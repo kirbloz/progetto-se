@@ -1,9 +1,10 @@
 package attivita;
 
 public abstract class Categoria {
- private String nome;
 
-    public Categoria(String nome) {
+    private String nome;
+
+    protected Categoria(String nome) {
         this.nome = nome;
     }
 

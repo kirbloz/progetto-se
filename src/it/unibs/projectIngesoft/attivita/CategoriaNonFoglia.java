@@ -2,24 +2,20 @@ package attivita;
 
 import java.util.ArrayList;
 
-public class CategoriaNonFoglia extends Categoria {
+public class CategoriaNonFoglia extends CategoriaRadice {
 
     //campo, dominio, madre, descrizione
     public Categoria madre;
-    public ArrayList<String> dominio;
-    public String campo;
 
 
-    public CategoriaNonFoglia(String nome) {
-        super(nome);
+    public CategoriaNonFoglia(String nome, ArrayList<String> dominio, String campo, Categoria madre) {
+        super(nome, dominio, campo);
+        this.madre = madre;
     }
 
-    public ArrayList<String> getDominio() {
-        return dominio;
-    }
-
-    public String getCampo() {
-        return campo;
+    public CategoriaNonFoglia(String nome, String campo, Categoria madre) {
+        super(nome, new ArrayList<String>(), campo);
+        this.madre = madre;
     }
 
     public Categoria getMadre() {
@@ -30,11 +26,4 @@ public class CategoriaNonFoglia extends Categoria {
         this.madre = madre;
     }
 
-    public void setDominio(ArrayList<String> dominio) {
-        this.dominio = dominio;
-    }
-
-    public void setCampo(String campo) {
-        this.campo = campo;
-    }
 }
