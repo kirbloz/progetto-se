@@ -1,5 +1,6 @@
+package main;
 
-/* Classe Main.
+/* Classe main.Main.
 
  */
 public class Main {
