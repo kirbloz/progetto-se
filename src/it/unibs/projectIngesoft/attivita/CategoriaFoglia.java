@@ -2,38 +2,29 @@ package attivita;
 
 public class CategoriaFoglia extends Categoria {
 
-    public Categoria madre;
-    public String dominio;
-    public String campo;
+    private CategoriaNonFoglia madre;
+    private String NomeValoreDominio;
 
-    public CategoriaFoglia(String nome, Categoria madre, String campo, String dominio) {
+    public CategoriaFoglia(String nome, CategoriaNonFoglia madre, String NomeValoreDominio) {
         super(nome);
         this.madre = madre;
-        this.campo = campo;
-        this.dominio = dominio;
+        this.NomeValoreDominio = NomeValoreDominio;
     }
 
-    public void setDominio(String dominio) {
-        dominio = dominio;
+    public void setNomeValoreDominio(String NomeValoreDominio) {
+        this.NomeValoreDominio = NomeValoreDominio;
     }
 
-    public String getDominio() {
-        return dominio;
+    public String getNomeValoreDominio() {
+        return this.NomeValoreDominio;
     }
 
     public Categoria getMadre() {
-        return madre;
+        return this.madre;
     }
 
-    public void setMadre(Categoria madre) {
-        madre = madre;
+    public void setMadre(CategoriaNonFoglia madre) {
+        this.madre = madre;
     }
 
-    public String getCampo() {
-        return campo;
-    }
-
-    public void setCampo(String campo) {
-        this.campo = campo;
-    }
 }
