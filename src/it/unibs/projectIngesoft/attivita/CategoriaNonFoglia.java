@@ -4,22 +4,25 @@ import java.util.ArrayList;
 
 public class CategoriaNonFoglia extends Categoria {
 
-    private ArrayList<ValoreDominio> dominio;
     private String campo;
+    private ArrayList<ValoreDominio> dominio;
     private CategoriaNonFoglia madre;
     private boolean isRadice;
 
 
-    public CategoriaNonFoglia(String nome, ArrayList<ValoreDominio> dominio, String campo) {
+    public CategoriaNonFoglia(String nome, String campo, ArrayList<ValoreDominio> dominio) {
         super(nome);
         this.campo = campo;
         this.dominio = dominio;
+        this.isRadice = true;
     }
 
-    public CategoriaNonFoglia(String nome, String campo, CategoriaNonFoglia madre) {
+    public CategoriaNonFoglia(String nome, String campo, ArrayList<ValoreDominio> dominio, CategoriaNonFoglia madre) {
         super(nome);
         this.campo = campo;
+        this.dominio = dominio;
         this.madre = madre;
+        this.isRadice = false;
     }
 
 
@@ -29,6 +32,10 @@ public class CategoriaNonFoglia extends Categoria {
 
     public String getCampo() {
         return campo;
+    }
+
+    public CategoriaNonFoglia getMadre() {
+        return madre;
     }
 
     public void setDominio(ArrayList<ValoreDominio> dominio) {
@@ -41,10 +48,6 @@ public class CategoriaNonFoglia extends Categoria {
 
     public void setCampo(String campo) {
         this.campo = campo;
-    }
-
-    public CategoriaNonFoglia getMadre() {
-        return madre;
     }
 
     public void setMadre(CategoriaNonFoglia madre) {
