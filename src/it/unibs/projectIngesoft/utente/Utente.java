@@ -2,15 +2,16 @@ package utente;
 
 public abstract class Utente {
 
-    private String username;
-    //private String password;
+    protected String username;
+    protected String password;
 
-    public Utente(String username/*, String password*/) {
-        this.username = username;
+    public Utente(){   // Usato solo nel caso del primo accesso del configuratore
+
     }
 
-    public void login(){
-        // TODO
+    public Utente(String username, String password) {
+        this.username = username;
+        this.password = password;
     }
 
 }
