@@ -11,9 +11,9 @@ public class GestoreUtenti {
     public static final String MSG_RICHIESTA_USERNAME = "Inserisci il tuo username: ";
     public static final String MSG_RICHIESTA_PASSWORD = "Inserisci la tua password: ";
 
-    private static BloccoDiCredenziali insiemeCredenziali = new BloccoDiCredenziali();//la lista degli utenti registrati (da salvare in fileCredenziali)
     public static File fileCredenziali = new File("fileCredenziali"); // file contenente gli utenti registrati
 
+    
     /**
      * Serve per il login.
      */
@@ -29,10 +29,10 @@ public class GestoreUtenti {
                                                     // deve cambiare per ogni istanza eventuale (o sono scemo?) (sono
                                                     // scemo -m)
             C1.cambioCredenziali();
-            BloccoDiCredenziali.listaUtenti.add(C1);
             scritturaCredenzialiSuFile();
         } else if (true/* nome inserito esiste && password corretta */) {
             // ok
+
         } else
             System.out.println("errore");// dai errore
     }
@@ -43,14 +43,12 @@ public class GestoreUtenti {
     }
 
     public static void scritturaCredenzialiSuFile() { // Crea il fileCredenziali a partire dall'ArrayList listaUtenti
-        
-        ServizioFile.salvaSingoloOggetto(fileCredenziali, insiemeCredenziali);
+       
     }
 
     public static void letturaFileCredenziali() { // Inserisce gli utenti e le password (che si trovano dentro al file)
                                                   // nell'ArrayList listaUtenti
-        BloccoDiCredenziali blocco = (BloccoDiCredenziali)ServizioFile.caricaSingoloOggetto(fileCredenziali);
-        insiemeCredenziali.listaUtenti = blocco.listaUtenti;
+        
     }
 
 }
