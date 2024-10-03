@@ -11,9 +11,12 @@ public class GestoreUtenti {
     public static final String MSG_RICHIESTA_USERNAME = "Inserisci il tuo username: ";
     public static final String MSG_RICHIESTA_PASSWORD = "Inserisci la tua password: ";
 
-    public ArrayList<Utente> listaUtenti; //la lista degli utenti registrati (da salvare in fileCredenziali)
+    public static ArrayList<Utente> listaUtenti; //la lista degli utenti registrati (da salvare in fileCredenziali)
     public File fileCredenziali; //file contenente gli utenti registrati
     
+    /**
+     * Serve per il login.
+     */
     public static void login(){
         String username, password;
 
@@ -24,6 +27,7 @@ public class GestoreUtenti {
         if(username == defaultAdminUsr && password == defaultAdminPsw){
             Configuratore C1 = new Configuratore(); //qui creiamo l'oggetto nuovo configuratore con nome C1, ma il nome deve cambiare per ogni istanza eventuale (o sono scemo?) (sono scemo -m)
             C1.cambioCredenziali();
+            listaUtenti.add(C1);
         }
         else if(true/*nome inserito esiste && password corretta */){
             //ok
@@ -31,13 +35,17 @@ public class GestoreUtenti {
         else System.out.println("errore");//dai errore
     }
 
-    public void letturaCredenziali(){
-        //per leggere la roba dell'array caricato o check l'esistenza dell'utente o forse no, l'ha fatto gabbay -m
+    public void checkUtente(){  //Ricerca all'interno dell'ArrayList (dopo averlo popolato leggendo il fileCredenziali) l'esistenza della coppia username e password data in input
+    
     }
 
-    public void caricamentoFileCredenziali(){
+    public void scritturaCredenzialiSuFile(){   //Crea il fileCredenziali a partire dall'ArrayList listaUtenti
         //todo servirà per caricare (o creare il file contenente i vari utenti registrati)
     }
 
+    public void letturaFileCredenziali(){      //Inserisce gli utenti e le password (che si trovano dentro al file) nell'ArrayList listaUtenti 
+
+    }
+    
 
 }
