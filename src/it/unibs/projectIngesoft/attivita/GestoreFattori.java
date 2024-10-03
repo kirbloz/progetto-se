@@ -103,5 +103,4 @@ public class GestoreFattori {
             return false;
         }
     }
-
 }

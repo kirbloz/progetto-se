@@ -24,10 +24,12 @@ public class GestoreUtenti {
         username = InputDati.leggiStringaNonVuota(MSG_RICHIESTA_USERNAME);
         password = InputDati.leggiStringaNonVuota(MSG_RICHIESTA_PASSWORD);
 
-        if(username == defaultAdminUsr && password == defaultAdminPsw){
+        if(username.equals(defaultAdminUsr) && password.equals(defaultAdminPsw)){
             Configuratore C1 = new Configuratore(); //qui creiamo l'oggetto nuovo configuratore con nome C1, ma il nome deve cambiare per ogni istanza eventuale (o sono scemo?) (sono scemo -m)
             C1.cambioCredenziali();
+            listaUtenti.size();
             listaUtenti.add(C1);
+            listaUtenti.size();
         }
         else if(true/*nome inserito esiste && password corretta */){
             //ok
@@ -44,7 +46,7 @@ public class GestoreUtenti {
     }
 
     public void letturaFileCredenziali(){      //Inserisce gli utenti e le password (che si trovano dentro al file) nell'ArrayList listaUtenti 
-
+    
     }
     
 
