@@ -11,8 +11,8 @@ public class GestoreUtenti {
     public static final String MSG_RICHIESTA_USERNAME = "Inserisci il tuo username: ";
     public static final String MSG_RICHIESTA_PASSWORD = "Inserisci la tua password: ";
 
-    public static ArrayList<Utente> listaUtenti; //la lista degli utenti registrati (da salvare in fileCredenziali)
-    public File fileCredenziali; //file contenente gli utenti registrati
+    public static ArrayList<Utente> listaUtenti = new ArrayList<>(); //la lista degli utenti registrati (da salvare in fileCredenziali)
+    public static File fileCredenziali = new File("fileCredenziali"); //file contenente gli utenti registrati
     
     /**
      * Serve per il login.
@@ -27,9 +27,8 @@ public class GestoreUtenti {
         if(username.equals(defaultAdminUsr) && password.equals(defaultAdminPsw)){
             Configuratore C1 = new Configuratore(); //qui creiamo l'oggetto nuovo configuratore con nome C1, ma il nome deve cambiare per ogni istanza eventuale (o sono scemo?) (sono scemo -m)
             C1.cambioCredenziali();
-            listaUtenti.size();
             listaUtenti.add(C1);
-            listaUtenti.size();
+            scritturaCredenzialiSuFile();
         }
         else if(true/*nome inserito esiste && password corretta */){
             //ok
@@ -41,12 +40,18 @@ public class GestoreUtenti {
     
     }
 
-    public void scritturaCredenzialiSuFile(){   //Crea il fileCredenziali a partire dall'ArrayList listaUtenti
-        //todo servirà per caricare (o creare il file contenente i vari utenti registrati)
+    public static void scritturaCredenzialiSuFile(){   //Crea il fileCredenziali a partire dall'ArrayList listaUtenti
+        for (Utente listaUtenti : listaUtenti) {
+        ServizioFile.salvaSingoloOggetto(fileCredenziali, listaUtenti);
+        }
     }
 
-    public void letturaFileCredenziali(){      //Inserisce gli utenti e le password (che si trovano dentro al file) nell'ArrayList listaUtenti 
-    
+    public static void letturaFileCredenziali(){      //Inserisce gli utenti e le password (che si trovano dentro al file) nell'ArrayList listaUtenti 
+        listaUtenti = (ArrayList<Utente>)ServizioFile.caricaSingoloOggetto(fileCredenziali);
+     for (Utente utente : listaUtenti) {
+        System.out.println(utente.getUsername() + utente.getPassword());
+     }
+        
     }
     
 
