@@ -1,29 +1,97 @@
 package main;
 
-import attivita.*;
-import it.unibs.fp.myutils.MyMenu;
+import menu.Menu;
 
 /* Classe main.Main.
 
  */
 public class Main {
-    
-
-
-    private static final String TITOLO_MENU_CONFIGURAZIONE = "OPZIONI DI CONFIGURAZIONE";
-    private static final String[] OPZIONI_CONFIGURAZIONE = {"Cambio Password", "Crea Categoria", "Crea Comprensorio Geografico"};
-
     public static void main(String[] args) {
-        // L'app si avvia con il login
-        GestoreUtenti.login();
-        // Mettiamo qualcosa da fare se il login va male? (un try catch e un throw in "login"?)
 
-        //dopo il login come amministratore deve essere possibile scegliere che caso d'uso effettuare
-        // (Classe per la gestione di questa scelta? o si mette tutto in configuratore?)
-        MyMenu opzioniConfigurazioneMenu = new MyMenu(TITOLO_MENU_CONFIGURAZIONE, OPZIONI_CONFIGURAZIONE);
-        opzioniConfigurazioneMenu.stampaMenu();
-        //DaFare: non mi ricordo come fare il case con MyMenu
+        /*
+            Creazione di uno pseudo menu fittizio per testare i casi d'uso durante l'implementazione.
+         */
+        String[] voci = new String[] {
+                "Accedi",
+                "Cambia Credenziali",
+                "Menu Comprensorio TODO",
+                "Menu Categorie WIP",
+                "Menu Fattori WIP"
+        };
+
+        String[] vociCategorie = new String[] {
+                "Aggiungi Categoria Non Foglia",
+                "Aggiungi Categoria Foglia",
+                "Aggiungi Gerarchia",
+                "Aggiungi Descrizione",
+                "Visualizza Gerarchia"
+        };
+
+        String[] vociFattori = new String[] {
+                "Visualizza Fattori di Conversione"
+                // TODO
+        };
+
+
+
+        Menu menu = new Menu("SCAMBIO ORE ATTIVITA'", voci);
+
+        Menu menuCategorie = new Menu("MENU CATEGORIE", vociCategorie);
+
+        Menu menuFattori = new Menu("MENU FATTORI", vociFattori);
+
+        loopMain(menu, menuCategorie, menuFattori);
+
+
+
+    }
+
+    private static void loopMain(Menu menu, Menu menuCategorie, Menu menuFattori){
+
+        int scelta = 0;
+        do{
+            scelta = menu.scegli();
+
+            switch (scelta){
+                case 4:
+                    //menu categorie
+                    loopCategorie(menuCategorie);
+                case 5:
+                    //menu fattori
+                    loopFattori(menuFattori);
+                default:
+                    System.out.println("Niente da mostrare.");
+            }
+
+        }while(scelta!=0);
+    }
+
+    private static void loopCategorie(Menu menuCategorie){
+        int scelta = 0;
+        do{
+            scelta = menuCategorie.scegli();
+
+            switch (scelta){
+
+                default:
+                    System.out.println("Niente da mostrare.");
+            }
+
+        }while(scelta!=0);
+    }
+
+    private static void loopFattori(Menu menuFattori){
+        int scelta = 0;
+        do{
+            scelta = menuFattori.scegli();
+
+            switch (scelta){
+
+                default:
+                    System.out.println("Niente da mostrare.");
+            }
+
+        }while(scelta!=0);
+
     }
 }
-
-
