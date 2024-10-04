@@ -1,9 +1,8 @@
-package attivita;
+package gestori;
 
 import it.unibs.fp.myutils.*;
 import utente.*; //non so se è una roba che serve -m
 import java.io.File;
-import java.util.ArrayList;
 
 public class GestoreUtenti {
     public static final String defaultAdminUsr = "admin";
