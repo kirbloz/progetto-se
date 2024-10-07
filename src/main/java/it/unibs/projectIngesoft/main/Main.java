@@ -3,6 +3,7 @@ package main;
 import attivita.FattoreDiConversione;
 import gestori.GestoreCategorie;
 import gestori.GestoreFattori;
+import gestori.GestoreUtenti;
 import menu.Menu;
 
 import java.util.ArrayList;
@@ -78,6 +79,11 @@ public class Main {
 
             switch (scelta) {
                 //TODO
+                case 1:
+                    //accedi
+                    System.out.println("UAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+                    GestoreUtenti gestUsers = new GestoreUtenti("users.xml");
+                    break;
                 case 4:
                     //menu categorie
                     loopCategorie(menuCategorie);

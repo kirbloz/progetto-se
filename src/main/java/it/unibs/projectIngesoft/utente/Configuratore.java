@@ -1,10 +1,16 @@
 package utente;
 
+import com.fasterxml.jackson.annotation.JsonRootName;
+
+@JsonRootName("")
 public class Configuratore extends Utente{
 
     public Configuratore() {
-        this.username = null;
-        this.password = null;
+    }
+
+    public Configuratore(String username, String password) {       // Caso utente
+        this.username = username;
+        this.password = password;
     }
     
 }
