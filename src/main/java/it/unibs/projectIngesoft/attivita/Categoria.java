@@ -4,6 +4,10 @@ public abstract class Categoria {
 
     private String nome;
 
+    protected Categoria(){
+
+    }
+
     protected Categoria(String nome) {
         this.nome = nome;
     }
@@ -14,5 +18,11 @@ public abstract class Categoria {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public String toString(){
+        StringBuilder sb = new StringBuilder();
+        sb.append(this.getNome());
+        return sb.toString();
     }
 }
