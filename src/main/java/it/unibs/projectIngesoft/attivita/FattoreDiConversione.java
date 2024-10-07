@@ -13,6 +13,8 @@ public class FattoreDiConversione {
     private double fattore;
 
 
+    // questo costruttore vuoto sta qui solo perchè altrimenti
+    // il mapper xml impazzisce completamente
     public FattoreDiConversione(){
 
     }
