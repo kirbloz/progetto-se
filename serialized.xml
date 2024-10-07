@@ -1,1 +1,5 @@
-<FattoreDiConversione><nome_c1>c1</nome_c1><nome_c2>c2</nome_c2><fattore>4.5</fattore></FattoreDiConversione>
+<ArrayList>
+    <item><nome_c1>c1</nome_c1><nome_c2>c2</nome_c2><fattore>4.5</fattore></item>
+    <item><nome_c1>c1</nome_c1><nome_c2>c3</nome_c2><fattore>0.2</fattore></item>
+    <item><nome_c1>c1</nome_c1><nome_c2>c4</nome_c2><fattore>0.6</fattore></item>
+</ArrayList>

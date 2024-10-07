@@ -4,156 +4,141 @@ import attivita.FattoreDiConversione;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 
-import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Scanner;
+import java.util.List;
 
 public class GestoreFattori {
 
     private final String filePath;
-    private HashMap<String, FattoreDiConversione> fattori;
+    private HashMap<String, ArrayList<FattoreDiConversione>> fattori;
 
     public GestoreFattori(String filePath) {
         this.filePath = filePath;
         this.fattori = new HashMap<>();
-        //this.leggiFileFattori();
-        //TODO ora la serializzazione e deserializzazione funziona, va solo fatto decentemente
-        // e adattato all'hashmap
-        deserializeXML();
+        deserializeXML(); //load dati
     }
 
     public String getFilePath() {
         return filePath;
     }
 
-    public HashMap<String, FattoreDiConversione> getFattori() {
+    public HashMap<String, ArrayList<FattoreDiConversione>> getFattori() {
         return fattori;
     }
 
-    public void setFattori(HashMap<String, FattoreDiConversione> fattori) {
+    public void setFattori(HashMap<String, ArrayList<FattoreDiConversione>> fattori) {
         this.fattori = fattori;
     }
 
-    public void addFattore(String key, FattoreDiConversione value) {
-        this.fattori.put(key, value);
-    }
+    /**
+     * Inserisce un nuovo fattore nell'HashMap, verificando eventuali duplicati.
+     *
+     * @param tempKey,   nome della prima categoria della coppia
+     * @param tempValue, oggetto FdC da inserire nella lista
+     */
+    public void addFattore(String tempKey, FattoreDiConversione tempValue) {
 
-    public boolean leggiFileFattori() {
-        File file;
-
-        HashMap<String, FattoreDiConversione> tempFattori = new HashMap<>();
-
-        try {
-            file = new File(this.filePath);
-            if (file.createNewFile())
-                System.out.println("FILE CREATO");
-            //sia che il file venga creato, sia che il file esista ritorno true => nessun problema
-
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-            return false;
-        }
-
-        //scrivo sul file la stringa formattata
-        try {
-            Scanner scanner = new Scanner(new File(this.filePath));
-
-            while (scanner.hasNext()) {
-                //System.out.println(scanner.nextLine());
-                String tempString = scanner.nextLine();
-                String[] words = tempString.split("\\W+");
-
-                FattoreDiConversione tempFattore = new FattoreDiConversione(words[0], words[1], Double.parseDouble(words[2]));
-                this.addFattore(words[0], tempFattore);
+        // controlla che esista già un'elemento dell'HashMap con quella chiave
+        if (this.fattori.containsKey(tempKey)) {
+            // inserisce il fattore se e solo se non esiste già nell'arraylist
+            if (!this.fattori.get(tempKey).contains(tempValue)) {
+                this.fattori.get(tempKey).add(tempValue);
             }
-
-            scanner.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-            return false;
+        } else {
+            // se non esiste la chiave, allora crea un nuovo arraylist, aggiunge il fattore e poi inserisce tutto nell'hashmap
+            ArrayList<FattoreDiConversione> tempLista = new ArrayList<>();
+            tempLista.add(tempValue);
+            this.fattori.put(tempKey, tempLista);
         }
-        return true;
     }
 
     /**
-     * @return true se ha scritto con successo. false altrimenti
+     * Per ogni chiave nell'HashMap fattori, si estrae il suo ArrayList e lo si serializza in XML.
      */
-    public boolean scriviFileFattori() {
+    public void serializeXML() {
 
-        File file;
         try {
-            file = new File(this.filePath);
-            if (file.createNewFile())
-                System.out.println("FILE CREATO");
-            //sia che il file venga creato, sia che il file esista ritorno true => nessun problema
 
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-            return false;
-        }
+            boolean debug = false;
 
-        //scrivo sul file la stringa formattata
-        try (PrintWriter out = new PrintWriter(file)) {
-            for (FattoreDiConversione value : fattori.values()) {
-                out.println(value.toString());
+            // creazione mapper e oggetto file
+            XmlMapper xmlMapper = new XmlMapper();
+            File file = new File(this.filePath);
+            // se il file non esiste, lo si crea
+            if (file.createNewFile()) {
+                if (debug)
+                    System.out.println("FILE CREATO");
+            }
+
+            for (String key : fattori.keySet()) {
+                // estrazione dell'arraylist per ogni chiave key
+                List<FattoreDiConversione> listaFattori = fattori.get(key);
+                // scrittura su file del valore xml dell'arraylist
+                xmlMapper.writeValue(file, listaFattori);
             }
 
 
-            System.out.println("FILE SCRITTO");
-            return true;
-        } catch (FileNotFoundException e) {
-            System.out.println(e.getMessage());
-            return false;
-        }
-    }
-
-
-    public void serializeXML() {
-        //TODO
-        try {
-            XmlMapper xmlMapper = new XmlMapper();
-
-            // serialize our Object into XML string
-            String xmlString = xmlMapper.writeValueAsString(new FattoreDiConversione("c1", "c2", 4.5));
-
-            // write to the console
-            System.out.println(xmlString);
-
-            // write XML string to file
-            File xmlOutput = new File("serialized.xml");
-            FileWriter fileWriter = new FileWriter(xmlOutput);
-            fileWriter.write(xmlString);
-            fileWriter.close();
         } catch (JsonProcessingException e) {
             // handle exception
             e.getMessage();
         } catch (IOException e) {
-            // handle exception
-            e.getMessage();
+            System.out.println(e.getMessage());
+            System.out.println("impossibile creare file");
         }
     }
 
     public void deserializeXML() {
-        //TODO
+        boolean debug = false;
 
         try {
-
             XmlMapper xmlMapper = new XmlMapper();
-            // read file and put contents into the string
-            String readContent = new String(Files.readAllBytes(Paths.get("serialized.xml")));
-            // deserialize from the XML into a Phone object
-            FattoreDiConversione deserializedData = xmlMapper.readValue(readContent, FattoreDiConversione.class);
+            File file = new File(this.filePath);
 
-            System.out.println("Deserialized data: " + deserializedData);
+            if (!file.exists()) {
+                if (debug)
+                    System.out.println("FILE NON ESISTE. NON CARICO NIENTE.");
+                return;
+            }
 
+            List<FattoreDiConversione> listaFattori = xmlMapper.readValue(file, xmlMapper.getTypeFactory().constructCollectionType(List.class, FattoreDiConversione.class));
 
+            for (FattoreDiConversione fattore : listaFattori) {
+                String tempKey = fattore.getNome_c1();
+                this.addFattore(tempKey, fattore);
+            }
+
+            if (debug)
+                for (FattoreDiConversione obj : listaFattori) {
+                    System.out.println(obj.toString());
+                }
         } catch (IOException e) {
             // handle the exception
+            System.out.println(e.getMessage());
         }
+    }
 
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (String key : fattori.keySet()) {
+            for (FattoreDiConversione fattore : fattori.get(key)) {
+                sb.append(fattore.toString()).append("\n");
+            }
+            sb.append("\n");
+        }
+        return sb.toString();
+    }
 
+    /**
+     * Logica grafica.
+     * Per ora ci si limita all'utilizzo del terminale.
+     */
+    private void visualizzaFattori() {
+        System.out.println("\n\n --- Visualizza Fattori ---\n\n");
+        System.out.println(this.toString());
     }
 
     /**
@@ -165,19 +150,11 @@ public class GestoreFattori {
         //TODO
         switch (scelta) {
             case 1:
-                //aggiungi cat nf
+                //visualizza
+                this.visualizzaFattori();
                 break;
             case 2:
-                //aggiungi cat f
-                break;
-            case 3:
-                //aggiungi gerarchia
-                break;
-            case 4:
-                //descrizione
-                break;
-            case 5:
-                //visualizza
+                //modifica - estensione futura
                 break;
             default:
                 System.out.println("Nulla da mostrare");

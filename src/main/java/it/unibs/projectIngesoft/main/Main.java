@@ -1,14 +1,21 @@
 package main;
 
+import attivita.FattoreDiConversione;
 import gestori.GestoreCategorie;
 import gestori.GestoreFattori;
 import menu.Menu;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 /* Classe main.Main.
 
  */
 public class Main {
 
+    protected final static String filePath = "serialized.xml";
+
+    protected final static String titoloMainMenu = "MENU' PRINCIPALE - SCAMBIO ORE";
     protected final static String[] voci = new String[]{
             "Accedi",
             "Cambia Credenziali",
@@ -17,6 +24,7 @@ public class Main {
             "Menu Fattori WIP"
     };
 
+    protected final static String titoloMenuCategorie = "MENU' CATEGORIE";
     protected final static String[] vociCategorie = new String[]{
             "Aggiungi Categoria Non Foglia",
             "Aggiungi Categoria Foglia",
@@ -25,25 +33,33 @@ public class Main {
             "Visualizza Gerarchia"
     };
 
+    protected final static String titoloMenuFattori = "MENU' FATTORI";
     protected final static String[] vociFattori = new String[]{
             "Visualizza Fattori di Conversione"
             // TODO
     };
 
-    public static void main(String[] args) {
+    protected final static ArrayList<FattoreDiConversione> listaFattori = new ArrayList<>() {{
+        add(new FattoreDiConversione("c1", "c2", 4.5));
+        add(new FattoreDiConversione("c1", "c3", 0.2));
+    }};
 
+
+    protected final static HashMap<String, ArrayList<FattoreDiConversione>> mapFattori = new HashMap<>() {{
+        put("c1", listaFattori);
+    }};
+
+
+    public static void main(String[] args) {
         /*
             Creazione di uno pseudo menu fittizio per testare i casi d'uso durante l'implementazione.
          */
 
-        Menu menu = new Menu("SCAMBIO ORE ATTIVITA'", voci);
-
-        Menu menuCategorie = new Menu("MENU CATEGORIE", vociCategorie);
-
-        Menu menuFattori = new Menu("MENU FATTORI", vociFattori);
+        Menu menu = new Menu(titoloMainMenu, voci);
+        Menu menuCategorie = new Menu(titoloMenuCategorie, vociCategorie);
+        Menu menuFattori = new Menu(titoloMenuCategorie, vociFattori);
 
         loopMain(menu, menuCategorie, menuFattori);
-
 
     }
 
@@ -99,7 +115,11 @@ public class Main {
      */
     private static void loopFattori(Menu menuFattori) {
         int scelta = 0;
-        GestoreFattori gestFatt = new GestoreFattori("serialized.xml");
+        GestoreFattori gestFatt = new GestoreFattori(filePath);
+
+        //per hot testing
+        //gestFatt.setFattori(mapFattori);
+        //gestFatt.visualizzaFattori();
 
         do {
             scelta = menuFattori.scegli();

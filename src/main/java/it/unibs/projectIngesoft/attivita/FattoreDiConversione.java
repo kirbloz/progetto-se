@@ -2,7 +2,7 @@ package attivita;
 
 import com.fasterxml.jackson.annotation.*;
 
-@JsonRootName("FattoreDiConversione")
+@JsonRootName("")
 public class FattoreDiConversione {
 
     @JsonProperty("nome_c1")
@@ -11,6 +11,7 @@ public class FattoreDiConversione {
     private String nome_c2;
     @JsonProperty("fattore")
     private double fattore;
+
 
     public FattoreDiConversione(){
 
