@@ -1,11 +1,11 @@
-package gestori;
+package it.unibs.projectIngesoft.gestori;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import it.unibs.fp.myutils.InputDati;
-import utente.Configuratore;
-import utente.Utente;
+import it.unibs.projectIngesoft.utente.Configuratore;
+import it.unibs.projectIngesoft.utente.Utente;
 
 import java.io.File;
 import java.io.IOException;

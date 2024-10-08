@@ -1,6 +1,6 @@
-package gestori;
+package it.unibs.projectIngesoft.gestori;
 
-import attivita.CategoriaNonFoglia;
+import it.unibs.projectIngesoft.attivita.CategoriaNonFoglia;
 
 import java.util.ArrayList;
 

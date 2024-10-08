@@ -1,4 +1,4 @@
-package attivita;
+package it.unibs.projectIngesoft.attivita;
 
 /**
  *  ValoreDominio è una classe che rappresenta i singoli valori che esistono all'interno di un "dominio concettuale".

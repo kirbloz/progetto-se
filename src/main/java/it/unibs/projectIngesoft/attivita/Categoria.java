@@ -1,4 +1,4 @@
-package attivita;
+package it.unibs.projectIngesoft.attivita;
 
 public abstract class Categoria {
 

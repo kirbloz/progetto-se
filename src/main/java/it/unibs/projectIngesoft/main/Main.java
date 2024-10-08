@@ -1,10 +1,8 @@
-package main;
+package it.unibs.projectIngesoft.main;
 
-import attivita.FattoreDiConversione;
-import gestori.GestoreCategorie;
-import gestori.GestoreFattori;
-import gestori.GestoreUtenti;
-import menu.Menu;
+import it.unibs.projectIngesoft.attivita.FattoreDiConversione;
+import it.unibs.projectIngesoft.gestori.*;
+import it.unibs.projectIngesoft.menu.Menu;
 
 import java.util.ArrayList;
 import java.util.HashMap;

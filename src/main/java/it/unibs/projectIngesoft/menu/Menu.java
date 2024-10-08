@@ -1,4 +1,4 @@
-package menu;
+package it.unibs.projectIngesoft.menu;
 
 import it.unibs.fp.myutils.InputDati;
 

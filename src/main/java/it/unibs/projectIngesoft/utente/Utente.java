@@ -1,4 +1,4 @@
-package utente;
+package it.unibs.projectIngesoft.utente;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
