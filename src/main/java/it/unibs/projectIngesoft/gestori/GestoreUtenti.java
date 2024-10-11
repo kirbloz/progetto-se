@@ -44,6 +44,7 @@ public class GestoreUtenti {
     }
 
 
+
     public void addUtente(Utente utente) {
         if (!this.utenti.contains(utente)) {
             // inserisce l'utente se e solo se non esiste già nell'arraylist
@@ -54,40 +55,45 @@ public class GestoreUtenti {
     /**
      * Serve per il login.
      */
-    public void login() {
+    public Utente login() {
         String username;
         String password;
+        int indice = -1;
 
+        do {
         // da ciclare i guess -m
         username = InputDati.leggiStringaNonVuota(MSG_RICHIESTA_USERNAME);
         password = InputDati.leggiStringaNonVuota(MSG_RICHIESTA_PASSWORD);
 
+        indice = checkUtente(username, password);
+
+
         if (username.equals(defaultAdminUsr) && password.equals(defaultAdminPsw)) {
             Configuratore C1 = new Configuratore(); // qui creiamo l'oggetto nuovo configuratore con nome C1, ma il nome
             // deve cambiare per ogni istanza eventuale (o sono scemo?) (sono
-            // scemo -m)
-            C1.cambioCredenziali();
-            this.scritturaCredenzialiSuFile();
-        } else if (true/* nome inserito esiste && password corretta */) {
-            // ok
+            // scemo -m)/
+            C1.cambioCredenziali(this);
+            addUtente(C1);
 
-        } else
-            System.out.println("errore");// dai errore
+        } else if (indice == -1) {
+            System.out.println("L'utente non esiste");
+        }
+
+        }while(indice == -1);
+
+        return utenti.get(indice);
     }
 
-    public void checkUtente() { // Ricerca all'interno dell'ArrayList (dopo averlo popolato leggendo il
+    public int checkUtente(String username, String password) { // Ricerca all'interno dell'ArrayList (dopo averlo popolato leggendo il
         // fileCredenziali) l'esistenza della coppia username e password data in input
-
+        for (int i = 0; i < utenti.size(); i++) {
+            if (utenti.get(i).getUsername().equals(username) && utenti.get(i).getPassword().equals(password)) {
+                return i;
+            }
+        }
+        return -1;
     }
 
-    public void scritturaCredenzialiSuFile() { // Crea il fileCredenziali a partire dall'ArrayList listaUtenti
-
-    }
-
-    public void letturaFileCredenziali() { // Inserisce gli utenti e le password (che si trovano dentro al file)
-        // nell'ArrayList listaUtenti
-
-    }
 
     /**
      * Per ogni chiave nell'HashMap fattori, si estrae il suo ArrayList e lo si serializza in XML.

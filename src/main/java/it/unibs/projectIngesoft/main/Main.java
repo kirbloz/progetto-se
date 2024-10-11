@@ -3,6 +3,7 @@ package it.unibs.projectIngesoft.main;
 import it.unibs.projectIngesoft.attivita.FattoreDiConversione;
 import it.unibs.projectIngesoft.gestori.*;
 import it.unibs.projectIngesoft.menu.Menu;
+import it.unibs.projectIngesoft.utente.Utente;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,6 +14,7 @@ import java.util.HashMap;
 public class Main {
 
     protected final static String filePath = "serialized.xml";
+    protected final static String nomeFileUtenti = "users.xml";
 
     protected final static String titoloMainMenu = "MENU' PRINCIPALE - SCAMBIO ORE";
     protected final static String[] voci = new String[]{
@@ -53,10 +55,13 @@ public class Main {
         /*
             Creazione di uno pseudo menu fittizio per testare i casi d'uso durante l'implementazione.
          */
-
+        GestoreUtenti userHandler = new GestoreUtenti(nomeFileUtenti);
         Menu menu = new Menu(titoloMainMenu, voci);
         Menu menuCategorie = new Menu(titoloMenuCategorie, vociCategorie);
         Menu menuFattori = new Menu(titoloMenuCategorie, vociFattori);
+        Utente utenteLoggato;
+
+        utenteLoggato = userHandler.login();
 
         loopMain(menu, menuCategorie, menuFattori);
 
@@ -80,7 +85,7 @@ public class Main {
                 case 1:
                     //accedi
                     System.out.println("UAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-                    GestoreUtenti gestUsers = new GestoreUtenti("users.xml");
+
                     break;
                 case 4:
                     //menu categorie
