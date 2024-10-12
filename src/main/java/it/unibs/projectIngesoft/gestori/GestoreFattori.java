@@ -1,4 +1,4 @@
-package gestori;
+package it.unibs.projectIngesoft.gestori;
 
 import attivita.FattoreDiConversione;
 import com.fasterxml.jackson.core.JsonProcessingException;
