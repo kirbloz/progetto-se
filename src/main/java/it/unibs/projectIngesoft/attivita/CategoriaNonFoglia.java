@@ -1,4 +1,4 @@
-package attivita;
+package it.unibs.projectIngesoft.attivita;
 
 import java.util.ArrayList;
 

@@ -1,6 +1,6 @@
 package it.unibs.projectIngesoft.gestori;
 
-import attivita.FattoreDiConversione;
+import it.unibs.projectIngesoft.attivita.FattoreDiConversione;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 

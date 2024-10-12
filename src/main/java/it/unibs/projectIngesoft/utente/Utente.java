@@ -1,10 +1,11 @@
-package utente;
+package it.unibs.projectIngesoft.utente;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import it.unibs.fp.myutils.InputDati;
+import it.unibs.projectIngesoft.gestori.GestoreUtenti;
 
 @JsonRootName("")
 public class Utente {
@@ -27,14 +28,25 @@ public class Utente {
         this.password = password;
     }
 
-    public void cambioCredenziali() { // per cambiare le credenziali di un utente (funziona in tutti i casi, ma se in una versione futura il fruitore può cambiare anche mail bisognerà fare un distinguo polimorfico)
+    public void cambioCredenziali(GestoreUtenti gestoreUtenti) { // per cambiare le credenziali di un utente (funziona in tutti i casi, ma se in una versione futura il fruitore può cambiare anche mail bisognerà fare un distinguo polimorfico)
         String newUsername;
         String newPassword;
-        newUsername = InputDati.leggiStringaNonVuota(MSG_RICHIESTA_NUSERNAME);
-        newPassword = InputDati.leggiStringaNonVuota(MSG_RICHIESTA_NPASSWORD);
+        boolean exists = false;
+        do {
+            newUsername = InputDati.leggiStringaNonVuota(MSG_RICHIESTA_NUSERNAME);
+            newPassword = InputDati.leggiStringaNonVuota(MSG_RICHIESTA_NPASSWORD);
+            for(Utente usr : gestoreUtenti.getUtenti()){
+                if(usr.getUsername().equals(newUsername)){
+                    exists = true;
+                    System.out.println("Nome utente e password gia' esistenti");             //TODO Da togliere password nel print
+                    break;
+                }
+            }
+        }while(exists);
+
+
         this.username = newUsername;
         this.password = newPassword;
-        // TODO SALVARE NEL FILE
     }
 
     public String getUsername() {
