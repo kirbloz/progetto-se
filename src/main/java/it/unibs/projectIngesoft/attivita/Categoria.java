@@ -1,7 +1,15 @@
 package it.unibs.projectIngesoft.attivita;
 
-public abstract class Categoria {
+import com.fasterxml.jackson.annotation.JsonRootName;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
+@JsonRootName("")
+@JsonDeserialize(as = CategoriaNonFoglia.class)
+public abstract class Categoria {
+    // se questa classe diventa astratta, jackson impazzisce
+
+    @JacksonXmlProperty(localName = "nome")
     private String nome;
 
     protected Categoria(){

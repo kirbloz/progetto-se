@@ -1,14 +1,23 @@
 package it.unibs.projectIngesoft.attivita;
 
+import com.fasterxml.jackson.annotation.JsonRootName;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+
 import java.util.ArrayList;
 
+@JsonRootName("")
 public class CategoriaNonFoglia extends Categoria {
 
+    @JacksonXmlProperty(localName = "campo")
     private String campo;
+    @JacksonXmlProperty(localName = "")
     private ArrayList<ValoreDominio> dominio;
+    @JacksonXmlProperty(localName = "madre")
     private CategoriaNonFoglia madre;
 
+    @JacksonXmlProperty(localName = "")
     private ArrayList<Categoria> categorieFiglie;
+    @JacksonXmlProperty(localName = "isRadice")
     private boolean isRadice;
 
     // questo costruttore esiste solo per un capriccio di jackson
@@ -72,6 +81,25 @@ public class CategoriaNonFoglia extends Categoria {
         this.categorieFiglie = categorieFiglie;
     }
 
+    // nelle addCategoriaFiglia non si fa il check se l'arraylist è inizializzato perchè i costruttori
+    // lo inizializzano a vuoto in qualsiasi caso
+    // ma sto coso muore con xml o che palle
+    public void addCategoriaFiglia(CategoriaFoglia categoria) {
+        if (this.categorieFiglie == null)
+            this.categorieFiglie = new ArrayList<>();
+        this.categorieFiglie.add(categoria);
+    }
+
+    public void addCategoriaFiglia(CategoriaNonFoglia categoria) {
+        if (this.categorieFiglie == null)
+            this.categorieFiglie = new ArrayList<>();
+        this.categorieFiglie.add(categoria);
+    }
+
+    public void removeCategoriaFiglia(CategoriaFoglia categoria) {
+        this.categorieFiglie.remove(categoria);
+    }
+
     public int getNumCategorieFiglie() {
         return categorieFiglie.size();
     }
@@ -80,19 +108,23 @@ public class CategoriaNonFoglia extends Categoria {
         return isRadice;
     }
 
-    public String toString(){
+    @Override
+    public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Categoria: ").append(this.getNome()).append("\n");
-        sb.append("Dominio: ").append(this.getDominio()).append("\n");
-        if(!this.isRadice())
+        sb.append("Dominio: ").append(this.getCampo()).append("\n");
+        if (!this.isRadice())
             sb.append("Madre: ").append(this.getMadre().getNome()).append("\n");
+
+        if (this.categorieFiglie != null)
+            sb.append(figlieToString());
 
         return sb.toString();
     }
 
-    public String figlieToString(){
+    public String figlieToString() {
         StringBuilder sb = new StringBuilder();
-        for (Categoria f : categorieFiglie) {
+        for (Categoria f : this.categorieFiglie) {
             sb.append("\t﹂").append(f.toString()).append("\n");
         }
         return sb.toString();

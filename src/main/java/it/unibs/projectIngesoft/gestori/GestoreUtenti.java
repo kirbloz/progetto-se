@@ -96,7 +96,7 @@ public class GestoreUtenti {
 
 
     /**
-     * Per ogni chiave nell'HashMap fattori, si estrae il suo ArrayList e lo si serializza in XML.
+     * TODO questo va commentato a dovere
      */
     public void serializeXML() {
 
@@ -125,6 +125,9 @@ public class GestoreUtenti {
         }
     }
 
+    /**
+     * TODO questo va commentato a dovere
+     */
     public void deserializeXML() {
         boolean debug = true;
 

@@ -109,7 +109,7 @@ public class Main {
      */
     private static void loopCategorie(Menu menuCategorie) {
         int scelta = 0;
-        GestoreCategorie gestCat = new GestoreCategorie();
+        GestoreCategorie gestCat = new GestoreCategorie("categorie.xml");
 
         do {
             scelta = menuCategorie.scegli();
