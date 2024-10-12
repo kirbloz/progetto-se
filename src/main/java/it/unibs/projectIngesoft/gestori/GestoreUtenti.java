@@ -27,8 +27,9 @@ public class GestoreUtenti {
     public GestoreUtenti(String filePath) {
         this.filePath = filePath;
         this.utenti = new ArrayList<>();
-        serializeXML();
         deserializeXML(); // load dati
+        serializeXML();
+
     }
 
     public String getFilePath() {
@@ -42,7 +43,6 @@ public class GestoreUtenti {
     public void setUtenti(ArrayList<Utente> utenti) {
         this.utenti = utenti;
     }
-
 
 
     public void addUtente(Utente utente) {
@@ -61,25 +61,25 @@ public class GestoreUtenti {
         int indice = -1;
 
         do {
-        // da ciclare i guess -m
-        username = InputDati.leggiStringaNonVuota(MSG_RICHIESTA_USERNAME);
-        password = InputDati.leggiStringaNonVuota(MSG_RICHIESTA_PASSWORD);
+            // da ciclare i guess -m
+            username = InputDati.leggiStringaNonVuota(MSG_RICHIESTA_USERNAME);
+            password = InputDati.leggiStringaNonVuota(MSG_RICHIESTA_PASSWORD);
 
-        indice = checkUtente(username, password);
+            indice = checkUtente(username, password);
 
 
-        if (username.equals(defaultAdminUsr) && password.equals(defaultAdminPsw)) {
-            Configuratore C1 = new Configuratore(); // qui creiamo l'oggetto nuovo configuratore con nome C1, ma il nome
-            // deve cambiare per ogni istanza eventuale (o sono scemo?) (sono
-            // scemo -m)/
-            C1.cambioCredenziali(this);
-            addUtente(C1);
+            if (username.equals(defaultAdminUsr) && password.equals(defaultAdminPsw)) {
+                Configuratore C1 = new Configuratore(); // qui creiamo l'oggetto nuovo configuratore con nome C1, ma il nome
+                // deve cambiare per ogni istanza eventuale (o sono scemo?) (sono
+                // scemo -m)/
+                C1.cambioCredenziali(this);
+                addUtente(C1);
+                serializeXML();
+            } else if (indice == -1) {
+                System.out.println("L'utente non esiste");
+            }
 
-        } else if (indice == -1) {
-            System.out.println("L'utente non esiste");
-        }
-
-        }while(indice == -1);
+        } while (indice == -1);
 
         return utenti.get(indice);
     }
@@ -112,10 +112,6 @@ public class GestoreUtenti {
                 if (debug)
                     System.out.println("FILE CREATO");
             }
-
-            this.utenti.add(new Utente("test", "testpwd"));
-
-
             xmlMapper.writeValue(file, this.utenti);
 
 
