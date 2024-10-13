@@ -28,4 +28,36 @@ public class Albero {
     public Albero() {
         this.radici = new ArrayList<>();
     }
+
+    public boolean contains(String nomeRadice){
+        for(CategoriaNonFoglia tempRadice: this.radici){
+            if(tempRadice.getNome().equals(nomeRadice))
+                return true;
+        }
+        return false;
+    }
+
+    public List<CategoriaNonFoglia> getRadici() {
+        return radici;
+    }
+
+    public void setRadici(List<CategoriaNonFoglia> radici) {
+        this.radici = radici;
+    }
+
+    public void aggiungiRadice(CategoriaNonFoglia radici){
+        this.radici.add(radici);
+    }
+
+    public void rimouviRadice(CategoriaNonFoglia radici){
+        this.radici.remove(radici);
+    }
+
+    public CategoriaNonFoglia getRadice (String nomeRadice){
+        for(CategoriaNonFoglia tempRadice: this.radici){
+            if(tempRadice.getNome().equals(nomeRadice))
+                return tempRadice;
+        }
+        return null;
+    }
 }

@@ -46,6 +46,16 @@ public class CategoriaNonFoglia extends Categoria {
         this.nomeMadre = null;
     }
 
+    public CategoriaNonFoglia(String nome, String campo) {
+        super(nome);
+        this.campo = campo;
+        this.listaValoriDominio = new ArrayList<>();
+        this.isRadice = true;
+        this.categorieFiglie = new ArrayList<>();
+        this.madre = null;
+        this.nomeMadre = null;
+    }
+
     // costruttore per categoria non radice
     public CategoriaNonFoglia(String nome, String campo, ArrayList<ValoreDominio> dominio, CategoriaNonFoglia madre) {
         super(nome);
@@ -56,6 +66,17 @@ public class CategoriaNonFoglia extends Categoria {
         this.categorieFiglie = new ArrayList<>();
         this.nomeMadre = madre.getNome();
     }
+
+    public CategoriaNonFoglia(String nome, String campo, CategoriaNonFoglia madre) {
+        super(nome);
+        this.campo = campo;
+        this.listaValoriDominio = new ArrayList<>();
+        this.madre = madre;
+        this.isRadice = false;
+        this.categorieFiglie = new ArrayList<>();
+        this.nomeMadre = madre.getNome();
+    }
+
 
     public ArrayList<ValoreDominio> getListaValoriDominio() {
         return listaValoriDominio;
@@ -125,11 +146,7 @@ public class CategoriaNonFoglia extends Categoria {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Categoria: ").append(this.getNome()).append("\n");
-        sb.append("Dominio: ").append(this.getCampo()).append("\n");
-        // se non è una radice, allora si stampano i dati della categoria madre
-        if (!this.isRadice())
-            sb.append("Madre: ").append(this.getMadre() != null ? this.getMadre().getNome() : "null").append("\n");
+        sb.append(this.simpleToString());
         // se esistono delle figlie allora le si stampano
         if (this.categorieFiglie != null)
             sb.append(figlieToString());
@@ -158,5 +175,18 @@ public class CategoriaNonFoglia extends Categoria {
         return sb.toString();
     }
 
+    /**
+     * Genera una stringa di descrizione della categoria limitata, senza eventuali figlie.
+     * @return stringa formattata
+     */
+    public String simpleToString(){
+        StringBuilder sb = new StringBuilder();
+        sb.append("Categoria: ").append(this.getNome()).append("\n");
+        sb.append("Dominio: ").append(this.getCampo()).append("\n");
+        // se non è una radice, allora si stampano i dati della categoria madre
+        if (!this.isRadice())
+            sb.append("Madre: ").append(this.getMadre() != null ? this.getMadre().getNome() : "null").append("\n");
+        return sb.toString();
+    }
 
 }

@@ -4,8 +4,8 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 /**
- *  ValoreDominio è una classe che rappresenta i singoli valori che esistono all'interno di un "dominio concettuale".
- *  Può essere ripetuto all'interno di più domini ed ha opzionalmente una descrizione.
+ * ValoreDominio è una classe che rappresenta i singoli valori che esistono all'interno di un "dominio concettuale".
+ * Può essere ripetuto all'interno di più domini ed ha opzionalmente una descrizione.
  */
 
 @JsonRootName("ValoreDominio")
@@ -20,6 +20,7 @@ public class ValoreDominio {
 
     public ValoreDominio(String nome) {
         this.nome = nome;
+        this.descrizione = "";
     }
 
     public ValoreDominio(String nome, String descrizione) {
@@ -27,8 +28,7 @@ public class ValoreDominio {
         this.descrizione = descrizione;
     }
 
-    public ValoreDominio (){
-
+    public ValoreDominio() {
     }
 
     public String getNome() {
@@ -45,5 +45,14 @@ public class ValoreDominio {
 
     public void setDescrizione(String descrizione) {
         this.descrizione = descrizione;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(this.getNome());
+        if (!this.getDescrizione().trim().isEmpty())
+            sb.append(", '").append(this.getDescrizione()).append("'");
+        return sb.toString();
     }
 }

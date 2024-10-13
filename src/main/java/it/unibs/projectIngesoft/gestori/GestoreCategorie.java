@@ -5,8 +5,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import it.unibs.fp.myutils.InputDati;
 import it.unibs.projectIngesoft.attivita.Albero;
 import it.unibs.projectIngesoft.attivita.CategoriaFoglia;
 import it.unibs.projectIngesoft.attivita.CategoriaNonFoglia;
@@ -52,6 +51,8 @@ public class GestoreCategorie {
             deserializeXML();
         }
 
+        // in funzione delle categorie appena lette, raccoglie i domini ed i loro valori e li spiaccica qui
+
         //serializeXML();
     }
 
@@ -68,7 +69,7 @@ public class GestoreCategorie {
             // creazione mapper e oggetto file
             XmlMapper xmlMapper = new XmlMapper();
             xmlMapper.enable(SerializationFeature.INDENT_OUTPUT);
-           xmlMapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
+            xmlMapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
 
 
             File file = new File(this.filePath);
@@ -152,6 +153,7 @@ public class GestoreCategorie {
                 break;
             case 4:
                 //descrizione
+                visualizzaDomini();
                 aggiungiDescrizioneValoreDominio();
                 break;
             case 5:
@@ -165,11 +167,17 @@ public class GestoreCategorie {
 
     public void aggiungiCategoriaNF() {
         //TODO
+        // mostra quali possono essere le categorie MADRE
+        // selezionane una
+        // crea l'oggetto
         serializeXML();
     }
 
     public void aggiungiCategoriaF() {
         //TODO
+        // mostra quali possono essere le categorie MADRE
+        // selezionane una
+        // crea l'oggetto
         serializeXML();
     }
 
@@ -177,9 +185,37 @@ public class GestoreCategorie {
      * Permette la creazione di una categoria radice.
      */
     public void aggiungiGerarchia() {
-        //TODO
+        String tempNome;
+        String tempCampo;
+
+        do {
+            System.out.println(">> Di seguito tutte le categorie radice.");
+            System.out.println(radiciToString());
+            tempNome = InputDati.leggiStringaNonVuota(">> Inserisci il nome della nuova categoria radice:\n>");
+        } while (this.esisteRadice(tempNome));
+
+        //TODO gestore di domini
+        // forse non serve
+
+        tempCampo = InputDati.leggiStringaNonVuota(">> Inserisci il nome del dominio della nuova categoria:\n>");
+        // non chiedo subito di inserire i valori del dominio. quelli staranno da decidere nel momento in cui
+        // si inserisce una figlia
+
+        CategoriaNonFoglia tempRadice = new CategoriaNonFoglia(tempNome, tempCampo);
+        this.tree.aggiungiRadice(tempRadice);
+
         serializeXML();
     }
+
+    private boolean esisteRadice(String tempNome) {
+        return this.tree.contains(tempNome);
+    }
+
+    public void visualizzaDomini() {
+        System.out.println(">>Visualizza i domini ed i loro valori");
+        System.out.println(dominiToString());
+    }
+
 
     /**
      * Aggiunge la descrizione al valore di dominio di una qualche categoria.
@@ -198,15 +234,40 @@ public class GestoreCategorie {
         System.out.println(this);
     }
 
-    @Override
-    public String toString() {
+    /*public void visualizzaRadici() {
+        System.out.println("Visualizza radici\n");
+        System.out.println(this.radiciToString());
+    }*/
+
+    public String dominiToString() {
         StringBuilder sb = new StringBuilder();
 
         for (CategoriaNonFoglia tempNF : tree.radici) {
-            // questo toString non piace molto... per quale cazzo di motivo??
-            sb.append(tempNF).append("\n\n");
-
+            ArrayList<ValoreDominio> tempLista = tempNF.getListaValoriDominio();
+            sb.append("\n\nNome Dominio: ").append(tempNF.getCampo()).append("\n");
+            if (tempLista.size() > 0) {
+                sb.append("Valori: ");
+                for (ValoreDominio val : tempLista)
+                    sb.append("\n{ ").append(val.toString()).append(" }");
+            }else {
+                sb.append("Vuoto.");
+            }
         }
+        return sb.toString();
+    }
+
+    public String radiciToString() {
+        StringBuilder sb = new StringBuilder();
+        for (CategoriaNonFoglia tempNF : tree.radici)
+            sb.append(tempNF.simpleToString()).append("\n");
+        return sb.toString();
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (CategoriaNonFoglia tempNF : tree.radici)
+            sb.append(tempNF).append("\n\n");
         return sb.toString();
     }
 
