@@ -1,23 +1,43 @@
 package it.unibs.projectIngesoft.attivita;
 
-import com.fasterxml.jackson.annotation.JsonRootName;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
-@JsonRootName("")
+@JacksonXmlRootElement(localName = "CategoriaFoglia")
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonTypeName("CategoriaFoglia")
 public class CategoriaFoglia extends Categoria {
 
-    @JacksonXmlProperty(localName = "madre")
-    private CategoriaNonFoglia madre;
+    //@JsonIgnore
+    //private CategoriaNonFoglia madre;
+    @JacksonXmlProperty(localName = "nomeMadre")
+    private String nomeMadre;
     @JacksonXmlProperty(localName = "NomeValoreDominio")
     private String NomeValoreDominio;
+    @JacksonXmlProperty(localName = "campo")
+    private String campo;
 
+
+    @JacksonXmlProperty(localName = "type")
+    private final String type = "CategoriaFoglia";
+
+    /*
+     * Memorizzare anche la categoria madre è ridondante. Mi segno solo quei due attributi
+     * utili e necessari per il toString.
+     */
     public CategoriaFoglia(String nome, CategoriaNonFoglia madre, String NomeValoreDominio) {
         super(nome);
-        this.madre = madre;
+        //this.madre = madre;
         this.NomeValoreDominio = NomeValoreDominio;
+        this.nomeMadre = madre.getNome();
+        this.campo = madre.getCampo();
     }
 
-    public CategoriaFoglia() {super();}
+    public CategoriaFoglia() {
+        super();
+    }
 
     public void setNomeValoreDominio(String NomeValoreDominio) {
         this.NomeValoreDominio = NomeValoreDominio;
@@ -27,21 +47,12 @@ public class CategoriaFoglia extends Categoria {
         return this.NomeValoreDominio;
     }
 
-    public CategoriaNonFoglia getMadre() {
-        return this.madre;
-    }
-
-    public void setMadre(CategoriaNonFoglia madre) {
-        this.madre = madre;
-    }
-
     @Override
-    public String toString(){
+    public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("\tCategoria: ").append(this.getNome()).append("\n");
-        sb.append("\tDominio: ").append(this.getMadre().getCampo()).append("\n");
-        sb.append("\tValore Dominio: ").append(this.getNomeValoreDominio()).append("\n");
-        sb.append("\tMadre: ").append(this.getMadre().getNome()).append("\n");
+        sb.append("\t\tMadre: ").append(this.nomeMadre).append("\n");
+        sb.append("\t\t").append(this.campo).append(" = ").append(this.getNomeValoreDominio()).append("\n");
 
         return sb.toString();
     }

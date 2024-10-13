@@ -1,18 +1,27 @@
 package it.unibs.projectIngesoft.attivita;
 
-import com.fasterxml.jackson.annotation.JsonRootName;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
-@JsonRootName("")
-@JsonDeserialize(as = CategoriaNonFoglia.class)
+
+@JsonTypeInfo(
+        use = JsonTypeInfo.Id.NAME,
+        include = JsonTypeInfo.As.WRAPPER_OBJECT,
+        property = "type"
+)
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = CategoriaNonFoglia.class, name = "CategoriaNonFoglia"),
+        @JsonSubTypes.Type(value = CategoriaFoglia.class, name = "CategoriaFoglia")
+})
+@JacksonXmlRootElement(localName = "Categoria")
 public abstract class Categoria {
-    // se questa classe diventa astratta, jackson impazzisce
 
     @JacksonXmlProperty(localName = "nome")
     private String nome;
 
-    protected Categoria(){
+    protected Categoria() {
 
     }
 
@@ -28,9 +37,5 @@ public abstract class Categoria {
         this.nome = nome;
     }
 
-    public String toString(){
-        StringBuilder sb = new StringBuilder();
-        sb.append(this.getNome());
-        return sb.toString();
-    }
+
 }

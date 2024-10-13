@@ -8,7 +8,7 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
  *  Può essere ripetuto all'interno di più domini ed ha opzionalmente una descrizione.
  */
 
-@JsonRootName("")
+@JsonRootName("ValoreDominio")
 public class ValoreDominio {
 
     // obbligatorio

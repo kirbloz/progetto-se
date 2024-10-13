@@ -1,8 +1,9 @@
 package it.unibs.projectIngesoft.gestori;
 
-import it.unibs.projectIngesoft.attivita.FattoreDiConversione;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import it.unibs.projectIngesoft.attivita.FattoreDiConversione;
 
 import java.io.File;
 import java.io.IOException;
@@ -66,6 +67,7 @@ public class GestoreFattori {
 
             // creazione mapper e oggetto file
             XmlMapper xmlMapper = new XmlMapper();
+            xmlMapper.enable(SerializationFeature.INDENT_OUTPUT);
             File file = new File(this.filePath);
             // se il file non esiste, lo si crea
             if (file.createNewFile()) {
@@ -96,6 +98,7 @@ public class GestoreFattori {
 
         try {
             XmlMapper xmlMapper = new XmlMapper();
+            xmlMapper.enable(SerializationFeature.INDENT_OUTPUT);
             File file = new File(this.filePath);
 
             if (!file.exists()) {
@@ -156,6 +159,7 @@ public class GestoreFattori {
                 break;
             case 2:
                 //modifica - estensione futura
+                //serializeXML();
                 break;
             default:
                 System.out.println("Nulla da mostrare");
