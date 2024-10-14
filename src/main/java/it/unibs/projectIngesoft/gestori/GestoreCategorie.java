@@ -52,7 +52,7 @@ public class GestoreCategorie {
         }
 
         // in funzione delle categorie appena lette, raccoglie i domini ed i loro valori e li spiaccica qui
-
+        // non serve forse
         //serializeXML();
     }
 
@@ -147,7 +147,7 @@ public class GestoreCategorie {
                 //aggiungi cat f
                 aggiungiCategoriaF();
                 break;
-            case 3:
+            case 3: // FATTO
                 //aggiungi gerarchia
                 aggiungiGerarchia();
                 break;
@@ -156,7 +156,7 @@ public class GestoreCategorie {
                 visualizzaDomini();
                 aggiungiDescrizioneValoreDominio();
                 break;
-            case 5:
+            case 5: // FATTO
                 //visualizza
                 visualizzaGerarchia();
                 break;
@@ -170,6 +170,32 @@ public class GestoreCategorie {
         // mostra quali possono essere le categorie MADRE
         // selezionane una
         // crea l'oggetto
+        /*
+        configuratore configura categorie non foglia: nome, campo caratt, dominio
+stabilire fattori di conversione per coppie categorie, categorie di gerarchia appena creata entrambe, o solo una
+         */
+
+        String tempNome;
+        String tempCampo;
+
+        do {
+            System.out.println(">> Di seguito tutte le categorie radice.");
+            System.out.println(radiciToString());
+            tempNome = InputDati.leggiStringaNonVuota(">> Inserisci il nome della nuova categoria radice:\n>");
+        } while (this.esisteRadice(tempNome));
+
+        //TODO gestore di domini
+        // forse non serve
+
+        tempCampo = InputDati.leggiStringaNonVuota(">> Inserisci il nome del dominio della nuova categoria:\n>");
+        // non chiedo subito di inserire i valori del dominio. quelli staranno da decidere nel momento in cui
+        // si inserisce una figlia
+
+        CategoriaNonFoglia tempRadice = new CategoriaNonFoglia(tempNome, tempCampo);
+        this.tree.aggiungiRadice(tempRadice);
+
+
+
         serializeXML();
     }
 

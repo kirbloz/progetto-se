@@ -15,9 +15,6 @@ public class Utente {
     @JacksonXmlProperty(localName = "password")
     protected String password;
 
-    public static final String MSG_RICHIESTA_NUSERNAME = "Inserisci il nuovo username: "; //per cambio username
-    public static final String MSG_RICHIESTA_NPASSWORD = "Inserisci la nuova password: "; //per cambio password
-
 
     public Utente(){
         // Usato solo nel caso del primo accesso del configuratore, per generare un utente nuovo da registrare (scelta di progettazione)
@@ -28,26 +25,12 @@ public class Utente {
         this.password = password;
     }
 
-    public void cambioCredenziali(GestoreUtenti gestoreUtenti) { // per cambiare le credenziali di un utente (funziona in tutti i casi, ma se in una versione futura il fruitore può cambiare anche mail bisognerà fare un distinguo polimorfico)
-        String newUsername;
-        String newPassword;
-        boolean exists = false;
-        do {
-            newUsername = InputDati.leggiStringaNonVuota(MSG_RICHIESTA_NUSERNAME);
-            newPassword = InputDati.leggiStringaNonVuota(MSG_RICHIESTA_NPASSWORD);
-            for(Utente usr : gestoreUtenti.getUtenti()){
-                if(usr.getUsername().equals(newUsername)){
-                    exists = true;
-                    System.out.println("Nome utente e password gia' esistenti");             //TODO Da togliere password nel print
-                    break;
-                }
-            }
-        }while(exists);
 
-
+    public void cambioCredenziali(String newUsername, String newPassword) { // per cambiare le credenziali di un utente (funziona in tutti i casi, ma se in una versione futura il fruitore può cambiare anche mail bisognerà fare un distinguo polimorfico)
         this.username = newUsername;
         this.password = newPassword;
     }
+
 
     public String getUsername() {
         return username;

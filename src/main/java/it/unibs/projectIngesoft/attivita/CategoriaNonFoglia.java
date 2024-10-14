@@ -13,8 +13,8 @@ public class CategoriaNonFoglia extends Categoria {
     @JacksonXmlProperty(localName = "isRadice")
     private boolean isRadice;
 
-    @JsonIgnore
-    private CategoriaNonFoglia madre;
+    //@JsonIgnore
+    //private CategoriaNonFoglia madre;
     @JacksonXmlProperty(localName = "nomeMadre")
     private String nomeMadre;
     @JacksonXmlProperty(localName = "campo")
@@ -42,7 +42,7 @@ public class CategoriaNonFoglia extends Categoria {
         this.listaValoriDominio = dominio;
         this.isRadice = true;
         this.categorieFiglie = new ArrayList<>();
-        this.madre = null;
+        //this.madre = null;
         this.nomeMadre = null;
     }
 
@@ -52,7 +52,7 @@ public class CategoriaNonFoglia extends Categoria {
         this.listaValoriDominio = new ArrayList<>();
         this.isRadice = true;
         this.categorieFiglie = new ArrayList<>();
-        this.madre = null;
+        //this.madre = null;
         this.nomeMadre = null;
     }
 
@@ -61,7 +61,7 @@ public class CategoriaNonFoglia extends Categoria {
         super(nome);
         this.campo = campo;
         this.listaValoriDominio = dominio;
-        this.madre = madre;
+        //this.madre = madre;
         this.isRadice = false;
         this.categorieFiglie = new ArrayList<>();
         this.nomeMadre = madre.getNome();
@@ -71,7 +71,7 @@ public class CategoriaNonFoglia extends Categoria {
         super(nome);
         this.campo = campo;
         this.listaValoriDominio = new ArrayList<>();
-        this.madre = madre;
+        //this.madre = madre;
         this.isRadice = false;
         this.categorieFiglie = new ArrayList<>();
         this.nomeMadre = madre.getNome();
@@ -86,9 +86,9 @@ public class CategoriaNonFoglia extends Categoria {
         return campo;
     }
 
-    public CategoriaNonFoglia getMadre() {
+    /*public CategoriaNonFoglia getMadre() {
         return madre;
-    }
+    }*/
 
     public void setListaValoriDominio(ArrayList<ValoreDominio> listaValoriDominio) {
         this.listaValoriDominio = listaValoriDominio;
@@ -102,9 +102,10 @@ public class CategoriaNonFoglia extends Categoria {
         this.campo = campo;
     }
 
+    /*
     public void setMadre(CategoriaNonFoglia madre) {
         this.madre = madre;
-    }
+    }*/
 
     public ArrayList<Categoria> getCategorieFiglie() {
         return categorieFiglie;
@@ -185,7 +186,7 @@ public class CategoriaNonFoglia extends Categoria {
         sb.append("Dominio: ").append(this.getCampo()).append("\n");
         // se non è una radice, allora si stampano i dati della categoria madre
         if (!this.isRadice())
-            sb.append("Madre: ").append(this.getMadre() != null ? this.getMadre().getNome() : "null").append("\n");
+            sb.append("Madre: ").append(this.nomeMadre)/*append(this.getMadre() != null ? this.getMadre().getNome() : "null")*/.append("\n");
         return sb.toString();
     }
 

@@ -1,7 +1,9 @@
 package it.unibs.projectIngesoft.main;
 
 import it.unibs.projectIngesoft.attivita.FattoreDiConversione;
-import it.unibs.projectIngesoft.gestori.*;
+import it.unibs.projectIngesoft.gestori.GestoreCategorie;
+import it.unibs.projectIngesoft.gestori.GestoreFattori;
+import it.unibs.projectIngesoft.gestori.GestoreUtenti;
 import it.unibs.projectIngesoft.menu.Menu;
 import it.unibs.projectIngesoft.utente.Utente;
 
@@ -18,7 +20,7 @@ public class Main {
 
     protected final static String titoloMainMenu = "MENU' PRINCIPALE - SCAMBIO ORE";
     protected final static String[] voci = new String[]{
-            "Accedi",
+            //"Accedi",
             "Cambia Credenziali",
             "Menu Comprensorio TODO",
             "Menu Categorie WIP",
@@ -50,6 +52,8 @@ public class Main {
         put("c1", listaFattori);
     }};
 
+    protected static Utente utenteLoggato = new Utente();
+
 
     public static void main(String[] args) {
         /*
@@ -59,11 +63,11 @@ public class Main {
         Menu menu = new Menu(titoloMainMenu, voci);
         Menu menuCategorie = new Menu(titoloMenuCategorie, vociCategorie);
         Menu menuFattori = new Menu(titoloMenuCategorie, vociFattori);
-        Utente utenteLoggato;
+
 
         utenteLoggato = userHandler.login();
 
-        loopMain(menu, menuCategorie, menuFattori);
+        loopMain(menu, menuCategorie, menuFattori, userHandler);
 
     }
 
@@ -74,7 +78,7 @@ public class Main {
      * @param menuCategorie, sotto-menu per le categorie
      * @param menuFattori,   sotto-menu per i fattori
      */
-    private static void loopMain(Menu menu, Menu menuCategorie, Menu menuFattori) {
+    private static void loopMain(Menu menu, Menu menuCategorie, Menu menuFattori, GestoreUtenti userHandler) {
 
         int scelta = 0;
         do {
@@ -83,9 +87,8 @@ public class Main {
             switch (scelta) {
                 //TODO
                 case 1:
-                    //accedi
-                    System.out.println("UAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-
+                    // cambio credenzilai
+                    userHandler.cambioCredenziali(utenteLoggato);
                     break;
                 case 4:
                     //menu categorie
