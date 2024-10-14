@@ -14,22 +14,22 @@ import java.util.List;
 
 public class GestoreUtenti {
 
+    // da levare l'hardcoding
     public static final String defaultAdminUsr = "admin";
     public static final String defaultAdminPsw = "1234";
     public static final String MSG_RICHIESTA_USERNAME = "Inserisci il tuo username: ";
     public static final String MSG_RICHIESTA_PASSWORD = "Inserisci la tua password: ";
 
+    public static final String MSG_RICHIESTA_NUSERNAME = "Inserisci il nuovo username: "; //per cambio username
+    public static final String MSG_RICHIESTA_NPASSWORD = "Inserisci la nuova password: "; //per cambio password
+
     private final String filePath;
     private ArrayList<Utente> utenti;
-
-    //public static File fileCredenziali = new File("fileCredenziali"); // file contenente gli utenti registrati
 
     public GestoreUtenti(String filePath) {
         this.filePath = filePath;
         this.utenti = new ArrayList<>();
         deserializeXML(); // load dati
-        serializeXML();
-
     }
 
     public String getFilePath() {
@@ -42,6 +42,7 @@ public class GestoreUtenti {
 
     public void setUtenti(ArrayList<Utente> utenti) {
         this.utenti = utenti;
+        serializeXML();
     }
 
 
@@ -49,6 +50,7 @@ public class GestoreUtenti {
         if (!this.utenti.contains(utente)) {
             // inserisce l'utente se e solo se non esiste già nell'arraylist
             this.utenti.add(utente);
+            serializeXML();
         }
     }
 
@@ -69,14 +71,11 @@ public class GestoreUtenti {
 
 
             if (username.equals(defaultAdminUsr) && password.equals(defaultAdminPsw)) {
-                Configuratore C1 = new Configuratore(); // qui creiamo l'oggetto nuovo configuratore con nome C1, ma il nome
-                // deve cambiare per ogni istanza eventuale (o sono scemo?) (sono
-                // scemo -m)/
-                C1.cambioCredenziali(this);
+                Configuratore C1 = new Configuratore();
+                this.cambioCredenziali(C1);
                 addUtente(C1);
-                serializeXML();
             } else if (indice == -1) {
-                System.out.println("L'utente non esiste");
+                System.out.println("Credenziali errate.");
             }
 
         } while (indice == -1);
@@ -84,16 +83,50 @@ public class GestoreUtenti {
         return utenti.get(indice);
     }
 
-    public int checkUtente(String username, String password) { // Ricerca all'interno dell'ArrayList (dopo averlo popolato leggendo il
-        // fileCredenziali) l'esistenza della coppia username e password data in input
-        for (int i = 0; i < utenti.size(); i++) {
-            if (utenti.get(i).getUsername().equals(username) && utenti.get(i).getPassword().equals(password)) {
-                return i;
+    /**
+     * TODO DA COMMENTARE
+     * @param C1
+     */
+    public void cambioCredenziali(Utente C1) {
+        boolean exists = false;
+        String newUsername;
+        String newPassword;
+        String oldUsername = C1.getUsername();
+
+        do {
+            newUsername = InputDati.leggiStringaNonVuota(MSG_RICHIESTA_NUSERNAME);
+            newPassword = InputDati.leggiStringaNonVuota(MSG_RICHIESTA_NPASSWORD);
+            if (!oldUsername.equals(newUsername)) {
+                for (Utente usr : this.utenti) {
+                    if (usr.getUsername().equals(newUsername)) {
+                        exists = true;
+                        System.out.println("Nome utente gia' esistente");
+                        break;
+                    }
+                }
+            }
+        } while (exists);
+
+        C1.cambioCredenziali(newUsername, newPassword);
+        serializeXML();
+    }
+
+    /**
+     * Ricerca all'interno dell'ArrayList (dopo averlo popolato leggendo il
+     * fileCredenziali) l'esistenza della coppia username e password data in input
+     *
+     * @param username
+     * @param password
+     * @return int indice dell'oggetto, altrimenti "-1" se
+     */
+    public int checkUtente(String username, String password) {
+        for (Utente utente : utenti) {
+            if (utente.getUsername().equals(username) && utente.getPassword().equals(password)) {
+                return utenti.indexOf(utente);
             }
         }
         return -1;
     }
-
 
     /**
      * TODO questo va commentato a dovere
