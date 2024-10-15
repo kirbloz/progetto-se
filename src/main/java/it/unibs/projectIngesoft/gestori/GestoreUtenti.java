@@ -50,7 +50,7 @@ public class GestoreUtenti {
      * @param utente
      */
     public void addUtente(Utente utente) {
-        if (!this.utenti.contains(utente)) {//TODO scusa wade ma scrivo sta cosa per ricordarti di chiedertelo:
+        if (!this.utenti.contains(utente)) {//TODO scusa wade ma scrivo sta cosa per ricordarmi di chiedertelo:
             // questo check lavora sull'utente come oggetto, quindi se gli arriva un utente che è un oggetto diverso ma è comunque con lo stesso nome (che non dovrebbe essere possibile però boh) non ritorna sempre true?
             this.utenti.add(utente);
             serializeXML();
@@ -66,11 +66,12 @@ public class GestoreUtenti {
         int indice = -1;
 
         do {
-            // da ciclare i guess -m
+            // Richiesta Input per il login
             username = InputDati.leggiStringaNonVuota(MSG_RICHIESTA_USERNAME);
             password = InputDati.leggiStringaNonVuota(MSG_RICHIESTA_PASSWORD);
 
-            indice = checkUtente(username, password);
+            // ricerca
+            indice = ricercaUtente(username, password);
 
 
             if (username.equals(defaultAdminUsr) && password.equals(defaultAdminPsw)) {
@@ -87,7 +88,7 @@ public class GestoreUtenti {
     }
 
     /**
-     * TODO DA COMMENTARE
+     * effettua il controllo sulle nuove credenziali (per mantenere l'unicità dell'username) e poi chiama la funzione dell'utente per modificarle
      * @param C1
      */
     public void cambioCredenziali(Utente C1) {
@@ -122,7 +123,7 @@ public class GestoreUtenti {
      * @param password
      * @return int indice dell'oggetto, altrimenti "-1" se
      */
-    public int checkUtente(String username, String password) {
+    public int ricercaUtente(String username, String password) {
         for (Utente utente : utenti) {
             if (utente.getUsername().equals(username) && utente.getPassword().equals(password)) {
                 return utenti.indexOf(utente);

@@ -5,6 +5,7 @@ import it.unibs.projectIngesoft.gestori.GestoreCategorie;
 import it.unibs.projectIngesoft.gestori.GestoreFattori;
 import it.unibs.projectIngesoft.gestori.GestoreUtenti;
 import it.unibs.projectIngesoft.menu.Menu;
+import it.unibs.projectIngesoft.utente.Configuratore;
 import it.unibs.projectIngesoft.utente.Utente;
 
 import java.util.ArrayList;
@@ -66,6 +67,15 @@ public class Main {
 
 
         utenteLoggato = userHandler.login();
+        //idea: per la distinzione tra configuratore e utente finale nel login possiamo mettere:    // -m
+        /*
+        if(utenteLoggato.getClass() == Configuratore.class){
+            loopMainConfiguratore(...);
+        } else if (utenteLoggato.getClass() != Configuratore.class) {
+            loopMainUtenteFinale(...)
+        }
+         */
+
 
         loopMain(menu, menuCategorie, menuFattori, userHandler);
 
