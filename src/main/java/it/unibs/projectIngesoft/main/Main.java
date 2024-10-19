@@ -2,6 +2,7 @@ package it.unibs.projectIngesoft.main;
 
 import it.unibs.projectIngesoft.attivita.FattoreDiConversione;
 import it.unibs.projectIngesoft.gestori.GestoreCategorie;
+import it.unibs.projectIngesoft.gestori.GestoreComprensorioGeografico;
 import it.unibs.projectIngesoft.gestori.GestoreFattori;
 import it.unibs.projectIngesoft.gestori.GestoreUtenti;
 import it.unibs.projectIngesoft.menu.Menu;
@@ -15,9 +16,10 @@ import java.util.HashMap;
  */
 public class Main {
 
-    protected static final String FATTORI_DI_CONVERSIONE_XML_FILEPATH = "serialized.xml";
+    protected static final String FATTORI_DI_CONVERSIONE_XML_FILEPATH = "serialized.xml"; ///DA RINOMINARE
     protected static final String UTENTI_XML_FILEPATH = "users.xml";
     public static final String CATEGORIE_XML_FILEPATH = "categorie.xml";
+    public static final String COMPRENSORI_GEOGRAFICI_XML_FILEPATH = "comprensoriGeografici.xml";
 
     public static final String MSG_PROGRAM_EXIT = "> ARRIVEDERCI <";
     public static final String MSG_DEFAULT_NO_VALID_MENU_SELECTION = "Niente da mostrare.";
@@ -29,6 +31,12 @@ public class Main {
             "Menu Comprensorio TODO",
             "Menu Categorie WIP",
             "Menu Fattori WIP"
+    };
+
+    protected static final String TITLE_MENU_COMPRENSORIO = "MENU' COMPRENSORI GEOGRAFICI";
+    protected static final String[] vociComprensorioGeografico = new String[]{
+            "Aggiungi Comprensorio Geografico",
+            "Visualizza Comprensorio Geografico"
     };
 
     protected static final String TITLE_MENU_CATEGORIE = "MENU' CATEGORIE";
@@ -55,9 +63,7 @@ public class Main {
         put("c1", listaFattori);
     }};
 
-
     protected static Utente utenteLoggato = new Utente();
-
 
     public static void main(String[] args) {
         /*
@@ -67,7 +73,7 @@ public class Main {
         Menu menu = new Menu(TITLE_MAIN_MENU, vociMain);
         Menu menuCategorie = new Menu(TITLE_MENU_CATEGORIE, vociCategorie);
         Menu menuFattori = new Menu(TITLE_MENU_CATEGORIE, vociFattori);
-
+        Menu menuComprensoriGeografici = new Menu(TITLE_MENU_COMPRENSORIO, vociComprensorioGeografico);
 
         utenteLoggato = userHandler.login();
         //idea: per la distinzione tra configuratore e utente finale nel login possiamo mettere:    // -m
@@ -80,7 +86,7 @@ public class Main {
          */
 
 
-        loopMain(menu, menuCategorie, menuFattori, userHandler);
+        loopMain(menu, menuCategorie, menuFattori, menuComprensoriGeografici, userHandler);
 
     }
 
@@ -91,7 +97,7 @@ public class Main {
      * @param menuCategorie, sotto-menu per le categorie
      * @param menuFattori,   sotto-menu per i fattori
      */
-    private static void loopMain(Menu menu, Menu menuCategorie, Menu menuFattori, GestoreUtenti userHandler) {
+    private static void loopMain(Menu menu, Menu menuCategorie, Menu menuFattori, Menu menuComprensoriGeografici, GestoreUtenti userHandler) {
 
         int scelta = 0;
         do {
@@ -107,7 +113,7 @@ public class Main {
                     break;
                 case 2:
                     //menu comprensorio
-                    // TODO
+                    loopComprensoriGeografici(menuComprensoriGeografici);
                     // @martino
                     break;
                 case 3:
@@ -124,6 +130,21 @@ public class Main {
 
         } while (scelta != 0);
     }
+
+    /**
+     *
+     * @param menuComprensoriGeografici
+     */
+    private static void loopComprensoriGeografici(Menu menuComprensoriGeografici) {
+        int scelta = 0;
+        GestoreComprensorioGeografico gestoreComprensori = new GestoreComprensorioGeografico(CATEGORIE_XML_FILEPATH);
+
+        do {
+            scelta = menuComprensoriGeografici.scegli();
+            gestoreComprensori.entryPoint(scelta);
+        } while (scelta != 0);
+    }
+
 
     /**
      * Metodo che cicla nelle scelte per il menu delle categorie
