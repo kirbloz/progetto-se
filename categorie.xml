@@ -1,13 +1,13 @@
 <Albero>
   <radice>
     <CategoriaNonFoglia>
-      <nomeValoreDominio/>
+      <nomeValoreDominio></nomeValoreDominio>
       <nome>cat1 radice</nome>
       <isRadice>true</isRadice>
-      <nomeMadre/>
-      <campo/>
+      <nomeMadre></nomeMadre>
+      <campo></campo>
       <campoFiglie>materia</campoFiglie>
-      <NomeValoreDominio/>
+      <NomeValoreDominio></NomeValoreDominio>
       <listaValoriDominio>
         <ValoreDominio>
           <nome>valore1</nome>
@@ -61,13 +61,13 @@
   </radice>
   <radice>
     <CategoriaNonFoglia>
-      <nomeValoreDominio/>
+      <nomeValoreDominio></nomeValoreDominio>
       <nome>cat2 radice</nome>
       <isRadice>true</isRadice>
-      <nomeMadre/>
-      <campo/>
+      <nomeMadre></nomeMadre>
+      <campo></campo>
       <campoFiglie>lezione</campoFiglie>
-      <NomeValoreDominio/>
+      <NomeValoreDominio></NomeValoreDominio>
       <listaValoriDominio>
         <ValoreDominio>
           <nome>valore1</nome>
@@ -125,29 +125,67 @@
   </radice>
   <radice>
     <CategoriaNonFoglia>
-      <nomeValoreDominio/>
-      <nome>Sport</nome>
+      <nomeValoreDominio></nomeValoreDominio>
+      <nome>test</nome>
       <isRadice>true</isRadice>
-      <nomeMadre/>
-      <campo/>
-      <campoFiglie>disciplina</campoFiglie>
-      <NomeValoreDominio/>
+      <nomeMadre></nomeMadre>
+      <campo></campo>
+      <campoFiglie>codice</campoFiglie>
+      <NomeValoreDominio></NomeValoreDominio>
       <listaValoriDominio>
         <ValoreDominio>
-          <nome>olimpica</nome>
+          <nome>java</nome>
+          <descrizione></descrizione>
+        </ValoreDominio>
+        <ValoreDominio>
+          <nome>python</nome>
           <descrizione></descrizione>
         </ValoreDominio>
       </listaValoriDominio>
       <categorieFiglie>
         <Categoria>
           <CategoriaNonFoglia>
-            <nomeValoreDominio>olimpica</nomeValoreDominio>
-            <nome>Gara</nome>
+            <nomeValoreDominio>java</nomeValoreDominio>
+            <nome>junit</nome>
             <isRadice>false</isRadice>
-            <nomeMadre>Sport</nomeMadre>
-            <campo>disciplina</campo>
-            <campoFiglie>pratica</campoFiglie>
-            <NomeValoreDominio>olimpica</NomeValoreDominio>
+            <nomeMadre>test</nomeMadre>
+            <campo>codice</campo>
+            <campoFiglie>condizioni</campoFiglie>
+            <NomeValoreDominio>java</NomeValoreDominio>
+            <listaValoriDominio>
+              <ValoreDominio>
+                <nome>pre</nome>
+                <descrizione></descrizione>
+              </ValoreDominio>
+            </listaValoriDominio>
+            <categorieFiglie>
+              <Categoria>
+                <CategoriaNonFoglia>
+                  <nomeValoreDominio>pre</nomeValoreDominio>
+                  <nome>precondizioni</nome>
+                  <isRadice>false</isRadice>
+                  <nomeMadre>junit</nomeMadre>
+                  <campo>condizioni</campo>
+                  <campoFiglie>logica</campoFiglie>
+                  <NomeValoreDominio>pre</NomeValoreDominio>
+                  <listaValoriDominio/>
+                  <categorieFiglie/>
+                  <type>CategoriaNonFoglia</type>
+                </CategoriaNonFoglia>
+              </Categoria>
+            </categorieFiglie>
+            <type>CategoriaNonFoglia</type>
+          </CategoriaNonFoglia>
+        </Categoria>
+        <Categoria>
+          <CategoriaNonFoglia>
+            <nomeValoreDominio>python</nomeValoreDominio>
+            <nome>pyunit</nome>
+            <isRadice>false</isRadice>
+            <nomeMadre>test</nomeMadre>
+            <campo>codice</campo>
+            <campoFiglie>condizioni</campoFiglie>
+            <NomeValoreDominio>python</NomeValoreDominio>
             <listaValoriDominio/>
             <categorieFiglie/>
             <type>CategoriaNonFoglia</type>
