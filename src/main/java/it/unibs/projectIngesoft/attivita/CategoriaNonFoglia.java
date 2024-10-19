@@ -200,22 +200,18 @@ public class CategoriaNonFoglia extends Categoria {
     @Override
     public Categoria cercaCategoria(String nomeCat) {
         Categoria found = null;
-
         // prima controlla se stessa
         if (this.getNome().equals(nomeCat))
             return this;
         else {
             // altrimenti controlla nelle figlie, richiamando per ognuna di loro la funzione di ricerca
-            for (int i = 0; i < this.getNumCategorieFiglie(); i++) {
-                // controllo la classe dell'oggetto e richiamo il metodo giusto
-                if (this.categorieFiglie.get(i) instanceof CategoriaNonFoglia tempNF) {
-                    found = tempNF.cercaCategoria(nomeCat);
-                } else if (this.categorieFiglie.get(i) instanceof CategoriaFoglia tempF) {
-                    found = tempF.cercaCategoria(nomeCat);
-                }
+            // appena trova qualcosa (cioè found non null) esce e ritorna
+            for( Categoria figlia : this.categorieFiglie) {
+                found = figlia.cercaCategoria(nomeCat);
+                if(found != null)
+                    break;
             }
         }
-
         return found;
     }
 

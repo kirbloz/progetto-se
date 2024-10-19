@@ -57,4 +57,9 @@ public class CategoriaFoglia extends Categoria {
         return sb.toString();
     }
 
+    @Override
+    public Categoria cercaCategoria(String nomeCat) {
+        return this.getNome().equals(nomeCat) ? this : null;
+    }
+
 }
