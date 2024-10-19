@@ -17,6 +17,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GestoreCategorie {
+
+
+    public static final String MSG_VISUALIZZA_GERARCHIE = "\n>>Visualizza gerarchie di categorie\n";
+    public static final String MSG_VISUALIZZA_RADICE = "\n>>Visualizza gerarchia di %s\n";
+    public static final String MSG_VISUALIZZA_DOMINI = "%n>>Visualizza i domini ed i loro valori";
+    public static final boolean DEBUG_DATA = false;
+    public static final boolean DEBUG_LOGIC = true;
+
+
     // non sono sicuro di quale struttura dati utilizzare
     private Albero tree;
 
@@ -30,8 +39,7 @@ public class GestoreCategorie {
         this.tree = new Albero();
         //deserializeXML(); // load dati
 
-        boolean debug_data = true;
-        if (debug_data) {
+        if (DEBUG_DATA) {
             ArrayList<ValoreDominio> valori = new ArrayList<>();
             ArrayList<ValoreDominio> valori2 = new ArrayList<>();
             //a che cazzo serve sta roba dei valori
@@ -66,8 +74,6 @@ public class GestoreCategorie {
 
         try {
 
-            boolean debug = true;
-
             // creazione mapper e oggetto file
             XmlMapper xmlMapper = new XmlMapper();
             xmlMapper.enable(SerializationFeature.INDENT_OUTPUT);
@@ -78,7 +84,7 @@ public class GestoreCategorie {
 
             // se il file non esiste, lo si crea
             if (file.createNewFile()) {
-                if (debug)
+                if (DEBUG_LOGIC)
                     System.out.println("FILE CREATO");
             }
 
@@ -99,14 +105,13 @@ public class GestoreCategorie {
      * TODO questo va commentato a dovere
      */
     public void deserializeXML() {
-        boolean debug = true;
 
         try {
             XmlMapper xmlMapper = new XmlMapper();
             File file = new File(this.filePath);
 
             if (!file.exists()) {
-                if (debug)
+                if (DEBUG_LOGIC)
                     System.out.println("FILE NON ESISTE. NON CARICO NIENTE.");
                 return;
             }
@@ -202,13 +207,13 @@ public class GestoreCategorie {
             if (!checkNomeUnivoco) {
                 //chiedi temp nome se non è univoco
                 visualizzaGerarchia(tempRadice);
-                tempNome = InputDati.leggiStringaNonVuota(">> Inserisci il nome della NUOVA CATEGORIA:\n> ").trim();
+                tempNome = InputDati.leggiStringaNonVuota(">> Inserisci il nome della NUOVA CATEGORIA:%n> ").trim();
                 // cerca tra i figli di una radice se c'è questa roba
             }
             if (!checkMadre) {
                 // stampa la gerarchia
                 visualizzaGerarchia(tempRadice);
-                tempMadre = InputDati.leggiStringaNonVuota(String.format(">> Inserisci il nome della CATEGORIA MADRE per %s:\n> ", tempNome)).trim();
+                tempMadre = InputDati.leggiStringaNonVuota(String.format(">> Inserisci il nome della CATEGORIA MADRE per %s:%n> ", tempNome)).trim();
                 // cerca tra i figli di una radice se c'è questa cosa
             }
 
@@ -231,11 +236,11 @@ public class GestoreCategorie {
 
         } while (!checkNomeUnivoco || !checkMadre);
 
-        tempValoreDominio = InputDati.leggiStringaNonVuota(String.format(">> Inserisci il valore di %s nel dominio di {%s}\n> ", tempNome, catMadre.getCampoFiglie())).trim();
+        tempValoreDominio = InputDati.leggiStringaNonVuota(String.format(">> Inserisci il valore di %s nel dominio di {%s}%n> ", tempNome, catMadre.getCampoFiglie())).trim();
         // non chiedo subito di inserire i valori del dominio. quelli staranno da decidere nel momento in cui
         // si inserisce una figlia
 
-        tempCampoFiglie = InputDati.leggiStringaNonVuota(">> Inserisci il nome del dominio per eventuali figlie della nuova categoria:\n> ").trim();
+        tempCampoFiglie = InputDati.leggiStringaNonVuota(">> Inserisci il nome del dominio per eventuali figlie della nuova categoria:%n> ").trim();
         // non chiedo subito di inserire i valori del dominio. quelli staranno da decidere nel momento in cui
         // si inserisce una figlia
 
@@ -263,12 +268,12 @@ public class GestoreCategorie {
         do {
             System.out.println(">> Di seguito tutte le categorie radice.");
             System.out.println(radiciToString());
-            tempNome = InputDati.leggiStringaNonVuota(">> Inserisci il nome della nuova categoria radice:\n>");
+            tempNome = InputDati.leggiStringaNonVuota(">> Inserisci il nome della nuova categoria radice:%n>");
         } while (this.esisteRadice(tempNome));
 
         // TODO
         // legge solo i nomi senza spazi wtf
-        tempCampo = InputDati.leggiStringaNonVuota(">> Inserisci il nome del dominio della nuova categoria:\n>");
+        tempCampo = InputDati.leggiStringaNonVuota(">> Inserisci il nome del dominio della nuova categoria:%n>");
 
         // non chiedo subito di inserire i valori del dominio. quelli staranno da decidere nel momento in cui
         // si inserisce una figlia
@@ -279,6 +284,7 @@ public class GestoreCategorie {
 
     /**
      * Verifica che una categoria radice esista
+     *
      * @param tempNome, nome della categoria da cercare
      * @return boolean, risultato ricerca
      */
@@ -288,7 +294,7 @@ public class GestoreCategorie {
 
     // TODO
     public void visualizzaDomini() {
-        System.out.println("\n>>Visualizza i domini ed i loro valori");
+        System.out.println(MSG_VISUALIZZA_DOMINI);
         System.out.println(dominiToString());
     }
 
@@ -306,18 +312,19 @@ public class GestoreCategorie {
      */
     public void visualizzaGerarchie() {
         //TODO
-        System.out.println("\n>>Visualizza gerarchie di categorie\n");
+        System.out.println(MSG_VISUALIZZA_GERARCHIE);
         System.out.println(this);
     }
 
     /**
-     * sStampa a video le info di un singolo albero gerarchico
+     * Stampa a video le info di un singolo albero gerarchico
      *
      * @param nomeRadice, nome della categoria radice dell'albero da mostrare
      */
     public void visualizzaGerarchia(String nomeRadice) {
-        System.out.println(String.format("\n>>Visualizza gerarchia di %s\n", nomeRadice));
-        System.out.println(this.tree.getRadice(nomeRadice) + " \n\n");
+        System.out.printf((MSG_VISUALIZZA_RADICE) + "%n", nomeRadice);
+        System.out.println(this.tree.getRadice(nomeRadice) + " %n%n");
+
 
     }
 
@@ -333,11 +340,11 @@ public class GestoreCategorie {
 
         for (CategoriaNonFoglia tempNF : tree.radici) {
             ArrayList<ValoreDominio> tempLista = tempNF.getListaValoriDominio();
-            sb.append("\n\nNome Dominio: ").append(tempNF.getCampo()).append("\n");
-            if (tempLista.size() > 0) {
+            sb.append("%n%nNome Dominio: ").append(tempNF.getCampo()).append("%n");
+            if (!tempLista.isEmpty()) {
                 sb.append("Valori: ");
                 for (ValoreDominio val : tempLista)
-                    sb.append("\n{ ").append(val.toString()).append(" }");
+                    sb.append("%n{ ").append(val.toString()).append(" }");
             } else {
                 sb.append("Vuoto.");
             }
@@ -356,7 +363,7 @@ public class GestoreCategorie {
         // scorre le radici (tutte catNF)
         for (CategoriaNonFoglia tempNF : tree.radici)
             // stampa solo radici e dominio, niente sulle figlie
-            sb.append(tempNF.simpleToString()).append("\n");
+            sb.append(tempNF.simpleToString()).append("%n");
         return sb.toString();
     }
 
@@ -364,7 +371,7 @@ public class GestoreCategorie {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         for (CategoriaNonFoglia tempNF : tree.radici)
-            sb.append(tempNF).append("\n\n");
+            sb.append(tempNF).append("%n%n");
         return sb.toString();
     }
 
