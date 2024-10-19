@@ -11,6 +11,9 @@ import java.util.Scanner;
  */
 public class InputDati {
 
+    // CAZZOOOOOO
+
+
     public static final String ERR_STRINGA_TROPPO_CORTA = "Attenzione: La stringa inserita e' troppo corta, la lunghezza minima e' caratteri: ";
     public static final String ERR_STRINGA_TROPPO_LUNGA = "Attenzione: la stringa inserita e' troppo lunga, la lunghezza massima e' di caratteri: ";
 
