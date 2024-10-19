@@ -137,7 +137,7 @@ public class Main {
      */
     private static void loopComprensoriGeografici(Menu menuComprensoriGeografici) {
         int scelta = 0;
-        GestoreComprensorioGeografico gestoreComprensori = new GestoreComprensorioGeografico(CATEGORIE_XML_FILEPATH);
+        GestoreComprensorioGeografico gestoreComprensori = new GestoreComprensorioGeografico(COMPRENSORI_GEOGRAFICI_XML_FILEPATH);
 
         do {
             scelta = menuComprensoriGeografici.scegli();

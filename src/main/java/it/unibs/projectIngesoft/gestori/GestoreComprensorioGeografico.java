@@ -6,6 +6,7 @@ import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import it.unibs.fp.myutils.InputDati;
 import it.unibs.projectIngesoft.attivita.ComprensorioGeografico;
 
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -44,7 +45,7 @@ public class GestoreComprensorioGeografico {
         ///User Interaction per la creazione del comprensorio
         //TODO controllo stupido dell'unicità perché ho fritto il cervello letteralmente sono scemo qualcuno lo cambi
         boolean nomeGiaUsato = false;
-        String nomeComprensorio = /*InputDati.*/leggiStringaNonVuota(MESSAGGIO_INSERIMENTO_NOME_NUOVO_COMPRENSORIO);
+        String nomeComprensorio = InputDati.leggiStringaNonVuota(MESSAGGIO_INSERIMENTO_NOME_NUOVO_COMPRENSORIO);
         for (ComprensorioGeografico comprensorio : this.listaComprensoriGeografici) {
             if(comprensorio.getNomeComprensorio().equalsIgnoreCase(nomeComprensorio)){
                 nomeGiaUsato = true;
@@ -53,7 +54,7 @@ public class GestoreComprensorioGeografico {
         }
         while(nomeGiaUsato){
             nomeGiaUsato = false;
-            nomeComprensorio = /*InputDati.*/leggiStringaNonVuota(MESSAGGIO_INSERIMENTO_NOME_NUOVO_COMPRENSORIO);
+            nomeComprensorio = InputDati.leggiStringaNonVuota(MESSAGGIO_INSERIMENTO_NOME_NUOVO_COMPRENSORIO);
             for (ComprensorioGeografico comprensorio : this.listaComprensoriGeografici) {
                 if(comprensorio.getNomeComprensorio().equalsIgnoreCase(nomeComprensorio)){
                     nomeGiaUsato = true;
@@ -81,7 +82,7 @@ public class GestoreComprensorioGeografico {
 
         String nomeDaCercare = InputDati.leggiStringaNonVuota(MESSAGGIO_RICERCA_COMPRENSORIO);
         for (ComprensorioGeografico comprensorio : this.listaComprensoriGeografici) {
-            if(comprensorio.getNomeComprensorio().equals(nomeDaCercare)){
+            if(comprensorio.getNomeComprensorio().equalsIgnoreCase(nomeDaCercare)){
                 stampaComprensorio(comprensorio);
                 return;
             }
@@ -181,7 +182,7 @@ public class GestoreComprensorioGeografico {
         }
     }
 
-
+    /*
     //TODO da fixare la lib
 
     Scanner lettore = creaScanner();
@@ -208,6 +209,6 @@ public class GestoreComprensorioGeografico {
         System.out.print(messaggio);
         return lettore.next();
     }
-
+    */
 
 }

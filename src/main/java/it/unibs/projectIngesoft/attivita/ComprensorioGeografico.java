@@ -1,11 +1,20 @@
 package it.unibs.projectIngesoft.attivita;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
+
 import java.util.ArrayList;
+
 
 public class ComprensorioGeografico {
 
+
     private String nomeComprensorio;
     private ArrayList<String> ListaComuni;
+
+    public ComprensorioGeografico (){
+
+    }
 
     public ComprensorioGeografico(String nomeComprensorio, ArrayList<String> listaComuni) {
         this.nomeComprensorio = nomeComprensorio;
