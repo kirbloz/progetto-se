@@ -17,6 +17,7 @@ public class GestoreUtenti {
     // da levare l'hardcoding
     public static final String defaultAdminUsr = "admin";
     public static final String defaultAdminPsw = "1234";
+
     public static final String MSG_RICHIESTA_USERNAME = "Inserisci il tuo username: ";
     public static final String MSG_RICHIESTA_PASSWORD = "Inserisci la tua password: ";
 
