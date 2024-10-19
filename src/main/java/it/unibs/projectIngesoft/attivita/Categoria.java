@@ -37,5 +37,11 @@ public abstract class Categoria {
         this.nome = nome;
     }
 
+    public Categoria cercaCategoria(String nomeCat){
+        if(this.nome.equals(nomeCat))
+            return this;
+        return null;
+    }
+
 
 }

@@ -32,7 +32,7 @@ public class CategoriaFoglia extends Categoria {
         //this.madre = madre;
         this.NomeValoreDominio = NomeValoreDominio;
         this.nomeMadre = madre.getNome();
-        this.campo = madre.getCampo();
+        this.campo = madre.getCampoFiglie();
     }
 
     public CategoriaFoglia() {

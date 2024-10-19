@@ -30,10 +30,11 @@ public class GestoreCategorie {
         this.tree = new Albero();
         //deserializeXML(); // load dati
 
-        boolean debug_data = false;
+        boolean debug_data = true;
         if (debug_data) {
             ArrayList<ValoreDominio> valori = new ArrayList<>();
             ArrayList<ValoreDominio> valori2 = new ArrayList<>();
+            //a che cazzo serve sta roba dei valori
             valori.add(new ValoreDominio("valore1", "desc1"));
             valori.add(new ValoreDominio("valore2", "desc2"));
             valori2.add(new ValoreDominio("valore3", "desc3"));
@@ -44,6 +45,7 @@ public class GestoreCategorie {
             radice1.addCategoriaFiglia(new CategoriaFoglia("figlia1", radice1, "matematica"));
             radice1.addCategoriaFiglia(new CategoriaFoglia("figlia2", radice1, "italiano"));
             radice2.addCategoriaFiglia(new CategoriaFoglia("figlia3", radice2, "online"));
+            radice2.addCategoriaFiglia(new CategoriaNonFoglia("figliaNF1", "gradoScuola", radice2, "in presenza"));
 
 
             serializeXML();
@@ -149,7 +151,7 @@ public class GestoreCategorie {
                 break;
             case 3: // FATTO
                 //aggiungi gerarchia
-                aggiungiGerarchia();
+                aggiungiCategoriaRadice();
                 break;
             case 4:
                 //descrizione
@@ -158,7 +160,7 @@ public class GestoreCategorie {
                 break;
             case 5: // FATTO
                 //visualizza
-                visualizzaGerarchia();
+                visualizzaGerarchie();
                 break;
             default:
                 System.out.println("Nulla da mostrare");
@@ -167,34 +169,78 @@ public class GestoreCategorie {
 
     public void aggiungiCategoriaNF() {
         //TODO
-        // mostra quali possono essere le categorie MADRE
-        // selezionane una
-        // crea l'oggetto
-        /*
-        configuratore configura categorie non foglia: nome, campo caratt, dominio
-stabilire fattori di conversione per coppie categorie, categorie di gerarchia appena creata entrambe, o solo una
-         */
+        // controllare che sia robusto rispetto a input barbini
 
-        String tempNome;
-        String tempCampo;
+
+        String tempRadice;
+        String tempCampoFiglie;
+        String tempValoreDominio;
+        boolean check = false;
+
+        // chiede a quale radice si vuole aggiungere
+        do {
+            System.out.println(">> Scegli un albero di categorie a cui aggiungere la nuova.\n>> Di seguito tutte le categorie radice.");
+            System.out.println(radiciToString());
+            tempRadice = InputDati.leggiStringaNonVuota(">> Inserisci il nome della categoria radice:\n> ");
+            check = this.esisteRadice(tempRadice);
+            if (!check)
+                System.out.println(">> Per favore indica una categoria radice esistente (!!) ");
+
+        } while (!check);
+
+        // 2. chiedi nome
+        // 3. chiedi madre
+        // 4. cerca madre e nome
+
+        boolean checkNomeUnivoco = false; // si setta false se si trovano nomi duplicati
+        boolean checkMadre = false; // si setta true quando si trova la madre
+        String tempNome = "";
+        String tempMadre = "";
+        CategoriaNonFoglia catMadre = null;
 
         do {
-            System.out.println(">> Di seguito tutte le categorie radice.");
-            System.out.println(radiciToString());
-            tempNome = InputDati.leggiStringaNonVuota(">> Inserisci il nome della nuova categoria radice:\n>");
-        } while (this.esisteRadice(tempNome));
+            if (!checkNomeUnivoco) {
+                //chiedi temp nome se non è univoco
+                visualizzaGerarchia(tempRadice);
+                tempNome = InputDati.leggiStringaNonVuota(">> Inserisci il nome della NUOVA CATEGORIA:\n> ").trim();
+                // cerca tra i figli di una radice se c'è questa roba
+            }
+            if (!checkMadre) {
+                // stampa la gerarchia
+                visualizzaGerarchia(tempRadice);
+                tempMadre = InputDati.leggiStringaNonVuota(String.format(">> Inserisci il nome della CATEGORIA MADRE per %s:\n> ", tempNome)).trim();
+                // cerca tra i figli di una radice se c'è questa cosa
+            }
 
-        //TODO gestore di domini
-        // forse non serve
+            for (CategoriaNonFoglia cat : tree.radici) {
+                // search for tempmadre e salva l'oggetto
 
-        tempCampo = InputDati.leggiStringaNonVuota(">> Inserisci il nome del dominio della nuova categoria:\n>");
+                // se trova corrispondenza, non mette checkNomeUnivoco = false (già inizializzato)
+                // se la trova, la setta true
+
+                if (!checkNomeUnivoco && cat.cercaCategoria(tempNome) == null)
+                    checkNomeUnivoco = true;
+                if (!checkMadre) { // se non ha ancora trovato la madre..
+                    catMadre = (CategoriaNonFoglia) this.tree.getRadice(tempRadice).cercaCategoria(tempMadre);
+                    if (catMadre != null) {
+                        checkMadre = true;
+                    }
+                }
+                // search for tempnome e rompi il cazzo se lo trovi
+            }
+
+        } while (!checkNomeUnivoco || !checkMadre);
+
+        tempValoreDominio = InputDati.leggiStringaNonVuota(String.format(">> Inserisci il valore di %s nel dominio di {%s}\n> ", tempNome, catMadre.getCampoFiglie())).trim();
         // non chiedo subito di inserire i valori del dominio. quelli staranno da decidere nel momento in cui
         // si inserisce una figlia
 
-        CategoriaNonFoglia tempRadice = new CategoriaNonFoglia(tempNome, tempCampo);
-        this.tree.aggiungiRadice(tempRadice);
+        tempCampoFiglie = InputDati.leggiStringaNonVuota(">> Inserisci il nome del dominio per eventuali figlie della nuova categoria:\n> ").trim();
+        // non chiedo subito di inserire i valori del dominio. quelli staranno da decidere nel momento in cui
+        // si inserisce una figlia
 
-
+        CategoriaNonFoglia tempNF = new CategoriaNonFoglia(tempNome, tempCampoFiglie, catMadre, tempValoreDominio);
+        catMadre.addCategoriaFiglia(tempNF);
 
         serializeXML();
     }
@@ -210,7 +256,7 @@ stabilire fattori di conversione per coppie categorie, categorie di gerarchia ap
     /**
      * Permette la creazione di una categoria radice.
      */
-    public void aggiungiGerarchia() {
+    public void aggiungiCategoriaRadice() {
         String tempNome;
         String tempCampo;
 
@@ -220,25 +266,29 @@ stabilire fattori di conversione per coppie categorie, categorie di gerarchia ap
             tempNome = InputDati.leggiStringaNonVuota(">> Inserisci il nome della nuova categoria radice:\n>");
         } while (this.esisteRadice(tempNome));
 
-        //TODO gestore di domini
-        // forse non serve
-
+        // TODO
+        // legge solo i nomi senza spazi wtf
         tempCampo = InputDati.leggiStringaNonVuota(">> Inserisci il nome del dominio della nuova categoria:\n>");
+
         // non chiedo subito di inserire i valori del dominio. quelli staranno da decidere nel momento in cui
         // si inserisce una figlia
-
         CategoriaNonFoglia tempRadice = new CategoriaNonFoglia(tempNome, tempCampo);
         this.tree.aggiungiRadice(tempRadice);
-
         serializeXML();
     }
 
+    /**
+     * Verifica che una categoria radice esista
+     * @param tempNome, nome della categoria da cercare
+     * @return boolean, risultato ricerca
+     */
     private boolean esisteRadice(String tempNome) {
         return this.tree.contains(tempNome);
     }
 
+    // TODO
     public void visualizzaDomini() {
-        System.out.println(">>Visualizza i domini ed i loro valori");
+        System.out.println("\n>>Visualizza i domini ed i loro valori");
         System.out.println(dominiToString());
     }
 
@@ -254,17 +304,30 @@ stabilire fattori di conversione per coppie categorie, categorie di gerarchia ap
     /**
      * Stampa a video la struttura tree-like delle gerarchie di radici presenti nel programma.
      */
-    public void visualizzaGerarchia() {
+    public void visualizzaGerarchie() {
         //TODO
-        System.out.println("Visualizza gerarchie di categorie\n");
+        System.out.println("\n>>Visualizza gerarchie di categorie\n");
         System.out.println(this);
     }
 
-    /*public void visualizzaRadici() {
-        System.out.println("Visualizza radici\n");
-        System.out.println(this.radiciToString());
-    }*/
+    /**
+     * sStampa a video le info di un singolo albero gerarchico
+     *
+     * @param nomeRadice, nome della categoria radice dell'albero da mostrare
+     */
+    public void visualizzaGerarchia(String nomeRadice) {
+        System.out.println(String.format("\n>>Visualizza gerarchia di %s\n", nomeRadice));
+        System.out.println(this.tree.getRadice(nomeRadice) + " \n\n");
 
+    }
+
+    /**
+     * Produce una stringa con le info dei domini.
+     * Scorre ogni boh vabbe è sbagliato
+     * TODO
+     *
+     * @return stringa formattata
+     */
     public String dominiToString() {
         StringBuilder sb = new StringBuilder();
 
@@ -275,16 +338,24 @@ stabilire fattori di conversione per coppie categorie, categorie di gerarchia ap
                 sb.append("Valori: ");
                 for (ValoreDominio val : tempLista)
                     sb.append("\n{ ").append(val.toString()).append(" }");
-            }else {
+            } else {
                 sb.append("Vuoto.");
             }
         }
         return sb.toString();
     }
 
+    /**
+     * Produce una stringa con le info delle radici.
+     * Si limita al nome delle radici e al nome del loro dominio (che danno alle figlie).
+     *
+     * @return stringa formattata
+     */
     public String radiciToString() {
         StringBuilder sb = new StringBuilder();
+        // scorre le radici (tutte catNF)
         for (CategoriaNonFoglia tempNF : tree.radici)
+            // stampa solo radici e dominio, niente sulle figlie
             sb.append(tempNF.simpleToString()).append("\n");
         return sb.toString();
     }

@@ -47,11 +47,11 @@ public class GestoreUtenti {
 
     /**
      * inserisce l'utente nell'arraylist se e solo se non esiste già
+     *
      * @param utente
      */
     public void addUtente(Utente utente) {
-        if (!this.utenti.contains(utente)) {//TODO scusa wade ma scrivo sta cosa per ricordarmi di chiedertelo:
-            // questo check lavora sull'utente come oggetto, quindi se gli arriva un utente che è un oggetto diverso ma è comunque con lo stesso nome (che non dovrebbe essere possibile però boh) non ritorna sempre true?
+        if (!this.utenti.contains(utente)) {
             this.utenti.add(utente);
             serializeXML();
         }
@@ -89,6 +89,7 @@ public class GestoreUtenti {
 
     /**
      * effettua il controllo sulle nuove credenziali (per mantenere l'unicità dell'username) e poi chiama la funzione dell'utente per modificarle
+     *
      * @param C1
      */
     public void cambioCredenziali(Utente C1) {

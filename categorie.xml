@@ -1,10 +1,13 @@
 <Albero>
   <radice>
     <CategoriaNonFoglia>
+      <nomeValoreDominio/>
       <nome>cat1 radice</nome>
       <isRadice>true</isRadice>
-      <nomeMadre></nomeMadre>
-      <campo>materia</campo>
+      <nomeMadre/>
+      <campo/>
+      <campoFiglie>materia</campoFiglie>
+      <NomeValoreDominio/>
       <listaValoriDominio>
         <ValoreDominio>
           <nome>valore1</nome>
@@ -13,6 +16,22 @@
         <ValoreDominio>
           <nome>valore2</nome>
           <descrizione>desc2</descrizione>
+        </ValoreDominio>
+        <ValoreDominio>
+          <nome>matematica</nome>
+          <descrizione></descrizione>
+        </ValoreDominio>
+        <ValoreDominio>
+          <nome>italiano</nome>
+          <descrizione></descrizione>
+        </ValoreDominio>
+        <ValoreDominio>
+          <nome>online</nome>
+          <descrizione></descrizione>
+        </ValoreDominio>
+        <ValoreDominio>
+          <nome>in presenza</nome>
+          <descrizione></descrizione>
         </ValoreDominio>
       </listaValoriDominio>
       <categorieFiglie>
@@ -42,10 +61,13 @@
   </radice>
   <radice>
     <CategoriaNonFoglia>
+      <nomeValoreDominio/>
       <nome>cat2 radice</nome>
       <isRadice>true</isRadice>
-      <nomeMadre></nomeMadre>
-      <campo>lezione</campo>
+      <nomeMadre/>
+      <campo/>
+      <campoFiglie>lezione</campoFiglie>
+      <NomeValoreDominio/>
       <listaValoriDominio>
         <ValoreDominio>
           <nome>valore1</nome>
@@ -54,6 +76,22 @@
         <ValoreDominio>
           <nome>valore2</nome>
           <descrizione>desc2</descrizione>
+        </ValoreDominio>
+        <ValoreDominio>
+          <nome>matematica</nome>
+          <descrizione></descrizione>
+        </ValoreDominio>
+        <ValoreDominio>
+          <nome>italiano</nome>
+          <descrizione></descrizione>
+        </ValoreDominio>
+        <ValoreDominio>
+          <nome>online</nome>
+          <descrizione></descrizione>
+        </ValoreDominio>
+        <ValoreDominio>
+          <nome>in presenza</nome>
+          <descrizione></descrizione>
         </ValoreDominio>
       </listaValoriDominio>
       <categorieFiglie>
@@ -67,40 +105,55 @@
             <type>CategoriaFoglia</type>
           </CategoriaFoglia>
         </Categoria>
+        <Categoria>
+          <CategoriaNonFoglia>
+            <nomeValoreDominio>in presenza</nomeValoreDominio>
+            <nome>figliaNF1</nome>
+            <isRadice>false</isRadice>
+            <nomeMadre>cat2 radice</nomeMadre>
+            <campo>lezione</campo>
+            <campoFiglie>gradoScuola</campoFiglie>
+            <NomeValoreDominio>in presenza</NomeValoreDominio>
+            <listaValoriDominio/>
+            <categorieFiglie/>
+            <type>CategoriaNonFoglia</type>
+          </CategoriaNonFoglia>
+        </Categoria>
       </categorieFiglie>
       <type>CategoriaNonFoglia</type>
     </CategoriaNonFoglia>
   </radice>
   <radice>
     <CategoriaNonFoglia>
-      <nome>radice3</nome>
-      <isRadice>true</isRadice>
-      <nomeMadre></nomeMadre>
-      <campo>arto</campo>
-      <listaValoriDominio/>
-      <categorieFiglie/>
-      <type>CategoriaNonFoglia</type>
-    </CategoriaNonFoglia>
-  </radice>
-  <radice>
-    <CategoriaNonFoglia>
+      <nomeValoreDominio/>
       <nome>Sport</nome>
       <isRadice>true</isRadice>
-      <nomeMadre></nomeMadre>
-      <campo>disciplina</campo>
-      <listaValoriDominio/>
-      <categorieFiglie/>
-      <type>CategoriaNonFoglia</type>
-    </CategoriaNonFoglia>
-  </radice>
-  <radice>
-    <CategoriaNonFoglia>
-      <nome>Martino</nome>
-      <isRadice>true</isRadice>
       <nomeMadre/>
-      <campo>Chad</campo>
-      <listaValoriDominio/>
-      <categorieFiglie/>
+      <campo/>
+      <campoFiglie>disciplina</campoFiglie>
+      <NomeValoreDominio/>
+      <listaValoriDominio>
+        <ValoreDominio>
+          <nome>olimpica</nome>
+          <descrizione></descrizione>
+        </ValoreDominio>
+      </listaValoriDominio>
+      <categorieFiglie>
+        <Categoria>
+          <CategoriaNonFoglia>
+            <nomeValoreDominio>olimpica</nomeValoreDominio>
+            <nome>Gara</nome>
+            <isRadice>false</isRadice>
+            <nomeMadre>Sport</nomeMadre>
+            <campo>disciplina</campo>
+            <campoFiglie>pratica</campoFiglie>
+            <NomeValoreDominio>olimpica</NomeValoreDominio>
+            <listaValoriDominio/>
+            <categorieFiglie/>
+            <type>CategoriaNonFoglia</type>
+          </CategoriaNonFoglia>
+        </Categoria>
+      </categorieFiglie>
       <type>CategoriaNonFoglia</type>
     </CategoriaNonFoglia>
   </radice>
