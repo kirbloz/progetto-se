@@ -1,4 +1,4 @@
-package it.unibs.fp.myutils;
+package it.unibs.projectIngesoft.libraries;
 
 import java.util.Arrays;
 import java.util.InputMismatchException;
@@ -33,7 +33,7 @@ public class InputDati {
 
     public static String leggiStringa(String messaggio) {
         System.out.print(messaggio);
-        return lettore.next();
+        return lettore.nextLine();
     }
 
     /**
@@ -48,7 +48,7 @@ public class InputDati {
         String lettura;
         do {
             System.out.print(messaggio + Arrays.toString(valoriAmmessi));
-            lettura = lettore.next();
+            lettura = lettore.nextLine();
 
             if (!Arrays.asList(valoriAmmessi).contains(lettura))
                 System.out.println(ERR_VALORI_NON_AMMESSI);
@@ -62,7 +62,7 @@ public class InputDati {
         do {
             lettura = leggiStringa(messaggio);
             lettura = lettura.trim();
-            if (lettura.length() > 0)
+            if (!lettura.isEmpty())
                 finito = true;
             else
                 System.out.println(ERRORE_STRINGA_VUOTA);

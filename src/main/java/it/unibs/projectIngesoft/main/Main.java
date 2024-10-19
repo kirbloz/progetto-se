@@ -5,7 +5,7 @@ import it.unibs.projectIngesoft.gestori.GestoreCategorie;
 import it.unibs.projectIngesoft.gestori.GestoreComprensorioGeografico;
 import it.unibs.projectIngesoft.gestori.GestoreFattori;
 import it.unibs.projectIngesoft.gestori.GestoreUtenti;
-import it.unibs.projectIngesoft.menu.Menu;
+import it.unibs.projectIngesoft.libraries.Menu;
 import it.unibs.projectIngesoft.utente.Utente;
 
 import java.util.ArrayList;
