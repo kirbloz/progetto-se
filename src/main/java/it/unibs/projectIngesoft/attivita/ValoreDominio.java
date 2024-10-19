@@ -28,6 +28,9 @@ public class ValoreDominio {
         this.descrizione = descrizione;
     }
 
+    /**
+     * Da non usare!
+     */
     public ValoreDominio() {
     }
 

@@ -19,7 +19,11 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 public abstract class Categoria {
 
     @JacksonXmlProperty(localName = "nome")
-    private String nome;
+    protected String nome;
+
+    @JacksonXmlProperty(localName = "valoreDominio")
+    protected ValoreDominio valoreDominio;
+
 
     protected Categoria() {
 
@@ -37,8 +41,11 @@ public abstract class Categoria {
         this.nome = nome;
     }
 
-    public abstract Categoria cercaCategoria(String nomeCat);
+    public ValoreDominio getValoreDominio() {
+        return this.valoreDominio;
+    }
 
+    public abstract Categoria cercaCategoria(String nomeCat);
 
 
 }

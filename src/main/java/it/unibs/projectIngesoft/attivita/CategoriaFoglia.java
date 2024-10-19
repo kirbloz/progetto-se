@@ -10,15 +10,11 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 @JsonTypeName("CategoriaFoglia")
 public class CategoriaFoglia extends Categoria {
 
-    //@JsonIgnore
-    //private CategoriaNonFoglia madre;
     @JacksonXmlProperty(localName = "nomeMadre")
     private String nomeMadre;
-    @JacksonXmlProperty(localName = "NomeValoreDominio")
-    private String NomeValoreDominio;
+
     @JacksonXmlProperty(localName = "campo")
     private String campo;
-
 
     @JacksonXmlProperty(localName = "type")
     private final String type = "CategoriaFoglia";
@@ -29,8 +25,7 @@ public class CategoriaFoglia extends Categoria {
      */
     public CategoriaFoglia(String nome, CategoriaNonFoglia madre, String NomeValoreDominio) {
         super(nome);
-        //this.madre = madre;
-        this.NomeValoreDominio = NomeValoreDominio;
+        this.valoreDominio = new ValoreDominio(NomeValoreDominio);
         this.nomeMadre = madre.getNome();
         this.campo = madre.getCampoFiglie();
     }
@@ -39,21 +34,12 @@ public class CategoriaFoglia extends Categoria {
         super();
     }
 
-    public void setNomeValoreDominio(String NomeValoreDominio) {
-        this.NomeValoreDominio = NomeValoreDominio;
-    }
-
-    public String getNomeValoreDominio() {
-        return this.NomeValoreDominio;
-    }
-
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("\tCategoria: ").append(this.getNome()).append("\n");
         sb.append("\t\tMadre: ").append(this.nomeMadre).append("\n");
-        sb.append("\t\t").append(this.campo).append(" = ").append(this.getNomeValoreDominio()).append("\n");
-
+        sb.append("\t\t").append(this.campo).append(" = ").append(this.valoreDominio).append("\n");
         return sb.toString();
     }
 

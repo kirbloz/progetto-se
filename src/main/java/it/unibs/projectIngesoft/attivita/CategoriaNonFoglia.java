@@ -17,8 +17,6 @@ public class CategoriaNonFoglia extends Categoria {
     @JacksonXmlProperty(localName = "isRadice")
     private boolean isRadice;
 
-    //@JsonIgnore
-    //private CategoriaNonFoglia madre;
     @JacksonXmlProperty(localName = "nomeMadre")
     private String nomeMadre;
     // campo che QUESTA categoria eredita dalla madre
@@ -27,21 +25,9 @@ public class CategoriaNonFoglia extends Categoria {
     // campo definito come dominio a cui appartengono le figlie di QUESTA categoria
     @JacksonXmlProperty(localName = "campoFiglie")
     private String campoFiglie;
-    // valore del dominio, potrebbe essere un ValoreDominio eh
-    //TODO
-    @JacksonXmlProperty(localName = "NomeValoreDominio")
-    private String NomeValoreDominio;
 
-
-    /*
-     * si rimuove questo perchè se già la classe contiene categorieFiglie,
-     * allora una lista di valoredominio si può ricavare ogni qualvolta sia necessario
-     * E INVECE NO. E' NECESSARIO PER AVERE UN PUNTO "CENTRALIZZATO" DOVE SI MEMORIZZANO
-     * I VALORI DEL DOMINIO E PER POTER MODIFICARE/AGGIUNGERE LE DESCRIZIONI FACILMENTE
-     */
-    @JacksonXmlProperty(localName = "ValoreDominio")
-    @JacksonXmlElementWrapper(localName = "listaValoriDominio")
-    private ArrayList<ValoreDominio> listaValoriDominio;
+    @JacksonXmlProperty(localName = "valoreDominio")
+    private ValoreDominio valoreDominio;
 
     @JacksonXmlElementWrapper(localName = "categorieFiglie")
     @JacksonXmlProperty(localName = "Categoria")
@@ -56,71 +42,33 @@ public class CategoriaNonFoglia extends Categoria {
     }
 
     // costruttore per categoria RADICE
-    public CategoriaNonFoglia(String nome, String campoFiglie, ArrayList<ValoreDominio> dominio) {
+    public CategoriaNonFoglia(String nome, String campoFiglie/*, ArrayList<ValoreDominio> dominio*/) {
         super(nome);
 
         this.categorieFiglie = new ArrayList<>();
         this.campoFiglie = campoFiglie;
-        this.listaValoriDominio = dominio;
 
-        //this.madre = null;
         //radice
         this.isRadice = true;
         this.nomeMadre = null;
         this.campo = null;
-        this.NomeValoreDominio = null;
+
+        this.valoreDominio = null;
     }
 
-    public CategoriaNonFoglia(String nome, String campoFiglie) {
-        super(nome);
-
-        //this.madre = null;
-        this.categorieFiglie = new ArrayList<>();
-        this.campoFiglie = campoFiglie;
-        this.listaValoriDominio = new ArrayList<>();
-
-        //this.madre = null;
-        //radice
-        this.isRadice = true;
-        this.nomeMadre = null;
-        this.campo = null;
-        this.NomeValoreDominio = null;
-    }
-
-    // costruttore per categoria NON RADICE
-    public CategoriaNonFoglia(String nome, String campoFiglie, ArrayList<ValoreDominio> dominio, CategoriaNonFoglia madre, String nomeValoreDominio) {
-        super(nome);
-
-        this.categorieFiglie = new ArrayList<>();
-        this.campoFiglie = campoFiglie;
-        this.listaValoriDominio = dominio;
-
-        //this.madre = madre;
-        //radice
-        this.isRadice = false;
-        this.nomeMadre = madre.getNome();
-        this.campo = madre.getCampoFiglie();
-        this.NomeValoreDominio = nomeValoreDominio;
-    }
 
     public CategoriaNonFoglia(String nome, String campoFiglie, CategoriaNonFoglia madre, String nomeValoreDominio) {
         super(nome);
 
-        //this.madre = madre;
         this.categorieFiglie = new ArrayList<>();
         this.campoFiglie = campoFiglie;
-        this.listaValoriDominio = new ArrayList<>();
 
-        //this.madre = madre
         //radice
         this.isRadice = false;
         this.nomeMadre = madre.getNome();
         this.campo = madre.getCampoFiglie();
-        this.NomeValoreDominio = nomeValoreDominio;
-    }
 
-    public ArrayList<ValoreDominio> getListaValoriDominio() {
-        return listaValoriDominio;
+        this.valoreDominio = new ValoreDominio(nomeValoreDominio);
     }
 
     public String getCampo() {
@@ -139,28 +87,8 @@ public class CategoriaNonFoglia extends Categoria {
         this.campoFiglie = campoFiglie;
     }
 
-    public void setListaValoriDominio(ArrayList<ValoreDominio> listaValoriDominio) {
-        this.listaValoriDominio = listaValoriDominio;
-    }
-
-    public boolean addValoreDominio(ValoreDominio valoreDominio) {
-        return this.listaValoriDominio.add(valoreDominio);
-    }
-
-    public String getNomeValoreDominio() {
-        return NomeValoreDominio;
-    }
-
-    public void setNomeValoreDominio(String nomeValoreDominio) {
-        this.NomeValoreDominio = nomeValoreDominio;
-    }
-
     public ArrayList<Categoria> getCategorieFiglie() {
         return categorieFiglie;
-    }
-
-    public void setCategorieFiglie(ArrayList<Categoria> categorieFiglie) {
-        this.categorieFiglie = categorieFiglie;
     }
 
     // nelle addCategoriaFiglia non si fa il check se l'arraylist è inizializzato perchè i costruttori
@@ -170,21 +98,12 @@ public class CategoriaNonFoglia extends Categoria {
         if (this.categorieFiglie == null)
             this.categorieFiglie = new ArrayList<>();
         this.categorieFiglie.add(categoria);
-        this.listaValoriDominio.add(new ValoreDominio((categoria.getNomeValoreDominio())));
     }
 
     public void addCategoriaFiglia(CategoriaNonFoglia categoria) {
         if (this.categorieFiglie == null)
             this.categorieFiglie = new ArrayList<>();
         this.categorieFiglie.add(categoria);
-        this.listaValoriDominio.add(new ValoreDominio((categoria.getNomeValoreDominio())));
-    }
-
-    public void removeCategoriaFiglia(CategoriaFoglia categoria) {
-        this.categorieFiglie.remove(categoria);
-        // TODO implementare la rimozione del valore che ha quel nome come string nomeValore in categoria
-        /*ValoreDominio tempValore =
-        this.listaValoriDominio.remove();*/
     }
 
     @JsonIgnore
@@ -206,9 +125,9 @@ public class CategoriaNonFoglia extends Categoria {
         else {
             // altrimenti controlla nelle figlie, richiamando per ognuna di loro la funzione di ricerca
             // appena trova qualcosa (cioè found non null) esce e ritorna
-            for( Categoria figlia : this.categorieFiglie) {
+            for (Categoria figlia : this.categorieFiglie) {
                 found = figlia.cercaCategoria(nomeCat);
-                if(found != null)
+                if (found != null)
                     break;
             }
         }
@@ -234,7 +153,7 @@ public class CategoriaNonFoglia extends Categoria {
             for (int i = 0; i < this.getNumCategorieFiglie(); i++) {
                 // necessario discriminare per capire quale toString richiamare.
                 if (this.categorieFiglie.get(i) instanceof CategoriaNonFoglia tempNF) {
-                    sb.append("\t﹂").append(tempNF);
+                    sb.append("\n﹂").append(tempNF);
                 } else if (this.categorieFiglie.get(i) instanceof CategoriaFoglia tempF) {
                     sb.append("\t﹂").append(tempF);
                 } else {
@@ -259,11 +178,35 @@ public class CategoriaNonFoglia extends Categoria {
 
         if (!this.isRadice()) {
             sb.append("Madre: ").append(this.nomeMadre).append("\n");
-            // dominio e valore dominio che eredita dalla madre (this non è radice)
-            sb.append("Dominio: ").append(this.getCampo()).append(" = ").append(this.getNomeValoreDominio()).append("\n");
+            sb.append("Dominio: ").append(this.getCampo()).append(" = ").append(this.valoreDominio).append("\n");
         }
         sb.append("Dominio Figlie: ").append(this.getCampoFiglie()).append("\n");
         // se non è una radice, allora si stampano i dati della categoria madre
+        return sb.toString();
+    }
+
+    /**
+     * Stampa il nome del dominio che imprime alle figlie, e tutti i valori che al momento assume + descrizioni.
+     * @return stringa formattata
+     */
+    public String dominioToString() {
+
+        StringBuilder sb = new StringBuilder();
+        ArrayList<ValoreDominio> tempLista = new ArrayList<>();
+
+        sb.append("\n\nNome Dominio: ").append(this.getCampoFiglie()).append("\n");
+
+        for (Categoria figlia : this.categorieFiglie)
+            tempLista.add(figlia.getValoreDominio());
+
+        if (!tempLista.isEmpty()) {
+            sb.append("Valori: ");
+            for (ValoreDominio val : tempLista)
+                sb.append("\n{ ").append(val.toString()).append(" }");
+        } else {
+            sb.append("Vuoto.");
+        }
+
         return sb.toString();
     }
 
