@@ -26,6 +26,7 @@ public class InputDati {
     private static final char RISPOSTA_SI = 'S';
     private static final char RISPOSTA_NO = 'N';
     private static final Scanner lettore = creaScanner();
+    private static final String ERRORE_RANGE = "Attenzione, il valore non rientra tra: ";
 
     private static Scanner creaScanner() {
         return new Scanner(System.in);
@@ -267,4 +268,17 @@ public class InputDati {
         return valoreLetto == RISPOSTA_SI;
     }
 
+    public static double leggiDoubleConRange(String msg, double minimo, double massimo) {
+        boolean finito = false;
+        double valoreLetto;
+        do {
+            valoreLetto = leggiDouble(msg);
+            if (valoreLetto >= minimo && valoreLetto <= massimo)
+                finito = true;
+            else
+                System.out.println(ERRORE_RANGE + minimo + " e " + massimo);
+        } while (!finito);
+
+        return valoreLetto;
+    }
 }

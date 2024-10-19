@@ -3,7 +3,9 @@ package it.unibs.projectIngesoft.gestori;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import it.unibs.projectIngesoft.attivita.CategoriaFoglia;
 import it.unibs.projectIngesoft.attivita.FattoreDiConversione;
+import it.unibs.projectIngesoft.libraries.InputDati;
 
 import java.io.File;
 import java.io.IOException;
@@ -13,6 +15,9 @@ import java.util.List;
 
 public class GestoreFattori {
 
+    private static final String MSG_INSERISCI_RADICE = "";
+    private static final String MSG_INSERISCI_FOGLIA = "";
+    private static final String MSG_INSERISCI_FATTORE = "Inserisci fattore:";
     private final String filePath;
     private HashMap<String, ArrayList<FattoreDiConversione>> fattori;
 
@@ -60,6 +65,36 @@ public class GestoreFattori {
             tempLista.add(tempValue);
             this.fattori.put(tempKey, tempLista);
         }
+    }
+
+    /**
+     * Chiede all'utente di inserire un fattore di conversione tra la categoria foglia appena creata
+     * e una a scelta, dopodiché lancia il metodo calcolaEAssegnaValoriDiConversione() per il calcolo dei restani
+     */
+    public void inserisciFattoreDiConversione(String nomeRadiceNuovaFoglia, String nomeNuovaFoglia){
+        String nomeRadicePreesistente = InputDati.leggiStringaNonVuota(MSG_INSERISCI_RADICE);
+        String nomeFogliaPreesistente = InputDati.leggiStringaNonVuota(MSG_INSERISCI_FOGLIA);
+        //TODO ciclare le radici e le categorie nella radice per controllare che esista
+        //SE esiste:
+
+        double fattore = InputDati.leggiDoubleConRange(MSG_INSERISCI_FATTORE, 0.5, 2.0);
+
+        calcolaEAssegnaValoriDiConversione(nomeRadicePreesistente, nomeFogliaPreesistente, nomeRadiceNuovaFoglia, nomeNuovaFoglia, fattore);
+    }
+
+    /**
+     * Calcola i valori di conversione per tutte le categorie dato un valore dal configuratore
+     */
+    private void calcolaEAssegnaValoriDiConversione(String nomeRadicePreesistente, String nomeFogliaPreesistente, String nomeRadiceNuovaFoglia, String nomeNuovaFoglia, double fattoreDato){
+        //TODO tutto il calcolo pazzo sgravato
+        FattoreDiConversione primoFattore = new FattoreDiConversione(factorNameBuilder(nomeRadiceNuovaFoglia, nomeNuovaFoglia), factorNameBuilder(nomeRadicePreesistente, nomeFogliaPreesistente), fattoreDato);
+
+        //TODO da fare il ciclazzo pazzo di tutte le foglie
+
+    }
+
+    public String factorNameBuilder(String root, String leaf){
+        return root +":"+ leaf;
     }
 
     /**
