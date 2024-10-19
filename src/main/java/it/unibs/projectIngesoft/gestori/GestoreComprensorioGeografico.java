@@ -2,6 +2,7 @@ package it.unibs.projectIngesoft.gestori;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import it.unibs.fp.myutils.InputDati;
 import it.unibs.projectIngesoft.attivita.ComprensorioGeografico;
@@ -15,10 +16,10 @@ import java.util.Scanner;
 
 public class GestoreComprensorioGeografico {
 
-    private static final String MESSAGGIO_INSERIMENTO_COMUNE = "Inserire nome del comune da inserire oppure fine per terminare l'inserimento:";
-    private static final String MESSAGGIO_INSERIMENTO_NOME_NUOVO_COMPRENSORIO = "Inserire il nome del comprensorio Geografico:";
-    private static final String MESSAGGIO_INSERIMENTO_COMUNE_2 = "Inserire nome del comune da inserire:";
-    private static final String MESSAGGIO_RICERCA_COMPRENSORIO = "Inserire il nome del comprensorio da stampare:";
+    private static final String MESSAGGIO_INSERIMENTO_COMUNE = ">> Inserire nome del comune da inserire oppure fine per terminare l'inserimento: ";
+    private static final String MESSAGGIO_INSERIMENTO_NOME_NUOVO_COMPRENSORIO = ">> Inserire il nome del comprensorio Geografico: ";
+    private static final String MESSAGGIO_INSERIMENTO_COMUNE_2 = ">> Inserire nome del comune da inserire: ";
+    private static final String MESSAGGIO_RICERCA_COMPRENSORIO = ">> Inserire il nome del comprensorio da stampare: ";
 
     private final String filePath;
 
@@ -125,7 +126,7 @@ public class GestoreComprensorioGeografico {
      * TODO copiato e incollato da gestoreutenti
      */
     public void deserializeXML() {
-        boolean debug = true;
+        boolean debug = false;
 
         try {
             XmlMapper xmlMapper = new XmlMapper();
@@ -163,6 +164,9 @@ public class GestoreComprensorioGeografico {
 
             // creazione mapper e oggetto file
             XmlMapper xmlMapper = new XmlMapper();
+            xmlMapper.enable(SerializationFeature.INDENT_OUTPUT);
+            xmlMapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
+
             File file = new File(this.filePath);
             // se il file non esiste, lo si crea
             if (file.createNewFile()) {

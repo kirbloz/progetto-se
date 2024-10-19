@@ -28,9 +28,9 @@ public class ComprensorioGeografico {
     @Override
     public String toString(){
         StringBuilder comprensorioStringato = new StringBuilder();
-        comprensorioStringato.append(nomeComprensorio).append("\n\n");
+        comprensorioStringato.append(nomeComprensorio).append("\n");
         for (String comune : ListaComuni){
-            comprensorioStringato.append(comune).append("\n");
+            comprensorioStringato.append("[").append(ListaComuni.indexOf(comune) + 1).append("] ").append(comune).append("\n");
         }
         return comprensorioStringato.toString();
     }
