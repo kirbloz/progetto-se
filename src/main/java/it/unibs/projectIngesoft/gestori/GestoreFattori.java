@@ -41,6 +41,12 @@ public class GestoreFattori {
      * @param tempValue, oggetto FdC da inserire nella lista
      */
     public void addFattore(String tempKey, FattoreDiConversione tempValue) {
+        // TODO
+        // string nomeCat, string nomeRadice
+        // String key = String.format("%s:%s", nomeRadice, nomeCat);
+
+        // newValue =
+
 
         // controlla che esista già un'elemento dell'HashMap con quella chiave
         if (this.fattori.containsKey(tempKey)) {

@@ -5,6 +5,15 @@ import com.fasterxml.jackson.annotation.*;
 @JsonRootName("")
 public class FattoreDiConversione {
 
+
+    /*
+     * inserire qua il discriminante tra radici e non farlo smazzare a gfestore fattori
+     * altrimenti l'hashmap memorizza SOLO la radice della cat1
+     * e finisce che la radice cat2 non è nota per cui non c'è precisione
+     * <- ridondanza necessaria
+     * <- non è vero possiamo anche tranquillamente lasciare perdere la via della hashmap che era
+     * un idea di risoluzione del requisito per la stampa
+     */
     @JsonProperty("nome_c1")
     private String nome_c1;
     @JsonProperty("nome_c2")
