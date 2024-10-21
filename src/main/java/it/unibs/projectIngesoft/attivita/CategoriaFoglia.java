@@ -48,4 +48,10 @@ public class CategoriaFoglia extends Categoria {
         return this.getNome().equals(nomeCat) ? this : null;
     }
 
+    @Override
+    public Categoria cercaValoreDominio(String valoreDominio) {
+        return this.valoreDominio.getNome().equals(valoreDominio) ? this : null;
+    }
+
+
 }
