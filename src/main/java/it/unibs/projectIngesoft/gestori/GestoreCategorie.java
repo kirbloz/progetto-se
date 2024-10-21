@@ -2,10 +2,7 @@ package it.unibs.projectIngesoft.gestori;
 
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import it.unibs.projectIngesoft.attivita.Albero;
-import it.unibs.projectIngesoft.attivita.Categoria;
-import it.unibs.projectIngesoft.attivita.CategoriaFoglia;
-import it.unibs.projectIngesoft.attivita.CategoriaNonFoglia;
+import it.unibs.projectIngesoft.attivita.*;
 import it.unibs.projectIngesoft.libraries.InputDati;
 import it.unibs.projectIngesoft.libraries.Serializer;
 
@@ -31,13 +28,19 @@ public class GestoreCategorie {
     public static final String MSG_INPUT_NUOVO_NOME_RADICE = ">> Inserisci il nome della NUOVA CATEGORIA RADICE:\n> ";
     public static final String MSG_INSERIMENTO_NUOVA_CATEGORIA = ">> Inserisci il nome della NUOVA CATEGORIA:\n> ";
 
+
+    public static final String MSG_INPUT_DESCRIZIONE_VALORE_DOMINIO = ">> Inserisci la descrizione (da 0 a 100 caratteri):\n> ";
+    public static final String CONFIRM_DESCRIZIONE_AGGIUNTA = ">> Descrizione aggiunta <<";
+
     public static final String WARNING_RADICE_NON_ESISTE = ">> (!!) Per favore indica una categoria radice esistente";
     public static final String WARNING_RADICE_ESISTE = ">> (!!) Per favore indica una categoria radice che non esiste già";
     public static final String WARNING_CATEGORIA_ESISTE = ">> (!!) Per favore indica una categoria che non esista già in questo albero gerarchico.";
     public static final String WARNING_CATEGORIA_NF_NON_ESISTE = ">> (!!) Per favore indica una categoria non foglia dell'albero gerarchico selezionato.\n";
+    public static final String WARNING_DESCRIZIONE_ESISTE = ">> (!!) Questo valore possiede già una descrizione.\n";
 
     public static final boolean DEBUG_DATA = false;
-    public static final boolean DEBUG_LOGIC = false;
+    public static final String MSG_SELEZIONE_VALORE_DOMINIO = ">> Ora scegli dai possibili valori, quello a cui vuoi aggiungere una descrizione.";
+    public static final String MSG_INPUT_NOME_VALORE_DOMINIO = ">> Inserisci il nome del valore che ti interessa del dominio {%s}:\n> ";
 
 
     // non sono sicuro di quale struttura dati utilizzare
@@ -104,6 +107,10 @@ public class GestoreCategorie {
      * @param scelta, selezione dal menu
      */
     public void entryPoint(int scelta) {
+
+        // TODO
+        // ma i valori dei domini, devono avere nomi univoci?
+        // in caso devo aggiungere questo check -w
 
         switch (scelta) {
             case 1:
@@ -305,65 +312,56 @@ public class GestoreCategorie {
         return tempCatNF;
     }
 
-
     /**
-     * TODO
+     * Permette di aggiungere una descrizione al valore di dominio assunto da una qualche categoria.
+     * Non permette di modificare descrizioni esistenti.
      */
     public void aggiungiDescrizioneValoriDominio() {
 
-       //visualizzaDomini();
-        // 0. necessario capire quale dominio
-        // ma 1 dominio : 1 catNF
-
-        // 1. chiedo a quale catNF si vuole toccare
-        // stampo radice gerarchia e poi
-        // stampo la lista di valori per tute le catNF di queste
-
-
-        // 1. seleziona la radice della gerarchia a cui aggiungere una categoria
+        // 1. seleziona la radice della gerarchia
         String tempRadice = this.selezioneCategoriaRadice();
 
-        // 2. chiedi nome per nuova radice, verificando che sia univoco
+        // 2. seleziona NF per avere un dominio di riferimento
         CategoriaNonFoglia tempCatNF = selezioneCategoriaNonFoglia(tempRadice);
 
-        // FUNZIONA!
+        // 3. seleziona il valore a cui aggiungere la descrizione
+        ValoreDominio tempValore = selezioneValoreDominio(tempCatNF, tempRadice);
 
+        // 4. se la descrizione esiste, termina; altrimenti la fa inserire
+        if (!tempValore.getDescrizione().isEmpty())
+            System.out.println(WARNING_DESCRIZIONE_ESISTE + tempValore);
+        else {
+            this.inserimentoDescrizione(tempValore);
+            System.out.println(CONFIRM_DESCRIZIONE_AGGIUNTA);
+        }
 
-        System.out.println("brao wade");
+        serializeXML(); // salvataggio info
+    }
 
-        //TODO CONTINUA DA QUI!
-
+    private ValoreDominio selezioneValoreDominio(CategoriaNonFoglia tempCatNF, String tempRadice) {
         boolean esisteValore = false;
         Categoria tempCat;
 
-        do{
-            System.out.println(">> Ora scegli dai possibili valori, quello a cui vuoi aggiungere una descrizione.");
-            System.out.println(tempCatNF.figlieToString());
+        do {
+            System.out.println(MSG_SELEZIONE_VALORE_DOMINIO);
             System.out.println(tempCatNF.dominioToString());
-            // si però se stampo il dominio non posso chiede le categorie zio can
-            String nomeCat = InputDati.leggiStringaNonVuota(String.format(">> Inserisci la categoria figlia di %s che assume il valore che ti interessa del dominio {%s}:\n> ", tempCatNF.getNome(), tempCatNF.getCampoFiglie()));
+            String nomeVal = InputDati.leggiStringaNonVuota(String.format(MSG_INPUT_NOME_VALORE_DOMINIO, tempCatNF.getCampoFiglie()));
 
-            // TODO forse un metodo apposito per cercare i valori non sarebbe male eh
+            // cerca la categoria a cui appartiene il valore
+            tempCat = this.tree.getRadice(tempRadice).cercaValoreDominio(nomeVal);
+            esisteValore = tempCat != null; // segna esisteValore = true, se la categoria trovata non è null
 
-            // search for tempmadre e salva l'oggetto
-            tempCat = this.tree.getRadice(tempRadice).cercaCategoria(nomeCat);
-            esisteValore = tempCat != null; // se non è assegnato null, allora l'ha trovata!
+            if (!esisteValore) // se non trova la categoria, allora stampa un avviso
+                System.out.print(WARNING_CATEGORIA_NF_NON_ESISTE);
 
-            if (!esisteValore) System.out.print(WARNING_CATEGORIA_NF_NON_ESISTE);
-        }while(!esisteValore);
+        } while (!esisteValore);
+        return tempCat.getValoreDominio();
+    }
 
-        System.out.println(tempCat.getValoreDominio());
-
-        System.out.println("brao wade pt2");
-
-
-
-        // 2. stampo solo i valori del suo dominio in loop e chiedo se si vuole aggiungere una descrizione
-        // scrivere una parola checka se è un valore -> true allora fa scrivere la desc
-        // scrivere "0" fa uscire
-
-
-        serializeXML();
+    private void inserimentoDescrizione(ValoreDominio tempValore) {
+        String desc;
+        desc = InputDati.stringReaderSpecificLength(MSG_INPUT_DESCRIZIONE_VALORE_DOMINIO, 0, 100);
+        tempValore.setDescrizione(desc);
     }
 
     /**
@@ -385,32 +383,6 @@ public class GestoreCategorie {
 
 
     }
-
-    /**
-     * Produce una stringa con le info dei domini.
-     * Scorre ogni boh vabbe è sbagliato
-     * TODO
-     *
-     * @return stringa formattata
-     */
-   /* public String dominioCategoriaNonFogliaToString() {
-
-
-        StringBuilder sb = new StringBuilder();
-
-       for (CategoriaNonFoglia tempNF : tree.radici) {
-            ArrayList<ValoreDominio> tempLista = tempNF.getListaValoriDominio();
-            sb.append("\n\nNome Dominio: ").append(tempNF.getCampo()).append("\n");
-            if (!tempLista.isEmpty()) {
-                sb.append("Valori: ");
-                for (ValoreDominio val : tempLista)
-                    sb.append("\n{ ").append(val.toString()).append(" }");
-            } else {
-                sb.append("Vuoto.");
-            }
-        }
-        return sb.toString();
-    }*/
 
     /**
      * Produce una stringa con le info delle radici.
