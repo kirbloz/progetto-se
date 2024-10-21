@@ -47,5 +47,5 @@ public abstract class Categoria {
 
     public abstract Categoria cercaCategoria(String nomeCat);
 
-
+    public abstract Categoria cercaValoreDominio(String valoreDominio);
 }
