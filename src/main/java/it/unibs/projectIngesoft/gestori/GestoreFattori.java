@@ -86,11 +86,34 @@ public class GestoreFattori {
      * Calcola i valori di conversione per tutte le categorie dato un valore dal configuratore
      */
     private void calcolaEAssegnaValoriDiConversione(String nomeRadicePreesistente, String nomeFogliaPreesistente, String nomeRadiceNuovaFoglia, String nomeNuovaFoglia, double fattoreDato){
-        //TODO tutto il calcolo pazzo sgravato
-        FattoreDiConversione primoFattore = new FattoreDiConversione(factorNameBuilder(nomeRadiceNuovaFoglia, nomeNuovaFoglia), factorNameBuilder(nomeRadicePreesistente, nomeFogliaPreesistente), fattoreDato);
 
-        //TODO da fare il ciclazzo pazzo di tutte le foglie
+        String fogliaNuovaFormattata = factorNameBuilder(nomeRadiceNuovaFoglia, nomeNuovaFoglia);
+        String fogliaVecchiaFormattata = factorNameBuilder(nomeRadicePreesistente, nomeFogliaPreesistente);
+        ArrayList<FattoreDiConversione> nuoviFattori = new ArrayList<>();
 
+
+        nuoviFattori.add(new FattoreDiConversione(fogliaNuovaFormattata, fogliaVecchiaFormattata, fattoreDato));
+        nuoviFattori.add(new FattoreDiConversione(fogliaVecchiaFormattata, fogliaNuovaFormattata, 1/fattoreDato));
+
+        ArrayList<FattoreDiConversione> fattoriDaSeparare = fattori.get(fogliaVecchiaFormattata);
+
+        //TODO valutare se aggiungere parallelismo nell'esecuzione della parte successiva
+        ///int sizeFattoriDaDividere = fattoriDaSeparare.size();
+
+        for (FattoreDiConversione f : fattoriDaSeparare) {
+            double fattoreNuovo = fattoreDato * f.getFattore();
+            nuoviFattori.add(new FattoreDiConversione(fogliaNuovaFormattata, f.getNome_c2(), fattoreNuovo));
+            nuoviFattori.add(new FattoreDiConversione(f.getNome_c2(), fogliaNuovaFormattata, 1/fattoreNuovo));
+        }
+
+        //TODO da fare il ciclazzo pazzo per inserire la roba nella hashmap
+
+
+    }
+
+
+    public String parseRadice(String nomeCategoria){
+        return nomeCategoria.split(":")[0];
     }
 
     public String factorNameBuilder(String root, String leaf){
