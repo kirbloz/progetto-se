@@ -26,9 +26,6 @@ public class CategoriaNonFoglia extends Categoria {
     @JacksonXmlProperty(localName = "campoFiglie")
     private String campoFiglie;
 
-    @JacksonXmlProperty(localName = "valoreDominio")
-    private ValoreDominio valoreDominio;
-
     @JacksonXmlElementWrapper(localName = "categorieFiglie")
     @JacksonXmlProperty(localName = "Categoria")
     private ArrayList<Categoria> categorieFiglie;
@@ -42,7 +39,7 @@ public class CategoriaNonFoglia extends Categoria {
     }
 
     // costruttore per categoria RADICE
-    public CategoriaNonFoglia(String nome, String campoFiglie/*, ArrayList<ValoreDominio> dominio*/) {
+    public CategoriaNonFoglia(String nome, String campoFiglie) {
         super(nome);
 
         this.categorieFiglie = new ArrayList<>();
@@ -52,11 +49,10 @@ public class CategoriaNonFoglia extends Categoria {
         this.isRadice = true;
         this.nomeMadre = null;
         this.campo = null;
-
         this.valoreDominio = null;
     }
 
-
+    // costruttore per categoria NON RADICE, NON FOGLIA
     public CategoriaNonFoglia(String nome, String campoFiglie, CategoriaNonFoglia madre, String nomeValoreDominio) {
         super(nome);
 
@@ -67,7 +63,6 @@ public class CategoriaNonFoglia extends Categoria {
         this.isRadice = false;
         this.nomeMadre = madre.getNome();
         this.campo = madre.getCampoFiglie();
-
         this.valoreDominio = new ValoreDominio(nomeValoreDominio);
     }
 
@@ -116,6 +111,13 @@ public class CategoriaNonFoglia extends Categoria {
         return isRadice;
     }
 
+    /**
+     * Cerca una categoria partendo dal nome.
+     * La cerca prima come sè stessa, e poi tra le sue figlie.
+     *
+     * @param nomeCat, nome della categoria da cercare
+     * @return null se non la trova, oggetto Categoria se trova corrispondenza
+     */
     @Override
     public Categoria cercaCategoria(String nomeCat) {
         Categoria found = null;
@@ -127,6 +129,29 @@ public class CategoriaNonFoglia extends Categoria {
             // appena trova qualcosa (cioè found non null) esce e ritorna
             for (Categoria figlia : this.categorieFiglie) {
                 found = figlia.cercaCategoria(nomeCat);
+                if (found != null)
+                    break;
+            }
+        }
+        return found;
+    }
+
+    /**
+     * Cerca la categoria che assuma un certo valore del dominio.
+     * Prima controlla se stessa e poi tra le sue figlie.
+     *
+     * @param nomeValore, nome del valore da cercare
+     * @return null se non la trova, oggetto Categoria se trova corrispondenza
+     */
+    public Categoria cercaValoreDominio(String nomeValore) {
+        Categoria found = null;
+        if (this.valoreDominio.getNome().equals(nomeValore))
+            return this;
+        else {
+            // altrimenti controlla nelle figlie, richiamando per ognuna di loro la funzione di ricerca
+            // appena trova qualcosa (cioè found non null) esce e ritorna
+            for (Categoria figlia : this.categorieFiglie) {
+                found = figlia.cercaValoreDominio(nomeValore);
                 if (found != null)
                     break;
             }
@@ -187,6 +212,7 @@ public class CategoriaNonFoglia extends Categoria {
 
     /**
      * Stampa il nome del dominio che imprime alle figlie, e tutti i valori che al momento assume + descrizioni.
+     *
      * @return stringa formattata
      */
     public String dominioToString() {
@@ -202,7 +228,8 @@ public class CategoriaNonFoglia extends Categoria {
         if (!tempLista.isEmpty()) {
             sb.append("Valori: ");
             for (ValoreDominio val : tempLista)
-                sb.append("\n{ ").append(val.toString()).append(" }");
+                if (val != null)
+                    sb.append("\n{ ").append(val).append(" }");
         } else {
             sb.append("Vuoto.");
         }
