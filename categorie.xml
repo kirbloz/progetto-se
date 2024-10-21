@@ -1,56 +1,36 @@
 <Albero>
   <radice>
     <CategoriaNonFoglia>
-      <nomeValoreDominio></nomeValoreDominio>
       <nome>cat1 radice</nome>
+      <valoreDominio>
+        <nome></nome>
+        <descrizione></descrizione>
+      </valoreDominio>
       <isRadice>true</isRadice>
       <nomeMadre></nomeMadre>
       <campo></campo>
       <campoFiglie>materia</campoFiglie>
-      <NomeValoreDominio></NomeValoreDominio>
-      <listaValoriDominio>
-        <ValoreDominio>
-          <nome>valore1</nome>
-          <descrizione>desc1</descrizione>
-        </ValoreDominio>
-        <ValoreDominio>
-          <nome>valore2</nome>
-          <descrizione>desc2</descrizione>
-        </ValoreDominio>
-        <ValoreDominio>
-          <nome>matematica</nome>
-          <descrizione></descrizione>
-        </ValoreDominio>
-        <ValoreDominio>
-          <nome>italiano</nome>
-          <descrizione></descrizione>
-        </ValoreDominio>
-        <ValoreDominio>
-          <nome>online</nome>
-          <descrizione></descrizione>
-        </ValoreDominio>
-        <ValoreDominio>
-          <nome>in presenza</nome>
-          <descrizione></descrizione>
-        </ValoreDominio>
-      </listaValoriDominio>
       <categorieFiglie>
         <Categoria>
           <CategoriaFoglia>
-            <nomeValoreDominio>matematica</nomeValoreDominio>
             <nome>figlia1</nome>
+            <valoreDominio>
+              <nome>matematica</nome>
+              <descrizione></descrizione>
+            </valoreDominio>
             <nomeMadre>cat1 radice</nomeMadre>
-            <NomeValoreDominio>matematica</NomeValoreDominio>
             <campo>materia</campo>
             <type>CategoriaFoglia</type>
           </CategoriaFoglia>
         </Categoria>
         <Categoria>
           <CategoriaFoglia>
-            <nomeValoreDominio>italiano</nomeValoreDominio>
             <nome>figlia2</nome>
+            <valoreDominio>
+              <nome>italiano</nome>
+              <descrizione></descrizione>
+            </valoreDominio>
             <nomeMadre>cat1 radice</nomeMadre>
-            <NomeValoreDominio>italiano</NomeValoreDominio>
             <campo>materia</campo>
             <type>CategoriaFoglia</type>
           </CategoriaFoglia>
@@ -61,132 +41,39 @@
   </radice>
   <radice>
     <CategoriaNonFoglia>
-      <nomeValoreDominio></nomeValoreDominio>
       <nome>cat2 radice</nome>
+      <valoreDominio>
+        <nome></nome>
+        <descrizione></descrizione>
+      </valoreDominio>
       <isRadice>true</isRadice>
       <nomeMadre></nomeMadre>
       <campo></campo>
       <campoFiglie>lezione</campoFiglie>
-      <NomeValoreDominio></NomeValoreDominio>
-      <listaValoriDominio>
-        <ValoreDominio>
-          <nome>valore1</nome>
-          <descrizione>desc1</descrizione>
-        </ValoreDominio>
-        <ValoreDominio>
-          <nome>valore2</nome>
-          <descrizione>desc2</descrizione>
-        </ValoreDominio>
-        <ValoreDominio>
-          <nome>matematica</nome>
-          <descrizione></descrizione>
-        </ValoreDominio>
-        <ValoreDominio>
-          <nome>italiano</nome>
-          <descrizione></descrizione>
-        </ValoreDominio>
-        <ValoreDominio>
-          <nome>online</nome>
-          <descrizione></descrizione>
-        </ValoreDominio>
-        <ValoreDominio>
-          <nome>in presenza</nome>
-          <descrizione></descrizione>
-        </ValoreDominio>
-      </listaValoriDominio>
       <categorieFiglie>
         <Categoria>
           <CategoriaFoglia>
-            <nomeValoreDominio>online</nomeValoreDominio>
             <nome>figlia3</nome>
+            <valoreDominio>
+              <nome>online</nome>
+              <descrizione>lezioni erogate in DaD tramite Microsoft Teams</descrizione>
+            </valoreDominio>
             <nomeMadre>cat2 radice</nomeMadre>
-            <NomeValoreDominio>online</NomeValoreDominio>
             <campo>lezione</campo>
             <type>CategoriaFoglia</type>
           </CategoriaFoglia>
         </Categoria>
         <Categoria>
           <CategoriaNonFoglia>
-            <nomeValoreDominio>in presenza</nomeValoreDominio>
             <nome>figliaNF1</nome>
+            <valoreDominio>
+              <nome>in presenza</nome>
+              <descrizione></descrizione>
+            </valoreDominio>
             <isRadice>false</isRadice>
             <nomeMadre>cat2 radice</nomeMadre>
             <campo>lezione</campo>
             <campoFiglie>gradoScuola</campoFiglie>
-            <NomeValoreDominio>in presenza</NomeValoreDominio>
-            <listaValoriDominio/>
-            <categorieFiglie/>
-            <type>CategoriaNonFoglia</type>
-          </CategoriaNonFoglia>
-        </Categoria>
-      </categorieFiglie>
-      <type>CategoriaNonFoglia</type>
-    </CategoriaNonFoglia>
-  </radice>
-  <radice>
-    <CategoriaNonFoglia>
-      <nomeValoreDominio></nomeValoreDominio>
-      <nome>test</nome>
-      <isRadice>true</isRadice>
-      <nomeMadre></nomeMadre>
-      <campo></campo>
-      <campoFiglie>codice</campoFiglie>
-      <NomeValoreDominio></NomeValoreDominio>
-      <listaValoriDominio>
-        <ValoreDominio>
-          <nome>java</nome>
-          <descrizione></descrizione>
-        </ValoreDominio>
-        <ValoreDominio>
-          <nome>python</nome>
-          <descrizione></descrizione>
-        </ValoreDominio>
-      </listaValoriDominio>
-      <categorieFiglie>
-        <Categoria>
-          <CategoriaNonFoglia>
-            <nomeValoreDominio>java</nomeValoreDominio>
-            <nome>junit</nome>
-            <isRadice>false</isRadice>
-            <nomeMadre>test</nomeMadre>
-            <campo>codice</campo>
-            <campoFiglie>condizioni</campoFiglie>
-            <NomeValoreDominio>java</NomeValoreDominio>
-            <listaValoriDominio>
-              <ValoreDominio>
-                <nome>pre</nome>
-                <descrizione></descrizione>
-              </ValoreDominio>
-            </listaValoriDominio>
-            <categorieFiglie>
-              <Categoria>
-                <CategoriaNonFoglia>
-                  <nomeValoreDominio>pre</nomeValoreDominio>
-                  <nome>precondizioni</nome>
-                  <isRadice>false</isRadice>
-                  <nomeMadre>junit</nomeMadre>
-                  <campo>condizioni</campo>
-                  <campoFiglie>logica</campoFiglie>
-                  <NomeValoreDominio>pre</NomeValoreDominio>
-                  <listaValoriDominio/>
-                  <categorieFiglie/>
-                  <type>CategoriaNonFoglia</type>
-                </CategoriaNonFoglia>
-              </Categoria>
-            </categorieFiglie>
-            <type>CategoriaNonFoglia</type>
-          </CategoriaNonFoglia>
-        </Categoria>
-        <Categoria>
-          <CategoriaNonFoglia>
-            <nomeValoreDominio>python</nomeValoreDominio>
-            <nome>pyunit</nome>
-            <isRadice>false</isRadice>
-            <nomeMadre>test</nomeMadre>
-            <campo>codice</campo>
-            <campoFiglie>condizioni</campoFiglie>
-            <NomeValoreDominio>python</NomeValoreDominio>
-            <listaValoriDominio/>
             <categorieFiglie/>
             <type>CategoriaNonFoglia</type>
           </CategoriaNonFoglia>
