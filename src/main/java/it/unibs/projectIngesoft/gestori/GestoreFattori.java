@@ -69,13 +69,19 @@ public class GestoreFattori {
 
     /**
      * Chiede all'utente di inserire un fattore di conversione tra la categoria foglia appena creata
-     * e una a scelta, dopodiché lancia il metodo calcolaEAssegnaValoriDiConversione() per il calcolo dei restani
+     * e una a scelta, dopodiché lancia il metodo calcolaEAssegnaValoriDiConversione() per il calcolo
+     * dei restanti
      */
     public void inserisciFattoreDiConversione(String nomeRadiceNuovaFoglia, String nomeNuovaFoglia){
-        String nomeRadicePreesistente = InputDati.leggiStringaNonVuota(MSG_INSERISCI_RADICE);
-        String nomeFogliaPreesistente = InputDati.leggiStringaNonVuota(MSG_INSERISCI_FOGLIA);
-        //TODO ciclare le radici e le categorie nella radice per controllare che esista
-        //SE esiste:
+
+        String nomeRadicePreesistente;
+        String nomeFogliaPreesistente;
+
+        //cicla la richiesta se non esiste nella hashmap la chiave per la foglia preesistente (dovrebbe essere più veloce)
+        do {
+            nomeRadicePreesistente = InputDati.leggiStringaNonVuota(MSG_INSERISCI_RADICE);
+            nomeFogliaPreesistente = InputDati.leggiStringaNonVuota(MSG_INSERISCI_FOGLIA);
+        }while (!fattori.containsKey(factorNameBuilder(nomeRadicePreesistente,nomeFogliaPreesistente)));
 
         double fattore = InputDati.leggiDoubleConRange(MSG_INSERISCI_FATTORE, 0.5, 2.0);
 
@@ -106,11 +112,26 @@ public class GestoreFattori {
             nuoviFattori.add(new FattoreDiConversione(f.getNome_c2(), fogliaNuovaFormattata, 1/fattoreNuovo));
         }
 
-        //TODO da fare il ciclazzo pazzo per inserire la roba nella hashmap
-
+        aggiungiAllaHashmap(nuoviFattori);
 
     }
 
+    /**
+     * Ciclo per inserire i nuovi fattori nella Hashmap e memorizzazione
+     */
+    private void aggiungiAllaHashmap(ArrayList<FattoreDiConversione> nuoviFattori){
+
+        for (FattoreDiConversione f : nuoviFattori) {
+            if(fattori.containsKey(f.getNome_c1())){
+                fattori.get(f.getNome_c1()).add(f);
+            }else {
+                ArrayList<FattoreDiConversione> tempLista = new ArrayList<>();
+                tempLista.add(f);
+                fattori.put(f.getNome_c1(), tempLista);
+            }
+        }
+        serializeXML();
+    }
 
     public String parseRadice(String nomeCategoria){
         return nomeCategoria.split(":")[0];
