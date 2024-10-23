@@ -6,6 +6,7 @@ import it.unibs.projectIngesoft.attivita.*;
 import it.unibs.projectIngesoft.libraries.InputDati;
 import it.unibs.projectIngesoft.libraries.Serializer;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class GestoreCategorie {
@@ -71,8 +72,8 @@ public class GestoreCategorie {
             CategoriaNonFoglia radice1 = new CategoriaNonFoglia("cat1 radice", "materia");
             CategoriaNonFoglia radice2 = new CategoriaNonFoglia("cat2 radice", "lezione");
 
-            tree.radici.add(radice1);
-            tree.radici.add(radice2);
+            tree.getRadici().add(radice1);
+            tree.getRadici().add(radice2);
             radice1.addCategoriaFiglia(new CategoriaFoglia("figlia1", radice1, "matematica"));
             radice1.addCategoriaFiglia(new CategoriaFoglia("figlia2", radice1, "italiano"));
             radice2.addCategoriaFiglia(new CategoriaFoglia("figlia3", radice2, "online"));
@@ -105,9 +106,9 @@ public class GestoreCategorie {
         List<CategoriaNonFoglia> tempCat = Serializer.deserialize(new TypeReference<List<CategoriaNonFoglia>>() {
         }, this.filePath);
 
-        tree.radici.clear();
+        tree.getRadici().clear();
         if (tempCat != null)
-            tree.radici.addAll(tempCat);
+            tree.getRadici().addAll(tempCat);
 
     }
 
@@ -258,12 +259,36 @@ public class GestoreCategorie {
 
         // 6. aggiunta del fattore di conversione relativo
         if (this.tree.getNumFoglie() == 2) {
-//  todo
-            // this.gestFatt.inserisciPrimoFattore(tempRadice, tempNome, );
+
+            String radiceFirstFoglia;
+            String nomeFirstFoglia;
+
+            List<String> foglieString = cercaCategorieFoglia();
+            // radice:foglia
+
+            String firstFogliaNome = foglieString.getFirst().split(":")[1];
+            String firstFogliaRadice = foglieString.getFirst().split(":")[0];
+            String lastFogliaNome = foglieString.getLast().split(":")[1];
+            String lastFogliaRadice = foglieString.getLast().split(":")[0];
+
+
+            // richiama inserisciPrimoFattore con radice e nome della nuova categoria + radice e nome della categoria pre-esistente
+            if (firstFogliaNome.equals(tempNome))
+                this.gestFatt.inserisciPrimoFattore(tempRadice, tempNome, lastFogliaRadice, lastFogliaNome);
+            else
+                this.gestFatt.inserisciPrimoFattore(tempRadice, tempNome, firstFogliaRadice, firstFogliaNome);
         } else
             this.gestFatt.inserisciFattoreDiConversione(tempRadice, tempNome);
 
         serializeXML();
+    }
+
+    public String parseRadice(String nomeCategoria) {
+        return nomeCategoria.split(":")[0];
+    }
+
+    public String factorNameBuilder(String root, String leaf) {
+        return root + ":" + leaf;
     }
 
     /**
@@ -383,6 +408,30 @@ public class GestoreCategorie {
         tempValore.setDescrizione(desc);
     }
 
+    /* prodotto di COPILOT */
+
+    public List<String> cercaCategorieFoglia() {
+        List<String> foglieAsString = new ArrayList<>();
+        for (CategoriaNonFoglia radice : tree.getRadici()) {
+            trovaCategorieFoglia(radice, radice.getNome(), foglieAsString);
+        }
+        return foglieAsString;
+    }
+
+    private void trovaCategorieFoglia(CategoriaNonFoglia categoria, String nomeRadice, List<String> foglieAsString) {
+        {
+            for (Categoria figlia : categoria.getCategorieFiglie()) {
+                if (figlia instanceof CategoriaFoglia) {
+                    foglieAsString.add(nomeRadice + ":" + figlia.getNome());
+                } else if (figlia instanceof CategoriaNonFoglia) {
+                    trovaCategorieFoglia((CategoriaNonFoglia) figlia, nomeRadice, foglieAsString);
+                }
+            }
+
+        }
+    }
+
+
     /**
      * Stampa a video una struttura pseudo-tree-like delle gerarchie di radici presenti nel programma.
      */
@@ -411,7 +460,7 @@ public class GestoreCategorie {
      */
     public String radiciToString() {
         StringBuilder sb = new StringBuilder();
-        for (CategoriaNonFoglia radice : tree.radici)
+        for (CategoriaNonFoglia radice : tree.getRadici())
             sb.append(radice.simpleToString()).append("\n");
         return sb.toString();
     }
@@ -424,7 +473,7 @@ public class GestoreCategorie {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        for (CategoriaNonFoglia radice : tree.radici)
+        for (CategoriaNonFoglia radice : tree.getRadici())
             sb.append("> RADICE\n").append(radice).append("\n\n");
         return sb.toString();
     }

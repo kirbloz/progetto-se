@@ -23,7 +23,7 @@ public class Albero {
      */
     @JacksonXmlProperty(localName = "radice")
     @JacksonXmlElementWrapper(useWrapping = false)
-    public List<CategoriaNonFoglia> radici;
+    private List<CategoriaNonFoglia> radici;
 
     @JacksonXmlProperty(localName = "numFoglie")
     private int numFoglie;
