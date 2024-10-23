@@ -1,23 +1,26 @@
 package it.unibs.projectIngesoft.gestori;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.dataformat.xml.XmlMapper;
-import it.unibs.projectIngesoft.attivita.FattoreDiConversione;
-import it.unibs.projectIngesoft.libraries.InputDati;
 
-import java.io.File;
-import java.io.IOException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import it.unibs.projectIngesoft.attivita.FattoreDiConversione;
+import it.unibs.projectIngesoft.attivita.FattoriWrapper;
+import it.unibs.projectIngesoft.libraries.InputDati;
+import it.unibs.projectIngesoft.libraries.Serializer;
+
+
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
+
+//@JacksonXmlRootElement(localName = "GestoreFattori")
+//@JsonIgnoreProperties(ignoreUnknown = true)
 public class GestoreFattori {
 
-    private static final String MSG_INSERISCI_RADICE = "";
-    private static final String MSG_INSERISCI_FOGLIA = "";
-    private static final String MSG_INSERISCI_FATTORE = "Inserisci fattore:";
+    private static final String MSG_INSERISCI_RADICE = ">> Inserisci la radice dell'albero cui appartiene la foglia che ti interessa:\n> ";
+    private static final String MSG_INSERISCI_FOGLIA = ">> Inserisci la foglia che ti interessa:\n> ";
+    private static final String MSG_INSERISCI_FATTORE = ">> Inserisci fattore:\n> ";
     private final String filePath;
+
     private HashMap<String, ArrayList<FattoreDiConversione>> fattori;
 
     public GestoreFattori(String filePath) {
@@ -36,6 +39,7 @@ public class GestoreFattori {
 
     public void setFattori(HashMap<String, ArrayList<FattoreDiConversione>> fattori) {
         this.fattori = fattori;
+        serializeXML();
     }
 
     /**
@@ -46,12 +50,7 @@ public class GestoreFattori {
      * @param tempValue, oggetto FdC da inserire nella lista
      */
     public void addFattore(String tempKey, FattoreDiConversione tempValue) {
-        // TODO
-        // string nomeCat, string nomeRadice
-        // String key = String.format("%s:%s", nomeRadice, nomeCat);
-
-        // newValue =
-
+        // TODO ? cosa bo
 
         // controlla che esista già un'elemento dell'HashMap con quella chiave
         if (this.fattori.containsKey(tempKey)) {
@@ -74,45 +73,50 @@ public class GestoreFattori {
      */
     public void inserisciFattoreDiConversione(String nomeRadiceNuovaFoglia, String nomeNuovaFoglia) {
 
-        // se l'hashmap è vuota
+        // se l'hashmap è vuota (in teoria solo quando cè una sola categoria foglia nel sistema)
         if (fattori.containsKey(nomeRadiceNuovaFoglia)) {
-            return;
+            return; // TODO chiedere a martino xk fa questo
         } else {
 
             String nomeRadicePreesistente;
             String nomeFogliaPreesistente;
 
 
-            //cicla la richiesta se non esiste nella hashmap la chiave per la foglia preesistente (dovrebbe essere più veloce)
+            //cicla la richiesta della categoria foglia se non esiste nella hashmap la chiave per la foglia preesistente
+            // (dovrebbe essere più veloce e funzionare bene comunque)
             do {
                 nomeRadicePreesistente = InputDati.leggiStringaNonVuota(MSG_INSERISCI_RADICE);
                 nomeFogliaPreesistente = InputDati.leggiStringaNonVuota(MSG_INSERISCI_FOGLIA);
+                // TODO cosa garantisce che nomeFogliaPreesistente inserito dall'utente sia corretto?
+                // si può sfruttare il cercaCategoria -> instanceOf CategoriaFoglia per il check
             } while (!fattori.containsKey(factorNameBuilder(nomeRadicePreesistente, nomeFogliaPreesistente)));
 
-            //Chiedo Fattore
+            //Chiedo Fattore all'utente
             double fattore = InputDati.leggiDoubleConRange(MSG_INSERISCI_FATTORE, 0.5, 2.0);
 
-            //Formatto i nomi delle Categorie Foglia
+            //Formatto i nomi delle Categorie Foglia relative al fattore inserito
             String fogliaNuovaFormattata = factorNameBuilder(nomeRadiceNuovaFoglia, nomeNuovaFoglia);
             String fogliaVecchiaFormattata = factorNameBuilder(nomeRadicePreesistente, nomeFogliaPreesistente);
 
+            //
             calcolaEAssegnaValoriDiConversione(fogliaNuovaFormattata, fogliaVecchiaFormattata, fattore);
 
         }
     }
 
     /**
-     * Questo metodo serve per l'inserimeno del primo (2) fattore nella hashmap,
+     * Questo metodo serve per l'inserimento del primo (2) fattore nella hashmap,
      * siccome inserisciFattoreDiConversione non lavora sulla hashmap vuota.
-     *
+     * <p>
      * Va chiamato da GestoreCategorie nel momento in cui si crea la seconda Categoria
      * in assoluto.
+     *
      * @param nomeRadiceNuovaFoglia
      * @param nomeNuovaFoglia
      * @param nomeRadicePreesistente
      * @param nomeFogliaPreesistente
      */
-    public void inserisciPrimoFattore(String nomeRadiceNuovaFoglia, String nomeNuovaFoglia, String nomeRadicePreesistente, String nomeFogliaPreesistente){
+    public void inserisciPrimoFattore(String nomeRadiceNuovaFoglia, String nomeNuovaFoglia, String nomeRadicePreesistente, String nomeFogliaPreesistente) {
         //formatto i nomi delle Categorie Foglia
         String fogliaNuovaFormattata = factorNameBuilder(nomeRadiceNuovaFoglia, nomeNuovaFoglia);
         String fogliaVecchiaFormattata = factorNameBuilder(nomeRadicePreesistente, nomeFogliaPreesistente);
@@ -125,17 +129,17 @@ public class GestoreFattori {
     /**
      * Calcola i valori di conversione per tutte le categorie dato un valore dal configuratore
      */
-    private void calcolaEAssegnaValoriDiConversione(String fogliaNuovaFormattata, String fogliaVecchiaFormattata,  double fattoreDato){
+    private void calcolaEAssegnaValoriDiConversione(String fogliaNuovaFormattata, String fogliaVecchiaFormattata, double fattoreDato) {
 
         //creo arraylist a cui aggiungerò i nuovi fattori
         ArrayList<FattoreDiConversione> nuoviFattori = new ArrayList<>();
 
         //ci aggiungo i nuovi fattori dati dall'utente
         nuoviFattori.add(new FattoreDiConversione(fogliaNuovaFormattata, fogliaVecchiaFormattata, fattoreDato));
-        nuoviFattori.add(new FattoreDiConversione(fogliaVecchiaFormattata, fogliaNuovaFormattata, 1/fattoreDato));
+        nuoviFattori.add(new FattoreDiConversione(fogliaVecchiaFormattata, fogliaNuovaFormattata, 1 / fattoreDato));
 
         //se l'hashmap è vuota non fa i conti per i nuovi fattori obv
-        if(!fattori.isEmpty()) {
+        if (!fattori.isEmpty()) {
             // prendo tutti i fattori che hanno come prima foglia quella già esistente scelta dall'utente
             // (serve per il calcolo di tutti gli altri fattori oltre a quelli appena aggiunti a mano)
             ArrayList<FattoreDiConversione> fattoriDaMoltiplicare = fattori.get(fogliaVecchiaFormattata);
@@ -151,101 +155,33 @@ public class GestoreFattori {
             }
         }
 
-        aggiungiAllaHashmap(nuoviFattori);
-
-    }
-
-    /**
-     * Ciclo per inserire i nuovi fattori nella Hashmap e memorizzazione
-     */
-    private void aggiungiAllaHashmap(ArrayList<FattoreDiConversione> nuoviFattori){
-
+        //Inserimento dei nuovi fattori nella Hashmap
         for (FattoreDiConversione f : nuoviFattori) {
-            if(fattori.containsKey(f.getNome_c1())){
-                fattori.get(f.getNome_c1()).add(f);
-            }else {
-                ArrayList<FattoreDiConversione> tempLista = new ArrayList<>();
-                tempLista.add(f);
-                fattori.put(f.getNome_c1(), tempLista);
-            }
+            addFattore(f.getNome_c1(), f);
         }
+        //Serializzazione
         serializeXML();
+
     }
 
-    public String parseRadice(String nomeCategoria){
+    public String parseRadice(String nomeCategoria) {
         return nomeCategoria.split(":")[0];
     }
 
-    public String factorNameBuilder(String root, String leaf){
-        return root +":"+ leaf;
+    public String factorNameBuilder(String root, String leaf) {
+        return root + ":" + leaf;
     }
 
-    /**
-     * Per ogni chiave nell'HashMap fattori, si estrae il suo ArrayList e lo si serializza in XML.
-     */
+
     public void serializeXML() {
-
-        try {
-
-            boolean debug = false;
-
-            // creazione mapper e oggetto file
-            XmlMapper xmlMapper = new XmlMapper();
-            xmlMapper.enable(SerializationFeature.INDENT_OUTPUT);
-            File file = new File(this.filePath);
-            // se il file non esiste, lo si crea
-            if (file.createNewFile()) {
-                if (debug)
-                    System.out.println("FILE CREATO");
-            }
-
-            for (String key : fattori.keySet()) {
-                // estrazione dell'arraylist per ogni chiave key
-                List<FattoreDiConversione> listaFattori = fattori.get(key);
-                // scrittura su file del valore xml dell'arraylist
-                xmlMapper.writeValue(file, listaFattori);
-            }
-
-
-        } catch (JsonProcessingException e) {
-            // handle exception
-            e.getMessage();
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-            System.out.println("impossibile creare file");
-        }
+        Serializer.serialize(this.filePath, new FattoriWrapper(fattori));
     }
-
 
     public void deserializeXML() {
-        boolean debug = false;
-
-        try {
-            XmlMapper xmlMapper = new XmlMapper();
-            xmlMapper.enable(SerializationFeature.INDENT_OUTPUT);
-            File file = new File(this.filePath);
-
-            if (!file.exists()) {
-                if (debug)
-                    System.out.println("FILE NON ESISTE. NON CARICO NIENTE.");
-                return;
-            }
-
-            List<FattoreDiConversione> listaFattori = xmlMapper.readValue(file, xmlMapper.getTypeFactory().constructCollectionType(List.class, FattoreDiConversione.class));
-
-            for (FattoreDiConversione fattore : listaFattori) {
-                String tempKey = fattore.getNome_c1();
-                this.addFattore(tempKey, fattore);
-            }
-
-            if (debug)
-                for (FattoreDiConversione obj : listaFattori) {
-                    System.out.println(obj.toString());
-                }
-        } catch (IOException e) {
-            // handle the exception
-            System.out.println(e.getMessage());
-        }
+        FattoriWrapper tempWrapper = Serializer.deserialize(new TypeReference<FattoriWrapper>() {
+        }, filePath);
+        if(tempWrapper != null)
+        fattori = tempWrapper.toHashMap();
     }
 
     @Override
@@ -266,7 +202,7 @@ public class GestoreFattori {
      */
     private void visualizzaFattori() {
         System.out.println("\n\n --- Visualizza Fattori ---\n\n");
-        System.out.println(this.toString());
+        System.out.println(this);
     }
 
     /**

@@ -1,8 +1,9 @@
 package it.unibs.projectIngesoft.attivita;
 
 import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
-@JsonRootName("")
+@JacksonXmlRootElement(localName = "FattoreDiConversione")
 public class FattoreDiConversione {
 
 

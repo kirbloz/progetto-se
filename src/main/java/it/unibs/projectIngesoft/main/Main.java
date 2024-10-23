@@ -16,7 +16,7 @@ import java.util.HashMap;
  */
 public class Main {
 
-    protected static final String FATTORI_DI_CONVERSIONE_XML_FILEPATH = "serialized.xml"; ///DA RINOMINARE
+    protected static final String FATTORI_DI_CONVERSIONE_XML_FILEPATH = "fattori.xml"; ///DA RINOMINARE
     protected static final String UTENTI_XML_FILEPATH = "users.xml";
     public static final String CATEGORIE_XML_FILEPATH = "categorie.xml";
     public static final String COMPRENSORI_GEOGRAFICI_XML_FILEPATH = "comprensoriGeografici.xml";
@@ -59,8 +59,14 @@ public class Main {
         add(new FattoreDiConversione("c1", "c3", 0.2));
     }};
 
+    protected static final ArrayList<FattoreDiConversione> listaFattori2 = new ArrayList<>() {{
+        add(new FattoreDiConversione("c4", "c2", 0.6));
+        add(new FattoreDiConversione("c4", "c3", 1));
+    }};
+
     protected static final HashMap<String, ArrayList<FattoreDiConversione>> mapFattori = new HashMap<>() {{
         put("c1", listaFattori);
+        put("c4", listaFattori2);
     }};
 
     protected static Utente utenteLoggato = new Utente();

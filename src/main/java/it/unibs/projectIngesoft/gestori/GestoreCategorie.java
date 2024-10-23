@@ -58,12 +58,6 @@ public class GestoreCategorie {
         prepara tutto apposto */
         this.filePath = categorieFilePath;
         this.tree = new Albero();
-
-        // TODO aggiungere questo ragionamento al coding logger
-        // gestoreCat conoscere il suo gestFatt perchè altrimenti le categorie
-        // rimarrebbero senza "nessuno" che si occupa dei loro fattori
-        // e non ha senso mettere un gestoreFatt "globale" perchè tanto non esistono fattori senza categorie
-        // (nè viceversa, ma prima dei fattori esistono le categorie quindi vincono queste ultime)
         this.gestFatt = new GestoreFattori(fattoriFilePath);
 
         //deserializeXML(); // load dati
@@ -109,7 +103,6 @@ public class GestoreCategorie {
         tree.getRadici().clear();
         if (tempCat != null)
             tree.getRadici().addAll(tempCat);
-
     }
 
 
@@ -123,9 +116,12 @@ public class GestoreCategorie {
         // TODO
         // ma i valori dei domini, devono avere nomi univoci?
         // in caso devo aggiungere questo check -w
+        // TODO
+        // mettere un check prima di aggiungini CNF e CF che esista almeno una radice -w
 
         switch (scelta) {
             case 1:
+
                 aggiungiCategoriaNonFoglia();
                 break;
             case 2:
