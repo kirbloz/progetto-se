@@ -3,7 +3,6 @@ package it.unibs.projectIngesoft.gestori;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
-import it.unibs.projectIngesoft.attivita.CategoriaFoglia;
 import it.unibs.projectIngesoft.attivita.FattoreDiConversione;
 import it.unibs.projectIngesoft.libraries.InputDati;
 
@@ -40,7 +39,8 @@ public class GestoreFattori {
     }
 
     /**
-     * Inserisce un nuovo fattore nell'HashMap, verificando eventuali duplicati.
+     * TODO FIXARE
+     * Inserisce un nuovo fattore nell'HashMap, verificando eventuali duplicati. SERVE SOLO PER XML IN QUESTO MOMENTO
      *
      * @param tempKey,   nome della prima categoria della coppia
      * @param tempValue, oggetto FdC da inserire nella lista
@@ -72,44 +72,83 @@ public class GestoreFattori {
      * e una a scelta, dopodiché lancia il metodo calcolaEAssegnaValoriDiConversione() per il calcolo
      * dei restanti
      */
-    public void inserisciFattoreDiConversione(String nomeRadiceNuovaFoglia, String nomeNuovaFoglia){
+    public void inserisciFattoreDiConversione(String nomeRadiceNuovaFoglia, String nomeNuovaFoglia) {
 
-        String nomeRadicePreesistente;
-        String nomeFogliaPreesistente;
+        // se l'hashmap è vuota
+        if (fattori.containsKey(nomeRadiceNuovaFoglia)) {
+            return;
+        } else {
 
-        //cicla la richiesta se non esiste nella hashmap la chiave per la foglia preesistente (dovrebbe essere più veloce)
-        do {
-            nomeRadicePreesistente = InputDati.leggiStringaNonVuota(MSG_INSERISCI_RADICE);
-            nomeFogliaPreesistente = InputDati.leggiStringaNonVuota(MSG_INSERISCI_FOGLIA);
-        }while (!fattori.containsKey(factorNameBuilder(nomeRadicePreesistente,nomeFogliaPreesistente)));
+            String nomeRadicePreesistente;
+            String nomeFogliaPreesistente;
 
+
+            //cicla la richiesta se non esiste nella hashmap la chiave per la foglia preesistente (dovrebbe essere più veloce)
+            do {
+                nomeRadicePreesistente = InputDati.leggiStringaNonVuota(MSG_INSERISCI_RADICE);
+                nomeFogliaPreesistente = InputDati.leggiStringaNonVuota(MSG_INSERISCI_FOGLIA);
+            } while (!fattori.containsKey(factorNameBuilder(nomeRadicePreesistente, nomeFogliaPreesistente)));
+
+            //Chiedo Fattore
+            double fattore = InputDati.leggiDoubleConRange(MSG_INSERISCI_FATTORE, 0.5, 2.0);
+
+            //Formatto i nomi delle Categorie Foglia
+            String fogliaNuovaFormattata = factorNameBuilder(nomeRadiceNuovaFoglia, nomeNuovaFoglia);
+            String fogliaVecchiaFormattata = factorNameBuilder(nomeRadicePreesistente, nomeFogliaPreesistente);
+
+            calcolaEAssegnaValoriDiConversione(fogliaNuovaFormattata, fogliaVecchiaFormattata, fattore);
+
+        }
+    }
+
+    /**
+     * Questo metodo serve per l'inserimeno del primo (2) fattore nella hashmap,
+     * siccome inserisciFattoreDiConversione non lavora sulla hashmap vuota.
+     *
+     * Va chiamato da GestoreCategorie nel momento in cui si crea la seconda Categoria
+     * in assoluto.
+     * @param nomeRadiceNuovaFoglia
+     * @param nomeNuovaFoglia
+     * @param nomeRadicePreesistente
+     * @param nomeFogliaPreesistente
+     */
+    public void inserisciPrimoFattore(String nomeRadiceNuovaFoglia, String nomeNuovaFoglia, String nomeRadicePreesistente, String nomeFogliaPreesistente){
+        //formatto i nomi delle Categorie Foglia
+        String fogliaNuovaFormattata = factorNameBuilder(nomeRadiceNuovaFoglia, nomeNuovaFoglia);
+        String fogliaVecchiaFormattata = factorNameBuilder(nomeRadicePreesistente, nomeFogliaPreesistente);
+        //chiedo fattore
         double fattore = InputDati.leggiDoubleConRange(MSG_INSERISCI_FATTORE, 0.5, 2.0);
 
-        calcolaEAssegnaValoriDiConversione(nomeRadicePreesistente, nomeFogliaPreesistente, nomeRadiceNuovaFoglia, nomeNuovaFoglia, fattore);
+        calcolaEAssegnaValoriDiConversione(fogliaNuovaFormattata, fogliaVecchiaFormattata, fattore);
     }
 
     /**
      * Calcola i valori di conversione per tutte le categorie dato un valore dal configuratore
      */
-    private void calcolaEAssegnaValoriDiConversione(String nomeRadicePreesistente, String nomeFogliaPreesistente, String nomeRadiceNuovaFoglia, String nomeNuovaFoglia, double fattoreDato){
+    private void calcolaEAssegnaValoriDiConversione(String fogliaNuovaFormattata, String fogliaVecchiaFormattata,  double fattoreDato){
 
-        String fogliaNuovaFormattata = factorNameBuilder(nomeRadiceNuovaFoglia, nomeNuovaFoglia);
-        String fogliaVecchiaFormattata = factorNameBuilder(nomeRadicePreesistente, nomeFogliaPreesistente);
+        //creo arraylist a cui aggiungerò i nuovi fattori
         ArrayList<FattoreDiConversione> nuoviFattori = new ArrayList<>();
 
-
+        //ci aggiungo i nuovi fattori dati dall'utente
         nuoviFattori.add(new FattoreDiConversione(fogliaNuovaFormattata, fogliaVecchiaFormattata, fattoreDato));
         nuoviFattori.add(new FattoreDiConversione(fogliaVecchiaFormattata, fogliaNuovaFormattata, 1/fattoreDato));
 
-        ArrayList<FattoreDiConversione> fattoriDaSeparare = fattori.get(fogliaVecchiaFormattata);
+        //se l'hashmap è vuota non fa i conti per i nuovi fattori obv
+        if(!fattori.isEmpty()) {
+            // prendo tutti i fattori che hanno come prima foglia quella già esistente scelta dall'utente
+            // (serve per il calcolo di tutti gli altri fattori oltre a quelli appena aggiunti a mano)
+            ArrayList<FattoreDiConversione> fattoriDaMoltiplicare = fattori.get(fogliaVecchiaFormattata);
 
-        //TODO valutare se aggiungere parallelismo nell'esecuzione della parte successiva
-        ///int sizeFattoriDaDividere = fattoriDaSeparare.size();
+            //TODO valutare se aggiungere parallelismo nell'esecuzione della parte successiva
 
-        for (FattoreDiConversione f : fattoriDaSeparare) {
-            double fattoreNuovo = fattoreDato * f.getFattore();
-            nuoviFattori.add(new FattoreDiConversione(fogliaNuovaFormattata, f.getNome_c2(), fattoreNuovo));
-            nuoviFattori.add(new FattoreDiConversione(f.getNome_c2(), fogliaNuovaFormattata, 1/fattoreNuovo));
+            // Qui ciclo i fattori presi per calcolare e aggiungere quelli nuovi.
+            ///Manca un controllo che non sforino perché non ho più scritto a nessuno sulla questione
+            for (FattoreDiConversione f : fattoriDaMoltiplicare) {
+                double fattoreNuovo = fattoreDato * f.getFattore();
+                nuoviFattori.add(new FattoreDiConversione(fogliaNuovaFormattata, f.getNome_c2(), fattoreNuovo));
+                nuoviFattori.add(new FattoreDiConversione(f.getNome_c2(), fogliaNuovaFormattata, 1 / fattoreNuovo));
+            }
         }
 
         aggiungiAllaHashmap(nuoviFattori);

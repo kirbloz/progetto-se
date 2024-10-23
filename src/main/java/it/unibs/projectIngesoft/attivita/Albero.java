@@ -25,6 +25,9 @@ public class Albero {
     @JacksonXmlElementWrapper(useWrapping = false)
     public List<CategoriaNonFoglia> radici;
 
+    @JacksonXmlProperty(localName = "numFoglie")
+    private int numFoglie;
+
     public Albero() {
         this.radici = new ArrayList<>();
     }
@@ -51,6 +54,14 @@ public class Albero {
 
     public void rimouviRadice(CategoriaNonFoglia radici){
         this.radici.remove(radici);
+    }
+
+    public int getNumFoglie() {
+        return numFoglie;
+    }
+
+    public void incrementNumFoglie() {
+        this.numFoglie++;
     }
 
     public CategoriaNonFoglia getRadice (String nomeRadice){

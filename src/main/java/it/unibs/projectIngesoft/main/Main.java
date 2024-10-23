@@ -153,7 +153,7 @@ public class Main {
      */
     private static void loopCategorie(Menu menuCategorie) {
         int scelta = 0;
-        GestoreCategorie gestCat = new GestoreCategorie(CATEGORIE_XML_FILEPATH);
+        GestoreCategorie gestCat = new GestoreCategorie(CATEGORIE_XML_FILEPATH, FATTORI_DI_CONVERSIONE_XML_FILEPATH);
 
         do {
             scelta = menuCategorie.scegli();

@@ -48,12 +48,23 @@ public class GestoreCategorie {
 
     private final String filePath;
 
+    //TENTATIVO DI COUPLLING CON FATTORI
+    private GestoreFattori gestFatt;
 
-    public GestoreCategorie(String filePath) {
+
+    public GestoreCategorie(String categorieFilePath, String fattoriFilePath) {
         /* legge da file memorizza le radici già presenti
         prepara tutto apposto */
-        this.filePath = filePath;
+        this.filePath = categorieFilePath;
         this.tree = new Albero();
+
+        // TODO aggiungere questo ragionamento al coding logger
+        // gestoreCat conoscere il suo gestFatt perchè altrimenti le categorie
+        // rimarrebbero senza "nessuno" che si occupa dei loro fattori
+        // e non ha senso mettere un gestoreFatt "globale" perchè tanto non esistono fattori senza categorie
+        // (nè viceversa, ma prima dei fattori esistono le categorie quindi vincono queste ultime)
+        this.gestFatt = new GestoreFattori(fattoriFilePath);
+
         //deserializeXML(); // load dati
 
         if (DEBUG_DATA) {
@@ -123,7 +134,7 @@ public class GestoreCategorie {
                 aggiungiCategoriaRadice();
                 break;
             case 4:
-                //TODO
+                // TODO
                 aggiungiDescrizioneValoriDominio();
                 break;
             case 5:
@@ -200,7 +211,6 @@ public class GestoreCategorie {
         return catMadre;
     }
 
-
     public void aggiungiCategoriaNonFoglia() {
 
         // 1. seleziona la radice della gerarchia a cui aggiungere una categoria
@@ -241,9 +251,17 @@ public class GestoreCategorie {
         // 4. chiedi che valore assegnare al dominio ereditato dalla categoria madre
         String tempValoreDominio = InputDati.leggiStringaNonVuota(String.format(MSG_INSERIMENTO_VALORE_DOMINIO, tempNome, catMadre.getCampoFiglie()));
 
-        // creazione oggetto e aggiunta figlia alla madre
+        // 5. creazione oggetto e aggiunta figlia alla madre
         CategoriaFoglia tempF = new CategoriaFoglia(tempNome, catMadre, tempValoreDominio);
         catMadre.addCategoriaFiglia(tempF);
+        this.tree.incrementNumFoglie();
+
+        // 6. aggiunta del fattore di conversione relativo
+        if (this.tree.getNumFoglie() == 2) {
+//  todo
+            // this.gestFatt.inserisciPrimoFattore(tempRadice, tempNome, );
+        } else
+            this.gestFatt.inserisciFattoreDiConversione(tempRadice, tempNome);
 
         serializeXML();
     }
@@ -259,6 +277,7 @@ public class GestoreCategorie {
         String tempCampo = InputDati.leggiStringaNonVuota(MSG_INSERIMENTO_NUOVO_DOMINIO);
         // non chiedo subito di inserire i valori del dominio -> da inserire quando si aggiunge una figlia
 
+        // 3. creazione oggetto e aggiunta all'albero
         CategoriaNonFoglia tempRadice = new CategoriaNonFoglia(tempNome, tempCampo);
         this.tree.aggiungiRadice(tempRadice);
         serializeXML();
@@ -274,13 +293,13 @@ public class GestoreCategorie {
         return this.tree.contains(tempNome);
     }
 
-    // TODO
-    public void visualizzaDomini() {
-        System.out.println(HEADER_VISUALIZZA_DOMINI);
-        //System.out.println(dominioCategoriaNonFogliaToString());
-    }
-
-
+    /**
+     * A partire da una radice, permette la selezione di una delle CategorieNonFoglia contenute nel suo albero
+     * gerarchico.
+     *
+     * @param tempRadice, Categoria radice di riferimento per l'albero
+     * @return CategoriaNonFoglia selezionata
+     */
     public CategoriaNonFoglia selezioneCategoriaNonFoglia(String tempRadice) {
 
         // stampo radice gerarchia e poi
