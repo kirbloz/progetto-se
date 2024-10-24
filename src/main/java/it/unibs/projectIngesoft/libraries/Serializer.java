@@ -26,7 +26,7 @@ public class Serializer {
             // creazione mapper e oggetto file
             XmlMapper xmlMapper = new XmlMapper();
             xmlMapper.enable(SerializationFeature.INDENT_OUTPUT);
-            xmlMapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
+            //xmlMapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
 
 
             File file = new File(filePath);

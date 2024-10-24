@@ -9,9 +9,10 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
 import java.util.ArrayList;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
+
 @JsonTypeName("CategoriaNonFoglia")
 @JacksonXmlRootElement(localName = "CategoriaNonFoglia")
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class CategoriaNonFoglia extends Categoria {
 
     @JacksonXmlProperty(localName = "isRadice")

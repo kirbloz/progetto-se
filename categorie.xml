@@ -2,13 +2,10 @@
   <radice>
     <CategoriaNonFoglia>
       <nome>cat1 radice</nome>
-      <valoreDominio>
-        <nome></nome>
-        <descrizione></descrizione>
-      </valoreDominio>
+      <valoreDominio/>
       <isRadice>true</isRadice>
-      <nomeMadre></nomeMadre>
-      <campo></campo>
+      <nomeMadre/>
+      <campo/>
       <campoFiglie>materia</campoFiglie>
       <categorieFiglie>
         <Categoria>
@@ -42,13 +39,10 @@
   <radice>
     <CategoriaNonFoglia>
       <nome>cat2 radice</nome>
-      <valoreDominio>
-        <nome></nome>
-        <descrizione></descrizione>
-      </valoreDominio>
+      <valoreDominio/>
       <isRadice>true</isRadice>
-      <nomeMadre></nomeMadre>
-      <campo></campo>
+      <nomeMadre/>
+      <campo/>
       <campoFiglie>lezione</campoFiglie>
       <categorieFiglie>
         <Categoria>
@@ -56,7 +50,7 @@
             <nome>figlia3</nome>
             <valoreDominio>
               <nome>online</nome>
-              <descrizione>lezioni erogate in DaD tramite Microsoft Teams</descrizione>
+              <descrizione></descrizione>
             </valoreDominio>
             <nomeMadre>cat2 radice</nomeMadre>
             <campo>lezione</campo>

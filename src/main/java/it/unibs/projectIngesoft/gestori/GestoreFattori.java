@@ -16,8 +16,7 @@ import java.util.HashMap;
 //@JsonIgnoreProperties(ignoreUnknown = true)
 public class GestoreFattori {
 
-    private static final String MSG_INSERISCI_RADICE = ">> Inserisci la radice dell'albero cui appartiene la foglia che ti interessa:\n> ";
-    private static final String MSG_INSERISCI_FOGLIA = ">> Inserisci la foglia che ti interessa:\n> ";
+
     private static final String MSG_INSERISCI_FATTORE = ">> Inserisci fattore:\n> ";
     private final String filePath;
 
@@ -71,16 +70,17 @@ public class GestoreFattori {
      * e una a scelta, dopodiché lancia il metodo calcolaEAssegnaValoriDiConversione() per il calcolo
      * dei restanti
      */
-    public void inserisciFattoreDiConversione(String nomeRadiceNuovaFoglia, String nomeNuovaFoglia) {
+    public void inserisciFattoreDiConversione(String nomeRadiceNuovaFoglia, String nomeNuovaFoglia, String nomeRadicePreesistente, String nomeFogliaPreesistente) {
 
         // se l'hashmap è vuota (in teoria solo quando cè una sola categoria foglia nel sistema)
-        if (fattori.containsKey(nomeRadiceNuovaFoglia)) {
-            return; // TODO chiedere a martino xk fa questo
-        } else {
+        // non si fa nulla
+        // se non è vuota, procedi ok
+        if (!fattori.containsKey(nomeRadiceNuovaFoglia)) {
 
-            String nomeRadicePreesistente;
+            // questa parte la spostiamo in gestoreCategorie
+            // FATTO
+            /*String nomeRadicePreesistente;
             String nomeFogliaPreesistente;
-
 
             //cicla la richiesta della categoria foglia se non esiste nella hashmap la chiave per la foglia preesistente
             // (dovrebbe essere più veloce e funzionare bene comunque)
@@ -89,7 +89,10 @@ public class GestoreFattori {
                 nomeFogliaPreesistente = InputDati.leggiStringaNonVuota(MSG_INSERISCI_FOGLIA);
                 // TODO cosa garantisce che nomeFogliaPreesistente inserito dall'utente sia corretto?
                 // si può sfruttare il cercaCategoria -> instanceOf CategoriaFoglia per il check
-            } while (!fattori.containsKey(factorNameBuilder(nomeRadicePreesistente, nomeFogliaPreesistente)));
+            } while (!fattori.containsKey(factorNameBuilder(nomeRadicePreesistente, nomeFogliaPreesistente)));*/
+
+            //TODO check la roba
+            
 
             //Chiedo Fattore all'utente
             double fattore = InputDati.leggiDoubleConRange(MSG_INSERISCI_FATTORE, 0.5, 2.0);
@@ -104,7 +107,7 @@ public class GestoreFattori {
         }
     }
 
-    /**
+    /*
      * Questo metodo serve per l'inserimento del primo (2) fattore nella hashmap,
      * siccome inserisciFattoreDiConversione non lavora sulla hashmap vuota.
      * <p>
@@ -115,7 +118,7 @@ public class GestoreFattori {
      * @param nomeNuovaFoglia
      * @param nomeRadicePreesistente
      * @param nomeFogliaPreesistente
-     */
+
     public void inserisciPrimoFattore(String nomeRadiceNuovaFoglia, String nomeNuovaFoglia, String nomeRadicePreesistente, String nomeFogliaPreesistente) {
         //formatto i nomi delle Categorie Foglia
         String fogliaNuovaFormattata = factorNameBuilder(nomeRadiceNuovaFoglia, nomeNuovaFoglia);
@@ -124,7 +127,7 @@ public class GestoreFattori {
         double fattore = InputDati.leggiDoubleConRange(MSG_INSERISCI_FATTORE, 0.5, 2.0);
 
         calcolaEAssegnaValoriDiConversione(fogliaNuovaFormattata, fogliaVecchiaFormattata, fattore);
-    }
+    }*/
 
     /**
      * Calcola i valori di conversione per tutte le categorie dato un valore dal configuratore
@@ -164,8 +167,13 @@ public class GestoreFattori {
 
     }
 
-    public String parseRadice(String nomeCategoria) {
-        return nomeCategoria.split(":")[0];
+    public boolean esisteEntry(String nomeRadice, String nomeFoglia){
+        return fattori.containsKey(factorNameBuilder(nomeRadice, nomeFoglia));
+    }
+
+
+    public String[] parseChiave(String nomeCategoria) {
+        return nomeCategoria.split(":");
     }
 
     public String factorNameBuilder(String root, String leaf) {
@@ -203,6 +211,15 @@ public class GestoreFattori {
     private void visualizzaFattori() {
         System.out.println("\n\n --- Visualizza Fattori ---\n\n");
         System.out.println(this);
+    }
+
+    public String visualizzaCategorieConFdC(){
+        StringBuilder sb = new StringBuilder();
+        for (String key : fattori.keySet()) {
+            String[] parsed = parseChiave(key);
+            sb.append(String.format(">> %s (%s)", parsed[1], parsed[0])).append("\n");
+        }
+        return sb.toString();
     }
 
     /**

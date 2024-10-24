@@ -1,5 +1,6 @@
 package it.unibs.projectIngesoft.attivita;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
@@ -25,7 +26,8 @@ public class Albero {
     @JacksonXmlElementWrapper(useWrapping = false)
     private List<CategoriaNonFoglia> radici;
 
-    @JacksonXmlProperty(localName = "numFoglie")
+    @JsonIgnore
+    //@JacksonXmlProperty(localName = "numFoglie")
     private int numFoglie;
 
     public Albero() {
