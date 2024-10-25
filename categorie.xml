@@ -1,79 +1,100 @@
 <Albero>
   <radice>
-    <CategoriaNonFoglia>
-      <nome>cat1 radice</nome>
-      <valoreDominio/>
-      <isRadice>true</isRadice>
-      <nomeMadre/>
-      <campo/>
-      <campoFiglie>materia</campoFiglie>
-      <categorieFiglie>
-        <Categoria>
-          <CategoriaFoglia>
-            <nome>figlia1</nome>
-            <valoreDominio>
-              <nome>matematica</nome>
-              <descrizione></descrizione>
-            </valoreDominio>
-            <nomeMadre>cat1 radice</nomeMadre>
-            <campo>materia</campo>
-            <type>CategoriaFoglia</type>
-          </CategoriaFoglia>
-        </Categoria>
-        <Categoria>
-          <CategoriaFoglia>
-            <nome>figlia2</nome>
-            <valoreDominio>
-              <nome>italiano</nome>
-              <descrizione></descrizione>
-            </valoreDominio>
-            <nomeMadre>cat1 radice</nomeMadre>
-            <campo>materia</campo>
-            <type>CategoriaFoglia</type>
-          </CategoriaFoglia>
-        </Categoria>
-      </categorieFiglie>
-      <type>CategoriaNonFoglia</type>
-    </CategoriaNonFoglia>
+    <nome>cat1 radice</nome>
+    <valoreDominio/>
+    <isRadice>true</isRadice>
+    <isFoglia>false</isFoglia>
+    <nomeMadre/>
+    <campo/>
+    <campoFiglie>materia</campoFiglie>
+    <categorieFiglie>
+      <Categoria>
+        <nome>figlia1</nome>
+        <valoreDominio>
+          <nome>matematica</nome>
+          <descrizione></descrizione>
+        </valoreDominio>
+        <isRadice>false</isRadice>
+        <isFoglia>true</isFoglia>
+        <nomeMadre>cat1 radice</nomeMadre>
+        <campo>materia</campo>
+        <campoFiglie></campoFiglie>
+        <categorieFiglie/>
+      </Categoria>
+      <Categoria>
+        <nome>figlia2</nome>
+        <valoreDominio>
+          <nome>italiano</nome>
+          <descrizione></descrizione>
+        </valoreDominio>
+        <isRadice>false</isRadice>
+        <isFoglia>true</isFoglia>
+        <nomeMadre>cat1 radice</nomeMadre>
+        <campo>materia</campo>
+        <campoFiglie></campoFiglie>
+        <categorieFiglie/>
+      </Categoria>
+    </categorieFiglie>
   </radice>
   <radice>
-    <CategoriaNonFoglia>
-      <nome>cat2 radice</nome>
-      <valoreDominio/>
-      <isRadice>true</isRadice>
-      <nomeMadre/>
-      <campo/>
-      <campoFiglie>lezione</campoFiglie>
-      <categorieFiglie>
-        <Categoria>
-          <CategoriaFoglia>
-            <nome>figlia3</nome>
-            <valoreDominio>
-              <nome>online</nome>
-              <descrizione></descrizione>
-            </valoreDominio>
-            <nomeMadre>cat2 radice</nomeMadre>
-            <campo>lezione</campo>
-            <type>CategoriaFoglia</type>
-          </CategoriaFoglia>
-        </Categoria>
-        <Categoria>
-          <CategoriaNonFoglia>
-            <nome>figliaNF1</nome>
-            <valoreDominio>
-              <nome>in presenza</nome>
-              <descrizione></descrizione>
-            </valoreDominio>
-            <isRadice>false</isRadice>
-            <nomeMadre>cat2 radice</nomeMadre>
-            <campo>lezione</campo>
-            <campoFiglie>gradoScuola</campoFiglie>
-            <categorieFiglie/>
-            <type>CategoriaNonFoglia</type>
-          </CategoriaNonFoglia>
-        </Categoria>
-      </categorieFiglie>
-      <type>CategoriaNonFoglia</type>
-    </CategoriaNonFoglia>
+    <nome>cat2 radice</nome>
+    <valoreDominio/>
+    <isRadice>true</isRadice>
+    <isFoglia>false</isFoglia>
+    <nomeMadre/>
+    <campo/>
+    <campoFiglie>lezione</campoFiglie>
+    <categorieFiglie>
+      <Categoria>
+        <nome>figlia3</nome>
+        <valoreDominio>
+          <nome>online</nome>
+          <descrizione></descrizione>
+        </valoreDominio>
+        <isRadice>false</isRadice>
+        <isFoglia>true</isFoglia>
+        <nomeMadre>cat2 radice</nomeMadre>
+        <campo>lezione</campo>
+        <campoFiglie></campoFiglie>
+        <categorieFiglie/>
+      </Categoria>
+      <Categoria>
+        <nome>figliaNF1</nome>
+        <valoreDominio>
+          <nome>in presenza</nome>
+          <descrizione></descrizione>
+        </valoreDominio>
+        <isRadice>false</isRadice>
+        <isFoglia>false</isFoglia>
+        <nomeMadre>cat2 radice</nomeMadre>
+        <campo>lezione</campo>
+        <campoFiglie>gradoScuola</campoFiglie>
+        <categorieFiglie/>
+      </Categoria>
+    </categorieFiglie>
+  </radice>
+  <radice>
+    <nome>cat3 radice</nome>
+    <valoreDominio/>
+    <isRadice>true</isRadice>
+    <isFoglia>false</isFoglia>
+    <nomeMadre/>
+    <campo/>
+    <campoFiglie>dominio3</campoFiglie>
+    <categorieFiglie>
+      <Categoria>
+        <nome>test1NF</nome>
+        <valoreDominio>
+          <nome>valore1</nome>
+          <descrizione></descrizione>
+        </valoreDominio>
+        <isRadice>false</isRadice>
+        <isFoglia>false</isFoglia>
+        <nomeMadre>cat3 radice</nomeMadre>
+        <campo>dominio3</campo>
+        <campoFiglie>dominio4</campoFiglie>
+        <categorieFiglie/>
+      </Categoria>
+    </categorieFiglie>
   </radice>
 </Albero>

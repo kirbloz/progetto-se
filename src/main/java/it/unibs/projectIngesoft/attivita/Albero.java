@@ -24,7 +24,7 @@ public class Albero {
      */
     @JacksonXmlProperty(localName = "radice")
     @JacksonXmlElementWrapper(useWrapping = false)
-    private List<CategoriaNonFoglia> radici;
+    private List<Categoria> radici;
 
     @JsonIgnore
     //@JacksonXmlProperty(localName = "numFoglie")
@@ -35,26 +35,26 @@ public class Albero {
     }
 
     public boolean contains(String nomeRadice){
-        for(CategoriaNonFoglia tempRadice: this.radici){
+        for(Categoria tempRadice: this.radici){
             if(tempRadice.getNome().equals(nomeRadice))
                 return true;
         }
         return false;
     }
 
-    public List<CategoriaNonFoglia> getRadici() {
+    public List<Categoria> getRadici() {
         return radici;
     }
 
-    public void setRadici(List<CategoriaNonFoglia> radici) {
+    public void setRadici(List<Categoria> radici) {
         this.radici = radici;
     }
 
-    public void aggiungiRadice(CategoriaNonFoglia radici){
+    public void aggiungiRadice(Categoria radici){
         this.radici.add(radici);
     }
 
-    public void rimouviRadice(CategoriaNonFoglia radici){
+    public void rimouviRadice(Categoria radici){
         this.radici.remove(radici);
     }
 
@@ -66,8 +66,8 @@ public class Albero {
         this.numFoglie++;
     }
 
-    public CategoriaNonFoglia getRadice (String nomeRadice){
-        for(CategoriaNonFoglia tempRadice: this.radici){
+    public Categoria getRadice (String nomeRadice){
+        for(Categoria tempRadice: this.radici){
             if(tempRadice.getNome().equals(nomeRadice))
                 return tempRadice;
         }
