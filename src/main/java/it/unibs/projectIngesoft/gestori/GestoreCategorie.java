@@ -8,8 +8,11 @@ import it.unibs.projectIngesoft.attivita.ValoreDominio;
 import it.unibs.projectIngesoft.libraries.InputDati;
 import it.unibs.projectIngesoft.libraries.Serializer;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
+
+import it.unibs.projectIngesoft.libraries.Menu;
 
 public class GestoreCategorie {
 
@@ -20,6 +23,10 @@ public class GestoreCategorie {
     public static final String MSG_INSERIMENTO_NUOVO_DOMINIO = ">> Inserisci il nome del dominio della nuova categoria:\n> ";
     public static final String MSG_INSERIMENTO_VALORE_DOMINIO = ">> Inserisci il valore di %s nel dominio di {%s}\n> ";
     public static final String MSG_INSERIMENTO_DOMINIO_PER_FIGLIE = ">> Inserisci il nome del dominio per eventuali figlie della nuova categoria:\n> ";
+    public static final String[] VOCI_SUBMENU_GERARCHIA = new String[]{
+            "Aggiungi Categoria",
+    };
+    public static final String TITLE_SUBMENU_AGGIUNGI_GERARCHIA = "AGGIUNGI GERARCHIA";
 
     private static final String MSG_INSERISCI_RADICE = ">> Inserisci la radice dell'albero cui appartiene la foglia che ti interessa:\n> ";
     private static final String MSG_INSERISCI_FOGLIA = ">> Inserisci la foglia che ti interessa:\n> ";
@@ -38,9 +45,9 @@ public class GestoreCategorie {
     public static final String MSG_INPUT_DESCRIZIONE_VALORE_DOMINIO = ">> Inserisci la descrizione (da 0 a 100 caratteri):\n> ";
     public static final String CONFIRM_DESCRIZIONE_AGGIUNTA = ">> Descrizione aggiunta <<";
 
-    public static final String WARNING_RADICE_NON_ESISTE = ">> (!!) Per favore indica una categoria radice esistente";
-    public static final String WARNING_RADICE_ESISTE = ">> (!!) Per favore indica una categoria radice che non esiste già";
-    public static final String WARNING_CATEGORIA_ESISTE = ">> (!!) Per favore indica una categoria che non esista già in questo albero gerarchico.";
+    public static final String WARNING_RADICE_NON_ESISTE = ">> (!!) Per favore indica una categoria radice esistente\n";
+    public static final String WARNING_RADICE_ESISTE = ">> (!!) Per favore indica una categoria radice che non esiste già\n";
+    public static final String WARNING_CATEGORIA_ESISTE = ">> (!!) Per favore indica una categoria che non esista già in questo albero gerarchico.\n";
     public static final String WARNING_CATEGORIA_NF_NON_ESISTE = ">> (!!) Per favore indica una categoria non foglia dell'albero gerarchico selezionato.\n";
     public static final String WARNING_DESCRIZIONE_ESISTE = ">> (!!) Questo valore possiede già una descrizione.\n";
 
@@ -75,10 +82,10 @@ public class GestoreCategorie {
 
             tree.getRadici().add(radice1);
             tree.getRadici().add(radice2);
-            radice1.addCategoriaFiglia(new Categoria("figlia1", radice1, "matematica"));
-            radice1.addCategoriaFiglia(new Categoria("figlia2", radice1, "italiano"));
-            radice2.addCategoriaFiglia(new Categoria("figlia3", radice2, "online"));
-            radice2.addCategoriaFiglia(new Categoria("figliaNF1", "gradoScuola", radice2, "in presenza"));
+            radice1.addCategoriaFiglia(new Categoria("figlia1", radice1, new ValoreDominio("matematica")));
+            radice1.addCategoriaFiglia(new Categoria("figlia2", radice1, new ValoreDominio("italiano")));
+            radice2.addCategoriaFiglia(new Categoria("figlia3", radice2, new ValoreDominio("online")));
+            radice2.addCategoriaFiglia(new Categoria("figliaNF1", "gradoScuola", radice2, new ValoreDominio("in presenza")));
 
 
             serializeXML();
@@ -121,14 +128,12 @@ public class GestoreCategorie {
     public void entryPoint(int scelta) {
 
         // TODO
-        // ma i valori dei domini, devono avere nomi univoci?
-        // in caso devo aggiungere questo check -w
-        // TODO
         // mettere un check prima di aggiungini CNF e CF che esista almeno una radice -w
 
         switch (scelta) {
-            case 1:
-                aggiungiCategoriaNonFoglia();
+            /*case 1:
+                //aggiungiCategoriaNonFoglia();
+                System.out.println(">> FEATURE RIMOSSA <<");
                 break;
             case 2:
                 aggiungiCategoriaFoglia();
@@ -142,13 +147,106 @@ public class GestoreCategorie {
                 break;
             case 5:
                 visualizzaGerarchie();
+                break;*/
+            case 1:
+                subMenuAggiungiGerarchia();
+                break;
+            case 2:
+                visualizzaGerarchie();
                 break;
             default:
                 break;
         }
     }
 
-    private String selezioneCategoriaRadice() {
+    /**
+     * Metodo per la creazione di un'intera gerarchia.
+     */
+    public void subMenuAggiungiGerarchia(){
+
+        Menu subMenu = new Menu(TITLE_SUBMENU_AGGIUNGI_GERARCHIA, VOCI_SUBMENU_GERARCHIA);
+        int scelta;
+
+        // 0. predispone una radice
+        this.aggiungiCategoriaRadice();
+
+        // 1. loop per l'inserimento di categorie nella gerarchia della radice appena creata
+
+        do{
+            scelta = subMenu.scegli();
+
+            switch(scelta){
+                case 1:
+                    this.aggiungiCategoria(this.tree.getRadici().getLast());
+                    break;
+                default:
+                    System.out.println("> Uscita dal submenu e salvataggio.. ");
+                    break;
+            }
+        }while(scelta !=0);
+
+    }
+
+    // TODO
+    /**
+     * Metodo per l'inserimento di una Categoria generica NON RADICE.
+     * Non modificabile.
+     * @param radice, Categoria radice di riferimento
+     */
+    private void aggiungiCategoria(Categoria radice){
+        String descrizioneValoreDominio="";
+        String nomeCampoFiglie= "";
+        ValoreDominio valoreDominio;
+
+        // 1. chiede nome
+        String nomeCategoria = this.inserimentoNomeNuovaCategoria(radice.getNome());
+
+        // 1.2. chiede madre per nuova radice, verificando che esista
+        Categoria categoriaMadre = this.inserimentoNomeCategoriaMadre(radice.getNome(), nomeCategoria);
+
+        // 2. chiede valore del dominio ereditato + descrizione
+        String nomeValoreDominio = this.inserimentoValoreDominio(nomeCategoria, categoriaMadre);
+        boolean insertDescription = InputDati.yesOrNo(">> Vuoi inserire una descrizione per questo valore?");
+
+        if(insertDescription){
+            descrizioneValoreDominio = InputDati.stringReaderSpecificLength(MSG_INPUT_DESCRIZIONE_VALORE_DOMINIO, 0, 100);
+            valoreDominio = new ValoreDominio(nomeValoreDominio, descrizioneValoreDominio);
+            System.out.println(CONFIRM_DESCRIZIONE_AGGIUNTA);
+        }else{
+            valoreDominio = new ValoreDominio(nomeValoreDominio);
+        }
+
+        // 3. chiede se è foglia
+        boolean isFoglia = InputDati.yesOrNo(">> Questa Categoria è Foglia?");
+
+        // 3.1 se non foglia, si inserisce il dominio che imprime alle figlie
+
+        if(!isFoglia){
+            // chiedi nome del dominio (campo) che questa categoria imporrà alle sue figlie
+            nomeCampoFiglie = InputDati.leggiStringaNonVuota(MSG_INSERIMENTO_DOMINIO_PER_FIGLIE);
+            // non chiedo subito di inserire i valori del dominio -> da inserire quando si aggiunge una figlia
+        }
+
+
+        // 5. fine credO? AH NO
+        //    inserimento dei fattori di conversione
+        // @martino it's your time to shine TODO
+
+
+
+        // FINE: creazione oggetto e aggiunta figlia alla madre
+        Categoria tempCategoria;
+        if(isFoglia)
+             tempCategoria = new Categoria(nomeCategoria, categoriaMadre, valoreDominio);
+        else
+            tempCategoria = new Categoria(nomeCategoria, nomeCampoFiglie, categoriaMadre, valoreDominio);
+
+        categoriaMadre.addCategoriaFiglia(tempCategoria);
+        serializeXML();
+
+    }
+
+    /*private String selezioneCategoriaRadice() {
         String tempNomeRadice;
         boolean esisteRadice;
         do {
@@ -160,7 +258,8 @@ public class GestoreCategorie {
 
         } while (!esisteRadice);
         return tempNomeRadice;
-    }
+    }*/
+
 
     private String inserimentoNomeCategoriaRadice() {
         String tempNomeRadice;
@@ -194,6 +293,7 @@ public class GestoreCategorie {
         return tempNome;
     }
 
+
     private Categoria inserimentoNomeCategoriaMadre(String tempRadice, String tempNome) {
         String tempNomeMadre;
         boolean esisteMadre; // si setta a true quando (e se) la si trova
@@ -215,6 +315,7 @@ public class GestoreCategorie {
         return catMadre;
     }
 
+/*
     public void aggiungiCategoriaNonFoglia() {
 
         // 1. seleziona la radice della gerarchia a cui aggiungere una categoria
@@ -229,6 +330,7 @@ public class GestoreCategorie {
         // 4. chiedi che valore assegnare al dominio ereditato dalla categoria madre
         String tempValoreDominio = this.inserimentoValoreDominio(tempNome, catMadre);
 
+
         // 5. chiedi nome del dominio (campo) che questa categoria imporrà alle sue figlie
         String tempCampoFiglie = InputDati.leggiStringaNonVuota(MSG_INSERIMENTO_DOMINIO_PER_FIGLIE);
         // non chiedo subito di inserire i valori del dominio -> da inserire quando si aggiunge una figlia
@@ -239,7 +341,7 @@ public class GestoreCategorie {
 
         // salvataggio dati
         serializeXML();
-    }
+    }*/
 
     /**
      * Guida l'input di una stringa imponendo un vincolo di univocit&agrave; tra i valori del dominio che le Categorie "sorelle"
@@ -260,6 +362,7 @@ public class GestoreCategorie {
         return nomeValore;
     }
 
+    /*
     public void aggiungiCategoriaFoglia() {
 
         // 1. seleziona la radice della gerarchia a cui aggiungere una categoria
@@ -277,7 +380,7 @@ public class GestoreCategorie {
         // 5. creazione oggetto e aggiunta figlia alla madre
         Categoria tempF = new Categoria(tempNome, catMadre, tempValoreDominio);
         catMadre.addCategoriaFiglia(tempF);
-        this.tree.incrementNumFoglie();
+        this.tree.incrementNumFoglie();*/
 
         // TODO
         // finire questa roba che non va
@@ -328,10 +431,10 @@ public class GestoreCategorie {
 
             this.gestFatt.inserisciFattoreDiConversione(tempRadice, tempNome, nomeRadicePreesistente, nomeFogliaPreesistente);
 
-        }*/
+        }*//*
 
         serializeXML();
-    }
+    }*/
 
 
     /**
@@ -368,6 +471,7 @@ public class GestoreCategorie {
      * @param tempRadice, Categoria radice di riferimento per l'albero
      * @return CategoriaNonFoglia selezionata
      */
+    /*
     public Categoria selezioneCategoriaNonFoglia(String tempRadice) {
         String tempNomeCNF;
         boolean esisteCNF = false; // si setta a true quando (e se) la si trova
@@ -385,61 +489,10 @@ public class GestoreCategorie {
                 System.out.print(WARNING_CATEGORIA_NF_NON_ESISTE);
         } while (!esisteCNF);
         return tempCatNF;
-    }
-
-    /**
-     * Permette di aggiungere una descrizione al valore di dominio assunto da una qualche categoria.
-     * Non permette di modificare descrizioni esistenti.
-     */
-    public void aggiungiDescrizioneValoriDominio() {
-
-        // 1. seleziona la radice della gerarchia
-        String tempRadice = this.selezioneCategoriaRadice();
-
-        // 2. seleziona NF per avere un dominio di riferimento
-        Categoria tempCatNF = selezioneCategoriaNonFoglia(tempRadice);
-
-        // 3. seleziona il valore a cui aggiungere la descrizione
-        ValoreDominio tempValore = selezioneValoreDominio(tempCatNF, tempRadice);
-
-        // 4. se la descrizione esiste, termina; altrimenti la fa inserire
-        if (!tempValore.getDescrizione().isEmpty())
-            System.out.println(WARNING_DESCRIZIONE_ESISTE + tempValore);
-        else {
-            this.inserimentoDescrizione(tempValore);
-            System.out.println(CONFIRM_DESCRIZIONE_AGGIUNTA);
-        }
-
-        serializeXML(); // salvataggio info
-    }
-
-    private ValoreDominio selezioneValoreDominio(Categoria tempCatNF, String tempRadice) {
-        boolean esisteValore;
-        Categoria tempCat;
-
-        do {
-            System.out.println(MSG_SELEZIONE_VALORE_DOMINIO);
-            System.out.println(tempCatNF.dominioToString());
-            String nomeVal = InputDati.leggiStringaNonVuota(String.format(MSG_INPUT_NOME_VALORE_DOMINIO, tempCatNF.getCampoFiglie()));
-
-            // cerca la categoria a cui appartiene il valore
-            tempCat = this.tree.getRadice(tempRadice).cercaValoreDominio(nomeVal);
-            esisteValore = tempCat != null; // segna esisteValore = true, se la categoria trovata non è null
-
-            if (!esisteValore) // se non trova la categoria, allora stampa un avviso
-                System.out.print(WARNING_CATEGORIA_NF_NON_ESISTE);
-
-        } while (!esisteValore);
-        return tempCat.getValoreDominio();
-    }
-
-    private void inserimentoDescrizione(ValoreDominio tempValore) {
-        String desc;
-        desc = InputDati.stringReaderSpecificLength(MSG_INPUT_DESCRIZIONE_VALORE_DOMINIO, 0, 100);
-        tempValore.setDescrizione(desc);
-    }
+    }*/
 
     /* prodotto di COPILOT */
+
 
     public List<String> cercaCategorieFoglia() {
         List<String> foglieAsString = new ArrayList<>();
@@ -476,7 +529,7 @@ public class GestoreCategorie {
      */
     public void visualizzaGerarchia(String nomeRadice) {
         System.out.println(String.format(HEADER_VISUALIZZA_RADICE, nomeRadice));
-        System.out.println(this.tree.getRadice(nomeRadice) + " \n\n");
+        System.out.println(this.tree.getRadice(nomeRadice) + " \n");
 
     }
 
