@@ -96,9 +96,9 @@ public class Categoria {
      * @param nome, della Categoria
      * @param campoFiglie, nome del dominio che imprime alle figlie
      * @param madre, della Categoria
-     * @param nomeValoreDominio, del dominio ereditato
+     * @param valoreDominio, del dominio ereditato
      */
-    public Categoria(String nome, String campoFiglie, Categoria madre, String nomeValoreDominio) {
+    public Categoria(String nome, String campoFiglie, Categoria madre, ValoreDominio valoreDominio) {
         this.nome = nome;
 
         // foglia
@@ -110,7 +110,7 @@ public class Categoria {
         this.isRadice = false;
         this.nomeMadre = madre.getNome();
         this.campo = madre.getCampoFiglie();
-        this.valoreDominio = new ValoreDominio(nomeValoreDominio);
+        this.valoreDominio = valoreDominio;
     }
 
     /**
@@ -118,9 +118,9 @@ public class Categoria {
      * Ha una madre ma non delle figlie.
      * @param nome, della Categoria
      * @param madre, della Categoria
-     * @param nomeValoreDominio, del dominio ereditato
+     * @param valoreDominio, del dominio ereditato
      */
-    public Categoria(String nome, Categoria madre, String nomeValoreDominio) {
+    public Categoria(String nome, Categoria madre, ValoreDominio valoreDominio) {
         this.nome = nome;
 
         // foglia
@@ -132,7 +132,7 @@ public class Categoria {
         this.isRadice = false;
         this.nomeMadre = madre.getNome();
         this.campo = madre.getCampoFiglie();
-        this.valoreDominio = new ValoreDominio(nomeValoreDominio);
+        this.valoreDominio = valoreDominio;
 
     }
 
@@ -190,7 +190,6 @@ public class Categoria {
     public boolean isFoglia() {
         return isFoglia;
     }
-
 
     /*
      * METODI PAZZI
