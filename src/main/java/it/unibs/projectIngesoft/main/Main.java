@@ -40,11 +40,11 @@ public class Main {
 
     protected static final String TITLE_MENU_CATEGORIE = "MENU' CATEGORIE";
     protected static final String[] vociCategorie = new String[]{
-            "Aggiungi Categoria Non Foglia",
+            /*"Aggiungi Categoria Non Foglia",
             "Aggiungi Categoria Foglia",
+            "Aggiungi Descrizione",*/
             "Aggiungi Gerarchia",
-            "Aggiungi Descrizione",
-            "Visualizza Gerarchia"
+            "Visualizza Gerarchie"
     };
 
     protected static final String TITLE_MENU_FATTORI = "MENU' FATTORI";
@@ -74,12 +74,13 @@ public class Main {
         /*
             Creazione di uno pseudo menu fittizio per testare i casi d'uso durante l'implementazione.
          */
-        GestoreUtenti userHandler = new GestoreUtenti(UTENTI_XML_FILEPATH);
-        Menu menu = new Menu(TITLE_MAIN_MENU, vociMain);
-        Menu menuCategorie = new Menu(TITLE_MENU_CATEGORIE, vociCategorie);
-        Menu menuFattori = new Menu(TITLE_MENU_CATEGORIE, vociFattori);
+
+        Menu menu =                      new Menu(TITLE_MAIN_MENU, vociMain);
+        Menu menuCategorie =             new Menu(TITLE_MENU_CATEGORIE, vociCategorie);
+        Menu menuFattori =               new Menu(TITLE_MENU_FATTORI, vociFattori);
         Menu menuComprensoriGeografici = new Menu(TITLE_MENU_COMPRENSORIO, vociComprensorioGeografico);
 
+        GestoreUtenti userHandler =      new GestoreUtenti(UTENTI_XML_FILEPATH);
         utenteLoggato = userHandler.login();
         //idea: per la distinzione tra configuratore e utente finale nel login possiamo mettere:    // -m
         /*
@@ -89,10 +90,7 @@ public class Main {
             loopMainUtenteFinale(...)
         }
          */
-
-
         loopMain(menu, menuCategorie, menuFattori, menuComprensoriGeografici, userHandler);
-
     }
 
     /**
@@ -113,7 +111,7 @@ public class Main {
                     System.out.println(MSG_PROGRAM_EXIT);
                     break;
                 case 1:
-                    // cambio credenzilai
+                    // cambio credenziali
                     userHandler.cambioCredenziali(utenteLoggato);
                     break;
                 case 2:
