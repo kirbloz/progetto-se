@@ -6,6 +6,7 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 /*@JsonTypeInfo(
@@ -153,6 +154,13 @@ public class Categoria {
 
     public String getCampoFiglie() {
         return campoFiglie;
+    }
+
+    public List<String> getValoriDominioFiglie(){
+        List<String> temp = new ArrayList<>();
+        for(Categoria figlia : categorieFiglie)
+            temp.add(figlia.getValoreDominio().getNome());
+        return temp;
     }
 
    public ArrayList<Categoria> getCategorieFiglie() {
