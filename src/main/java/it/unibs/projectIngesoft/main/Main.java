@@ -26,11 +26,10 @@ public class Main {
 
     protected static final String TITLE_MAIN_MENU = "MENU' PRINCIPALE - SCAMBIO ORE";
     protected static final String[] vociMain = new String[]{
-            //"Accedi",
             "Cambia Credenziali",
-            "Menu Comprensorio TODO",
-            "Menu Categorie WIP",
-            "Menu Fattori WIP"
+            "Menu Comprensorio ",
+            "Menu Categorie",
+            "Menu Fattori"
     };
 
     protected static final String TITLE_MENU_COMPRENSORIO = "MENU' COMPRENSORI GEOGRAFICI";

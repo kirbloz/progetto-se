@@ -4,11 +4,9 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
-import it.unibs.projectIngesoft.attivita.CategoriaNonFoglia;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
 
 /**
  * Utility per serializzare oggetti su file XML tramite Jackson, libreria maven.
@@ -17,7 +15,7 @@ public class Serializer {
 
     // TODO
     //testato per categorie, funziona
-    //fattori?
+    //fattori? FATTO
     //utenti?
     //comprensori?
     public static void serialize(String filePath, Object obj) {
