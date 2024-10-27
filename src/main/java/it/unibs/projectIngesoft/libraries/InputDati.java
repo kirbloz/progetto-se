@@ -61,7 +61,8 @@ public class InputDati {
         boolean finito = false;
         String lettura;
         do {
-            lettura = leggiStringa(messaggio);
+            System.out.print(messaggio);
+            lettura = lettore.next();
             lettura = lettura.trim();
             if (!lettura.isEmpty())
                 finito = true;
@@ -79,16 +80,17 @@ public class InputDati {
      * @param minLength La lunghezza minima consentita
      * @param maxLength La lunghezza massima consentita
      * @return L'input
-     * @author Legati Matteo
+     * @author Legati Matteo, Wade Giovanni Baisini
      */
     public static String stringReaderSpecificLength(String messaggio, int minLength, int maxLength) {
         boolean finito = true;
         String lettura;
         do {
-            lettura = leggiStringa(messaggio);
+            System.out.print(messaggio);
+            lettura = lettore.next();
             lettura = lettura.trim();
 
-            if (lettura.length() == 0) {
+            if (lettura.isEmpty()) {
                 System.out.println(ERRORE_STRINGA_VUOTA);
                 finito = false;
             } else if (lettura.length() < minLength) {
