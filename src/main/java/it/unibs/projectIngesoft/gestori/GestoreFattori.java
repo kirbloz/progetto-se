@@ -208,6 +208,14 @@ public class GestoreFattori {
      * Logica grafica.
      * Per ora ci si limita all'utilizzo del terminale.
      */
+    public String stringaFattoriDataCategoria(String categoriaFormattata){
+        StringBuilder sb = new StringBuilder();
+        for (FattoreDiConversione f : fattori.get(categoriaFormattata)){
+            sb.append(f.getNome_c1()+" "+f.getNome_c2()+" "+f.getFattore()+"\n");
+        }
+        return sb.toString();
+    }
+
     private void visualizzaFattori() {
         System.out.println("\n\n --- Visualizza Fattori ---\n\n");
         System.out.println(this);
