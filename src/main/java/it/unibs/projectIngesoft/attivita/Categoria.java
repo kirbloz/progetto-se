@@ -257,6 +257,7 @@ public class Categoria {
 
     /**
      * Stampa le figlie della Categoria.
+     *
      * @return stringa formattata
      */
     public String figlieToString() {
@@ -298,6 +299,7 @@ public class Categoria {
         return sb.toString();
     }
 
+    @JsonIgnore
     public List<Categoria> getFoglie() {
         List<Categoria> foglie = new ArrayList<>();
 
