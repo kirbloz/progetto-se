@@ -19,6 +19,7 @@ public class Categoria {
 
     @JacksonXmlProperty(localName = "isRadice")
     private boolean isRadice;
+
     @JacksonXmlProperty(localName = "isFoglia")
     private boolean isFoglia;
 
@@ -160,6 +161,8 @@ public class Categoria {
     // lo inizializzano a vuoto in qualsiasi caso
     // ma sto coso muore con xml o che palle
     public void addCategoriaFiglia(Categoria categoria) {
+        assert categoria != null : "categoria can't be null";
+
         if (this.categorieFiglie == null)
             this.categorieFiglie = new ArrayList<>();
         this.categorieFiglie.add(categoria);
@@ -192,6 +195,8 @@ public class Categoria {
      * @return null se non la trova, oggetto Categoria se trova corrispondenza
      */
     public Categoria cercaCategoria(String nomeCat) {
+        assert nomeCat != null : "nomeCat can't be null";
+
         Categoria found = null;
         // prima controlla se stessa
         if (this.getNome().equals(nomeCat))
@@ -209,6 +214,8 @@ public class Categoria {
     }
 
     public Categoria cercaValoreDominio(String valoreDominio) {
+        assert valoreDominio != null : "valoreDominio can't be null"; // precondizione
+
         if (!this.isFoglia)
             return this.valoreDominio.getNome().equals(valoreDominio) ? this : null;
         else return null;
