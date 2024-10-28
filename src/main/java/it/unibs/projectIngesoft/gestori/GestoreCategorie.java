@@ -169,6 +169,7 @@ public class GestoreCategorie {
 
         // 0. predispone una radice
         this.aggiungiCategoriaRadice();
+        Categoria radice = this.tree.getRadici().getLast();
 
         // 1. loop per l'inserimento di categorie nella gerarchia della radice appena creata
 
@@ -177,13 +178,17 @@ public class GestoreCategorie {
 
             switch(scelta){
                 case 1:
-                    this.aggiungiCategoria(this.tree.getRadici().getLast());
+                    this.aggiungiCategoria(radice);
                     break;
                 default:
                     System.out.println("> Uscita dal submenu e salvataggio.. ");
                     break;
             }
         }while(scelta !=0);
+
+        if(radice.getNumCategorieFiglie()==0)
+            radice.setFoglia();
+
 
         // 2. procedura per i fattori
 
@@ -253,20 +258,6 @@ public class GestoreCategorie {
 
     }
 
-    /*private String selezioneCategoriaRadice() {
-        String tempNomeRadice;
-        boolean esisteRadice;
-        do {
-            System.out.println(MSG_SELEZIONE_RADICE + MSG_PRINT_LISTA_RADICI + radiciToString());
-            tempNomeRadice = InputDati.leggiStringaNonVuota(MSG_INPUT_NOME_RADICE);
-            esisteRadice = this.esisteRadice(tempNomeRadice);
-            if (!esisteRadice)
-                System.out.println(WARNING_RADICE_NON_ESISTE);
-
-        } while (!esisteRadice);
-        return tempNomeRadice;
-    }*/
-
 
     private String inserimentoNomeCategoriaRadice() {
         String tempNomeRadice;
@@ -322,33 +313,6 @@ public class GestoreCategorie {
         return catMadre;
     }
 
-/*
-    public void aggiungiCategoriaNonFoglia() {
-
-        // 1. seleziona la radice della gerarchia a cui aggiungere una categoria
-        String tempRadice = this.selezioneCategoriaRadice();
-
-        // 2. chiedi nome per nuova radice, verificando che sia univoco
-        String tempNome = this.inserimentoNomeNuovaCategoria(tempRadice);
-
-        // 3. chiedi madre per nuova radice, verificando che esista
-        Categoria catMadre = this.inserimentoNomeCategoriaMadre(tempRadice, tempNome);
-
-        // 4. chiedi che valore assegnare al dominio ereditato dalla categoria madre
-        String tempValoreDominio = this.inserimentoValoreDominio(tempNome, catMadre);
-
-
-        // 5. chiedi nome del dominio (campo) che questa categoria imporrà alle sue figlie
-        String tempCampoFiglie = InputDati.leggiStringaNonVuota(MSG_INSERIMENTO_DOMINIO_PER_FIGLIE);
-        // non chiedo subito di inserire i valori del dominio -> da inserire quando si aggiunge una figlia
-
-        // creazione oggetto e aggiunta figlia alla madre
-        Categoria tempNF = new Categoria(tempNome, tempCampoFiglie, catMadre, tempValoreDominio);
-        catMadre.addCategoriaFiglia(tempNF);
-
-        // salvataggio dati
-        serializeXML();
-    }*/
 
     /**
      * Guida l'input di una stringa imponendo un vincolo di univocit&agrave; tra i valori del dominio che le Categorie "sorelle"
@@ -369,79 +333,7 @@ public class GestoreCategorie {
         return nomeValore;
     }
 
-    /*
-    public void aggiungiCategoriaFoglia() {
 
-        // 1. seleziona la radice della gerarchia a cui aggiungere una categoria
-        String tempRadice = this.selezioneCategoriaRadice();
-
-        // 2. chiedi nome per nuova categoria, verificando che sia univoco
-        String tempNome = this.inserimentoNomeNuovaCategoria(tempRadice);
-
-        // 3. chiedi madre per nuova categoria, verificando che esista
-        Categoria catMadre = this.inserimentoNomeCategoriaMadre(tempRadice, tempNome);
-
-        // 4. chiedi che valore assegnare al dominio ereditato dalla categoria madre
-        String tempValoreDominio = this.inserimentoValoreDominio(tempNome, catMadre);
-
-        // 5. creazione oggetto e aggiunta figlia alla madre
-        Categoria tempF = new Categoria(tempNome, catMadre, tempValoreDominio);
-        catMadre.addCategoriaFiglia(tempF);
-        this.tree.incrementNumFoglie();*/
-
-        // TODO
-        // finire questa roba che non va
-
-        // 6. aggiunta del fattore di conversione relativo
-        /*System.out.println(MSG_INIZIO_GESTIONE_FDC);
-
-        if (this.tree.getNumFoglie() == 2) {
-
-            String radiceFirstFoglia;
-            String nomeFirstFoglia;
-
-            List<String> foglieString = cercaCategorieFoglia();
-            // radice:foglia
-
-            String firstFogliaNome = foglieString.getFirst().split(":")[1];
-            String firstFogliaRadice = foglieString.getFirst().split(":")[0];
-            String lastFogliaNome = foglieString.getLast().split(":")[1];
-            String lastFogliaRadice = foglieString.getLast().split(":")[0];
-
-
-            // richiama inserisciPrimoFattore con radice e nome della nuova categoria + radice e nome della categoria pre-esistente
-            if (firstFogliaNome.equals(tempNome))
-                this.gestFatt.inserisciFattoreDiConversione(tempRadice, tempNome, lastFogliaRadice, lastFogliaNome);
-            else
-                this.gestFatt.inserisciFattoreDiConversione(tempRadice, tempNome, firstFogliaRadice, firstFogliaNome);
-        } else {
-
-            // TODO
-            // fare in modo che l'inserimento della seconda categoria avvenga sotto la supervisione di
-            // gestoreCat e non gestFatt (perchè quest'ultimo non ha accesso all'albero delle categorie)
-
-            String nomeRadicePreesistente;
-            String nomeFogliaPreesistente;
-
-            //cicla la richiesta della categoria foglia se non esiste nella hashmap la chiave per la foglia preesistente
-            // (dovrebbe essere più veloce e funzionare bene comunque)
-
-            do {
-                // TODO print lista possibili
-                this.gestFatt.visualizzaCategorieConFdC();
-                System.out.println(">> Scegli una categoria per la conversione.");
-
-                nomeRadicePreesistente = InputDati.leggiStringaNonVuota(MSG_INSERISCI_RADICE);
-                nomeFogliaPreesistente = InputDati.leggiStringaNonVuota(MSG_INSERISCI_FOGLIA);
-                // si può sfruttare il cercaCategoria -> instanceOf CategoriaFoglia per il check
-            } while (this.gestFatt.esisteEntry(nomeRadicePreesistente, nomeFogliaPreesistente));
-
-            this.gestFatt.inserisciFattoreDiConversione(tempRadice, tempNome, nomeRadicePreesistente, nomeFogliaPreesistente);
-
-        }*//*
-
-        serializeXML();
-    }*/
 
 
     /**
@@ -471,32 +363,6 @@ public class GestoreCategorie {
         return this.tree.contains(tempNome);
     }
 
-    /**
-     * A partire da una radice, permette la selezione di una delle CategorieNonFoglia contenute nel suo albero
-     * gerarchico.
-     *
-     * @param , Categoria radice di riferimento per l'albero
-     * @return CategoriaNonFoglia selezionata
-     */
-    /*
-    public Categoria selezioneCategoriaNonFoglia(String tempRadice) {
-        String tempNomeCNF;
-        boolean esisteCNF = false; // si setta a true quando (e se) la si trova
-        Categoria tempCatNF;
-
-        do { //chiedi temp nome madre
-            visualizzaGerarchia(tempRadice); // stampa la gerarchia
-            tempNomeCNF = InputDati.leggiStringaNonVuota(">> Inserisci il nome della categoria non foglia che ti interessa:\n> ");
-
-            // search for tempCNF e salva l'oggetto
-            tempCatNF = this.tree.getRadice(tempRadice).cercaCategoria(tempNomeCNF);
-            if (tempCatNF != null) // se non è null, allora l'ha trovata
-                esisteCNF = true;
-            if (!esisteCNF)  // se non la trova stampa un avviso
-                System.out.print(WARNING_CATEGORIA_NF_NON_ESISTE);
-        } while (!esisteCNF);
-        return tempCatNF;
-    }*/
 
     /* prodotto di COPILOT */
 
