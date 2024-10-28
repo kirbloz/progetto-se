@@ -2,6 +2,7 @@ package it.unibs.projectIngesoft.gestori;
 
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import it.unibs.projectIngesoft.attivita.Categoria;
 import it.unibs.projectIngesoft.attivita.FattoreDiConversione;
 import it.unibs.projectIngesoft.attivita.FattoriWrapper;
 import it.unibs.projectIngesoft.libraries.InputDati;
@@ -10,6 +11,7 @@ import it.unibs.projectIngesoft.libraries.Serializer;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 
 //@JacksonXmlRootElement(localName = "GestoreFattori")
@@ -70,8 +72,113 @@ public class GestoreFattori {
      * e una a scelta, dopodiché lancia il metodo calcolaEAssegnaValoriDiConversione() per il calcolo
      * dei restanti
      */
-    public void inserisciFattoreDiConversione(String nomeRadiceNuovaFoglia, String nomeNuovaFoglia, String nomeRadicePreesistente, String nomeFogliaPreesistente) {
+    public void inserisciFattoriDiConversione(String nomeRadice, List<Categoria> foglie) {
 
+        //dichiaro l'arraylist dove infilo i fattori tra le foglie nella radice
+        ArrayList<FattoreDiConversione> nuoviDaNuovaRadice = new ArrayList<>();
+
+        /*Cosa fa questo ciclo:
+        * Cicla le foglie dalla prima all'ultima per generare tutte le coppie di valori possibili.
+        * (combinazione senza ripetizione)
+        *
+        * Per ogni coppia generata chiede il fattore all'utente.
+        * Genera il FattoreDiConversione e il suo inverso.
+        * Li inserisce nell'ArrayList nuoviDaNuovaRadice.
+        *
+        * Alla fine del for tutti i fattori di conversione interni alla nuova radice
+        * sono stati messi in nuoviDaNuovaRadice.
+        *
+        * Date le foglie A, B, C, D e la radice R dovrebbe calcolare i fattori (segnati x):
+        * R:A R:B x
+        * R:A R:C x
+        * R:A R:D x
+        * R:B R:C x
+        * R:B R:D x
+        * R:C R:D x
+        * + gli inversi.
+        *
+        * Questo funziona anche nel caso la radice sia la prima inserita.
+        *
+        *   TODO se la radice è l'unica foglia funziona? e se ci sono poche foglie?
+        *
+        */
+        for (int i = 0; i < foglie.size(); i++) {
+            String nomeFogliai = factorNameBuilder(nomeRadice, foglie.get(i).getNome());
+            for (int j = i+1; j < foglie.size(); j++) {
+                String nomeFogliaj = factorNameBuilder(nomeRadice, foglie.get(j).getNome());
+                double fattore_ij = InputDati.leggiDoubleConRange(MSG_INSERISCI_FATTORE,0.5, 2);
+                FattoreDiConversione fattoreIJ = new FattoreDiConversione(nomeFogliai, nomeFogliaj, fattore_ij);
+                FattoreDiConversione fattoreJI = new FattoreDiConversione(nomeFogliaj, nomeFogliai, 1/fattore_ij);
+                nuoviDaNuovaRadice.add(fattoreIJ);
+                nuoviDaNuovaRadice.add(fattoreJI);
+            }
+        }
+
+        /* 1. se è vuota e hai i nuovi => è la prima radice ed ha più di una foglia
+                => aggiungi i nuovi fattori (sono gli unici)
+        *  2. se è vuota e non hai i nuovi => è la prima radice ed hai solo una foglia nuova.
+                => metti la chiave ma non i fattori di conversione (arrayList vuoto)
+        *  3. non è vuota ma c'è solo una chiave => hai solo una foglia esterna.
+                => stampa la lista delle chiavi e chiedi quale usare al configuratore (controllo esistenza)
+                => stampa le categorie interne e chiedi quale usare al configuratore (controllo esistenza)
+                => chiedi il fattore
+                => calcola tutti i fattori esterni nuovi (1 * numeroNuoveFoglie)
+           4. non è vuota e c'è più di una chiave => situazione standard
+                => stampa la lista delle chiavi e chiedi quale usare al configuratore (controllo esistenza)
+                => stampa le categorie interne e chiedi quale usare al configuratore (controllo esistenza)
+                => chiedi il fattore
+                => calcola tutti i fattori esterni nuovi (numeroFoglieEsistenti * numeroNuoveFoglie)
+           NOTA: 3 e 4 sono assimilabili
+        */
+        if(!fattori.isEmpty()){ //TODO controllare che sia giusto
+            //TODO fattori esterni
+            //Stampa categorie esterne (Opzionale)
+            for (String key : fattori.keySet()){
+                System.out.println(key);
+            }
+            //Chiedi la foglia esterna e controllo [Old:A in (Old:A New:A x)]
+            String nomeFogliaEsternaFormattata;
+            do{
+                nomeFogliaEsternaFormattata = factorNameBuilder(InputDati.leggiStringaNonVuota("Inserisci radice:"), InputDati.leggiStringaNonVuota("Inserisci nome Foglia"));
+            }while(!fattori.containsKey(nomeFogliaEsternaFormattata));
+
+            //Stampa categorie Interne
+            for (FattoreDiConversione nuovo : nuoviDaNuovaRadice){
+                System.out.println(nuovo.getNome_c1());
+            }
+            //Chiedi la foglia interna e controllo [New:A in (Old:A New:A x)]
+            String nomeFogliaInternaFormattata;
+            do{
+                nomeFogliaInternaFormattata = factorNameBuilder(InputDati.leggiStringaNonVuota("Inserisci radice:"), InputDati.leggiStringaNonVuota("Inserisci nome Foglia"));
+            }while(!fattori.containsKey(nomeFogliaInternaFormattata));
+
+            //Chiedi il Fattore di conversione tra le 2 [x in (Old:A New:A x)]
+            double fattoreDiConversioneEsternoInterno = InputDati.leggiDoubleConRange("inserisci fattore tra e", 0.5, 2);
+
+            //(Old:A New:A x)
+            FattoreDiConversione primoFattoreEsternoInterno = new FattoreDiConversione(nomeFogliaEsternaFormattata, nomeFogliaInternaFormattata, fattoreDiConversioneEsternoInterno);
+
+
+            ArrayList<FattoreDiConversione> nuoviSingoloEsternoAInterni = new ArrayList<>();
+            //TODO Calcolo dei Fattori Old:A New:x serve un foglio per controllare che non faccia stronzate
+            for (FattoreDiConversione nuovo : nuoviDaNuovaRadice){
+                //Se New:A in (Old:A New:A x) == New:A in (New:A New:X y) => genera (Old:A New:X x*y)
+                if(nomeFogliaInternaFormattata.equals(nuovo.getNome_c1())){
+                    FattoreDiConversione nuovoSingoloEsternoAInterno = new FattoreDiConversione();
+
+                }
+            }
+
+            //TODO generazione fattore e chiamata a calcolofattori
+        }else if (fattori.isEmpty() && !nuoviDaNuovaRadice.isEmpty()) {
+            //TODO metti solo i nuovi
+        }else if (fattori.isEmpty() && nuoviDaNuovaRadice.isEmpty()) {
+            //TODO metti la chiave della singola foglia e collega un array vuoto nella hashmap
+        }
+        //TODO memorizzazione ()
+
+
+        /*
         // se l'hashmap è vuota (in teoria solo quando cè una sola categoria foglia nel sistema)
         // non si fa nulla
         // se non è vuota, procedi ok
@@ -79,7 +186,7 @@ public class GestoreFattori {
 
             // questa parte la spostiamo in gestoreCategorie
             // FATTO
-            /*String nomeRadicePreesistente;
+            String nomeRadicePreesistente;
             String nomeFogliaPreesistente;
 
             //cicla la richiesta della categoria foglia se non esiste nella hashmap la chiave per la foglia preesistente
@@ -89,7 +196,7 @@ public class GestoreFattori {
                 nomeFogliaPreesistente = InputDati.leggiStringaNonVuota(MSG_INSERISCI_FOGLIA);
                 // TODO cosa garantisce che nomeFogliaPreesistente inserito dall'utente sia corretto?
                 // si può sfruttare il cercaCategoria -> instanceOf CategoriaFoglia per il check
-            } while (!fattori.containsKey(factorNameBuilder(nomeRadicePreesistente, nomeFogliaPreesistente)));*/
+            } while (!fattori.containsKey(factorNameBuilder(nomeRadicePreesistente, nomeFogliaPreesistente)));
 
             //TODO check la roba
             
@@ -104,7 +211,7 @@ public class GestoreFattori {
             //
             calcolaEAssegnaValoriDiConversione(fogliaNuovaFormattata, fogliaVecchiaFormattata, fattore);
 
-        }
+        }*/
     }
 
     /*
