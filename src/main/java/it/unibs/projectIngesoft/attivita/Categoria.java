@@ -8,16 +8,6 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import java.util.ArrayList;
 import java.util.List;
 
-
-/*@JsonTypeInfo(
-        use = JsonTypeInfo.Id.NAME,
-        include = JsonTypeInfo.As.WRAPPER_OBJECT,
-        property = "type"
-)
-@JsonSubTypes({
-        @JsonSubTypes.Type(value = CategoriaNonFoglia.class, name = "CategoriaNonFoglia"),
-        @JsonSubTypes.Type(value = CategoriaFoglia.class, name = "CategoriaFoglia")
-})*/
 @JacksonXmlRootElement(localName = "Categoria")
 public class Categoria {
 
@@ -54,86 +44,53 @@ public class Categoria {
     /**
      * Costruttore per una Categoria RADICE e FOGLIA.
      * Non ha figlie, non ha madre.
+     *
      * @param nome, della Categoria
      */
     public Categoria(String nome) {
         this.nome = nome;
-
-        // foglia
-        this.isFoglia = true;
-        this.categorieFiglie = new ArrayList<>();
-        this.campoFiglie = "";
-
-        //radice
-        this.isRadice = true;
-        this.nomeMadre = "";
-        this.campo = "";
-        this.valoreDominio = null;
+        this.setFoglia();
+        this.setRadice();
     }
 
     /**
      * Costruttore della Categoria RADICE, NON FOGLIA
-     * @param nome, della Categoria
+     *
+     * @param nome,        della Categoria
      * @param campoFiglie, dominio impresso alle Categorie figlie
      */
     public Categoria(String nome, String campoFiglie) {
         this.nome = nome;
-
-        // foglia
-        this.isFoglia = false;
-        this.categorieFiglie = new ArrayList<>();
-        this.campoFiglie = campoFiglie;
-
-        //radice
-        this.isRadice = true;
-        this.nomeMadre = null;
-        this.campo = null;
-        this.valoreDominio = null;
+        this.setNotFoglia(campoFiglie);
+        this.setRadice();
     }
 
     /**
      * Costruttore per Categoria NON RADICE e NON FOGLIA
-     * @param nome, della Categoria
-     * @param campoFiglie, nome del dominio che imprime alle figlie
-     * @param madre, della Categoria
+     *
+     * @param nome,          della Categoria
+     * @param campoFiglie,   nome del dominio che imprime alle figlie
+     * @param madre,         della Categoria
      * @param valoreDominio, del dominio ereditato
      */
     public Categoria(String nome, String campoFiglie, Categoria madre, ValoreDominio valoreDominio) {
         this.nome = nome;
-
-        // foglia
-        this.isFoglia = false;
-        this.categorieFiglie = new ArrayList<>();
-        this.campoFiglie = campoFiglie;
-
-        //radice
-        this.isRadice = false;
-        this.nomeMadre = madre.getNome();
-        this.campo = madre.getCampoFiglie();
-        this.valoreDominio = valoreDominio;
+        this.setNotFoglia(campoFiglie);
+        this.setNotRadice(madre, valoreDominio);
     }
 
     /**
      * Costruttore per Categoria NON RADICE e FOGLIA.
      * Ha una madre ma non delle figlie.
-     * @param nome, della Categoria
-     * @param madre, della Categoria
+     *
+     * @param nome,          della Categoria
+     * @param madre,         della Categoria
      * @param valoreDominio, del dominio ereditato
      */
     public Categoria(String nome, Categoria madre, ValoreDominio valoreDominio) {
         this.nome = nome;
-
-        // foglia
-        this.isFoglia = true;
-        this.categorieFiglie = new ArrayList<>();
-        this.campoFiglie = "";
-
-        //radice
-        this.isRadice = false;
-        this.nomeMadre = madre.getNome();
-        this.campo = madre.getCampoFiglie();
-        this.valoreDominio = valoreDominio;
-
+        this.setFoglia();
+        this.setNotRadice(madre, valoreDominio);
     }
 
     /*
@@ -156,14 +113,46 @@ public class Categoria {
         return campoFiglie;
     }
 
-    public List<String> getValoriDominioFiglie(){
+    public void setFoglia() {
+        this.isFoglia = true;
+        this.categorieFiglie = new ArrayList<>();
+        this.campoFiglie = "";
+    }
+
+    public void setNotFoglia(String campoFiglie) {
+        assert campoFiglie != null : "campoFiglie can't be null";
+
+        // foglia
+        this.isFoglia = false;
+        this.categorieFiglie = new ArrayList<>();
+        this.campoFiglie = campoFiglie;
+    }
+
+    public void setRadice() {
+        this.isRadice = true;
+        this.nomeMadre = "";
+        this.campo = "";
+        this.valoreDominio = null;
+    }
+
+    public void setNotRadice(Categoria madre, ValoreDominio valoreDominio) {
+        assert madre != null : "madre can't be null";
+        assert valoreDominio != null : "valoreDominio can't be null";
+
+        this.isRadice = false;
+        this.nomeMadre = madre.getNome();
+        this.campo = madre.getCampoFiglie();
+        this.valoreDominio = valoreDominio;
+    }
+
+    public List<String> getValoriDominioFiglie() {
         List<String> temp = new ArrayList<>();
-        for(Categoria figlia : categorieFiglie)
+        for (Categoria figlia : categorieFiglie)
             temp.add(figlia.getValoreDominio().getNome());
         return temp;
     }
 
-   public ArrayList<Categoria> getCategorieFiglie() {
+    public ArrayList<Categoria> getCategorieFiglie() {
         return categorieFiglie;
     }
 
@@ -195,8 +184,6 @@ public class Categoria {
      * METODI PAZZI
      */
 
-    //public abstract Categoria cercaCategoria(String nomeCat);
-
     /**
      * Cerca una categoria partendo dal nome.
      * La cerca prima come sè stessa, e poi tra le sue figlie.
@@ -221,25 +208,16 @@ public class Categoria {
         return found;
     }
 
-        /*public Categoria cercaCategoria(String nomeCat) {
-        return this.getNome().equals(nomeCat) ? this : null;
-    }*/
-
-
     public Categoria cercaValoreDominio(String valoreDominio) {
         if (!this.isFoglia)
             return this.valoreDominio.getNome().equals(valoreDominio) ? this : null;
         else return null;
     }
 
-    //public abstract Categoria cercaValoreDominio(String valoreDominio);
-
-
     // CAT NF
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append(this.simpleToString());
-
 
         // se esistono delle figlie allora le si stampano
         if (this.categorieFiglie != null && !this.categorieFiglie.isEmpty())
@@ -263,39 +241,28 @@ public class Categoria {
             sb.append("Dominio: ").append(this.getCampo()).append(" = ").append(this.valoreDominio).append("\n");
 
         }
-        if(!this.isFoglia()){
+        if (!this.isFoglia()) {
             sb.append("Dominio Figlie: ").append(this.getCampoFiglie()).append("\n");
         }
-
         // se non è una radice, allora si stampano i dati della categoria madre
         return sb.toString();
     }
 
-
+    /**
+     * Stampa le figlie della Categoria.
+     * @return stringa formattata
+     */
     public String figlieToString() {
         StringBuilder sb = new StringBuilder();
-
-        if (this.getNumCategorieFiglie() > 0) {
-            for (int i = 0; i < this.getNumCategorieFiglie(); i++) {
-                sb.append("\n").append(this.categorieFiglie.get(i));
-                // necessario discriminare per capire quale toString richiamare.
-                /*if (this.categorieFiglie.get(i) instanceof CategoriaNonFoglia tempNF) {
-
-                } else if (this.categorieFiglie.get(i) instanceof CategoriaFoglia tempF) {
-                    sb.append("\t﹂").append(tempF);
-                } else {
-                    // se qualcosa non viene riconosciuto come CatNF o CatF allora c'è un GROSSO problema a monte
-                    System.out.println("c'è stato un problemino oops");
-                }*/
+        if (getNumCategorieFiglie() > 0) {
+            for (int i = 0; i < getNumCategorieFiglie(); i++) {
+                sb.append("\n").append(categorieFiglie.get(i));
             }
         } else {
             sb.append("\t﹂ Nessuna figlia.");
         }
         return sb.toString();
     }
-
-
-
 
     /**
      * Stampa il nome del dominio che imprime alle figlie, e tutti i valori che al momento assume + descrizioni.
@@ -309,7 +276,7 @@ public class Categoria {
 
         sb.append("\n\nNome Dominio: ").append(this.getCampoFiglie()).append("\n");
 
-        for (Categoria figlia : this.categorieFiglie)
+        for (Categoria figlia : categorieFiglie)
             tempLista.add(figlia.getValoreDominio());
 
         if (!tempLista.isEmpty()) {
@@ -324,13 +291,13 @@ public class Categoria {
         return sb.toString();
     }
 
-    public List<Categoria> getFoglie(){
+    public List<Categoria> getFoglie() {
         List<Categoria> foglie = new ArrayList<>();
 
-        if(this.isFoglia())
+        if (this.isFoglia())
             foglie.add(this);
         else
-            for(Categoria figlia : this.categorieFiglie)
+            for (Categoria figlia : this.categorieFiglie)
                 foglie.addAll(figlia.getFoglie());
 
         return foglie;
