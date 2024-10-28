@@ -110,7 +110,7 @@ public class GestoreUtenti {
                             System.out.println("Nome utente gia' esistente");
                             break;
                         }
-                        exists = false;
+                        exists = false; // Nel caso si entrasse nell'if sopra almeno una volta
                     }
                 }
             }
