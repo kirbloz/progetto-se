@@ -324,6 +324,17 @@ public class Categoria {
         return sb.toString();
     }
 
+    public List<Categoria> getFoglie(){
+        List<Categoria> foglie = new ArrayList<>();
+
+        if(this.isFoglia())
+            foglie.add(this);
+        else
+            for(Categoria figlia : this.categorieFiglie)
+                foglie.addAll(figlia.getFoglie());
+
+        return foglie;
+    }
 
 
 }

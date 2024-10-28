@@ -58,6 +58,7 @@ public class Albero {
         this.radici.remove(radici);
     }
 
+    /*
     public int getNumFoglie() {
         return numFoglie;
     }
@@ -65,6 +66,7 @@ public class Albero {
     public void incrementNumFoglie() {
         this.numFoglie++;
     }
+    */
 
     public Categoria getRadice (String nomeRadice){
         for(Categoria tempRadice: this.radici){
@@ -73,4 +75,5 @@ public class Albero {
         }
         return null;
     }
+
 }
