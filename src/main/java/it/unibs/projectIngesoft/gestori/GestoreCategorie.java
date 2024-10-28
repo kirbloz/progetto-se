@@ -185,6 +185,10 @@ public class GestoreCategorie {
             }
         }while(scelta !=0);
 
+        // 2. procedura per i fattori
+
+
+
     }
 
     // TODO
@@ -194,6 +198,7 @@ public class GestoreCategorie {
      * @param radice, Categoria radice di riferimento
      */
     private void aggiungiCategoria(Categoria radice){
+        // TODO AGGIUNGERE IL FATTO CHE LA RADICE VIENE SETTATA A FOGLIA SE NON SI AGGIUNGE NULLA
         String descrizioneValoreDominio="";
         String nomeCampoFiglie= "";
         ValoreDominio valoreDominio;
@@ -231,6 +236,8 @@ public class GestoreCategorie {
         // 5. fine credO? AH NO
         //    inserimento dei fattori di conversione
         // @martino it's your time to shine TODO
+        // QUESTA ROBA VIENE FATTA TRAMITE UNA PROCEDURA ALLA FINE
+
 
 
 
@@ -468,7 +475,7 @@ public class GestoreCategorie {
      * A partire da una radice, permette la selezione di una delle CategorieNonFoglia contenute nel suo albero
      * gerarchico.
      *
-     * @param tempRadice, Categoria radice di riferimento per l'albero
+     * @param , Categoria radice di riferimento per l'albero
      * @return CategoriaNonFoglia selezionata
      */
     /*
