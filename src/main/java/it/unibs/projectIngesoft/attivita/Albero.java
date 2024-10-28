@@ -27,14 +27,20 @@ public class Albero {
     private List<Categoria> radici;
 
     @JsonIgnore
-    //@JacksonXmlProperty(localName = "numFoglie")
     private int numFoglie;
 
     public Albero() {
         this.radici = new ArrayList<>();
     }
 
+    /**
+     * Verifica se esiste una radice con il nome specificato.
+     * @param nomeRadice il nome della radice da cercare
+     * @return true se esiste una radice con il nome specificato, false altrimenti
+     */
     public boolean contains(String nomeRadice){
+        assert nomeRadice != null
+                && !nomeRadice.trim().isEmpty() : "Il nome della radice non deve essere null o vuoto";
         for(Categoria tempRadice: this.radici){
             if(tempRadice.getNome().equals(nomeRadice))
                 return true;
@@ -47,15 +53,13 @@ public class Albero {
     }
 
     public void setRadici(List<Categoria> radici) {
+        assert radici != null : "La lista delle radici non deve essere null";
         this.radici = radici;
     }
 
     public void aggiungiRadice(Categoria radici){
+        assert radici != null : "La radice da aggiungere non deve essere null";
         this.radici.add(radici);
-    }
-
-    public void rimouviRadice(Categoria radici){
-        this.radici.remove(radici);
     }
 
     /*
@@ -68,7 +72,14 @@ public class Albero {
     }
     */
 
+    /**
+     * Restituisce la radice con il nome specificato.
+     * @param nomeRadice il nome della radice da cercare
+     * @return la radice con il nome specificato, null se non esiste
+     */
     public Categoria getRadice (String nomeRadice){
+        assert nomeRadice != null
+                && !nomeRadice.trim().isEmpty() : "Il nome della radice non deve essere null o vuoto";
         for(Categoria tempRadice: this.radici){
             if(tempRadice.getNome().equals(nomeRadice))
                 return tempRadice;

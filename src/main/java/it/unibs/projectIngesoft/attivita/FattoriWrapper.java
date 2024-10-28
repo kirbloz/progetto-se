@@ -13,10 +13,14 @@ import java.util.Map;
  */
 @JacksonXmlRootElement(localName = "FattoriWrapper")
 public class FattoriWrapper {
+
+    // annotazione per racchiudere la lista "fattori" in un solo tag XML
     @JacksonXmlElementWrapper(localName = "fattori")
+    // annotazione per racchiudere ogni elemento della lista in una tag "entry"
     @JacksonXmlProperty(localName = "entry")
     private List<Entry> fattori;
 
+    // costruttore di default per Jackson
     public FattoriWrapper() {
         this.fattori = new ArrayList<>();
     }
@@ -28,6 +32,7 @@ public class FattoriWrapper {
         }
     }
 
+    // metodo per convertire la lista di entry in una hashmap
     public HashMap<String, ArrayList<FattoreDiConversione>> toHashMap() {
         HashMap<String, ArrayList<FattoreDiConversione>> map = new HashMap<>();
         for (Entry entry : this.fattori) {
@@ -37,10 +42,15 @@ public class FattoriWrapper {
     }
 
     public static class Entry {
+
+        // Annotazione per specificare il nome del tag XML per la chiave
         @JacksonXmlProperty(localName = "key")
         private String key;
 
+        // annotazione per racchiudere la lista 'values' in un singolo tag XML
         @JacksonXmlElementWrapper(localName = "values")
+
+        // annotazione per specificare il nome del tag per ogni valore nella lista
         @JacksonXmlProperty(localName = "value")
         private ArrayList<FattoreDiConversione> value;
 

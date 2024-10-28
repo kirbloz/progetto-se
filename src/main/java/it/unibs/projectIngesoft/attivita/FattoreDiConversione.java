@@ -1,20 +1,15 @@
 package it.unibs.projectIngesoft.attivita;
 
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
+/**
+ * FattoreDiConversione rappresenta un fattore di conversione tra due categorie.
+ * Viene utilizzata per calcolare il fattore di conversione delle ore da una categoria ad un'altra.
+ */
 @JacksonXmlRootElement(localName = "FattoreDiConversione")
 public class FattoreDiConversione {
 
-
-    /*
-     * inserire qua il discriminante tra radici e non farlo smazzare a gfestore fattori
-     * altrimenti l'hashmap memorizza SOLO la radice della cat1
-     * e finisce che la radice cat2 non è nota per cui non c'è precisione
-     * <- ridondanza necessaria
-     * <- non è vero possiamo anche tranquillamente lasciare perdere la via della hashmap che era
-     * un idea di risoluzione del requisito per la stampa
-     */
     @JsonProperty("nome_c1")
     private String nome_c1;
     @JsonProperty("nome_c2")
@@ -22,23 +17,22 @@ public class FattoreDiConversione {
     @JsonProperty("fattore")
     private double fattore;
 
-
-    // questo costruttore vuoto sta qui solo perchè altrimenti
-    // il mapper xml impazzisce completamente
-    public FattoreDiConversione(){
+    // costruttore default per Jackson
+    public FattoreDiConversione() {
 
     }
 
     /**
+     * Costruttore per un FattoreDiConversione.
      *
      * @param nome_c1, nome della prima categoria
      * @param nome_c2, nome della seconda categoria
      * @param fattore, valore del fattore di conversione, dalle ore della prima categoria alle ore della seconda
      */
-    public FattoreDiConversione(String nome_c1, String nome_c2, double fattore){
-        this.nome_c1 = nome_c1;
-        this.nome_c2 = nome_c2;
-        this.fattore = fattore;
+    public FattoreDiConversione(String nome_c1, String nome_c2, double fattore) {
+        this.setNome_c1(nome_c1);
+        this.setNome_c2(nome_c2);
+        this.setFattore(fattore);
     }
 
     public String getNome_c1() {
@@ -46,6 +40,8 @@ public class FattoreDiConversione {
     }
 
     public void setNome_c1(String nome_c1) {
+        assert nome_c1 != null
+                && !nome_c1.trim().isEmpty() : "Il nome della prima categoria non deve essere null o vuoto";
         this.nome_c1 = nome_c1;
     }
 
@@ -54,6 +50,8 @@ public class FattoreDiConversione {
     }
 
     public void setNome_c2(String nome_c2) {
+        assert nome_c2 != null
+                && !nome_c2.trim().isEmpty() : "Il nome della seconda categoria non deve essere null o vuoto";
         this.nome_c2 = nome_c2;
     }
 
@@ -62,6 +60,8 @@ public class FattoreDiConversione {
     }
 
     public void setFattore(double fattore) {
+        assert fattore >= 0.5
+                && fattore <= 2 : "Il fattore di conversione deve stare tra 0.5 e 2";
         this.fattore = fattore;
     }
 
@@ -70,9 +70,10 @@ public class FattoreDiConversione {
      * FARE ATTENZIONE SE SI MODIFICA
      * TODO
      * PREDISPORRE UN ALTRO "TOSTRING" PER IL GESTORE MAGARI FATTO AD HOC
+     *
      * @return
      */
-    public String toString(){
-        return  nome_c1 + " " + nome_c2 + " " + fattore;
+    public String toString() {
+        return nome_c1 + " " + nome_c2 + " " + fattore;
     }
 }

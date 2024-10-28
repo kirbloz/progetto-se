@@ -19,17 +19,17 @@ public class ValoreDominio {
     private String descrizione;
 
     public ValoreDominio(String nome) {
-        this.nome = nome;
-        this.descrizione = "";
+        this.setNome(nome);
+        this.setDescrizione("");
     }
 
     public ValoreDominio(String nome, String descrizione) {
-        this.nome = nome;
-        this.descrizione = descrizione;
+        this.setNome(nome);
+        this.setDescrizione(descrizione);
     }
 
     /**
-     * Da non usare!
+     * Da non usare! Solo per Jackson
      */
     public ValoreDominio() {
     }
@@ -39,6 +39,7 @@ public class ValoreDominio {
     }
 
     public void setNome(String nome) {
+        assert nome != null && !nome.trim().isEmpty() : "Il nome non deve essere null o vuoto";
         this.nome = nome;
     }
 
@@ -47,6 +48,7 @@ public class ValoreDominio {
     }
 
     public void setDescrizione(String descrizione) {
+        assert descrizione != null : "La descrizione non deve essere null";
         this.descrizione = descrizione;
     }
 
