@@ -2,6 +2,7 @@ package it.unibs.projectIngesoft.gestori;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import it.unibs.fp.myutils.InputDati;
 import it.unibs.projectIngesoft.utente.Configuratore;
@@ -148,6 +149,9 @@ public class GestoreUtenti {
 
             // creazione mapper e oggetto file
             XmlMapper xmlMapper = new XmlMapper();
+            xmlMapper.enable(SerializationFeature.INDENT_OUTPUT);
+            xmlMapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
+
             File file = new File(this.filePath);
             // se il file non esiste, lo si crea
             if (file.createNewFile()) {
