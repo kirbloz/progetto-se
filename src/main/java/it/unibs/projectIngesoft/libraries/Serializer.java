@@ -13,11 +13,6 @@ import java.io.IOException;
  */
 public class Serializer {
 
-    // TODO
-    //testato per categorie, funziona
-    //fattori? FATTO
-    //utenti?
-    //comprensori?
     public static void serialize(String filePath, Object obj) {
         try {
 
@@ -26,13 +21,10 @@ public class Serializer {
             xmlMapper.enable(SerializationFeature.INDENT_OUTPUT);
             //xmlMapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
 
-
             File file = new File(filePath);
-
             // se il file non esiste, lo si crea
             file.createNewFile();
             xmlMapper.writeValue(file, obj);
-
 
         } catch (JsonProcessingException e) {
             System.out.println("Errore di serializzazione: " + e.getMessage());
@@ -44,7 +36,7 @@ public class Serializer {
     }
 
     public static <T> T deserialize(TypeReference<T> typeref, String filePath) {
-        T data = null;
+        T data;
         try {
             XmlMapper xmlMapper = new XmlMapper();
             File file = new File(filePath);
@@ -53,9 +45,8 @@ public class Serializer {
                 System.out.println("FILE NON ESISTE. NON CARICO NIENTE.");
                 return null;
             }
-
+            // legge i dati dal file con un mapper
             data = xmlMapper.readValue(file, typeref);
-
 
         } catch (IOException e) {
             System.out.println(e.getMessage());

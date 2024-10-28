@@ -6,11 +6,12 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 public class Configuratore extends Utente{
 
     public Configuratore() {
+        super();
     }
 
+
     public Configuratore(String username, String password) {       // Caso utente //??? a cosa serve il costruttore con username e password? -m
-        this.username = username;
-        this.password = password;
+        super(username, password);
     }
-    
+
 }
