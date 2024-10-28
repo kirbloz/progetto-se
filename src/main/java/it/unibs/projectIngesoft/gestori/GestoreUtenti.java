@@ -102,12 +102,14 @@ public class GestoreUtenti {
         do {
             newUsername = InputDati.leggiStringaNonVuota(MSG_RICHIESTA_NUSERNAME);
             newPassword = InputDati.leggiStringaNonVuota(MSG_RICHIESTA_NPASSWORD);
-            if (!oldUsername.equals(newUsername)) {
-                for (Utente usr : this.utenti) {
-                    if (usr.getUsername().equals(newUsername)) {
-                        exists = true;
-                        System.out.println("Nome utente gia' esistente");
-                        break;
+            if(!(oldUsername == null)) {
+                if (!oldUsername.equals(newUsername)) {
+                    for (Utente usr : this.utenti) {
+                        if (usr.getUsername().equals(newUsername)) {
+                            exists = true;
+                            System.out.println("Nome utente gia' esistente");
+                            break;
+                        }
                     }
                 }
             }
