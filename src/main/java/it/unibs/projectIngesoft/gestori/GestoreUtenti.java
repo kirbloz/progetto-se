@@ -110,6 +110,7 @@ public class GestoreUtenti {
                             System.out.println("Nome utente gia' esistente");
                             break;
                         }
+                        exists = false;
                     }
                 }
             }
