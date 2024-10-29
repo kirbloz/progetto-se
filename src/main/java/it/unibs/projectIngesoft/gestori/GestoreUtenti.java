@@ -1,15 +1,11 @@
 package it.unibs.projectIngesoft.gestori;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import it.unibs.fp.myutils.InputDati;
+import it.unibs.projectIngesoft.libraries.Serializer;
 import it.unibs.projectIngesoft.utente.Configuratore;
 import it.unibs.projectIngesoft.utente.Utente;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -103,7 +99,7 @@ public class GestoreUtenti {
         do {
             newUsername = InputDati.leggiStringaNonVuota(MSG_RICHIESTA_NUSERNAME);
             newPassword = InputDati.leggiStringaNonVuota(MSG_RICHIESTA_NPASSWORD);
-            if(!(oldUsername == null)) {
+            if (!(oldUsername == null)) {
                 if (!oldUsername.equals(newUsername)) {
                     for (Utente usr : this.utenti) {
                         if (usr.getUsername().equals(newUsername)) {
@@ -139,69 +135,39 @@ public class GestoreUtenti {
     }
 
     /**
-     * TODO questo va commentato a dovere
+     * Sfrutto l'implementazione statica della classe Serializer.
+     * Questo metodo esiste da prima di Serializer, per non cambiare ogni call a questo ho semplicemente sostituito il corpo.
      */
     public void serializeXML() {
 
-        try {
+        assert this.utenti != null;
+        assert this.filePath != null;
 
-            boolean debug = false;
+        Serializer.serialize(this.filePath, this.utenti);
 
-            // creazione mapper e oggetto file
-            XmlMapper xmlMapper = new XmlMapper();
-            xmlMapper.enable(SerializationFeature.INDENT_OUTPUT);
-            xmlMapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
-
-            File file = new File(this.filePath);
-            // se il file non esiste, lo si crea
-            if (file.createNewFile()) {
-                if (debug)
-                    System.out.println("FILE CREATO");
-            }
-            xmlMapper.writeValue(file, this.utenti);
-
-
-        } catch (JsonProcessingException e) {
-            // handle exception
-            System.out.println(e.getMessage());
-
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-
-        }
     }
 
     /**
-     * TODO questo va commentato a dovere
+     * Sfrutto l'implementazione statica della classe Serializer.
+     * Questo metodo esiste da prima di Serializer, per non cambiare ogni call a questo ho semplicemente sostituito il corpo.
      */
     public void deserializeXML() {
-        boolean debug = true;
 
-        try {
-            XmlMapper xmlMapper = new XmlMapper();
-            File file = new File(this.filePath);
+        assert this.utenti != null : "deve essere almeno inizializzato!";
+        assert this.filePath != null;
 
-            if (!file.exists()) {
-                if (debug)
-                    System.out.println("FILE NON ESISTE. NON CARICO NIENTE.");
-                return;
-            }
+        List<Utente> listaUtenti = Serializer.deserialize(new TypeReference<>() {
+        }, this.filePath);
 
-            List<Utente> listaUtenti = xmlMapper.readValue(file, new TypeReference<>() {
-            });
-
-            for (Utente utente : listaUtenti) {
-                this.addUtente(utente);
-            }
-
-            if (debug)
-                for (Utente obj : listaUtenti) {
-                    System.out.println(obj.toString());
-                }
-        } catch (IOException e) {
-            // handle the exception
-            System.out.println(e.getMessage());
+        /* for debugging */
+        for (Utente obj : listaUtenti) {
+            System.out.println(obj.toString());
         }
+
+        this.utenti.clear();
+        if (listaUtenti != null)
+            this.utenti.addAll(listaUtenti);
+
     }
 
 
