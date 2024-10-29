@@ -61,24 +61,27 @@ public class GestoreUtenti {
     public Utente login() {
         String username;
         String password;
-        int indice = -1;
+        int indice;
+        // TODO
+        // spostare le credenziali da hardcoding a un file credenzialiDefault.xml
 
         do {
             // Richiesta Input per il login
             username = InputDati.leggiStringaNonVuota(MSG_RICHIESTA_USERNAME);
             password = InputDati.leggiStringaNonVuota(MSG_RICHIESTA_PASSWORD);
 
-            // ricerca
-            indice = ricercaUtente(username, password);
-
-
+            // controllo se credenziali default e in caso creo il nuovo configuratore
             if (username.equals(defaultAdminUsr) && password.equals(defaultAdminPsw)) {
                 Configuratore C1 = new Configuratore();
                 this.cambioCredenziali(C1);
                 addUtente(C1);
-            } else if (indice == -1) {
-                System.out.println("Credenziali errate.");
+                return C1;
             }
+
+            // ricerca
+            indice = ricercaUtente(username, password);
+            if (indice == -1)
+                System.out.println("Credenziali errate.");
 
         } while (indice == -1);
 
@@ -152,8 +155,6 @@ public class GestoreUtenti {
      * Questo metodo esiste da prima di Serializer, per non cambiare ogni call a questo ho semplicemente sostituito il corpo.
      */
     public void deserializeXML() {
-
-        assert this.utenti != null : "deve essere almeno inizializzato!";
         assert this.filePath != null;
 
         List<Utente> listaUtenti = Serializer.deserialize(new TypeReference<>() {
@@ -168,6 +169,7 @@ public class GestoreUtenti {
         if (listaUtenti != null)
             this.utenti.addAll(listaUtenti);
 
+        assert this.utenti != null : "deve essere almeno inizializzato!";
     }
 
 
