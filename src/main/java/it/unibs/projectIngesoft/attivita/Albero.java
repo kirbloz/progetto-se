@@ -87,4 +87,13 @@ public class Albero {
         return null;
     }
 
+    /**
+     * Punto di partenza per la ricorsione e ricerca di foglie all'interno di una sola gerarchia.
+     * @param nomeRadice, radice di riferimento della gerarchia.
+     * @return lista delle foglie.
+     */
+    public List<Categoria> getFoglie (String nomeRadice){
+        return this.getRadice(nomeRadice).getFoglie();
+    }
+
 }

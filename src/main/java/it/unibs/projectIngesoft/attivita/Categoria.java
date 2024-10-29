@@ -300,7 +300,7 @@ public class Categoria {
     }
 
     @JsonIgnore
-    public List<Categoria> getFoglie() {
+    protected List<Categoria> getFoglie() {
         List<Categoria> foglie = new ArrayList<>();
 
         if (this.isFoglia())
