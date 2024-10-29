@@ -62,7 +62,7 @@ public class InputDati {
         String lettura;
         do {
             System.out.print(messaggio);
-            lettura = lettore.next();
+            lettura = lettore.nextLine();
             lettura = lettura.trim();
             if (!lettura.isEmpty())
                 finito = true;
@@ -87,7 +87,7 @@ public class InputDati {
         String lettura;
         do {
             System.out.print(messaggio);
-            lettura = lettore.next();
+            lettura = lettore.nextLine();
             lettura = lettura.trim();
 
             if (lettura.isEmpty()) {

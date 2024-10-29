@@ -39,7 +39,7 @@ public class GestoreCategorie {
     public static final String WARNING_CATEGORIA_ESISTE = ">> (!!) Per favore indica una categoria che non esista già in questo albero gerarchico.\n";
     public static final String WARNING_CATEGORIA_NF_NON_ESISTE = ">> (!!) Per favore indica una categoria non foglia dell'albero gerarchico selezionato.\n";
 
-    public static final boolean DEBUG_DATA = true;
+    public static final boolean DEBUG_DATA = false;
 
 
     // non sono sicuro di quale struttura dati utilizzare
@@ -157,7 +157,8 @@ public class GestoreCategorie {
             radice.setFoglia();
 
         // 2. procedura per i fattori TODO
-
+        List<Categoria> foglie = tree.getFoglie(radice.getNome());
+        gestFatt.inserisciFattoriDiConversione(radice.getNome(), foglie);
 
         //3. salvataggio dei dati
         serializeXML();
