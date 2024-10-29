@@ -264,7 +264,7 @@ public class GestoreCategorie {
      * @return true se esiste una Categoria con quel nome
      */
     private boolean esisteCategoriaNellaGerarchia(String tempNome, String tempRadice) {
-        return this.tree.getRadice(tempRadice).cercaCategoria(tempNome) == null;
+        return this.tree.getRadice(tempRadice).cercaCategoria(tempNome) != null;
     }
 
 
