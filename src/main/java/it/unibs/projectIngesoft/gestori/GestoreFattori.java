@@ -19,6 +19,7 @@ import java.util.List;
 public class GestoreFattori {
 
 
+    public static final String INSERISCI_IL_FATTORE_TRA_S_E_S = "Inserisci il fattore tra %s e %s";
     private static final String MSG_INSERISCI_FATTORE = ">> Inserisci fattore tra 0.5 e 2.0:\n> ";
     public static final double MIN_FATTORE = 0.5;
     public static final double MAX_FATTORE = 2.0;
@@ -127,9 +128,11 @@ public class GestoreFattori {
             String nomeFogliai = factorNameBuilder(nomeRadice, foglie.get(i).getNome());
             for (int j = i+1; j < foglie.size(); j++) {
                 String nomeFogliaj = factorNameBuilder(nomeRadice, foglie.get(j).getNome());
-                double fattore_ij = InputDati.leggiDoubleConRange(MSG_INSERISCI_FATTORE, MIN_FATTORE, MAX_FATTORE);
+                double fattore_ij = InputDati.leggiDoubleConRange(INSERISCI_IL_FATTORE_TRA_S_E_S.formatted(foglie.get(i).getNome(), foglie.get(j).getNome()), MIN_FATTORE, MAX_FATTORE);
+
                 FattoreDiConversione fattoreIJ = new FattoreDiConversione(nomeFogliai, nomeFogliaj, fattore_ij);
                 FattoreDiConversione fattoreJI = generaInverso(fattoreIJ);
+
                 nuoviDaNuovaRadice.add(fattoreIJ);
                 nuoviDaNuovaRadice.add(fattoreJI);
             }
@@ -161,6 +164,7 @@ public class GestoreFattori {
             //Chiedi la foglia esterna e controllo [Old:A in (Old:A New:A x)]
             String nomeFogliaEsternaFormattata;
             do{
+                System.out.println("Inserire la foglia esterna con cui fare il confronto");
                 nomeFogliaEsternaFormattata = factorNameBuilder(InputDati.leggiStringaNonVuota(MSG_INSERISCI_NOME_RADICE), InputDati.leggiStringaNonVuota(MSG_INSERISCI_NOME_FOGLIA));
             }while(!fattori.containsKey(nomeFogliaEsternaFormattata));
 
@@ -173,6 +177,7 @@ public class GestoreFattori {
             String nomeFogliaInternaScelta;
             boolean appartieneAlleFoglie = false;
             do{
+                System.out.println("Inserire la foglia interna con cui fare il confronto");
                 nomeFogliaInternaScelta = InputDati.leggiStringaNonVuota(MSG_INSERISCI_NOME_FOGLIA);
                 for (Categoria foglia : foglie){
                     if (foglia.getNome().equals(nomeFogliaInternaScelta)){
