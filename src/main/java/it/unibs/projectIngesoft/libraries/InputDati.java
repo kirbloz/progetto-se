@@ -5,9 +5,10 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
- *  Fornisce metodi di utilità generale per gestire l'input di dati.
- *  @author Libreria base fornita dal Prof. Serina Ivan
- *  @author Modificata da Wade Giovanni Baisini
+ * Fornisce metodi di utilità generale per gestire l'input di dati.
+ *
+ * @author Libreria base fornita dal Prof. Serina Ivan durante il corso di Fondamenti di Programmazione
+ * @author Modificata da Wade Giovanni Baisini, Legati Matteo
  */
 public class InputDati {
 
@@ -33,6 +34,8 @@ public class InputDati {
     }
 
     public static String leggiStringa(String messaggio) {
+        if (lettore.hasNextLine())
+            lettore.skip("\n");
         System.out.print(messaggio);
         return lettore.nextLine();
     }
@@ -61,8 +64,7 @@ public class InputDati {
         boolean finito = false;
         String lettura;
         do {
-            System.out.print(messaggio);
-            lettura = lettore.nextLine();
+            lettura = leggiStringa(messaggio);
             lettura = lettura.trim();
             if (!lettura.isEmpty())
                 finito = true;
@@ -86,8 +88,9 @@ public class InputDati {
         boolean finito = true;
         String lettura;
         do {
-            System.out.print(messaggio);
-            lettura = lettore.nextLine();
+            /*System.out.print(messaggio);
+            lettura = lettore.nextLine();*/
+            lettura = leggiStringa(messaggio);
             lettura = lettura.trim();
 
             if (lettura.isEmpty()) {
@@ -100,6 +103,8 @@ public class InputDati {
             if (lettura.length() > maxLength) {
                 System.out.println(ERR_STRINGA_TROPPO_LUNGA + maxLength);
                 finito = false;
+            } else {
+                finito = true;
             }
         } while (!finito);
 
@@ -178,7 +183,7 @@ public class InputDati {
                 finito = true;
             } catch (InputMismatchException e) {
                 System.out.println(ERRORE_FORMATO);
-               lettore.next();
+                lettore.next();
             }
         } while (!finito);
         return valoreLetto;
@@ -211,7 +216,7 @@ public class InputDati {
         boolean finito = false;
         int valoreLetto;
         do {
-            valoreLetto = leggiIntero(messaggio);
+            valoreLetto = lettore.nextInt();
             if (valoreLetto >= minimo && valoreLetto <= massimo)
                 finito = true;
             else if (valoreLetto < minimo)
