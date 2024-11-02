@@ -148,7 +148,7 @@ public class GestoreCategorie {
                     this.aggiungiCategoria(radice);
                     break;
                 default:
-                    System.out.println("> Uscita dal submenu e salvataggio.. ");
+                    System.out.println(">> Uscita dal submenu e salvataggio.. <<");
                     break;
             }
         } while (scelta != 0);
