@@ -196,6 +196,7 @@ public class GestoreFattori {
 
             ArrayList<FattoreDiConversione> fattoriEsterni = calcoloFattoriEsterni(primoFattoreEsternoInterno, nuoviDaNuovaRadice);
 
+            aggiungiArrayListDiFattori(nuoviDaNuovaRadice);
             aggiungiArrayListDiFattori(fattoriEsterni);
 
         }else if (!nuoviDaNuovaRadice.isEmpty()) {
@@ -260,6 +261,7 @@ public class GestoreFattori {
                 fattoriInternoATuttiEsterni.add(fattoreEsternoInterno);
             }
         }
+
         fattoriCalcolati.addAll(fattoriInternoATuttiEsterni); //Aggiungo l'array di fattori esterni
 
         fattoriCalcolati.addAll(nuoviSingoloEsternoAInterni); //Aggiungo l'array di diretti
