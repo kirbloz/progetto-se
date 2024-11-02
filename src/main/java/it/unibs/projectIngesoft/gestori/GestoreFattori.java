@@ -19,14 +19,18 @@ import java.util.List;
 public class GestoreFattori {
 
 
-    public static final String INSERISCI_IL_FATTORE_TRA_S_E_S = "Inserisci il fattore tra %s e %s: ";
+    public static final String INSERISCI_IL_FATTORE_TRA = ">> Inserisci il fattore tra [%s] e [%s]:\n> ";
     public static final double MIN_FATTORE = 0.5;
     public static final double MAX_FATTORE = 2.0;
-    public static final String MSG_INSERISCI_NOME_FOGLIA = "Inserisci nome Foglia: ";
-    public static final String MSG_INSERISCI_NOME_RADICE = "Inserisci nome radice: ";
+
+    public static final String MSG_INSERISCI_NOME_FOGLIA = ">> Inserisci il nome della categoria FOGLIA:\n> ";
+    public static final String MSG_INSERISCI_NOME_RADICE = ">> Inserisci il nome della categoria RADICE:\n> ";
+
+    public static final String MSG_INSERISCI_FOGLIA_ESTERNA = ">> Inserire la foglia (da una gerarchia) ESTERNA con cui fare il confronto tra queste ";
+    public static final String MSG_INSERISCI_FOGLIA_INTERNA = ">> Inserire la foglia (dalla gerarchia) INTERNA con cui fare il confronto tra queste ";
+
     public static final String ERRORE_FATTORI = "Errore nei Fattori";
-    public static final String MSG_INSERIRE_FOGLIA_ESTERNA = "Inserire la foglia esterna con cui fare il confronto tra queste: ";
-    public static final String MSG_INSERIRE_CATEGORIA_INTERNA = "Inserire la foglia interna con cui fare il confronto tra queste: ";
+
     private final String filePath;
 
     private HashMap<String, ArrayList<FattoreDiConversione>> fattori;
@@ -82,7 +86,9 @@ public class GestoreFattori {
 
 
     /**
-     * Chiede all'utente i fattori di conversione minimi necessari al calcolo dei restanti e avvia il calcolo degli altri
+     * Chiede all'utente i fattori di conversione minimi necessari al calcolo dei restanti e avvia il calcolo degli altri.
+     * @param nomeRadice, categoria radice della gerarchia per cui si aggiungono i fattori
+     * @param foglie, foglie della gerarchia
      */
     public void inserisciFattoriDiConversione(String nomeRadice, List<Categoria> foglie) {
 
@@ -118,7 +124,7 @@ public class GestoreFattori {
             String nomeFogliai = factorNameBuilder(nomeRadice, foglie.get(i).getNome());
             for (int j = i+1; j < foglie.size(); j++) {
                 String nomeFogliaj = factorNameBuilder(nomeRadice, foglie.get(j).getNome());
-                double fattore_ij = InputDati.leggiDoubleConRange(INSERISCI_IL_FATTORE_TRA_S_E_S.formatted(nomeFogliai, nomeFogliaj), MIN_FATTORE, MAX_FATTORE);
+                double fattore_ij = InputDati.leggiDoubleConRange(INSERISCI_IL_FATTORE_TRA.formatted(nomeFogliai, nomeFogliaj), MIN_FATTORE, MAX_FATTORE);
 
                 FattoreDiConversione fattoreIJ = new FattoreDiConversione(nomeFogliai, nomeFogliaj, fattore_ij);
                 FattoreDiConversione fattoreJI = generaInverso(fattoreIJ);
@@ -150,7 +156,7 @@ public class GestoreFattori {
             /*  Stampa categorie esterne (Opzionale) : In realtà stampa le chiavi nella hashmap, così se c'é una sola
              *  categoria già memorizzata stampa e lavora su quella
             */
-            System.out.println(MSG_INSERIRE_FOGLIA_ESTERNA);
+            System.out.println(MSG_INSERISCI_FOGLIA_ESTERNA);
             for (String key : fattori.keySet()){
                 System.out.println(key);
             }
@@ -162,7 +168,7 @@ public class GestoreFattori {
 
 
             //Stampa categorie Interne, basandosi sulle foglie della nuova radice
-            System.out.println(MSG_INSERIRE_CATEGORIA_INTERNA);
+            System.out.println(MSG_INSERISCI_FOGLIA_INTERNA);
             for (Categoria foglia : foglie){
                 System.out.println(factorNameBuilder(nomeRadice, foglia.getNome()));
             }
@@ -182,7 +188,7 @@ public class GestoreFattori {
 
 
             //Chiedi il Fattore di conversione tra le 2 [x in (Old:A New:A x)]
-            double fattoreDiConversioneEsternoInterno = InputDati.leggiDoubleConRange(INSERISCI_IL_FATTORE_TRA_S_E_S.formatted(nomeFogliaEsternaFormattata, nomeFogliaInternaFormattata), MIN_FATTORE, MAX_FATTORE);
+            double fattoreDiConversioneEsternoInterno = InputDati.leggiDoubleConRange(INSERISCI_IL_FATTORE_TRA.formatted(nomeFogliaEsternaFormattata, nomeFogliaInternaFormattata), MIN_FATTORE, MAX_FATTORE);
 
 
             ///PARTE IN CUI FACCIO I CONTI
@@ -276,7 +282,7 @@ public class GestoreFattori {
         return fattori.containsKey(factorNameBuilder(nomeRadice, nomeFoglia));
     }
 
-
+    // che cazzo è sta roba
     public String[] parseChiave(String nomeCategoria) {
         return nomeCategoria.split(":");
     }
@@ -305,6 +311,7 @@ public class GestoreFattori {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         for (String key : fattori.keySet()) {
+            sb.append("[").append(key).append("]").append("\n");
             for (FattoreDiConversione fattore : fattori.get(key)) {
                 sb.append(fattore.toString()).append("\n");
             }
@@ -332,18 +339,20 @@ public class GestoreFattori {
     }
 
     private void visualizzaFattori() {
-        String categoriaFormattata = factorNameBuilder(InputDati.leggiStringaNonVuota(MSG_INSERISCI_NOME_RADICE),InputDati.leggiStringaNonVuota(MSG_INSERISCI_NOME_FOGLIA));
-        System.out.println(stringaFattoriDataCategoria(categoriaFormattata));
+        /*String categoriaFormattata = factorNameBuilder(InputDati.leggiStringaNonVuota(MSG_INSERISCI_NOME_RADICE),InputDati.leggiStringaNonVuota(MSG_INSERISCI_NOME_FOGLIA));
+        System.out.println(stringaFattoriDataCategoria(categoriaFormattata));*/
+        System.out.println(">> Fattori di Conversione <<");
+        System.out.println(this);
     }
 
-    public String visualizzaCategorieConFdC(){
+    /*public String visualizzaCategorieConFdC(){
         StringBuilder sb = new StringBuilder();
         for (String key : fattori.keySet()) {
             String[] parsed = parseChiave(key);
             sb.append(String.format(">> %s (%s)", parsed[1], parsed[0])).append("\n");
         }
         return sb.toString();
-    }
+    }*/
 
     /**
      * Richiama il metodo necessario in base alla selezione dal menu.
@@ -351,15 +360,10 @@ public class GestoreFattori {
      * @param scelta, selezione dal menu
      */
     public void entryPoint(int scelta) {
-        //TODO
         switch (scelta) {
             case 1:
                 //visualizza
                 this.visualizzaFattori();
-                break;
-            case 2:
-                //modifica - estensione futura
-                //serializeXML();
                 break;
             default:
                 System.out.println("Nulla da mostrare");
