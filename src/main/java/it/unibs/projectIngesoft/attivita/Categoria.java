@@ -148,6 +148,8 @@ public class Categoria {
 
     public List<String> getValoriDominioFiglie() {
         List<String> temp = new ArrayList<>();
+        if (categorieFiglie == null)
+            return temp; //empty arraylist
         for (Categoria figlia : categorieFiglie)
             temp.add(figlia.getValoreDominio().getNome());
         return temp;
