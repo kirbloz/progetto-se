@@ -1,1 +1,14 @@
-<ArrayList><item><username>admin</username><password>1234</password></item><item><username>ciao</username><password>1234</password></item><item><username>culo</username><password>bianco</password></item><item><username>marteeno</username><password>LigmaBS02</password></item></ArrayList>
+<ArrayList>
+  <item>
+    <username>wade</username>
+    <password>1234</password>
+  </item>
+  <item>
+    <username>culo</username>
+    <password>bianco</password>
+  </item>
+  <item>
+    <username>marteeno</username>
+    <password>LigmaBS02</password>
+  </item>
+</ArrayList>
