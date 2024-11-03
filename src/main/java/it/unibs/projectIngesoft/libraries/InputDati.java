@@ -33,9 +33,11 @@ public class InputDati {
         return new Scanner(System.in);
     }
 
+    // TODO questo file non è presentabile
+
     public static String leggiStringa(String messaggio) {
-        if (lettore.hasNextLine())
-            lettore.skip("\n");
+        /*if (lettore.hasNextLine())
+            lettore.skip("\n");*/
         System.out.print(messaggio);
         return lettore.nextLine();
     }
