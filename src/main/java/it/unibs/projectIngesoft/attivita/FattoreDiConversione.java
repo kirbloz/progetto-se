@@ -17,7 +17,9 @@ public class FattoreDiConversione {
     @JsonProperty("fattore")
     private double fattore;
 
-    // costruttore default per Jackson
+    /**
+     * Costruttore di default necessario per la deserializzazione di Jackson
+     */
     public FattoreDiConversione() {
 
     }
@@ -25,13 +27,13 @@ public class FattoreDiConversione {
     /**
      * Costruttore per un FattoreDiConversione.
      *
-     * @param nome_c1, nome della prima categoria
-     * @param nome_c2, nome della seconda categoria
+     * @param catUno,  nome della prima categoria
+     * @param catDue,  nome della seconda categoria
      * @param fattore, valore del fattore di conversione, dalle ore della prima categoria alle ore della seconda
      */
-    public FattoreDiConversione(String nome_c1, String nome_c2, double fattore) {
-        this.setNome_c1(nome_c1);
-        this.setNome_c2(nome_c2);
+    public FattoreDiConversione(String catUno, String catDue, double fattore) {
+        this.setNome_c1(catUno);
+        this.setNome_c2(catDue);
         this.setFattore(fattore);
     }
 
@@ -39,26 +41,31 @@ public class FattoreDiConversione {
         return nome_c1;
     }
 
-    public void setNome_c1(String nome_c1) {
-        assert nome_c1 != null
-                && !nome_c1.trim().isEmpty() : "Il nome della prima categoria non deve essere null o vuoto";
-        this.nome_c1 = nome_c1;
+    public void setNome_c1(String catUno) {
+        assert catUno != null
+                && !catUno.trim().isEmpty() : "Il nome della prima categoria non deve essere null o vuoto";
+        this.nome_c1 = catUno;
     }
 
     public String getNome_c2() {
         return nome_c2;
     }
 
-    public void setNome_c2(String nome_c2) {
-        assert nome_c2 != null
-                && !nome_c2.trim().isEmpty() : "Il nome della seconda categoria non deve essere null o vuoto";
-        this.nome_c2 = nome_c2;
+    public void setNome_c2(String catDue) {
+        assert catDue != null
+                && !catDue.trim().isEmpty() : "Il nome della seconda categoria non deve essere null o vuoto";
+        this.nome_c2 = catDue;
     }
 
     public double getFattore() {
         return fattore;
     }
 
+    /**
+     * Imposta il valore del fattore di conversione controllando per un max di 2 e un min di 0.5
+     *
+     * @param fattore, valore a cui impostare l'attributo
+     */
     public void setFattore(double fattore) {
         assert fattore >= 0.5
                 && fattore <= 2 : "Il fattore di conversione deve stare tra 0.5 e 2";
@@ -66,13 +73,13 @@ public class FattoreDiConversione {
     }
 
     /**
-     * UTILIZZATO DAL GESTORE DI FATTORI.
-     * FARE ATTENZIONE SE SI MODIFICA
-     * TODO
-     * PREDISPORRE UN ALTRO "TOSTRING" PER IL GESTORE MAGARI FATTO AD HOC
+     * Rappresenta l'oggetto come una stringa formattata.
+     * Inutile in questo momento perchè la classe GestoreFattori recupera e formatta
+     * le informazioni autonomamente.
      *
-     * @return
+     * @return stringa formattata
      */
+    @Override
     public String toString() {
         return nome_c1 + " " + nome_c2 + " " + fattore;
     }
