@@ -1,7 +1,6 @@
 package it.unibs.projectIngesoft.attivita;
 
 import com.fasterxml.jackson.annotation.JsonRootName;
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 /**
  * ValoreDominio è una classe che rappresenta i singoli valori che esistono all'interno di un "dominio concettuale".
@@ -12,24 +11,33 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 public class ValoreDominio {
 
     // obbligatorio
-    @JacksonXmlProperty(localName = "nome")
     private String nome;
     // opzionale
-    @JacksonXmlProperty(localName = "descrizione")
     private String descrizione;
 
+    /**
+     * Costruttore con nome
+     *
+     * @param nome, nome del valore
+     */
     public ValoreDominio(String nome) {
         this.setNome(nome);
         this.setDescrizione("");
     }
 
+    /**
+     * Costruttore con nome e descrizione
+     *
+     * @param nome,       nome del valore del dominio
+     * @param descrizione descrizione del valore del dominio
+     */
     public ValoreDominio(String nome, String descrizione) {
         this.setNome(nome);
         this.setDescrizione(descrizione);
     }
 
     /**
-     * Da non usare! Solo per Jackson
+     * Da non usare! Solo per la deserializzazione di Jackson
      */
     public ValoreDominio() {
     }
@@ -39,7 +47,8 @@ public class ValoreDominio {
     }
 
     public void setNome(String nome) {
-        assert nome != null && !nome.trim().isEmpty() : "Il nome non deve essere null o vuoto";
+        assert nome != null
+                && !nome.trim().isEmpty() : "Il nome non deve essere null o vuoto";
         this.nome = nome;
     }
 
@@ -48,10 +57,16 @@ public class ValoreDominio {
     }
 
     public void setDescrizione(String descrizione) {
-        assert descrizione != null : "La descrizione non deve essere null";
+        assert descrizione != null
+                && !descrizione.trim().isEmpty() : "La descrizione non deve essere null o vuota";
         this.descrizione = descrizione;
     }
 
+    /**
+     * Rappresenta sotto forma di stringa formattata l'oggetto ValoreDominio
+     *
+     * @return stringa formattata
+     */
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
