@@ -1,28 +1,23 @@
 package it.unibs.projectIngesoft.gestori;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.dataformat.xml.XmlMapper;
-import it.unibs.fp.myutils.InputDati;
+import it.unibs.projectIngesoft.libraries.InputDati;
 import it.unibs.projectIngesoft.attivita.ComprensorioGeografico;
+import it.unibs.projectIngesoft.libraries.Serializer;
 
-
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class GestoreComprensorioGeografico {
 
-    private static final String MESSAGGIO_INSERIMENTO_COMUNE = ">> Inserire nome del comune da inserire oppure fine per terminare l'inserimento: ";
-    private static final String MESSAGGIO_INSERIMENTO_NOME_NUOVO_COMPRENSORIO = ">> Inserire il nome del comprensorio Geografico: ";
-    private static final String MESSAGGIO_INSERIMENTO_COMUNE_2 = ">> Inserire nome del comune da inserire: ";
-    private static final String MESSAGGIO_RICERCA_COMPRENSORIO = ">> Inserire il nome del comprensorio da stampare: ";
+    private static final String MSG_INSERISCI_COMUNE = ">> Inserire nome del comune da inserire oppure fine per terminare l'inserimento:\n> ";
+    private static final String MSG_INSERISCI_NOME_NUOVO_COMPRENSORIO = ">> Inserire il nome del comprensorio geografico:\n> ";
+    private static final String MSG_RICERCA_COMPRENSORIO = ">> Inserire il nome del comprensorio da visualizzare:\n> ";
+
+    private static final String WARNING_NOME_COMPRENSORIO_GIA_USATO = ">> (!!) Attenzione, esiste già un comprensorio con questo nome";
+    public static final String WARNING_NOME_COMPRENSORIO_NON_ESISTE = ">> (!!) Non esiste un comprensorio con questo nome";
 
     private final String filePath;
-
     private ArrayList<ComprensorioGeografico> listaComprensoriGeografici;
 
     public GestoreComprensorioGeografico(String filePath) {
@@ -31,188 +26,104 @@ public class GestoreComprensorioGeografico {
         deserializeXML(); // load dati
     }
 
+    /**
+     * De-serializza l'attributo listaComprensoriGeografici.
+     * Sfrutto l'implementazione statica della classe Serializer.
+     */
+    public void deserializeXML() {
+        assert this.filePath != null;
+        if (this.listaComprensoriGeografici == null)
+            listaComprensoriGeografici = new ArrayList<>();
+
+        List<ComprensorioGeografico> listaLetta = Serializer.deserialize(new TypeReference<>() {
+        }, this.filePath);
+        this.listaComprensoriGeografici.clear();
+        this.listaComprensoriGeografici.addAll(listaLetta);
+    }
+
+    /**
+     * Serializza l'attributo listaComprensoriGeografici.
+     * Sfrutto l'implementazione statica della classe Serializer.
+     */
+    public void serializeXML() {
+        assert this.listaComprensoriGeografici != null;
+        assert this.filePath != null;
+        Serializer.serialize(this.filePath, this.listaComprensoriGeografici);
+    }
+
+    /**
+     * Richiama il metodo necessario in base alla selezione dal menu principale.
+     *
+     * @param scelta, selezione dal menu
+     */
+    public void entryPoint(int scelta) {
+        switch (scelta) {
+            case 1 -> aggiungiComprensorio();
+            case 2 -> scegliComprensorioDaStampare();
+            default -> System.out.println("Nulla da mostrare");
+        }
+    }
 
     private void addComprensorio(ComprensorioGeografico comprensorio) { //Aggiunge il comprensorio alla lista e serializza
         if (!this.listaComprensoriGeografici.contains(comprensorio)) {
             this.listaComprensoriGeografici.add(comprensorio);
             serializeXML();
         }
-
     }
 
-    public void inserisciComprensorio(){
+    public void aggiungiComprensorio() {
+        String nomeComprensorio;
+        do {
+            nomeComprensorio = InputDati.leggiStringaNonVuota(MSG_INSERISCI_NOME_NUOVO_COMPRENSORIO);
+        } while (isNomeGiaUsato(nomeComprensorio));
+
         ArrayList<String> comuniDelComprensorio = new ArrayList<>();
-
-        ///User Interaction per la creazione del comprensorio
-        //TODO controllo stupido dell'unicità perché ho fritto il cervello letteralmente sono scemo qualcuno lo cambi
-        boolean nomeGiaUsato = false;
-        String nomeComprensorio = InputDati.leggiStringaNonVuota(MESSAGGIO_INSERIMENTO_NOME_NUOVO_COMPRENSORIO);
-        for (ComprensorioGeografico comprensorio : this.listaComprensoriGeografici) {
-            if(comprensorio.getNomeComprensorio().equalsIgnoreCase(nomeComprensorio)){
-                nomeGiaUsato = true;
-                break;
+        String nomeComuneDaInserire;
+        do {
+            nomeComuneDaInserire = InputDati.leggiStringaNonVuota(MSG_INSERISCI_COMUNE);
+            if (!nomeComuneDaInserire.equalsIgnoreCase("fine")) {
+                comuniDelComprensorio.add(nomeComuneDaInserire);
             }
-        }
-        while(nomeGiaUsato){
-            nomeGiaUsato = false;
-            nomeComprensorio = InputDati.leggiStringaNonVuota(MESSAGGIO_INSERIMENTO_NOME_NUOVO_COMPRENSORIO);
-            for (ComprensorioGeografico comprensorio : this.listaComprensoriGeografici) {
-                if(comprensorio.getNomeComprensorio().equalsIgnoreCase(nomeComprensorio)){
-                    nomeGiaUsato = true;
-                    break;
-                }
-            }
-        }
-
-        String nomeComuneDaInserire = InputDati.leggiStringaNonVuota(MESSAGGIO_INSERIMENTO_COMUNE);
-        while(!nomeComuneDaInserire.equalsIgnoreCase("fine")){
-            comuniDelComprensorio.add(nomeComuneDaInserire);
-            nomeComuneDaInserire = InputDati.leggiStringaNonVuota(MESSAGGIO_INSERIMENTO_COMUNE);
-        }
-
-        //memorizzazione del nuovo comprensorio
+        } while (!nomeComuneDaInserire.equalsIgnoreCase("fine") && !comuniDelComprensorio.isEmpty());
+        // Memorizzazione del nuovo comprensorio
         addComprensorio(new ComprensorioGeografico(nomeComprensorio, comuniDelComprensorio));
     }
 
-    public void scegliComprensorioDaStampare(){
-        //Per Debug
+    private boolean isNomeGiaUsato(String nomeComprensorio) {
         for (ComprensorioGeografico comprensorio : this.listaComprensoriGeografici) {
-            stampaComprensorio(comprensorio);
-        }
-        //Fine Debug
-
-        String nomeDaCercare = InputDati.leggiStringaNonVuota(MESSAGGIO_RICERCA_COMPRENSORIO);
-        for (ComprensorioGeografico comprensorio : this.listaComprensoriGeografici) {
-            if(comprensorio.getNomeComprensorio().equalsIgnoreCase(nomeDaCercare)){
-                stampaComprensorio(comprensorio);
-                return;
+            if (comprensorio.getNomeComprensorio().equalsIgnoreCase(nomeComprensorio)) {
+                System.out.println(WARNING_NOME_COMPRENSORIO_GIA_USATO);
+                return true;
             }
         }
-        System.out.println("questo nome non esiste");
+        return false;
     }
 
-    public void stampaComprensorio(ComprensorioGeografico comprensorio){
-        System.out.println(comprensorio.toString());
-    }
-
-    //non richiesto in v1
-    public void aggiungiComuneA(ComprensorioGeografico comprensorio){
-        String comune = InputDati.leggiStringaNonVuota(MESSAGGIO_INSERIMENTO_COMUNE_2);
-        comprensorio.addComune(comune);
-    }
-
-
-    //copiato da gesorecategorie
-    public void entryPoint(int scelta) {
-        //TODO
-        switch (scelta) {
-            case 1:
-                //aggiungi comprensoiro
-                inserisciComprensorio();
-                break;
-            case 2:
-                //Stampa Comprensorio
-                scegliComprensorioDaStampare();
-                break;
-            default:
-                System.out.println("Nulla da mostrare");
+    private void scegliComprensorioDaStampare() {
+        for (ComprensorioGeografico comprensorio : this.listaComprensoriGeografici) {
+            System.out.println(comprensorio.getNomeComprensorio());
         }
+
+        String nomeDaCercare = InputDati.leggiStringaNonVuota(MSG_RICERCA_COMPRENSORIO);
+        // Cerca e stampa il comprensorio
+        ComprensorioGeografico comprensorioTrovato =
+                this.listaComprensoriGeografici.stream()
+                        .filter(comprensorio -> comprensorio.getNomeComprensorio().equalsIgnoreCase(nomeDaCercare))
+                        .findFirst()
+                        .orElse(null);
+
+        if (comprensorioTrovato != null)
+            visualizzaComprensorio(comprensorioTrovato);
+        else
+            System.out.println(WARNING_NOME_COMPRENSORIO_NON_ESISTE);
     }
-
-
-    //ROBA COPIATA DAGLI ALTRI GESTORI
 
     /**
-     * TODO copiato e incollato da gestoreutenti
+     * Visualizza le informazioni di un certo comprensorio geografico.
+     *
+     * @param comprensorio, nome del comprensorio da visualizzare
      */
-    public void deserializeXML() {
-        boolean debug = false;
-
-        try {
-            XmlMapper xmlMapper = new XmlMapper();
-            File file = new File(this.filePath);
-
-            if (!file.exists()) {
-                if (debug)
-                    System.out.println("FILE NON ESISTE. NON CARICO NIENTE.");
-                return;
-            }
-
-            List<ComprensorioGeografico> listaComprensoriGeografici = xmlMapper.readValue(file, new TypeReference<>() {
-            });
-
-            for (ComprensorioGeografico comprensorio : listaComprensoriGeografici) {
-                this.addComprensorio(comprensorio);
-            }
-
-            if (debug)
-                for (ComprensorioGeografico obj : listaComprensoriGeografici) {
-                    System.out.println(obj.toString());
-                }
-        } catch (IOException e) {
-            // handle the exception
-            System.out.println(e.getMessage());
-        }
+    public void visualizzaComprensorio(ComprensorioGeografico comprensorio) {
+        System.out.println(comprensorio.toString());
     }
-
-
-    public void serializeXML() {
-
-        try {
-
-            boolean debug = false;
-
-            // creazione mapper e oggetto file
-            XmlMapper xmlMapper = new XmlMapper();
-            xmlMapper.enable(SerializationFeature.INDENT_OUTPUT);
-            xmlMapper.configure(SerializationFeature.WRAP_ROOT_VALUE, false);
-
-            File file = new File(this.filePath);
-            // se il file non esiste, lo si crea
-            if (file.createNewFile()) {
-                if (debug)
-                    System.out.println("FILE CREATO");
-            }
-            xmlMapper.writeValue(file, this.listaComprensoriGeografici);
-
-
-        } catch (JsonProcessingException e) {
-            // handle exception
-            System.out.println(e.getMessage());
-
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-
-        }
-    }
-
-    /*
-    //TODO da fixare la lib
-
-    Scanner lettore = creaScanner();
-    public String leggiStringaNonVuota(String messaggio) {
-
-        boolean finito = false;
-        String lettura;
-        do {
-            lettura = leggiStringa(messaggio);
-            if (lettura.length() > 0)
-                finito = true;
-            else
-                System.out.println("ERRORE_STRINGA_VUOTA");
-        } while (!finito);
-
-        return lettura;
-    }
-
-    private Scanner creaScanner() {
-        return new Scanner(System.in);
-    }
-
-    public String leggiStringa(String messaggio) {
-        System.out.print(messaggio);
-        return lettore.next();
-    }
-    */
-
 }
