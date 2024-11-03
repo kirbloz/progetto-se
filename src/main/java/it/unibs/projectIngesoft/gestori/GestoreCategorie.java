@@ -16,13 +16,18 @@ public class GestoreCategorie {
     public static final String HEADER_VISUALIZZA_GERARCHIE = ">> Visualizza gerarchie di categorie <<\n";
     public static final String HEADER_VISUALIZZA_RADICE = ">> Visualizza gerarchia di %s <<\n";
 
+    private static final String[] VOCI_SUBMENU_GERARCHIA = new String[]{
+            "Aggiungi Categoria",
+    };
+    private static final String TITLE_SUBMENU_AGGIUNGI_GERARCHIA = "AGGIUNGI GERARCHIA";
+    public static final String MSG_USCITA_SUBMENU_AGGIUNGI_GERARCHIA = ">> Uscita dal submenu e salvataggio.. <<";
+
+    public static final String ASK_INSERISCI_DESCRIZIONE_VALORE_DOMINIO = ">> Vuoi inserire una descrizione per questo valore?";
     public static final String MSG_INSERIMENTO_NUOVO_DOMINIO = ">> Inserisci il nome del dominio della nuova categoria:\n> ";
     public static final String MSG_INSERIMENTO_VALORE_DOMINIO = ">> Inserisci il valore di %s nel dominio di {%s}\n> ";
     public static final String MSG_INSERIMENTO_DOMINIO_PER_FIGLIE = ">> Inserisci il nome del dominio per eventuali figlie della nuova categoria:\n> ";
-    public static final String[] VOCI_SUBMENU_GERARCHIA = new String[]{
-            "Aggiungi Categoria",
-    };
-    public static final String TITLE_SUBMENU_AGGIUNGI_GERARCHIA = "AGGIUNGI GERARCHIA";
+
+    public static final String ASK_CATEGORIA_IS_FOGLIA = ">> Questa Categoria è Foglia?";
 
     public static final String MSG_INSERIMENTO_NOME_CATEGORIA_MADRE = ">> Inserisci il nome della CATEGORIA MADRE per %s:\n> ";
 
@@ -39,72 +44,46 @@ public class GestoreCategorie {
     public static final String WARNING_CATEGORIA_ESISTE = ">> (!!) Per favore indica una categoria che non esista già in questo albero gerarchico.\n";
     public static final String WARNING_CATEGORIA_NF_NON_ESISTE = ">> (!!) Per favore indica una categoria non foglia dell'albero gerarchico selezionato.\n";
 
-    public static final boolean DEBUG_DATA = false;
 
-
-    // non sono sicuro di quale struttura dati utilizzare
     private Albero tree;
     private final String filePath;
     private GestoreFattori gestFatt;
 
-
+    /**
+     * Costruttore per inizializzare i percorsi dei file e de-serializzare l'albero.
+     *
+     * @param categorieFilePath percorso del file delle categorie
+     * @param fattoriFilePath   percorso del file dei fattori
+     */
     public GestoreCategorie(String categorieFilePath, String fattoriFilePath) {
-
         this.filePath = categorieFilePath;
         this.tree = new Albero();
         this.gestFatt = new GestoreFattori(fattoriFilePath);
-
-        //deserializeXML(); // load dati
-
-        if (DEBUG_DATA) {
-
-            Categoria radice1 = new Categoria("cat1 radice", "materia");
-            Categoria radice2 = new Categoria("cat2 radice", "lezione");
-
-            tree.getRadici().add(radice1);
-            tree.getRadici().add(radice2);
-            radice1.addCategoriaFiglia(new Categoria("figlia1", radice1, new ValoreDominio("matematica")));
-            radice1.addCategoriaFiglia(new Categoria("figlia2", radice1, new ValoreDominio("italiano")));
-            radice2.addCategoriaFiglia(new Categoria("figlia3", radice2, new ValoreDominio("online")));
-            radice2.addCategoriaFiglia(new Categoria("figliaNF1", "gradoScuola", radice2, new ValoreDominio("in presenza")));
-
-
-            serializeXML();
-        } else {
-            deserializeXML();
-        }
-
-        //serializeXML();
+        deserializeXML(); // load dati
     }
 
-
     /**
+     * Serializza l'oggetto tree.
      * Sfrutto l'implementazione statica della classe Serializer.
-     * Questo metodo esiste da prima di Serializer, per non cambiare ogni call a questo ho semplicemente sostituito il corpo.
      */
-    public void serializeXML() {
+    private void serializeXML() {
         assert this.tree != null;
         assert this.filePath != null;
-
         Serializer.serialize(this.filePath, this.tree);
     }
 
     /**
+     * De-serializza l'oggetto tree.
      * Sfrutto l'implementazione statica della classe Serializer.
-     * Questo metodo esiste da prima di Serializer, per non cambiare ogni call a questo ho semplicemente sostituito il corpo.
      */
-    public void deserializeXML() {
+    private void deserializeXML() {
         assert this.tree != null;
-
         List<Categoria> tempCat = Serializer.deserialize(new TypeReference<>() {
         }, this.filePath);
 
         tree.getRadici().clear();
-        if (tempCat != null)
-            tree.getRadici().addAll(tempCat);
-
+        if (tempCat != null) tree.getRadici().addAll(tempCat);
     }
-
 
     /**
      * Richiama il metodo necessario in base alla selezione dal menu principale.
@@ -112,16 +91,10 @@ public class GestoreCategorie {
      * @param scelta, selezione dal menu
      */
     public void entryPoint(int scelta) {
-
         switch (scelta) {
-            case 1:
-                subMenuAggiungiGerarchia();
-                break;
-            case 2:
-                visualizzaGerarchie();
-                break;
-            default:
-                break;
+            case 1 -> subMenuAggiungiGerarchia();
+            case 2 -> visualizzaGerarchie();
+            default -> {}
         }
     }
 
@@ -131,32 +104,26 @@ public class GestoreCategorie {
      * Terminato l'inserimento, salva su file XML i dati.
      */
     public void subMenuAggiungiGerarchia() {
-
         Menu subMenu = new Menu(TITLE_SUBMENU_AGGIUNGI_GERARCHIA, VOCI_SUBMENU_GERARCHIA);
-        int scelta;
 
-        // 0. predispone una radice
+        // 0. predispone una radice e la salva localmente
         this.aggiungiCategoriaRadice();
         Categoria radice = this.tree.getRadici().getLast();
 
         // 1. loop per l'inserimento di categorie nella gerarchia della radice appena creata
+        int scelta;
         do {
             scelta = subMenu.scegli();
-            // switch ad un solo case per ampliamento futuro
-            switch (scelta) {
-                case 1:
-                    this.aggiungiCategoria(radice);
-                    break;
-                default:
-                    System.out.println(">> Uscita dal submenu e salvataggio.. <<");
-                    break;
+            switch (scelta) { // switch con un solo case per ampliamento futuro
+                case 1 -> this.aggiungiCategoria(radice);
+                default -> System.out.println(MSG_USCITA_SUBMENU_AGGIUNGI_GERARCHIA);
             }
         } while (scelta != 0);
 
         if (radice.getNumCategorieFiglie() == 0)
             radice.setFoglia();
 
-        // 2. procedura per i fattori TODO
+        // 2. procedura per i fattori
         List<Categoria> foglie = tree.getFoglie(radice.getNome());
         gestFatt.inserisciFattoriDiConversione(radice.getNome(), foglie);
 
@@ -173,22 +140,23 @@ public class GestoreCategorie {
     private void aggiungiCategoria(Categoria radice) {
         assert radice != null : "la radice non deve essere null";
 
-        String descrizioneValoreDominio = "";
-        String nomeCampoFiglie = "";
+        String descrizioneValoreDominio;
         ValoreDominio valoreDominio;
 
         // 1. chiede nome
         String nomeCategoria = this.inserimentoNomeNuovaCategoria(radice.getNome());
-        assert nomeCategoria != null && !nomeCategoria.isEmpty() : "Il nome della categoria non deve essere null o vuoto";
+        assert nomeCategoria != null
+                && !nomeCategoria.isEmpty() : "Il nome della categoria non deve essere null o vuoto";
         // 1.1 chiede madre per nuova radice, verificando che esista
         Categoria categoriaMadre = this.inserimentoNomeCategoriaMadre(radice.getNome(), nomeCategoria);
         assert categoriaMadre != null : "La madre della categoria non deve essere null";
 
         // 2. chiede valore del dominio ereditato + descrizione
         String nomeValoreDominio = this.inserimentoValoreDominio(nomeCategoria, categoriaMadre);
-        assert nomeValoreDominio != null && !nomeValoreDominio.isEmpty() : "Il nome del valore del dominio non deve essere null o vuoto";
+        assert nomeValoreDominio != null
+                && !nomeValoreDominio.isEmpty() : "Il nome del valore del dominio non deve essere null o vuoto";
 
-        boolean insertDescription = InputDati.yesOrNo(">> Vuoi inserire una descrizione per questo valore?");
+        boolean insertDescription = InputDati.yesOrNo(ASK_INSERISCI_DESCRIZIONE_VALORE_DOMINIO);
         if (insertDescription) {
             descrizioneValoreDominio = InputDati.stringReaderSpecificLength(MSG_INPUT_DESCRIZIONE_VALORE_DOMINIO, 0, 100);
             assert descrizioneValoreDominio != null : "La descrizione del valore del dominio non deve essere null";
@@ -199,13 +167,13 @@ public class GestoreCategorie {
         }
 
         // 3. chiede se è foglia
-        boolean isFoglia = InputDati.yesOrNo(">> Questa Categoria è Foglia?");
+        boolean isFoglia = InputDati.yesOrNo(ASK_CATEGORIA_IS_FOGLIA);
 
         // 3.1 se non è foglia, inserisce il dominio che imprime alle figlie
-        if (!isFoglia) {
-            nomeCampoFiglie = InputDati.leggiStringaNonVuota(MSG_INSERIMENTO_DOMINIO_PER_FIGLIE);
-            assert nomeCampoFiglie != null && !nomeCampoFiglie.isEmpty() : "Il nome del campo delle figlie non deve essere null o vuoto";
-        }
+        String nomeCampoFiglie = isFoglia ?
+                "" : InputDati.leggiStringaNonVuota(MSG_INSERIMENTO_DOMINIO_PER_FIGLIE);
+        assert isFoglia || nomeCampoFiglie != null
+                && !nomeCampoFiglie.isEmpty() : "Il nome del campo delle figlie non deve essere null o vuoto";
 
         // 4. creazione dell'oggetto Categoria
         Categoria tempCategoria = isFoglia
@@ -215,24 +183,19 @@ public class GestoreCategorie {
         // 5. aggiunta della categoria figlia alla madre
         categoriaMadre.addCategoriaFiglia(tempCategoria);
         assert categoriaMadre.getCategorieFiglie().contains(tempCategoria) : "La categoria madre deve contenere la nuova categoria figlia";
-
     }
 
 
     private String inserimentoNomeCategoriaRadice() {
-        assert this.tree != null;
-        assert this.tree.getRadici() != null;
-
         String tempNomeRadice;
         do {
             System.out.println(MSG_INSERIMENTO_RADICE + MSG_PRINT_LISTA_RADICI + radiciToString());
             tempNomeRadice = InputDati.leggiStringaNonVuota(MSG_INPUT_NUOVO_NOME_RADICE);
-            if (this.esisteRadice(tempNomeRadice)) {
+
+            if (this.esisteRadice(tempNomeRadice))
                 System.out.println(WARNING_RADICE_ESISTE);
-            }
         } while (this.esisteRadice(tempNomeRadice));
         return tempNomeRadice;
-
     }
 
     /**
@@ -267,9 +230,8 @@ public class GestoreCategorie {
         return this.tree.getRadice(tempRadice).cercaCategoria(tempNome) != null;
     }
 
-
     /**
-     * Guida l'input del nome della Categoria a cui assegnare nomeCategoria come figlia.
+     * Guida l'immissione del nome della Categoria a cui assegnare nomeCategoria come figlia.
      * Controlla che si inserisca il nome di una Categoria che può avere figlie.
      *
      * @param nomeCategoriaRadice, Categoria radice della gerarchia di riferimento
@@ -280,30 +242,26 @@ public class GestoreCategorie {
         assert nomeCategoriaRadice != null : "il nome della radice non può essere null";
         assert nomeCategoria != null : "il nome della categoria figlia non può essere null";
 
-        String nomeCategoriaMadre;
         boolean esisteMadre; // si setta a true quando (e se) la si trova
         Categoria categoriaMadre;
 
         do { //chiedi temp nome madre
             visualizzaGerarchia(nomeCategoriaRadice); // stampa la gerarchia
-            nomeCategoriaMadre = InputDati.leggiStringaNonVuota(String.format(MSG_INSERIMENTO_NOME_CATEGORIA_MADRE, nomeCategoria));
+            String nomeCategoriaMadre = InputDati.leggiStringaNonVuota(String.format(MSG_INSERIMENTO_NOME_CATEGORIA_MADRE, nomeCategoria));
 
-            // TODO potrebbe essere più bello questo check
-            // search for tempmadre e salva l'oggetto
+            // search for tempmadre e salva l'oggetto; poi fa i controlli
             categoriaMadre = this.tree.getRadice(nomeCategoriaRadice).cercaCategoria(nomeCategoriaMadre);
             esisteMadre = categoriaMadre != null
                     && !categoriaMadre.isFoglia()
                     && !nomeCategoriaMadre.equals(nomeCategoria); // se non è assegnato null, allora l'ha trovata!
-
             if (!esisteMadre) System.out.print(WARNING_CATEGORIA_NF_NON_ESISTE);
         } while (!esisteMadre);
 
         return categoriaMadre;
     }
 
-
     /**
-     * Guida l'input di una stringa imponendo un vincolo di univocit&agrave; tra i valori del dominio che le Categorie "sorelle"
+     * Guida l'immissione di una stringa imponendo un vincolo di univocit&agrave; tra i valori del dominio che le Categorie "sorelle"
      * assumono.
      *
      * @param tempNome,       Categoria a cui assegnare il nome del ValoreDominio
@@ -319,29 +277,19 @@ public class GestoreCategorie {
         return nomeValore;
     }
 
-
     /**
      * Permette la creazione di una categoria radice.
      */
     public void aggiungiCategoriaRadice() {
-
         // 1. chiede un nome univoco tra le radici
         String tempNome = inserimentoNomeCategoriaRadice();
         // 2. chiedi nome del dominio (campo) che questa categoria imporrà alle sue figlie
         String tempCampo = InputDati.leggiStringaNonVuota(MSG_INSERIMENTO_NUOVO_DOMINIO);
-        // non chiedo subito di inserire i valori del dominio -> da inserire quando si aggiunge una figlia
         // 3. creazione oggetto e aggiunta all'albero
-        Categoria tempRadice = new Categoria(tempNome, tempCampo);
-        this.tree.aggiungiRadice(tempRadice);
+        this.tree.aggiungiRadice(new Categoria(tempNome, tempCampo));
         serializeXML();
     }
 
-    /**
-     * Verifica che una categoria radice esista
-     *
-     * @param tempNome, nome della categoria da cercare
-     * @return boolean, risultato ricerca
-     */
     private boolean esisteRadice(String tempNome) {
         return this.tree.contains(tempNome);
     }
@@ -390,5 +338,4 @@ public class GestoreCategorie {
             sb.append("> RADICE\n").append(radice).append("\n\n");
         return sb.toString();
     }
-
 }
