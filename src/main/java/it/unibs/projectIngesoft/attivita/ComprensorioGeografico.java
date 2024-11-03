@@ -1,17 +1,20 @@
 package it.unibs.projectIngesoft.attivita;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Rappresenta un insieme di Comuni limitrofi, tra cui effettuare scambi di prestazioni.
  */
 public class ComprensorioGeografico {
 
-
     private String nomeComprensorio;
-    private ArrayList<String> listaComuni;
+    private List<String> listaComuni;
 
-    public ComprensorioGeografico (){
+    /**
+     * Costruttore di default necessario per la deserializzazione di Jackson
+     */
+    public ComprensorioGeografico() {
         this.listaComuni = new ArrayList<>();
     }
 
@@ -19,38 +22,44 @@ public class ComprensorioGeografico {
      * Costruttore con parametri per la classe.
      *
      * @param nomeComprensorio, nome del comprensorio geografico
-     * @param listaComuni, lista dei comuni appartenenti al comprensorio
+     * @param listaComuni,      lista dei comuni appartenenti al comprensorio
      */
-    public ComprensorioGeografico(String nomeComprensorio, ArrayList<String> listaComuni) {
+    public ComprensorioGeografico(String nomeComprensorio, List<String> listaComuni) {
         this.setNomeComprensorio(nomeComprensorio);
         this.setListaComuni(listaComuni);
     }
 
     /**
      * Aggiunge un comune alla lista nel Comprensorio.
-     * @param comune, da aggiungere
+     *
+     * @param comune, nome del comune da aggiungere
      */
-    public void addComune(String comune){
-        assert comune != null && !comune.trim().isEmpty() : "Il nome del comune non deve essere null o vuoto";
-        this.listaComuni.add(comune);
+    public void addComune(String comune) {
+        assert comune != null
+                && !comune.trim().isEmpty() : "Il nome del comune non deve essere null o vuoto";
+        if (!listaComuni.contains(comune)) // controlla non ci siano duplicati
+            this.listaComuni.add(comune);
     }
 
     /**
      * Rappresenta il comprensorio geografico come stringa.
+     *
      * @return la stringa formattata
      */
     @Override
-    public String toString(){
-        StringBuilder comprensorioStringato = new StringBuilder();
-        comprensorioStringato.append(nomeComprensorio).append("\n");
-        for (String comune : listaComuni){
-            comprensorioStringato.append("[").append(listaComuni.indexOf(comune) + 1).append("] ").append(comune).append("\n");
+    public String toString() {
+        StringBuilder comprensorioAsString = new StringBuilder();
+        comprensorioAsString.append(nomeComprensorio).append("\n");
+        int index = 0;
+        for (String comune : listaComuni) {
+            comprensorioAsString.append("[").append(index++).append("] ").append(comune).append("\n");
         }
-        return comprensorioStringato.toString();
+        return comprensorioAsString.toString();
     }
 
     public void setNomeComprensorio(String nomeComprensorio) {
-        assert nomeComprensorio != null && !nomeComprensorio.trim().isEmpty() : "Il nome del comprensorio non deve essere null o vuoto";
+        assert nomeComprensorio != null
+                && !nomeComprensorio.trim().isEmpty() : "Il nome del comprensorio non deve essere null o vuoto";
         this.nomeComprensorio = nomeComprensorio;
     }
 
@@ -58,13 +67,11 @@ public class ComprensorioGeografico {
         return nomeComprensorio;
     }
 
-    // Wade Bullshit: keep reading at your own risk
-
-    public ArrayList<String> getListaComuni() {
+    public List<String> getListaComuni() {
         return listaComuni;
     }
 
-    public void setListaComuni(ArrayList<String> listaComuni) {
+    public void setListaComuni(List<String> listaComuni) {
         assert listaComuni != null : "La lista dei comuni non deve essere null";
         this.listaComuni = listaComuni;
     }
