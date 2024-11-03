@@ -1,7 +1,5 @@
 package it.unibs.projectIngesoft.libraries;
 
-import it.unibs.fp.myutils.InputDati;
-
 /**
  * Presa da InputDati. A meno che sia necessario adattare questa classe per il progetto, possiamo eliminare questo file e semplicemente usare quello di myutils
  */
