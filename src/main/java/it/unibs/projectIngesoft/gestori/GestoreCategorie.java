@@ -120,8 +120,8 @@ public class GestoreCategorie {
             }
         } while (scelta != 0);
 
-        if (radice.getNumCategorieFiglie() == 0)
-            radice.setFoglia();
+        //1.5 imposto a foglie tutte le categorie che non hanno figlie
+        impostaCategorieFoglia(radice);
 
         // 2. procedura per i fattori
         List<Categoria> foglie = tree.getFoglie(radice.getNome());
@@ -129,6 +129,25 @@ public class GestoreCategorie {
 
         //3. salvataggio dei dati
         serializeXML();
+    }
+
+    /**
+     * Partendo dalla radice di una gerarchia, chiama se stessa ricorsivamente per controllare che tutte le categorie
+     * che non hanno figlie siano impostate come foglie.
+     * @param radice, categoria di partenza
+     */
+    private void impostaCategorieFoglia (Categoria radice){
+        if(radice.getNumCategorieFiglie() == 0 && !radice.isFoglia()){
+            radice.setFoglia();
+            return;
+        }
+
+        for(Categoria figlia : radice.getCategorieFiglie()){
+            if(figlia.getNumCategorieFiglie() == 0 && !figlia.isFoglia())
+                figlia.setFoglia();
+            else
+                impostaCategorieFoglia(figlia);
+        }
     }
 
     /**
