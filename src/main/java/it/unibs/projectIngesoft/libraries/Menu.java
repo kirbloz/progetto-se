@@ -3,7 +3,7 @@ package it.unibs.projectIngesoft.libraries;
 public class Menu {
     private static final String CORNICE = "--------------------------------";
     private static final String VOCE_USCITA = "0\tEsci";
-    private static final String RICHIESTA_INSERIMENTO = ">> ";
+    private static final String RICHIESTA_INSERIMENTO = "> ";
 
     private final String titolo;
     private String[] voci;
