@@ -25,9 +25,13 @@ public class GestoreFattori {
     public static final String MSG_INSERISCI_NOME_FOGLIA = ">> Inserisci il nome della categoria FOGLIA:\n> ";
     public static final String MSG_INSERISCI_NOME_RADICE = ">> Inserisci il nome della categoria RADICE:\n> ";
 
-    public static final String MSG_INSERISCI_FOGLIA_ESTERNA = ">> Inserire la foglia (da una gerarchia) ESTERNA con cui fare il confronto tra queste ";
-    public static final String MSG_INSERISCI_FOGLIA_INTERNA = ">> Inserire la foglia (dalla gerarchia) INTERNA con cui fare il confronto tra queste ";
+    public static final String MSG_INSERISCI_FOGLIA_ESTERNA = ">> Inserire la foglia (da una gerarchia) ESTERNA con cui fare il confronto tra queste";
+    public static final String MSG_INSERISCI_FOGLIA_INTERNA = ">> Inserire la foglia (dalla gerarchia) INTERNA con cui fare il confronto tra queste";
+    public static final String MSG_INSERISCI_CATEGORIA_VISUALIZZA_FATTORI = ">> Inserisci la categoria di cui vuoi controllare i fattori di conversione";
+
     public static final String WARNING_CATEGORIA_NON_ESISTE = ">> (!!) La foglia richiesta non esiste o non esistono fattori relativi a questa foglia";
+    public static final String WARNING_NO_FATTORI_MEMORIZZATI = ">> (!!) Non ci sono Fattori di Conversione memorizzati";
+
 
     private final String filePath;
 
@@ -218,7 +222,7 @@ public class GestoreFattori {
             System.out.println(key);
         }
         // inserimento guidato e controllo [Old:A in (Old:A New:A x)]
-        // TODO che vuol dire martino???
+
         do {
             nomeFogliaFormattato = factorNameBuilder(
                     InputDati.leggiStringaNonVuota(MSG_INSERISCI_NOME_RADICE),
@@ -229,10 +233,8 @@ public class GestoreFattori {
     }
 
     /**
-     * // TODO controllare non rompa il cazzo se gli passi un ArrayList vuoto perché dovrebbe andare comunque
-     * // TODO MARTINO RENDI QUESTA COSA LEGGIBILE E SNELLA GRAZIE
      * Calcola tutti i fattori che hanno una foglia nuova e una preesistente,
-     * ovvero appartenente ad una gerarchia diversa da quella nuova.
+     * ovvero appartenente a una gerarchia diversa da quella nuova.
      *
      * @param primoFattoreEsternoInterno, fattore creato tra una foglia nuova e una preesistente.
      *                                    Permette il calcolo di tutti gli altri
@@ -319,24 +321,11 @@ public class GestoreFattori {
         StringBuilder sb = new StringBuilder();
         if (fattori.containsKey(categoriaFormattata)) {
             for (FattoreDiConversione f : fattori.get(categoriaFormattata)) {
-                sb.append(f.getNome_c1()).append(" ").append(f.getNome_c2()).append(" ").append(f.getFattore()).append("\n");
+                String valoreFormattato = String.format("%.3f", f.getFattore());
+                sb.append(f.getNome_c1()).append(" ").append(f.getNome_c2()).append(" ").append(valoreFormattato).append("\n");
             }
             return sb.toString();
         } else return WARNING_CATEGORIA_NON_ESISTE;
-    }
-
-    //TODO non ho ancora capito a cosa minchia dovrebbe servire questa cosa
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        for (String key : fattori.keySet()) {
-            sb.append("[").append(key).append("]").append("\n");
-            for (FattoreDiConversione fattore : fattori.get(key)) {
-                sb.append(fattore.toString()).append("\n");
-            }
-            sb.append("\n");
-        }
-        return sb.toString();
     }
 
     /**
@@ -344,7 +333,11 @@ public class GestoreFattori {
      * I fattori sono raggruppati in base alla prima categoria.
      */
     private void visualizzaFattori() {
-        System.out.println(">> Inserisci la categoria di cui vuoi controllare i fattori di conversione");
+        if (fattori.isEmpty()){
+            System.out.println(WARNING_NO_FATTORI_MEMORIZZATI);
+            return;
+    }
+        System.out.println(MSG_INSERISCI_CATEGORIA_VISUALIZZA_FATTORI);
         String radice = InputDati.leggiStringaNonVuota(MSG_INSERISCI_NOME_RADICE);
         String foglia = InputDati.leggiStringaNonVuota(MSG_INSERISCI_NOME_FOGLIA);
         System.out.println(stringaFattoriDataCategoria(factorNameBuilder(radice, foglia)));
