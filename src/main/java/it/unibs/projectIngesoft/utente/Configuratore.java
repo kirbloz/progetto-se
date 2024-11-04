@@ -9,7 +9,6 @@ public class Configuratore extends Utente{
         super();
     }
 
-
     public Configuratore(String username, String password) {       // Caso utente //??? a cosa serve il costruttore con username e password? -m
         super(username, password);
     }

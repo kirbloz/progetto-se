@@ -12,9 +12,6 @@ import java.util.Scanner;
  */
 public class InputDati {
 
-    // CAZZOOOOOO
-
-
     public static final String ERR_STRINGA_TROPPO_CORTA = "Attenzione: La stringa inserita e' troppo corta, la lunghezza minima e' caratteri: ";
     public static final String ERR_STRINGA_TROPPO_LUNGA = "Attenzione: la stringa inserita e' troppo lunga, la lunghezza massima e' di caratteri: ";
 
@@ -33,11 +30,7 @@ public class InputDati {
         return new Scanner(System.in);
     }
 
-    // TODO questo file non è presentabile
-
     public static String leggiStringa(String messaggio) {
-        /*if (lettore.hasNextLine())
-            lettore.skip("\n");*/
         System.out.print(messaggio);
         return lettore.nextLine();
     }
@@ -90,8 +83,6 @@ public class InputDati {
         boolean finito = true;
         String lettura;
         do {
-            /*System.out.print(messaggio);
-            lettura = lettore.nextLine();*/
             lettura = leggiStringa(messaggio);
             lettura = lettura.trim();
 

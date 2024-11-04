@@ -5,7 +5,7 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
 /**
  * FattoreDiConversione rappresenta un fattore di conversione tra due categorie.
- * Viene utilizzata per calcolare il fattore di conversione delle ore da una categoria ad un'altra.
+ * Viene utilizzata per calcolare il fattore di conversione delle ore da una categoria a un'altra.
  */
 @JacksonXmlRootElement(localName = "FattoreDiConversione")
 public class FattoreDiConversione {
