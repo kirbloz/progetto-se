@@ -1,8 +1,10 @@
 package it.unibs.projectIngesoft.libraries;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.InputMismatchException;
-import java.util.Scanner;
 
 /**
  * Fornisce metodi di utilità generale per gestire l'input di dati.
@@ -23,16 +25,22 @@ public class InputDati {
     private static final String MESSAGGIO_AMMISSIBILI = "Attenzione: i caratteri ammissibili sono: ";
     private static final char RISPOSTA_SI = 'S';
     private static final char RISPOSTA_NO = 'N';
-    private static final Scanner lettore = creaScanner();
+    private static final BufferedReader lettore = creaBufferedReader();
     private static final String ERRORE_RANGE = "Attenzione, il valore non rientra tra: ";
+    public static final String ERRORE_IOEXCEPTION = "Attenzione: si e' verificato un problema con l'input.";
 
-    private static Scanner creaScanner() {
-        return new Scanner(System.in);
+    private static BufferedReader creaBufferedReader() {
+        return new BufferedReader((new InputStreamReader(System.in)));
     }
 
     public static String leggiStringa(String messaggio) {
         System.out.print(messaggio);
-        return lettore.nextLine();
+        try {
+            return lettore.readLine();
+        } catch (IOException e) {
+            System.out.println(ERRORE_IOEXCEPTION);
+        }
+        return "";
     }
 
     /**
@@ -47,7 +55,7 @@ public class InputDati {
         String lettura;
         do {
             System.out.print(messaggio + Arrays.toString(valoriAmmessi));
-            lettura = lettore.nextLine();
+            lettura = leggiStringa("");
 
             if (!Arrays.asList(valoriAmmessi).contains(lettura))
                 System.out.println(ERR_VALORI_NON_AMMESSI);
@@ -104,48 +112,21 @@ public class InputDati {
         return lettura;
     }
 
-    /**
-     * Il metodo restituisce una stringa chiesta in input all'utente con l'obbligo che sia di una lunghezza compresa tra i valori massimi e minimi specificati rispettivamente
-     * da minLength e maxLength, e che ogni carattere della stringa faccia parte dei valoriAmmessi
-     *
-     * @param messaggio     Il messaggio che visualizza all'utente nel momento dell'input
-     * @param minLength     lunghezza minima consentita
-     * @param maxLength     lunghezza massima consentita
-     * @param valoriAmmessi valori che e' consentito scrivere
-     * @return L'input
-     * @author Legati Matteo
-     */
-    public static String stringReaderSpecificLengthUsing(String messaggio, int minLength, int maxLength, String valoriAmmessi) {
-        boolean tuttiIValoriSonoAmmessi = true;
-        String lettura;
-        do {
-            lettura = stringReaderSpecificLength(messaggio + "[Valori Ammessi: " + valoriAmmessi + " ]", minLength, maxLength);
-
-            for (int i = 0; i < lettura.length(); i++) {
-                if (!valoriAmmessi.contains(String.valueOf(lettura.charAt(i)))) {
-                    tuttiIValoriSonoAmmessi = false;
-                    break;
-                }
-            }
-
-            if (!tuttiIValoriSonoAmmessi)
-                System.out.println(ERR_VALORI_NON_AMMESSI);
-        } while (!tuttiIValoriSonoAmmessi);
-
-        return lettura;
-    }
-
     public static char leggiChar(String messaggio) {
         boolean finito = false;
         char valoreLetto = '\0';
         do {
             System.out.print(messaggio);
-            String lettura = lettore.next();
-            if (lettura.length() > 0) {
-                valoreLetto = lettura.charAt(0);
-                finito = true;
-            } else {
-                System.out.println(ERRORE_STRINGA_VUOTA);
+            try {
+                String lettura = lettore.readLine();
+                if (!lettura.isEmpty()) {
+                    valoreLetto = lettura.charAt(0);
+                    finito = true;
+                } else {
+                    System.out.println(ERRORE_STRINGA_VUOTA);
+                }
+            } catch (IOException e) {
+                System.out.println(ERRORE_IOEXCEPTION);
             }
         } while (!finito);
         return valoreLetto;
@@ -165,18 +146,19 @@ public class InputDati {
         return valoreLetto;
     }
 
-
     public static int leggiIntero(String messaggio) {
         boolean finito = false;
         int valoreLetto = 0;
         do {
             System.out.print(messaggio);
             try {
-                valoreLetto = lettore.nextInt();
+                String lettura = lettore.readLine();
+                valoreLetto = Integer.parseInt(lettura);
                 finito = true;
-            } catch (InputMismatchException e) {
+            } catch (IOException e) {
+                System.out.println(ERRORE_IOEXCEPTION);
+            } catch (NumberFormatException e) {
                 System.out.println(ERRORE_FORMATO);
-                lettore.next();
             }
         } while (!finito);
         return valoreLetto;
@@ -189,7 +171,6 @@ public class InputDati {
     public static int leggiInteroNonNegativo(String messaggio) {
         return leggiInteroConMinimo(messaggio, 0);
     }
-
 
     public static int leggiInteroConMinimo(String messaggio, int minimo) {
         boolean finito = false;
@@ -209,7 +190,7 @@ public class InputDati {
         boolean finito = false;
         int valoreLetto;
         do {
-            valoreLetto = lettore.nextInt();
+            valoreLetto = leggiIntero(messaggio);
             if (valoreLetto >= minimo && valoreLetto <= massimo)
                 finito = true;
             else if (valoreLetto < minimo)
@@ -220,7 +201,6 @@ public class InputDati {
 
         return valoreLetto;
     }
-
 
     public static int leggiInteroRange(String msg, int min, int max) {
         int read;
@@ -236,11 +216,13 @@ public class InputDati {
         do {
             System.out.print(messaggio);
             try {
-                valoreLetto = lettore.nextDouble();
+                String lettura = lettore.readLine();
+                valoreLetto = Double.parseDouble(lettura);
                 finito = true;
+            }catch (IOException e){
+                System.out.println(ERRORE_IOEXCEPTION);
             } catch (InputMismatchException e) {
                 System.out.println(ERRORE_FORMATO);
-                lettore.next();
             }
         } while (!finito);
         return valoreLetto;
@@ -260,11 +242,9 @@ public class InputDati {
         return valoreLetto;
     }
 
-
     public static boolean yesOrNo(String messaggio) {
         String mioMessaggio = messaggio + "(" + RISPOSTA_SI + "/" + RISPOSTA_NO + ")";
         char valoreLetto = leggiUpperChar(mioMessaggio, String.valueOf(RISPOSTA_SI) + RISPOSTA_NO);
-
         return valoreLetto == RISPOSTA_SI;
     }
 
