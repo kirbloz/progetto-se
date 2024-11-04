@@ -263,6 +263,8 @@ public class Categoria {
         }
         if (!this.isFoglia()) { // se non è foglia, si stampa il dominio impresso alle figlie
             sb.append("Dominio Figlie: ").append(this.getCampoFiglie()).append("\n");
+        }else{
+            sb.append("> Foglia\n");
         }
 
         return sb.toString();
