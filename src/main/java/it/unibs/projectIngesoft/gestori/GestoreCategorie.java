@@ -90,12 +90,23 @@ public class GestoreCategorie {
      *
      * @param scelta, selezione dal menu
      */
-    public void entryPoint(int scelta) {
-        switch (scelta) {
-            case 1 -> subMenuAggiungiGerarchia();
-            case 2 -> visualizzaGerarchie();
-            default -> {}
+    public void entryPoint(int scelta, boolean isConfiguratore) {
+        if (isConfiguratore) {
+            switch (scelta) {
+                case 1 -> subMenuAggiungiGerarchia();
+                case 2 -> visualizzaGerarchie();
+                default -> {
+                }
+            }
+        } else {
+            switch (scelta) {
+                case 1 -> esploraGerarchie();
+                default -> {
+
+                }
+            }
         }
+
     }
 
     /**
@@ -134,16 +145,17 @@ public class GestoreCategorie {
     /**
      * Partendo dalla radice di una gerarchia, chiama se stessa ricorsivamente per controllare che tutte le categorie
      * che non hanno figlie siano impostate come foglie.
+     *
      * @param radice, categoria di partenza
      */
-    private void impostaCategorieFoglia (Categoria radice){
-        if(radice.getNumCategorieFiglie() == 0 && !radice.isFoglia()){
+    private void impostaCategorieFoglia(Categoria radice) {
+        if (radice.getNumCategorieFiglie() == 0 && !radice.isFoglia()) {
             radice.setFoglia();
             return;
         }
 
-        for(Categoria figlia : radice.getCategorieFiglie()){
-            if(figlia.getNumCategorieFiglie() == 0 && !figlia.isFoglia())
+        for (Categoria figlia : radice.getCategorieFiglie()) {
+            if (figlia.getNumCategorieFiglie() == 0 && !figlia.isFoglia())
                 figlia.setFoglia();
             else
                 impostaCategorieFoglia(figlia);
@@ -317,7 +329,7 @@ public class GestoreCategorie {
      * Stampa a video una struttura pseudo-tree-like delle gerarchie di radici presenti nel programma.
      */
     public void visualizzaGerarchie() {
-        if(tree.getRadici().isEmpty())
+        if (tree.getRadici().isEmpty())
             return;
         System.out.println(HEADER_VISUALIZZA_GERARCHIE);
         System.out.println(this);
@@ -331,7 +343,6 @@ public class GestoreCategorie {
     public void visualizzaGerarchia(String nomeRadice) {
         System.out.println(String.format(HEADER_VISUALIZZA_RADICE, nomeRadice));
         System.out.println(this.tree.getRadice(nomeRadice) + " \n");
-
     }
 
     /**
@@ -341,6 +352,8 @@ public class GestoreCategorie {
      * @return stringa formattata
      */
     public String radiciToString() {
+        if (tree.getRadici().isEmpty())
+            return "";
         StringBuilder sb = new StringBuilder();
         for (Categoria radice : tree.getRadici())
             sb.append(radice.simpleToString()).append("\n");
@@ -359,4 +372,26 @@ public class GestoreCategorie {
             sb.append("> RADICE\n").append(radice).append("\n\n");
         return sb.toString();
     }
+
+    /* VERSIONE 2 */
+
+    // TODO
+
+    /**
+     * Permette di navigare un livello alla volta per le gerarchie.
+     * Un livello equivale a un dominio che una categoria imprime sulle figlie,
+     * quindi mostrerà categorie sorelle.
+     */
+    public void esploraGerarchie() {
+        System.out.println(">> ESPLORA GERARCHIE <<");
+
+        if (tree.getRadici().isEmpty()) {
+            System.out.println(">> (!!) Nessuna gerarchia memorizzata.");
+            return;
+        }
+
+        System.out.println(radiciToString());
+
+    }
+
 }

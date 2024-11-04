@@ -24,6 +24,10 @@ public class Main {
             "Menu Categorie",
             "Menu Fattori"
     };
+    protected static final String[] vociMainFruitore = new String[]{
+            "Cambia Credenziali",
+            "Menu Categorie",
+    };
 
     protected static final String TITLE_MENU_COMPRENSORIO = "MENU' COMPRENSORI GEOGRAFICI";
     protected static final String[] vociComprensorioGeografico = new String[]{
@@ -37,20 +41,25 @@ public class Main {
             "Visualizza Gerarchie"
     };
 
+    protected static final String[] vociCategorieFruitore = new String[]{
+            "Esplora Gerarchie"
+    };
+
     protected static final String TITLE_MENU_FATTORI = "MENU' FATTORI";
     protected static final String[] vociFattori = new String[]{
             "Visualizza Fattori di Conversione"
     };
 
     protected static Utente utenteLoggato = new Utente();
+    protected static boolean isConfiguratore = false;
 
     public static void main(String[] args) {
 
-        Menu menu =                         new Menu(TITLE_MAIN_MENU, vociMain);
-        Menu menuCategorie =                new Menu(TITLE_MENU_CATEGORIE, vociCategorie);
-        Menu menuFattori =                  new Menu(TITLE_MENU_FATTORI, vociFattori);
-        Menu menuComprensoriGeografici =    new Menu(TITLE_MENU_COMPRENSORIO, vociComprensorioGeografico);
-        GestoreUtenti userHandler =         new GestoreUtenti(UTENTI_XML_FILEPATH, UTENTI_DEF_CREDS_XML_FILEPATH);
+        Menu menu = new Menu(TITLE_MAIN_MENU, isConfiguratore ? vociMain : vociMainFruitore);
+        Menu menuCategorie = new Menu(TITLE_MENU_CATEGORIE, isConfiguratore ? vociCategorie : vociCategorieFruitore);
+        Menu menuFattori = new Menu(TITLE_MENU_FATTORI, vociFattori);
+        Menu menuComprensoriGeografici = new Menu(TITLE_MENU_COMPRENSORIO, vociComprensorioGeografico);
+        GestoreUtenti userHandler = new GestoreUtenti(UTENTI_XML_FILEPATH, UTENTI_DEF_CREDS_XML_FILEPATH);
 
         utenteLoggato = userHandler.login();
         loopMain(menu, menuCategorie, menuFattori, menuComprensoriGeografici, userHandler);
@@ -65,19 +74,34 @@ public class Main {
      */
     private static void loopMain(Menu menu, Menu menuCategorie, Menu menuFattori, Menu menuComprensoriGeografici, GestoreUtenti userHandler) {
         int scelta;
-        do {
-            scelta = menu.scegli();
+        if (isConfiguratore)
+            do {
+                scelta = menu.scegli();
 
-            switch (scelta) {
-                case 0 -> System.out.println(MSG_PROGRAM_EXIT);
-                case 1 -> userHandler.cambioCredenziali(utenteLoggato); // cambio credenziali
-                case 2 -> loopComprensoriGeografici(menuComprensoriGeografici); //menu comprensorio
-                case 3 -> loopCategorie(menuCategorie); //menu categorie
-                case 4 -> loopFattori(menuFattori); //menu fattori
-                default -> {} // già gestito dalla classe Menu
-            }
+                switch (scelta) {
+                    case 0 -> System.out.println(MSG_PROGRAM_EXIT);
+                    case 1 -> userHandler.cambioCredenziali(utenteLoggato); // cambio credenziali
+                    case 2 -> loopComprensoriGeografici(menuComprensoriGeografici); //menu comprensorio
+                    case 3 -> loopCategorie(menuCategorie); //menu categorie
+                    case 4 -> loopFattori(menuFattori); //menu fattori
+                    default -> {
+                    } // già gestito dalla classe Menu
+                }
 
-        } while (scelta != 0);
+            } while (scelta != 0);
+        else
+            do {
+                scelta = menu.scegli();
+
+                switch (scelta) {
+                    case 0 -> System.out.println(MSG_PROGRAM_EXIT);
+                    case 1 -> userHandler.cambioCredenziali(utenteLoggato);
+                    case 2 -> loopCategorie(menuCategorie);
+                    default -> {
+                    } // già gestito dalla classe Menu
+                }
+
+            } while (scelta != 0);
     }
 
     /**
@@ -105,7 +129,7 @@ public class Main {
         GestoreCategorie gestoreCategorieCat = new GestoreCategorie(CATEGORIE_XML_FILEPATH, FATTORI_DI_CONVERSIONE_XML_FILEPATH);
         do {
             scelta = menuCategorie.scegli();
-            gestoreCategorieCat.entryPoint(scelta);
+            gestoreCategorieCat.entryPoint(scelta, isConfiguratore);
         } while (scelta != 0);
     }
 
