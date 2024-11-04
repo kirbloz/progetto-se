@@ -298,6 +298,8 @@ public class GestoreCategorie {
      * Stampa a video una struttura pseudo-tree-like delle gerarchie di radici presenti nel programma.
      */
     public void visualizzaGerarchie() {
+        if(tree.getRadici().isEmpty())
+            return;
         System.out.println(HEADER_VISUALIZZA_GERARCHIE);
         System.out.println(this);
     }
