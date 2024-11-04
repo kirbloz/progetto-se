@@ -27,6 +27,7 @@ public class GestoreFattori {
 
     public static final String MSG_INSERISCI_FOGLIA_ESTERNA = ">> Inserire la foglia (da una gerarchia) ESTERNA con cui fare il confronto tra queste ";
     public static final String MSG_INSERISCI_FOGLIA_INTERNA = ">> Inserire la foglia (dalla gerarchia) INTERNA con cui fare il confronto tra queste ";
+    public static final String WARNING_CATEGORIA_NON_ESISTE = ">> (!!) La foglia richiesta non esiste o non esistono fattori relativi a questa foglia";
 
     private final String filePath;
 
@@ -311,7 +312,7 @@ public class GestoreFattori {
 
     /**
      * Dato il nome di una categoria ritorna una stringa formattata con tutti i fattori di conversione relativi a quella categoria
-     * @param categoriaFormattata
+     * @param categoriaFormattata, nome categoria nel formato root:leaf
      * @return String
      */
     public String stringaFattoriDataCategoria(String categoriaFormattata){
@@ -321,7 +322,7 @@ public class GestoreFattori {
                 sb.append(f.getNome_c1()).append(" ").append(f.getNome_c2()).append(" ").append(f.getFattore()).append("\n");
             }
             return sb.toString();
-        } else return "La foglia richiesta non esiste o non esistono fattori relativi a qusta foglia";
+        } else return WARNING_CATEGORIA_NON_ESISTE;
     }
 
     //TODO non ho ancora capito a cosa minchia dovrebbe servire questa cosa
