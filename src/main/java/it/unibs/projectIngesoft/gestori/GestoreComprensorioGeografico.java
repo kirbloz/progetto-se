@@ -79,16 +79,17 @@ public class GestoreComprensorioGeografico {
             nomeComprensorio = InputDati.leggiStringaNonVuota(MSG_INSERISCI_NOME_NUOVO_COMPRENSORIO);
         } while (isNomeGiaUsato(nomeComprensorio));
 
-        ArrayList<String> comuniDelComprensorio = new ArrayList<>();
+        ComprensorioGeografico nuovoComprensorio = new ComprensorioGeografico(nomeComprensorio, new ArrayList<>());
+
         String nomeComuneDaInserire;
         do {
             nomeComuneDaInserire = InputDati.leggiStringaNonVuota(MSG_INSERISCI_COMUNE);
-            if (!nomeComuneDaInserire.equalsIgnoreCase(STR_END_INPUT) && !comuniDelComprensorio.contains(nomeComuneDaInserire)) {
-                comuniDelComprensorio.add(nomeComuneDaInserire);
+            if (!nomeComuneDaInserire.equalsIgnoreCase(STR_END_INPUT)) {
+                nuovoComprensorio.addComune(nomeComuneDaInserire);
             }
-        } while (!nomeComuneDaInserire.equalsIgnoreCase(STR_END_INPUT) && !comuniDelComprensorio.isEmpty());
+        } while (!nomeComuneDaInserire.equalsIgnoreCase(STR_END_INPUT) && nuovoComprensorio.getListaComuni().isEmpty());
         // Memorizzazione del nuovo comprensorio
-        addComprensorio(new ComprensorioGeografico(nomeComprensorio, comuniDelComprensorio));
+        addComprensorio(nuovoComprensorio);
     }
 
     private boolean isNomeGiaUsato(String nomeComprensorio) {
