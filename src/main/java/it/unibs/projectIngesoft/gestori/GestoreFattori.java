@@ -316,12 +316,15 @@ public class GestoreFattori {
      */
     public String stringaFattoriDataCategoria(String categoriaFormattata){
         StringBuilder sb = new StringBuilder();
-        for (FattoreDiConversione f : fattori.get(categoriaFormattata)){
-            sb.append(f.getNome_c1()).append(" ").append(f.getNome_c2()).append(" ").append(f.getFattore()).append("\n");
-        }
-        return sb.toString();
+        if (fattori.containsKey(categoriaFormattata)) {
+            for (FattoreDiConversione f : fattori.get(categoriaFormattata)) {
+                sb.append(f.getNome_c1()).append(" ").append(f.getNome_c2()).append(" ").append(f.getFattore()).append("\n");
+            }
+            return sb.toString();
+        } else return "La foglia richiesta non esiste o non esistono fattori relativi a qusta foglia";
     }
 
+    //TODO non ho ancora capito a cosa minchia dovrebbe servire questa cosa
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -340,8 +343,10 @@ public class GestoreFattori {
      * I fattori sono raggruppati in base alla prima categoria.
      */
     private void visualizzaFattori() {
-        System.out.println(">> Fattori di Conversione <<");
-        System.out.println(this);
+        System.out.println(">> Inserisci la categoria di cui vuoi controllare i fattori di conversione");
+        String radice = InputDati.leggiStringaNonVuota(MSG_INSERISCI_NOME_RADICE);
+        String foglia = InputDati.leggiStringaNonVuota(MSG_INSERISCI_NOME_FOGLIA);
+        System.out.println(stringaFattoriDataCategoria(factorNameBuilder(radice, foglia)));
     }
 
     /**
