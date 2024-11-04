@@ -16,6 +16,8 @@ public class GestoreComprensorioGeografico {
 
     private static final String WARNING_NOME_COMPRENSORIO_GIA_USATO = ">> (!!) Attenzione, esiste già un comprensorio con questo nome";
     public static final String WARNING_NOME_COMPRENSORIO_NON_ESISTE = ">> (!!) Non esiste un comprensorio con questo nome";
+    public static final String STR_END_INPUT = "fine";
+    public static final String WARNING_NO_COMPRENSORI = ">> (!!) Non ci sono comprensori memorizzati.";
 
     private final String filePath;
     private ArrayList<ComprensorioGeografico> listaComprensoriGeografici;
@@ -81,10 +83,10 @@ public class GestoreComprensorioGeografico {
         String nomeComuneDaInserire;
         do {
             nomeComuneDaInserire = InputDati.leggiStringaNonVuota(MSG_INSERISCI_COMUNE);
-            if (!nomeComuneDaInserire.equalsIgnoreCase("fine")) {
+            if (!nomeComuneDaInserire.equalsIgnoreCase(STR_END_INPUT) && !comuniDelComprensorio.contains(nomeComuneDaInserire)) {
                 comuniDelComprensorio.add(nomeComuneDaInserire);
             }
-        } while (!nomeComuneDaInserire.equalsIgnoreCase("fine") && !comuniDelComprensorio.isEmpty());
+        } while (!nomeComuneDaInserire.equalsIgnoreCase(STR_END_INPUT) && !comuniDelComprensorio.isEmpty());
         // Memorizzazione del nuovo comprensorio
         addComprensorio(new ComprensorioGeografico(nomeComprensorio, comuniDelComprensorio));
     }
@@ -100,6 +102,9 @@ public class GestoreComprensorioGeografico {
     }
 
     private void scegliComprensorioDaStampare() {
+        if(listaComprensoriGeografici.isEmpty()){
+            System.out.println(WARNING_NO_COMPRENSORI);
+        }
         for (ComprensorioGeografico comprensorio : this.listaComprensoriGeografici) {
             System.out.println(comprensorio.getNomeComprensorio());
         }
