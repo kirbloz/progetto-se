@@ -1,4 +1,4 @@
-![immagine](https://github.com/user-attachments/assets/a1461c8c-d2cb-4330-b1aa-46a665ef1196)# Ermes
+# Ermes
 Questo repository contiene lo svolgimento del progetto di Ingegneria del Software, consegna del AA. 24-25.
 I collaboratori sono @GabbayBG, @kirbloz, @martibarimaff.
 
