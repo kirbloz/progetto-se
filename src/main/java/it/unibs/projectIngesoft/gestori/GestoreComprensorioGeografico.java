@@ -1,8 +1,8 @@
 package it.unibs.projectIngesoft.gestori;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import it.unibs.projectIngesoft.libraries.InputDati;
 import it.unibs.projectIngesoft.attivita.ComprensorioGeografico;
+import it.unibs.projectIngesoft.libraries.InputDati;
 import it.unibs.projectIngesoft.libraries.Serializer;
 
 import java.util.ArrayList;
@@ -40,7 +40,8 @@ public class GestoreComprensorioGeografico {
         List<ComprensorioGeografico> listaLetta = Serializer.deserialize(new TypeReference<>() {
         }, this.filePath);
         this.listaComprensoriGeografici.clear();
-        this.listaComprensoriGeografici.addAll(listaLetta);
+        if (listaLetta != null)
+            this.listaComprensoriGeografici.addAll(listaLetta);
     }
 
     /**
@@ -87,7 +88,7 @@ public class GestoreComprensorioGeografico {
             if (!nomeComuneDaInserire.equalsIgnoreCase(STR_END_INPUT)) {
                 nuovoComprensorio.addComune(nomeComuneDaInserire);
             }
-        } while (!nomeComuneDaInserire.equalsIgnoreCase(STR_END_INPUT) && nuovoComprensorio.getListaComuni().isEmpty());
+        } while (!nomeComuneDaInserire.equalsIgnoreCase(STR_END_INPUT) || nuovoComprensorio.getListaComuni().isEmpty());
         // Memorizzazione del nuovo comprensorio
         addComprensorio(nuovoComprensorio);
     }
@@ -103,8 +104,9 @@ public class GestoreComprensorioGeografico {
     }
 
     private void scegliComprensorioDaStampare() {
-        if(listaComprensoriGeografici.isEmpty()){
+        if (listaComprensoriGeografici.isEmpty()) {
             System.out.println(WARNING_NO_COMPRENSORI);
+            return;
         }
         for (ComprensorioGeografico comprensorio : this.listaComprensoriGeografici) {
             System.out.println(comprensorio.getNomeComprensorio());

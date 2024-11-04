@@ -40,8 +40,7 @@ public class Serializer {
             XmlMapper xmlMapper = new XmlMapper();
             File file = new File(filePath);
 
-            if (!file.exists()) {
-                System.out.println("FILE NON ESISTE. NON CARICO NIENTE.");
+            if (!file.exists() || file.length() == 0) {
                 return null;
             }
             // legge i dati dal file con un mapper
