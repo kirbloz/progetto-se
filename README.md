@@ -17,4 +17,4 @@ al configuratore, il quale lo comunica (al di fuori del sistema) a ciascun fruit
 La consegna prevista dai docenti è molto più precisa e verbosa, riportiamo solo questo piccolo riassunto.
 
 ## Documentazione
-Nella cartella `external doc` sono contenuti i file di documentazione prodotti durante lo sviluppo dell'applicazione.
+Nella cartella (external doc) sono contenuti i file di documentazione prodotti durante lo sviluppo dell'applicazione.
