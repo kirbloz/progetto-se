@@ -1,4 +1,4 @@
-# Ermes
+![immagine](https://github.com/user-attachments/assets/a1461c8c-d2cb-4330-b1aa-46a665ef1196)# Ermes
 Questo repository contiene lo svolgimento del progetto di Ingegneria del Software, consegna del AA. 24-25.
 I collaboratori sono @GabbayBG, @kirbloz, @martibarimaff.
 
@@ -17,4 +17,4 @@ al configuratore, il quale lo comunica (al di fuori del sistema) a ciascun fruit
 La consegna prevista dai docenti è molto più precisa e verbosa, riportiamo solo questo piccolo riassunto.
 
 ## Documentazione
-Nella cartella [external doc](external doc) sono contenuti i file di documentazione prodotti durante lo sviluppo dell'applicazione.
+Nella cartella `external doc` sono contenuti i file di documentazione prodotti durante lo sviluppo dell'applicazione.
