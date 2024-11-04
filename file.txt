@@ -1,2 +1,0 @@
-cat1 cat2 0.3
-cat2 cat3 1.2
