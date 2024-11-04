@@ -309,6 +309,19 @@ public class GestoreFattori {
         return root + ":" + leaf;
     }
 
+    /**
+     * Dato il nome di una categoria ritorna una stringa formattata con tutti i fattori di conversione relativi a quella categoria
+     * @param categoriaFormattata
+     * @return String
+     */
+    public String stringaFattoriDataCategoria(String categoriaFormattata){
+        StringBuilder sb = new StringBuilder();
+        for (FattoreDiConversione f : fattori.get(categoriaFormattata)){
+            sb.append(f.getNome_c1()).append(" ").append(f.getNome_c2()).append(" ").append(f.getFattore()).append("\n");
+        }
+        return sb.toString();
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
