@@ -107,6 +107,10 @@ public class Categoria {
         return nome;
     }
 
+    public String getNomeMadre() {
+        return nomeMadre;
+    }
+
     public ValoreDominio getValoreDominio() {
         return this.valoreDominio;
     }
