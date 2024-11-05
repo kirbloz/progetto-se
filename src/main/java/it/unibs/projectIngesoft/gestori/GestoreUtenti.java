@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import it.unibs.projectIngesoft.libraries.InputDati;
 import it.unibs.projectIngesoft.libraries.Serializer;
 import it.unibs.projectIngesoft.utente.Configuratore;
+import it.unibs.projectIngesoft.utente.Fruitore;
 import it.unibs.projectIngesoft.utente.Utente;
 
 import java.util.ArrayList;
@@ -13,9 +14,14 @@ public class GestoreUtenti {
 
     public static final String MSG_RICHIESTA_USERNAME = "Inserisci il tuo username: ";
     public static final String MSG_RICHIESTA_PASSWORD = "Inserisci la tua password: ";
+    public static final String MSG_RICHIESTA_EMAIL = "Inserisci la tua email: ";
+    public static final String MSG_RICHIESTA_COMPRENSORIO = "Inserisci il comprensorio di appartenenza: ";
 
     public static final String MSG_RICHIESTA_NEW_USERNAME = "Inserisci il nuovo username: "; //per cambio username
     public static final String MSG_RICHIESTA_NEW_PASSWORD = "Inserisci la nuova password: "; //per cambio password
+
+    public static final String MSG_UTENTE_ESISTENTE = "L'username e' gia' in uso";
+    public static final String MSG_COMPRENSORIO_NEXIST = "Il comprensorio non esiste!";
 
     private final String filePath;
     private final String defaultCredentialsFilePath;
@@ -71,6 +77,37 @@ public class GestoreUtenti {
             serializeXML();
         }
     }
+
+    public Utente register(ArrayList<String> possibiliComprensori) {
+        String comprensorio;
+        String username;
+        String password;
+        String email;
+        Fruitore fruitore;
+
+        for(String tmp: possibiliComprensori){
+            System.out.println(tmp);
+        }
+
+        comprensorio = InputDati.leggiStringaNonVuota(MSG_RICHIESTA_COMPRENSORIO);
+        while (!possibiliComprensori.contains(comprensorio)) {
+            System.out.println(MSG_COMPRENSORIO_NEXIST);
+            comprensorio = InputDati.leggiStringaNonVuota(MSG_RICHIESTA_COMPRENSORIO);
+        }
+
+        username = InputDati.leggiStringaNonVuota(MSG_RICHIESTA_USERNAME);
+        while (!(cercaConUsername(username) == null)) {
+            System.out.println(MSG_UTENTE_ESISTENTE);
+            username = InputDati.leggiStringaNonVuota(MSG_RICHIESTA_USERNAME);
+        }
+
+        password = InputDati.leggiStringaNonVuota(MSG_RICHIESTA_PASSWORD);
+        email = InputDati.leggiStringaNonVuota(MSG_RICHIESTA_EMAIL);
+        fruitore = new Fruitore(username, password, email, comprensorio);
+        this.addUtente(fruitore);
+        return fruitore;
+    }
+
 
     /**
      * Serve per il login.

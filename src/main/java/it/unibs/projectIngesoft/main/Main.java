@@ -5,7 +5,10 @@ import it.unibs.projectIngesoft.gestori.GestoreComprensorioGeografico;
 import it.unibs.projectIngesoft.gestori.GestoreFattori;
 import it.unibs.projectIngesoft.gestori.GestoreUtenti;
 import it.unibs.projectIngesoft.libraries.Menu;
+import it.unibs.projectIngesoft.utente.Configuratore;
 import it.unibs.projectIngesoft.utente.Utente;
+
+import java.util.ArrayList;
 
 public class Main {
 
@@ -17,8 +20,14 @@ public class Main {
 
     public static final String MSG_PROGRAM_EXIT = "> ARRIVEDERCI <";
 
+    protected static final String TITLE_STARTING_MENU = "BENVENUTO";
+    protected static final String[] vociMenuIniziale = new String[]{
+            "Login",
+            "Registrazione"
+    };
+    
     protected static final String TITLE_MAIN_MENU = "MENU' PRINCIPALE - SCAMBIO ORE";
-    protected static final String[] vociMain = new String[]{
+    protected static final String[] vociMainConfiguratore = new String[]{
             "Cambia Credenziali",
             "Menu Comprensorio ",
             "Menu Categorie",
@@ -55,14 +64,19 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Menu menu = new Menu(TITLE_MAIN_MENU, isConfiguratore ? vociMain : vociMainFruitore);
+        Menu menuIniziale = new Menu(TITLE_STARTING_MENU, vociMenuIniziale);
+        Menu menu = new Menu(TITLE_MAIN_MENU, isConfiguratore ? vociMainConfiguratore : vociMainFruitore);
         Menu menuCategorie = new Menu(TITLE_MENU_CATEGORIE, isConfiguratore ? vociCategorie : vociCategorieFruitore);
         Menu menuFattori = new Menu(TITLE_MENU_FATTORI, vociFattori);
         Menu menuComprensoriGeografici = new Menu(TITLE_MENU_COMPRENSORIO, vociComprensorioGeografico);
-        GestoreUtenti userHandler = new GestoreUtenti(UTENTI_XML_FILEPATH, UTENTI_DEF_CREDS_XML_FILEPATH);
 
-        utenteLoggato = userHandler.login();
-        loopMain(menu, menuCategorie, menuFattori, menuComprensoriGeografici, userHandler);
+        GestoreUtenti userHandler = new GestoreUtenti(UTENTI_XML_FILEPATH, UTENTI_DEF_CREDS_XML_FILEPATH);
+        GestoreComprensorioGeografico comprensorioHandler = new GestoreComprensorioGeografico(COMPRENSORI_GEOGRAFICI_XML_FILEPATH);
+
+
+        Utente utenteAttivo = loopMenuIniziale(menuIniziale, userHandler, comprensorioHandler.listaNomiComprensoriGeografici());
+        if(utenteAttivo != null)
+            loopMain(menu, menuCategorie, menuFattori, menuComprensoriGeografici, userHandler, utenteAttivo);
     }
 
     /**
@@ -72,9 +86,9 @@ public class Main {
      * @param menuCategorie, sotto-menu per le categorie
      * @param menuFattori,   sotto-menu per i fattori
      */
-    private static void loopMain(Menu menu, Menu menuCategorie, Menu menuFattori, Menu menuComprensoriGeografici, GestoreUtenti userHandler) {
+    private static void loopMain(Menu menu, Menu menuCategorie, Menu menuFattori, Menu menuComprensoriGeografici, GestoreUtenti userHandler, Utente utenteAttivo) {
         int scelta;
-        if (isConfiguratore)
+        if (isConfiguratore)  //TODO utenteAttivo.getClass() == Configuratore.class
             do {
                 scelta = menu.scegli();
 
@@ -104,6 +118,27 @@ public class Main {
             } while (scelta != 0);
     }
 
+    private static Utente loopMenuIniziale(Menu menu, GestoreUtenti userHandler, ArrayList<String> listaNomiComprensorio) {
+        int scelta;
+        Utente utenteLoggato;
+        scelta = menu.scegli();
+        switch (scelta) {
+            case 0:
+                System.out.println(MSG_PROGRAM_EXIT);
+                return utenteLoggato = null;
+            case 1:
+                utenteLoggato = userHandler.login();
+                break;
+            case 2:
+                utenteLoggato = userHandler.register(listaNomiComprensorio);
+                break;
+            default:
+                utenteLoggato = null;
+        }
+        return utenteLoggato;
+    }
+    
+    
     /**
      * Gestisce il menu per i comprensori geografici.
      *

@@ -134,4 +134,12 @@ public class GestoreComprensorioGeografico {
     public void visualizzaComprensorio(ComprensorioGeografico comprensorio) {
         System.out.println(comprensorio.toString());
     }
+
+    public ArrayList<String> listaNomiComprensoriGeografici() {
+        ArrayList<String> listaNomiComprensoriGeografici = new ArrayList<>();
+        for(ComprensorioGeografico comprensorio : listaComprensoriGeografici){
+            listaNomiComprensoriGeografici.add(comprensorio.getNomeComprensorio());
+        }
+        return listaNomiComprensoriGeografici;
+    }
 }
