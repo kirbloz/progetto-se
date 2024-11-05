@@ -1,8 +1,20 @@
 package it.unibs.projectIngesoft.utente;
 
 import com.fasterxml.jackson.annotation.JsonRootName;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
+
+@JsonTypeInfo(
+        use = JsonTypeInfo.Id.NAME,
+        //include = JsonTypeInfo.As.PROPERTY,
+        property = "type"
+)
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = Fruitore.class, name = "Fruitore"),
+        @JsonSubTypes.Type(value = Configuratore.class, name = "Configuratore")
+})
 @JsonRootName("")
 public class Utente {
 
@@ -10,7 +22,6 @@ public class Utente {
     protected String username;
     @JacksonXmlProperty(localName = "password")
     protected String password;
-
 
     public Utente() {
         // Usato solo nel caso del primo accesso del configuratore, per generare un utente nuovo da registrare (scelta di progettazione)

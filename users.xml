@@ -1,0 +1,12 @@
+<ArrayList>
+  <item type="Configuratore">
+    <username>ciao</username>
+    <password>1234</password>
+  </item>
+  <item type="Fruitore">
+    <username>0</username>
+    <password>0</password>
+    <email>fake@mail</email>
+    <comprensorioDiAppartenenza>Brescia</comprensorioDiAppartenenza>
+  </item>
+</ArrayList>

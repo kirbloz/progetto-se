@@ -25,7 +25,7 @@ public class Main {
             "Login",
             "Registrazione"
     };
-    
+
     protected static final String TITLE_MAIN_MENU = "MENU' PRINCIPALE - SCAMBIO ORE";
     protected static final String[] vociMainConfiguratore = new String[]{
             "Cambia Credenziali",
@@ -65,8 +65,8 @@ public class Main {
     public static void main(String[] args) {
 
         Menu menuIniziale = new Menu(TITLE_STARTING_MENU, vociMenuIniziale);
-        Menu menu = new Menu(TITLE_MAIN_MENU, isConfiguratore ? vociMainConfiguratore : vociMainFruitore);
-        Menu menuCategorie = new Menu(TITLE_MENU_CATEGORIE, isConfiguratore ? vociCategorie : vociCategorieFruitore);
+
+
         Menu menuFattori = new Menu(TITLE_MENU_FATTORI, vociFattori);
         Menu menuComprensoriGeografici = new Menu(TITLE_MENU_COMPRENSORIO, vociComprensorioGeografico);
 
@@ -75,8 +75,14 @@ public class Main {
 
 
         Utente utenteAttivo = loopMenuIniziale(menuIniziale, userHandler, comprensorioHandler.listaNomiComprensoriGeografici());
-        if(utenteAttivo != null)
+        if (utenteAttivo != null) {
+            if(utenteAttivo instanceof Configuratore)
+                isConfiguratore = true;
+            Menu menu = new Menu(TITLE_MAIN_MENU, isConfiguratore ? vociMainConfiguratore : vociMainFruitore);
+            Menu menuCategorie = new Menu(TITLE_MENU_CATEGORIE, isConfiguratore ? vociCategorie : vociCategorieFruitore);
             loopMain(menu, menuCategorie, menuFattori, menuComprensoriGeografici, userHandler, utenteAttivo);
+
+        }
     }
 
     /**
@@ -137,8 +143,8 @@ public class Main {
         }
         return utenteLoggato;
     }
-    
-    
+
+
     /**
      * Gestisce il menu per i comprensori geografici.
      *

@@ -33,6 +33,7 @@ public class GestoreUtenti {
         this.defaultCredentialsFilePath = defaultCredentialsFilePath;
         this.utenti = new ArrayList<>();
         deserializeXML(); // load dati
+        serializeXML();
     }
 
     /**
@@ -61,6 +62,9 @@ public class GestoreUtenti {
 
         this.defaultUtente = Serializer.deserialize(new TypeReference<>() {
         }, this.defaultCredentialsFilePath);
+
+        //this.utenti.add(new Configuratore("ciao", "1234"));
+        //this.utenti.add(new Fruitore("0","0", "fake@mail", "fake-comprensorio"));
 
         assert this.utenti != null : "deve essere almeno inizializzato!";
         assert this.defaultUtente != null : "l'utente default non può essere null, deve esistere";

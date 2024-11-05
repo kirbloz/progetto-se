@@ -1,9 +1,12 @@
 package it.unibs.projectIngesoft.utente;
 
 import com.fasterxml.jackson.annotation.JsonRootName;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
-@JsonRootName("")
 public class Configuratore extends Utente{
+
+    @JacksonXmlProperty(isAttribute = true, localName = "type")
+    private String type = "Configuratore";
 
     public Configuratore() {
         super();
