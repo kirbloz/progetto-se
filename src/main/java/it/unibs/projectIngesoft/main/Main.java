@@ -1,9 +1,6 @@
 package it.unibs.projectIngesoft.main;
 
-import it.unibs.projectIngesoft.gestori.GestoreCategorie;
-import it.unibs.projectIngesoft.gestori.GestoreComprensorioGeografico;
-import it.unibs.projectIngesoft.gestori.GestoreFattori;
-import it.unibs.projectIngesoft.gestori.GestoreUtenti;
+import it.unibs.projectIngesoft.gestori.*;
 import it.unibs.projectIngesoft.libraries.Menu;
 import it.unibs.projectIngesoft.utente.Configuratore;
 import it.unibs.projectIngesoft.utente.Utente;
@@ -17,6 +14,7 @@ public class Main {
     protected static final String UTENTI_DEF_CREDS_XML_FILEPATH = "defaultCredentials.xml";
     public static final String CATEGORIE_XML_FILEPATH = "categorie.xml";
     public static final String COMPRENSORI_GEOGRAFICI_XML_FILEPATH = "comprensoriGeografici.xml";
+    private static final String PROPOSTE_XML_FILEPATH = "proposte.xml";
 
     public static final String MSG_PROGRAM_EXIT = "> ARRIVEDERCI <";
 
@@ -35,6 +33,7 @@ public class Main {
     };
     protected static final String[] vociMainFruitore = new String[]{
             "Cambia Credenziali",
+            "Effettua proposta di scambio",
             "Menu Categorie",
     };
 
@@ -59,12 +58,14 @@ public class Main {
             "Visualizza Fattori di Conversione"
     };
 
+
     public static void main(String[] args) {
 
         Menu menuIniziale = new Menu(TITLE_STARTING_MENU, vociMenuIniziale);
 
         GestoreUtenti userHandler = new GestoreUtenti(UTENTI_XML_FILEPATH, UTENTI_DEF_CREDS_XML_FILEPATH);
         GestoreComprensorioGeografico comprensorioHandler = new GestoreComprensorioGeografico(COMPRENSORI_GEOGRAFICI_XML_FILEPATH);
+        GestoreProposte proposeHandler = new GestoreProposte(PROPOSTE_XML_FILEPATH, FATTORI_DI_CONVERSIONE_XML_FILEPATH);
 
         Utente utenteAttivo = loopMenuIniziale(menuIniziale, userHandler, comprensorioHandler.listaNomiComprensoriGeografici());
         if (utenteAttivo != null) {
@@ -78,7 +79,7 @@ public class Main {
             Menu menuComprensoriGeografici = isConfiguratore ?
                     new Menu(TITLE_MENU_COMPRENSORIO, vociComprensorioGeografico) : null;
 
-            loopMain(menu, menuCategorie, menuFattori, menuComprensoriGeografici, userHandler, utenteAttivo);
+            loopMain(menu, menuCategorie, menuFattori, menuComprensoriGeografici, userHandler, proposeHandler, utenteAttivo);
         } else {
             System.out.println(MSG_PROGRAM_EXIT);
         }
@@ -91,7 +92,7 @@ public class Main {
      * @param menuCategorie, sotto-menu per le categorie
      * @param menuFattori,   sotto-menu per i fattori
      */
-    private static void loopMain(Menu menu, Menu menuCategorie, Menu menuFattori, Menu menuComprensoriGeografici, GestoreUtenti userHandler, Utente utenteAttivo) {
+    private static void loopMain(Menu menu, Menu menuCategorie, Menu menuFattori, Menu menuComprensoriGeografici, GestoreUtenti userHandler, GestoreProposte proposeHandler, Utente utenteAttivo) {
         int scelta;
         boolean isConfiguratore = utenteAttivo instanceof Configuratore;
 
@@ -117,7 +118,8 @@ public class Main {
                 switch (scelta) {
                     case 0 -> System.out.println(MSG_PROGRAM_EXIT);
                     case 1 -> userHandler.cambioCredenziali(utenteAttivo);
-                    case 2 -> loopCategorie(menuCategorie, isConfiguratore);
+                    case 2 -> proposeHandler.effettuaProposta();
+                    case 3 -> loopCategorie(menuCategorie, isConfiguratore);
                     default -> {
                     } // già gestito dalla classe Menu
                 }
