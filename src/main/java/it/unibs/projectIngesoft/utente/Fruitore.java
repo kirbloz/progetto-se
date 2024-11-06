@@ -18,7 +18,7 @@ public class Fruitore extends Utente {
     }
 
     public Fruitore(String username, String password, String email, String comprensorioDiAppartenenza) {
-        super();
+        super(username, password);
         this.email = email;
         this.comprensorioDiAppartenenza = comprensorioDiAppartenenza;
     }
