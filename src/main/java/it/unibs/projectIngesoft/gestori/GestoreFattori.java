@@ -65,6 +65,10 @@ public class GestoreFattori {
         }
     }
 
+    public boolean hashmapContainsKey(String chiave){
+        return fattori.containsKey(chiave);
+    }
+
     /**
      * Inserisce un nuovo fattore nell'HashMap, verificando eventuali duplicati.
      * Garantisce il formato di chiave (string root:leaf) e valore (oggetto FdC)
