@@ -55,7 +55,7 @@ public class InputDati {
         String lettura;
         do {
             System.out.print(messaggio + Arrays.toString(valoriAmmessi));
-            lettura = leggiStringa("");
+            lettura = leggiStringa("\n> ");
 
             if (!Arrays.asList(valoriAmmessi).contains(lettura))
                 System.out.println(ERR_VALORI_NON_AMMESSI);
