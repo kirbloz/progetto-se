@@ -94,7 +94,7 @@ public class Main {
      */
     private static void loopMain(Menu menu, Menu menuCategorie, Menu menuFattori, Menu menuComprensoriGeografici, GestoreUtenti userHandler, Utente utenteAttivo) {
         int scelta;
-        if (isConfiguratore)  //TODO utenteAttivo.getClass() == Configuratore.class
+        if (isConfiguratore)  
             do {
                 scelta = menu.scegli();
 
@@ -139,7 +139,7 @@ public class Main {
                 utenteLoggato = userHandler.register(listaNomiComprensorio);
                 break;
             default:
-                utenteLoggato = null;
+                utenteLoggato = null; //TODO controlla con wade
         }
         return utenteLoggato;
     }

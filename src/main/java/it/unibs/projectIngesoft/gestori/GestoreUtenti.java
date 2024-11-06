@@ -106,7 +106,7 @@ public class GestoreUtenti {
         }
 
         password = InputDati.leggiStringaNonVuota(MSG_RICHIESTA_PASSWORD);
-        email = InputDati.leggiStringaNonVuota(MSG_RICHIESTA_EMAIL);
+        email = InputDati.leggiStringaNonVuota(MSG_RICHIESTA_EMAIL); //TODO qualche controllo sulla '@'
         fruitore = new Fruitore(username, password, email, comprensorio);
         this.addUtente(fruitore);
         return fruitore;
