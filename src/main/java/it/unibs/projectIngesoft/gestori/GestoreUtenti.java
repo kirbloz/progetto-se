@@ -9,6 +9,7 @@ import it.unibs.projectIngesoft.utente.Utente;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class GestoreUtenti {
 
@@ -89,7 +90,7 @@ public class GestoreUtenti {
         String email;
         Fruitore fruitore;
 
-        for(String tmp: possibiliComprensori){
+        for (String tmp : possibiliComprensori) {
             System.out.println(tmp);
         }
 
@@ -106,12 +107,26 @@ public class GestoreUtenti {
         }
 
         password = InputDati.leggiStringaNonVuota(MSG_RICHIESTA_PASSWORD);
-        email = InputDati.leggiStringaNonVuota(MSG_RICHIESTA_EMAIL); //TODO qualche controllo sulla '@'
+
+        email = InputDati.leggiStringaNonVuota(MSG_RICHIESTA_EMAIL);
+        while (!isValidEmail(email)) {
+            System.out.println(">> (!!) Formato email non valido.");
+            email = InputDati.leggiStringaNonVuota(MSG_RICHIESTA_EMAIL);
+        }
+
         fruitore = new Fruitore(username, password, email, comprensorio);
         this.addUtente(fruitore);
         return fruitore;
     }
 
+    private static boolean isValidEmail(String email) {
+        String emailRegex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$";
+        Pattern pat = Pattern.compile(emailRegex);
+        if (email == null) {
+            return false;
+        }
+        return pat.matcher(email).matches();
+    }
 
     /**
      * Serve per il login.
