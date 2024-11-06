@@ -11,4 +11,8 @@
     <email>sad@fdsg.com</email>
     <comprensorioDiAppartenenza>Brescia</comprensorioDiAppartenenza>
   </item>
+  <item type="Configuratore">
+    <username>wade</username>
+    <password>1234</password>
+  </item>
 </ArrayList>
