@@ -45,7 +45,7 @@ public class Main {
     };
 
     protected static final String TITLE_MENU_CATEGORIE = "MENU' CATEGORIE";
-    protected static final String[] vociCategorie = new String[]{
+    protected static final String[] vociCategorieConfiguratore = new String[]{
             "Aggiungi Gerarchia",
             "Visualizza Gerarchie"
     };
@@ -59,29 +59,26 @@ public class Main {
             "Visualizza Fattori di Conversione"
     };
 
-    protected static Utente utenteLoggato = new Utente();
-    protected static boolean isConfiguratore = false;
-
     public static void main(String[] args) {
 
         Menu menuIniziale = new Menu(TITLE_STARTING_MENU, vociMenuIniziale);
 
-
-        Menu menuFattori = new Menu(TITLE_MENU_FATTORI, vociFattori);
-        Menu menuComprensoriGeografici = new Menu(TITLE_MENU_COMPRENSORIO, vociComprensorioGeografico);
-
         GestoreUtenti userHandler = new GestoreUtenti(UTENTI_XML_FILEPATH, UTENTI_DEF_CREDS_XML_FILEPATH);
         GestoreComprensorioGeografico comprensorioHandler = new GestoreComprensorioGeografico(COMPRENSORI_GEOGRAFICI_XML_FILEPATH);
 
-
         Utente utenteAttivo = loopMenuIniziale(menuIniziale, userHandler, comprensorioHandler.listaNomiComprensoriGeografici());
         if (utenteAttivo != null) {
-            if (utenteAttivo instanceof Configuratore)
-                isConfiguratore = true;
+            boolean isConfiguratore = utenteAttivo instanceof Configuratore;
+            // menu con diverse voci tra fruitore e configuratore
             Menu menu = new Menu(TITLE_MAIN_MENU, isConfiguratore ? vociMainConfiguratore : vociMainFruitore);
-            Menu menuCategorie = new Menu(TITLE_MENU_CATEGORIE, isConfiguratore ? vociCategorie : vociCategorieFruitore);
-            loopMain(menu, menuCategorie, menuFattori, menuComprensoriGeografici, userHandler, utenteAttivo);
+            Menu menuCategorie = new Menu(TITLE_MENU_CATEGORIE, isConfiguratore ? vociCategorieConfiguratore : vociCategorieFruitore);
+            // menu per soli configuratori
+            Menu menuFattori = isConfiguratore ?
+                    new Menu(TITLE_MENU_FATTORI, vociFattori) : null;
+            Menu menuComprensoriGeografici = isConfiguratore ?
+                    new Menu(TITLE_MENU_COMPRENSORIO, vociComprensorioGeografico) : null;
 
+            loopMain(menu, menuCategorie, menuFattori, menuComprensoriGeografici, userHandler, utenteAttivo);
         } else {
             System.out.println(MSG_PROGRAM_EXIT);
         }
@@ -96,15 +93,17 @@ public class Main {
      */
     private static void loopMain(Menu menu, Menu menuCategorie, Menu menuFattori, Menu menuComprensoriGeografici, GestoreUtenti userHandler, Utente utenteAttivo) {
         int scelta;
+        boolean isConfiguratore = utenteAttivo instanceof Configuratore;
+
         if (isConfiguratore)
             do {
                 scelta = menu.scegli();
 
                 switch (scelta) {
                     case 0 -> System.out.println(MSG_PROGRAM_EXIT);
-                    case 1 -> userHandler.cambioCredenziali(utenteLoggato); // cambio credenziali
+                    case 1 -> userHandler.cambioCredenziali(utenteAttivo); // cambio credenziali
                     case 2 -> loopComprensoriGeografici(menuComprensoriGeografici); //menu comprensorio
-                    case 3 -> loopCategorie(menuCategorie); //menu categorie
+                    case 3 -> loopCategorie(menuCategorie, isConfiguratore); //menu categorie
                     case 4 -> loopFattori(menuFattori); //menu fattori
                     default -> {
                     } // già gestito dalla classe Menu
@@ -117,8 +116,8 @@ public class Main {
 
                 switch (scelta) {
                     case 0 -> System.out.println(MSG_PROGRAM_EXIT);
-                    case 1 -> userHandler.cambioCredenziali(utenteLoggato);
-                    case 2 -> loopCategorie(menuCategorie);
+                    case 1 -> userHandler.cambioCredenziali(utenteAttivo);
+                    case 2 -> loopCategorie(menuCategorie, isConfiguratore);
                     default -> {
                     } // già gestito dalla classe Menu
                 }
@@ -159,7 +158,7 @@ public class Main {
      *
      * @param menuCategorie, menu gestito
      */
-    private static void loopCategorie(Menu menuCategorie) {
+    private static void loopCategorie(Menu menuCategorie, boolean isConfiguratore) {
         int scelta;
         GestoreCategorie gestoreCategorieCat = new GestoreCategorie(CATEGORIE_XML_FILEPATH, FATTORI_DI_CONVERSIONE_XML_FILEPATH);
         do {
