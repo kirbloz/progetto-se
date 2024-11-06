@@ -65,7 +65,7 @@ public class GestoreFattori {
         }
     }
 
-    public boolean hashmapContainsKey(String chiave){
+    public boolean esisteCategoriaChiave(String chiave){
         return fattori.containsKey(chiave);
     }
 
@@ -357,6 +357,16 @@ public class GestoreFattori {
             case 1 -> visualizzaFattori();
             default -> System.out.println("Nulla da mostrare");
         }
+    }
+
+    //TODO credo funzioni -w
+    public boolean esisteFattore(String catUno, String catDue){
+        if(!fattori.containsKey(catUno))
+            return false;
+        if(fattori.get(catUno).isEmpty())
+            return false;
+        return fattori.get(catUno).stream()
+                .anyMatch(fattore -> fattore.getNome_c2().equals(catDue));
     }
 
     public int calcolaRapportoOre(String richiesta, String offerta, int oreRichiesta) throws Exception {
