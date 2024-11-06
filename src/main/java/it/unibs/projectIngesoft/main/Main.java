@@ -76,12 +76,14 @@ public class Main {
 
         Utente utenteAttivo = loopMenuIniziale(menuIniziale, userHandler, comprensorioHandler.listaNomiComprensoriGeografici());
         if (utenteAttivo != null) {
-            if(utenteAttivo instanceof Configuratore)
+            if (utenteAttivo instanceof Configuratore)
                 isConfiguratore = true;
             Menu menu = new Menu(TITLE_MAIN_MENU, isConfiguratore ? vociMainConfiguratore : vociMainFruitore);
             Menu menuCategorie = new Menu(TITLE_MENU_CATEGORIE, isConfiguratore ? vociCategorie : vociCategorieFruitore);
             loopMain(menu, menuCategorie, menuFattori, menuComprensoriGeografici, userHandler, utenteAttivo);
 
+        } else {
+            System.out.println(MSG_PROGRAM_EXIT);
         }
     }
 
@@ -94,7 +96,7 @@ public class Main {
      */
     private static void loopMain(Menu menu, Menu menuCategorie, Menu menuFattori, Menu menuComprensoriGeografici, GestoreUtenti userHandler, Utente utenteAttivo) {
         int scelta;
-        if (isConfiguratore)  
+        if (isConfiguratore)
             do {
                 scelta = menu.scegli();
 
@@ -129,17 +131,9 @@ public class Main {
         Utente utenteLoggato;
         scelta = menu.scegli();
         switch (scelta) {
-            case 0:
-                System.out.println(MSG_PROGRAM_EXIT);
-                return utenteLoggato = null;
-            case 1:
-                utenteLoggato = userHandler.login();
-                break;
-            case 2:
-                utenteLoggato = userHandler.register(listaNomiComprensorio);
-                break;
-            default:
-                utenteLoggato = null; //TODO controlla con wade
+            case 1 -> utenteLoggato = userHandler.login();
+            case 2 -> utenteLoggato = userHandler.register(listaNomiComprensorio);
+            default -> utenteLoggato = null;
         }
         return utenteLoggato;
     }
