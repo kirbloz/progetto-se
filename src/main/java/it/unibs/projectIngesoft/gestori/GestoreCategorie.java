@@ -19,7 +19,7 @@ public class GestoreCategorie {
     public static final String HEADER_ESPLORAZIONE_LIVELLO = "\n>> LIVELLO CORRENTE [ %s ] <<\n";
 
     private static final String TITLE_SUBMENU_AGGIUNGI_GERARCHIA = "AGGIUNGI GERARCHIA";
-    public static final String MSG_USCITA_SUBMENU_AGGIUNGI_GERARCHIA = ">> Uscita dal submenu e salvataggio.. <<";
+    public static final String MSG_USCITA_SUBMENU = ">> Uscita dal submenu.. <<";
     private static final String[] VOCI_SUBMENU_AGGIUNGI_GERARCHIA = new String[]{
             "Aggiungi Categoria",
     };
@@ -44,6 +44,7 @@ public class GestoreCategorie {
 
     public static final String MSG_SELEZIONE_RADICE = ">> Inserisci il nome di una categoria radice\n";
     public static final String MSG_INPUT_NOME_RADICE = ">> Inserisci il nome della categoria radice\n> ";
+    public static final String MSG_INPUT_SCELTA_CAMPO = ">> Scegli un campo tra quelli delle categorie non foglia\n";
 
     public static final String MSG_INPUT_NUOVO_NOME_RADICE = ">> Inserisci il nome della NUOVA CATEGORIA RADICE:\n> ";
     public static final String MSG_INSERIMENTO_NUOVA_CATEGORIA = ">> Inserisci il nome della NUOVA CATEGORIA:\n> ";
@@ -57,6 +58,7 @@ public class GestoreCategorie {
     public static final String WARNING_CATEGORIA_ESISTE = ">> (!!) Per favore indica una categoria che non esista già in questo albero gerarchico.\n";
     public static final String WARNING_CATEGORIA_NF_NON_ESISTE = ">> (!!) Per favore indica una categoria non foglia dell'albero gerarchico selezionato.\n";
     public static final String WARNING_NO_GERARCHIE_MEMORIZZATE = ">> (!!) Nessuna gerarchia memorizzata.";
+
 
     private Albero tree;
     private final String filePath;
@@ -140,7 +142,7 @@ public class GestoreCategorie {
             scelta = subMenu.scegli();
             switch (scelta) { // switch con un solo case per ampliamento futuro
                 case 1 -> this.aggiungiCategoria(radice);
-                default -> System.out.println(MSG_USCITA_SUBMENU_AGGIUNGI_GERARCHIA);
+                default -> System.out.println(MSG_USCITA_SUBMENU);
             }
         } while (scelta != 0);
 
@@ -412,40 +414,42 @@ public class GestoreCategorie {
             System.out.println(WARNING_NO_GERARCHIE_MEMORIZZATE);
             return;
         }
-
-        // 0. seleziono la radice della gerarchia da esplorare
-        Categoria radice = tree.getRadice(selezioneNomeCategoriaRadice());
-
         Menu subMenu = new Menu(TITLE_SUBMENU_ESPLORA_GERARCHIA, VOCI_SUBMENU_ESPLORA_GERARCHIA);
         int scelta;
+        
+        // 0. seleziono la radice della gerarchia da esplorare
+        Categoria radice = tree.getRadice(selezioneNomeCategoriaRadice());
         Categoria madreCorrente = radice; // categoria madre del livello che si sta visualizzando al momento
         List<Categoria> livello = madreCorrente.getCategorieFiglie();
 
         do {
-            System.out.println(String.format(HEADER_ESPLORAZIONE_LIVELLO, madreCorrente.getCampoFiglie()));
-            // 1. print delle categorie del livello corrente
-            for (Categoria categoria : livello) {
-                System.out.println(categoria.simpleToString());
-            }
-            // prepara le cose
+            // 1. print del livello corrente
+            visualizzaLivello(madreCorrente.getCampoFiglie(), livello);
+            // 2. print menu
             Categoria nuovaMadre = madreCorrente;
-
             scelta = subMenu.scegli();
             switch (scelta) {
-                case 1 -> {
+                case 1 -> { // esplora
                     String nuovoCampo = selezionaCampo(livello);
-                    nuovaMadre = nuovoCampo == null ? madreCorrente : selezionaCategoriaDaCampo(nuovoCampo, livello);
+                    nuovaMadre = nuovoCampo == null ?
+                            madreCorrente : selezionaCategoriaDaCampo(nuovoCampo, livello);
                 }
-                case 2 -> {
-                    nuovaMadre = madreCorrente.isRadice() ?
-                            madreCorrente : radice.cercaCategoria(madreCorrente.getNomeMadre()); // trova la madre del livello superiore se può salire
-                }
-                default -> System.out.println(">> Uscita dal submenu..");
+                case 2 -> nuovaMadre = madreCorrente.isRadice() ?
+                        madreCorrente : radice.cercaCategoria(madreCorrente.getNomeMadre()); // torna indietro di un livello
+                default -> System.out.println(MSG_USCITA_SUBMENU);
             }
             // aggiorno i valori
             madreCorrente = nuovaMadre == null ? madreCorrente : nuovaMadre;
             livello = madreCorrente.getCategorieFiglie();
         } while (scelta != 0);
+    }
+
+    private static void visualizzaLivello(String dominio, List<Categoria> livello) {
+        System.out.println(String.format(HEADER_ESPLORAZIONE_LIVELLO, dominio));
+
+        for (Categoria categoria : livello) {
+            System.out.println(categoria.simpleToString());
+        }
     }
 
 
@@ -460,7 +464,7 @@ public class GestoreCategorie {
             return null;
         }
 
-        return InputDati.stringReaderFromAvailable(">> Scegli un campo tra quelli delle categorie non foglia\n", campiFiglie);
+        return InputDati.stringReaderFromAvailable(MSG_INPUT_SCELTA_CAMPO, campiFiglie);
     }
 
     private Categoria selezionaCategoriaDaCampo(String nuovoCampo, List<Categoria> livello) {
