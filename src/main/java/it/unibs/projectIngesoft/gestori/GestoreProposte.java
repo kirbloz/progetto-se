@@ -13,9 +13,7 @@ import java.util.List;
 
 
 public class GestoreProposte {
-    public static final String MSG_RICHIESTA_RADICE = ">> Inserisci la radice:\n> ";
     public static final String WARNING_PROPOSTA_ANNULLATA = ">> Proposta annullata";
-    private static final String MSG_RICHIESTA_FOGLIA = ">> Inserisci la foglia:\n> ";
     public static final String MSG_INSERISCI_RICHIESTA = ">> Inserisci una categoria valida di cui vuoi effettuare la RICHIESTA.";
     public static final String MSG_INSERISCI_OFFERTA = ">> Inserisci una categoria valida che sei disposto a OFFRIRE in cambio.";
     public static final String MSG_RICHIESTA_ORE = ">> Inserisci il numero di ORE che vuoi richiedere:\n> ";
@@ -35,48 +33,6 @@ public class GestoreProposte {
         this.listaProposte = new ArrayList<>();
         this.utenteAttivo = utenteAttivo;
         deserializeXML();
-    }
-
-    public void effettuaProposta() {
-        String richiesta;
-        String offerta;
-        int oreRichiesta;
-        int oreOfferta;
-
-        richiesta = richiestaFoglia(MSG_INSERISCI_RICHIESTA);
-        oreRichiesta = InputDati.leggiInteroPositivo(MSG_RICHIESTA_ORE);
-
-        offerta = richiestaFoglia(MSG_INSERISCI_OFFERTA);
-        oreOfferta = gestFatt.calcolaRapportoOre(richiesta, offerta, oreRichiesta);
-
-        if (oreOfferta == -1) {
-            System.out.println(WARNING_IMPOSSIBILE_CALCOLARE_ORE + WARNING_PROPOSTA_ANNULLATA);
-            return;
-        }
-
-        if (InputDati.yesOrNo(MSG_CONFERMA_PROPOSTA.formatted(oreOfferta)))
-            addProposta(new Proposta(richiesta, offerta, oreRichiesta, oreOfferta, utenteAttivo.getUsername()));
-        else
-            System.out.println(WARNING_PROPOSTA_ANNULLATA);
-    }
-
-    public String richiestaFoglia(String messaggio) {
-        String radice;
-        String foglia;
-        String categoria;
-
-        do {
-            System.out.println(messaggio);
-            radice = InputDati.leggiStringaNonVuota(MSG_RICHIESTA_RADICE);
-            foglia = InputDati.leggiStringaNonVuota(MSG_RICHIESTA_FOGLIA);
-            categoria = gestFatt.factorNameBuilder(radice, foglia);
-        } while (!gestFatt.esisteCategoriaChiave(categoria));
-        return categoria;
-    }
-
-    public void addProposta(Proposta proposta) {
-        listaProposte.add(proposta);
-        serializeXML();
     }
 
     /**
@@ -100,6 +56,41 @@ public class GestoreProposte {
 
         listaProposte.clear();
         if (tempList != null) listaProposte.addAll(tempList);
+    }
+
+    /**
+     * Guida la creazione di una nuova proposta di scambio di prestazioni d'opera
+     */
+    public void effettuaProposta() {
+        String categoriaRichiesta;
+        String categoriaOfferta;
+        int oreRichiesta;
+        int oreOfferta;
+
+        // 1. inserimento categoria richiesta, ore, e categoria offerta
+        categoriaRichiesta = gestFatt.selezioneFoglia(MSG_INSERISCI_RICHIESTA);
+        oreRichiesta = InputDati.leggiInteroPositivo(MSG_RICHIESTA_ORE);
+        categoriaOfferta = gestFatt.selezioneFoglia(MSG_INSERISCI_OFFERTA);
+
+        // 2. calcolo ore per l'offerta
+        oreOfferta = gestFatt.calcolaRapportoOre(categoriaRichiesta, categoriaOfferta, oreRichiesta);
+        if (oreOfferta == -1) {
+            System.out.println(WARNING_IMPOSSIBILE_CALCOLARE_ORE + WARNING_PROPOSTA_ANNULLATA);
+            return;
+        }
+
+        Proposta tempProposta = new Proposta(categoriaRichiesta, categoriaOfferta, oreRichiesta, oreOfferta, utenteAttivo.getUsername());
+
+        // 3. conferma e memorizza la proposta
+        if (InputDati.yesOrNo("\n" + tempProposta + "\n" + MSG_CONFERMA_PROPOSTA.formatted(oreOfferta)))
+            addProposta(tempProposta);
+        else
+            System.out.println(WARNING_PROPOSTA_ANNULLATA);
+    }
+
+    public void addProposta(Proposta proposta) {
+        listaProposte.add(proposta);
+        serializeXML();
     }
 
 }

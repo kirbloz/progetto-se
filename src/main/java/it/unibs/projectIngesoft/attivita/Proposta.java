@@ -32,5 +32,13 @@ public class Proposta {
 
         this.isAttiva = true;
     }
+
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Richiesta:\t[ ").append(richiesta.split(":")[1]).append(", ").append(oreRichiesta).append(" ore ]\n");
+        sb.append("Offerta:\t[ ").append(offerta.split(":")[1]).append(", ").append(oreOfferta).append(" ore ]\n");
+
+        return sb.toString();
+    }
 }
 
