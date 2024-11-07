@@ -65,19 +65,22 @@ public class Main {
 
         GestoreUtenti userHandler = new GestoreUtenti(UTENTI_XML_FILEPATH, UTENTI_DEF_CREDS_XML_FILEPATH);
         GestoreComprensorioGeografico comprensorioHandler = new GestoreComprensorioGeografico(COMPRENSORI_GEOGRAFICI_XML_FILEPATH);
-        GestoreProposte proposeHandler = new GestoreProposte(PROPOSTE_XML_FILEPATH, FATTORI_DI_CONVERSIONE_XML_FILEPATH);
+
 
         Utente utenteAttivo = loopMenuIniziale(menuIniziale, userHandler, comprensorioHandler.listaNomiComprensoriGeografici());
         if (utenteAttivo != null) {
             boolean isConfiguratore = utenteAttivo instanceof Configuratore;
+
             // menu con diverse voci tra fruitore e configuratore
             Menu menu = new Menu(TITLE_MAIN_MENU, isConfiguratore ? vociMainConfiguratore : vociMainFruitore);
             Menu menuCategorie = new Menu(TITLE_MENU_CATEGORIE, isConfiguratore ? vociCategorieConfiguratore : vociCategorieFruitore);
+
             // menu per soli configuratori
             Menu menuFattori = isConfiguratore ?
                     new Menu(TITLE_MENU_FATTORI, vociFattori) : null;
             Menu menuComprensoriGeografici = isConfiguratore ?
                     new Menu(TITLE_MENU_COMPRENSORIO, vociComprensorioGeografico) : null;
+            GestoreProposte proposeHandler = new GestoreProposte(PROPOSTE_XML_FILEPATH, FATTORI_DI_CONVERSIONE_XML_FILEPATH, utenteAttivo);
 
             loopMain(menu, menuCategorie, menuFattori, menuComprensoriGeografici, userHandler, proposeHandler, utenteAttivo);
         } else {
