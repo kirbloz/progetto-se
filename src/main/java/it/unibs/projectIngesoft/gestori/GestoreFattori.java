@@ -359,23 +359,14 @@ public class GestoreFattori {
         }
     }
 
-    //TODO credo funzioni -w
-    public boolean esisteFattore(String catUno, String catDue){
-        if(!fattori.containsKey(catUno))
-            return false;
-        if(fattori.get(catUno).isEmpty())
-            return false;
-        return fattori.get(catUno).stream()
-                .anyMatch(fattore -> fattore.getNome_c2().equals(catDue));
-    }
+    public int calcolaRapportoOre(String richiesta, String offerta, int oreRichiesta) {
 
-    public int calcolaRapportoOre(String richiesta, String offerta, int oreRichiesta) throws Exception {
-        //TODO chiedi [foglia1, foglia2, 2] is foglia1 = 2*foglia2 o il contrario?
         for (FattoreDiConversione f : fattori.get(richiesta)) {
             if (f.getNome_c2().equals(offerta)) {
-                return (int) (oreRichiesta * f.getFattore()); //TODO vedere se cambiare l'approx
+                return (int) Math.rint(oreRichiesta * f.getFattore());
             }
         }
-        throw new Exception("Fattore non esistente");
+
+        return -1;
     }
 }
