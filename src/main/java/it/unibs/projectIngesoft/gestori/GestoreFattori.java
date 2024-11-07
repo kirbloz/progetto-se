@@ -65,7 +65,7 @@ public class GestoreFattori {
         }
     }
 
-    public boolean esisteCategoriaChiave(String chiave){
+    public boolean esisteCategoriaChiave(String chiave) {
         return fattori.containsKey(chiave);
     }
 
@@ -120,7 +120,7 @@ public class GestoreFattori {
         if (!fattori.isEmpty()) {
             // 1. scegliere una categoria per cui i fattori siano GIA' stati calcolati
             // -> permette di calcolare tutti i nuovi chiedendo un solo inserimento di valore del fattore
-            String nomeFogliaEsternaFormattata = selezioneFoglia();
+            String nomeFogliaEsternaFormattata = selezioneFoglia(MSG_INSERISCI_FOGLIA_ESTERNA);
 
             // 2. scegliere una categoria delle nuove, da utilizzare per il primo fattore di conversione
             String nomeFogliaInternaFormattata = selezioneFogliaDaLista(nomeRadice, foglie);
@@ -218,10 +218,10 @@ public class GestoreFattori {
      *
      * @return stringa formattata come "radice:foglia"
      */
-    private String selezioneFoglia() {
+    public String selezioneFoglia(String messaggio) {
         String nomeFogliaFormattato;
         // visualizza tutte le categorie foglia usando le chiavi dell'attributo che memorizza i fattori di conversione
-        System.out.println(MSG_INSERISCI_FOGLIA_ESTERNA);
+        System.out.println(messaggio);
         for (String key : fattori.keySet()) {
             System.out.println(key);
         }
@@ -318,10 +318,11 @@ public class GestoreFattori {
 
     /**
      * Dato il nome di una categoria ritorna una stringa formattata con tutti i fattori di conversione relativi a quella categoria
+     *
      * @param categoriaFormattata, nome categoria nel formato root:leaf
      * @return String
      */
-    public String stringaFattoriDataCategoria(String categoriaFormattata){
+    public String stringaFattoriDataCategoria(String categoriaFormattata) {
         StringBuilder sb = new StringBuilder();
         if (fattori.containsKey(categoriaFormattata)) {
             for (FattoreDiConversione f : fattori.get(categoriaFormattata)) {
@@ -337,10 +338,10 @@ public class GestoreFattori {
      * I fattori sono raggruppati in base alla prima categoria.
      */
     private void visualizzaFattori() {
-        if (fattori.isEmpty()){
+        if (fattori.isEmpty()) {
             System.out.println(WARNING_NO_FATTORI_MEMORIZZATI);
             return;
-    }
+        }
         System.out.println(MSG_INSERISCI_CATEGORIA_VISUALIZZA_FATTORI);
         String radice = InputDati.leggiStringaNonVuota(MSG_INSERISCI_NOME_RADICE);
         String foglia = InputDati.leggiStringaNonVuota(MSG_INSERISCI_NOME_FOGLIA);
@@ -359,14 +360,22 @@ public class GestoreFattori {
         }
     }
 
+    /**
+     * Calcola le ore da erogare della categoria offerta, dato un certo numero di ore
+     * della categoria richiesta. Si usano i fattori di conversione.
+     *
+     * @param richiesta,    categoria richiesta dal propositore
+     * @param offerta,      categoria offerta dal propositore
+     * @param oreRichiesta, ore di categoria richiesta indicate dal propositore
+     * @return numero di ore arrontondato all'intero più vicino;
+     * se non esistono fattori di conversione tra le categorie indicate, ritorna -1
+     */
     public int calcolaRapportoOre(String richiesta, String offerta, int oreRichiesta) {
-
         for (FattoreDiConversione f : fattori.get(richiesta)) {
             if (f.getNome_c2().equals(offerta)) {
                 return (int) Math.rint(oreRichiesta * f.getFattore());
             }
         }
-
         return -1;
     }
 }
