@@ -22,4 +22,12 @@ public class Fruitore extends Utente {
         this.comprensorioDiAppartenenza = comprensorioDiAppartenenza;
     }
 
+    //Getters & Setters
+    public String getComprensorioDiAppartenenza() {
+        return comprensorioDiAppartenenza;
+    }
+
+    public void setComprensorioDiAppartenenza(String comprensorioDiAppartenenza) {
+        this.comprensorioDiAppartenenza = comprensorioDiAppartenenza;
+    }
 }

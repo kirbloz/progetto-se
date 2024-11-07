@@ -29,7 +29,8 @@ public class Main {
             "Cambia Credenziali",
             "Menu Comprensorio ",
             "Menu Categorie",
-            "Menu Fattori"
+            "Menu Fattori",
+            "Menu Proposte"
     };
     protected static final String[] vociMainFruitore = new String[]{
             "Cambia Credenziali",
@@ -57,6 +58,13 @@ public class Main {
     protected static final String[] vociFattori = new String[]{
             "Visualizza Fattori di Conversione"
     };
+    private static final String TITLE_MENU_PROPOSTE = "Menu Proposte";
+    private static final String[] VOCI_PROPOSTE_CONFIGURATORE = new String[]{
+            "Visualizza proposte da categoria"
+    };
+    private static final String[] VOCI_PROPOSTE_FRUITORE = new String[]{
+            "Visualizza proposte inviate"
+    };
 
 
     public static void main(String[] args) {
@@ -74,7 +82,7 @@ public class Main {
             // menu con diverse voci tra fruitore e configuratore
             Menu menu = new Menu(TITLE_MAIN_MENU, isConfiguratore ? vociMainConfiguratore : vociMainFruitore);
             Menu menuCategorie = new Menu(TITLE_MENU_CATEGORIE, isConfiguratore ? vociCategorieConfiguratore : vociCategorieFruitore);
-
+            Menu menuProposte = new Menu(TITLE_MENU_PROPOSTE, isConfiguratore ? VOCI_PROPOSTE_CONFIGURATORE : VOCI_PROPOSTE_FRUITORE);
             // menu per soli configuratori
             Menu menuFattori = isConfiguratore ?
                     new Menu(TITLE_MENU_FATTORI, vociFattori) : null;
@@ -82,7 +90,7 @@ public class Main {
                     new Menu(TITLE_MENU_COMPRENSORIO, vociComprensorioGeografico) : null;
             GestoreProposte proposeHandler = new GestoreProposte(PROPOSTE_XML_FILEPATH, FATTORI_DI_CONVERSIONE_XML_FILEPATH, utenteAttivo);
 
-            loopMain(menu, menuCategorie, menuFattori, menuComprensoriGeografici, userHandler, proposeHandler, utenteAttivo);
+            loopMain(menu, menuCategorie, menuFattori, menuComprensoriGeografici, menuProposte, userHandler, proposeHandler, utenteAttivo);
         } else {
             System.out.println(MSG_PROGRAM_EXIT);
         }
@@ -95,7 +103,7 @@ public class Main {
      * @param menuCategorie, sotto-menu per le categorie
      * @param menuFattori,   sotto-menu per i fattori
      */
-    private static void loopMain(Menu menu, Menu menuCategorie, Menu menuFattori, Menu menuComprensoriGeografici, GestoreUtenti userHandler, GestoreProposte proposeHandler, Utente utenteAttivo) {
+    private static void loopMain(Menu menu, Menu menuCategorie, Menu menuFattori, Menu menuComprensoriGeografici, Menu menuProposte, GestoreUtenti userHandler, GestoreProposte proposeHandler, Utente utenteAttivo) {
         int scelta;
         boolean isConfiguratore = utenteAttivo instanceof Configuratore;
 
@@ -109,6 +117,7 @@ public class Main {
                     case 2 -> loopComprensoriGeografici(menuComprensoriGeografici); //menu comprensorio
                     case 3 -> loopCategorie(menuCategorie, isConfiguratore); //menu categorie
                     case 4 -> loopFattori(menuFattori); //menu fattori
+                    case 5 -> loopProposte(menuProposte, utenteAttivo);
                     default -> {
                     } // già gestito dalla classe Menu
                 }
@@ -123,6 +132,7 @@ public class Main {
                     case 1 -> userHandler.cambioCredenziali(utenteAttivo);
                     case 2 -> proposeHandler.effettuaProposta();
                     case 3 -> loopCategorie(menuCategorie, isConfiguratore);
+                    case 4 -> loopProposte(menuProposte, utenteAttivo);
                     default -> {
                     } // già gestito dalla classe Menu
                 }
@@ -157,6 +167,14 @@ public class Main {
         } while (scelta != 0);
     }
 
+    private static void loopProposte(Menu menuProposta, Utente utenteAttivo) {
+        int scelta;
+        GestoreProposte gestoreProposte = new GestoreProposte(PROPOSTE_XML_FILEPATH, FATTORI_DI_CONVERSIONE_XML_FILEPATH, utenteAttivo);
+        do {
+            scelta = menuProposta.scegli();
+            gestoreProposte.entryPoint(scelta);
+        } while (scelta != 0);
+    }
 
     /**
      * Gestisce il menu per le categorie.
