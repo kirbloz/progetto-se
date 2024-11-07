@@ -14,16 +14,23 @@ public class Proposta {
     private int oreRichiesta;
     @JacksonXmlProperty(localName = "oreOfferta")
     private int oreOfferta;
+    @JacksonXmlProperty(localName = "isAttiva")
+    private boolean isAttiva;
+    @JacksonXmlProperty(localName = "usernameAutore")
+    private String usernameAutore;
 
     public Proposta(){
 
     }
 
-    public Proposta(String richiesta, String offerta, int oreRichiesta, int oreOfferta) {
+    public Proposta(String richiesta, String offerta, int oreRichiesta, int oreOfferta, String usernameAutore) {
         this.richiesta = richiesta;
         this.offerta = offerta;
         this.oreRichiesta = oreRichiesta;
         this.oreOfferta = oreOfferta;
+        this.usernameAutore = usernameAutore;
+
+        this.isAttiva = true;
     }
 }
 
