@@ -30,11 +30,12 @@ public class Main {
             "Menu Comprensorio ",
             "Menu Categorie",
             "Menu Fattori",
-            "Menu Proposte"
+
     };
     protected static final String[] vociMainFruitore = new String[]{
             "Cambia Credenziali",
-            "Effettua proposta di scambio",
+            //"Effettua proposta di scambio",
+            "Menu Proposte",
             "Menu Categorie",
     };
 
@@ -58,12 +59,13 @@ public class Main {
     protected static final String[] vociFattori = new String[]{
             "Visualizza Fattori di Conversione"
     };
-    private static final String TITLE_MENU_PROPOSTE = "Menu Proposte";
-    private static final String[] VOCI_PROPOSTE_CONFIGURATORE = new String[]{
+    private static final String TITLE_MENU_PROPOSTE = "MENU' PROPOSTE";
+    private static final String[] vociProposteConfiguratore = new String[]{
             "Visualizza proposte da categoria"
     };
-    private static final String[] VOCI_PROPOSTE_FRUITORE = new String[]{
-            "Visualizza proposte inviate"
+    private static final String[] vociProposteFruitore = new String[]{
+            "Visualizza proposte inviate",
+            "Effettua proposta di scambio"
     };
 
 
@@ -73,24 +75,21 @@ public class Main {
 
         GestoreUtenti userHandler = new GestoreUtenti(UTENTI_XML_FILEPATH, UTENTI_DEF_CREDS_XML_FILEPATH);
         GestoreComprensorioGeografico comprensorioHandler = new GestoreComprensorioGeografico(COMPRENSORI_GEOGRAFICI_XML_FILEPATH);
-
-
         Utente utenteAttivo = loopMenuIniziale(menuIniziale, userHandler, comprensorioHandler.listaNomiComprensoriGeografici());
+
         if (utenteAttivo != null) {
             boolean isConfiguratore = utenteAttivo instanceof Configuratore;
-
             // menu con diverse voci tra fruitore e configuratore
             Menu menu = new Menu(TITLE_MAIN_MENU, isConfiguratore ? vociMainConfiguratore : vociMainFruitore);
             Menu menuCategorie = new Menu(TITLE_MENU_CATEGORIE, isConfiguratore ? vociCategorieConfiguratore : vociCategorieFruitore);
-            Menu menuProposte = new Menu(TITLE_MENU_PROPOSTE, isConfiguratore ? VOCI_PROPOSTE_CONFIGURATORE : VOCI_PROPOSTE_FRUITORE);
+            Menu menuProposte = new Menu(TITLE_MENU_PROPOSTE, isConfiguratore ? vociProposteConfiguratore : vociProposteFruitore);
             // menu per soli configuratori
             Menu menuFattori = isConfiguratore ?
                     new Menu(TITLE_MENU_FATTORI, vociFattori) : null;
             Menu menuComprensoriGeografici = isConfiguratore ?
                     new Menu(TITLE_MENU_COMPRENSORIO, vociComprensorioGeografico) : null;
-            GestoreProposte proposeHandler = new GestoreProposte(PROPOSTE_XML_FILEPATH, FATTORI_DI_CONVERSIONE_XML_FILEPATH, utenteAttivo);
-
-            loopMain(menu, menuCategorie, menuFattori, menuComprensoriGeografici, menuProposte, userHandler, proposeHandler, utenteAttivo);
+            // menu principale
+            loopMain(menu, menuCategorie, menuFattori, menuComprensoriGeografici, menuProposte, userHandler, utenteAttivo);
         } else {
             System.out.println(MSG_PROGRAM_EXIT);
         }
@@ -103,7 +102,7 @@ public class Main {
      * @param menuCategorie, sotto-menu per le categorie
      * @param menuFattori,   sotto-menu per i fattori
      */
-    private static void loopMain(Menu menu, Menu menuCategorie, Menu menuFattori, Menu menuComprensoriGeografici, Menu menuProposte, GestoreUtenti userHandler, GestoreProposte proposeHandler, Utente utenteAttivo) {
+    private static void loopMain(Menu menu, Menu menuCategorie, Menu menuFattori, Menu menuComprensoriGeografici, Menu menuProposte, GestoreUtenti userHandler, Utente utenteAttivo) {
         int scelta;
         boolean isConfiguratore = utenteAttivo instanceof Configuratore;
 
@@ -130,9 +129,8 @@ public class Main {
                 switch (scelta) {
                     case 0 -> System.out.println(MSG_PROGRAM_EXIT);
                     case 1 -> userHandler.cambioCredenziali(utenteAttivo);
-                    case 2 -> proposeHandler.effettuaProposta();
+                    case 2 -> loopProposte(menuProposte, utenteAttivo);
                     case 3 -> loopCategorie(menuCategorie, isConfiguratore);
-                    case 4 -> loopProposte(menuProposte, utenteAttivo);
                     default -> {
                     } // già gestito dalla classe Menu
                 }
@@ -151,7 +149,6 @@ public class Main {
         }
         return utenteLoggato;
     }
-
 
     /**
      * Gestisce il menu per i comprensori geografici.
