@@ -1,8 +1,7 @@
 package it.unibs.projectIngesoft.utente;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
-
-public class Fruitore extends Utente {
+public class Fruitore extends Utente{
 
     @JacksonXmlProperty(localName = "email")
     private String email;
@@ -27,7 +26,7 @@ public class Fruitore extends Utente {
         return comprensorioDiAppartenenza;
     }
 
-    public void setComprensorioDiAppartenenza(String comprensorioDiAppartenenza) {
-        this.comprensorioDiAppartenenza = comprensorioDiAppartenenza;
+    public String getEmail(){
+        return email;
     }
 }
