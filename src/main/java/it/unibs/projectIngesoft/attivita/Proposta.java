@@ -4,6 +4,9 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import it.unibs.projectIngesoft.utente.Fruitore;
 
+import javax.management.Query;
+import java.util.Stack;
+
 @JacksonXmlRootElement(localName = "Proposta")
 public class Proposta {
 
@@ -20,7 +23,10 @@ public class Proposta {
     @JacksonXmlProperty(localName = "autore")
     private Fruitore autore;
 
-    public Proposta(){
+    private Stack<StatiProposta> cronologiaStati = new Stack<>();    //TODO Wade salva sta roba con xml :D
+
+
+    public Proposta() {
 
     }
 
@@ -30,8 +36,8 @@ public class Proposta {
         this.oreRichiesta = oreRichiesta;
         this.oreOfferta = oreOfferta;
         this.autore = autore;
-
         this.stato = StatiProposta.APERTA;
+        cronologiaStati.push(this.stato);
     }
 
     public String toString() {
@@ -41,7 +47,7 @@ public class Proposta {
         return sb.toString();
     }
 
-    public boolean isCompatibile(Proposta p){
+    public boolean isCompatibile(Proposta p) {
         return this.richiesta == p.offerta && this.oreRichiesta == p.oreOfferta;
     }
 
@@ -55,19 +61,22 @@ public class Proposta {
         return stato;
     }
 
-    public void setChiusa(){
+    public void setChiusa() {
         this.stato = StatiProposta.CHIUSA;
+        cronologiaStati.push(this.stato);
     }
 
-    public void setAperta(){
+    public void setAperta() {
         this.stato = StatiProposta.APERTA;
+        cronologiaStati.push(this.stato);
     }
 
-    public void setRitirata(){
+    public void setRitirata() {
         this.stato = StatiProposta.RITIRATA;
+        cronologiaStati.push(this.stato);
     }
 
-    public String getComprensorio(){
+    public String getComprensorio() {
         return this.autore.getComprensorioDiAppartenenza();
     }
 
@@ -85,6 +94,10 @@ public class Proposta {
 
     public int getOreOfferta() {
         return oreOfferta;
+    }
+
+    public Stack<StatiProposta> getCronologiaStati() {
+        return cronologiaStati;
     }
 }
 
