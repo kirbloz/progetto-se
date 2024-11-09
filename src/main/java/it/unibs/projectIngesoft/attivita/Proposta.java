@@ -1,11 +1,9 @@
 package it.unibs.projectIngesoft.attivita;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import it.unibs.projectIngesoft.utente.Fruitore;
-
-import javax.management.Query;
-import java.util.Stack;
 
 @JacksonXmlRootElement(localName = "Proposta")
 public class Proposta {
@@ -21,12 +19,11 @@ public class Proposta {
     @JacksonXmlProperty(localName = "stato")
     private StatiProposta stato;
     @JacksonXmlProperty(localName = "autore")
-    private Fruitore autore;
+    private String autore;
+    @JacksonXmlProperty(localName = "comprensorioDiAppartenenza")
+    private String comprensorioDiAppartenenza;
 
-    private Stack<StatiProposta> cronologiaStati = new Stack<>();    //TODO Wade salva sta roba con xml :D
-
-
-    public Proposta() {
+    public Proposta(){
 
     }
 
@@ -35,9 +32,10 @@ public class Proposta {
         this.offerta = offerta;
         this.oreRichiesta = oreRichiesta;
         this.oreOfferta = oreOfferta;
-        this.autore = autore;
+        this.autore = autore.getUsername();
+        this.comprensorioDiAppartenenza = autore.getComprensorioDiAppartenenza();
+
         this.stato = StatiProposta.APERTA;
-        cronologiaStati.push(this.stato);
     }
 
     public String toString() {
@@ -47,43 +45,42 @@ public class Proposta {
         return sb.toString();
     }
 
-    public boolean isCompatibile(Proposta p) {
+    public boolean isCompatibile(Proposta p){
         return this.richiesta == p.offerta && this.oreRichiesta == p.oreOfferta;
     }
 
     //Getters & Setters
 
-    public Fruitore getAutore() {
+    @JsonIgnore
+    public String getAutore() {
         return autore;
     }
-
+    @JsonIgnore
     public StatiProposta getStato() {
         return stato;
     }
 
-    public void setChiusa() {
+    public void setChiusa(){
         this.stato = StatiProposta.CHIUSA;
-        cronologiaStati.push(this.stato);
     }
 
-    public void setAperta() {
+    public void setAperta(){
         this.stato = StatiProposta.APERTA;
-        cronologiaStati.push(this.stato);
     }
 
-    public void setRitirata() {
+    public void setRitirata(){
         this.stato = StatiProposta.RITIRATA;
-        cronologiaStati.push(this.stato);
     }
 
-    public String getComprensorio() {
-        return this.autore.getComprensorioDiAppartenenza();
+    @JsonIgnore
+    public String getComprensorio(){
+        return this.comprensorioDiAppartenenza;
     }
-
+    @JsonIgnore
     public String getRichiesta() {
         return richiesta;
     }
-
+    @JsonIgnore
     public String getOfferta() {
         return offerta;
     }
@@ -94,10 +91,6 @@ public class Proposta {
 
     public int getOreOfferta() {
         return oreOfferta;
-    }
-
-    public Stack<StatiProposta> getCronologiaStati() {
-        return cronologiaStati;
     }
 }
 
