@@ -36,8 +36,9 @@ public class GestoreProposte {
     public GestoreProposte(String proposteFilepath, String fattoriFilePath, Utente utenteAttivo) {
         this.gestFatt = new GestoreFattori(fattoriFilePath);
         this.filePath = proposteFilepath;
-        this.listaProposte = new HashMap<>();
         this.utenteAttivo = utenteAttivo;
+
+        this.listaProposte = new HashMap<>();
         deserializeXML();
     }
 
@@ -115,11 +116,10 @@ public class GestoreProposte {
                     }
                 }
             }
+            serializeXML();
 
+            //TODO decidere come impacchettare le proposte compatibili e inviarle al configuratore
         }
-
-
-        //TODO chiuderla (mandare la roba al configuratore etc...(FLAG appenaChiusa???))
 
     }
 
@@ -140,7 +140,7 @@ public class GestoreProposte {
             }
         }
 
-        return new ArrayList<>(); // forse basta fare return null;
+        return null;
     }
 
     public void mostraPropostePerCategoria() {
