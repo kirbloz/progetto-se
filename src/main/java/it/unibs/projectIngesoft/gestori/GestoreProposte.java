@@ -14,6 +14,7 @@ import it.unibs.projectIngesoft.utente.Utente;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.function.Predicate;
 
 
 public class GestoreProposte {
@@ -37,7 +38,10 @@ public class GestoreProposte {
         this.filePath = proposteFilepath;
         this.listaProposte = new HashMap<>();
         this.utenteAttivo = utenteAttivo;
-        deserializeXML();
+
+        addProposta(new Proposta("richiesta", "offerta", 1, 1, new Fruitore("ciao", "1234", "mail@test.com", "Brescia")));
+        serializeXML();
+        //deserializeXML();
     }
 
     /**
@@ -108,7 +112,7 @@ public class GestoreProposte {
             for (Proposta pComp : proposteCompatibili) {
                 for (Proposta p : listaProposte.get(nuovaProposta.getComprensorio())) {
                     if (pComp == p) {
-                        p.setClosed();
+                        p.setChiusa();
                     }
                 }
             }
@@ -137,47 +141,38 @@ public class GestoreProposte {
             }
         }
 
-        return null; // forse basta fare return null;
+        return new ArrayList<>(); // forse basta fare return null;
     }
 
     public void mostraPropostePerCategoria() {
         String categoria = gestFatt.selezioneFoglia(MSG_INSERISCI_CATEGORIA);
+        Predicate<Proposta> filtro = p -> p.getOfferta().equals(categoria) || p.getRichiesta().equals(categoria);
+        System.out.println(proposteToString(filtro));
+    }
 
+    public void mostraPropostePerAutore(String usernameAutore) {
+        Predicate<Proposta> filtro = p -> p.getAutore().getUsername().equals(usernameAutore);
+        System.out.println(proposteToString(filtro));
+    }
+
+    public String proposteToString(Predicate<Proposta> filtro) {
         StringBuilder aperte = new StringBuilder();
         StringBuilder chiuse = new StringBuilder();
         StringBuilder ritirate = new StringBuilder();
 
-        for (ArrayList<Proposta> arraylist : listaProposte.values()) {
-            for (Proposta p : arraylist) {
-                if (p.getOfferta().equals(categoria) || p.getRichiesta().equals(categoria)) {
-                    switch (p.getStato()) {
-                        case StatiProposta.APERTA -> aperte.append(p);
-                        case StatiProposta.CHIUSA -> chiuse.append(p);
-                        case StatiProposta.RITIRATA -> ritirate.append(p);
+        //for (ArrayList<Proposta> arraylist : listaProposte.values()) {
+        for(String comprensorio : listaProposte.keySet()) {
+            for (Proposta proposta : listaProposte.get(comprensorio)) {
+                if (filtro.test(proposta)) {
+                    switch (proposta.getStato()) {
+                        case StatiProposta.APERTA -> aperte.append(proposta);
+                        case StatiProposta.CHIUSA -> chiuse.append(proposta);
+                        case StatiProposta.RITIRATA -> ritirate.append(proposta);
                     }
                 }
             }
         }
-
-        System.out.println(aperte.append(chiuse).append(ritirate).toString());
-    }
-
-    public void mostraPropostePerAutore() {
-        StringBuilder aperte = new StringBuilder();
-        StringBuilder chiuse = new StringBuilder();
-        StringBuilder ritirate = new StringBuilder();
-
-        for (Proposta p : listaProposte.get(((Fruitore) utenteAttivo).getComprensorioDiAppartenenza())) {
-            if (p.getAutore().getUsername().equals(utenteAttivo.getUsername())) {
-                switch (p.getStato()) {
-                    case StatiProposta.APERTA -> aperte.append(p);
-                    case StatiProposta.CHIUSA -> chiuse.append(p);
-                    case StatiProposta.RITIRATA -> ritirate.append(p);
-                }
-            }
-        }
-
-        System.out.println(aperte.append(chiuse).append(ritirate).toString());
+        return aperte.append(chiuse).append(ritirate).toString();
     }
 
 
@@ -187,9 +182,10 @@ public class GestoreProposte {
                 case 1 -> mostraPropostePerCategoria();
                 default -> System.out.println("Nulla da mostrare");
             }
-        }else{
+        } else {
             switch (scelta) {
-                case 1 -> mostraPropostePerAutore();
+                case 1 -> mostraPropostePerAutore(utenteAttivo.getUsername());
+                case 2 -> effettuaProposta();
                 default -> System.out.println("Nulla da mostrare");
             }
         }
