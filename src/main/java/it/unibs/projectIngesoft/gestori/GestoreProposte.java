@@ -150,7 +150,7 @@ public class GestoreProposte {
     }
 
     public void mostraPropostePerAutore(String usernameAutore) {
-        Predicate<Proposta> filtro = p -> p.getAutore().getUsername().equals(usernameAutore);
+        Predicate<Proposta> filtro = p -> p.getAutore().equals(usernameAutore);
         System.out.println(proposteToString(filtro));
     }
 

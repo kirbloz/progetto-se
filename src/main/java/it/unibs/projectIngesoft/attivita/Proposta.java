@@ -19,7 +19,9 @@ public class Proposta {
     @JacksonXmlProperty(localName = "stato")
     private StatiProposta stato;
     @JacksonXmlProperty(localName = "autore")
-    private Fruitore autore;
+    private String autore;
+    @JacksonXmlProperty(localName = "comprensorioDiAppartenenza")
+    private String comprensorioDiAppartenenza;
 
     public Proposta(){
 
@@ -30,7 +32,8 @@ public class Proposta {
         this.offerta = offerta;
         this.oreRichiesta = oreRichiesta;
         this.oreOfferta = oreOfferta;
-        this.autore = autore;
+        this.autore = autore.getUsername();
+        this.comprensorioDiAppartenenza = autore.getComprensorioDiAppartenenza();
 
         this.stato = StatiProposta.APERTA;
     }
@@ -49,7 +52,7 @@ public class Proposta {
     //Getters & Setters
 
     @JsonIgnore
-    public Fruitore getAutore() {
+    public String getAutore() {
         return autore;
     }
     @JsonIgnore
@@ -71,7 +74,7 @@ public class Proposta {
 
     @JsonIgnore
     public String getComprensorio(){
-        return this.autore.getComprensorioDiAppartenenza();
+        return this.comprensorioDiAppartenenza;
     }
     @JsonIgnore
     public String getRichiesta() {
