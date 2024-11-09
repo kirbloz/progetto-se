@@ -9,8 +9,8 @@ public class Fruitore extends Utente {
     @JacksonXmlProperty(localName = "comprensorioDiAppartenenza")
     private String comprensorioDiAppartenenza;
 
-    @JacksonXmlProperty(isAttribute = true, localName = "type")
-    private String type = "Fruitore";
+    /*@JacksonXmlProperty(isAttribute = true, localName = "type")
+    private String type = "Fruitore";*/
 
     public Fruitore () {
         super();
