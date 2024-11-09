@@ -24,21 +24,26 @@ public class GestoreProposte {
     public static final String MSG_RICHIESTA_ORE = ">> Inserisci il numero di ORE che vuoi richiedere:\n> ";
     public static final String WARNING_IMPOSSIBILE_CALCOLARE_ORE = ">> Impossibile Calcolare il numero di ore da offrire.\n";
     public static final String MSG_CONFERMA_PROPOSTA = ">> Dovrai offrire %d ore in cambio. Confermi?%n> ";
+    public static final String HEADER_PROPOSTE_APERTE = ">> PROPOSTE APERTE\n";
     private static final String MSG_INSERISCI_CATEGORIA = "Inserisci una categoria di cui ricercare le proposte";
+    public static final String HEADER_PROPOSTE_CHIUSE = ">> PROPOSTE CHIUSE\n";
+    public static final String HEADER_PROPOSTE_RITIRATE = ">> PROPOSTE RITIRATE\n";
 
     @JacksonXmlElementWrapper(localName = "listaProposte")
     @JacksonXmlProperty(localName = "Proposta")
     private HashMap<String, ArrayList<Proposta>> listaProposte;
-    private GestoreFattori gestFatt;
-    private String filePath;
-    private Utente utenteAttivo;
+    private final GestoreFattori gestFatt;
+    private final String filePath;
+    private final Utente utenteAttivo;
+    private ArrayList<Proposta> proposteDaNotificare;
 
     public GestoreProposte(String proposteFilepath, String fattoriFilePath, Utente utenteAttivo) {
         this.gestFatt = new GestoreFattori(fattoriFilePath);
         this.filePath = proposteFilepath;
-        this.utenteAttivo = utenteAttivo;
-
         this.listaProposte = new HashMap<>();
+        this.utenteAttivo = utenteAttivo;
+        this.proposteDaNotificare = new ArrayList<>();
+
         deserializeXML();
     }
 
@@ -116,10 +121,11 @@ public class GestoreProposte {
                     }
                 }
             }
-            serializeXML();
 
-            //TODO decidere come impacchettare le proposte compatibili e inviarle al configuratore
         }
+
+
+        //TODO chiuderla (mandare la roba al configuratore etc...(FLAG appenaChiusa???))
 
     }
 
@@ -140,54 +146,64 @@ public class GestoreProposte {
             }
         }
 
-        return null;
+        return new ArrayList<>(); // forse basta fare return null;
     }
 
-    public void mostraPropostePerCategoria() {
+    public void visualizzaPropostePerCategoria() {
         String categoria = gestFatt.selezioneFoglia(MSG_INSERISCI_CATEGORIA);
         Predicate<Proposta> filtro = p -> p.getOfferta().equals(categoria) || p.getRichiesta().equals(categoria);
         System.out.println(proposteToString(filtro));
     }
 
-    public void mostraPropostePerAutore(String usernameAutore) {
+    public void visualizzaPropostePerAutore(String usernameAutore) {
         Predicate<Proposta> filtro = p -> p.getAutore().equals(usernameAutore);
         System.out.println(proposteToString(filtro));
     }
 
+    private void visualizzaProposteNotificate() {
+        for (Proposta proposta : proposteDaNotificare) {
+            System.out.println(proposta);
+            String email = GestoreUtenti.getInformazioniFruitore(proposta.getAutore()).getEmail();
+            System.out.println(proposta.getAutore() + " --> Email: " + email);
+        }
+    }
+
     public String proposteToString(Predicate<Proposta> filtro) {
         StringBuilder aperte = new StringBuilder();
-        aperte.append(">> PROPOSTE APERTE\n");
         StringBuilder chiuse = new StringBuilder();
-        chiuse.append(">> PROPOSTE CHIUSE\n");
         StringBuilder ritirate = new StringBuilder();
-        ritirate.append(">> PROPOSTE RITIRATE\n");
+        aperte.append(HEADER_PROPOSTE_APERTE);
+        chiuse.append(HEADER_PROPOSTE_CHIUSE);
+        ritirate.append(HEADER_PROPOSTE_RITIRATE);
 
         listaProposte.keySet().stream()
                 .flatMap(comprensorio -> listaProposte.get(comprensorio).stream()).filter(filtro).forEach(proposta -> {
-            switch (proposta.getStato()) {
-                case StatiProposta.APERTA -> aperte.append(proposta).append("\n");
-                case StatiProposta.CHIUSA -> chiuse.append(proposta).append("\n");
-                case StatiProposta.RITIRATA -> ritirate.append(proposta).append("\n");
-            }
-        });
+                    switch (proposta.getStato()) {
+                        case StatiProposta.APERTA -> aperte.append(proposta).append("\n");
+                        case StatiProposta.CHIUSA -> chiuse.append(proposta).append("\n");
+                        case StatiProposta.RITIRATA -> ritirate.append(proposta).append("\n");
+                    }
+                });
 
         return aperte.append(chiuse).append(ritirate).toString();
     }
 
-
     public void entryPoint(int scelta) {
         if (utenteAttivo.getClass() == Configuratore.class) {
             switch (scelta) {
-                case 1 -> mostraPropostePerCategoria();
+                case 1 -> visualizzaPropostePerCategoria();
+                case 2 -> visualizzaProposteNotificate();
                 default -> System.out.println("Nulla da mostrare");
             }
         } else {
             switch (scelta) {
-                case 1 -> mostraPropostePerAutore(utenteAttivo.getUsername());
+                case 1 -> visualizzaPropostePerAutore(utenteAttivo.getUsername());
                 case 2 -> effettuaProposta();
                 default -> System.out.println("Nulla da mostrare");
             }
         }
 
     }
+
+
 }
