@@ -3,7 +3,6 @@ package it.unibs.projectIngesoft.attivita;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import it.unibs.projectIngesoft.utente.Fruitore;
-import it.unibs.projectIngesoft.utente.Utente;
 
 @JacksonXmlRootElement(localName = "Proposta")
 public class Proposta {
@@ -18,7 +17,7 @@ public class Proposta {
     private int oreOfferta;
     @JacksonXmlProperty(localName = "stato")
     private StatiProposta stato;
-    @JacksonXmlProperty(localName = "Autore")
+    @JacksonXmlProperty(localName = "autore")
     private Fruitore autore;
 
     public Proposta(){
@@ -39,14 +38,11 @@ public class Proposta {
         StringBuilder sb = new StringBuilder();
         sb.append("Richiesta:\t[ ").append(richiesta.split(":")[1]).append(", ").append(oreRichiesta).append(" ore ]\n");
         sb.append("Offerta:\t[ ").append(offerta.split(":")[1]).append(", ").append(oreOfferta).append(" ore ]\n");
-
         return sb.toString();
     }
 
     public boolean isCompatibile(Proposta p){
-        if(this.richiesta == p.offerta && this.oreRichiesta == p.oreOfferta) {
-            return true;
-        } else return false;
+        return this.richiesta == p.offerta && this.oreRichiesta == p.oreOfferta;
     }
 
     //Getters & Setters
@@ -59,15 +55,15 @@ public class Proposta {
         return stato;
     }
 
-    public void setClosed(){
+    public void setChiusa(){
         this.stato = StatiProposta.CHIUSA;
     }
 
-    public void setOpen(){
+    public void setAperta(){
         this.stato = StatiProposta.APERTA;
     }
 
-    public void setRetired(){
+    public void setRitirata(){
         this.stato = StatiProposta.RITIRATA;
     }
 
