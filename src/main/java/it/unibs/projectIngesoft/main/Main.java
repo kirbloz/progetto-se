@@ -61,7 +61,8 @@ public class Main {
     };
     private static final String TITLE_MENU_PROPOSTE = "MENU' PROPOSTE";
     private static final String[] vociProposteConfiguratore = new String[]{
-            "Visualizza proposte da categoria"
+            "Visualizza proposte da categoria",
+            "Visualizza proposte pronte"
     };
     private static final String[] vociProposteFruitore = new String[]{
             "Visualizza proposte inviate",
