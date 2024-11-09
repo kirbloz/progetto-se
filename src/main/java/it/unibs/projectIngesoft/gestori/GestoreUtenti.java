@@ -26,25 +26,43 @@ public class GestoreUtenti {
 
     private final String filePath;
     private final String defaultCredentialsFilePath;
-    private ArrayList<Utente> utenti;
+    private static ArrayList<Utente> utenti;
     private Utente defaultUtente;
 
     public GestoreUtenti(String filePath, String defaultCredentialsFilePath) {
         this.filePath = filePath;
         this.defaultCredentialsFilePath = defaultCredentialsFilePath;
-        this.utenti = new ArrayList<>();
+        if (utenti == null)
+            utenti = new ArrayList<>();
         deserializeXML(); // load dati
         serializeXML();
     }
+
+    private static ArrayList<Utente> getListaUtenti() {
+        if (utenti == null) {
+            utenti = new ArrayList<>();
+        }
+        return utenti;
+    }
+
+    public static Fruitore getInformazioniFruitore(String username) {
+        List<Utente> tempUtenti = getListaUtenti();
+        return tempUtenti.stream()
+                .filter(u -> u instanceof Fruitore && u.getUsername().equals(username))
+                .map(u -> (Fruitore) u)
+                .findFirst()
+                .orElse(null);
+    }
+
 
     /**
      * Sfrutto l'implementazione statica della classe Serializer.
      * Questo metodo esiste da prima di Serializer, per non cambiare ogni call a questo ho semplicemente sostituito il corpo.
      */
     public void serializeXML() {
-        assert this.utenti != null;
+        assert utenti != null;
         assert this.filePath != null;
-        Serializer.serialize(this.filePath, this.utenti);
+        Serializer.serialize(this.filePath, utenti);
     }
 
     /**
@@ -57,17 +75,14 @@ public class GestoreUtenti {
 
         List<Utente> listaUtenti = Serializer.deserialize(new TypeReference<>() {
         }, this.filePath);
-        this.utenti.clear();
+        utenti.clear();
         if (listaUtenti != null)
-            this.utenti.addAll(listaUtenti);
+            utenti.addAll(listaUtenti);
 
         this.defaultUtente = Serializer.deserialize(new TypeReference<>() {
         }, this.defaultCredentialsFilePath);
 
-        //this.utenti.add(new Configuratore("ciao", "1234"));
-        //this.utenti.add(new Fruitore("0","0", "fake@mail", "fake-comprensorio"));
-
-        assert this.utenti != null : "deve essere almeno inizializzato!";
+        assert utenti != null : "deve essere almeno inizializzato!";
         assert this.defaultUtente != null : "l'utente default non può essere null, deve esistere";
     }
 
@@ -77,8 +92,9 @@ public class GestoreUtenti {
      * @param utente, utente da inserire
      */
     public void addUtente(Utente utente) {
-        if (!this.utenti.contains(utente)) {
-            this.utenti.add(utente);
+        assert utenti != null;
+        if (!utenti.contains(utente)) {
+            utenti.add(utente);
             serializeXML();
         }
     }
@@ -179,8 +195,8 @@ public class GestoreUtenti {
      * @return oggetto utente corrispondente se lo username esiste, null altrimenti
      */
     private Utente cercaConUsername(String username) {
-        assert this.utenti != null;
-        return this.utenti.stream()
+        assert utenti != null;
+        return utenti.stream()
                 .filter(usr -> usr.getUsername().equals(username))
                 .findFirst()
                 .orElse(null);
