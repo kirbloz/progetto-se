@@ -28,6 +28,7 @@ public class GestoreProposte {
     private static final String MSG_INSERISCI_CATEGORIA = "Inserisci una categoria di cui ricercare le proposte";
     public static final String HEADER_PROPOSTE_CHIUSE = ">> PROPOSTE CHIUSE\n";
     public static final String HEADER_PROPOSTE_RITIRATE = ">> PROPOSTE RITIRATE\n";
+    public static final String HEADER_PROPOSTE_PRONTE = ">> PROPOSTE PRONTE <<";
 
     @JacksonXmlElementWrapper(localName = "listaProposte")
     @JacksonXmlProperty(localName = "Proposta")
@@ -35,16 +36,24 @@ public class GestoreProposte {
     private final GestoreFattori gestFatt;
     private final String filePath;
     private final Utente utenteAttivo;
-    private ArrayList<Proposta> proposteDaNotificare;
 
     public GestoreProposte(String proposteFilepath, String fattoriFilePath, Utente utenteAttivo) {
         this.gestFatt = new GestoreFattori(fattoriFilePath);
         this.filePath = proposteFilepath;
         this.listaProposte = new HashMap<>();
         this.utenteAttivo = utenteAttivo;
-        this.proposteDaNotificare = new ArrayList<>();
+
+        Fruitore tempUtente = new Fruitore("ciao", "1234", "asdf@culo.iy", "Brescia");
 
         deserializeXML();
+
+        /*
+        addProposta(new Proposta("radice:liv2f3", "radice:liv2f1", 1, 1, tempUtente));
+        addProposta(new Proposta("radice:liv2f1", "test:livello1f1", 1, 1, tempUtente));
+        addProposta(new Proposta("test:livello1f1", "test:livello1f2", 1, 1, tempUtente));
+*/
+
+        serializeXML();
     }
 
     /**
@@ -72,6 +81,12 @@ public class GestoreProposte {
 
     }
 
+    public void addProposta(Proposta proposta) {
+        assert this.listaProposte != null;
+        this.listaProposte.computeIfAbsent(proposta.getComprensorio(), k -> new ArrayList<>()).add(proposta);
+        serializeXML();
+    }
+
     /**
      * Guida la creazione di una nuova proposta di scambio di prestazioni d'opera
      */
@@ -96,79 +111,82 @@ public class GestoreProposte {
         Proposta tempProposta = new Proposta(categoriaRichiesta, categoriaOfferta, oreRichiesta, oreOfferta, (Fruitore) utenteAttivo);
 
         // 3. conferma e memorizza la proposta
-        if (InputDati.yesOrNo("\n" + tempProposta + "\n" + MSG_CONFERMA_PROPOSTA.formatted(oreOfferta)))
+        if (InputDati.yesOrNo("\n" + tempProposta + "\n" + MSG_CONFERMA_PROPOSTA.formatted(oreOfferta))) {
             addProposta(tempProposta);
-        else
+            controllaSeChiuderla(tempProposta);
+        } else
             System.out.println(WARNING_PROPOSTA_ANNULLATA);
-
-        controllaSeChiuderla(tempProposta);
     }
 
-    public void addProposta(Proposta proposta) {
-        this.listaProposte.computeIfAbsent(proposta.getComprensorio(), k -> new ArrayList<>()).add(proposta);
+
+    private void controllaSeChiuderla(Proposta nuovaProposta) {
+        //todo ma che è
+        ArrayList<Proposta> proposteCompatibili = cercaProposteCompatibili(nuovaProposta, nuovaProposta);
+
+        if (proposteCompatibili.isEmpty())
+            return;
+
+        proposteCompatibili.add(nuovaProposta);
+        proposteCompatibili.stream()
+                .filter(compatibile -> listaProposte.get(nuovaProposta.getComprensorio()).contains(compatibile))
+                .forEach(Proposta::setChiusa);
+
         serializeXML();
     }
 
-    private void controllaSeChiuderla(Proposta nuovaProposta) {
-
-        ArrayList<Proposta> proposteCompatibili = cercaProposteCompatibili(nuovaProposta, nuovaProposta);
-
-        if (proposteCompatibili != null) {
-            for (Proposta pComp : proposteCompatibili) {
-                for (Proposta p : listaProposte.get(nuovaProposta.getComprensorio())) {
-                    if (pComp == p) {
-                        p.setChiusa();
-                    }
-                }
-            }
-
-        }
-
-
-        //TODO chiuderla (mandare la roba al configuratore etc...(FLAG appenaChiusa???))
-
-    }
-
-    private ArrayList<Proposta> cercaProposteCompatibili(Proposta propostaDaCheckare, Proposta propostaOriginale) {
+    private ArrayList<Proposta> cercaProposteCompatibili(Proposta propostaDaControllare, Proposta propostaOriginale) {
+        assert listaProposte != null;
         ArrayList<Proposta> insiemeDiProposteCompatibili = new ArrayList<>();
 
-        for (Proposta proposta : listaProposte.get(propostaDaCheckare.getComprensorio())) {
+        for (Proposta proposta : listaProposte.get(propostaDaControllare.getComprensorio())) {
             if (proposta.getStato() == StatiProposta.APERTA) {
-                if (propostaDaCheckare.isCompatibile(proposta) && proposta.isCompatibile(propostaOriginale)) {
+                if (propostaDaControllare.isCompatibile(proposta) && proposta.isCompatibile(propostaOriginale)) {
                     //fine ricorsione, ritorna l' array di Proposte da cui sei passato
                     insiemeDiProposteCompatibili.add(proposta);
                     return insiemeDiProposteCompatibili;
-                } else if (propostaDaCheckare.isCompatibile(proposta)) {
+                } else if (propostaDaControllare.isCompatibile(proposta)) {
                     //continua ricorsione
-                    insiemeDiProposteCompatibili.addAll(cercaProposteCompatibili(proposta, propostaOriginale)); //forse addall o concatenate o che cazzo ne se
+                    insiemeDiProposteCompatibili.addAll(cercaProposteCompatibili(proposta, propostaOriginale));
                     return insiemeDiProposteCompatibili;
                 }
             }
         }
 
-        return new ArrayList<>(); // forse basta fare return null;
+        return new ArrayList<>();
     }
 
     public void visualizzaPropostePerCategoria() {
+        assert listaProposte != null;
         String categoria = gestFatt.selezioneFoglia(MSG_INSERISCI_CATEGORIA);
         Predicate<Proposta> filtro = p -> p.getOfferta().equals(categoria) || p.getRichiesta().equals(categoria);
         System.out.println(proposteToString(filtro));
     }
 
     public void visualizzaPropostePerAutore(String usernameAutore) {
+        assert listaProposte != null;
         Predicate<Proposta> filtro = p -> p.getAutore().equals(usernameAutore);
         System.out.println(proposteToString(filtro));
     }
 
-    private void visualizzaProposteNotificate() {
-        for (Proposta proposta : proposteDaNotificare) {
-            System.out.println(proposta);
-            String email = GestoreUtenti.getInformazioniFruitore(proposta.getAutore()).getEmail();
-            System.out.println(proposta.getAutore() + " --> Email: " + email);
-        }
+    private void visualizzaProposteDaNotificare() {
+        assert listaProposte != null;
+        System.out.println(HEADER_PROPOSTE_PRONTE);
+
+        listaProposte.keySet().stream()
+                .flatMap(comprensorio -> listaProposte.get(comprensorio).stream()).filter(Proposta::isDaNotificare)
+                .forEach(proposta -> {
+                    System.out.println(proposta);
+                    String email = GestoreUtenti.getInformazioniFruitore(proposta.getAutore()).getEmail();
+                    System.out.println(proposta.getAutore() + " --> Email: " + email + "\n");
+                    proposta.notificata();
+                });
+
+        serializeXML();
     }
 
     public String proposteToString(Predicate<Proposta> filtro) {
+        assert listaProposte != null;
+
         StringBuilder aperte = new StringBuilder();
         StringBuilder chiuse = new StringBuilder();
         StringBuilder ritirate = new StringBuilder();
@@ -192,7 +210,7 @@ public class GestoreProposte {
         if (utenteAttivo.getClass() == Configuratore.class) {
             switch (scelta) {
                 case 1 -> visualizzaPropostePerCategoria();
-                case 2 -> visualizzaProposteNotificate();
+                case 2 -> visualizzaProposteDaNotificare();
                 default -> System.out.println("Nulla da mostrare");
             }
         } else {
