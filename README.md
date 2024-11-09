@@ -1,5 +1,5 @@
 # Ermes
-Questo repository contiene lo svolgimento del progetto di Ingegneria del Software, consegna del AA. 24-25.
+Questo repository contiene lo svolgimento del progetto di Ingegneria del Software, consegna del AA. 23-24.
 I collaboratori sono @GabbayBG, @kirbloz, @martibarimaff.
 
 > Abbiamo scelto il nome "Ermes" per l'applicazione perché nella mitologia greca, egli è la divinità degli scambi e del commercio.
