@@ -5,6 +5,7 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import it.unibs.projectIngesoft.utente.Fruitore;
 
+import java.util.Objects;
 import java.util.Stack;
 
 @JacksonXmlRootElement(localName = "Proposta")
@@ -24,8 +25,8 @@ public class Proposta {
     private String autore;
     @JacksonXmlProperty(localName = "comprensorioDiAppartenenza")
     private String comprensorioDiAppartenenza;
-
-    private Stack<StatiProposta> cronologiaStati = new Stack<>();    //TODO Wade salva sta roba con xml :D
+    @JacksonXmlProperty(localName = "cronologiaStati")
+    private Stack<StatiProposta> cronologiaStati;
 
     public Proposta(){
 
@@ -39,6 +40,7 @@ public class Proposta {
         this.autore = autore.getUsername();
         this.comprensorioDiAppartenenza = autore.getComprensorioDiAppartenenza();
 
+        this.cronologiaStati  = new Stack<>();
         this.stato = StatiProposta.APERTA;
         aggiornaStoricoStati();
     }
@@ -51,7 +53,7 @@ public class Proposta {
     }
 
     public boolean isCompatibile(Proposta p){
-        return this.richiesta == p.offerta && this.oreRichiesta == p.oreOfferta;
+        return this.richiesta.equals(p.offerta) && this.oreRichiesta == p.oreOfferta;
     }
 
     //Getters & Setters
@@ -95,14 +97,6 @@ public class Proposta {
     @JsonIgnore
     public String getOfferta() {
         return offerta;
-    }
-
-    public int getOreRichiesta() {
-        return oreRichiesta;
-    }
-
-    public int getOreOfferta() {
-        return oreOfferta;
     }
 }
 
