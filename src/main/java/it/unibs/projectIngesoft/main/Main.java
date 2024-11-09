@@ -30,7 +30,7 @@ public class Main {
             "Menu Comprensorio ",
             "Menu Categorie",
             "Menu Fattori",
-
+            "Menu Proposte"
     };
     protected static final String[] vociMainFruitore = new String[]{
             "Cambia Credenziali",
