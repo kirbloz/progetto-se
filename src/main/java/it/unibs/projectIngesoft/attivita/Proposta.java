@@ -5,7 +5,6 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import it.unibs.projectIngesoft.utente.Fruitore;
 
-import java.util.Objects;
 import java.util.Stack;
 
 @JacksonXmlRootElement(localName = "Proposta")
@@ -27,8 +26,10 @@ public class Proposta {
     private String comprensorioDiAppartenenza;
     @JacksonXmlProperty(localName = "cronologiaStati")
     private Stack<StatiProposta> cronologiaStati;
+    @JacksonXmlProperty(localName = "daNotificare")
+    private boolean daNotificare;
 
-    public Proposta(){
+    public Proposta() {
 
     }
 
@@ -40,7 +41,7 @@ public class Proposta {
         this.autore = autore.getUsername();
         this.comprensorioDiAppartenenza = autore.getComprensorioDiAppartenenza();
 
-        this.cronologiaStati  = new Stack<>();
+        this.cronologiaStati = new Stack<>();
         this.stato = StatiProposta.APERTA;
         aggiornaStoricoStati();
     }
@@ -52,7 +53,7 @@ public class Proposta {
         return sb.toString();
     }
 
-    public boolean isCompatibile(Proposta p){
+    public boolean isCompatibile(Proposta p) {
         return this.richiesta.equals(p.offerta) && this.oreRichiesta == p.oreOfferta;
     }
 
@@ -62,38 +63,53 @@ public class Proposta {
     public String getAutore() {
         return autore;
     }
+
     @JsonIgnore
     public StatiProposta getStato() {
         return stato;
     }
 
-    public void setChiusa(){
+    @JsonIgnore
+    public boolean isDaNotificare() {
+        return daNotificare;
+    }
+
+    public void notificata(){
+        this.daNotificare = false;
+    }
+
+    public void setChiusa() {
         this.stato = StatiProposta.CHIUSA;
+        this.daNotificare = true;
         aggiornaStoricoStati();
     }
 
-    public void setAperta(){
+    public void setAperta() {
         this.stato = StatiProposta.APERTA;
+        this.daNotificare = false;
         aggiornaStoricoStati();
     }
 
-    public void setRitirata(){
+    public void setRitirata() {
         this.stato = StatiProposta.RITIRATA;
+        this.daNotificare = false;
         aggiornaStoricoStati();
     }
 
-    public void aggiornaStoricoStati(){
+    public void aggiornaStoricoStati() {
         cronologiaStati.push(this.stato);
     }
 
     @JsonIgnore
-    public String getComprensorio(){
+    public String getComprensorio() {
         return this.comprensorioDiAppartenenza;
     }
+
     @JsonIgnore
     public String getRichiesta() {
         return richiesta;
     }
+
     @JsonIgnore
     public String getOfferta() {
         return offerta;
