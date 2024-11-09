@@ -5,6 +5,8 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import it.unibs.projectIngesoft.utente.Fruitore;
 
+import java.util.Stack;
+
 @JacksonXmlRootElement(localName = "Proposta")
 public class Proposta {
 
@@ -23,6 +25,8 @@ public class Proposta {
     @JacksonXmlProperty(localName = "comprensorioDiAppartenenza")
     private String comprensorioDiAppartenenza;
 
+    private Stack<StatiProposta> cronologiaStati = new Stack<>();    //TODO Wade salva sta roba con xml :D
+
     public Proposta(){
 
     }
@@ -36,6 +40,7 @@ public class Proposta {
         this.comprensorioDiAppartenenza = autore.getComprensorioDiAppartenenza();
 
         this.stato = StatiProposta.APERTA;
+        aggiornaStoricoStati();
     }
 
     public String toString() {
@@ -62,14 +67,21 @@ public class Proposta {
 
     public void setChiusa(){
         this.stato = StatiProposta.CHIUSA;
+        aggiornaStoricoStati();
     }
 
     public void setAperta(){
         this.stato = StatiProposta.APERTA;
+        aggiornaStoricoStati();
     }
 
     public void setRitirata(){
         this.stato = StatiProposta.RITIRATA;
+        aggiornaStoricoStati();
+    }
+
+    public void aggiornaStoricoStati(){
+        cronologiaStati.push(this.stato);
     }
 
     @JsonIgnore
