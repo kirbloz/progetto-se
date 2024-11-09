@@ -40,7 +40,7 @@ public class Proposta {
         this.comprensorioDiAppartenenza = autore.getComprensorioDiAppartenenza();
 
         this.stato = StatiProposta.APERTA;
-        cronologiaStati.push(this.stato);
+        aggiornaStoricoStati();
     }
 
     public String toString() {
@@ -67,16 +67,20 @@ public class Proposta {
 
     public void setChiusa(){
         this.stato = StatiProposta.CHIUSA;
-        cronologiaStati.push(this.stato);
+        aggiornaStoricoStati();
     }
 
     public void setAperta(){
         this.stato = StatiProposta.APERTA;
-        cronologiaStati.push(this.stato);
+        aggiornaStoricoStati();
     }
 
     public void setRitirata(){
         this.stato = StatiProposta.RITIRATA;
+        aggiornaStoricoStati();
+    }
+
+    public void aggiornaStoricoStati(){
         cronologiaStati.push(this.stato);
     }
 
