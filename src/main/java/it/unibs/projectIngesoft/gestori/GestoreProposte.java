@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import it.unibs.projectIngesoft.attivita.Proposta;
+import it.unibs.projectIngesoft.attivita.ProposteWrapper;
 import it.unibs.projectIngesoft.attivita.StatiProposta;
 import it.unibs.projectIngesoft.libraries.InputDati;
 import it.unibs.projectIngesoft.libraries.Serializer;
@@ -13,7 +14,6 @@ import it.unibs.projectIngesoft.utente.Utente;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.function.Predicate;
 
 
@@ -38,10 +38,7 @@ public class GestoreProposte {
         this.filePath = proposteFilepath;
         this.listaProposte = new HashMap<>();
         this.utenteAttivo = utenteAttivo;
-
-        addProposta(new Proposta("richiesta", "offerta", 1, 1, new Fruitore("ciao", "1234", "mail@test.com", "Brescia")));
-        serializeXML();
-        //deserializeXML();
+        deserializeXML();
     }
 
     /**
@@ -51,7 +48,7 @@ public class GestoreProposte {
     private void serializeXML() {
         assert this.listaProposte != null;
         assert this.filePath != null;
-        Serializer.serialize(this.filePath, this.listaProposte);
+        Serializer.serialize(this.filePath, new ProposteWrapper(listaProposte));
     }
 
     /**
@@ -60,11 +57,13 @@ public class GestoreProposte {
      */
     private void deserializeXML() {
         assert this.listaProposte != null;
-        List<Proposta> tempList = Serializer.deserialize(new TypeReference<>() {
-        }, this.filePath);
 
-        listaProposte.clear();
-        //if (tempList != null) listaProposte.addAll(tempList); //TODO WADE
+        ProposteWrapper tempWrapper = Serializer.deserialize(new TypeReference<>() {
+        }, filePath);
+        if (tempWrapper != null) {
+            listaProposte = tempWrapper.toHashMap();
+        }
+
     }
 
     /**
@@ -157,21 +156,21 @@ public class GestoreProposte {
 
     public String proposteToString(Predicate<Proposta> filtro) {
         StringBuilder aperte = new StringBuilder();
+        aperte.append(">> PROPOSTE APERTE\n");
         StringBuilder chiuse = new StringBuilder();
+        chiuse.append(">> PROPOSTE CHIUSE\n");
         StringBuilder ritirate = new StringBuilder();
+        ritirate.append(">> PROPOSTE RITIRATE\n");
 
-        //for (ArrayList<Proposta> arraylist : listaProposte.values()) {
-        for(String comprensorio : listaProposte.keySet()) {
-            for (Proposta proposta : listaProposte.get(comprensorio)) {
-                if (filtro.test(proposta)) {
-                    switch (proposta.getStato()) {
-                        case StatiProposta.APERTA -> aperte.append(proposta);
-                        case StatiProposta.CHIUSA -> chiuse.append(proposta);
-                        case StatiProposta.RITIRATA -> ritirate.append(proposta);
-                    }
-                }
+        listaProposte.keySet().stream()
+                .flatMap(comprensorio -> listaProposte.get(comprensorio).stream()).filter(filtro).forEach(proposta -> {
+            switch (proposta.getStato()) {
+                case StatiProposta.APERTA -> aperte.append(proposta).append("\n");
+                case StatiProposta.CHIUSA -> chiuse.append(proposta).append("\n");
+                case StatiProposta.RITIRATA -> ritirate.append(proposta).append("\n");
             }
-        }
+        });
+
         return aperte.append(chiuse).append(ritirate).toString();
     }
 

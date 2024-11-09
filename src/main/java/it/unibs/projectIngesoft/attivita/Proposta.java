@@ -1,5 +1,6 @@
 package it.unibs.projectIngesoft.attivita;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import it.unibs.projectIngesoft.utente.Fruitore;
@@ -47,10 +48,11 @@ public class Proposta {
 
     //Getters & Setters
 
+    @JsonIgnore
     public Fruitore getAutore() {
         return autore;
     }
-
+    @JsonIgnore
     public StatiProposta getStato() {
         return stato;
     }
@@ -67,14 +69,15 @@ public class Proposta {
         this.stato = StatiProposta.RITIRATA;
     }
 
+    @JsonIgnore
     public String getComprensorio(){
         return this.autore.getComprensorioDiAppartenenza();
     }
-
+    @JsonIgnore
     public String getRichiesta() {
         return richiesta;
     }
-
+    @JsonIgnore
     public String getOfferta() {
         return offerta;
     }
