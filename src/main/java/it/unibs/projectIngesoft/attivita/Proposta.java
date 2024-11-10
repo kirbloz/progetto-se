@@ -53,8 +53,14 @@ public class Proposta {
         return sb.toString();
     }
 
-    public boolean isCompatibile(Proposta p) {
-        return this.richiesta.equals(p.offerta) && this.oreRichiesta == p.oreOfferta;
+    /**
+     * La compatibilità vuole che la richiesta della proposta passata sia uguale all'offerta della proposta corrente.
+     * @param p, proposta da controllare
+     * @return true se l'offerta di this può soddisfare la richiesta di p (param)
+     */
+    public boolean isOffertaCompatibile(Proposta p) {
+        //return this.richiesta.equals(p.offerta) && this.oreRichiesta == p.oreOfferta;
+        return this.getOfferta().equals(p.getRichiesta());
     }
 
     //Getters & Setters
