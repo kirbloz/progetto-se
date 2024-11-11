@@ -18,22 +18,30 @@ import java.util.function.Predicate;
 
 
 public class GestoreProposte {
-    public static final String WARNING_PROPOSTA_ANNULLATA = ">> Proposta annullata";
-    public static final String WARNING_PROPOSTA_DUPLICATA = ">> Proposta duplicata! Procedura annullata.";
+
+    public static final String HEADER_PROPOSTE_PRONTE = ">> PROPOSTE PRONTE <<";
+
+    public static final String HEADER_PROPOSTE_CHIUSE = ">> PROPOSTE CHIUSE\n";
+    public static final String HEADER_PROPOSTE_RITIRATE = ">> PROPOSTE RITIRATE\n";
+    public static final String HEADER_PROPOSTE_APERTE = ">> PROPOSTE APERTE\n";
+
     public static final String MSG_INSERISCI_RICHIESTA = ">> Inserisci una categoria valida di cui vuoi effettuare la RICHIESTA.";
     public static final String MSG_INSERISCI_OFFERTA = ">> Inserisci una categoria valida che sei disposto a OFFRIRE in cambio.";
     public static final String MSG_RICHIESTA_ORE = ">> Inserisci il numero di ORE che vuoi richiedere:\n> ";
-    public static final String WARNING_IMPOSSIBILE_CALCOLARE_ORE = ">> Impossibile Calcolare il numero di ore da offrire.\n";
     public static final String MSG_CONFERMA_PROPOSTA = ">> Dovrai offrire %d ore in cambio. Confermi?%n> ";
-    public static final String HEADER_PROPOSTE_APERTE = ">> PROPOSTE APERTE\n";
-    private static final String MSG_INSERISCI_CATEGORIA = "Inserisci una categoria di cui ricercare le proposte";
-    public static final String HEADER_PROPOSTE_CHIUSE = ">> PROPOSTE CHIUSE\n";
-    public static final String HEADER_PROPOSTE_RITIRATE = ">> PROPOSTE RITIRATE\n";
-    public static final String HEADER_PROPOSTE_PRONTE = ">> PROPOSTE PRONTE <<";
+
+    private static final String MSG_INSERISCI_CATEGORIA = ">> Inserisci una categoria di cui ricercare le proposte";
     public static final String MSG_FORMATTED_PROPOSTA_PRONTA = "%s, %s\n >>> Indirizzo email: %s\n";
-    public static final String MSG_SELEZIONE_CATEGORIA_RICHIESTA = "Inserisci la categoria richiesta per la selezione: ";
-    public static final String MSG_SELEZIONE_ORE = "Inserisci il monte ore richieste per la selezione: ";
-    public static final String MSG_SELEZIONE_CATEGORIA_OFFERTA = "Inserisci la categoria offerta per la selezione: ";
+
+    public static final String MSG_SELEZIONE_CATEGORIA_RICHIESTA = ">> Inserisci la categoria RICHIESTA per la selezione: ";
+    public static final String MSG_SELEZIONE_ORE = ">> Inserisci il monte ORE RICHIESTE per la selezione: ";
+    public static final String MSG_SELEZIONE_CATEGORIA_OFFERTA = ">> Inserisci la categoria OFFERTA per la selezione: ";
+    public static final String MSG_CONFERMA_CAMBIO_STATO = ">> Vuoi cambiare lo stato della proposta da %s a %s?";
+    public static final String MSG_STATO_MODIFICATO = ">> Stato modificato in %s";
+
+    public static final String WARNING_IMPOSSIBILE_CALCOLARE_ORE = ">> Impossibile Calcolare il numero di ore da offrire.\n";
+    public static final String WARNING_PROPOSTA_ANNULLATA = ">> Proposta annullata";
+    public static final String WARNING_PROPOSTA_DUPLICATA = ">> Proposta duplicata! Procedura annullata.";
 
     @JacksonXmlElementWrapper(localName = "listaProposte")
     @JacksonXmlProperty(localName = "Proposta")
@@ -219,7 +227,7 @@ public class GestoreProposte {
 
         // 1. inserimento categoria richiesta, ore, e categoria offerta
         boolean found = false;
-        do{
+        do {
             visualizzaProposteModificabili(utenteAttivo.getUsername());
             categoriaRichiesta = gestFatt.selezioneFogliaPerCambioStatoProposta(MSG_SELEZIONE_CATEGORIA_RICHIESTA);
             visualizzaProposteModificabili(utenteAttivo.getUsername());
@@ -227,28 +235,32 @@ public class GestoreProposte {
             visualizzaProposteModificabili(utenteAttivo.getUsername());
             categoriaOfferta = gestFatt.selezioneFogliaPerCambioStatoProposta(MSG_SELEZIONE_CATEGORIA_OFFERTA);
 
-            for (Proposta proposta : listaProposte.get(((Fruitore)utenteAttivo).getComprensorioDiAppartenenza())){
-                if(proposta.getOfferta().equals(categoriaOfferta) && proposta.getOreRichiesta() == oreRichiesta && proposta.getRichiesta().equals(categoriaRichiesta)){
+            for (Proposta proposta : listaProposte.get(((Fruitore) utenteAttivo).getComprensorioDiAppartenenza())) {
+                if (proposta.getOfferta().equals(categoriaOfferta)
+                        && proposta.getOreRichiesta() == oreRichiesta
+                        && proposta.getRichiesta().equals(categoriaRichiesta)) {
                     found = true;
                     daCambiare = proposta;
                     break;
-                };
+                }
+                ;
             }
-        }while (!found);
+        } while (!found);
 
         assert daCambiare != null;
         StatiProposta statoAttuale = daCambiare.getStato();
-        StatiProposta statoNuovo = statoAttuale==StatiProposta.APERTA ? StatiProposta.RITIRATA : StatiProposta.APERTA;
-        if (InputDati.yesOrNo("Vuoi cambiare lo stato della proposta da %s a %s?".formatted(statoAttuale, statoNuovo))) {
-            if (statoAttuale == StatiProposta.RITIRATA) {
-                daCambiare.setAperta();
-            }else {
-                daCambiare.setRitirata();
-            }
-            serializeXML();
-            System.out.println("Stato modificato in %s".formatted(statoNuovo));
-            return;
+        StatiProposta statoNuovo = (statoAttuale == StatiProposta.APERTA) ? StatiProposta.RITIRATA : StatiProposta.APERTA;
+
+        if (!InputDati.yesOrNo(MSG_CONFERMA_CAMBIO_STATO.formatted(statoAttuale, statoNuovo)))
+            return; // non conferma
+
+        if (statoAttuale == StatiProposta.RITIRATA) {
+            daCambiare.setAperta();
+        } else {
+            daCambiare.setRitirata();
         }
+        System.out.println(MSG_STATO_MODIFICATO.formatted(statoNuovo));
+        serializeXML();
     }
 
     public void visualizzaPropostePerCategoria() {
@@ -278,7 +290,7 @@ public class GestoreProposte {
                 .flatMap(comprensorio -> listaProposte.get(comprensorio).stream()).filter(Proposta::isDaNotificare)
                 .forEach(proposta -> {
                     System.out.println(proposta);
-                    Fruitore autore = GestoreUtenti.getInformazioniFruitore(proposta.getAutore());
+                    Fruitore autore = getAutoreFromProposta(proposta);
                     String email = autore.getEmail();
                     String comprensorio = autore.getComprensorioDiAppartenenza();
                     System.out.println(MSG_FORMATTED_PROPOSTA_PRONTA.formatted(autore.getUsername(), comprensorio, email));
@@ -286,6 +298,10 @@ public class GestoreProposte {
                 });
 
         serializeXML();
+    }
+
+    private Fruitore getAutoreFromProposta(Proposta proposta) {
+        return GestoreUtenti.getInformazioniFruitore(proposta.getAutore());
     }
 
     public String proposteToString(Predicate<Proposta> filtro) {
@@ -316,14 +332,16 @@ public class GestoreProposte {
                 case 1 -> visualizzaPropostePerCategoria();
                 case 2 -> visualizzaProposteDaNotificare();
                 case 3 -> cambiaStatoProposta();
-                default ->{}
+                default -> {
+                }
             }
         } else {
             switch (scelta) {
                 case 1 -> visualizzaPropostePerAutore(utenteAttivo.getUsername());
                 case 2 -> effettuaProposta();
                 case 3 -> cambiaStatoProposta();
-                default -> {}
+                default -> {
+                }
             }
         }
 
