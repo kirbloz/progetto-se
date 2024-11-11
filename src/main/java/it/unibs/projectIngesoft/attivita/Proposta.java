@@ -60,7 +60,9 @@ public class Proposta {
      */
     public boolean isOffertaCompatibile(Proposta p) {
         //return this.richiesta.equals(p.offerta) && this.oreRichiesta == p.oreOfferta;
-        return this.getOfferta().equals(p.getRichiesta());
+        //return this.getOfferta().equals(p.getRichiesta());
+        return this.getOfferta().equals(p.getRichiesta())
+                && this.getOreOfferta() == p.getOreRichiesta();
     }
 
     //Getters & Setters
@@ -120,5 +122,16 @@ public class Proposta {
     public String getOfferta() {
         return offerta;
     }
+
+    @JsonIgnore
+    public int getOreOfferta() {
+        return oreOfferta;
+    }
+
+    @JsonIgnore
+    public int getOreRichiesta() {
+        return oreRichiesta;
+    }
+
 }
 

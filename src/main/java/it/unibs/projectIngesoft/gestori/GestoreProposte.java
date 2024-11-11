@@ -12,7 +12,6 @@ import it.unibs.projectIngesoft.utente.Configuratore;
 import it.unibs.projectIngesoft.utente.Fruitore;
 import it.unibs.projectIngesoft.utente.Utente;
 
-import java.net.ProxySelector;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.function.Predicate;
@@ -20,6 +19,7 @@ import java.util.function.Predicate;
 
 public class GestoreProposte {
     public static final String WARNING_PROPOSTA_ANNULLATA = ">> Proposta annullata";
+    public static final String WARNING_PROPOSTA_DUPLICATA = ">> Proposta duplicata! Procedura annullata.";
     public static final String MSG_INSERISCI_RICHIESTA = ">> Inserisci una categoria valida di cui vuoi effettuare la RICHIESTA.";
     public static final String MSG_INSERISCI_OFFERTA = ">> Inserisci una categoria valida che sei disposto a OFFRIRE in cambio.";
     public static final String MSG_RICHIESTA_ORE = ">> Inserisci il numero di ORE che vuoi richiedere:\n> ";
@@ -44,51 +44,7 @@ public class GestoreProposte {
         this.listaProposte = new HashMap<>();
         this.utenteAttivo = utenteAttivo;
 
-        Fruitore tempUtente = new Fruitore("ciao", "1234", "asdf@culo.iy", "Brescia");
-
-        //deserializeXML();
-
-        //test data per la concatenazione: test passato
-        addProposta(new Proposta("test:b", "test:c", 1, 1, tempUtente));
-        addProposta(new Proposta("test:c", "test:d", 1, 1, tempUtente));
-        addProposta(new Proposta("test:d", "test:e", 1, 1, tempUtente));
-        addProposta(new Proposta("test:e", "test:f", 1, 1, tempUtente));
-        addProposta(new Proposta("test:f", "test:g", 1, 1, tempUtente));
-
-        addProposta(new Proposta("test:b", "test:d", 1, 1, tempUtente));
-
-        //addProposta(new Proposta("test:b", "test:a", 1, 1, tempUtente));
-        //addProposta(new Proposta("test:b", "test:h", 1, 1, tempUtente));
-        addProposta(new Proposta("test:h", "test:a", 1, 1, tempUtente));
-        addProposta(new Proposta("test:e", "test:a", 1, 1, tempUtente));
-
-        Proposta finale = new Proposta("test:a", "test:b", 1, 1, tempUtente);
-
-
-
-        /* test data per avere una compatibilità 1:1
-        addProposta(new Proposta("radice:liv2f3", "radice:liv2f1", 1, 1, tempUtente));
-        Proposta finale = new Proposta("radice:liv2f1", "radice:liv2f3", 1, 1, tempUtente);
-        */
-
-        /* test data per non avere una catena chiusa
-
-        addProposta(new Proposta("radice:liv2f1", "test:livello1f1", 1, 1, tempUtente));
-        addProposta(new Proposta("test:livello1f1", "radice:liv2f3", 1, 1, tempUtente));
-        Proposta finale = new Proposta("test:livello1f1", "radice:liv2f1", 1, 1, tempUtente);
-        */
-
-        /* TEST METHODS*/
-        ArrayList<Proposta> MIHAIROTTOILCAZZO = new ArrayList<>();
-        MIHAIROTTOILCAZZO.addAll(this.listaProposte.get("Brescia"));
-        ArrayList<Proposta> catena = concatenaCompatibili(finale, finale, MIHAIROTTOILCAZZO );
-        addProposta(finale);
-
-        System.out.println("catena chiusa? " + (catena.isEmpty() ? "VUOTA" : isCatenaChiusa(catena.getFirst(), catena.getLast())));
-        if (!catena.isEmpty()) catena.forEach(Proposta::setChiusa);
-
-
-        //serializeXML();
+        deserializeXML();
     }
 
     /**
@@ -119,7 +75,19 @@ public class GestoreProposte {
     public void addProposta(Proposta proposta) {
         assert this.listaProposte != null;
         this.listaProposte.computeIfAbsent(proposta.getComprensorio(), k -> new ArrayList<>()).add(proposta);
-        serializeXML();
+    }
+
+    /**
+     * Ritorna la lista di proposte afferenti a un certo comprensorio.
+     *
+     * @param comprensorio, nome del comprensorio
+     * @return new ArrayList() se non esistono proposte da un certo comprensorio, altrimenti lista di proposte
+     */
+    public ArrayList<Proposta> getListaProposteComprensorio(String comprensorio) {
+        assert this.listaProposte != null;
+        if (this.listaProposte.containsKey(comprensorio))
+            return this.listaProposte.get(comprensorio);
+        else return new ArrayList<>();
     }
 
     /**
@@ -142,15 +110,37 @@ public class GestoreProposte {
             System.out.println(WARNING_IMPOSSIBILE_CALCOLARE_ORE + WARNING_PROPOSTA_ANNULLATA);
             return;
         }
-
         Proposta tempProposta = new Proposta(categoriaRichiesta, categoriaOfferta, oreRichiesta, oreOfferta, (Fruitore) utenteAttivo);
 
         // 3. conferma e memorizza la proposta
-        if (InputDati.yesOrNo("\n" + tempProposta + "\n" + MSG_CONFERMA_PROPOSTA.formatted(oreOfferta))) {
-            addProposta(tempProposta);
-            cercaProposteDaChiudere(tempProposta);
-        } else
+        if (!InputDati.yesOrNo("\n" + tempProposta + "\n" + MSG_CONFERMA_PROPOSTA.formatted(oreOfferta))) {
             System.out.println(WARNING_PROPOSTA_ANNULLATA);
+            return;
+        }
+
+        // 3.1 se confermi ma è duplicata, segnala e non aggiunge
+        if (controllaPropostaDuplicata(tempProposta)) {
+            System.out.println(WARNING_PROPOSTA_DUPLICATA);
+            return;
+        }
+        addProposta(tempProposta);
+        cercaProposteDaChiudere(tempProposta);
+    }
+
+    /**
+     * Controlla se esiste già una proposta così nel comprensorio, da parte dello stesso utente.
+     *
+     * @return true se esiste, false altrimenti
+     */
+    private boolean controllaPropostaDuplicata(Proposta proposta) {
+        String comprensorio = GestoreUtenti.getInformazioniFruitore(proposta.getAutore()).getComprensorioDiAppartenenza();
+        return getListaProposteComprensorio(comprensorio).stream()
+                .filter(p -> p.getStato() == StatiProposta.APERTA)
+                .anyMatch(p -> p.getRichiesta().equals(proposta.getRichiesta())
+                        && p.getOfferta().equals(proposta.getOfferta())
+                        && p.getOreRichiesta() == proposta.getOreRichiesta()
+                        && p.getOreOfferta() == proposta.getOreOfferta()
+                );
     }
 
 
@@ -159,17 +149,16 @@ public class GestoreProposte {
 
         ArrayList<Proposta> catena = new ArrayList<>();
         ArrayList<Proposta> proposteComprensorio = new ArrayList<>();
-        proposteComprensorio.addAll(listaProposte.get(nuovaProposta.getComprensorio()));
 
-        catena.add(nuovaProposta);
-        catena.addAll(concatenaCompatibili(nuovaProposta, catena.getLast(), proposteComprensorio));
+        proposteComprensorio.addAll(getListaProposteComprensorio(nuovaProposta.getComprensorio()));
+        catena.addAll(concatenaCompatibili(nuovaProposta, nuovaProposta, proposteComprensorio));
 
-        if (catena.size() == 1)
+        if (catena.isEmpty()) // non esiste una catena di proposte che con l'aggiunta della nuova verrebbero soddisfatte
             return;
-        else
-            catena.forEach(Proposta::setChiusa);
 
-        serializeXML();
+        catena.add(nuovaProposta); // aggiungo la nuova così posso chiuderle tutte
+        catena.forEach(Proposta::setChiusa);
+        serializeXML(); // aggiorno i dati salvati con i nuovi stati
     }
 
     private ArrayList<Proposta> concatenaCompatibili(Proposta first, Proposta last, ArrayList<Proposta> proposteComprensorio) {
@@ -179,101 +168,46 @@ public class GestoreProposte {
             return new ArrayList<>();
 
         ArrayList<Proposta> catena = new ArrayList<>();
-
         for (Proposta proposta : proposteComprensorio) {
-            //String richiestaLast = last.getRichiesta(); // check sull'ultima da chiudere
-            // if(proposta.isOffertaCompatibile(last)
-            if (last.isOffertaCompatibile(proposta)/*proposta.getOfferta().equals(richiestaLast)*/) { // si concatena! ma si richiude anche?
-                System.out.println("CONCATENATA! O:" + last.getOfferta() + " R: " + proposta.getRichiesta());
+
+            if (last.isOffertaCompatibile(proposta)) { // si concatena! ma si richiude anche?
                 catena.add(proposta);
 
                 if (!isCatenaChiusa(first, proposta)) { // non si chiude.. continuo la ricerca
                     ArrayList<Proposta> proposteComprensorioRidotte = new ArrayList<>(proposteComprensorio);
                     proposteComprensorioRidotte.remove(proposta);
 
-                    ArrayList<Proposta> continuoCatena = new ArrayList<>(); //trova un nome migliore per continua catena perché una variabile non può essere un cazzo di verbo in 3° persona
+                    ArrayList<Proposta> continuoCatena = new ArrayList<>();
                     continuoCatena.addAll(concatenaCompatibili(first, proposta, proposteComprensorioRidotte));
 
-                    if(continuoCatena.isEmpty()) { // allora proposta non porta a nessuna catena conclusa
+                    if (continuoCatena.isEmpty()) { // allora proposta non porta a nessuna catena conclusa
                         catena.remove(proposta);
-                        System.out.println("RIMUOVO\n:" + proposta);
-                    }else{
+                    } else { // la catena è stata chiusa nella ricorsione appena precedente, continuo a ritornare
                         catena.addAll(continuoCatena);
                         return catena;
                     }
-
-                    //return isCatenaChiusa(first, catena.getLast()) ? catena : new ArrayList<>(); // se la ricerca non trova nulla, non ritornare nulla
                 } else {
-                    System.out.println("CHIUSA!  finale:" + proposta + "\n iniziale: " + first);
                     return catena; // catena chiusa! (la prima non è inserita in catena)
                 }
             }
         }
         return new ArrayList<>(); // nessuna concatenazione
-
-        /*assert proposteComprensorio != null;
-
-        if (proposteComprensorio.isEmpty()) {
-            return new ArrayList<>();
-        }*/
-
-        /*ArrayList<Proposta> catena = new ArrayList<>(); // Usa stream per filtrare e raccogliere le proposte che si concatenano
-        proposteComprensorio = proposteComprensorio.stream()
-                .filter(
-                        proposta -> {
-                            // controlla se concatenabile
-                            if (proposta.isOffertaCompatibile(last)) {
-                                catena.add(proposta);
-                                return !isCatenaChiusa(first, proposta);
-                            }
-                            return true;
-                        }).collect(Collectors.toCollection(ArrayList::new));
-
-        if (!catena.isEmpty() && !isCatenaChiusa(first, catena.getLast())) {
-            // passo di ricorsione, se non riesce a chiudere ma comunque trova qualcosa, ricomincia
-            ArrayList<Proposta> nuoveProposte = concatenaCompatibili(first, catena.getLast(), proposteComprensorio);
-            if (!nuoveProposte.isEmpty()) {
-                catena.addAll(nuoveProposte);
-            } else {
-                return new ArrayList<>();
-            }
-        }
-        return catena;
-
-        assert listaProposte != null;
-        ArrayList<Proposta> insiemeDiProposteCompatibili = new ArrayList<>();
-
-
-        /*for (Proposta proposta : proposteComprensorio) {
-            if (proposta.getStato() == StatiProposta.APERTA) {
-
-                if (!last.isOffertaCompatibile(proposta))
-                    continue;
-
-                else {
-                    System.out.println("CONCATENATA! O:" + proposta.getOfferta() + " R: " + last.getRichiesta());
-                    insiemeDiProposteCompatibili.addAll(concatenaCompatibili(first, proposta, proposteComprensorio));
-
-
-                    if (isCatenaChiusa(first, last)) {
-                        //continua ricorsione
-                        //fine ricorsione, ritorna l' array di Proposte da cui sei passato
-                        insiemeDiProposteCompatibili.add(proposta);
-                        System.out.println("CHIUSA! O iniziale:" + first.getOfferta() + " R finale: " + proposta.getRichiesta());
-                    }
-
-                }
-                return insiemeDiProposteCompatibili;
-            }
-        }*/
-
-        //return new ArrayList<>();
-
-
     }
 
+    /**
+     * Controlla che l'offerta dell'ultima proposta aggiunta soddisfi la richiesta della prima proposta della catena
+     *
+     * @param first, prima proposta
+     * @param last,  ultima proposta concatenata
+     * @return true se si richiude, false altrimenti
+     */
     private boolean isCatenaChiusa(Proposta first, Proposta last) {
-        return first.getRichiesta().equals(last.getOfferta());
+        return first.getRichiesta().equals(last.getOfferta())
+                && first.getOreRichiesta() == last.getOreOfferta();
+    }
+
+    private void cambiaStatoProposta() {
+        //todo martino & gab
     }
 
     public void visualizzaPropostePerCategoria() {
@@ -297,8 +231,10 @@ public class GestoreProposte {
                 .flatMap(comprensorio -> listaProposte.get(comprensorio).stream()).filter(Proposta::isDaNotificare)
                 .forEach(proposta -> {
                     System.out.println(proposta);
-                    String email = GestoreUtenti.getInformazioniFruitore(proposta.getAutore()).getEmail();
-                    System.out.println(proposta.getAutore() + " --> Email: " + email + "\n");
+                    Fruitore autore = GestoreUtenti.getInformazioniFruitore(proposta.getAutore());
+                    String email = autore.getEmail();
+                    String comprensorio = autore.getComprensorioDiAppartenenza();
+                    System.out.println(proposta.getAutore() + ", " + comprensorio + "\n >>> Indirizzo email: " + email + "\n");
                     proposta.notificata();
                 });
 
@@ -338,6 +274,7 @@ public class GestoreProposte {
             switch (scelta) {
                 case 1 -> visualizzaPropostePerAutore(utenteAttivo.getUsername());
                 case 2 -> effettuaProposta();
+                case 3 -> cambiaStatoProposta();
                 default -> System.out.println("Nulla da mostrare");
             }
         }
