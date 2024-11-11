@@ -30,6 +30,7 @@ public class GestoreProposte {
     public static final String HEADER_PROPOSTE_CHIUSE = ">> PROPOSTE CHIUSE\n";
     public static final String HEADER_PROPOSTE_RITIRATE = ">> PROPOSTE RITIRATE\n";
     public static final String HEADER_PROPOSTE_PRONTE = ">> PROPOSTE PRONTE <<";
+    public static final String MSG_FORMATTED_PROPOSTA_PRONTA = "%s, %s\n >>> Indirizzo email: %s\n";
 
     @JacksonXmlElementWrapper(localName = "listaProposte")
     @JacksonXmlProperty(localName = "Proposta")
@@ -234,7 +235,7 @@ public class GestoreProposte {
                     Fruitore autore = GestoreUtenti.getInformazioniFruitore(proposta.getAutore());
                     String email = autore.getEmail();
                     String comprensorio = autore.getComprensorioDiAppartenenza();
-                    System.out.println(proposta.getAutore() + ", " + comprensorio + "\n >>> Indirizzo email: " + email + "\n");
+                    System.out.println(MSG_FORMATTED_PROPOSTA_PRONTA.formatted(autore.getUsername(), comprensorio, email));
                     proposta.notificata();
                 });
 
@@ -268,14 +269,14 @@ public class GestoreProposte {
             switch (scelta) {
                 case 1 -> visualizzaPropostePerCategoria();
                 case 2 -> visualizzaProposteDaNotificare();
-                default -> System.out.println("Nulla da mostrare");
+                default ->{}
             }
         } else {
             switch (scelta) {
                 case 1 -> visualizzaPropostePerAutore(utenteAttivo.getUsername());
                 case 2 -> effettuaProposta();
                 case 3 -> cambiaStatoProposta();
-                default -> System.out.println("Nulla da mostrare");
+                default -> {}
             }
         }
 
