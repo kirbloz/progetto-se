@@ -236,6 +236,19 @@ public class GestoreFattori {
         return nomeFogliaFormattato;
     }
 
+    public String selezioneFogliaPerCambioStatoProposta(String messaggio){   //TODO da cambiare sto nome dimmerda
+        String nomeFogliaFormattato;
+
+        System.out.println(messaggio);
+        do {
+            nomeFogliaFormattato = factorNameBuilder(
+                    InputDati.leggiStringaNonVuota(MSG_INSERISCI_NOME_RADICE),
+                    InputDati.leggiStringaNonVuota(MSG_INSERISCI_NOME_FOGLIA)
+            );
+        } while (!fattori.containsKey(nomeFogliaFormattato));
+        return nomeFogliaFormattato;
+    }
+
     /**
      * Calcola tutti i fattori che hanno una foglia nuova e una preesistente,
      * ovvero appartenente a una gerarchia diversa da quella nuova.

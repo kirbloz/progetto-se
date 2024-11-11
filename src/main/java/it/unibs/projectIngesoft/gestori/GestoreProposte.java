@@ -31,6 +31,9 @@ public class GestoreProposte {
     public static final String HEADER_PROPOSTE_RITIRATE = ">> PROPOSTE RITIRATE\n";
     public static final String HEADER_PROPOSTE_PRONTE = ">> PROPOSTE PRONTE <<";
     public static final String MSG_FORMATTED_PROPOSTA_PRONTA = "%s, %s\n >>> Indirizzo email: %s\n";
+    public static final String MSG_SELEZIONE_CATEGORIA_RICHIESTA = "Inserisci la categoria richiesta per la selezione: ";
+    public static final String MSG_SELEZIONE_ORE = "Inserisci il monte ore richieste per la selezione: ";
+    public static final String MSG_SELEZIONE_CATEGORIA_OFFERTA = "Inserisci la categoria offerta per la selezione: ";
 
     @JacksonXmlElementWrapper(localName = "listaProposte")
     @JacksonXmlProperty(localName = "Proposta")
@@ -209,20 +212,20 @@ public class GestoreProposte {
     }
 
     private void cambiaStatoProposta() {
-        //todo martino & gab
         String categoriaRichiesta;
         String categoriaOfferta;
         int oreRichiesta;
         Proposta daCambiare = null;
 
-        visualizzaProposteModificabili(utenteAttivo.getUsername());
-
         // 1. inserimento categoria richiesta, ore, e categoria offerta
         boolean found = false;
         do{
-            categoriaRichiesta = gestFatt.selezioneFoglia("Inserisci la categoria richiesta per la selezione: ");
-            oreRichiesta = InputDati.leggiInteroPositivo("Inserisci il monte ore richieste per la selezione: ");
-            categoriaOfferta = gestFatt.selezioneFoglia("Inserisci la categoria offerta per la selezione: ");
+            visualizzaProposteModificabili(utenteAttivo.getUsername());
+            categoriaRichiesta = gestFatt.selezioneFogliaPerCambioStatoProposta(MSG_SELEZIONE_CATEGORIA_RICHIESTA);
+            visualizzaProposteModificabili(utenteAttivo.getUsername());
+            oreRichiesta = InputDati.leggiInteroPositivo(MSG_SELEZIONE_ORE);
+            visualizzaProposteModificabili(utenteAttivo.getUsername());
+            categoriaOfferta = gestFatt.selezioneFogliaPerCambioStatoProposta(MSG_SELEZIONE_CATEGORIA_OFFERTA);
 
             for (Proposta proposta : listaProposte.get(((Fruitore)utenteAttivo).getComprensorioDiAppartenenza())){
                 if(proposta.getOfferta().equals(categoriaOfferta) && proposta.getOreRichiesta() == oreRichiesta && proposta.getRichiesta().equals(categoriaRichiesta)){
