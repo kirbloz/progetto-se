@@ -76,6 +76,7 @@ public class GestoreProposte {
     public void addProposta(Proposta proposta) {
         assert this.listaProposte != null;
         this.listaProposte.computeIfAbsent(proposta.getComprensorio(), k -> new ArrayList<>()).add(proposta);
+        serializeXML();
     }
 
     /**
@@ -209,6 +210,42 @@ public class GestoreProposte {
 
     private void cambiaStatoProposta() {
         //todo martino & gab
+        String categoriaRichiesta;
+        String categoriaOfferta;
+        int oreRichiesta;
+        Proposta daCambiare = null;
+
+        visualizzaProposteModificabili(utenteAttivo.getUsername());
+
+        // 1. inserimento categoria richiesta, ore, e categoria offerta
+        boolean found = false;
+        do{
+            categoriaRichiesta = gestFatt.selezioneFoglia("Inserisci la categoria richiesta per la selezione: ");
+            oreRichiesta = InputDati.leggiInteroPositivo("Inserisci il monte ore richieste per la selezione: ");
+            categoriaOfferta = gestFatt.selezioneFoglia("Inserisci la categoria offerta per la selezione: ");
+
+            for (Proposta proposta : listaProposte.get(((Fruitore)utenteAttivo).getComprensorioDiAppartenenza())){
+                if(proposta.getOfferta().equals(categoriaOfferta) && proposta.getOreRichiesta() == oreRichiesta && proposta.getRichiesta().equals(categoriaRichiesta)){
+                    found = true;
+                    daCambiare = proposta;
+                    break;
+                };
+            }
+        }while (!found);
+
+        assert daCambiare != null;
+        StatiProposta statoAttuale = daCambiare.getStato();
+        StatiProposta statoNuovo = statoAttuale==StatiProposta.APERTA ? StatiProposta.RITIRATA : StatiProposta.APERTA;
+        if (InputDati.yesOrNo("Vuoi cambiare lo stato della proposta da %s a %s?".formatted(statoAttuale, statoNuovo))) {
+            if (statoAttuale == StatiProposta.RITIRATA) {
+                daCambiare.setAperta();
+            }else {
+                daCambiare.setRitirata();
+            }
+            serializeXML();
+            System.out.println("Stato modificato in %s".formatted(statoNuovo));
+            return;
+        }
     }
 
     public void visualizzaPropostePerCategoria() {
@@ -221,6 +258,12 @@ public class GestoreProposte {
     public void visualizzaPropostePerAutore(String usernameAutore) {
         assert listaProposte != null;
         Predicate<Proposta> filtro = p -> p.getAutore().equals(usernameAutore);
+        System.out.println(proposteToString(filtro));
+    }
+
+    public void visualizzaProposteModificabili(String usernameAutore) {
+        assert listaProposte != null;
+        Predicate<Proposta> filtro = p -> p.getAutore().equals(usernameAutore) && p.getStato() != StatiProposta.CHIUSA;
         System.out.println(proposteToString(filtro));
     }
 
@@ -269,6 +312,7 @@ public class GestoreProposte {
             switch (scelta) {
                 case 1 -> visualizzaPropostePerCategoria();
                 case 2 -> visualizzaProposteDaNotificare();
+                case 3 -> cambiaStatoProposta();
                 default ->{}
             }
         } else {

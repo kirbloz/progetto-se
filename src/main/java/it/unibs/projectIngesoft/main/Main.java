@@ -66,7 +66,8 @@ public class Main {
     };
     private static final String[] vociProposteFruitore = new String[]{
             "Visualizza proposte inviate",
-            "Effettua proposta di scambio"
+            "Effettua proposta di scambio",
+            "Modifica stato proposta"
     };
 
 
