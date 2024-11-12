@@ -8,7 +8,10 @@
       <valoriDominioFiglie>es</valoriDominioFiglie>
     </valoriDominioFiglie>
     <nome>Ripetizioni Scolastiche</nome>
-    <valoreDominio/>
+    <valoreDominio>
+      <nome></nome>
+      <descrizione></descrizione>
+    </valoreDominio>
     <isRadice>true</isRadice>
     <isFoglia>false</isFoglia>
     <nomeMadre></nomeMadre>
@@ -345,6 +348,129 @@
         <campo>tipo</campo>
         <campoFiglie></campoFiglie>
         <categorieFiglie/>
+      </Categoria>
+    </categorieFiglie>
+  </radice>
+  <radice>
+    <valoriDominioFiglie>
+      <valoriDominioFiglie>teoria</valoriDominioFiglie>
+    </valoriDominioFiglie>
+    <nome>Lezioni di musica</nome>
+    <valoreDominio>
+      <nome></nome>
+      <descrizione></descrizione>
+    </valoreDominio>
+    <isRadice>true</isRadice>
+    <isFoglia>false</isFoglia>
+    <nomeMadre></nomeMadre>
+    <campo></campo>
+    <campoFiglie>tipo</campoFiglie>
+    <categorieFiglie>
+      <Categoria>
+        <valoriDominioFiglie>
+          <valoriDominioFiglie>solfeggio</valoriDominioFiglie>
+          <valoriDominioFiglie>storia della musica</valoriDominioFiglie>
+        </valoriDominioFiglie>
+        <nome>Lezioni di teoria musicale</nome>
+        <valoreDominio>
+          <nome>teoria</nome>
+          <descrizione></descrizione>
+        </valoreDominio>
+        <isRadice>false</isRadice>
+        <isFoglia>false</isFoglia>
+        <nomeMadre>Lezioni di musica</nomeMadre>
+        <campo>tipo</campo>
+        <campoFiglie>materia</campoFiglie>
+        <categorieFiglie>
+          <Categoria>
+            <valoriDominioFiglie/>
+            <nome>Lezioni di solfeggio</nome>
+            <valoreDominio>
+              <nome>solfeggio</nome>
+              <descrizione></descrizione>
+            </valoreDominio>
+            <isRadice>false</isRadice>
+            <isFoglia>true</isFoglia>
+            <nomeMadre>Lezioni di teoria musicale</nomeMadre>
+            <campo>materia</campo>
+            <campoFiglie></campoFiglie>
+            <categorieFiglie/>
+          </Categoria>
+          <Categoria>
+            <valoriDominioFiglie/>
+            <nome>Lezioni di storia della musica</nome>
+            <valoreDominio>
+              <nome>storia della musica</nome>
+              <descrizione></descrizione>
+            </valoreDominio>
+            <isRadice>false</isRadice>
+            <isFoglia>true</isFoglia>
+            <nomeMadre>Lezioni di teoria musicale</nomeMadre>
+            <campo>materia</campo>
+            <campoFiglie></campoFiglie>
+            <categorieFiglie/>
+          </Categoria>
+        </categorieFiglie>
+      </Categoria>
+    </categorieFiglie>
+  </radice>
+  <radice>
+    <valoriDominioFiglie>
+      <valoriDominioFiglie>logica</valoriDominioFiglie>
+    </valoriDominioFiglie>
+    <nome>Attività di svago</nome>
+    <valoreDominio/>
+    <isRadice>true</isRadice>
+    <isFoglia>false</isFoglia>
+    <nomeMadre></nomeMadre>
+    <campo></campo>
+    <campoFiglie>tipo</campoFiglie>
+    <categorieFiglie>
+      <Categoria>
+        <valoriDominioFiglie>
+          <valoriDominioFiglie>scacchi</valoriDominioFiglie>
+          <valoriDominioFiglie>sudoku</valoriDominioFiglie>
+        </valoriDominioFiglie>
+        <nome>Giochi di Logica</nome>
+        <valoreDominio>
+          <nome>logica</nome>
+          <descrizione></descrizione>
+        </valoreDominio>
+        <isRadice>false</isRadice>
+        <isFoglia>false</isFoglia>
+        <nomeMadre>Attività di svago</nomeMadre>
+        <campo>tipo</campo>
+        <campoFiglie>gioco</campoFiglie>
+        <categorieFiglie>
+          <Categoria>
+            <valoriDominioFiglie/>
+            <nome>Lezioni di Scacchi</nome>
+            <valoreDominio>
+              <nome>scacchi</nome>
+              <descrizione></descrizione>
+            </valoreDominio>
+            <isRadice>false</isRadice>
+            <isFoglia>true</isFoglia>
+            <nomeMadre>Giochi di Logica</nomeMadre>
+            <campo>gioco</campo>
+            <campoFiglie></campoFiglie>
+            <categorieFiglie/>
+          </Categoria>
+          <Categoria>
+            <valoriDominioFiglie/>
+            <nome>Lezioni di Sudoku</nome>
+            <valoreDominio>
+              <nome>sudoku</nome>
+              <descrizione></descrizione>
+            </valoreDominio>
+            <isRadice>false</isRadice>
+            <isFoglia>true</isFoglia>
+            <nomeMadre>Giochi di Logica</nomeMadre>
+            <campo>gioco</campo>
+            <campoFiglie></campoFiglie>
+            <categorieFiglie/>
+          </Categoria>
+        </categorieFiglie>
       </Categoria>
     </categorieFiglie>
   </radice>

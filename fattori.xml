@@ -1,6 +1,121 @@
 <FattoriWrapper>
   <fattori>
     <entry>
+      <key>Attività di svago:Lezioni di Scacchi</key>
+      <values>
+        <value>
+          <nome_c1>Attività di svago:Lezioni di Scacchi</nome_c1>
+          <nome_c2>Attività di svago:Lezioni di Sudoku</nome_c2>
+          <fattore>2.0</fattore>
+        </value>
+        <value>
+          <nome_c1>Attività di svago:Lezioni di Scacchi</nome_c1>
+          <nome_c2>Lezioni di musica:Lezioni di storia della musica</nome_c2>
+          <fattore>0.8666666666666667</fattore>
+        </value>
+        <value>
+          <nome_c1>Attività di svago:Lezioni di Scacchi</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Letteratura Italiana</nome_c2>
+          <fattore>1.3333333333333333</fattore>
+        </value>
+        <value>
+          <nome_c1>Attività di svago:Lezioni di Scacchi</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Filosofia</nome_c2>
+          <fattore>1.1904761904761905</fattore>
+        </value>
+        <value>
+          <nome_c1>Attività di svago:Lezioni di Scacchi</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Storia</nome_c2>
+          <fattore>0.6349206349206349</fattore>
+        </value>
+        <value>
+          <nome_c1>Attività di svago:Lezioni di Scacchi</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Storia dell'Arte</nome_c2>
+          <fattore>0.9523809523809523</fattore>
+        </value>
+        <value>
+          <nome_c1>Attività di svago:Lezioni di Scacchi</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Matematica</nome_c2>
+          <fattore>1.0582010582010581</fattore>
+        </value>
+        <value>
+          <nome_c1>Attività di svago:Lezioni di Scacchi</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Fisica</nome_c2>
+          <fattore>0.8658008658008658</fattore>
+        </value>
+        <value>
+          <nome_c1>Attività di svago:Lezioni di Scacchi</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Chimica</nome_c2>
+          <fattore>0.9523809523809523</fattore>
+        </value>
+        <value>
+          <nome_c1>Attività di svago:Lezioni di Scacchi</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Biologia</nome_c2>
+          <fattore>1.0476190476190477</fattore>
+        </value>
+        <value>
+          <nome_c1>Attività di svago:Lezioni di Scacchi</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Scienze della Terra</nome_c2>
+          <fattore>1.1428571428571428</fattore>
+        </value>
+        <value>
+          <nome_c1>Attività di svago:Lezioni di Scacchi</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Inglese</nome_c2>
+          <fattore>1.3333333333333333</fattore>
+        </value>
+        <value>
+          <nome_c1>Attività di svago:Lezioni di Scacchi</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Spagnolo</nome_c2>
+          <fattore>1.3333333333333333</fattore>
+        </value>
+        <value>
+          <nome_c1>Attività di svago:Lezioni di Scacchi</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Francese</nome_c2>
+          <fattore>1.2380952380952381</fattore>
+        </value>
+        <value>
+          <nome_c1>Attività di svago:Lezioni di Scacchi</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Tedesco</nome_c2>
+          <fattore>0.5</fattore>
+        </value>
+        <value>
+          <nome_c1>Attività di svago:Lezioni di Scacchi</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Latino</nome_c2>
+          <fattore>0.761904761904762</fattore>
+        </value>
+        <value>
+          <nome_c1>Attività di svago:Lezioni di Scacchi</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Greco</nome_c2>
+          <fattore>1.3333333333333333</fattore>
+        </value>
+        <value>
+          <nome_c1>Attività di svago:Lezioni di Scacchi</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Arabo</nome_c2>
+          <fattore>1.3333333333333333</fattore>
+        </value>
+        <value>
+          <nome_c1>Attività di svago:Lezioni di Scacchi</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Svago</nome_c2>
+          <fattore>0.9523809523809523</fattore>
+        </value>
+        <value>
+          <nome_c1>Attività di svago:Lezioni di Scacchi</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Giochi di Logica</nome_c2>
+          <fattore>0.9523809523809523</fattore>
+        </value>
+        <value>
+          <nome_c1>Attività di svago:Lezioni di Scacchi</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Informatica</nome_c2>
+          <fattore>0.9523809523809523</fattore>
+        </value>
+        <value>
+          <nome_c1>Attività di svago:Lezioni di Scacchi</nome_c1>
+          <nome_c2>Lezioni di musica:Lezioni di solfeggio</nome_c2>
+          <fattore>0.6666666666666666</fattore>
+        </value>
+      </values>
+    </entry>
+    <entry>
       <key>Ripetizioni Scolastiche:Svago</key>
       <values>
         <value>
@@ -92,6 +207,26 @@
           <nome_c1>Ripetizioni Scolastiche:Svago</nome_c1>
           <nome_c2>Ripetizioni Scolastiche:Giochi di Logica</nome_c2>
           <fattore>1.0</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Svago</nome_c1>
+          <nome_c2>Lezioni di musica:Lezioni di solfeggio</nome_c2>
+          <fattore>0.7</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Svago</nome_c1>
+          <nome_c2>Lezioni di musica:Lezioni di storia della musica</nome_c2>
+          <fattore>0.9099999999999999</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Svago</nome_c1>
+          <nome_c2>Attività di svago:Lezioni di Scacchi</nome_c2>
+          <fattore>1.05</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Svago</nome_c1>
+          <nome_c2>Attività di svago:Lezioni di Sudoku</nome_c2>
+          <fattore>2.0</fattore>
         </value>
       </values>
     </entry>
@@ -188,6 +323,26 @@
           <nome_c2>Ripetizioni Scolastiche:Giochi di Logica</nome_c2>
           <fattore>0.9</fattore>
         </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Latino</nome_c1>
+          <nome_c2>Lezioni di musica:Lezioni di solfeggio</nome_c2>
+          <fattore>0.8749999999999999</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Latino</nome_c1>
+          <nome_c2>Lezioni di musica:Lezioni di storia della musica</nome_c2>
+          <fattore>1.1375</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Latino</nome_c1>
+          <nome_c2>Attività di svago:Lezioni di Scacchi</nome_c2>
+          <fattore>1.3124999999999998</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Latino</nome_c1>
+          <nome_c2>Attività di svago:Lezioni di Sudoku</nome_c2>
+          <fattore>2.0</fattore>
+        </value>
       </values>
     </entry>
     <entry>
@@ -282,6 +437,26 @@
           <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Fisica</nome_c1>
           <nome_c2>Ripetizioni Scolastiche:Giochi di Logica</nome_c2>
           <fattore>0.9</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Fisica</nome_c1>
+          <nome_c2>Lezioni di musica:Lezioni di solfeggio</nome_c2>
+          <fattore>0.77</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Fisica</nome_c1>
+          <nome_c2>Lezioni di musica:Lezioni di storia della musica</nome_c2>
+          <fattore>1.001</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Fisica</nome_c1>
+          <nome_c2>Attività di svago:Lezioni di Scacchi</nome_c2>
+          <fattore>1.155</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Fisica</nome_c1>
+          <nome_c2>Attività di svago:Lezioni di Sudoku</nome_c2>
+          <fattore>2.0</fattore>
         </value>
       </values>
     </entry>
@@ -378,6 +553,26 @@
           <nome_c2>Ripetizioni Scolastiche:Giochi di Logica</nome_c2>
           <fattore>1.0</fattore>
         </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Chimica</nome_c1>
+          <nome_c2>Lezioni di musica:Lezioni di solfeggio</nome_c2>
+          <fattore>0.7</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Chimica</nome_c1>
+          <nome_c2>Lezioni di musica:Lezioni di storia della musica</nome_c2>
+          <fattore>0.9099999999999999</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Chimica</nome_c1>
+          <nome_c2>Attività di svago:Lezioni di Scacchi</nome_c2>
+          <fattore>1.05</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Chimica</nome_c1>
+          <nome_c2>Attività di svago:Lezioni di Sudoku</nome_c2>
+          <fattore>2.0</fattore>
+        </value>
       </values>
     </entry>
     <entry>
@@ -471,6 +666,26 @@
         <value>
           <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Storia dell'Arte</nome_c1>
           <nome_c2>Ripetizioni Scolastiche:Giochi di Logica</nome_c2>
+          <fattore>2.0</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Storia dell'Arte</nome_c1>
+          <nome_c2>Lezioni di musica:Lezioni di solfeggio</nome_c2>
+          <fattore>0.7</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Storia dell'Arte</nome_c1>
+          <nome_c2>Lezioni di musica:Lezioni di storia della musica</nome_c2>
+          <fattore>0.9099999999999999</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Storia dell'Arte</nome_c1>
+          <nome_c2>Attività di svago:Lezioni di Scacchi</nome_c2>
+          <fattore>1.05</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Storia dell'Arte</nome_c1>
+          <nome_c2>Attività di svago:Lezioni di Sudoku</nome_c2>
           <fattore>2.0</fattore>
         </value>
       </values>
@@ -568,6 +783,371 @@
           <nome_c2>Ripetizioni Scolastiche:Giochi di Logica</nome_c2>
           <fattore>0.7</fattore>
         </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Matematica</nome_c1>
+          <nome_c2>Lezioni di musica:Lezioni di solfeggio</nome_c2>
+          <fattore>0.6299999999999999</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Matematica</nome_c1>
+          <nome_c2>Lezioni di musica:Lezioni di storia della musica</nome_c2>
+          <fattore>0.819</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Matematica</nome_c1>
+          <nome_c2>Attività di svago:Lezioni di Scacchi</nome_c2>
+          <fattore>0.9450000000000001</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Matematica</nome_c1>
+          <nome_c2>Attività di svago:Lezioni di Sudoku</nome_c2>
+          <fattore>1.8900000000000001</fattore>
+        </value>
+      </values>
+    </entry>
+    <entry>
+      <key>Lezioni di musica:Lezioni di storia della musica</key>
+      <values>
+        <value>
+          <nome_c1>Lezioni di musica:Lezioni di storia della musica</nome_c1>
+          <nome_c2>Lezioni di musica:Lezioni di solfeggio</nome_c2>
+          <fattore>0.7692307692307692</fattore>
+        </value>
+        <value>
+          <nome_c1>Lezioni di musica:Lezioni di storia della musica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Letteratura Italiana</nome_c2>
+          <fattore>2.0</fattore>
+        </value>
+        <value>
+          <nome_c1>Lezioni di musica:Lezioni di storia della musica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Filosofia</nome_c2>
+          <fattore>1.3736263736263736</fattore>
+        </value>
+        <value>
+          <nome_c1>Lezioni di musica:Lezioni di storia della musica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Storia</nome_c2>
+          <fattore>0.7326007326007327</fattore>
+        </value>
+        <value>
+          <nome_c1>Lezioni di musica:Lezioni di storia della musica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Storia dell'Arte</nome_c2>
+          <fattore>1.098901098901099</fattore>
+        </value>
+        <value>
+          <nome_c1>Lezioni di musica:Lezioni di storia della musica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Matematica</nome_c2>
+          <fattore>1.221001221001221</fattore>
+        </value>
+        <value>
+          <nome_c1>Lezioni di musica:Lezioni di storia della musica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Fisica</nome_c2>
+          <fattore>0.999000999000999</fattore>
+        </value>
+        <value>
+          <nome_c1>Lezioni di musica:Lezioni di storia della musica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Chimica</nome_c2>
+          <fattore>1.098901098901099</fattore>
+        </value>
+        <value>
+          <nome_c1>Lezioni di musica:Lezioni di storia della musica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Biologia</nome_c2>
+          <fattore>1.208791208791209</fattore>
+        </value>
+        <value>
+          <nome_c1>Lezioni di musica:Lezioni di storia della musica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Scienze della Terra</nome_c2>
+          <fattore>1.3186813186813187</fattore>
+        </value>
+        <value>
+          <nome_c1>Lezioni di musica:Lezioni di storia della musica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Inglese</nome_c2>
+          <fattore>2.0</fattore>
+        </value>
+        <value>
+          <nome_c1>Lezioni di musica:Lezioni di storia della musica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Spagnolo</nome_c2>
+          <fattore>1.7582417582417584</fattore>
+        </value>
+        <value>
+          <nome_c1>Lezioni di musica:Lezioni di storia della musica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Francese</nome_c2>
+          <fattore>1.4285714285714288</fattore>
+        </value>
+        <value>
+          <nome_c1>Lezioni di musica:Lezioni di storia della musica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Tedesco</nome_c2>
+          <fattore>0.5494505494505495</fattore>
+        </value>
+        <value>
+          <nome_c1>Lezioni di musica:Lezioni di storia della musica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Latino</nome_c2>
+          <fattore>0.8791208791208792</fattore>
+        </value>
+        <value>
+          <nome_c1>Lezioni di musica:Lezioni di storia della musica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Greco</nome_c2>
+          <fattore>2.0</fattore>
+        </value>
+        <value>
+          <nome_c1>Lezioni di musica:Lezioni di storia della musica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Arabo</nome_c2>
+          <fattore>2.0</fattore>
+        </value>
+        <value>
+          <nome_c1>Lezioni di musica:Lezioni di storia della musica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Svago</nome_c2>
+          <fattore>1.098901098901099</fattore>
+        </value>
+        <value>
+          <nome_c1>Lezioni di musica:Lezioni di storia della musica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Giochi di Logica</nome_c2>
+          <fattore>1.098901098901099</fattore>
+        </value>
+        <value>
+          <nome_c1>Lezioni di musica:Lezioni di storia della musica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Informatica</nome_c2>
+          <fattore>1.098901098901099</fattore>
+        </value>
+        <value>
+          <nome_c1>Lezioni di musica:Lezioni di storia della musica</nome_c1>
+          <nome_c2>Attività di svago:Lezioni di Scacchi</nome_c2>
+          <fattore>1.1538461538461537</fattore>
+        </value>
+        <value>
+          <nome_c1>Lezioni di musica:Lezioni di storia della musica</nome_c1>
+          <nome_c2>Attività di svago:Lezioni di Sudoku</nome_c2>
+          <fattore>2.0</fattore>
+        </value>
+      </values>
+    </entry>
+    <entry>
+      <key>Lezioni di musica:Lezioni di solfeggio</key>
+      <values>
+        <value>
+          <nome_c1>Lezioni di musica:Lezioni di solfeggio</nome_c1>
+          <nome_c2>Lezioni di musica:Lezioni di storia della musica</nome_c2>
+          <fattore>1.3</fattore>
+        </value>
+        <value>
+          <nome_c1>Lezioni di musica:Lezioni di solfeggio</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Letteratura Italiana</nome_c2>
+          <fattore>2.0</fattore>
+        </value>
+        <value>
+          <nome_c1>Lezioni di musica:Lezioni di solfeggio</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Filosofia</nome_c2>
+          <fattore>1.7857142857142858</fattore>
+        </value>
+        <value>
+          <nome_c1>Lezioni di musica:Lezioni di solfeggio</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Storia</nome_c2>
+          <fattore>0.9523809523809523</fattore>
+        </value>
+        <value>
+          <nome_c1>Lezioni di musica:Lezioni di solfeggio</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Storia dell'Arte</nome_c2>
+          <fattore>1.4285714285714286</fattore>
+        </value>
+        <value>
+          <nome_c1>Lezioni di musica:Lezioni di solfeggio</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Matematica</nome_c2>
+          <fattore>1.5873015873015874</fattore>
+        </value>
+        <value>
+          <nome_c1>Lezioni di musica:Lezioni di solfeggio</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Fisica</nome_c2>
+          <fattore>1.2987012987012987</fattore>
+        </value>
+        <value>
+          <nome_c1>Lezioni di musica:Lezioni di solfeggio</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Chimica</nome_c2>
+          <fattore>1.4285714285714286</fattore>
+        </value>
+        <value>
+          <nome_c1>Lezioni di musica:Lezioni di solfeggio</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Biologia</nome_c2>
+          <fattore>1.5714285714285716</fattore>
+        </value>
+        <value>
+          <nome_c1>Lezioni di musica:Lezioni di solfeggio</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Scienze della Terra</nome_c2>
+          <fattore>1.7142857142857142</fattore>
+        </value>
+        <value>
+          <nome_c1>Lezioni di musica:Lezioni di solfeggio</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Inglese</nome_c2>
+          <fattore>2.0</fattore>
+        </value>
+        <value>
+          <nome_c1>Lezioni di musica:Lezioni di solfeggio</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Spagnolo</nome_c2>
+          <fattore>2.0</fattore>
+        </value>
+        <value>
+          <nome_c1>Lezioni di musica:Lezioni di solfeggio</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Francese</nome_c2>
+          <fattore>1.8571428571428572</fattore>
+        </value>
+        <value>
+          <nome_c1>Lezioni di musica:Lezioni di solfeggio</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Tedesco</nome_c2>
+          <fattore>0.7142857142857143</fattore>
+        </value>
+        <value>
+          <nome_c1>Lezioni di musica:Lezioni di solfeggio</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Latino</nome_c2>
+          <fattore>1.142857142857143</fattore>
+        </value>
+        <value>
+          <nome_c1>Lezioni di musica:Lezioni di solfeggio</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Greco</nome_c2>
+          <fattore>2.0</fattore>
+        </value>
+        <value>
+          <nome_c1>Lezioni di musica:Lezioni di solfeggio</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Arabo</nome_c2>
+          <fattore>2.0</fattore>
+        </value>
+        <value>
+          <nome_c1>Lezioni di musica:Lezioni di solfeggio</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Svago</nome_c2>
+          <fattore>1.4285714285714286</fattore>
+        </value>
+        <value>
+          <nome_c1>Lezioni di musica:Lezioni di solfeggio</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Giochi di Logica</nome_c2>
+          <fattore>1.4285714285714286</fattore>
+        </value>
+        <value>
+          <nome_c1>Lezioni di musica:Lezioni di solfeggio</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Informatica</nome_c2>
+          <fattore>1.4285714285714286</fattore>
+        </value>
+        <value>
+          <nome_c1>Lezioni di musica:Lezioni di solfeggio</nome_c1>
+          <nome_c2>Attività di svago:Lezioni di Scacchi</nome_c2>
+          <fattore>1.5</fattore>
+        </value>
+        <value>
+          <nome_c1>Lezioni di musica:Lezioni di solfeggio</nome_c1>
+          <nome_c2>Attività di svago:Lezioni di Sudoku</nome_c2>
+          <fattore>2.0</fattore>
+        </value>
+      </values>
+    </entry>
+    <entry>
+      <key>Attività di svago:Lezioni di Sudoku</key>
+      <values>
+        <value>
+          <nome_c1>Attività di svago:Lezioni di Sudoku</nome_c1>
+          <nome_c2>Attività di svago:Lezioni di Scacchi</nome_c2>
+          <fattore>0.5</fattore>
+        </value>
+        <value>
+          <nome_c1>Attività di svago:Lezioni di Sudoku</nome_c1>
+          <nome_c2>Lezioni di musica:Lezioni di storia della musica</nome_c2>
+          <fattore>0.5</fattore>
+        </value>
+        <value>
+          <nome_c1>Attività di svago:Lezioni di Sudoku</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Letteratura Italiana</nome_c2>
+          <fattore>0.6666666666666666</fattore>
+        </value>
+        <value>
+          <nome_c1>Attività di svago:Lezioni di Sudoku</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Filosofia</nome_c2>
+          <fattore>0.5952380952380952</fattore>
+        </value>
+        <value>
+          <nome_c1>Attività di svago:Lezioni di Sudoku</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Storia</nome_c2>
+          <fattore>0.5</fattore>
+        </value>
+        <value>
+          <nome_c1>Attività di svago:Lezioni di Sudoku</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Storia dell'Arte</nome_c2>
+          <fattore>0.5</fattore>
+        </value>
+        <value>
+          <nome_c1>Attività di svago:Lezioni di Sudoku</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Matematica</nome_c2>
+          <fattore>0.5291005291005291</fattore>
+        </value>
+        <value>
+          <nome_c1>Attività di svago:Lezioni di Sudoku</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Fisica</nome_c2>
+          <fattore>0.5</fattore>
+        </value>
+        <value>
+          <nome_c1>Attività di svago:Lezioni di Sudoku</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Chimica</nome_c2>
+          <fattore>0.5</fattore>
+        </value>
+        <value>
+          <nome_c1>Attività di svago:Lezioni di Sudoku</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Biologia</nome_c2>
+          <fattore>0.5238095238095238</fattore>
+        </value>
+        <value>
+          <nome_c1>Attività di svago:Lezioni di Sudoku</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Scienze della Terra</nome_c2>
+          <fattore>0.5714285714285714</fattore>
+        </value>
+        <value>
+          <nome_c1>Attività di svago:Lezioni di Sudoku</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Inglese</nome_c2>
+          <fattore>0.6666666666666666</fattore>
+        </value>
+        <value>
+          <nome_c1>Attività di svago:Lezioni di Sudoku</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Spagnolo</nome_c2>
+          <fattore>0.6666666666666666</fattore>
+        </value>
+        <value>
+          <nome_c1>Attività di svago:Lezioni di Sudoku</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Francese</nome_c2>
+          <fattore>0.6190476190476191</fattore>
+        </value>
+        <value>
+          <nome_c1>Attività di svago:Lezioni di Sudoku</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Tedesco</nome_c2>
+          <fattore>0.5</fattore>
+        </value>
+        <value>
+          <nome_c1>Attività di svago:Lezioni di Sudoku</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Latino</nome_c2>
+          <fattore>0.5</fattore>
+        </value>
+        <value>
+          <nome_c1>Attività di svago:Lezioni di Sudoku</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Greco</nome_c2>
+          <fattore>0.6666666666666666</fattore>
+        </value>
+        <value>
+          <nome_c1>Attività di svago:Lezioni di Sudoku</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Arabo</nome_c2>
+          <fattore>0.6666666666666666</fattore>
+        </value>
+        <value>
+          <nome_c1>Attività di svago:Lezioni di Sudoku</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Svago</nome_c2>
+          <fattore>0.5</fattore>
+        </value>
+        <value>
+          <nome_c1>Attività di svago:Lezioni di Sudoku</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Giochi di Logica</nome_c2>
+          <fattore>0.5</fattore>
+        </value>
+        <value>
+          <nome_c1>Attività di svago:Lezioni di Sudoku</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Informatica</nome_c2>
+          <fattore>0.5</fattore>
+        </value>
+        <value>
+          <nome_c1>Attività di svago:Lezioni di Sudoku</nome_c1>
+          <nome_c2>Lezioni di musica:Lezioni di solfeggio</nome_c2>
+          <fattore>0.5</fattore>
+        </value>
       </values>
     </entry>
     <entry>
@@ -662,6 +1242,26 @@
           <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Spagnolo</nome_c1>
           <nome_c2>Ripetizioni Scolastiche:Giochi di Logica</nome_c2>
           <fattore>1.2</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Spagnolo</nome_c1>
+          <nome_c2>Lezioni di musica:Lezioni di solfeggio</nome_c2>
+          <fattore>0.5</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Spagnolo</nome_c1>
+          <nome_c2>Lezioni di musica:Lezioni di storia della musica</nome_c2>
+          <fattore>0.56875</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Spagnolo</nome_c1>
+          <nome_c2>Attività di svago:Lezioni di Scacchi</nome_c2>
+          <fattore>0.75</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Spagnolo</nome_c1>
+          <nome_c2>Attività di svago:Lezioni di Sudoku</nome_c2>
+          <fattore>1.5</fattore>
         </value>
       </values>
     </entry>
@@ -758,6 +1358,26 @@
           <nome_c2>Ripetizioni Scolastiche:Giochi di Logica</nome_c2>
           <fattore>1.0</fattore>
         </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Francese</nome_c1>
+          <nome_c2>Lezioni di musica:Lezioni di solfeggio</nome_c2>
+          <fattore>0.5384615384615384</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Francese</nome_c1>
+          <nome_c2>Lezioni di musica:Lezioni di storia della musica</nome_c2>
+          <fattore>0.6999999999999998</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Francese</nome_c1>
+          <nome_c2>Attività di svago:Lezioni di Scacchi</nome_c2>
+          <fattore>0.8076923076923077</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Francese</nome_c1>
+          <nome_c2>Attività di svago:Lezioni di Sudoku</nome_c2>
+          <fattore>1.6153846153846154</fattore>
+        </value>
       </values>
     </entry>
     <entry>
@@ -852,6 +1472,26 @@
           <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Inglese</nome_c1>
           <nome_c2>Ripetizioni Scolastiche:Giochi di Logica</nome_c2>
           <fattore>0.6</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Inglese</nome_c1>
+          <nome_c2>Lezioni di musica:Lezioni di solfeggio</nome_c2>
+          <fattore>0.5</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Inglese</nome_c1>
+          <nome_c2>Lezioni di musica:Lezioni di storia della musica</nome_c2>
+          <fattore>0.5</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Inglese</nome_c1>
+          <nome_c2>Attività di svago:Lezioni di Scacchi</nome_c2>
+          <fattore>0.75</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Inglese</nome_c1>
+          <nome_c2>Attività di svago:Lezioni di Sudoku</nome_c2>
+          <fattore>1.5</fattore>
         </value>
       </values>
     </entry>
@@ -948,6 +1588,26 @@
           <nome_c2>Ripetizioni Scolastiche:Giochi di Logica</nome_c2>
           <fattore>0.5</fattore>
         </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Filosofia</nome_c1>
+          <nome_c2>Lezioni di musica:Lezioni di solfeggio</nome_c2>
+          <fattore>0.5599999999999999</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Filosofia</nome_c1>
+          <nome_c2>Lezioni di musica:Lezioni di storia della musica</nome_c2>
+          <fattore>0.728</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Filosofia</nome_c1>
+          <nome_c2>Attività di svago:Lezioni di Scacchi</nome_c2>
+          <fattore>0.84</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Filosofia</nome_c1>
+          <nome_c2>Attività di svago:Lezioni di Sudoku</nome_c2>
+          <fattore>1.68</fattore>
+        </value>
       </values>
     </entry>
     <entry>
@@ -1042,6 +1702,26 @@
           <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Arabo</nome_c1>
           <nome_c2>Ripetizioni Scolastiche:Giochi di Logica</nome_c2>
           <fattore>1.0</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Arabo</nome_c1>
+          <nome_c2>Lezioni di musica:Lezioni di solfeggio</nome_c2>
+          <fattore>0.5</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Arabo</nome_c1>
+          <nome_c2>Lezioni di musica:Lezioni di storia della musica</nome_c2>
+          <fattore>0.5</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Arabo</nome_c1>
+          <nome_c2>Attività di svago:Lezioni di Scacchi</nome_c2>
+          <fattore>0.75</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Arabo</nome_c1>
+          <nome_c2>Attività di svago:Lezioni di Sudoku</nome_c2>
+          <fattore>1.5</fattore>
         </value>
       </values>
     </entry>
@@ -1138,6 +1818,26 @@
           <nome_c2>Ripetizioni Scolastiche:Giochi di Logica</nome_c2>
           <fattore>0.9</fattore>
         </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Storia</nome_c1>
+          <nome_c2>Lezioni di musica:Lezioni di solfeggio</nome_c2>
+          <fattore>1.05</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Storia</nome_c1>
+          <nome_c2>Lezioni di musica:Lezioni di storia della musica</nome_c2>
+          <fattore>1.365</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Storia</nome_c1>
+          <nome_c2>Attività di svago:Lezioni di Scacchi</nome_c2>
+          <fattore>1.5750000000000002</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Storia</nome_c1>
+          <nome_c2>Attività di svago:Lezioni di Sudoku</nome_c2>
+          <fattore>2.0</fattore>
+        </value>
       </values>
     </entry>
     <entry>
@@ -1232,6 +1932,26 @@
           <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Tedesco</nome_c1>
           <nome_c2>Ripetizioni Scolastiche:Giochi di Logica</nome_c2>
           <fattore>1.1</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Tedesco</nome_c1>
+          <nome_c2>Lezioni di musica:Lezioni di solfeggio</nome_c2>
+          <fattore>1.4</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Tedesco</nome_c1>
+          <nome_c2>Lezioni di musica:Lezioni di storia della musica</nome_c2>
+          <fattore>1.8199999999999998</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Tedesco</nome_c1>
+          <nome_c2>Attività di svago:Lezioni di Scacchi</nome_c2>
+          <fattore>2.0</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Tedesco</nome_c1>
+          <nome_c2>Attività di svago:Lezioni di Sudoku</nome_c2>
+          <fattore>2.0</fattore>
         </value>
       </values>
     </entry>
@@ -1328,6 +2048,26 @@
           <nome_c2>Ripetizioni Scolastiche:Giochi di Logica</nome_c2>
           <fattore>2.0</fattore>
         </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Scienze della Terra</nome_c1>
+          <nome_c2>Lezioni di musica:Lezioni di solfeggio</nome_c2>
+          <fattore>0.5833333333333334</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Scienze della Terra</nome_c1>
+          <nome_c2>Lezioni di musica:Lezioni di storia della musica</nome_c2>
+          <fattore>0.7583333333333333</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Scienze della Terra</nome_c1>
+          <nome_c2>Attività di svago:Lezioni di Scacchi</nome_c2>
+          <fattore>0.875</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Scienze della Terra</nome_c1>
+          <nome_c2>Attività di svago:Lezioni di Sudoku</nome_c2>
+          <fattore>1.75</fattore>
+        </value>
       </values>
     </entry>
     <entry>
@@ -1422,6 +2162,26 @@
           <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Letteratura Italiana</nome_c1>
           <nome_c2>Ripetizioni Scolastiche:Giochi di Logica</nome_c2>
           <fattore>1.0</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Letteratura Italiana</nome_c1>
+          <nome_c2>Lezioni di musica:Lezioni di solfeggio</nome_c2>
+          <fattore>0.5</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Letteratura Italiana</nome_c1>
+          <nome_c2>Lezioni di musica:Lezioni di storia della musica</nome_c2>
+          <fattore>0.5</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Letteratura Italiana</nome_c1>
+          <nome_c2>Attività di svago:Lezioni di Scacchi</nome_c2>
+          <fattore>0.75</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Letteratura Italiana</nome_c1>
+          <nome_c2>Attività di svago:Lezioni di Sudoku</nome_c2>
+          <fattore>1.5</fattore>
         </value>
       </values>
     </entry>
@@ -1518,6 +2278,26 @@
           <nome_c2>Ripetizioni Scolastiche:Svago</nome_c2>
           <fattore>1.0</fattore>
         </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Giochi di Logica</nome_c1>
+          <nome_c2>Lezioni di musica:Lezioni di solfeggio</nome_c2>
+          <fattore>0.7</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Giochi di Logica</nome_c1>
+          <nome_c2>Lezioni di musica:Lezioni di storia della musica</nome_c2>
+          <fattore>0.9099999999999999</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Giochi di Logica</nome_c1>
+          <nome_c2>Attività di svago:Lezioni di Scacchi</nome_c2>
+          <fattore>1.05</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Giochi di Logica</nome_c1>
+          <nome_c2>Attività di svago:Lezioni di Sudoku</nome_c2>
+          <fattore>2.0</fattore>
+        </value>
       </values>
     </entry>
     <entry>
@@ -1612,6 +2392,26 @@
           <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Biologia</nome_c1>
           <nome_c2>Ripetizioni Scolastiche:Giochi di Logica</nome_c2>
           <fattore>1.6</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Biologia</nome_c1>
+          <nome_c2>Lezioni di musica:Lezioni di solfeggio</nome_c2>
+          <fattore>0.6363636363636362</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Biologia</nome_c1>
+          <nome_c2>Lezioni di musica:Lezioni di storia della musica</nome_c2>
+          <fattore>0.8272727272727272</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Biologia</nome_c1>
+          <nome_c2>Attività di svago:Lezioni di Scacchi</nome_c2>
+          <fattore>0.9545454545454545</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Biologia</nome_c1>
+          <nome_c2>Attività di svago:Lezioni di Sudoku</nome_c2>
+          <fattore>1.909090909090909</fattore>
         </value>
       </values>
     </entry>
@@ -1708,6 +2508,26 @@
           <nome_c2>Ripetizioni Scolastiche:Giochi di Logica</nome_c2>
           <fattore>1.0</fattore>
         </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Informatica</nome_c1>
+          <nome_c2>Lezioni di musica:Lezioni di solfeggio</nome_c2>
+          <fattore>0.7</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Informatica</nome_c1>
+          <nome_c2>Lezioni di musica:Lezioni di storia della musica</nome_c2>
+          <fattore>0.9099999999999999</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Informatica</nome_c1>
+          <nome_c2>Attività di svago:Lezioni di Scacchi</nome_c2>
+          <fattore>1.05</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Informatica</nome_c1>
+          <nome_c2>Attività di svago:Lezioni di Sudoku</nome_c2>
+          <fattore>2.0</fattore>
+        </value>
       </values>
     </entry>
     <entry>
@@ -1802,6 +2622,26 @@
           <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Greco</nome_c1>
           <nome_c2>Ripetizioni Scolastiche:Giochi di Logica</nome_c2>
           <fattore>0.9</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Greco</nome_c1>
+          <nome_c2>Lezioni di musica:Lezioni di solfeggio</nome_c2>
+          <fattore>0.5</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Greco</nome_c1>
+          <nome_c2>Lezioni di musica:Lezioni di storia della musica</nome_c2>
+          <fattore>0.5</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Greco</nome_c1>
+          <nome_c2>Attività di svago:Lezioni di Scacchi</nome_c2>
+          <fattore>0.75</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Greco</nome_c1>
+          <nome_c2>Attività di svago:Lezioni di Sudoku</nome_c2>
+          <fattore>1.5</fattore>
         </value>
       </values>
     </entry>
