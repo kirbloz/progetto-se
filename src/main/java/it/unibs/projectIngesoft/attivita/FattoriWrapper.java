@@ -52,7 +52,7 @@ public class FattoriWrapper {
     public HashMap<String, ArrayList<FattoreDiConversione>> toHashMap() {
         HashMap<String, ArrayList<FattoreDiConversione>> map = new HashMap<>();
         for (Entry entry : this.fattori) {
-            String keyParsed = entry.getKey().split(" ")[0];
+            String keyParsed = entry.getKey();
             map.put(keyParsed, entry.getValue());
         }
         return map;
