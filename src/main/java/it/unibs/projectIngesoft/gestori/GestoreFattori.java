@@ -223,13 +223,6 @@ public class GestoreFattori {
     public String selezioneFoglia(String messaggio) {
         System.out.println(messaggio);
         // inserimento guidato e controllo [Old:A in (Old:A New:A x)]
-        return inserimentoNomeFogliaFormattato();
-    }
-
-    private String inserimentoNomeFogliaFormattato() {
-        for (String key : fattori.keySet()) {
-            System.out.println(key);
-        }
         String nomeFogliaFormattato;
         do {
             nomeFogliaFormattato = factorNameBuilder(
