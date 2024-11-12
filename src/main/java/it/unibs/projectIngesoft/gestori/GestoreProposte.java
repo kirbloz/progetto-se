@@ -15,11 +15,15 @@ import it.unibs.projectIngesoft.utente.Utente;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.function.Predicate;
+import java.util.stream.Stream;
 
 
 public class GestoreProposte {
 
     public static final String HEADER_PROPOSTE_PRONTE = ">> PROPOSTE PRONTE <<";
+    public static final String HEADER_PROPOSTE_MODIFICABILI = ">> PROPOSTE MODIFICABILI<<\n";
+    public static final String HEADER_PROPOSTE_AUTORE = ">> PROPOSTE DI %s <<\n";
+    public static final String HEADER_PROPOSTE_CATEGORIA = ">> PROPOSTE CON %s <<\n";
 
     public static final String HEADER_PROPOSTE_CHIUSE = ">> PROPOSTE CHIUSE\n";
     public static final String HEADER_PROPOSTE_RITIRATE = ">> PROPOSTE RITIRATE\n";
@@ -237,21 +241,22 @@ public class GestoreProposte {
         boolean found = false;
         do {
             visualizzaProposteModificabili();
-            categoriaRichiesta = gestFatt.selezioneFogliaPerCambioStatoProposta(MSG_SELEZIONE_CATEGORIA_RICHIESTA);
+            categoriaRichiesta = gestFatt.selezioneFoglia(MSG_SELEZIONE_CATEGORIA_RICHIESTA);
             oreRichiesta = InputDati.leggiInteroPositivo(MSG_SELEZIONE_ORE);
-            categoriaOfferta = gestFatt.selezioneFogliaPerCambioStatoProposta(MSG_SELEZIONE_CATEGORIA_OFFERTA);
+            categoriaOfferta = gestFatt.selezioneFoglia(MSG_SELEZIONE_CATEGORIA_OFFERTA);
 
             daCambiare = cercaProposta(comprensorio, categoriaOfferta, categoriaRichiesta, oreRichiesta);
-            found = daCambiare != null;
 
+            if (daCambiare != null)
+                found = daCambiare.getStato() != StatiProposta.CHIUSA;
         } while (!found);
 
+        // 2. cambio stato guidato e conferma
         StatiProposta statoAttuale = daCambiare.getStato();
         StatiProposta statoNuovo = (statoAttuale == StatiProposta.APERTA) ? StatiProposta.RITIRATA : StatiProposta.APERTA;
 
         if (!InputDati.yesOrNo(MSG_CONFERMA_CAMBIO_STATO.formatted(statoAttuale, statoNuovo)))
             return; // non conferma
-
         if (statoAttuale == StatiProposta.RITIRATA) {
             daCambiare.setAperta();
         } else {
@@ -271,25 +276,25 @@ public class GestoreProposte {
      * @return Proposta se esiste, null altrimenti
      */
     private Proposta cercaProposta(String comprensorio, String categoriaOfferta, String categoriaRichiesta, int oreRichiesta) {
-        return listaProposte
-                .get(comprensorio).stream()
-                .filter(p -> p.getOfferta().equals(categoriaOfferta)
-                        && p.getOreRichiesta() == oreRichiesta
-                        && p.getRichiesta().equals(categoriaRichiesta))
+
+        Predicate<Proposta> filtro = p -> p.getOfferta().equals(categoriaOfferta)
+                && p.getOreRichiesta() == oreRichiesta
+                && p.getRichiesta().equals(categoriaRichiesta)
+                && p.getComprensorio().equals(comprensorio);
+
+        return getFilteredProposte(filtro)
                 .findFirst()
                 .orElse(null);
     }
 
-    private Fruitore getAutoreFromProposta(Proposta proposta) {
-        return GestoreUtenti.getInformazioniFruitore(proposta.getAutore());
-    }
 
     /**
      * Visualizza le proposte a schermo dopo averle filtrate a partire da quelle memorizzate.
      *
      * @param filtro, predicato per selezionare le proposte da visualizzare.
      */
-    private void visualizzaProposte(Predicate<Proposta> filtro) {
+    private void visualizzaProposte(String header, Predicate<Proposta> filtro) {
+        System.out.println(header);
         System.out.println(proposteToString(filtro));
     }
 
@@ -301,7 +306,7 @@ public class GestoreProposte {
         assert listaProposte != null;
         String categoria = gestFatt.selezioneFoglia(MSG_INSERISCI_CATEGORIA);
         Predicate<Proposta> filtro = p -> p.getOfferta().equals(categoria) || p.getRichiesta().equals(categoria);
-        System.out.println(proposteToString(filtro));
+        visualizzaProposte(HEADER_PROPOSTE_CATEGORIA.formatted(categoria), filtro);
     }
 
     public void visualizzaPropostePerAutore(String usernameAutore) {

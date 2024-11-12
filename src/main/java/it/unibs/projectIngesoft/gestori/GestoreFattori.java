@@ -120,8 +120,10 @@ public class GestoreFattori {
         if (!fattori.isEmpty()) {
             // 1. scegliere una categoria per cui i fattori siano GIA' stati calcolati
             // -> permette di calcolare tutti i nuovi chiedendo un solo inserimento di valore del fattore
+            for (String key : fattori.keySet()) {
+                System.out.println(key);
+            }
             String nomeFogliaEsternaFormattata = selezioneFoglia(MSG_INSERISCI_FOGLIA_ESTERNA);
-
             // 2. scegliere una categoria delle nuove, da utilizzare per il primo fattore di conversione
             String nomeFogliaInternaFormattata = selezioneFogliaDaLista(nomeRadice, foglie);
 
@@ -219,27 +221,16 @@ public class GestoreFattori {
      * @return stringa formattata come "radice:foglia"
      */
     public String selezioneFoglia(String messaggio) {
-        String nomeFogliaFormattato;
-        // visualizza tutte le categorie foglia usando le chiavi dell'attributo che memorizza i fattori di conversione
         System.out.println(messaggio);
+        // inserimento guidato e controllo [Old:A in (Old:A New:A x)]
+        return inserimentoNomeFogliaFormattato();
+    }
+
+    private String inserimentoNomeFogliaFormattato() {
         for (String key : fattori.keySet()) {
             System.out.println(key);
         }
-        // inserimento guidato e controllo [Old:A in (Old:A New:A x)]
-
-        do {
-            nomeFogliaFormattato = factorNameBuilder(
-                    InputDati.leggiStringaNonVuota(MSG_INSERISCI_NOME_RADICE),
-                    InputDati.leggiStringaNonVuota(MSG_INSERISCI_NOME_FOGLIA)
-            );
-        } while (!fattori.containsKey(nomeFogliaFormattato));
-        return nomeFogliaFormattato;
-    }
-
-    public String selezioneFogliaPerCambioStatoProposta(String messaggio){   //TODO da cambiare sto nome dimmerda
         String nomeFogliaFormattato;
-
-        System.out.println(messaggio);
         do {
             nomeFogliaFormattato = factorNameBuilder(
                     InputDati.leggiStringaNonVuota(MSG_INSERISCI_NOME_RADICE),
