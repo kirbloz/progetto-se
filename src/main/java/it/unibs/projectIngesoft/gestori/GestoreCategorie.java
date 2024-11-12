@@ -24,7 +24,7 @@ public class GestoreCategorie {
             "Aggiungi Categoria",
     };
 
-    private static final String TITLE_SUBMENU_ESPLORA_GERARCHIA = "AGGIUNGI GERARCHIA";
+    private static final String TITLE_SUBMENU_ESPLORA_GERARCHIA = "ESPLORA GERARCHIA";
     private static final String[] VOCI_SUBMENU_ESPLORA_GERARCHIA = new String[]{
             "Esplora un nuovo livello",
             "Torna indietro di un livello"
@@ -430,12 +430,13 @@ public class GestoreCategorie {
             scelta = subMenu.scegli();
             switch (scelta) {
                 case 1 -> { // esplora
-                    String nuovoCampo = selezionaCampo(livello);
+                    String nuovoCampo = selezionaValoreCampo(livello);
                     nuovaMadre = nuovoCampo == null ?
-                            madreCorrente : selezionaCategoriaDaCampo(nuovoCampo, livello);
+                            madreCorrente : selezionaCategoriaDaValoreCampo(nuovoCampo, livello);
                 }
+                // torna indietro di un livello
                 case 2 -> nuovaMadre = madreCorrente.isRadice() ?
-                        madreCorrente : radice.cercaCategoria(madreCorrente.getNomeMadre()); // torna indietro di un livello
+                        madreCorrente : radice.cercaCategoria(madreCorrente.getNomeMadre());
                 default -> System.out.println(MSG_USCITA_SUBMENU);
             }
             // aggiorno i valori
@@ -453,23 +454,24 @@ public class GestoreCategorie {
     }
 
 
-    private String selezionaCampo(List<Categoria> livello) {
-        String[] campiFiglie = livello.stream()
+    private String selezionaValoreCampo(List<Categoria> livello) {
+        String[] valoriFiglie = livello.stream()
                 .filter(categoria -> !categoria.isFoglia())
-                .map(Categoria::getCampoFiglie)
+                //.map(Categoria::getCampoFiglie)
+                .map(categoria -> categoria.getValoreDominio().getNome())
                 .toArray(String[]::new);
 
-        if (campiFiglie.length == 0) {
+        if (valoriFiglie.length == 0) {
             System.out.println(WARNING_NO_RAMI_DA_ESPLORARE);
             return null;
         }
 
-        return InputDati.stringReaderFromAvailable(MSG_INPUT_SCELTA_CAMPO, campiFiglie);
+        return InputDati.stringReaderFromAvailable(MSG_INPUT_SCELTA_CAMPO, valoriFiglie);
     }
 
-    private Categoria selezionaCategoriaDaCampo(String nuovoCampo, List<Categoria> livello) {
+    private Categoria selezionaCategoriaDaValoreCampo(String nuovoValore, List<Categoria> livello) {
         return livello.stream()
-                .filter(categoria -> categoria.getCampoFiglie().equals(nuovoCampo))
+                .filter(categoria -> categoria.getValoreDominio().getNome().equals(nuovoValore))
                 .findFirst()
                 .orElse(null);
     }
