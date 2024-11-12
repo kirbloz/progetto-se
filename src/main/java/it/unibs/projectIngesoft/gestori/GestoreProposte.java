@@ -332,7 +332,7 @@ public class GestoreProposte {
     }
 
 
-    private void visualizzaProposteDaNotificare() {
+    public void visualizzaProposteDaNotificare() {
         assert listaProposte != null;
         System.out.println(HEADER_PROPOSTE_PRONTE);
 
