@@ -229,12 +229,15 @@ public class GestoreProposte {
         String comprensorio = ((Fruitore) utenteAttivo).getComprensorioDiAppartenenza();
 
         boolean esisteAlmenoUnaPropostaPerLUtenteLoggatoOra = false;
-        for (Proposta proposta : listaProposte.get(comprensorio)) {
-            if (proposta.getAutore().equals(utenteAttivo.getUsername())) {
-                esisteAlmenoUnaPropostaPerLUtenteLoggatoOra = true;
-                break;
+        if (listaProposte != null && listaProposte.get(comprensorio) != null) {
+            for (Proposta proposta : listaProposte.get(comprensorio)) {
+                if (proposta.getAutore().equals(utenteAttivo.getUsername())) {
+                    esisteAlmenoUnaPropostaPerLUtenteLoggatoOra = true;
+                    break;
+                }
             }
         }
+
         if (!esisteAlmenoUnaPropostaPerLUtenteLoggatoOra) return;
 
         String categoriaRichiesta;
