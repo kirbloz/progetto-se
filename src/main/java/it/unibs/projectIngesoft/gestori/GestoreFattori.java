@@ -221,8 +221,15 @@ public class GestoreFattori {
      * @return stringa formattata come "radice:foglia"
      */
     public String selezioneFoglia(String messaggio) {
-        System.out.println(messaggio);
+        for (String key : fattori.keySet()) {
+            System.out.println(key);
+        }
         // inserimento guidato e controllo [Old:A in (Old:A New:A x)]
+        return inserimentoNomeFogliaFormattato(messaggio);
+    }
+
+    public String inserimentoNomeFogliaFormattato(String messaggio) {
+        System.out.println(messaggio);
         String nomeFogliaFormattato;
         do {
             nomeFogliaFormattato = factorNameBuilder(
@@ -232,6 +239,7 @@ public class GestoreFattori {
         } while (!fattori.containsKey(nomeFogliaFormattato));
         return nomeFogliaFormattato;
     }
+
 
     /**
      * Calcola tutti i fattori che hanno una foglia nuova e una preesistente,

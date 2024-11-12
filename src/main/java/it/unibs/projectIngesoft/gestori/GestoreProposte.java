@@ -180,7 +180,7 @@ public class GestoreProposte {
 
     private ArrayList<Proposta> concatenaCompatibili(Proposta first, Proposta last, ArrayList<Proposta> proposteComprensorio) {
         assert proposteComprensorio != null;
-        
+
         ArrayList<Proposta> catena = new ArrayList<>();
         for (Proposta proposta : proposteComprensorio) {
             if (last.isOffertaCompatibile(proposta)) { // si concatena! ma si richiude anche?
@@ -237,9 +237,9 @@ public class GestoreProposte {
         boolean found = false;
         do {
             visualizzaProposteModificabili();
-            categoriaRichiesta = gestFatt.selezioneFoglia(MSG_SELEZIONE_CATEGORIA_RICHIESTA);
+            categoriaRichiesta = gestFatt.inserimentoNomeFogliaFormattato(MSG_SELEZIONE_CATEGORIA_RICHIESTA);
             oreRichiesta = InputDati.leggiInteroPositivo(MSG_SELEZIONE_ORE);
-            categoriaOfferta = gestFatt.selezioneFoglia(MSG_SELEZIONE_CATEGORIA_OFFERTA);
+            categoriaOfferta = gestFatt.inserimentoNomeFogliaFormattato(MSG_SELEZIONE_CATEGORIA_OFFERTA);
 
             daCambiare = cercaProposta(comprensorio, categoriaOfferta, categoriaRichiesta, oreRichiesta);
 
