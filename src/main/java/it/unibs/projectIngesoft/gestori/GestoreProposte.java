@@ -228,6 +228,15 @@ public class GestoreProposte {
         assert utenteAttivo instanceof Fruitore;
         String comprensorio = ((Fruitore) utenteAttivo).getComprensorioDiAppartenenza();
 
+        boolean esisteAlmenoUnaPropostaPerLUtenteLoggatoOra = false;
+        for (Proposta proposta : listaProposte.get(comprensorio)) {
+            if (proposta.getAutore().equals(utenteAttivo.getUsername())) {
+                esisteAlmenoUnaPropostaPerLUtenteLoggatoOra = true;
+                break;
+            }
+        }
+        if (!esisteAlmenoUnaPropostaPerLUtenteLoggatoOra) return;
+
         String categoriaRichiesta;
         String categoriaOfferta;
         int oreRichiesta;
@@ -243,8 +252,9 @@ public class GestoreProposte {
 
             daCambiare = cercaProposta(comprensorio, categoriaOfferta, categoriaRichiesta, oreRichiesta);
 
-            if (daCambiare != null)
+            if (daCambiare != null && daCambiare.getAutore().equals(utenteAttivo.getUsername())) {
                 found = daCambiare.getStato() != StatiProposta.CHIUSA;
+            }
         } while (!found);
 
         // 2. cambio stato guidato e conferma
