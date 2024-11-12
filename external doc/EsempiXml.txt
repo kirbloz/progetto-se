@@ -1,0 +1,194 @@
+>-> le credenziali di almeno 2 configuratori:
+	
+	usr: 	tizianoFerro
+	pssw:	LoStadio2015
+	
+	usr: 	robertoBenigni
+	pssw:	LaVitaèBella97
+	
+- le credenziali (e gli indirizzi di posta elettronica) di almeno 3 fruitori:
+
+	usr:	Gabbayyyy
+	pssw:	wasd1234
+	e-mail:	gabriele.baiguini@gmail.com
+	comprensorio: Bergamo
+	
+	usr:	martinomaff
+	pssw:	martino123
+	e-mail:	martino.bariselli@gmail.com
+	comprensorio: Brescia
+	
+	usr:	LucaMaff
+	pssw:	luca1234
+	e-mail:	luca.barismaff@gmail.com
+	comprensorio: Brescia
+	
+	usr:	WadeGiovanniBaiguini
+	pssw:	fourmis7
+	e-mail:	gabriele.baiguini@gmail.com
+	comprensorio: Brescia
+	
+	usr:	GiorgioVanni
+	pssw:	gormiti1
+	e-mail:	giorgio.baigua@tiscali.it
+	comprensorio: Bergamo
+
+- le composizioni di almeno 2 comprensori;
+
+	Brescia
+		|_ Brescia
+		|_
+		|_
+		|_
+		|_
+		|_
+		|_
+	
+	Bergamo
+		|_ Bergamo
+		|_
+		|_
+		|_
+		|_
+		|_
+		|_
+		|_
+		
+- le descrizioni di almeno 3 gerarchie di categorie, aventi globalmente almeno 6 categorie foglia,
+nonché il valore dei fattori di conversione relativi alle stesse:
+
+Ripetizioni Scolastiche
+	|
+	|_ Ripetizioni di Materie Umanistiche
+	|	|_ Ripetizioni di Letteratura Italiana
+	|	|_ Ripetizioni di Filosofia
+	|	|_ Ripetizioni di Storia
+	|	|_ Ripetizioni di Storia dell'arte
+	|
+	|_ Ripetizioni di Materie Scientifiche
+	|	|_ Ripetizioni di Matematica
+	|	|_ Ripetizioni di Fisica
+	|	|_ Ripetizioni di Informatica
+	|	|_ Ripetizioni di Chimica
+	|	|_ Ripetizioni di Biologia
+	|	|_ Ripetizioni di Scienze della terra
+	|
+	|_ Ripetizioni di lingue
+		|_ Ripetizioni di Inglese
+		|_ Ripetizioni di Spagnolo
+		|_ Ripetizioni di Francese
+		|_ Ripetizioni di Tedesco
+		|_ Ripetizioni di Latino
+		|_ Ripetizioni di Greco
+
+
+Attività di svago
+	|
+	|_ Giochi di Logica
+	|	|_ Lezioni di Scacchi
+	|	|_ Lezioni di Sudoku
+	|
+	|_ Sport
+		|_ Attività Relative a specchi d'acqua
+		|	|_ Lezioni di Vela
+		|	|_ Lezioni si Surf
+		|
+		|_ Sport di Squadra
+		|	|_ Allenamento di Calcio
+		|	|_ Allenamento di Pallacanestro
+		|	|_ Allenamento di Pallavolo
+		|
+		|_ Sport Individuali
+			|_ Allenamento Tennis
+			|_ Allenamento Ping Pong
+			|_ Allenamento Sci
+			
+- le informazioni inerenti ad almeno 10 proposte aperte, 3 proposte chiuse e 2 proposte ritirate:
+
+	Richiesta: Attività di svago : lezioni di scacchi
+		oreRichiesta: 10
+	Offerta: Attività di svago : lezioni di surf
+		oreOfferta: X
+	Autore: 
+	Comprensorio:
+
+
+	Richiesta:
+		oreRichiesta:
+	Offerta:
+		oreOfferta: X
+	Autore:
+	Comprensorio:
+
+
+	Richiesta:
+		oreRichiesta:
+	Offerta:
+		oreOfferta: X
+	Autore:
+	Comprensorio:
+
+
+	Richiesta:
+		oreRichiesta:
+	Offerta:
+		oreOfferta: X
+	Autore:
+	Comprensorio:
+
+
+	Richiesta:
+		oreRichiesta:
+	Offerta:
+		oreOfferta: X
+	Autore:
+	Comprensorio:
+
+
+	Richiesta:
+		oreRichiesta:
+	Offerta:
+		oreOfferta: X
+	Autore:
+	Comprensorio:
+
+
+	Richiesta:
+		oreRichiesta:
+	Offerta:
+		oreOfferta: X
+	Autore:
+	Comprensorio:
+
+
+	Richiesta:
+		oreRichiesta:
+	Offerta:
+		oreOfferta: X
+	Autore:
+	Comprensorio:
+
+
+	Richiesta:
+		oreRichiesta:
+	Offerta:
+		oreOfferta: X
+	Autore:
+	Comprensorio:
+
+
+	Richiesta:
+		oreRichiesta:
+	Offerta:
+		oreOfferta: X
+	Autore:
+	Comprensorio:
+
+
+	Richiesta:
+		oreRichiesta:
+	Offerta:
+		oreOfferta: X
+	Autore:
+	Comprensorio:
+
