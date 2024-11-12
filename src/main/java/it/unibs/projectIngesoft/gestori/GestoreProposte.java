@@ -219,7 +219,15 @@ public class GestoreProposte {
                 && first.getOreRichiesta() == last.getOreOfferta();
     }
 
+    /**
+     * L'autore di una proposta può cambiare il suo stato tra RITIRATA e APERTA.
+     * Guida la selezione della proposta.
+     * L'autore è sempre un Fruitore.
+     */
     private void cambiaStatoProposta() {
+        assert utenteAttivo instanceof Fruitore;
+        String comprensorio = ((Fruitore) utenteAttivo).getComprensorioDiAppartenenza();
+
         String categoriaRichiesta;
         String categoriaOfferta;
         int oreRichiesta;
@@ -228,26 +236,16 @@ public class GestoreProposte {
         // 1. inserimento categoria richiesta, ore, e categoria offerta
         boolean found = false;
         do {
-            visualizzaProposteModificabili(utenteAttivo.getUsername());
+            visualizzaProposteModificabili();
             categoriaRichiesta = gestFatt.selezioneFogliaPerCambioStatoProposta(MSG_SELEZIONE_CATEGORIA_RICHIESTA);
-            visualizzaProposteModificabili(utenteAttivo.getUsername());
             oreRichiesta = InputDati.leggiInteroPositivo(MSG_SELEZIONE_ORE);
-            visualizzaProposteModificabili(utenteAttivo.getUsername());
             categoriaOfferta = gestFatt.selezioneFogliaPerCambioStatoProposta(MSG_SELEZIONE_CATEGORIA_OFFERTA);
 
-            for (Proposta proposta : listaProposte.get(((Fruitore) utenteAttivo).getComprensorioDiAppartenenza())) {
-                if (proposta.getOfferta().equals(categoriaOfferta)
-                        && proposta.getOreRichiesta() == oreRichiesta
-                        && proposta.getRichiesta().equals(categoriaRichiesta)) {
-                    found = true;
-                    daCambiare = proposta;
-                    break;
-                }
-                ;
-            }
+            daCambiare = cercaProposta(comprensorio, categoriaOfferta, categoriaRichiesta, oreRichiesta);
+            found = daCambiare != null;
+
         } while (!found);
 
-        assert daCambiare != null;
         StatiProposta statoAttuale = daCambiare.getStato();
         StatiProposta statoNuovo = (statoAttuale == StatiProposta.APERTA) ? StatiProposta.RITIRATA : StatiProposta.APERTA;
 
@@ -263,6 +261,42 @@ public class GestoreProposte {
         serializeXML();
     }
 
+    /**
+     * A partire dai dettagli di una proposta, verifica se questa esiste tra le proposte memorizzate.
+     *
+     * @param comprensorio,       comprensorio della proposta
+     * @param categoriaOfferta,   categoria dell'offerta
+     * @param categoriaRichiesta, categoria della richiesta
+     * @param oreRichiesta,       ore richieste
+     * @return Proposta se esiste, null altrimenti
+     */
+    private Proposta cercaProposta(String comprensorio, String categoriaOfferta, String categoriaRichiesta, int oreRichiesta) {
+        return listaProposte
+                .get(comprensorio).stream()
+                .filter(p -> p.getOfferta().equals(categoriaOfferta)
+                        && p.getOreRichiesta() == oreRichiesta
+                        && p.getRichiesta().equals(categoriaRichiesta))
+                .findFirst()
+                .orElse(null);
+    }
+
+    private Fruitore getAutoreFromProposta(Proposta proposta) {
+        return GestoreUtenti.getInformazioniFruitore(proposta.getAutore());
+    }
+
+    /**
+     * Visualizza le proposte a schermo dopo averle filtrate a partire da quelle memorizzate.
+     *
+     * @param filtro, predicato per selezionare le proposte da visualizzare.
+     */
+    private void visualizzaProposte(Predicate<Proposta> filtro) {
+        System.out.println(proposteToString(filtro));
+    }
+
+    /**
+     * Mostra le proposte filtrando per categoria, che appaia come offerta o richiesta.
+     * Guida l'immissione della categoria.
+     */
     public void visualizzaPropostePerCategoria() {
         assert listaProposte != null;
         String categoria = gestFatt.selezioneFoglia(MSG_INSERISCI_CATEGORIA);
