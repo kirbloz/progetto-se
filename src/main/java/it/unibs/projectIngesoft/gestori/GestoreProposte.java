@@ -231,7 +231,7 @@ public class GestoreProposte {
         boolean esisteAlmenoUnaPropostaPerLUtenteLoggatoOra = false;
         if (listaProposte != null && listaProposte.get(comprensorio) != null) {
             for (Proposta proposta : listaProposte.get(comprensorio)) {
-                if (proposta.getAutore().equals(utenteAttivo.getUsername())) {
+                if (proposta.getAutoreUsername().equals(utenteAttivo.getUsername())) {
                     esisteAlmenoUnaPropostaPerLUtenteLoggatoOra = true;
                     break;
                 }
@@ -255,7 +255,7 @@ public class GestoreProposte {
 
             daCambiare = cercaProposta(comprensorio, categoriaOfferta, categoriaRichiesta, oreRichiesta);
 
-            if (daCambiare != null && daCambiare.getAutore().equals(utenteAttivo.getUsername())) {
+            if (daCambiare != null && daCambiare.getAutoreUsername().equals(utenteAttivo.getUsername())) {
                 found = daCambiare.getStato() != StatiProposta.CHIUSA;
             }
         } while (!found);
