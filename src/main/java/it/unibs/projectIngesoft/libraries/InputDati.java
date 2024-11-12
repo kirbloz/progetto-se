@@ -19,6 +19,7 @@ public class InputDati {
 
     public static final String ERR_VALORI_NON_AMMESSI = "Attenzione: hai utilizzato dei valori non consentiti";
     private static final String ERRORE_FORMATO = "Attenzione: il dato inserito non e' nel formato corretto";
+    private static final String ERRORE_FORMATO_VIRGOLA = "Attenzione: usa il punto come separatore decimale";
     private static final String ERRORE_MINIMO = "Attenzione: e' richiesto un valore maggiore o uguale a ";
     private static final String ERRORE_STRINGA_VUOTA = "Attenzione: non hai inserito alcun carattere";
     private static final String ERRORE_MASSIMO = "Attenzione: e' richiesto un valore minore o uguale a ";
@@ -223,7 +224,9 @@ public class InputDati {
                 System.out.println(ERRORE_IOEXCEPTION);
             } catch (InputMismatchException e) {
                 System.out.println(ERRORE_FORMATO);
-            }
+            } catch (NumberFormatException e) {
+            System.out.println(ERRORE_FORMATO_VIRGOLA);
+        }
         } while (!finito);
         return valoreLetto;
     }
