@@ -3,7 +3,21 @@
     <nomeComprensorio>Brescia</nomeComprensorio>
     <listaComuni>
       <listaComuni>Brescia</listaComuni>
-      <listaComuni>Darfo</listaComuni>
+      <listaComuni>Alfianello</listaComuni>
+      <listaComuni>Berlingo</listaComuni>
+      <listaComuni>Chiari</listaComuni>
+      <listaComuni>Sirmione</listaComuni>
+    </listaComuni>
+  </item>
+  <item>
+    <nomeComprensorio>Bergamo</nomeComprensorio>
+    <listaComuni>
+      <listaComuni>Bergamo</listaComuni>
+      <listaComuni>Albino</listaComuni>
+      <listaComuni>Carona</listaComuni>
+      <listaComuni>Cassiglio</listaComuni>
+      <listaComuni>Membro</listaComuni>
+      <listaComuni>Zorro</listaComuni>
     </listaComuni>
   </item>
 </ArrayList>

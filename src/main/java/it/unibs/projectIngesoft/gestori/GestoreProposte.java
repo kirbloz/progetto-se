@@ -259,6 +259,7 @@ public class GestoreProposte {
             return; // non conferma
         if (statoAttuale == StatiProposta.RITIRATA) {
             daCambiare.setAperta();
+            cercaProposteDaChiudere(daCambiare);
         } else {
             daCambiare.setRitirata();
         }
@@ -393,8 +394,5 @@ public class GestoreProposte {
                 }
             }
         }
-
     }
-
-
 }

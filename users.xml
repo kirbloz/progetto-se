@@ -1,18 +1,40 @@
 <ArrayList>
-  <item type="Fruitore">
-    <username>test</username>
-    <password>1234</password>
-    <email>fake@mail</email>
-    <comprensorioDiAppartenenza>Brescia</comprensorioDiAppartenenza>
-  </item>
-  <item type="Fruitore">
-    <username>ciao</username>
-    <password>1234</password>
-    <email>sad@fdsg.com</email>
-    <comprensorioDiAppartenenza>Brescia</comprensorioDiAppartenenza>
+  <item type="Configuratore">
+    <username>tizianoFerro</username>
+    <password>LoStadio2015</password>
   </item>
   <item type="Configuratore">
-    <username>wade</username>
-    <password>1234</password>
+    <username>robertoBenigni</username>
+    <password>LaVitaèBella97</password>
+  </item>
+  <item type="Fruitore">
+    <username>Gabbayyyy</username>
+    <password>wasd1234</password>
+    <email>gabriele.baiguini@gmail.com</email>
+    <comprensorioDiAppartenenza>Bergamo</comprensorioDiAppartenenza>
+  </item>
+  <item type="Fruitore">
+    <username>martinomaff</username>
+    <password>martino123</password>
+    <email>martino.bariselli@gmail.com</email>
+    <comprensorioDiAppartenenza>Brescia</comprensorioDiAppartenenza>
+  </item>
+  <item type="Fruitore">
+    <username>WadeGiovanniBaiguini</username>
+    <password>fourmis7</password>
+    <email>wade.baiguini@gmail.com</email>
+    <comprensorioDiAppartenenza>Brescia</comprensorioDiAppartenenza>
+  </item>
+  <item type="Fruitore">
+    <username>LucaMaff</username>
+    <password>luca1234</password>
+    <email>luca.barismaff@gmail.com</email>
+    <comprensorioDiAppartenenza>Brescia</comprensorioDiAppartenenza>
+  </item>
+  <item type="Fruitore">
+    <username>GiorgioVanni</username>
+    <password>gormiti1</password>
+    <email>giorgio.baigua@tiscali.it</email>
+    <comprensorioDiAppartenenza>Bergamo</comprensorioDiAppartenenza>
   </item>
 </ArrayList>

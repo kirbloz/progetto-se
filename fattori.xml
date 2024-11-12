@@ -1,127 +1,1807 @@
 <FattoriWrapper>
   <fattori>
     <entry>
-      <key>radice:liv2f3</key>
+      <key>Ripetizioni Scolastiche:Svago</key>
       <values>
         <value>
-          <nome_c1>radice:liv2f3</nome_c1>
-          <nome_c2>radice:liv2f1</nome_c2>
+          <nome_c1>Ripetizioni Scolastiche:Svago</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Letteratura Italiana</nome_c2>
           <fattore>1.0</fattore>
         </value>
         <value>
-          <nome_c1>radice:liv2f3</nome_c1>
-          <nome_c2>radice:liv2f2</nome_c2>
+          <nome_c1>Ripetizioni Scolastiche:Svago</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Filosofia</nome_c2>
           <fattore>1.0</fattore>
         </value>
         <value>
-          <nome_c1>radice:liv2f3</nome_c1>
-          <nome_c2>test:livello1f2</nome_c2>
-          <fattore>1.2</fattore>
+          <nome_c1>Ripetizioni Scolastiche:Svago</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Storia</nome_c2>
+          <fattore>1.25</fattore>
         </value>
         <value>
-          <nome_c1>radice:liv2f3</nome_c1>
-          <nome_c2>test:livello1f1</nome_c2>
+          <nome_c1>Ripetizioni Scolastiche:Svago</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Storia dell'Arte</nome_c2>
+          <fattore>0.625</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Svago</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Matematica</nome_c2>
+          <fattore>1.6666666666666667</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Svago</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Fisica</nome_c2>
+          <fattore>1.25</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Svago</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Informatica</nome_c2>
+          <fattore>1.0</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Svago</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Chimica</nome_c2>
+          <fattore>1.0</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Svago</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Biologia</nome_c2>
+          <fattore>0.6666666666666666</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Svago</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Scienze della Terra</nome_c2>
+          <fattore>0.5263157894736842</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Svago</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Inglese</nome_c2>
+          <fattore>2.0</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Svago</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Spagnolo</nome_c2>
+          <fattore>0.6666666666666666</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Svago</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Francese</nome_c2>
+          <fattore>1.0</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Svago</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Tedesco</nome_c2>
+          <fattore>1.0</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Svago</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Latino</nome_c2>
+          <fattore>1.1111111111111112</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Svago</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Greco</nome_c2>
+          <fattore>1.1111111111111112</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Svago</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Arabo</nome_c2>
+          <fattore>1.0</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Svago</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Giochi di Logica</nome_c2>
           <fattore>1.0</fattore>
         </value>
       </values>
     </entry>
     <entry>
-      <key>test:livello1f1</key>
+      <key>Ripetizioni Scolastiche:Ripetizioni di Latino</key>
       <values>
         <value>
-          <nome_c1>test:livello1f1</nome_c1>
-          <nome_c2>test:livello1f2</nome_c2>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Latino</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Letteratura Italiana</nome_c2>
+          <fattore>0.8333333333333334</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Latino</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Filosofia</nome_c2>
+          <fattore>0.5263157894736842</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Latino</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Storia</nome_c2>
+          <fattore>1.0</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Latino</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Storia dell'Arte</nome_c2>
+          <fattore>1.1111111111111112</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Latino</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Matematica</nome_c2>
+          <fattore>0.5</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Latino</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Fisica</nome_c2>
+          <fattore>1.1111111111111112</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Latino</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Informatica</nome_c2>
+          <fattore>1.25</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Latino</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Chimica</nome_c2>
+          <fattore>0.6666666666666666</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Latino</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Biologia</nome_c2>
+          <fattore>1.0</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Latino</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Scienze della Terra</nome_c2>
+          <fattore>1.0</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Latino</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Inglese</nome_c2>
+          <fattore>1.1111111111111112</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Latino</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Spagnolo</nome_c2>
+          <fattore>1.0</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Latino</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Francese</nome_c2>
+          <fattore>1.4285714285714286</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Latino</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Tedesco</nome_c2>
+          <fattore>1.6666666666666667</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Latino</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Greco</nome_c2>
           <fattore>1.2</fattore>
         </value>
         <value>
-          <nome_c1>test:livello1f1</nome_c1>
-          <nome_c2>radice:liv2f1</nome_c2>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Latino</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Arabo</nome_c2>
+          <fattore>1.1</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Latino</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Svago</nome_c2>
+          <fattore>0.9</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Latino</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Giochi di Logica</nome_c2>
+          <fattore>0.9</fattore>
+        </value>
+      </values>
+    </entry>
+    <entry>
+      <key>Ripetizioni Scolastiche:Ripetizioni di Fisica</key>
+      <values>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Fisica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Letteratura Italiana</nome_c2>
+          <fattore>1.1111111111111112</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Fisica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Filosofia</nome_c2>
+          <fattore>2.0</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Fisica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Storia</nome_c2>
+          <fattore>0.9090909090909091</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Fisica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Storia dell'Arte</nome_c2>
+          <fattore>1.6666666666666667</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Fisica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Matematica</nome_c2>
+          <fattore>1.25</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Fisica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Informatica</nome_c2>
+          <fattore>1.1</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Fisica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Chimica</nome_c2>
           <fattore>1.0</fattore>
         </value>
         <value>
-          <nome_c1>test:livello1f1</nome_c1>
-          <nome_c2>radice:liv2f2</nome_c2>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Fisica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Biologia</nome_c2>
+          <fattore>1.4</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Fisica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Scienze della Terra</nome_c2>
+          <fattore>1.2</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Fisica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Inglese</nome_c2>
+          <fattore>1.4</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Fisica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Spagnolo</nome_c2>
+          <fattore>1.9</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Fisica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Francese</nome_c2>
+          <fattore>0.5</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Fisica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Tedesco</nome_c2>
+          <fattore>1.2</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Fisica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Latino</nome_c2>
+          <fattore>0.9</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Fisica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Greco</nome_c2>
+          <fattore>1.5</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Fisica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Arabo</nome_c2>
+          <fattore>1.2</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Fisica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Svago</nome_c2>
+          <fattore>0.8</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Fisica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Giochi di Logica</nome_c2>
+          <fattore>0.9</fattore>
+        </value>
+      </values>
+    </entry>
+    <entry>
+      <key>Ripetizioni Scolastiche:Ripetizioni di Chimica</key>
+      <values>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Chimica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Letteratura Italiana</nome_c2>
+          <fattore>0.7692307692307692</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Chimica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Filosofia</nome_c2>
+          <fattore>1.1111111111111112</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Chimica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Storia</nome_c2>
+          <fattore>0.625</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Chimica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Storia dell'Arte</nome_c2>
+          <fattore>0.5</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Chimica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Matematica</nome_c2>
+          <fattore>0.5</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Chimica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Fisica</nome_c2>
           <fattore>1.0</fattore>
         </value>
         <value>
-          <nome_c1>test:livello1f1</nome_c1>
-          <nome_c2>radice:liv2f3</nome_c2>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Chimica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Informatica</nome_c2>
+          <fattore>1.0</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Chimica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Biologia</nome_c2>
+          <fattore>0.6</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Chimica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Scienze della Terra</nome_c2>
+          <fattore>0.9</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Chimica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Inglese</nome_c2>
+          <fattore>1.1</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Chimica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Spagnolo</nome_c2>
+          <fattore>1.4</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Chimica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Francese</nome_c2>
+          <fattore>0.6</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Chimica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Tedesco</nome_c2>
+          <fattore>0.7</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Chimica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Latino</nome_c2>
+          <fattore>1.5</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Chimica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Greco</nome_c2>
+          <fattore>1.9</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Chimica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Arabo</nome_c2>
+          <fattore>0.8</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Chimica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Svago</nome_c2>
+          <fattore>1.0</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Chimica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Giochi di Logica</nome_c2>
           <fattore>1.0</fattore>
         </value>
       </values>
     </entry>
     <entry>
-      <key>radice:liv2f1</key>
+      <key>Ripetizioni Scolastiche:Ripetizioni di Storia dell'Arte</key>
       <values>
         <value>
-          <nome_c1>radice:liv2f1</nome_c1>
-          <nome_c2>radice:liv2f2</nome_c2>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Storia dell'Arte</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Letteratura Italiana</nome_c2>
+          <fattore>0.7142857142857143</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Storia dell'Arte</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Filosofia</nome_c2>
+          <fattore>1.6666666666666667</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Storia dell'Arte</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Storia</nome_c2>
+          <fattore>1.1111111111111112</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Storia dell'Arte</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Matematica</nome_c2>
           <fattore>1.0</fattore>
         </value>
         <value>
-          <nome_c1>radice:liv2f1</nome_c1>
-          <nome_c2>radice:liv2f3</nome_c2>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Storia dell'Arte</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Fisica</nome_c2>
+          <fattore>0.6</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Storia dell'Arte</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Informatica</nome_c2>
           <fattore>1.0</fattore>
         </value>
         <value>
-          <nome_c1>radice:liv2f1</nome_c1>
-          <nome_c2>test:livello1f2</nome_c2>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Storia dell'Arte</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Chimica</nome_c2>
+          <fattore>2.0</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Storia dell'Arte</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Biologia</nome_c2>
+          <fattore>2.0</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Storia dell'Arte</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Scienze della Terra</nome_c2>
+          <fattore>1.0</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Storia dell'Arte</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Inglese</nome_c2>
+          <fattore>1.5</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Storia dell'Arte</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Spagnolo</nome_c2>
+          <fattore>0.5</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Storia dell'Arte</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Francese</nome_c2>
+          <fattore>0.7</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Storia dell'Arte</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Tedesco</nome_c2>
+          <fattore>0.87</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Storia dell'Arte</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Latino</nome_c2>
+          <fattore>0.9</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Storia dell'Arte</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Greco</nome_c2>
+          <fattore>1.0</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Storia dell'Arte</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Arabo</nome_c2>
+          <fattore>1.5</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Storia dell'Arte</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Svago</nome_c2>
+          <fattore>1.6</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Storia dell'Arte</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Giochi di Logica</nome_c2>
+          <fattore>2.0</fattore>
+        </value>
+      </values>
+    </entry>
+    <entry>
+      <key>Ripetizioni Scolastiche:Ripetizioni di Matematica</key>
+      <values>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Matematica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Letteratura Italiana</nome_c2>
+          <fattore>1.6666666666666667</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Matematica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Filosofia</nome_c2>
+          <fattore>0.5</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Matematica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Storia</nome_c2>
+          <fattore>2.0</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Matematica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Storia dell'Arte</nome_c2>
+          <fattore>1.0</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Matematica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Fisica</nome_c2>
+          <fattore>0.8</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Matematica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Informatica</nome_c2>
+          <fattore>0.9</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Matematica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Chimica</nome_c2>
+          <fattore>2.0</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Matematica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Biologia</nome_c2>
+          <fattore>1.0</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Matematica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Scienze della Terra</nome_c2>
+          <fattore>1.1</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Matematica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Inglese</nome_c2>
+          <fattore>0.6</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Matematica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Spagnolo</nome_c2>
           <fattore>1.2</fattore>
         </value>
         <value>
-          <nome_c1>radice:liv2f1</nome_c1>
-          <nome_c2>test:livello1f1</nome_c2>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Matematica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Francese</nome_c2>
+          <fattore>1.4</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Matematica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Tedesco</nome_c2>
+          <fattore>1.8</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Matematica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Latino</nome_c2>
+          <fattore>2.0</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Matematica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Greco</nome_c2>
+          <fattore>1.0</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Matematica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Arabo</nome_c2>
+          <fattore>0.9</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Matematica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Svago</nome_c2>
+          <fattore>0.6</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Matematica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Giochi di Logica</nome_c2>
+          <fattore>0.7</fattore>
+        </value>
+      </values>
+    </entry>
+    <entry>
+      <key>Ripetizioni Scolastiche:Ripetizioni di Spagnolo</key>
+      <values>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Spagnolo</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Letteratura Italiana</nome_c2>
+          <fattore>1.0</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Spagnolo</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Filosofia</nome_c2>
+          <fattore>0.8333333333333334</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Spagnolo</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Storia</nome_c2>
+          <fattore>1.0</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Spagnolo</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Storia dell'Arte</nome_c2>
+          <fattore>2.0</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Spagnolo</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Matematica</nome_c2>
+          <fattore>0.8333333333333334</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Spagnolo</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Fisica</nome_c2>
+          <fattore>0.5263157894736842</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Spagnolo</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Informatica</nome_c2>
+          <fattore>0.625</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Spagnolo</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Chimica</nome_c2>
+          <fattore>0.7142857142857143</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Spagnolo</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Biologia</nome_c2>
+          <fattore>1.1111111111111112</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Spagnolo</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Scienze della Terra</nome_c2>
+          <fattore>0.5</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Spagnolo</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Inglese</nome_c2>
+          <fattore>0.5</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Spagnolo</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Francese</nome_c2>
+          <fattore>2.0</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Spagnolo</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Tedesco</nome_c2>
+          <fattore>1.0</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Spagnolo</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Latino</nome_c2>
+          <fattore>1.0</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Spagnolo</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Greco</nome_c2>
+          <fattore>0.6</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Spagnolo</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Arabo</nome_c2>
+          <fattore>1.2</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Spagnolo</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Svago</nome_c2>
+          <fattore>1.5</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Spagnolo</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Giochi di Logica</nome_c2>
+          <fattore>1.2</fattore>
+        </value>
+      </values>
+    </entry>
+    <entry>
+      <key>Ripetizioni Scolastiche:Ripetizioni di Francese</key>
+      <values>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Francese</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Letteratura Italiana</nome_c2>
+          <fattore>1.0</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Francese</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Filosofia</nome_c2>
+          <fattore>1.0</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Francese</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Storia</nome_c2>
+          <fattore>0.6666666666666666</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Francese</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Storia dell'Arte</nome_c2>
+          <fattore>1.4285714285714286</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Francese</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Matematica</nome_c2>
+          <fattore>0.7142857142857143</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Francese</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Fisica</nome_c2>
+          <fattore>2.0</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Francese</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Informatica</nome_c2>
+          <fattore>0.7692307692307692</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Francese</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Chimica</nome_c2>
+          <fattore>1.6666666666666667</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Francese</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Biologia</nome_c2>
+          <fattore>0.9090909090909091</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Francese</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Scienze della Terra</nome_c2>
+          <fattore>1.0</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Francese</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Inglese</nome_c2>
+          <fattore>0.9090909090909091</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Francese</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Spagnolo</nome_c2>
+          <fattore>0.5</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Francese</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Tedesco</nome_c2>
+          <fattore>0.6</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Francese</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Latino</nome_c2>
+          <fattore>0.7</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Francese</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Greco</nome_c2>
+          <fattore>0.8</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Francese</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Arabo</nome_c2>
+          <fattore>1.0</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Francese</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Svago</nome_c2>
+          <fattore>1.0</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Francese</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Giochi di Logica</nome_c2>
           <fattore>1.0</fattore>
         </value>
       </values>
     </entry>
     <entry>
-      <key>radice:liv2f2</key>
+      <key>Ripetizioni Scolastiche:Ripetizioni di Inglese</key>
       <values>
         <value>
-          <nome_c1>radice:liv2f2</nome_c1>
-          <nome_c2>radice:liv2f1</nome_c2>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Inglese</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Letteratura Italiana</nome_c2>
+          <fattore>1.4285714285714286</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Inglese</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Filosofia</nome_c2>
+          <fattore>1.25</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Inglese</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Storia</nome_c2>
+          <fattore>1.1111111111111112</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Inglese</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Storia dell'Arte</nome_c2>
+          <fattore>0.6666666666666666</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Inglese</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Matematica</nome_c2>
+          <fattore>1.6666666666666667</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Inglese</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Fisica</nome_c2>
+          <fattore>0.7142857142857143</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Inglese</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Informatica</nome_c2>
+          <fattore>0.5</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Inglese</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Chimica</nome_c2>
+          <fattore>0.9090909090909091</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Inglese</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Biologia</nome_c2>
+          <fattore>1.1111111111111112</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Inglese</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Scienze della Terra</nome_c2>
+          <fattore>0.5263157894736842</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Inglese</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Spagnolo</nome_c2>
+          <fattore>2.0</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Inglese</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Francese</nome_c2>
+          <fattore>1.1</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Inglese</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Tedesco</nome_c2>
+          <fattore>0.7</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Inglese</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Latino</nome_c2>
+          <fattore>0.9</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Inglese</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Greco</nome_c2>
           <fattore>1.0</fattore>
         </value>
         <value>
-          <nome_c1>radice:liv2f2</nome_c1>
-          <nome_c2>radice:liv2f3</nome_c2>
-          <fattore>1.0</fattore>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Inglese</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Arabo</nome_c2>
+          <fattore>0.8</fattore>
         </value>
         <value>
-          <nome_c1>radice:liv2f2</nome_c1>
-          <nome_c2>test:livello1f2</nome_c2>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Inglese</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Svago</nome_c2>
+          <fattore>0.5</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Inglese</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Giochi di Logica</nome_c2>
+          <fattore>0.6</fattore>
+        </value>
+      </values>
+    </entry>
+    <entry>
+      <key>Ripetizioni Scolastiche:Ripetizioni di Filosofia</key>
+      <values>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Filosofia</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Letteratura Italiana</nome_c2>
+          <fattore>0.9090909090909091</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Filosofia</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Storia</nome_c2>
+          <fattore>0.9</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Filosofia</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Storia dell'Arte</nome_c2>
+          <fattore>0.6</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Filosofia</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Matematica</nome_c2>
+          <fattore>2.0</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Filosofia</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Fisica</nome_c2>
+          <fattore>0.5</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Filosofia</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Informatica</nome_c2>
+          <fattore>0.8</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Filosofia</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Chimica</nome_c2>
+          <fattore>0.9</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Filosofia</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Biologia</nome_c2>
+          <fattore>1.5</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Filosofia</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Scienze della Terra</nome_c2>
+          <fattore>1.7</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Filosofia</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Inglese</nome_c2>
+          <fattore>0.8</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Filosofia</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Spagnolo</nome_c2>
           <fattore>1.2</fattore>
         </value>
         <value>
-          <nome_c1>radice:liv2f2</nome_c1>
-          <nome_c2>test:livello1f1</nome_c2>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Filosofia</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Francese</nome_c2>
+          <fattore>1.0</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Filosofia</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Tedesco</nome_c2>
+          <fattore>1.1</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Filosofia</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Latino</nome_c2>
+          <fattore>1.9</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Filosofia</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Greco</nome_c2>
+          <fattore>0.7</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Filosofia</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Arabo</nome_c2>
+          <fattore>0.9</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Filosofia</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Svago</nome_c2>
+          <fattore>1.0</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Filosofia</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Giochi di Logica</nome_c2>
+          <fattore>0.5</fattore>
+        </value>
+      </values>
+    </entry>
+    <entry>
+      <key>Ripetizioni Scolastiche:Ripetizioni di Arabo</key>
+      <values>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Arabo</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Letteratura Italiana</nome_c2>
+          <fattore>1.6666666666666667</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Arabo</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Filosofia</nome_c2>
+          <fattore>1.1111111111111112</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Arabo</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Storia</nome_c2>
+          <fattore>2.0</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Arabo</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Storia dell'Arte</nome_c2>
+          <fattore>0.6666666666666666</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Arabo</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Matematica</nome_c2>
+          <fattore>1.1111111111111112</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Arabo</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Fisica</nome_c2>
+          <fattore>0.8333333333333334</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Arabo</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Informatica</nome_c2>
+          <fattore>0.5</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Arabo</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Chimica</nome_c2>
+          <fattore>1.25</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Arabo</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Biologia</nome_c2>
+          <fattore>1.25</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Arabo</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Scienze della Terra</nome_c2>
+          <fattore>0.5882352941176471</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Arabo</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Inglese</nome_c2>
+          <fattore>1.25</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Arabo</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Spagnolo</nome_c2>
+          <fattore>0.8333333333333334</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Arabo</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Francese</nome_c2>
+          <fattore>1.0</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Arabo</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Tedesco</nome_c2>
+          <fattore>0.5</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Arabo</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Latino</nome_c2>
+          <fattore>0.9090909090909091</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Arabo</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Greco</nome_c2>
+          <fattore>1.1111111111111112</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Arabo</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Svago</nome_c2>
+          <fattore>1.0</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Arabo</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Giochi di Logica</nome_c2>
           <fattore>1.0</fattore>
         </value>
       </values>
     </entry>
     <entry>
-      <key>test:livello1f2</key>
+      <key>Ripetizioni Scolastiche:Ripetizioni di Storia</key>
       <values>
         <value>
-          <nome_c1>test:livello1f2</nome_c1>
-          <nome_c2>test:livello1f1</nome_c2>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Storia</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Letteratura Italiana</nome_c2>
+          <fattore>1.25</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Storia</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Filosofia</nome_c2>
+          <fattore>1.1111111111111112</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Storia</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Storia dell'Arte</nome_c2>
+          <fattore>0.9</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Storia</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Matematica</nome_c2>
+          <fattore>0.5</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Storia</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Fisica</nome_c2>
+          <fattore>1.1</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Storia</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Informatica</nome_c2>
+          <fattore>1.5</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Storia</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Chimica</nome_c2>
+          <fattore>1.6</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Storia</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Biologia</nome_c2>
+          <fattore>1.2</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Storia</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Scienze della Terra</nome_c2>
+          <fattore>0.8</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Storia</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Inglese</nome_c2>
+          <fattore>0.9</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Storia</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Spagnolo</nome_c2>
+          <fattore>1.0</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Storia</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Francese</nome_c2>
+          <fattore>1.5</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Storia</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Tedesco</nome_c2>
+          <fattore>0.8</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Storia</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Latino</nome_c2>
+          <fattore>1.0</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Storia</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Greco</nome_c2>
+          <fattore>1.3</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Storia</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Arabo</nome_c2>
+          <fattore>0.5</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Storia</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Svago</nome_c2>
+          <fattore>0.8</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Storia</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Giochi di Logica</nome_c2>
+          <fattore>0.9</fattore>
+        </value>
+      </values>
+    </entry>
+    <entry>
+      <key>Ripetizioni Scolastiche:Ripetizioni di Tedesco</key>
+      <values>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Tedesco</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Letteratura Italiana</nome_c2>
+          <fattore>1.1111111111111112</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Tedesco</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Filosofia</nome_c2>
+          <fattore>0.9090909090909091</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Tedesco</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Storia</nome_c2>
+          <fattore>1.25</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Tedesco</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Storia dell'Arte</nome_c2>
+          <fattore>1.1494252873563218</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Tedesco</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Matematica</nome_c2>
+          <fattore>0.5555555555555556</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Tedesco</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Fisica</nome_c2>
           <fattore>0.8333333333333334</fattore>
         </value>
         <value>
-          <nome_c1>test:livello1f2</nome_c1>
-          <nome_c2>radice:liv2f1</nome_c2>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Tedesco</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Informatica</nome_c2>
+          <fattore>2.0</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Tedesco</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Chimica</nome_c2>
+          <fattore>1.4285714285714286</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Tedesco</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Biologia</nome_c2>
+          <fattore>1.1111111111111112</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Tedesco</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Scienze della Terra</nome_c2>
+          <fattore>1.0</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Tedesco</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Inglese</nome_c2>
+          <fattore>1.4285714285714286</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Tedesco</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Spagnolo</nome_c2>
+          <fattore>1.0</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Tedesco</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Francese</nome_c2>
+          <fattore>1.6666666666666667</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Tedesco</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Latino</nome_c2>
+          <fattore>0.6</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Tedesco</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Greco</nome_c2>
+          <fattore>2.0</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Tedesco</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Arabo</nome_c2>
+          <fattore>2.0</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Tedesco</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Svago</nome_c2>
+          <fattore>1.0</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Tedesco</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Giochi di Logica</nome_c2>
+          <fattore>1.1</fattore>
+        </value>
+      </values>
+    </entry>
+    <entry>
+      <key>Ripetizioni Scolastiche:Ripetizioni di Scienze della Terra</key>
+      <values>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Scienze della Terra</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Letteratura Italiana</nome_c2>
+          <fattore>0.5882352941176471</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Scienze della Terra</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Filosofia</nome_c2>
+          <fattore>0.5882352941176471</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Scienze della Terra</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Storia</nome_c2>
+          <fattore>1.25</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Scienze della Terra</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Storia dell'Arte</nome_c2>
+          <fattore>1.0</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Scienze della Terra</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Matematica</nome_c2>
+          <fattore>0.9090909090909091</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Scienze della Terra</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Fisica</nome_c2>
           <fattore>0.8333333333333334</fattore>
         </value>
         <value>
-          <nome_c1>test:livello1f2</nome_c1>
-          <nome_c2>radice:liv2f2</nome_c2>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Scienze della Terra</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Informatica</nome_c2>
           <fattore>0.8333333333333334</fattore>
         </value>
         <value>
-          <nome_c1>test:livello1f2</nome_c1>
-          <nome_c2>radice:liv2f3</nome_c2>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Scienze della Terra</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Chimica</nome_c2>
+          <fattore>1.1111111111111112</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Scienze della Terra</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Biologia</nome_c2>
+          <fattore>1.0</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Scienze della Terra</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Inglese</nome_c2>
+          <fattore>1.9</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Scienze della Terra</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Spagnolo</nome_c2>
+          <fattore>2.0</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Scienze della Terra</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Francese</nome_c2>
+          <fattore>1.0</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Scienze della Terra</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Tedesco</nome_c2>
+          <fattore>1.0</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Scienze della Terra</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Latino</nome_c2>
+          <fattore>1.0</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Scienze della Terra</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Greco</nome_c2>
+          <fattore>1.2</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Scienze della Terra</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Arabo</nome_c2>
+          <fattore>1.7</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Scienze della Terra</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Svago</nome_c2>
+          <fattore>1.9</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Scienze della Terra</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Giochi di Logica</nome_c2>
+          <fattore>2.0</fattore>
+        </value>
+      </values>
+    </entry>
+    <entry>
+      <key>Ripetizioni Scolastiche:Ripetizioni di Letteratura Italiana</key>
+      <values>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Letteratura Italiana</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Filosofia</nome_c2>
+          <fattore>1.1</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Letteratura Italiana</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Storia</nome_c2>
+          <fattore>0.8</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Letteratura Italiana</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Storia dell'Arte</nome_c2>
+          <fattore>1.4</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Letteratura Italiana</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Matematica</nome_c2>
+          <fattore>0.6</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Letteratura Italiana</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Fisica</nome_c2>
+          <fattore>0.9</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Letteratura Italiana</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Informatica</nome_c2>
+          <fattore>0.5</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Letteratura Italiana</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Chimica</nome_c2>
+          <fattore>1.3</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Letteratura Italiana</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Biologia</nome_c2>
+          <fattore>1.2</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Letteratura Italiana</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Scienze della Terra</nome_c2>
+          <fattore>1.7</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Letteratura Italiana</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Inglese</nome_c2>
+          <fattore>0.7</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Letteratura Italiana</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Spagnolo</nome_c2>
+          <fattore>1.0</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Letteratura Italiana</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Francese</nome_c2>
+          <fattore>1.0</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Letteratura Italiana</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Tedesco</nome_c2>
+          <fattore>0.9</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Letteratura Italiana</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Latino</nome_c2>
+          <fattore>1.2</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Letteratura Italiana</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Greco</nome_c2>
+          <fattore>1.6</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Letteratura Italiana</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Arabo</nome_c2>
+          <fattore>0.6</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Letteratura Italiana</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Svago</nome_c2>
+          <fattore>1.0</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Letteratura Italiana</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Giochi di Logica</nome_c2>
+          <fattore>1.0</fattore>
+        </value>
+      </values>
+    </entry>
+    <entry>
+      <key>Ripetizioni Scolastiche:Giochi di Logica</key>
+      <values>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Giochi di Logica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Letteratura Italiana</nome_c2>
+          <fattore>1.0</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Giochi di Logica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Filosofia</nome_c2>
+          <fattore>2.0</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Giochi di Logica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Storia</nome_c2>
+          <fattore>1.1111111111111112</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Giochi di Logica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Storia dell'Arte</nome_c2>
+          <fattore>0.5</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Giochi di Logica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Matematica</nome_c2>
+          <fattore>1.4285714285714286</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Giochi di Logica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Fisica</nome_c2>
+          <fattore>1.1111111111111112</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Giochi di Logica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Informatica</nome_c2>
+          <fattore>1.0</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Giochi di Logica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Chimica</nome_c2>
+          <fattore>1.0</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Giochi di Logica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Biologia</nome_c2>
+          <fattore>0.625</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Giochi di Logica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Scienze della Terra</nome_c2>
+          <fattore>0.5</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Giochi di Logica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Inglese</nome_c2>
+          <fattore>1.6666666666666667</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Giochi di Logica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Spagnolo</nome_c2>
           <fattore>0.8333333333333334</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Giochi di Logica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Francese</nome_c2>
+          <fattore>1.0</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Giochi di Logica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Tedesco</nome_c2>
+          <fattore>0.9090909090909091</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Giochi di Logica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Latino</nome_c2>
+          <fattore>1.1111111111111112</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Giochi di Logica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Greco</nome_c2>
+          <fattore>1.1111111111111112</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Giochi di Logica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Arabo</nome_c2>
+          <fattore>1.0</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Giochi di Logica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Svago</nome_c2>
+          <fattore>1.0</fattore>
+        </value>
+      </values>
+    </entry>
+    <entry>
+      <key>Ripetizioni Scolastiche:Ripetizioni di Biologia</key>
+      <values>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Biologia</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Letteratura Italiana</nome_c2>
+          <fattore>0.8333333333333334</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Biologia</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Filosofia</nome_c2>
+          <fattore>0.6666666666666666</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Biologia</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Storia</nome_c2>
+          <fattore>0.8333333333333334</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Biologia</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Storia dell'Arte</nome_c2>
+          <fattore>0.5</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Biologia</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Matematica</nome_c2>
+          <fattore>1.0</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Biologia</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Fisica</nome_c2>
+          <fattore>0.7142857142857143</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Biologia</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Informatica</nome_c2>
+          <fattore>0.9090909090909091</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Biologia</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Chimica</nome_c2>
+          <fattore>1.6666666666666667</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Biologia</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Scienze della Terra</nome_c2>
+          <fattore>1.0</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Biologia</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Inglese</nome_c2>
+          <fattore>0.9</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Biologia</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Spagnolo</nome_c2>
+          <fattore>0.9</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Biologia</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Francese</nome_c2>
+          <fattore>1.1</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Biologia</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Tedesco</nome_c2>
+          <fattore>0.9</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Biologia</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Latino</nome_c2>
+          <fattore>1.0</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Biologia</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Greco</nome_c2>
+          <fattore>0.6</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Biologia</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Arabo</nome_c2>
+          <fattore>0.8</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Biologia</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Svago</nome_c2>
+          <fattore>1.5</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Biologia</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Giochi di Logica</nome_c2>
+          <fattore>1.6</fattore>
+        </value>
+      </values>
+    </entry>
+    <entry>
+      <key>Ripetizioni Scolastiche:Ripetizioni di Informatica</key>
+      <values>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Informatica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Letteratura Italiana</nome_c2>
+          <fattore>2.0</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Informatica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Filosofia</nome_c2>
+          <fattore>1.25</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Informatica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Storia</nome_c2>
+          <fattore>0.6666666666666666</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Informatica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Storia dell'Arte</nome_c2>
+          <fattore>1.0</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Informatica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Matematica</nome_c2>
+          <fattore>1.1111111111111112</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Informatica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Fisica</nome_c2>
+          <fattore>0.9090909090909091</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Informatica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Chimica</nome_c2>
+          <fattore>1.0</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Informatica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Biologia</nome_c2>
+          <fattore>1.1</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Informatica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Scienze della Terra</nome_c2>
+          <fattore>1.2</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Informatica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Inglese</nome_c2>
+          <fattore>2.0</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Informatica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Spagnolo</nome_c2>
+          <fattore>1.6</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Informatica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Francese</nome_c2>
+          <fattore>1.3</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Informatica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Tedesco</nome_c2>
+          <fattore>0.5</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Informatica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Latino</nome_c2>
+          <fattore>0.8</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Informatica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Greco</nome_c2>
+          <fattore>2.0</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Informatica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Arabo</nome_c2>
+          <fattore>2.0</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Informatica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Svago</nome_c2>
+          <fattore>1.0</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Informatica</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Giochi di Logica</nome_c2>
+          <fattore>1.0</fattore>
+        </value>
+      </values>
+    </entry>
+    <entry>
+      <key>Ripetizioni Scolastiche:Ripetizioni di Greco</key>
+      <values>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Greco</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Letteratura Italiana</nome_c2>
+          <fattore>0.625</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Greco</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Filosofia</nome_c2>
+          <fattore>1.4285714285714286</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Greco</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Storia</nome_c2>
+          <fattore>0.7692307692307692</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Greco</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Storia dell'Arte</nome_c2>
+          <fattore>1.0</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Greco</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Matematica</nome_c2>
+          <fattore>1.0</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Greco</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Fisica</nome_c2>
+          <fattore>0.6666666666666666</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Greco</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Informatica</nome_c2>
+          <fattore>0.5</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Greco</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Chimica</nome_c2>
+          <fattore>0.5263157894736842</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Greco</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Biologia</nome_c2>
+          <fattore>1.6666666666666667</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Greco</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Scienze della Terra</nome_c2>
+          <fattore>0.8333333333333334</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Greco</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Inglese</nome_c2>
+          <fattore>1.0</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Greco</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Spagnolo</nome_c2>
+          <fattore>1.6666666666666667</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Greco</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Francese</nome_c2>
+          <fattore>1.25</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Greco</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Tedesco</nome_c2>
+          <fattore>0.5</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Greco</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Latino</nome_c2>
+          <fattore>0.8333333333333334</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Greco</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Ripetizioni di Arabo</nome_c2>
+          <fattore>0.9</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Greco</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Svago</nome_c2>
+          <fattore>0.9</fattore>
+        </value>
+        <value>
+          <nome_c1>Ripetizioni Scolastiche:Ripetizioni di Greco</nome_c1>
+          <nome_c2>Ripetizioni Scolastiche:Giochi di Logica</nome_c2>
+          <fattore>0.9</fattore>
         </value>
       </values>
     </entry>

@@ -1,89 +1,91 @@
 <Albero>
   <radice>
     <valoriDominioFiglie>
-      <valoriDominioFiglie>sadgdsg</valoriDominioFiglie>
-      <valoriDominioFiglie>asdfdsaf</valoriDominioFiglie>
+      <valoriDominioFiglie>umanistiche</valoriDominioFiglie>
+      <valoriDominioFiglie>scientifiche</valoriDominioFiglie>
+      <valoriDominioFiglie>lingue</valoriDominioFiglie>
+      <valoriDominioFiglie>svago</valoriDominioFiglie>
+      <valoriDominioFiglie>es</valoriDominioFiglie>
     </valoriDominioFiglie>
-    <nome>test</nome>
-    <valoreDominio>
-      <nome></nome>
-      <descrizione></descrizione>
-    </valoreDominio>
-    <isRadice>true</isRadice>
-    <isFoglia>false</isFoglia>
-    <nomeMadre></nomeMadre>
-    <campo></campo>
-    <campoFiglie>dom1</campoFiglie>
-    <categorieFiglie>
-      <Categoria>
-        <valoriDominioFiglie/>
-        <nome>livello1f1</nome>
-        <valoreDominio>
-          <nome>sadgdsg</nome>
-          <descrizione></descrizione>
-        </valoreDominio>
-        <isRadice>false</isRadice>
-        <isFoglia>true</isFoglia>
-        <nomeMadre>test</nomeMadre>
-        <campo>dom1</campo>
-        <campoFiglie></campoFiglie>
-        <categorieFiglie/>
-      </Categoria>
-      <Categoria>
-        <valoriDominioFiglie/>
-        <nome>livello1f2</nome>
-        <valoreDominio>
-          <nome>asdfdsaf</nome>
-          <descrizione></descrizione>
-        </valoreDominio>
-        <isRadice>false</isRadice>
-        <isFoglia>true</isFoglia>
-        <nomeMadre>test</nomeMadre>
-        <campo>dom1</campo>
-        <campoFiglie></campoFiglie>
-        <categorieFiglie/>
-      </Categoria>
-    </categorieFiglie>
-  </radice>
-  <radice>
-    <valoriDominioFiglie>
-      <valoriDominioFiglie>asdg</valoriDominioFiglie>
-      <valoriDominioFiglie>sdg</valoriDominioFiglie>
-    </valoriDominioFiglie>
-    <nome>radice</nome>
+    <nome>Ripetizioni Scolastiche</nome>
     <valoreDominio/>
     <isRadice>true</isRadice>
     <isFoglia>false</isFoglia>
     <nomeMadre></nomeMadre>
     <campo></campo>
-    <campoFiglie>dom1</campoFiglie>
+    <campoFiglie>tipo</campoFiglie>
     <categorieFiglie>
       <Categoria>
         <valoriDominioFiglie>
-          <valoriDominioFiglie>sadg</valoriDominioFiglie>
+          <valoriDominioFiglie>italiano</valoriDominioFiglie>
+          <valoriDominioFiglie>filosofia</valoriDominioFiglie>
+          <valoriDominioFiglie>storia</valoriDominioFiglie>
+          <valoriDominioFiglie>storia dell'arte</valoriDominioFiglie>
         </valoriDominioFiglie>
-        <nome>liv1f1</nome>
+        <nome>Ripetizioni di Materie Umanistiche</nome>
         <valoreDominio>
-          <nome>asdg</nome>
+          <nome>umanistiche</nome>
           <descrizione></descrizione>
         </valoreDominio>
         <isRadice>false</isRadice>
         <isFoglia>false</isFoglia>
-        <nomeMadre>radice</nomeMadre>
-        <campo>dom1</campo>
-        <campoFiglie>dom2</campoFiglie>
+        <nomeMadre>Ripetizioni Scolastiche</nomeMadre>
+        <campo>tipo</campo>
+        <campoFiglie>materia</campoFiglie>
         <categorieFiglie>
           <Categoria>
             <valoriDominioFiglie/>
-            <nome>liv2f1</nome>
+            <nome>Ripetizioni di Letteratura Italiana</nome>
             <valoreDominio>
-              <nome>sadg</nome>
+              <nome>italiano</nome>
               <descrizione></descrizione>
             </valoreDominio>
             <isRadice>false</isRadice>
             <isFoglia>true</isFoglia>
-            <nomeMadre>liv1f1</nomeMadre>
-            <campo>dom2</campo>
+            <nomeMadre>Ripetizioni di Materie Umanistiche</nomeMadre>
+            <campo>materia</campo>
+            <campoFiglie></campoFiglie>
+            <categorieFiglie/>
+          </Categoria>
+          <Categoria>
+            <valoriDominioFiglie/>
+            <nome>Ripetizioni di Filosofia</nome>
+            <valoreDominio>
+              <nome>filosofia</nome>
+              <descrizione></descrizione>
+            </valoreDominio>
+            <isRadice>false</isRadice>
+            <isFoglia>true</isFoglia>
+            <nomeMadre>Ripetizioni di Materie Umanistiche</nomeMadre>
+            <campo>materia</campo>
+            <campoFiglie></campoFiglie>
+            <categorieFiglie/>
+          </Categoria>
+          <Categoria>
+            <valoriDominioFiglie/>
+            <nome>Ripetizioni di Storia</nome>
+            <valoreDominio>
+              <nome>storia</nome>
+              <descrizione></descrizione>
+            </valoreDominio>
+            <isRadice>false</isRadice>
+            <isFoglia>true</isFoglia>
+            <nomeMadre>Ripetizioni di Materie Umanistiche</nomeMadre>
+            <campo>materia</campo>
+            <campoFiglie></campoFiglie>
+            <categorieFiglie/>
+          </Categoria>
+          <Categoria>
+            <valoriDominioFiglie/>
+            <nome>Ripetizioni di Storia dell'Arte</nome>
+            <valoreDominio>
+              <nome>storia dell'arte</nome>
+              <descrizione></descrizione>
+            </valoreDominio>
+            <isRadice>false</isRadice>
+            <isFoglia>true</isFoglia>
+            <nomeMadre>Ripetizioni di Materie Umanistiche</nomeMadre>
+            <campo>materia</campo>
             <campoFiglie></campoFiglie>
             <categorieFiglie/>
           </Categoria>
@@ -91,49 +93,258 @@
       </Categoria>
       <Categoria>
         <valoriDominioFiglie>
-          <valoriDominioFiglie>sadfdsag</valoriDominioFiglie>
-          <valoriDominioFiglie>asdfdsg</valoriDominioFiglie>
+          <valoriDominioFiglie>matematica</valoriDominioFiglie>
+          <valoriDominioFiglie>fisica</valoriDominioFiglie>
+          <valoriDominioFiglie>informatica</valoriDominioFiglie>
+          <valoriDominioFiglie>chimica</valoriDominioFiglie>
+          <valoriDominioFiglie>biologia</valoriDominioFiglie>
+          <valoriDominioFiglie>scienze della terra</valoriDominioFiglie>
         </valoriDominioFiglie>
-        <nome>liv1f2</nome>
+        <nome>Ripetizioni di Materie Scientifiche</nome>
         <valoreDominio>
-          <nome>sdg</nome>
+          <nome>scientifiche</nome>
           <descrizione></descrizione>
         </valoreDominio>
         <isRadice>false</isRadice>
         <isFoglia>false</isFoglia>
-        <nomeMadre>radice</nomeMadre>
-        <campo>dom1</campo>
-        <campoFiglie>dom3</campoFiglie>
+        <nomeMadre>Ripetizioni Scolastiche</nomeMadre>
+        <campo>tipo</campo>
+        <campoFiglie>materia</campoFiglie>
         <categorieFiglie>
           <Categoria>
             <valoriDominioFiglie/>
-            <nome>liv2f2</nome>
+            <nome>Ripetizioni di Matematica</nome>
             <valoreDominio>
-              <nome>sadfdsag</nome>
+              <nome>matematica</nome>
               <descrizione></descrizione>
             </valoreDominio>
             <isRadice>false</isRadice>
             <isFoglia>true</isFoglia>
-            <nomeMadre>liv1f2</nomeMadre>
-            <campo>dom3</campo>
+            <nomeMadre>Ripetizioni di Materie Scientifiche</nomeMadre>
+            <campo>materia</campo>
             <campoFiglie></campoFiglie>
             <categorieFiglie/>
           </Categoria>
           <Categoria>
             <valoriDominioFiglie/>
-            <nome>liv2f3</nome>
+            <nome>Ripetizioni di Fisica</nome>
             <valoreDominio>
-              <nome>asdfdsg</nome>
-              <descrizione>ciao</descrizione>
+              <nome>fisica</nome>
+              <descrizione></descrizione>
             </valoreDominio>
             <isRadice>false</isRadice>
             <isFoglia>true</isFoglia>
-            <nomeMadre>liv1f2</nomeMadre>
-            <campo>dom3</campo>
+            <nomeMadre>Ripetizioni di Materie Scientifiche</nomeMadre>
+            <campo>materia</campo>
+            <campoFiglie></campoFiglie>
+            <categorieFiglie/>
+          </Categoria>
+          <Categoria>
+            <valoriDominioFiglie/>
+            <nome>Ripetizioni di Informatica</nome>
+            <valoreDominio>
+              <nome>informatica</nome>
+              <descrizione></descrizione>
+            </valoreDominio>
+            <isRadice>false</isRadice>
+            <isFoglia>true</isFoglia>
+            <nomeMadre>Ripetizioni di Materie Scientifiche</nomeMadre>
+            <campo>materia</campo>
+            <campoFiglie></campoFiglie>
+            <categorieFiglie/>
+          </Categoria>
+          <Categoria>
+            <valoriDominioFiglie/>
+            <nome>Ripetizioni di Chimica</nome>
+            <valoreDominio>
+              <nome>chimica</nome>
+              <descrizione></descrizione>
+            </valoreDominio>
+            <isRadice>false</isRadice>
+            <isFoglia>true</isFoglia>
+            <nomeMadre>Ripetizioni di Materie Scientifiche</nomeMadre>
+            <campo>materia</campo>
+            <campoFiglie></campoFiglie>
+            <categorieFiglie/>
+          </Categoria>
+          <Categoria>
+            <valoriDominioFiglie/>
+            <nome>Ripetizioni di Biologia</nome>
+            <valoreDominio>
+              <nome>biologia</nome>
+              <descrizione></descrizione>
+            </valoreDominio>
+            <isRadice>false</isRadice>
+            <isFoglia>true</isFoglia>
+            <nomeMadre>Ripetizioni di Materie Scientifiche</nomeMadre>
+            <campo>materia</campo>
+            <campoFiglie></campoFiglie>
+            <categorieFiglie/>
+          </Categoria>
+          <Categoria>
+            <valoriDominioFiglie/>
+            <nome>Ripetizioni di Scienze della Terra</nome>
+            <valoreDominio>
+              <nome>scienze della terra</nome>
+              <descrizione></descrizione>
+            </valoreDominio>
+            <isRadice>false</isRadice>
+            <isFoglia>true</isFoglia>
+            <nomeMadre>Ripetizioni di Materie Scientifiche</nomeMadre>
+            <campo>materia</campo>
             <campoFiglie></campoFiglie>
             <categorieFiglie/>
           </Categoria>
         </categorieFiglie>
+      </Categoria>
+      <Categoria>
+        <valoriDominioFiglie>
+          <valoriDominioFiglie>inglese</valoriDominioFiglie>
+          <valoriDominioFiglie>spagnolo</valoriDominioFiglie>
+          <valoriDominioFiglie>francese</valoriDominioFiglie>
+          <valoriDominioFiglie>tedesco</valoriDominioFiglie>
+          <valoriDominioFiglie>latino</valoriDominioFiglie>
+          <valoriDominioFiglie>greco</valoriDominioFiglie>
+          <valoriDominioFiglie>arabo</valoriDominioFiglie>
+        </valoriDominioFiglie>
+        <nome>Ripetizioni di lingue</nome>
+        <valoreDominio>
+          <nome>lingue</nome>
+          <descrizione></descrizione>
+        </valoreDominio>
+        <isRadice>false</isRadice>
+        <isFoglia>false</isFoglia>
+        <nomeMadre>Ripetizioni Scolastiche</nomeMadre>
+        <campo>tipo</campo>
+        <campoFiglie>materia</campoFiglie>
+        <categorieFiglie>
+          <Categoria>
+            <valoriDominioFiglie/>
+            <nome>Ripetizioni di Inglese</nome>
+            <valoreDominio>
+              <nome>inglese</nome>
+              <descrizione></descrizione>
+            </valoreDominio>
+            <isRadice>false</isRadice>
+            <isFoglia>true</isFoglia>
+            <nomeMadre>Ripetizioni di lingue</nomeMadre>
+            <campo>materia</campo>
+            <campoFiglie></campoFiglie>
+            <categorieFiglie/>
+          </Categoria>
+          <Categoria>
+            <valoriDominioFiglie/>
+            <nome>Ripetizioni di Spagnolo</nome>
+            <valoreDominio>
+              <nome>spagnolo</nome>
+              <descrizione></descrizione>
+            </valoreDominio>
+            <isRadice>false</isRadice>
+            <isFoglia>true</isFoglia>
+            <nomeMadre>Ripetizioni di lingue</nomeMadre>
+            <campo>materia</campo>
+            <campoFiglie></campoFiglie>
+            <categorieFiglie/>
+          </Categoria>
+          <Categoria>
+            <valoriDominioFiglie/>
+            <nome>Ripetizioni di Francese</nome>
+            <valoreDominio>
+              <nome>francese</nome>
+              <descrizione></descrizione>
+            </valoreDominio>
+            <isRadice>false</isRadice>
+            <isFoglia>true</isFoglia>
+            <nomeMadre>Ripetizioni di lingue</nomeMadre>
+            <campo>materia</campo>
+            <campoFiglie></campoFiglie>
+            <categorieFiglie/>
+          </Categoria>
+          <Categoria>
+            <valoriDominioFiglie/>
+            <nome>Ripetizioni di Tedesco</nome>
+            <valoreDominio>
+              <nome>tedesco</nome>
+              <descrizione></descrizione>
+            </valoreDominio>
+            <isRadice>false</isRadice>
+            <isFoglia>true</isFoglia>
+            <nomeMadre>Ripetizioni di lingue</nomeMadre>
+            <campo>materia</campo>
+            <campoFiglie></campoFiglie>
+            <categorieFiglie/>
+          </Categoria>
+          <Categoria>
+            <valoriDominioFiglie/>
+            <nome>Ripetizioni di Latino</nome>
+            <valoreDominio>
+              <nome>latino</nome>
+              <descrizione></descrizione>
+            </valoreDominio>
+            <isRadice>false</isRadice>
+            <isFoglia>true</isFoglia>
+            <nomeMadre>Ripetizioni di lingue</nomeMadre>
+            <campo>materia</campo>
+            <campoFiglie></campoFiglie>
+            <categorieFiglie/>
+          </Categoria>
+          <Categoria>
+            <valoriDominioFiglie/>
+            <nome>Ripetizioni di Greco</nome>
+            <valoreDominio>
+              <nome>greco</nome>
+              <descrizione></descrizione>
+            </valoreDominio>
+            <isRadice>false</isRadice>
+            <isFoglia>true</isFoglia>
+            <nomeMadre>Ripetizioni di lingue</nomeMadre>
+            <campo>materia</campo>
+            <campoFiglie></campoFiglie>
+            <categorieFiglie/>
+          </Categoria>
+          <Categoria>
+            <valoriDominioFiglie/>
+            <nome>Ripetizioni di Arabo</nome>
+            <valoreDominio>
+              <nome>arabo</nome>
+              <descrizione></descrizione>
+            </valoreDominio>
+            <isRadice>false</isRadice>
+            <isFoglia>true</isFoglia>
+            <nomeMadre>Ripetizioni di lingue</nomeMadre>
+            <campo>materia</campo>
+            <campoFiglie></campoFiglie>
+            <categorieFiglie/>
+          </Categoria>
+        </categorieFiglie>
+      </Categoria>
+      <Categoria>
+        <valoriDominioFiglie/>
+        <nome>Svago</nome>
+        <valoreDominio>
+          <nome>svago</nome>
+          <descrizione></descrizione>
+        </valoreDominio>
+        <isRadice>false</isRadice>
+        <isFoglia>true</isFoglia>
+        <nomeMadre>Ripetizioni Scolastiche</nomeMadre>
+        <campo>tipo</campo>
+        <campoFiglie></campoFiglie>
+        <categorieFiglie/>
+      </Categoria>
+      <Categoria>
+        <valoriDominioFiglie/>
+        <nome>Giochi di Logica</nome>
+        <valoreDominio>
+          <nome>es</nome>
+          <descrizione></descrizione>
+        </valoreDominio>
+        <isRadice>false</isRadice>
+        <isFoglia>true</isFoglia>
+        <nomeMadre>Ripetizioni Scolastiche</nomeMadre>
+        <campo>tipo</campo>
+        <campoFiglie></campoFiglie>
+        <categorieFiglie/>
       </Categoria>
     </categorieFiglie>
   </radice>
