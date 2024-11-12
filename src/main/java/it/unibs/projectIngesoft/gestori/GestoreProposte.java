@@ -180,13 +180,9 @@ public class GestoreProposte {
 
     private ArrayList<Proposta> concatenaCompatibili(Proposta first, Proposta last, ArrayList<Proposta> proposteComprensorio) {
         assert proposteComprensorio != null;
-
-        if (proposteComprensorio.isEmpty())
-            return new ArrayList<>();
-
+        
         ArrayList<Proposta> catena = new ArrayList<>();
         for (Proposta proposta : proposteComprensorio) {
-
             if (last.isOffertaCompatibile(proposta)) { // si concatena! ma si richiude anche?
                 catena.add(proposta);
 
@@ -208,7 +204,7 @@ public class GestoreProposte {
                 }
             }
         }
-        return new ArrayList<>(); // nessuna concatenazione
+        return new ArrayList<>();// nessuna concatenazione
     }
 
     /**
