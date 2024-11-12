@@ -73,6 +73,7 @@ public class Proposta {
         return autore;
     }
 
+    @JsonIgnore
     public Fruitore getAutore() {
         return GestoreUtenti.getInformazioniFruitore(this.getAutoreUsername());
     }
