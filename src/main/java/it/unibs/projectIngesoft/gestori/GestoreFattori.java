@@ -331,7 +331,9 @@ public class GestoreFattori {
         if (fattori.containsKey(categoriaFormattata)) {
             for (FattoreDiConversione f : fattori.get(categoriaFormattata)) {
                 String valoreFormattato = String.format("%.3f", f.getFattore());
-                sb.append(f.getNome_c1()).append(" ").append(f.getNome_c2()).append(" ").append(valoreFormattato).append("\n");
+                sb.append("[ ")
+                        .append(f.getNome_c1()).append(", ").append(f.getNome_c2())
+                        .append(", ").append(valoreFormattato).append(" ]\n");
             }
             return sb.toString();
         } else return WARNING_CATEGORIA_NON_ESISTE;
@@ -345,6 +347,9 @@ public class GestoreFattori {
         if (fattori.isEmpty()) {
             System.out.println(WARNING_NO_FATTORI_MEMORIZZATI);
             return;
+        }
+        for (String key : fattori.keySet()) {
+            System.out.println(key);
         }
         System.out.println(MSG_INSERISCI_CATEGORIA_VISUALIZZA_FATTORI);
         String radice = InputDati.leggiStringaNonVuota(MSG_INSERISCI_NOME_RADICE);
