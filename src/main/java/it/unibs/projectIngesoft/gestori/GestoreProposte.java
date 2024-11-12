@@ -46,6 +46,7 @@ public class GestoreProposte {
     public static final String WARNING_IMPOSSIBILE_CALCOLARE_ORE = ">> Impossibile Calcolare il numero di ore da offrire.\n";
     public static final String WARNING_PROPOSTA_ANNULLATA = ">> Proposta annullata";
     public static final String WARNING_PROPOSTA_DUPLICATA = ">> Proposta duplicata! Procedura annullata.";
+    public static final String MSG_NON_HAI_PROPOSTE_NON_CHIUSE = ">> Non hai proposte non chiuse";
 
     @JacksonXmlElementWrapper(localName = "listaProposte")
     @JacksonXmlProperty(localName = "Proposta")
@@ -231,14 +232,17 @@ public class GestoreProposte {
         boolean esisteAlmenoUnaPropostaPerLUtenteLoggatoOra = false;
         if (listaProposte != null && listaProposte.get(comprensorio) != null) {
             for (Proposta proposta : listaProposte.get(comprensorio)) {
-                if (proposta.getAutoreUsername().equals(utenteAttivo.getUsername())) {
+                if (proposta.getStato() != StatiProposta.CHIUSA && proposta.getAutoreUsername().equals(utenteAttivo.getUsername())) {
                     esisteAlmenoUnaPropostaPerLUtenteLoggatoOra = true;
                     break;
                 }
             }
         }
 
-        if (!esisteAlmenoUnaPropostaPerLUtenteLoggatoOra) return;
+        if (!esisteAlmenoUnaPropostaPerLUtenteLoggatoOra) {
+            System.out.println(MSG_NON_HAI_PROPOSTE_NON_CHIUSE);
+            return;
+        }
 
         String categoriaRichiesta;
         String categoriaOfferta;
