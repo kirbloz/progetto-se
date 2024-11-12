@@ -150,7 +150,7 @@ public class GestoreProposte {
      * @return true se esiste, false altrimenti
      */
     private boolean controllaPropostaDuplicata(Proposta proposta) {
-        String comprensorio = GestoreUtenti.getInformazioniFruitore(proposta.getAutore()).getComprensorioDiAppartenenza();
+        String comprensorio = GestoreUtenti.getInformazioniFruitore(proposta.getAutoreUsername()).getComprensorioDiAppartenenza();
         return getListaProposteComprensorio(comprensorio).stream()
                 .filter(p -> p.getStato() == StatiProposta.APERTA)
                 .anyMatch(p -> p.getRichiesta().equals(proposta.getRichiesta())
@@ -309,27 +309,37 @@ public class GestoreProposte {
         visualizzaProposte(HEADER_PROPOSTE_CATEGORIA.formatted(categoria), filtro);
     }
 
+    /**
+     * Mostra le proposte filtrando per autore.
+     *
+     * @param usernameAutore, username del Fruitore che ha creato la proposta.
+     */
     public void visualizzaPropostePerAutore(String usernameAutore) {
         assert listaProposte != null;
-        Predicate<Proposta> filtro = p -> p.getAutore().equals(usernameAutore);
-        System.out.println(proposteToString(filtro));
+        Predicate<Proposta> filtro = p -> p.getAutoreUsername().equals(usernameAutore);
+        visualizzaProposte(HEADER_PROPOSTE_AUTORE.formatted(usernameAutore), filtro);
     }
 
-    public void visualizzaProposteModificabili(String usernameAutore) {
+    /**
+     * Mostra le proposte modificabili. Solo l'autore - loggato - può modificare le sue proposte.
+     */
+    public void visualizzaProposteModificabili() {
+        assert utenteAttivo != null;
         assert listaProposte != null;
-        Predicate<Proposta> filtro = p -> p.getAutore().equals(usernameAutore) && p.getStato() != StatiProposta.CHIUSA;
-        System.out.println(proposteToString(filtro));
+
+        Predicate<Proposta> filtro = p -> p.getAutoreUsername().equals(utenteAttivo.getUsername()) && p.getStato() != StatiProposta.CHIUSA;
+        visualizzaProposte(HEADER_PROPOSTE_MODIFICABILI, filtro);
     }
+
 
     private void visualizzaProposteDaNotificare() {
         assert listaProposte != null;
         System.out.println(HEADER_PROPOSTE_PRONTE);
 
-        listaProposte.keySet().stream()
-                .flatMap(comprensorio -> listaProposte.get(comprensorio).stream()).filter(Proposta::isDaNotificare)
+        getFilteredProposte(Proposta::isDaNotificare)
                 .forEach(proposta -> {
                     System.out.println(proposta);
-                    Fruitore autore = getAutoreFromProposta(proposta);
+                    Fruitore autore = proposta.getAutore();
                     String email = autore.getEmail();
                     String comprensorio = autore.getComprensorioDiAppartenenza();
                     System.out.println(MSG_FORMATTED_PROPOSTA_PRONTA.formatted(autore.getUsername(), comprensorio, email));
@@ -337,10 +347,6 @@ public class GestoreProposte {
                 });
 
         serializeXML();
-    }
-
-    private Fruitore getAutoreFromProposta(Proposta proposta) {
-        return GestoreUtenti.getInformazioniFruitore(proposta.getAutore());
     }
 
     public String proposteToString(Predicate<Proposta> filtro) {
@@ -353,8 +359,8 @@ public class GestoreProposte {
         chiuse.append(HEADER_PROPOSTE_CHIUSE);
         ritirate.append(HEADER_PROPOSTE_RITIRATE);
 
-        listaProposte.keySet().stream()
-                .flatMap(comprensorio -> listaProposte.get(comprensorio).stream()).filter(filtro).forEach(proposta -> {
+        getFilteredProposte(filtro)
+                .forEach(proposta -> {
                     switch (proposta.getStato()) {
                         case StatiProposta.APERTA -> aperte.append(proposta).append("\n");
                         case StatiProposta.CHIUSA -> chiuse.append(proposta).append("\n");
@@ -363,6 +369,10 @@ public class GestoreProposte {
                 });
 
         return aperte.append(chiuse).append(ritirate).toString();
+    }
+
+    private Stream<Proposta> getFilteredProposte(Predicate<Proposta> filtro) {
+        return listaProposte.keySet().stream().flatMap(comprensorio -> listaProposte.get(comprensorio).stream()).filter(filtro);
     }
 
     public void entryPoint(int scelta) {
