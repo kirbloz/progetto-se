@@ -28,7 +28,7 @@
         <nome>Ripetizioni di Materie Umanistiche</nome>
         <valoreDominio>
           <nome>umanistiche</nome>
-          <descrizione></descrizione>
+          <descrizione>Materie umanistiche</descrizione>
         </valoreDominio>
         <isRadice>false</isRadice>
         <isFoglia>false</isFoglia>
@@ -69,7 +69,7 @@
             <nome>Ripetizioni di Storia</nome>
             <valoreDominio>
               <nome>storia</nome>
-              <descrizione></descrizione>
+              <descrizione>Lezioni di racconti vari</descrizione>
             </valoreDominio>
             <isRadice>false</isRadice>
             <isFoglia>true</isFoglia>
@@ -133,7 +133,7 @@
             <nome>Ripetizioni di Fisica</nome>
             <valoreDominio>
               <nome>fisica</nome>
-              <descrizione></descrizione>
+              <descrizione>Laboratori interessanti</descrizione>
             </valoreDominio>
             <isRadice>false</isRadice>
             <isFoglia>true</isFoglia>
