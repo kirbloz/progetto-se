@@ -147,26 +147,21 @@ public class UtentiModel {
     /**
      * Serve per il login.
      */
-    public Utente login() {
-        String username;
-        String password;
+    public Utente verificaCredenziali(String[] credenziali) throws Exception{
+        String username = credenziali[0];
+        String password = credenziali[1];
         int indice;
-        do {
-            // immissione credenziali per il login
-            username = InputDati.leggiStringaNonVuota(MSG_RICHIESTA_USERNAME);
-            password = InputDati.leggiStringaNonVuota(MSG_RICHIESTA_PASSWORD);
             // controllo se credenziali default e in caso creo il nuovo configuratore
             if (username.equals(defaultUtente.getUsername()) && password.equals(defaultUtente.getPassword())) {
                 Configuratore C1 = new Configuratore();
-                cambioCredenziali(C1);
-                addUtente(C1);
+                C1.setFirstAccess(true);
                 return C1;
             }
             // ricerca
             indice = ricercaUtente(username, password);
-            if (indice == -1)
-                System.out.println("Credenziali errate.");
-        } while (indice == -1);
+        Exception userNotFound;
+        if (indice == -1)
+                throw userNotFound = new Exception() ;
 
         return utenti.get(indice);
     }

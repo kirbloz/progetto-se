@@ -8,12 +8,19 @@ public class Configuratore extends Utente{
     @JacksonXmlProperty(isAttribute = true, localName = "type")
     private String type = "Configuratore";
 
+    boolean firstAccess;
+
     public Configuratore() {
         super();
+        firstAccess = false;
     }
 
     public Configuratore(String username, String password) {       // Caso utente //??? a cosa serve il costruttore con username e password? -m
         super(username, password);
+    }
+
+    public void setFirstAccess(boolean firstAccess) {
+        this.firstAccess = firstAccess;
     }
 
 }
