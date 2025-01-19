@@ -16,7 +16,7 @@ import java.util.List;
  * Si occupa di calcolare, memorizzare e leggere i Fattori di Conversione relativi alle Categorie.
  * Non conosce chi gestisce le categorie, ma mette a disposizione i suoi metodi.
  */
-public class GestoreFattori {
+public class FattoriModel {
 
     public static final String INSERISCI_IL_FATTORE_TRA = ">> Inserisci il fattore tra [%s] e [%s]:\n> ";
     public static final double MIN_FATTORE = 0.5;
@@ -37,7 +37,7 @@ public class GestoreFattori {
 
     private HashMap<String, ArrayList<FattoreDiConversione>> fattori;
 
-    public GestoreFattori(String filePath) {
+    public FattoriModel(String filePath) {
         this.filePath = filePath;
         this.fattori = new HashMap<>();
         deserializeXML(); //load dati

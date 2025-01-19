@@ -3,7 +3,7 @@ package it.unibs.projectIngesoft.attivita;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
-import it.unibs.projectIngesoft.gestori.GestoreUtenti;
+import it.unibs.projectIngesoft.gestori.UtentiModel;
 import it.unibs.projectIngesoft.utente.Fruitore;
 
 import java.util.Stack;
@@ -75,7 +75,7 @@ public class Proposta {
 
     @JsonIgnore
     public Fruitore getAutore() {
-        return GestoreUtenti.getInformazioniFruitore(this.getAutoreUsername());
+        return UtentiModel.getInformazioniFruitore(this.getAutoreUsername());
     }
 
     @JsonIgnore

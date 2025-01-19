@@ -11,7 +11,7 @@ import it.unibs.projectIngesoft.libraries.Serializer;
 
 import java.util.List;
 
-public class GestoreCategorie {
+public class CategorieModel {
 
     public static final String HEADER_VISUALIZZA_GERARCHIE = ">> Visualizza gerarchie di categorie <<\n";
     public static final String HEADER_VISUALIZZA_RADICE = ">> Visualizza gerarchia di %s <<\n";
@@ -62,7 +62,7 @@ public class GestoreCategorie {
 
     private Albero tree;
     private final String filePath;
-    private GestoreFattori gestFatt;
+    private FattoriModel gestFatt;
 
     /**
      * Costruttore per inizializzare i percorsi dei file e de-serializzare l'albero.
@@ -70,10 +70,10 @@ public class GestoreCategorie {
      * @param categorieFilePath percorso del file delle categorie
      * @param fattoriFilePath   percorso del file dei fattori
      */
-    public GestoreCategorie(String categorieFilePath, String fattoriFilePath) {
+    public CategorieModel(String categorieFilePath, String fattoriFilePath) {
         this.filePath = categorieFilePath;
         this.tree = new Albero();
-        this.gestFatt = new GestoreFattori(fattoriFilePath);
+        this.gestFatt = new FattoriModel(fattoriFilePath);
         deserializeXML(); // load dati
     }
 

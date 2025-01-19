@@ -18,7 +18,7 @@ import java.util.function.Predicate;
 import java.util.stream.Stream;
 
 
-public class GestoreProposte {
+public class ProposteModel {
 
     public static final String HEADER_PROPOSTE_PRONTE = ">> PROPOSTE PRONTE <<";
     public static final String HEADER_PROPOSTE_MODIFICABILI = ">> PROPOSTE MODIFICABILI<<\n";
@@ -51,12 +51,12 @@ public class GestoreProposte {
     @JacksonXmlElementWrapper(localName = "listaProposte")
     @JacksonXmlProperty(localName = "Proposta")
     private HashMap<String, ArrayList<Proposta>> listaProposte;
-    private final GestoreFattori gestFatt;
+    private final FattoriModel gestFatt;
     private final String filePath;
     private final Utente utenteAttivo;
 
-    public GestoreProposte(String proposteFilepath, String fattoriFilePath, Utente utenteAttivo) {
-        this.gestFatt = new GestoreFattori(fattoriFilePath);
+    public ProposteModel(String proposteFilepath, String fattoriFilePath, Utente utenteAttivo) {
+        this.gestFatt = new FattoriModel(fattoriFilePath);
         this.filePath = proposteFilepath;
         this.listaProposte = new HashMap<>();
         this.utenteAttivo = utenteAttivo;
@@ -151,7 +151,7 @@ public class GestoreProposte {
      * @return true se esiste, false altrimenti
      */
     private boolean controllaPropostaDuplicata(Proposta proposta) {
-        String comprensorio = GestoreUtenti.getInformazioniFruitore(proposta.getAutoreUsername()).getComprensorioDiAppartenenza();
+        String comprensorio = UtentiModel.getInformazioniFruitore(proposta.getAutoreUsername()).getComprensorioDiAppartenenza();
         return getListaProposteComprensorio(comprensorio).stream()
                 .filter(p -> p.getStato() == StatiProposta.APERTA)
                 .anyMatch(p -> p.getRichiesta().equals(proposta.getRichiesta())

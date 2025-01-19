@@ -8,7 +8,7 @@ import it.unibs.projectIngesoft.libraries.Serializer;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GestoreComprensorioGeografico {
+public class ComprensorioGeograficoModel {
 
     private static final String MSG_INSERISCI_COMUNE = ">> Inserire nome del comune da inserire oppure fine per terminare l'inserimento:\n> ";
     private static final String MSG_INSERISCI_NOME_NUOVO_COMPRENSORIO = ">> Inserire il nome del comprensorio geografico:\n> ";
@@ -22,7 +22,7 @@ public class GestoreComprensorioGeografico {
     private final String filePath;
     private ArrayList<ComprensorioGeografico> listaComprensoriGeografici;
 
-    public GestoreComprensorioGeografico(String filePath) {
+    public ComprensorioGeograficoModel(String filePath) {
         this.filePath = filePath;
         this.listaComprensoriGeografici = new ArrayList<>();
         deserializeXML(); // load dati

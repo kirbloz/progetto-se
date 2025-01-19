@@ -16,84 +16,45 @@ public class Main {
     public static final String COMPRENSORI_GEOGRAFICI_XML_FILEPATH = "comprensoriGeografici.xml";
     private static final String PROPOSTE_XML_FILEPATH = "proposte.xml";
 
-    public static final String MSG_PROGRAM_EXIT = "> ARRIVEDERCI <";
-
-    protected static final String TITLE_STARTING_MENU = "BENVENUTO";
-    protected static final String[] vociMenuIniziale = new String[]{
-            "Login",
-            "Registrazione"
-    };
-
-    protected static final String TITLE_MAIN_MENU = "MENU' PRINCIPALE - SCAMBIO ORE";
-    protected static final String[] vociMainConfiguratore = new String[]{
-            "Cambia Credenziali",
-            "Menu Comprensorio ",
-            "Menu Categorie",
-            "Menu Fattori",
-            "Menu Proposte"
-    };
-    protected static final String[] vociMainFruitore = new String[]{
-            "Cambia Credenziali",
-            //"Effettua proposta di scambio",
-            "Menu Proposte",
-            "Menu Categorie",
-    };
-
-    protected static final String TITLE_MENU_COMPRENSORIO = "MENU' COMPRENSORI GEOGRAFICI";
-    protected static final String[] vociComprensorioGeografico = new String[]{
-            "Aggiungi Comprensorio Geografico",
-            "Visualizza Comprensorio Geografico"
-    };
-
-    protected static final String TITLE_MENU_CATEGORIE = "MENU' CATEGORIE";
-    protected static final String[] vociCategorieConfiguratore = new String[]{
-            "Aggiungi Gerarchia",
-            "Visualizza Gerarchie"
-    };
-
-    protected static final String[] vociCategorieFruitore = new String[]{
-            "Esplora Gerarchie"
-    };
-
-    protected static final String TITLE_MENU_FATTORI = "MENU' FATTORI";
-    protected static final String[] vociFattori = new String[]{
-            "Visualizza Fattori di Conversione"
-    };
-    private static final String TITLE_MENU_PROPOSTE = "MENU' PROPOSTE";
-    private static final String[] vociProposteConfiguratore = new String[]{
-            "Visualizza proposte da categoria",
-            "Visualizza proposte pronte"
-    };
-    private static final String[] vociProposteFruitore = new String[]{
-            "Visualizza proposte inviate",
-            "Effettua proposta di scambio",
-            "Modifica stato proposta"
-    };
-
 
     public static void main(String[] args) {
 
-        Menu menuIniziale = new Menu(TITLE_STARTING_MENU, vociMenuIniziale);
+        // start -> caricare controller utenti -> controller utenti login + view utenti login
 
-        GestoreUtenti userHandler = new GestoreUtenti(UTENTI_XML_FILEPATH, UTENTI_DEF_CREDS_XML_FILEPATH);
-        GestoreComprensorioGeografico comprensorioHandler = new GestoreComprensorioGeografico(COMPRENSORI_GEOGRAFICI_XML_FILEPATH);
+        // controller utenti crea gestore utenti
+        // controller utenti chiama view utenti per login
+            // si attende input utente
+
+        // loop menu -> richiama controller menu
+            // menuController.start();
+
+        // stop
+            // menuController.stop(); che stampa ARRIVEDERCI
+
+
+
+
+        Menu menuIniziale = new Menu(MenuView.TITLE_STARTING_MENU, MenuView.vociMenuIniziale);
+
+        UtentiModel userHandler = new UtentiModel(UTENTI_XML_FILEPATH, UTENTI_DEF_CREDS_XML_FILEPATH);
+        ComprensorioGeograficoModel comprensorioHandler = new ComprensorioGeograficoModel(COMPRENSORI_GEOGRAFICI_XML_FILEPATH);
         Utente utenteAttivo = loopMenuIniziale(menuIniziale, userHandler, comprensorioHandler.listaNomiComprensoriGeografici());
 
         if (utenteAttivo != null) {
             boolean isConfiguratore = utenteAttivo instanceof Configuratore;
             // menu con diverse voci tra fruitore e configuratore
-            Menu menu = new Menu(TITLE_MAIN_MENU, isConfiguratore ? vociMainConfiguratore : vociMainFruitore);
-            Menu menuCategorie = new Menu(TITLE_MENU_CATEGORIE, isConfiguratore ? vociCategorieConfiguratore : vociCategorieFruitore);
-            Menu menuProposte = new Menu(TITLE_MENU_PROPOSTE, isConfiguratore ? vociProposteConfiguratore : vociProposteFruitore);
+            Menu menu = new Menu(MenuView.TITLE_MAIN_MENU, isConfiguratore ? MenuView.vociMainConfiguratore : MenuView.vociMainFruitore);
+            Menu menuCategorie = new Menu(MenuView.TITLE_MENU_CATEGORIE, isConfiguratore ? MenuView.vociCategorieConfiguratore : MenuView.vociCategorieFruitore);
+            Menu menuProposte = new Menu(MenuView.TITLE_MENU_PROPOSTE, isConfiguratore ? MenuView.vociProposteConfiguratore : MenuView.vociProposteFruitore);
             // menu per soli configuratori
             Menu menuFattori = isConfiguratore ?
-                    new Menu(TITLE_MENU_FATTORI, vociFattori) : null;
+                    new Menu(MenuView.TITLE_MENU_FATTORI, MenuView.vociFattori) : null;
             Menu menuComprensoriGeografici = isConfiguratore ?
-                    new Menu(TITLE_MENU_COMPRENSORIO, vociComprensorioGeografico) : null;
+                    new Menu(MenuView.TITLE_MENU_COMPRENSORIO, MenuView.vociComprensorioGeografico) : null;
             // menu principale
             loopMain(menu, menuCategorie, menuFattori, menuComprensoriGeografici, menuProposte, userHandler, utenteAttivo);
         } else {
-            System.out.println(MSG_PROGRAM_EXIT);
+            System.out.println(MenuView.MSG_PROGRAM_EXIT);
         }
     }
 
@@ -104,7 +65,7 @@ public class Main {
      * @param menuCategorie, sotto-menu per le categorie
      * @param menuFattori,   sotto-menu per i fattori
      */
-    private static void loopMain(Menu menu, Menu menuCategorie, Menu menuFattori, Menu menuComprensoriGeografici, Menu menuProposte, GestoreUtenti userHandler, Utente utenteAttivo) {
+    private static void loopMain(Menu menu, Menu menuCategorie, Menu menuFattori, Menu menuComprensoriGeografici, Menu menuProposte, UtentiModel userHandler, Utente utenteAttivo) {
         int scelta;
         boolean isConfiguratore = utenteAttivo instanceof Configuratore;
 
@@ -113,7 +74,7 @@ public class Main {
                 scelta = menu.scegli();
 
                 switch (scelta) {
-                    case 0 -> System.out.println(MSG_PROGRAM_EXIT);
+                    case 0 -> System.out.println(MenuView.MSG_PROGRAM_EXIT);
                     case 1 -> userHandler.cambioCredenziali(utenteAttivo); // cambio credenziali
                     case 2 -> loopComprensoriGeografici(menuComprensoriGeografici); //menu comprensorio
                     case 3 -> loopCategorie(menuCategorie, isConfiguratore); //menu categorie
@@ -129,7 +90,7 @@ public class Main {
                 scelta = menu.scegli();
 
                 switch (scelta) {
-                    case 0 -> System.out.println(MSG_PROGRAM_EXIT);
+                    case 0 -> System.out.println(MenuView.MSG_PROGRAM_EXIT);
                     case 1 -> userHandler.cambioCredenziali(utenteAttivo);
                     case 2 -> loopProposte(menuProposte, utenteAttivo);
                     case 3 -> loopCategorie(menuCategorie, isConfiguratore);
@@ -140,7 +101,7 @@ public class Main {
             } while (scelta != 0);
     }
 
-    private static Utente loopMenuIniziale(Menu menu, GestoreUtenti userHandler, ArrayList<String> listaNomiComprensorio) {
+    private static Utente loopMenuIniziale(Menu menu, UtentiModel userHandler, ArrayList<String> listaNomiComprensorio) {
         int scelta;
         Utente utenteLoggato;
         scelta = menu.scegli();
@@ -159,7 +120,7 @@ public class Main {
      */
     private static void loopComprensoriGeografici(Menu menuComprensoriGeografici) {
         int scelta;
-        GestoreComprensorioGeografico gestoreComprensori = new GestoreComprensorioGeografico(COMPRENSORI_GEOGRAFICI_XML_FILEPATH);
+        ComprensorioGeograficoModel gestoreComprensori = new ComprensorioGeograficoModel(COMPRENSORI_GEOGRAFICI_XML_FILEPATH);
         do {
             scelta = menuComprensoriGeografici.scegli();
             gestoreComprensori.entryPoint(scelta);
@@ -168,10 +129,10 @@ public class Main {
 
     private static void loopProposte(Menu menuProposta, Utente utenteAttivo) {
         int scelta;
-        GestoreProposte gestoreProposte = new GestoreProposte(PROPOSTE_XML_FILEPATH, FATTORI_DI_CONVERSIONE_XML_FILEPATH, utenteAttivo);
+        ProposteModel proposteModel = new ProposteModel(PROPOSTE_XML_FILEPATH, FATTORI_DI_CONVERSIONE_XML_FILEPATH, utenteAttivo);
         do {
             scelta = menuProposta.scegli();
-            gestoreProposte.entryPoint(scelta);
+            proposteModel.entryPoint(scelta);
         } while (scelta != 0);
     }
 
@@ -182,10 +143,10 @@ public class Main {
      */
     private static void loopCategorie(Menu menuCategorie, boolean isConfiguratore) {
         int scelta;
-        GestoreCategorie gestoreCategorieCat = new GestoreCategorie(CATEGORIE_XML_FILEPATH, FATTORI_DI_CONVERSIONE_XML_FILEPATH);
+        CategorieModel categorieModelCat = new CategorieModel(CATEGORIE_XML_FILEPATH, FATTORI_DI_CONVERSIONE_XML_FILEPATH);
         do {
             scelta = menuCategorie.scegli();
-            gestoreCategorieCat.entryPoint(scelta, isConfiguratore);
+            categorieModelCat.entryPoint(scelta, isConfiguratore);
         } while (scelta != 0);
     }
 
@@ -196,10 +157,10 @@ public class Main {
      */
     private static void loopFattori(Menu menuFattori) {
         int scelta;
-        GestoreFattori gestoreFattori = new GestoreFattori(FATTORI_DI_CONVERSIONE_XML_FILEPATH);
+        FattoriModel fattoriModel = new FattoriModel(FATTORI_DI_CONVERSIONE_XML_FILEPATH);
         do {
             scelta = menuFattori.scegli();
-            gestoreFattori.entryPoint(scelta);
+            fattoriModel.entryPoint(scelta);
         } while (scelta != 0);
 
     }

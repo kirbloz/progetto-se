@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
-public class GestoreUtenti {
+public class UtentiModel {
 
     public static final String MSG_RICHIESTA_USERNAME = "Inserisci il tuo username: ";
     public static final String MSG_RICHIESTA_PASSWORD = "Inserisci la tua password: ";
@@ -29,7 +29,7 @@ public class GestoreUtenti {
     private static ArrayList<Utente> utenti;
     private Utente defaultUtente;
 
-    public GestoreUtenti(String filePath, String defaultCredentialsFilePath) {
+    public UtentiModel(String filePath, String defaultCredentialsFilePath) {
         this.filePath = filePath;
         this.defaultCredentialsFilePath = defaultCredentialsFilePath;
         if (utenti == null)
