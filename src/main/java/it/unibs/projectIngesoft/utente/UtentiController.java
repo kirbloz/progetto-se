@@ -8,9 +8,9 @@ public class UtentiController {
     AccessoView accessoView;
     UtentiModel utentiModel;
 
-    public UtentiController() {
-        accessoView = new AccessoView();
-        utentiModel = new UtentiModel("users.xml", "defaultCredentials.xml");
+    public UtentiController(AccessoView accessoView, UtentiModel utentiModel) {
+        this.accessoView = accessoView;
+        this.utentiModel = utentiModel;
     }
 
 
@@ -53,7 +53,7 @@ public class UtentiController {
                 return utentiModel.verificaCredenziali(credenziali);
             }catch (Exception e){
                 riuscito = false;
-                accessoView.stampaErroreCredenziali();
+                accessoView.stampaErroreCredenziali("Login fallito");
             }
         }while(!riuscito);
         return null;
