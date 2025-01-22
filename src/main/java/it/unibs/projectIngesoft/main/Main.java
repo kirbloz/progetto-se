@@ -4,6 +4,9 @@ import it.unibs.projectIngesoft.gestori.*;
 import it.unibs.projectIngesoft.libraries.Menu;
 import it.unibs.projectIngesoft.utente.Configuratore;
 import it.unibs.projectIngesoft.utente.Utente;
+import it.unibs.projectIngesoft.view.AccessoView;
+import it.unibs.projectIngesoft.view.ConfiguratoreView;
+import it.unibs.projectIngesoft.view.FruitoreView;
 
 import java.util.ArrayList;
 
@@ -34,7 +37,7 @@ public class Main {
 
 
 
-        Menu menuIniziale = new Menu(MenuView.TITLE_STARTING_MENU, MenuView.vociMenuIniziale);
+        Menu menuIniziale = new Menu(AccessoView.TITLE_STARTING_MENU, AccessoView.vociMenuIniziale);
 
         UtentiModel userHandler = new UtentiModel(UTENTI_XML_FILEPATH, UTENTI_DEF_CREDS_XML_FILEPATH);
         ComprensorioGeograficoModel comprensorioHandler = new ComprensorioGeograficoModel(COMPRENSORI_GEOGRAFICI_XML_FILEPATH);
@@ -43,18 +46,18 @@ public class Main {
         if (utenteAttivo != null) {
             boolean isConfiguratore = utenteAttivo instanceof Configuratore;
             // menu con diverse voci tra fruitore e configuratore
-            Menu menu = new Menu(MenuView.TITLE_MAIN_MENU, isConfiguratore ? MenuView.vociMainConfiguratore : MenuView.vociMainFruitore);
-            Menu menuCategorie = new Menu(MenuView.TITLE_MENU_CATEGORIE, isConfiguratore ? MenuView.vociCategorieConfiguratore : MenuView.vociCategorieFruitore);
-            Menu menuProposte = new Menu(MenuView.TITLE_MENU_PROPOSTE, isConfiguratore ? MenuView.vociProposteConfiguratore : MenuView.vociProposteFruitore);
+            Menu menu = new Menu(ConfiguratoreView.TITLE_MAIN_MENU, isConfiguratore ? ConfiguratoreView.vociMainConfiguratore : FruitoreView.vociMainFruitore);
+            Menu menuCategorie = new Menu(ConfiguratoreView.TITLE_MENU_CATEGORIE, isConfiguratore ? ConfiguratoreView.vociCategorieConfiguratore : FruitoreView.vociCategorieFruitore);
+            Menu menuProposte = new Menu(ConfiguratoreView.TITLE_MENU_PROPOSTE, isConfiguratore ? ConfiguratoreView.vociProposteConfiguratore : FruitoreView.vociProposteFruitore);
             // menu per soli configuratori
             Menu menuFattori = isConfiguratore ?
-                    new Menu(MenuView.TITLE_MENU_FATTORI, MenuView.vociFattori) : null;
+                    new Menu(ConfiguratoreView.TITLE_MENU_FATTORI, ConfiguratoreView.vociFattori) : null;
             Menu menuComprensoriGeografici = isConfiguratore ?
-                    new Menu(MenuView.TITLE_MENU_COMPRENSORIO, MenuView.vociComprensorioGeografico) : null;
+                    new Menu(ConfiguratoreView.TITLE_MENU_COMPRENSORIO, ConfiguratoreView.vociComprensorioGeografico) : null;
             // menu principale
             loopMain(menu, menuCategorie, menuFattori, menuComprensoriGeografici, menuProposte, userHandler, utenteAttivo);
         } else {
-            System.out.println(MenuView.MSG_PROGRAM_EXIT);
+            System.out.println(AccessoView.MSG_PROGRAM_EXIT);
         }
     }
 
@@ -74,7 +77,7 @@ public class Main {
                 scelta = menu.scegli();
 
                 switch (scelta) {
-                    case 0 -> System.out.println(MenuView.MSG_PROGRAM_EXIT);
+                    case 0 -> System.out.println(AccessoView.MSG_PROGRAM_EXIT);
                     case 1 -> userHandler.cambioCredenziali(utenteAttivo); // cambio credenziali
                     case 2 -> loopComprensoriGeografici(menuComprensoriGeografici); //menu comprensorio
                     case 3 -> loopCategorie(menuCategorie, isConfiguratore); //menu categorie
@@ -90,7 +93,7 @@ public class Main {
                 scelta = menu.scegli();
 
                 switch (scelta) {
-                    case 0 -> System.out.println(MenuView.MSG_PROGRAM_EXIT);
+                    case 0 -> System.out.println(AccessoView.MSG_PROGRAM_EXIT);
                     case 1 -> userHandler.cambioCredenziali(utenteAttivo);
                     case 2 -> loopProposte(menuProposte, utenteAttivo);
                     case 3 -> loopCategorie(menuCategorie, isConfiguratore);
@@ -106,7 +109,7 @@ public class Main {
         Utente utenteLoggato;
         scelta = menu.scegli();
         switch (scelta) {
-            case 1 -> utenteLoggato = userHandler.login();
+            case 1 -> utenteLoggato = null; // utenteLoggato =userHandler.login();
             case 2 -> utenteLoggato = userHandler.register(listaNomiComprensorio);
             default -> utenteLoggato = null;
         }
