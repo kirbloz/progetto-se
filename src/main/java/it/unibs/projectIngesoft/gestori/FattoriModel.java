@@ -5,7 +5,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import it.unibs.projectIngesoft.attivita.Categoria;
 import it.unibs.projectIngesoft.attivita.FattoreDiConversione;
 import it.unibs.projectIngesoft.attivita.FattoriWrapper;
-import it.unibs.projectIngesoft.libraries.InputDati;
+import it.unibs.projectIngesoft.libraries.InputDatiTerminale;
 import it.unibs.projectIngesoft.libraries.Serializer;
 
 import java.util.ArrayList;
@@ -128,7 +128,7 @@ public class FattoriModel {
             String nomeFogliaInternaFormattata = selezioneFogliaDaLista(nomeRadice, foglie);
 
             //3. chiedi il fattore di conversione tra le 2 [x in (Old:A New:A x)]
-            double fattoreDiConversioneEsternoInterno = InputDati.leggiDoubleConRange(
+            double fattoreDiConversioneEsternoInterno = InputDatiTerminale.leggiDoubleConRange(
                     INSERISCI_IL_FATTORE_TRA.formatted(nomeFogliaEsternaFormattata, nomeFogliaInternaFormattata),
                     MIN_FATTORE, MAX_FATTORE);
 
@@ -172,7 +172,7 @@ public class FattoriModel {
             String nomeFogliai = factorNameBuilder(nomeRadice, foglie.get(i).getNome());
             for (int j = i + 1; j < foglie.size(); j++) {
                 String nomeFogliaj = factorNameBuilder(nomeRadice, foglie.get(j).getNome());
-                double fattore_ij = InputDati.leggiDoubleConRange(INSERISCI_IL_FATTORE_TRA.formatted(nomeFogliai, nomeFogliaj), MIN_FATTORE, MAX_FATTORE);
+                double fattore_ij = InputDatiTerminale.leggiDoubleConRange(INSERISCI_IL_FATTORE_TRA.formatted(nomeFogliai, nomeFogliaj), MIN_FATTORE, MAX_FATTORE);
 
                 FattoreDiConversione fattoreIJ = new FattoreDiConversione(nomeFogliai, nomeFogliaj, fattore_ij);
                 FattoreDiConversione fattoreJI = generaInverso(fattoreIJ);
@@ -202,7 +202,7 @@ public class FattoriModel {
         String nomeFogliaNonFormattato;
         boolean fogliaEsiste = false;
         do {
-            nomeFogliaNonFormattato = InputDati.leggiStringaNonVuota(MSG_INSERISCI_NOME_FOGLIA);
+            nomeFogliaNonFormattato = InputDatiTerminale.leggiStringaNonVuota(MSG_INSERISCI_NOME_FOGLIA);
             for (Categoria foglia : foglie) {
                 if (foglia.getNome().equals(nomeFogliaNonFormattato)) {
                     fogliaEsiste = true;
@@ -233,8 +233,8 @@ public class FattoriModel {
         String nomeFogliaFormattato;
         do {
             nomeFogliaFormattato = factorNameBuilder(
-                    InputDati.leggiStringaNonVuota(MSG_INSERISCI_NOME_RADICE),
-                    InputDati.leggiStringaNonVuota(MSG_INSERISCI_NOME_FOGLIA)
+                    InputDatiTerminale.leggiStringaNonVuota(MSG_INSERISCI_NOME_RADICE),
+                    InputDatiTerminale.leggiStringaNonVuota(MSG_INSERISCI_NOME_FOGLIA)
             );
         } while (!fattori.containsKey(nomeFogliaFormattato));
         return nomeFogliaFormattato;
@@ -353,8 +353,8 @@ public class FattoriModel {
             System.out.println(key);
         }
         System.out.println(MSG_INSERISCI_CATEGORIA_VISUALIZZA_FATTORI);
-        String radice = InputDati.leggiStringaNonVuota(MSG_INSERISCI_NOME_RADICE);
-        String foglia = InputDati.leggiStringaNonVuota(MSG_INSERISCI_NOME_FOGLIA);
+        String radice = InputDatiTerminale.leggiStringaNonVuota(MSG_INSERISCI_NOME_RADICE);
+        String foglia = InputDatiTerminale.leggiStringaNonVuota(MSG_INSERISCI_NOME_FOGLIA);
         System.out.println(stringaFattoriDataCategoria(factorNameBuilder(radice, foglia)));
     }
 

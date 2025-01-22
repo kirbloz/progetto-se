@@ -6,7 +6,7 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import it.unibs.projectIngesoft.attivita.Proposta;
 import it.unibs.projectIngesoft.attivita.ProposteWrapper;
 import it.unibs.projectIngesoft.attivita.StatiProposta;
-import it.unibs.projectIngesoft.libraries.InputDati;
+import it.unibs.projectIngesoft.libraries.InputDatiTerminale;
 import it.unibs.projectIngesoft.libraries.Serializer;
 import it.unibs.projectIngesoft.utente.Configuratore;
 import it.unibs.projectIngesoft.utente.Fruitore;
@@ -119,7 +119,7 @@ public class ProposteModel {
 
         // 1. inserimento categoria richiesta, ore, e categoria offerta
         categoriaRichiesta = gestFatt.selezioneFoglia(MSG_INSERISCI_RICHIESTA);
-        oreRichiesta = InputDati.leggiInteroPositivo(MSG_RICHIESTA_ORE);
+        oreRichiesta = InputDatiTerminale.leggiInteroPositivo(MSG_RICHIESTA_ORE);
         categoriaOfferta = gestFatt.selezioneFoglia(MSG_INSERISCI_OFFERTA);
 
         // 2. calcolo ore per l'offerta
@@ -131,7 +131,7 @@ public class ProposteModel {
         Proposta tempProposta = new Proposta(categoriaRichiesta, categoriaOfferta, oreRichiesta, oreOfferta, (Fruitore) utenteAttivo);
 
         // 3. conferma e memorizza la proposta
-        if (!InputDati.yesOrNo("\n" + tempProposta + "\n" + MSG_CONFERMA_PROPOSTA.formatted(oreOfferta))) {
+        if (!InputDatiTerminale.yesOrNo("\n" + tempProposta + "\n" + MSG_CONFERMA_PROPOSTA.formatted(oreOfferta))) {
             System.out.println(WARNING_PROPOSTA_ANNULLATA);
             return;
         }
@@ -254,7 +254,7 @@ public class ProposteModel {
         do {
             visualizzaProposteModificabili();
             categoriaRichiesta = gestFatt.inserimentoNomeFogliaFormattato(MSG_SELEZIONE_CATEGORIA_RICHIESTA);
-            oreRichiesta = InputDati.leggiInteroPositivo(MSG_SELEZIONE_ORE);
+            oreRichiesta = InputDatiTerminale.leggiInteroPositivo(MSG_SELEZIONE_ORE);
             categoriaOfferta = gestFatt.inserimentoNomeFogliaFormattato(MSG_SELEZIONE_CATEGORIA_OFFERTA);
 
             daCambiare = cercaProposta(comprensorio, categoriaOfferta, categoriaRichiesta, oreRichiesta);
@@ -268,7 +268,7 @@ public class ProposteModel {
         StatiProposta statoAttuale = daCambiare.getStato();
         StatiProposta statoNuovo = (statoAttuale == StatiProposta.APERTA) ? StatiProposta.RITIRATA : StatiProposta.APERTA;
 
-        if (!InputDati.yesOrNo(MSG_CONFERMA_CAMBIO_STATO.formatted(statoAttuale, statoNuovo)))
+        if (!InputDatiTerminale.yesOrNo(MSG_CONFERMA_CAMBIO_STATO.formatted(statoAttuale, statoNuovo)))
             return; // non conferma
         if (statoAttuale == StatiProposta.RITIRATA) {
             daCambiare.setAperta();

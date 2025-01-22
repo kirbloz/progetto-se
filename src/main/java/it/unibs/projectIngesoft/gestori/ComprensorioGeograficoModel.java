@@ -2,7 +2,7 @@ package it.unibs.projectIngesoft.gestori;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import it.unibs.projectIngesoft.attivita.ComprensorioGeografico;
-import it.unibs.projectIngesoft.libraries.InputDati;
+import it.unibs.projectIngesoft.libraries.InputDatiTerminale;
 import it.unibs.projectIngesoft.libraries.Serializer;
 
 import java.util.ArrayList;
@@ -77,14 +77,14 @@ public class ComprensorioGeograficoModel {
     public void aggiungiComprensorio() {
         String nomeComprensorio;
         do {
-            nomeComprensorio = InputDati.leggiStringaNonVuota(MSG_INSERISCI_NOME_NUOVO_COMPRENSORIO);
+            nomeComprensorio = InputDatiTerminale.leggiStringaNonVuota(MSG_INSERISCI_NOME_NUOVO_COMPRENSORIO);
         } while (isNomeGiaUsato(nomeComprensorio));
 
         ComprensorioGeografico nuovoComprensorio = new ComprensorioGeografico(nomeComprensorio, new ArrayList<>());
 
         String nomeComuneDaInserire;
         do {
-            nomeComuneDaInserire = InputDati.leggiStringaNonVuota(MSG_INSERISCI_COMUNE);
+            nomeComuneDaInserire = InputDatiTerminale.leggiStringaNonVuota(MSG_INSERISCI_COMUNE);
             if (!nomeComuneDaInserire.equalsIgnoreCase(STR_END_INPUT)) {
                 nuovoComprensorio.addComune(nomeComuneDaInserire);
             }
@@ -112,7 +112,7 @@ public class ComprensorioGeograficoModel {
             System.out.println(comprensorio.getNomeComprensorio());
         }
 
-        String nomeDaCercare = InputDati.leggiStringaNonVuota(MSG_RICERCA_COMPRENSORIO);
+        String nomeDaCercare = InputDatiTerminale.leggiStringaNonVuota(MSG_RICERCA_COMPRENSORIO);
         // Cerca e stampa il comprensorio
         ComprensorioGeografico comprensorioTrovato =
                 this.listaComprensoriGeografici.stream()

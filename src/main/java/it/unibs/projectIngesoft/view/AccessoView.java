@@ -1,6 +1,6 @@
 package it.unibs.projectIngesoft.view;
 
-import it.unibs.projectIngesoft.libraries.InputDati;
+import it.unibs.projectIngesoft.libraries.InputDatiTerminale;
 
 // classe generica per la view del login a priori
 public class AccessoView{
@@ -21,12 +21,12 @@ public class AccessoView{
     }
 
     public String[] richiestaCredenziali() {
-        String username = InputDati.leggiStringaNonVuota(MSG_RICHIESTA_USERNAME);
-        String password = InputDati.leggiStringaNonVuota(MSG_RICHIESTA_PASSWORD);
+        String username = InputDatiTerminale.leggiStringaNonVuota(MSG_RICHIESTA_USERNAME);
+        String password = InputDatiTerminale.leggiStringaNonVuota(MSG_RICHIESTA_PASSWORD);
         return new String[]{username,password};
     }
 
-    public void stampaErroreCredenziali() {
-        System.out.println("va una sega");
+    public void stampaErroreCredenziali(String msg) {
+        System.out.println("Errore nella stampa" + msg);
     }
 }

@@ -5,7 +5,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import it.unibs.projectIngesoft.attivita.Albero;
 import it.unibs.projectIngesoft.attivita.Categoria;
 import it.unibs.projectIngesoft.attivita.ValoreDominio;
-import it.unibs.projectIngesoft.libraries.InputDati;
+import it.unibs.projectIngesoft.libraries.InputDatiTerminale;
 import it.unibs.projectIngesoft.libraries.Menu;
 import it.unibs.projectIngesoft.libraries.Serializer;
 
@@ -202,9 +202,9 @@ public class CategorieModel {
         assert nomeValoreDominio != null
                 && !nomeValoreDominio.isEmpty() : "Il nome del valore del dominio non deve essere null o vuoto";
 
-        boolean insertDescription = InputDati.yesOrNo(ASK_INSERISCI_DESCRIZIONE_VALORE_DOMINIO);
+        boolean insertDescription = InputDatiTerminale.yesOrNo(ASK_INSERISCI_DESCRIZIONE_VALORE_DOMINIO);
         if (insertDescription) {
-            descrizioneValoreDominio = InputDati.stringReaderSpecificLength(MSG_INPUT_DESCRIZIONE_VALORE_DOMINIO, 0, 100);
+            descrizioneValoreDominio = InputDatiTerminale.stringReaderSpecificLength(MSG_INPUT_DESCRIZIONE_VALORE_DOMINIO, 0, 100);
             assert descrizioneValoreDominio != null : "La descrizione del valore del dominio non deve essere null";
             valoreDominio = new ValoreDominio(nomeValoreDominio, descrizioneValoreDominio);
             System.out.println(CONFIRM_DESCRIZIONE_AGGIUNTA);
@@ -213,11 +213,11 @@ public class CategorieModel {
         }
 
         // 3. chiede se è foglia
-        boolean isFoglia = InputDati.yesOrNo(ASK_CATEGORIA_IS_FOGLIA);
+        boolean isFoglia = InputDatiTerminale.yesOrNo(ASK_CATEGORIA_IS_FOGLIA);
 
         // 3.1 se non è foglia, inserisce il dominio che imprime alle figlie
         String nomeCampoFiglie = isFoglia ?
-                "" : InputDati.leggiStringaNonVuota(MSG_INSERIMENTO_DOMINIO_PER_FIGLIE);
+                "" : InputDatiTerminale.leggiStringaNonVuota(MSG_INSERIMENTO_DOMINIO_PER_FIGLIE);
         assert isFoglia || nomeCampoFiglie != null
                 && !nomeCampoFiglie.isEmpty() : "Il nome del campo delle figlie non deve essere null o vuoto";
 
@@ -236,7 +236,7 @@ public class CategorieModel {
         String tempNomeRadice;
         do {
             System.out.println(MSG_INSERIMENTO_RADICE + MSG_PRINT_LISTA_RADICI + radiciToString());
-            tempNomeRadice = InputDati.leggiStringaNonVuota(MSG_INPUT_NUOVO_NOME_RADICE);
+            tempNomeRadice = InputDatiTerminale.leggiStringaNonVuota(MSG_INPUT_NUOVO_NOME_RADICE);
 
             if (this.esisteRadice(tempNomeRadice))
                 System.out.println(WARNING_RADICE_ESISTE);
@@ -248,7 +248,7 @@ public class CategorieModel {
         String tempNomeRadice;
         do {
             System.out.println(MSG_SELEZIONE_RADICE + MSG_PRINT_LISTA_RADICI + radiciToString());
-            tempNomeRadice = InputDati.leggiStringaNonVuota(MSG_INPUT_NOME_RADICE);
+            tempNomeRadice = InputDatiTerminale.leggiStringaNonVuota(MSG_INPUT_NOME_RADICE);
 
             if (!this.esisteRadice(tempNomeRadice))
                 System.out.println(WARNING_RADICE_NON_ESISTE);
@@ -269,7 +269,7 @@ public class CategorieModel {
         String tempNome;
         do {
             visualizzaGerarchia(tempRadice); // stampa la gerarchia
-            tempNome = InputDati.leggiStringaNonVuota(MSG_INSERIMENTO_NUOVA_CATEGORIA);
+            tempNome = InputDatiTerminale.leggiStringaNonVuota(MSG_INSERIMENTO_NUOVA_CATEGORIA);
             if (esisteCategoriaNellaGerarchia(tempNome, tempRadice)) {
                 System.out.print(WARNING_CATEGORIA_ESISTE);
             }
@@ -305,7 +305,7 @@ public class CategorieModel {
 
         do { //chiedi temp nome madre
             visualizzaGerarchia(nomeCategoriaRadice); // stampa la gerarchia
-            String nomeCategoriaMadre = InputDati.leggiStringaNonVuota(String.format(MSG_INSERIMENTO_NOME_CATEGORIA_MADRE, nomeCategoria));
+            String nomeCategoriaMadre = InputDatiTerminale.leggiStringaNonVuota(String.format(MSG_INSERIMENTO_NOME_CATEGORIA_MADRE, nomeCategoria));
 
             // search for tempmadre e salva l'oggetto; poi fa i controlli
             categoriaMadre = this.tree.getRadice(nomeCategoriaRadice).cercaCategoria(nomeCategoriaMadre);
@@ -330,7 +330,7 @@ public class CategorieModel {
         String nomeValore;
         List<String> valoriSorelle = categoriaMadre.getValoriDominioFiglie();
         do {
-            nomeValore = InputDati.leggiStringaNonVuota(String.format(MSG_INSERIMENTO_VALORE_DOMINIO, tempNome, categoriaMadre.getCampoFiglie()));
+            nomeValore = InputDatiTerminale.leggiStringaNonVuota(String.format(MSG_INSERIMENTO_VALORE_DOMINIO, tempNome, categoriaMadre.getCampoFiglie()));
         } while (valoriSorelle.contains(nomeValore));
         return nomeValore;
     }
@@ -342,7 +342,7 @@ public class CategorieModel {
         // 1. chiede un nome univoco tra le radici
         String tempNome = inserimentoNomeCategoriaRadice();
         // 2. chiedi nome del dominio (campo) che questa categoria imporrà alle sue figlie
-        String tempCampo = InputDati.leggiStringaNonVuota(MSG_INSERIMENTO_NUOVO_DOMINIO);
+        String tempCampo = InputDatiTerminale.leggiStringaNonVuota(MSG_INSERIMENTO_NUOVO_DOMINIO);
         // 3. creazione oggetto e aggiunta all'albero
         this.tree.aggiungiRadice(new Categoria(tempNome, tempCampo));
         serializeXML();
@@ -466,7 +466,7 @@ public class CategorieModel {
             return null;
         }
 
-        return InputDati.stringReaderFromAvailable(MSG_INPUT_SCELTA_CAMPO, valoriFiglie);
+        return InputDatiTerminale.stringReaderFromAvailable(MSG_INPUT_SCELTA_CAMPO, valoriFiglie);
     }
 
     private Categoria selezionaCategoriaDaValoreCampo(String nuovoValore, List<Categoria> livello) {
