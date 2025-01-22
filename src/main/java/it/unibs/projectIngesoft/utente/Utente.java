@@ -32,7 +32,8 @@ public class Utente {
         this.setPassword(password);
     }
 
-    public void cambioCredenziali(String newUsername, String newPassword) { // per cambiare le credenziali di un utente (funziona in tutti i casi, ma se in una versione futura il fruitore può cambiare anche mail bisognerà fare un distinguo polimorfico)
+    public void cambioCredenziali(String newUsername, String newPassword) {
+        // per cambiare le credenziali di un utente (funziona in tutti i casi, ma se in una versione futura il fruitore può cambiare anche mail bisognerà fare un distinguo polimorfico)
         this.setUsername(newUsername);
         this.setPassword(newPassword);
     }

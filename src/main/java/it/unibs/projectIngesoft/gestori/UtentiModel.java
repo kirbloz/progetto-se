@@ -215,4 +215,5 @@ public class UtentiModel {
         // se la password è errata, ritorna -1
         return -1;
     }
+
 }
