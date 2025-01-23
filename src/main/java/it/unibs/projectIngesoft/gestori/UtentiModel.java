@@ -1,8 +1,7 @@
 package it.unibs.projectIngesoft.gestori;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import it.unibs.projectIngesoft.libraries.InputDati;
-import it.unibs.projectIngesoft.libraries.Serializer;
+import it.unibs.projectIngesoft.libraries.InputDatiTerminale;
+import it.unibs.projectIngesoft.main.IIOList;
 import it.unibs.projectIngesoft.utente.Configuratore;
 import it.unibs.projectIngesoft.utente.Fruitore;
 import it.unibs.projectIngesoft.utente.Utente;
@@ -13,6 +12,7 @@ import java.util.regex.Pattern;
 
 public class UtentiModel {
 
+    // da rimuovere e spostare nella view
     public static final String MSG_RICHIESTA_USERNAME = "Inserisci il tuo username: ";
     public static final String MSG_RICHIESTA_PASSWORD = "Inserisci la tua password: ";
     public static final String MSG_RICHIESTA_EMAIL = "Inserisci la tua email: ";
@@ -23,19 +23,17 @@ public class UtentiModel {
 
     public static final String MSG_UTENTE_ESISTENTE = "L'username e' gia' in uso";
     public static final String MSG_COMPRENSORIO_NEXIST = "Il comprensorio non esiste!";
+    //
 
-    private final String filePath;
-    private final String defaultCredentialsFilePath;
+
     private static ArrayList<Utente> utenti;
     private Utente defaultUtente;
 
-    public UtentiModel(String filePath, String defaultCredentialsFilePath) {
-        this.filePath = filePath;
-        this.defaultCredentialsFilePath = defaultCredentialsFilePath;
-        if (utenti == null)
-            utenti = new ArrayList<>();
-        deserializeXML(); // load dati
-        serializeXML();
+    private IIOList<Utente> listHandler;
+
+    public UtentiModel(IIOList<Utente> listHandler) {
+        this.listHandler = listHandler;
+        //utenti = new ArrayList<>(listHandler.readList());
     }
 
     private static ArrayList<Utente> getListaUtenti() {
@@ -54,38 +52,6 @@ public class UtentiModel {
                 .orElse(null);
     }
 
-
-    /**
-     * Sfrutto l'implementazione statica della classe Serializer.
-     * Questo metodo esiste da prima di Serializer, per non cambiare ogni call a questo ho semplicemente sostituito il corpo.
-     */
-    public void serializeXML() {
-        assert utenti != null;
-        assert this.filePath != null;
-        Serializer.serialize(this.filePath, utenti);
-    }
-
-    /**
-     * Sfrutto l'implementazione statica della classe Serializer.
-     * Questo metodo esiste da prima di Serializer, per non cambiare ogni call a questo ho semplicemente sostituito il corpo.
-     */
-    public void deserializeXML() {
-        assert this.filePath != null;
-        assert this.defaultCredentialsFilePath != null;
-
-        List<Utente> listaUtenti = Serializer.deserialize(new TypeReference<>() {
-        }, this.filePath);
-        utenti.clear();
-        if (listaUtenti != null)
-            utenti.addAll(listaUtenti);
-
-        this.defaultUtente = Serializer.deserialize(new TypeReference<>() {
-        }, this.defaultCredentialsFilePath);
-
-        assert utenti != null : "deve essere almeno inizializzato!";
-        assert this.defaultUtente != null : "l'utente default non può essere null, deve esistere";
-    }
-
     /**
      * Inserisce l'utente nell'attributo utenti se e solo se non esiste già
      *
@@ -95,7 +61,7 @@ public class UtentiModel {
         assert utenti != null;
         if (!utenti.contains(utente)) {
             utenti.add(utente);
-            serializeXML();
+            //writeList(this.utenti);
         }
     }
 
@@ -110,24 +76,24 @@ public class UtentiModel {
             System.out.println(tmp);
         }
 
-        comprensorio = InputDati.leggiStringaNonVuota(MSG_RICHIESTA_COMPRENSORIO);
+        comprensorio = InputDatiTerminale.leggiStringaNonVuota(MSG_RICHIESTA_COMPRENSORIO);
         while (!possibiliComprensori.contains(comprensorio)) {
             System.out.println(MSG_COMPRENSORIO_NEXIST);
-            comprensorio = InputDati.leggiStringaNonVuota(MSG_RICHIESTA_COMPRENSORIO);
+            comprensorio = InputDatiTerminale.leggiStringaNonVuota(MSG_RICHIESTA_COMPRENSORIO);
         }
 
-        username = InputDati.leggiStringaNonVuota(MSG_RICHIESTA_USERNAME);
+        username = InputDatiTerminale.leggiStringaNonVuota(MSG_RICHIESTA_USERNAME);
         while (!(cercaConUsername(username) == null)) {
             System.out.println(MSG_UTENTE_ESISTENTE);
-            username = InputDati.leggiStringaNonVuota(MSG_RICHIESTA_USERNAME);
+            username = InputDatiTerminale.leggiStringaNonVuota(MSG_RICHIESTA_USERNAME);
         }
 
-        password = InputDati.leggiStringaNonVuota(MSG_RICHIESTA_PASSWORD);
+        password = InputDatiTerminale.leggiStringaNonVuota(MSG_RICHIESTA_PASSWORD);
 
-        email = InputDati.leggiStringaNonVuota(MSG_RICHIESTA_EMAIL);
+        email = InputDatiTerminale.leggiStringaNonVuota(MSG_RICHIESTA_EMAIL);
         while (!isValidEmail(email)) {
             System.out.println(">> (!!) Formato email non valido.");
-            email = InputDati.leggiStringaNonVuota(MSG_RICHIESTA_EMAIL);
+            email = InputDatiTerminale.leggiStringaNonVuota(MSG_RICHIESTA_EMAIL);
         }
 
         fruitore = new Fruitore(username, password, email, comprensorio);
@@ -159,6 +125,7 @@ public class UtentiModel {
             }
             // ricerca
             indice = ricercaUtente(username, password);
+            //todo queste prossime righe sono terribili
         Exception userNotFound;
         if (indice == -1)
                 throw userNotFound = new Exception() ;
@@ -176,11 +143,11 @@ public class UtentiModel {
         String newUsername;
         String newPassword;
         do {
-            newUsername = InputDati.leggiStringaNonVuota(MSG_RICHIESTA_NEW_USERNAME);
-            newPassword = InputDati.leggiStringaNonVuota(MSG_RICHIESTA_NEW_PASSWORD);
+            newUsername = InputDatiTerminale.leggiStringaNonVuota(MSG_RICHIESTA_NEW_USERNAME);
+            newPassword = InputDatiTerminale.leggiStringaNonVuota(MSG_RICHIESTA_NEW_PASSWORD);
         } while (cercaConUsername(newUsername) != null);
         C1.cambioCredenziali(newUsername, newPassword);
-        serializeXML();
+        //writeList();
     }
 
     /**

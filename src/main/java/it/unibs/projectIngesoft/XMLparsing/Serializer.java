@@ -1,4 +1,4 @@
-package it.unibs.projectIngesoft.libraries;
+package it.unibs.projectIngesoft.XMLparsing;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -13,6 +13,7 @@ import java.io.IOException;
  */
 public class Serializer {
 
+    // TODO tutti i system out diventeranno dei throw exception da far gestire al controller
     public static void serialize(String filePath, Object obj) {
         try {
 

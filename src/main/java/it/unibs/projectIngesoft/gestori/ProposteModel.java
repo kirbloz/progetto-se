@@ -7,7 +7,7 @@ import it.unibs.projectIngesoft.attivita.Proposta;
 import it.unibs.projectIngesoft.attivita.ProposteWrapper;
 import it.unibs.projectIngesoft.attivita.StatiProposta;
 import it.unibs.projectIngesoft.libraries.InputDatiTerminale;
-import it.unibs.projectIngesoft.libraries.Serializer;
+import it.unibs.projectIngesoft.XMLparsing.Serializer;
 import it.unibs.projectIngesoft.utente.Configuratore;
 import it.unibs.projectIngesoft.utente.Fruitore;
 import it.unibs.projectIngesoft.utente.Utente;

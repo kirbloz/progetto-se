@@ -8,9 +8,12 @@ public class UtentiController {
     AccessoView accessoView;
     UtentiModel utentiModel;
 
-    public UtentiController(AccessoView accessoView, UtentiModel utentiModel) {
+    //IIOList<Utente> listHandler;
+
+    public UtentiController(AccessoView accessoView, UtentiModel utentiModel/*, IIOList<Utente> listHandler*/) {
         this.accessoView = accessoView;
         this.utentiModel = utentiModel;
+        //this.listHandler = listHandler;
     }
 
 
@@ -22,8 +25,8 @@ public class UtentiController {
             -> riconosce il tipo di utente all’accesso
      */
     public Utente effettuaAccesso(){
-       return gestioneMenuIniziale();
-
+        // assert che sia stato letto utenti
+               return gestioneMenuIniziale();
 
     }
 

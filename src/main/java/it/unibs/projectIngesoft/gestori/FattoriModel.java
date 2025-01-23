@@ -6,7 +6,7 @@ import it.unibs.projectIngesoft.attivita.Categoria;
 import it.unibs.projectIngesoft.attivita.FattoreDiConversione;
 import it.unibs.projectIngesoft.attivita.FattoriWrapper;
 import it.unibs.projectIngesoft.libraries.InputDatiTerminale;
-import it.unibs.projectIngesoft.libraries.Serializer;
+import it.unibs.projectIngesoft.XMLparsing.Serializer;
 
 import java.util.ArrayList;
 import java.util.HashMap;

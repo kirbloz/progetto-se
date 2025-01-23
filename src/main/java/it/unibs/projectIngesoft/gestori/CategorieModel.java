@@ -7,11 +7,11 @@ import it.unibs.projectIngesoft.attivita.Categoria;
 import it.unibs.projectIngesoft.attivita.ValoreDominio;
 import it.unibs.projectIngesoft.libraries.InputDatiTerminale;
 import it.unibs.projectIngesoft.libraries.Menu;
-import it.unibs.projectIngesoft.libraries.Serializer;
+import it.unibs.projectIngesoft.XMLparsing.Serializer;
 
 import java.util.List;
 
-public class CategorieModel {
+public class CategorieModel  {
 
     public static final String HEADER_VISUALIZZA_GERARCHIE = ">> Visualizza gerarchie di categorie <<\n";
     public static final String HEADER_VISUALIZZA_RADICE = ">> Visualizza gerarchia di %s <<\n";
