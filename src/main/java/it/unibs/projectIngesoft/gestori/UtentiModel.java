@@ -2,6 +2,7 @@ package it.unibs.projectIngesoft.gestori;
 
 import it.unibs.projectIngesoft.libraries.InputDatiTerminale;
 import it.unibs.projectIngesoft.main.IIOList;
+import it.unibs.projectIngesoft.parsing.UtentiMapper;
 import it.unibs.projectIngesoft.utente.Configuratore;
 import it.unibs.projectIngesoft.utente.Fruitore;
 import it.unibs.projectIngesoft.utente.Utente;
@@ -29,11 +30,16 @@ public class UtentiModel {
     private static ArrayList<Utente> utenti;
     private Utente defaultUtente;
 
-    private IIOList<Utente> listHandler;
+    //devo aggiungere un livello di indirezione perchè
+    // prima era IIOList che non prevedeva di leggere un utente
+    //di default e quindi non esisteva il metodo
+    //.readDefaultUtente
+    private UtentiMapper listHandler;
 
-    public UtentiModel(IIOList<Utente> listHandler) {
+    public UtentiModel(UtentiMapper listHandler) {
         this.listHandler = listHandler;
-        //utenti = new ArrayList<>(listHandler.readList());
+        utenti = new ArrayList<>(listHandler.read());
+        defaultUtente = listHandler.readDefaultUtente();
     }
 
     private static ArrayList<Utente> getListaUtenti() {

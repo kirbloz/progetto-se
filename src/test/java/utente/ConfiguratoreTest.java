@@ -1,5 +1,8 @@
 package utente;
 
+import it.unibs.projectIngesoft.gestori.UtentiModel;
+import it.unibs.projectIngesoft.main.IIOList;
+import it.unibs.projectIngesoft.parsing.UtentiMapper;
 import it.unibs.projectIngesoft.utente.Configuratore;
 import it.unibs.projectIngesoft.utente.Utente;
 import org.junit.jupiter.api.BeforeEach;
@@ -7,17 +10,32 @@ import org.junit.jupiter.api.Test;
 
 public class ConfiguratoreTest {
 
+    private UtentiModel model;
     private Configuratore configuratore;
+    private UtentiMapper reader;
 
     @BeforeEach
     void prepareTest(){
+        this.reader = new UtentiMapper("usersTest.json", "defaultCredentials.json");
         this.configuratore = new Configuratore("admin", "pwd");
+        this.model = new UtentiModel(this.reader);
     }
+
 
     void primoAccessoConfiguratore() {
         //todo
         // qui c'è il problema di avere uno stub che simuli il check del "database utenti"
         // si attende di fare il refactoring che astragga il meccanismo di serializzazione xml
+        // ok apposto la lettura ma serve l'input dati -> per ora è da terminale
+    }
+
+    @Test
+    void testStoCazzoMiUccido() throws Exception {
+        //System.out.println(reader.read());
+        assert null != this.model.verificaCredenziali(new String[]{"tizianoFerro", "LoStadio2015"});
+        model.addUtente(this.configuratore);
+        assert null != this.model.verificaCredenziali(new String[]{"admin", "pwd"});
+
     }
 
     @Test

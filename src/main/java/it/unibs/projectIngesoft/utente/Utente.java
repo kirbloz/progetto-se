@@ -1,5 +1,6 @@
 package it.unibs.projectIngesoft.utente;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
@@ -8,7 +9,7 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,
-        //include = JsonTypeInfo.As.PROPERTY,
+        include = JsonTypeInfo.As.PROPERTY,
         property = "type"
 )
 @JsonSubTypes({
@@ -18,9 +19,11 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 @JsonRootName("")
 public class Utente {
 
-    @JacksonXmlProperty(localName = "username")
+    //@JacksonXmlProperty(localName = "username")
+    @JsonProperty
     protected String username;
-    @JacksonXmlProperty(localName = "password")
+    //@JacksonXmlProperty(localName = "password")
+    @JsonProperty("password")
     protected String password;
 
     public Utente() {

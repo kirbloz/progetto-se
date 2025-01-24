@@ -1,14 +1,18 @@
 package it.unibs.projectIngesoft.utente;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 public class Fruitore extends Utente{
 
-    @JacksonXmlProperty(localName = "email")
+    //@JacksonXmlProperty(localName = "email")
+    @JsonProperty
     private String email;
-    @JacksonXmlProperty(localName = "comprensorioDiAppartenenza")
+    //@JacksonXmlProperty(localName = "comprensorioDiAppartenenza")
+    @JsonProperty
     private String comprensorioDiAppartenenza;
 
-    @JacksonXmlProperty(isAttribute = true, localName = "type")
+    @JsonProperty("type")
+    //@JacksonXmlProperty(isAttribute = true, localName = "type")
     private String type = "Fruitore";
 
     public Fruitore () {
