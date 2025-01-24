@@ -3,7 +3,7 @@ package it.unibs.projectIngesoft.gestori;
 import com.fasterxml.jackson.core.type.TypeReference;
 import it.unibs.projectIngesoft.attivita.ComprensorioGeografico;
 import it.unibs.projectIngesoft.libraries.InputDatiTerminale;
-import it.unibs.projectIngesoft.XMLparsing.Serializer;
+import it.unibs.projectIngesoft.parsing.Serializer;
 
 import java.util.ArrayList;
 import java.util.List;
