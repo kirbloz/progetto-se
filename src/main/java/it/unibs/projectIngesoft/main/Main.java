@@ -36,8 +36,9 @@ public class Main {
 
 
 
-
+        /*
         Menu menuIniziale = new Menu(AccessoView.TITLE_STARTING_MENU, AccessoView.vociMenuIniziale);
+
 
         UtentiModel userHandler = new UtentiModel(UTENTI_XML_FILEPATH, UTENTI_DEF_CREDS_XML_FILEPATH);
         ComprensorioGeograficoModel comprensorioHandler = new ComprensorioGeograficoModel(COMPRENSORI_GEOGRAFICI_XML_FILEPATH);
@@ -58,7 +59,7 @@ public class Main {
             loopMain(menu, menuCategorie, menuFattori, menuComprensoriGeografici, menuProposte, userHandler, utenteAttivo);
         } else {
             System.out.println(AccessoView.MSG_PROGRAM_EXIT);
-        }
+        }*/
     }
 
     /**
