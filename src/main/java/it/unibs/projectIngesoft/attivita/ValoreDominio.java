@@ -16,6 +16,12 @@ public class ValoreDominio {
     private String descrizione;
 
     /**
+     * Da non usare! Solo per la deserializzazione di Jackson
+     */
+    public ValoreDominio() {
+    }
+
+    /**
      * Costruttore con nome
      *
      * @param nome, nome del valore
@@ -36,12 +42,6 @@ public class ValoreDominio {
         this.setDescrizione(descrizione);
     }
 
-    /**
-     * Da non usare! Solo per la deserializzazione di Jackson
-     */
-    public ValoreDominio() {
-    }
-
     public String getNome() {
         return nome;
     }
@@ -58,7 +58,7 @@ public class ValoreDominio {
 
     public void setDescrizione(String descrizione) {
         assert descrizione != null
-                && !descrizione.trim().isEmpty() : "La descrizione non deve essere null o vuota";
+                /*&& !descrizione.trim().isEmpty()*/ : "La descrizione non deve essere null";
         this.descrizione = descrizione;
     }
 

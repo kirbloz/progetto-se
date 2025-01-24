@@ -1,0 +1,20 @@
+[ {
+  "nome" : "provaRadice",
+  "valoreDominio" : null,
+  "nomeMadre" : "",
+  "campo" : "",
+  "campoFiglie" : "campoFiglieRadice",
+  "categorieFiglie" : [ {
+    "nome" : "provaFiglia",
+    "valoreDominio" : {
+      "nome" : "valoreTest",
+      "descrizione" : ""
+    },
+    "nomeMadre" : "provaRadice",
+    "campo" : "campoFiglieRadice",
+    "campoFiglie" : "",
+    "categorieFiglie" : [ ],
+    "valoriDominioFiglie" : [ ]
+  } ],
+  "valoriDominioFiglie" : [ "valoreTest" ]
+} ]

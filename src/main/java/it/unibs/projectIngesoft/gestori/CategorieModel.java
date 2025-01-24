@@ -7,7 +7,7 @@ import it.unibs.projectIngesoft.attivita.Categoria;
 import it.unibs.projectIngesoft.attivita.ValoreDominio;
 import it.unibs.projectIngesoft.libraries.InputDatiTerminale;
 import it.unibs.projectIngesoft.libraries.Menu;
-import it.unibs.projectIngesoft.XMLparsing.Serializer;
+import it.unibs.projectIngesoft.parsing.Serializer;
 
 import java.util.List;
 
