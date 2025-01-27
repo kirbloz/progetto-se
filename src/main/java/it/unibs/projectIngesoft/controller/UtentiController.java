@@ -1,6 +1,7 @@
-package it.unibs.projectIngesoft.utente;
+package it.unibs.projectIngesoft.controller;
 
 import it.unibs.projectIngesoft.gestori.UtentiModel;
+import it.unibs.projectIngesoft.utente.Utente;
 import it.unibs.projectIngesoft.view.AccessoView;
 
 public class UtentiController {
@@ -32,7 +33,6 @@ public class UtentiController {
 
     private Utente gestioneMenuIniziale(){
         Utente utenteAttivo = null;
-        int option = accessoView.menuIniziale();
         switch(option){
             case 1:
                 utenteAttivo = login();
