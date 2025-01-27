@@ -1,10 +1,9 @@
 package utente;
 
 import it.unibs.projectIngesoft.gestori.UtentiModel;
-import it.unibs.projectIngesoft.main.IIOList;
-import it.unibs.projectIngesoft.parsing.UtentiMapper;
+import it.unibs.projectIngesoft.parsing.SerializerJSON;
+import it.unibs.projectIngesoft.mappers.UtentiMapper;
 import it.unibs.projectIngesoft.utente.Configuratore;
-import it.unibs.projectIngesoft.utente.Utente;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -16,7 +15,10 @@ public class ConfiguratoreTest {
 
     @BeforeEach
     void prepareTest(){
-        this.reader = new UtentiMapper("usersTest.json", "defaultCredentials.json");
+        this.reader = new UtentiMapper("usersTest.json",
+                "defaultCredentials.json",
+                new SerializerJSON<>(),
+                new SerializerJSON<>());
         this.configuratore = new Configuratore("admin", "pwd");
         this.model = new UtentiModel(this.reader);
     }
