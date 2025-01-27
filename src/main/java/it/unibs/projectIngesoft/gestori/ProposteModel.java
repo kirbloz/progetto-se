@@ -1,19 +1,19 @@
 package it.unibs.projectIngesoft.gestori;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import it.unibs.projectIngesoft.attivita.Proposta;
-import it.unibs.projectIngesoft.attivita.ProposteWrapper;
 import it.unibs.projectIngesoft.attivita.StatiProposta;
 import it.unibs.projectIngesoft.libraries.InputDatiTerminale;
-import it.unibs.projectIngesoft.parsing.Serializer;
+import it.unibs.projectIngesoft.mappers.ProposteMapper;
 import it.unibs.projectIngesoft.utente.Configuratore;
 import it.unibs.projectIngesoft.utente.Fruitore;
 import it.unibs.projectIngesoft.utente.Utente;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
@@ -50,18 +50,28 @@ public class ProposteModel {
 
     @JacksonXmlElementWrapper(localName = "listaProposte")
     @JacksonXmlProperty(localName = "Proposta")
-    private HashMap<String, ArrayList<Proposta>> listaProposte;
+    private Map<String, List<Proposta>> hashListaProposte;
     private final FattoriModel gestFatt;
     private final String filePath;
     private final Utente utenteAttivo;
 
-    public ProposteModel(String proposteFilepath, String fattoriFilePath, Utente utenteAttivo) {
+    private final ProposteMapper mapper;
+
+    public ProposteModel(String proposteFilepath, String fattoriFilePath, Utente utenteAttivo, ProposteMapper mapper) {
         this.gestFatt = new FattoriModel(fattoriFilePath);
         this.filePath = proposteFilepath;
-        this.listaProposte = new HashMap<>();
+
+        this.hashListaProposte = new HashMap<>();
         this.utenteAttivo = utenteAttivo;
 
-        deserializeXML();
+        this.mapper = mapper;
+        hashListaProposte = mapper.read();
+
+    }
+
+
+    public HashMap<String, List<Proposta>> getHashListaProposte() {
+        return new HashMap<>(hashListaProposte);
     }
 
     /**
@@ -69,9 +79,9 @@ public class ProposteModel {
      * Sfrutto l'implementazione statica della classe Serializer.
      */
     private void serializeXML() {
-        assert this.listaProposte != null;
+        assert this.hashListaProposte != null;
         assert this.filePath != null;
-        Serializer.serialize(this.filePath, new ProposteWrapper(listaProposte));
+        //SerializerJSON.serialize(this.filePath, new ProposteWrapper(listaProposte));
     }
 
     /**
@@ -79,19 +89,19 @@ public class ProposteModel {
      * Sfrutto l'implementazione statica della classe Serializer.
      */
     private void deserializeXML() {
-        assert this.listaProposte != null;
+        assert this.hashListaProposte != null;
 
-        ProposteWrapper tempWrapper = Serializer.deserialize(new TypeReference<>() {
+        /*ProposteWrapper tempWrapper = SerializerJSON.deserialize(new TypeReference<>() {
         }, filePath);
         if (tempWrapper != null) {
             listaProposte = tempWrapper.toHashMap();
-        }
+        }*/
 
     }
 
     public void addProposta(Proposta proposta) {
-        assert this.listaProposte != null;
-        this.listaProposte.computeIfAbsent(proposta.getComprensorio(), k -> new ArrayList<>()).add(proposta);
+        assert this.hashListaProposte != null;
+        this.hashListaProposte.computeIfAbsent(proposta.getComprensorio(), k -> new ArrayList<>()).add(proposta);
         serializeXML();
     }
 
@@ -101,10 +111,10 @@ public class ProposteModel {
      * @param comprensorio, nome del comprensorio
      * @return new ArrayList() se non esistono proposte da un certo comprensorio, altrimenti lista di proposte
      */
-    public ArrayList<Proposta> getListaProposteComprensorio(String comprensorio) {
-        assert this.listaProposte != null;
-        if (this.listaProposte.containsKey(comprensorio))
-            return this.listaProposte.get(comprensorio);
+    public List<Proposta> getListaProposteComprensorio(String comprensorio) {
+        assert this.hashListaProposte != null;
+        if (this.hashListaProposte.containsKey(comprensorio))
+            return this.hashListaProposte.get(comprensorio);
         else return new ArrayList<>();
     }
 
@@ -163,7 +173,7 @@ public class ProposteModel {
 
 
     private void cercaProposteDaChiudere(Proposta nuovaProposta) {
-        assert listaProposte != null;
+        assert hashListaProposte != null;
 
         ArrayList<Proposta> catena = new ArrayList<>();
         ArrayList<Proposta> proposteComprensorio = new ArrayList<>();
@@ -230,8 +240,8 @@ public class ProposteModel {
         String comprensorio = ((Fruitore) utenteAttivo).getComprensorioDiAppartenenza();
 
         boolean esisteAlmenoUnaPropostaPerLUtenteLoggatoOra = false;
-        if (listaProposte != null && listaProposte.get(comprensorio) != null) {
-            for (Proposta proposta : listaProposte.get(comprensorio)) {
+        if (hashListaProposte != null && hashListaProposte.get(comprensorio) != null) {
+            for (Proposta proposta : hashListaProposte.get(comprensorio)) {
                 if (proposta.getStato() != StatiProposta.CHIUSA && proposta.getAutoreUsername().equals(utenteAttivo.getUsername())) {
                     esisteAlmenoUnaPropostaPerLUtenteLoggatoOra = true;
                     break;
@@ -317,7 +327,7 @@ public class ProposteModel {
      * Guida l'immissione della categoria.
      */
     public void visualizzaPropostePerCategoria() {
-        assert listaProposte != null;
+        assert hashListaProposte != null;
         String categoria = gestFatt.selezioneFoglia(MSG_INSERISCI_CATEGORIA);
         Predicate<Proposta> filtro = p -> p.getOfferta().equals(categoria) || p.getRichiesta().equals(categoria);
         visualizzaProposte(HEADER_PROPOSTE_CATEGORIA.formatted(categoria), filtro);
@@ -329,7 +339,7 @@ public class ProposteModel {
      * @param usernameAutore, username del Fruitore che ha creato la proposta.
      */
     public void visualizzaPropostePerAutore(String usernameAutore) {
-        assert listaProposte != null;
+        assert hashListaProposte != null;
         Predicate<Proposta> filtro = p -> p.getAutoreUsername().equals(usernameAutore);
         visualizzaProposte(HEADER_PROPOSTE_AUTORE.formatted(usernameAutore), filtro);
     }
@@ -339,7 +349,7 @@ public class ProposteModel {
      */
     public void visualizzaProposteModificabili() {
         assert utenteAttivo != null;
-        assert listaProposte != null;
+        assert hashListaProposte != null;
 
         Predicate<Proposta> filtro = p -> p.getAutoreUsername().equals(utenteAttivo.getUsername()) && p.getStato() != StatiProposta.CHIUSA;
         visualizzaProposte(HEADER_PROPOSTE_MODIFICABILI, filtro);
@@ -347,7 +357,7 @@ public class ProposteModel {
 
 
     public void visualizzaProposteDaNotificare() {
-        assert listaProposte != null;
+        assert hashListaProposte != null;
         System.out.println(HEADER_PROPOSTE_PRONTE);
 
         getFilteredProposte(Proposta::isDaNotificare)
@@ -364,7 +374,7 @@ public class ProposteModel {
     }
 
     public String proposteToString(Predicate<Proposta> filtro) {
-        assert listaProposte != null;
+        assert hashListaProposte != null;
 
         StringBuilder aperte = new StringBuilder();
         StringBuilder chiuse = new StringBuilder();
@@ -386,7 +396,7 @@ public class ProposteModel {
     }
 
     private Stream<Proposta> getFilteredProposte(Predicate<Proposta> filtro) {
-        return listaProposte.keySet().stream().flatMap(comprensorio -> listaProposte.get(comprensorio).stream()).filter(filtro);
+        return hashListaProposte.keySet().stream().flatMap(comprensorio -> hashListaProposte.get(comprensorio).stream()).filter(filtro);
     }
 
     public void entryPoint(int scelta) {

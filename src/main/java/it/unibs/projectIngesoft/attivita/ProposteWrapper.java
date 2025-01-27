@@ -46,8 +46,8 @@ public class ProposteWrapper {
      *
      * @return map, HashMap costruita
      */
-    public HashMap<String, ArrayList<Proposta>> toHashMap() {
-        HashMap<String, ArrayList<Proposta>> map = new HashMap<>();
+    public HashMap<String, List<Proposta>> toHashMap() {
+        HashMap<String, List<Proposta>> map = new HashMap<>();
         for (Entry entry : this.proposte) {
             map.put(entry.getKey(), entry.getValue());
         }
