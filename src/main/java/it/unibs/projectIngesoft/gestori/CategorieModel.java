@@ -7,7 +7,9 @@ import it.unibs.projectIngesoft.attivita.Categoria;
 import it.unibs.projectIngesoft.attivita.ValoreDominio;
 import it.unibs.projectIngesoft.libraries.InputDatiTerminale;
 import it.unibs.projectIngesoft.libraries.Menu;
-import it.unibs.projectIngesoft.parsing.Serializer;
+import it.unibs.projectIngesoft.mappers.CategorieMapper;
+import it.unibs.projectIngesoft.parsing.JacksonSerializer;
+import it.unibs.projectIngesoft.parsing.SerializerJSON;
 
 import java.util.List;
 
@@ -61,43 +63,28 @@ public class CategorieModel  {
 
 
     private Albero tree;
-    private final String filePath;
+    //private final String filePath;
+    private CategorieMapper mapper;
+
+    // questa cosa??? sarebbe da levare. la comunicazione va fatta tra controllers
     private FattoriModel gestFatt;
 
     /**
      * Costruttore per inizializzare i percorsi dei file e de-serializzare l'albero.
      *
-     * @param categorieFilePath percorso del file delle categorie
      * @param fattoriFilePath   percorso del file dei fattori
      */
-    public CategorieModel(String categorieFilePath, String fattoriFilePath) {
-        this.filePath = categorieFilePath;
+    public CategorieModel(String fattoriFilePath, CategorieMapper listHandler) {
         this.tree = new Albero();
         this.gestFatt = new FattoriModel(fattoriFilePath);
-        deserializeXML(); // load dati
+        this.mapper = listHandler;
+
+        //deserializeXML(); // load dati
+        this.tree.setRadici(listHandler.read());
     }
 
-    /**
-     * Serializza l'oggetto tree.
-     * Sfrutto l'implementazione statica della classe Serializer.
-     */
-    private void serializeXML() {
-        assert this.tree != null;
-        assert this.filePath != null;
-        Serializer.serialize(this.filePath, this.tree);
-    }
-
-    /**
-     * De-serializza l'oggetto tree.
-     * Sfrutto l'implementazione statica della classe Serializer.
-     */
-    private void deserializeXML() {
-        assert this.tree != null;
-        List<Categoria> tempCat = Serializer.deserialize(new TypeReference<>() {
-        }, this.filePath);
-
-        tree.getRadici().clear();
-        if (tempCat != null) tree.getRadici().addAll(tempCat);
+    public List<Categoria> getRadici(){
+        return tree.getRadici();
     }
 
     /**
@@ -154,7 +141,8 @@ public class CategorieModel  {
         gestFatt.inserisciFattoriDiConversione(radice.getNome(), foglie);
 
         //3. salvataggio dei dati
-        serializeXML();
+        mapper.write(getRadici());
+        //serializeXML();
     }
 
     /**
@@ -345,7 +333,8 @@ public class CategorieModel  {
         String tempCampo = InputDatiTerminale.leggiStringaNonVuota(MSG_INSERIMENTO_NUOVO_DOMINIO);
         // 3. creazione oggetto e aggiunta all'albero
         this.tree.aggiungiRadice(new Categoria(tempNome, tempCampo));
-        serializeXML();
+        //serializeXML();
+        mapper.write(tree.getRadici());
     }
 
     private boolean esisteRadice(String tempNome) {

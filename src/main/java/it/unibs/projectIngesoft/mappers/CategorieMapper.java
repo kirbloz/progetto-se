@@ -1,16 +1,15 @@
-package it.unibs.projectIngesoft.parsing;
+package it.unibs.projectIngesoft.mappers;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import it.unibs.projectIngesoft.attivita.Categoria;
-import it.unibs.projectIngesoft.main.IIOList;
-
-import java.util.ArrayList;
+import it.unibs.projectIngesoft.parsing.JacksonSerializer;
 import java.util.List;
 
-public class CategorieMapper implements IIOList<Categoria> {
+public class CategorieMapper{
 
     private final String filePath;
 
+    private final JacksonSerializer<List<Categoria>> jacksonSerializer;
     // TODO
     /*
         IMPLEMENTARE CATEGORIE WRAPPER.
@@ -18,30 +17,22 @@ public class CategorieMapper implements IIOList<Categoria> {
         L'INTERA GERARCHIA. PORCA PUPAZZA!
      */
 
-
-
-
-
-
-    public CategorieMapper(String filePath) {
+    public CategorieMapper(String filePath, JacksonSerializer<List<Categoria>> jacksonSerializer) {
         this.filePath = filePath;
         //readList(); o set ListaUtenti
+        this.jacksonSerializer = jacksonSerializer;
     }
 
-    @Override
     public void write(List<Categoria> list) {
         assert list!= null;
         assert this.filePath != null;
-        Serializer.serialize(this.filePath, list);
+        jacksonSerializer.serialize(this.filePath, list);
     }
 
-    @Override
     public List<Categoria> read() {
         assert this.filePath != null;
-
-        List<Categoria> tempCat = Serializer.deserialize(new TypeReference<List<Categoria>>() {
+        return this.jacksonSerializer.deserialize(new TypeReference<>() {
         }, this.filePath);
-
-        return (tempCat != null) ?  tempCat : new ArrayList<>();
     }
+
 }

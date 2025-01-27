@@ -56,6 +56,9 @@ public class Albero {
     public List<Categoria> getRadici() {
         return radici;
     }
+    public void setRadici(List<Categoria> radici) {
+        this.radici= radici;
+    }
 
     /**
      * Aggiunge una nuova radice alla lista delle radici.
