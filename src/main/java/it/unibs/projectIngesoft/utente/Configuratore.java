@@ -6,7 +6,7 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 public class Configuratore extends Utente{
 
-    //@JacksonXmlProperty(isAttribute = true, localName = "type")
+    @JacksonXmlProperty(/*isAttribute = true,*/ localName = "type")
     @JsonProperty("type")
     private String type = "Configuratore";
 

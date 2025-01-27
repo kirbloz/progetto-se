@@ -9,15 +9,16 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
  * Può essere ripetuto all'interno di più domini ed ha opzionalmente una descrizione.
  */
 
+
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonRootName("ValoreDominio")
+//@JsonRootName("valoreDominio")
 public class ValoreDominio {
 
     // obbligatorio
-    @JacksonXmlProperty
+    @JacksonXmlProperty(localName="nome")
     private String nome;
     // opzionale
-    @JacksonXmlProperty
+    @JacksonXmlProperty(localName="descrizione")
     private String descrizione;
 
     /**

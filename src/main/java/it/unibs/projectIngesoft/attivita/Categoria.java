@@ -1,6 +1,8 @@
 package it.unibs.projectIngesoft.attivita;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
@@ -16,29 +18,39 @@ import java.util.List;
 @JacksonXmlRootElement(localName = "Categoria")
 public class Categoria {
 
+    @JsonProperty("nome")
     @JacksonXmlProperty(localName = "nome")
     protected String nome;
 
+    @JsonProperty("valoreDominio")
     @JacksonXmlProperty(localName = "valoreDominio")
     protected ValoreDominio valoreDominio;
 
+    @JsonProperty("isRadice")
     @JacksonXmlProperty(localName = "isRadice")
     private boolean isRadice;
 
+    @JsonProperty("isFoglia")
     @JacksonXmlProperty(localName = "isFoglia")
     private boolean isFoglia;
 
+    @JsonProperty("nomeMadre")
     @JacksonXmlProperty(localName = "nomeMadre")
     private String nomeMadre;
 
     // campo che QUESTA categoria eredita dalla madre
+    @JsonProperty("campo")
     @JacksonXmlProperty(localName = "campo")
     private String campo;
 
     // campo definito come dominio a cui appartengono le figlie di QUESTA categoria
+    @JsonProperty("campoFiglie")
     @JacksonXmlProperty(localName = "campoFiglie")
     private String campoFiglie;
 
+
+    //@JsonProperty("Categoria")
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
     @JacksonXmlElementWrapper(localName = "categorieFiglie")
     @JacksonXmlProperty(localName = "Categoria")
     private ArrayList<Categoria> categorieFiglie;

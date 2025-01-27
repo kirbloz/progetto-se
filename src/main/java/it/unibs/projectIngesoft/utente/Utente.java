@@ -19,10 +19,10 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 @JsonRootName("")
 public class Utente {
 
-    //@JacksonXmlProperty(localName = "username")
+    @JacksonXmlProperty(localName = "username")
     @JsonProperty
     protected String username;
-    //@JacksonXmlProperty(localName = "password")
+    @JacksonXmlProperty(localName = "password")
     @JsonProperty("password")
     protected String password;
 

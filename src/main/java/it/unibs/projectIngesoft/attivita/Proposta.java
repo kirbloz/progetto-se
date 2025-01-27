@@ -1,6 +1,7 @@
 package it.unibs.projectIngesoft.attivita;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import it.unibs.projectIngesoft.gestori.UtentiModel;
@@ -11,22 +12,31 @@ import java.util.Stack;
 @JacksonXmlRootElement(localName = "Proposta")
 public class Proposta {
 
+    @JsonProperty
     @JacksonXmlProperty(localName = "richiesta")
     private String richiesta;
+    @JsonProperty
     @JacksonXmlProperty(localName = "offerta")
     private String offerta;
+    @JsonProperty
     @JacksonXmlProperty(localName = "oreRichiesta")
     private int oreRichiesta;
+    @JsonProperty
     @JacksonXmlProperty(localName = "oreOfferta")
     private int oreOfferta;
+    @JsonProperty
     @JacksonXmlProperty(localName = "stato")
     private StatiProposta stato;
+    @JsonProperty
     @JacksonXmlProperty(localName = "autore")
     private String autore;
+    @JsonProperty
     @JacksonXmlProperty(localName = "comprensorioDiAppartenenza")
     private String comprensorioDiAppartenenza;
+    @JsonProperty
     @JacksonXmlProperty(localName = "cronologiaStati")
     private Stack<StatiProposta> cronologiaStati;
+    @JsonProperty
     @JacksonXmlProperty(localName = "daNotificare")
     private boolean daNotificare;
 
