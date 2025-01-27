@@ -6,7 +6,7 @@ import it.unibs.projectIngesoft.attivita.Categoria;
 import it.unibs.projectIngesoft.attivita.FattoreDiConversione;
 import it.unibs.projectIngesoft.attivita.FattoriWrapper;
 import it.unibs.projectIngesoft.libraries.InputDatiTerminale;
-import it.unibs.projectIngesoft.parsing.Serializer;
+import it.unibs.projectIngesoft.parsing.SerializerJSON;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -41,7 +41,7 @@ public class FattoriModel {
     public void serializeXML() {
         assert this.filePath != null;
         assert this.fattori != null;
-        Serializer.serialize(this.filePath, new FattoriWrapper(fattori));
+        //SerializerJSON.serialize(this.filePath, new FattoriWrapper(fattori));
     }
 
     /**
@@ -49,11 +49,11 @@ public class FattoriModel {
      * Sfrutto l'implementazione statica della classe Serializer.
      */
     public void deserializeXML() {
-        FattoriWrapper tempWrapper = Serializer.deserialize(new TypeReference<>() {
+        /*FattoriWrapper tempWrapper = SerializerJSON.deserialize(new TypeReference<>() {
         }, filePath);
         if (tempWrapper != null) {
             fattori = tempWrapper.toHashMap();
-        }
+        }*/
     }
 
     public boolean esisteCategoriaChiave(String chiave) {

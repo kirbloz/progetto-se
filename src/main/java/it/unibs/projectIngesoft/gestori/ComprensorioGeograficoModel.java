@@ -3,7 +3,7 @@ package it.unibs.projectIngesoft.gestori;
 import com.fasterxml.jackson.core.type.TypeReference;
 import it.unibs.projectIngesoft.attivita.ComprensorioGeografico;
 import it.unibs.projectIngesoft.libraries.InputDatiTerminale;
-import it.unibs.projectIngesoft.parsing.Serializer;
+import it.unibs.projectIngesoft.parsing.SerializerJSON;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +20,7 @@ public class ComprensorioGeograficoModel {
     public static final String WARNING_NO_COMPRENSORI = ">> (!!) Non ci sono comprensori memorizzati.";
 
     private final String filePath;
-    private ArrayList<ComprensorioGeografico> listaComprensoriGeografici;
+    private List<ComprensorioGeografico> listaComprensoriGeografici;
 
     public ComprensorioGeograficoModel(String filePath) {
         this.filePath = filePath;
@@ -37,11 +37,11 @@ public class ComprensorioGeograficoModel {
         if (this.listaComprensoriGeografici == null)
             listaComprensoriGeografici = new ArrayList<>();
 
-        List<ComprensorioGeografico> listaLetta = Serializer.deserialize(new TypeReference<>() {
+        /*List<ComprensorioGeografico> listaLetta = SerializerJSON.deserialize(new TypeReference<>() {
         }, this.filePath);
         this.listaComprensoriGeografici.clear();
         if (listaLetta != null)
-            this.listaComprensoriGeografici.addAll(listaLetta);
+            this.listaComprensoriGeografici.addAll(listaLetta);*/
     }
 
     /**
@@ -51,7 +51,7 @@ public class ComprensorioGeograficoModel {
     public void serializeXML() {
         assert this.listaComprensoriGeografici != null;
         assert this.filePath != null;
-        Serializer.serialize(this.filePath, this.listaComprensoriGeografici);
+        //SerializerJSON.serialize(this.filePath, this.listaComprensoriGeografici);
     }
 
     /**

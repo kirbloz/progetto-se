@@ -2,6 +2,9 @@ package it.unibs.projectIngesoft.main;
 
 import it.unibs.projectIngesoft.gestori.*;
 import it.unibs.projectIngesoft.libraries.Menu;
+import it.unibs.projectIngesoft.mappers.CategorieMapper;
+import it.unibs.projectIngesoft.mappers.ProposteMapper;
+import it.unibs.projectIngesoft.parsing.SerializerJSON;
 import it.unibs.projectIngesoft.utente.Configuratore;
 import it.unibs.projectIngesoft.utente.Utente;
 import it.unibs.projectIngesoft.view.AccessoView;
@@ -133,7 +136,10 @@ public class Main {
 
     private static void loopProposte(Menu menuProposta, Utente utenteAttivo) {
         int scelta;
-        ProposteModel proposteModel = new ProposteModel(PROPOSTE_XML_FILEPATH, FATTORI_DI_CONVERSIONE_XML_FILEPATH, utenteAttivo);
+        ProposteModel proposteModel = new ProposteModel(PROPOSTE_XML_FILEPATH,
+                FATTORI_DI_CONVERSIONE_XML_FILEPATH,
+                utenteAttivo,
+                new ProposteMapper(PROPOSTE_XML_FILEPATH, new SerializerJSON<>()));
         do {
             scelta = menuProposta.scegli();
             proposteModel.entryPoint(scelta);
@@ -147,7 +153,9 @@ public class Main {
      */
     private static void loopCategorie(Menu menuCategorie, boolean isConfiguratore) {
         int scelta;
-        CategorieModel categorieModelCat = new CategorieModel(CATEGORIE_XML_FILEPATH, FATTORI_DI_CONVERSIONE_XML_FILEPATH);
+        CategorieModel categorieModelCat = new CategorieModel(/*CATEGORIE_XML_FILEPATH,*/
+                FATTORI_DI_CONVERSIONE_XML_FILEPATH,
+                new CategorieMapper(CATEGORIE_XML_FILEPATH, new SerializerJSON<>()));
         do {
             scelta = menuCategorie.scegli();
             categorieModelCat.entryPoint(scelta, isConfiguratore);
