@@ -1,6 +1,8 @@
 package mapper;
 
-import it.unibs.projectIngesoft.parsing.UtentiMapper;
+import it.unibs.projectIngesoft.parsing.SerializerJSON;
+import it.unibs.projectIngesoft.parsing.SerializerXML;
+import it.unibs.projectIngesoft.mappers.UtentiMapper;
 import it.unibs.projectIngesoft.utente.Configuratore;
 import it.unibs.projectIngesoft.utente.Fruitore;
 import it.unibs.projectIngesoft.utente.Utente;
@@ -18,7 +20,17 @@ class UtentiMapperTest {
 
     @BeforeEach
     void prepareTest(){
-        this.mapper = new UtentiMapper("usersTest.json", "defaultCredentials.json");
+        this.mapper = new UtentiMapper("usersTest.json",
+                "defaultCredentials.json",
+                new SerializerJSON<List<Utente>>(),
+                new SerializerJSON<Utente>());
+
+        this.mapper = new UtentiMapper("users.xml",
+                "defaultCredentials.xml",
+                new SerializerXML<List<Utente>>(),
+                new SerializerXML<Utente>());
+
+        //this.mapper = new UtentiMapper("usersTest.json", "defaultCredentials.json");
         //ObjectMapper objectMapper = new ObjectMapper();
     }
 
@@ -45,6 +57,10 @@ class UtentiMapperTest {
     @Test
     void readTest() throws IOException {
         List<Utente> utenti = mapper.read();
+        //JSONMapper mapper2 = new JSONMapper("usersTest.json");
+       //List<Utente> utenti = mapper2.readList(Utente.class);
+
+        for(Utente utente : utenti){System.out.println(utente);}
 
         assert utenti != null;
         assert utenti.get(0).getUsername().equals("tizianoFerro");
@@ -59,6 +75,7 @@ class UtentiMapperTest {
 
         //List<Utente> utenti = mapper.read();
         Utente def = mapper.readDefaultUtente();
+        System.out.println(def);
         assert def.getUsername().equals("admin");
     }
 }

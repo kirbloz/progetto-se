@@ -1,8 +1,7 @@
 package it.unibs.projectIngesoft.gestori;
 
 import it.unibs.projectIngesoft.libraries.InputDatiTerminale;
-import it.unibs.projectIngesoft.main.IIOList;
-import it.unibs.projectIngesoft.parsing.UtentiMapper;
+import it.unibs.projectIngesoft.mappers.UtentiMapper;
 import it.unibs.projectIngesoft.utente.Configuratore;
 import it.unibs.projectIngesoft.utente.Fruitore;
 import it.unibs.projectIngesoft.utente.Utente;
@@ -27,26 +26,21 @@ public class UtentiModel {
     //
 
 
-    private static ArrayList<Utente> utenti;
+    private static List<Utente> utenti;
     private Utente defaultUtente;
-
-    //devo aggiungere un livello di indirezione perchè
-    // prima era IIOList che non prevedeva di leggere un utente
-    //di default e quindi non esisteva il metodo
-    //.readDefaultUtente
     private UtentiMapper listHandler;
 
     public UtentiModel(UtentiMapper listHandler) {
         this.listHandler = listHandler;
-        utenti = new ArrayList<>(listHandler.read());
-        defaultUtente = listHandler.readDefaultUtente();
+        utenti = listHandler.read();
+        this.defaultUtente = listHandler.readDefaultUtente();
     }
 
     private static ArrayList<Utente> getListaUtenti() {
         if (utenti == null) {
             utenti = new ArrayList<>();
         }
-        return utenti;
+        return new ArrayList<>(utenti);
     }
 
     public static Fruitore getInformazioniFruitore(String username) {
@@ -151,7 +145,7 @@ public class UtentiModel {
         do {
             newUsername = InputDatiTerminale.leggiStringaNonVuota(MSG_RICHIESTA_NEW_USERNAME);
             newPassword = InputDatiTerminale.leggiStringaNonVuota(MSG_RICHIESTA_NEW_PASSWORD);
-        } while (cercaConUsername(newUsername) != null);
+        } while (!existsUsername(newUsername));
         C1.cambioCredenziali(newUsername, newPassword);
         //writeList();
     }
@@ -169,6 +163,13 @@ public class UtentiModel {
                 .findFirst()
                 .orElse(null);
     }
+
+    public boolean existsUsername(String username) {
+        assert utenti != null;
+        return utenti.stream()
+                .anyMatch(usr -> usr.getUsername().equals(username));
+    }
+
 
     /**
      * Ricerca all'interno dell'attributo utenti 'esistenza della coppia username e password data in ingresso
