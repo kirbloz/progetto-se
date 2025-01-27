@@ -1,6 +1,7 @@
 package it.unibs.projectIngesoft.XMLparsing;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import it.unibs.projectIngesoft.parsing.Serializer;
 import it.unibs.projectIngesoft.utente.Utente;
 
 import java.util.ArrayList;

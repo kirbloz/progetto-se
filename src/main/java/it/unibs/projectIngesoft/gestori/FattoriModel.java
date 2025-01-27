@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import static it.unibs.projectIngesoft.view.ConfiguratoreView.*;
+
 /**
  * Si occupa di calcolare, memorizzare e leggere i Fattori di Conversione relativi alle Categorie.
  * Non conosce chi gestisce le categorie, ma mette a disposizione i suoi metodi.
