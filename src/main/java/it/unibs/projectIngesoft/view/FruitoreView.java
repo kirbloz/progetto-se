@@ -1,6 +1,8 @@
 package it.unibs.projectIngesoft.view;
 
-public class FruitoreView {
+import it.unibs.projectIngesoft.libraries.InputDatiTerminale;
+
+public class FruitoreView implements UtenteViewableTerminal{
 
     public static final String TITLE_MAIN_MENU = "MENU' PRINCIPALE - SCAMBIO ORE";
     public static final String[] vociMainFruitore = new String[]{
@@ -23,7 +25,18 @@ public class FruitoreView {
     };
 
 
+    @Override
+    public void stampaMenu() {
+        System.out.println("TO IMPLEMENT");
+    }
 
+    @Override
+    public int getUserSelection() {
+        return InputDatiTerminale.leggiInteroConMinimo(">> Selezione (>0): ", 0);
+    }
 
-
+    @Override
+    public String getUserInput() {
+        return InputDatiTerminale.leggiStringaNonVuota(">> Input stringa: ");
+    }
 }

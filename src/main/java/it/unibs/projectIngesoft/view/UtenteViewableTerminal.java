@@ -5,5 +5,7 @@ package it.unibs.projectIngesoft.view;
 public interface UtenteViewableTerminal {
 
      void stampaMenu();
+     int getUserSelection();
+     String getUserInput();
 
 }
