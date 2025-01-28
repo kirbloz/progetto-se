@@ -1,18 +1,21 @@
 package it.unibs.projectIngesoft.main;
 
+import it.unibs.projectIngesoft.controller.AccessoController;
+import it.unibs.projectIngesoft.controller.UtentiController;
 import it.unibs.projectIngesoft.gestori.*;
 import it.unibs.projectIngesoft.libraries.Menu;
 import it.unibs.projectIngesoft.mappers.CategorieMapper;
 import it.unibs.projectIngesoft.mappers.CompGeoMapper;
 import it.unibs.projectIngesoft.mappers.ProposteMapper;
+import it.unibs.projectIngesoft.mappers.UtentiMapper;
 import it.unibs.projectIngesoft.parsing.SerializerJSON;
 import it.unibs.projectIngesoft.utente.Configuratore;
 import it.unibs.projectIngesoft.utente.Utente;
 import it.unibs.projectIngesoft.view.AccessoView;
-import it.unibs.projectIngesoft.view.ConfiguratoreView;
-import it.unibs.projectIngesoft.view.FruitoreView;
 
 import java.util.ArrayList;
+import java.util.List;
+
 
 public class Main {
 
@@ -26,17 +29,22 @@ public class Main {
 
     public static void main(String[] args) {
 
+
+
+        ErmesController ermesController = new ErmesController();
+        ermesController.mainLoop();
+
         // start -> caricare controller utenti -> controller utenti login + view utenti login
 
         // controller utenti crea gestore utenti
         // controller utenti chiama view utenti per login
-            // si attende input utente
+        // si attende input utente
 
         // loop menu -> richiama controller menu
-            // menuController.start();
+        // menuController.start();
 
         // stop
-            // menuController.stop(); che stampa ARRIVEDERCI
+        // menuController.stop(); che stampa ARRIVEDERCI
 
 
 
