@@ -1,16 +1,16 @@
 package it.unibs.projectIngesoft.gestori;
 
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import it.unibs.projectIngesoft.attivita.Categoria;
 import it.unibs.projectIngesoft.attivita.FattoreDiConversione;
-import it.unibs.projectIngesoft.attivita.FattoriWrapper;
+import it.unibs.projectIngesoft.attivita.Proposta;
 import it.unibs.projectIngesoft.libraries.InputDatiTerminale;
-import it.unibs.projectIngesoft.parsing.SerializerJSON;
+import it.unibs.projectIngesoft.mappers.FattoriMapper;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static it.unibs.projectIngesoft.view.ConfiguratoreView.*;
 
@@ -24,40 +24,59 @@ public class FattoriModel {
     public static final double MAX_FATTORE = 2.0;
 
 
-    private final String filePath;
+    //private final String filePath;
+    private Map<String, List<FattoreDiConversione>> hashListaFattori;
+    private final FattoriMapper mapper;
 
-    private HashMap<String, ArrayList<FattoreDiConversione>> fattori;
+    public FattoriModel(/*String filePath,*/ FattoriMapper mapper) {
+        //this.filePath = filePath;
+        this.hashListaFattori = new HashMap<>();
+        this.mapper = mapper;
+        hashListaFattori = mapper.read();
+        if(hashListaFattori==null) {
+            hashListaFattori = new HashMap<>();
+        }
+        //deserializeXML(); //load dati
+    }
 
-    public FattoriModel(String filePath) {
-        this.filePath = filePath;
-        this.fattori = new HashMap<>();
-        deserializeXML(); //load dati
+    /**
+     * Costruttore vuoto e finto. Non fa nulla.
+     */
+    public FattoriModel() {
+        //this.filePath = "";
+        this.mapper = null;
+        //empty constructor
+        System.out.println("fake fattoriModel");
     }
 
     /**
      * Serializza l'oggetto fattori trasformato dalla classe FattoriWrapper.
      * Sfrutto l'implementazione statica della classe Serializer.
      */
-    public void serializeXML() {
+    /*public void serializeXML() {
         assert this.filePath != null;
         assert this.fattori != null;
         //SerializerJSON.serialize(this.filePath, new FattoriWrapper(fattori));
-    }
+    }*/
 
     /**
      * De-serializza l'oggetto fattori tramite la classe FattoriWrapper.
      * Sfrutto l'implementazione statica della classe Serializer.
      */
-    public void deserializeXML() {
-        /*FattoriWrapper tempWrapper = SerializerJSON.deserialize(new TypeReference<>() {
+    /*public void deserializeXML() {
+        FattoriWrapper tempWrapper = SerializerJSON.deserialize(new TypeReference<>() {
         }, filePath);
         if (tempWrapper != null) {
             fattori = tempWrapper.toHashMap();
-        }*/
+        }
+    }*/
+
+    public HashMap<String, List<FattoreDiConversione>> getHashListaFattori() {
+        return new HashMap<>(hashListaFattori);
     }
 
     public boolean esisteCategoriaChiave(String chiave) {
-        return fattori.containsKey(chiave);
+        return hashListaFattori.containsKey(chiave);
     }
 
     /**
@@ -72,7 +91,7 @@ public class FattoriModel {
         FattoreDiConversione fattore = controllaESostituisciValoriFuoriScala(tempValue);
         // computeIfAbsent verifica se la chiave tempKey esiste già: se non esiste, la aggiunge e crea una nuova arraylist come valore
         // in entrambi i casi, aggiunge il fattore alla lista.
-        this.fattori.computeIfAbsent(tempKey, k -> new ArrayList<>()).add(fattore);
+        this.hashListaFattori.computeIfAbsent(tempKey, k -> new ArrayList<>()).add(fattore);
     }
 
     private FattoreDiConversione controllaESostituisciValoriFuoriScala(FattoreDiConversione fattoreDaControllare) {
@@ -93,6 +112,7 @@ public class FattoriModel {
         for (FattoreDiConversione f : fattori) {
             addFattore(f.getNome_c1(), f);
         }
+        mapper.write(hashListaFattori);
     }
 
 
@@ -108,10 +128,10 @@ public class FattoriModel {
 
         // caso hashmap non è vuota ma c'è solo una chiave => hai solo una foglia esterna
         // OPPURE hashmap non è vuota e c'è più di una chiave => situazione standard
-        if (!fattori.isEmpty()) {
+        if (!hashListaFattori.isEmpty()) {
             // 1. scegliere una categoria per cui i fattori siano GIA' stati calcolati
             // -> permette di calcolare tutti i nuovi chiedendo un solo inserimento di valore del fattore
-            for (String key : fattori.keySet()) {
+            for (String key : hashListaFattori.keySet()) {
                 System.out.println(key);
             }
             String nomeFogliaEsternaFormattata = selezioneFoglia(MSG_INSERISCI_FOGLIA_ESTERNA);
@@ -139,10 +159,10 @@ public class FattoriModel {
         // caso hashmap è vuota e non hai i nuovi => è la prima radice ed hai solo una foglia nuova
         else {
             // 1. prepara la chiave e un arraylist vuoto, non puoi calcolare nessun fattore
-            fattori.put(factorNameBuilder(nomeRadice, foglie.getFirst().getNome()), new ArrayList<>());
+            hashListaFattori.put(factorNameBuilder(nomeRadice, foglie.getFirst().getNome()), new ArrayList<>());
         }
-
-        serializeXML(); // memorizza su file
+        mapper.write(hashListaFattori);
+        //serializeXML(); // memorizza su file
     }
 
     /**
@@ -212,7 +232,7 @@ public class FattoriModel {
      * @return stringa formattata come "radice:foglia"
      */
     public String selezioneFoglia(String messaggio) {
-        for (String key : fattori.keySet()) {
+        for (String key : hashListaFattori.keySet()) {
             System.out.println(key);
         }
         // inserimento guidato e controllo [Old:A in (Old:A New:A x)]
@@ -227,7 +247,7 @@ public class FattoriModel {
                     InputDatiTerminale.leggiStringaNonVuota(MSG_INSERISCI_NOME_RADICE),
                     InputDatiTerminale.leggiStringaNonVuota(MSG_INSERISCI_NOME_FOGLIA)
             );
-        } while (!fattori.containsKey(nomeFogliaFormattato));
+        } while (!hashListaFattori.containsKey(nomeFogliaFormattato));
         return nomeFogliaFormattato;
     }
 
@@ -274,7 +294,7 @@ public class FattoriModel {
         //per ogni nuovo fattore nel formato (Interno:X Esterno:A)
         for (FattoreDiConversione fattoreInternoASingoloEsterno : nuoviInterniASingoloEsterno) {
             //Per ogni Fattore che ha come Key la foglia Esterno:A
-            for (FattoreDiConversione fattoreInMemoria : fattori.get(fattoreInternoASingoloEsterno.getNome_c2())) {
+            for (FattoreDiConversione fattoreInMemoria : hashListaFattori.get(fattoreInternoASingoloEsterno.getNome_c2())) {
                 //Genero i fattori con tutto il resto del fuori
                 FattoreDiConversione fattoreInternoEsterno = new FattoreDiConversione(fattoreInternoASingoloEsterno.getNome_c1(), fattoreInMemoria.getNome_c2(), fattoreInternoASingoloEsterno.getFattore() * fattoreInMemoria.getFattore());
                 FattoreDiConversione fattoreEsternoInterno = generaInverso(fattoreInternoEsterno);
@@ -320,8 +340,8 @@ public class FattoriModel {
      */
     public String stringaFattoriDataCategoria(String categoriaFormattata) {
         StringBuilder sb = new StringBuilder();
-        if (fattori.containsKey(categoriaFormattata)) {
-            for (FattoreDiConversione f : fattori.get(categoriaFormattata)) {
+        if (hashListaFattori.containsKey(categoriaFormattata)) {
+            for (FattoreDiConversione f : hashListaFattori.get(categoriaFormattata)) {
                 String valoreFormattato = String.format("%.3f", f.getFattore());
                 sb.append("[ ")
                         .append(f.getNome_c1()).append(", ").append(f.getNome_c2())
@@ -336,11 +356,11 @@ public class FattoriModel {
      * I fattori sono raggruppati in base alla prima categoria.
      */
     private void visualizzaFattori() {
-        if (fattori.isEmpty()) {
+        if (hashListaFattori.isEmpty()) {
             System.out.println(WARNING_NO_FATTORI_MEMORIZZATI);
             return;
         }
-        for (String key : fattori.keySet()) {
+        for (String key : hashListaFattori.keySet()) {
             System.out.println(key);
         }
         System.out.println(MSG_INSERISCI_CATEGORIA_VISUALIZZA_FATTORI);
@@ -372,7 +392,7 @@ public class FattoriModel {
      * se non esistono fattori di conversione tra le categorie indicate, ritorna -1
      */
     public int calcolaRapportoOre(String richiesta, String offerta, int oreRichiesta) {
-        for (FattoreDiConversione f : fattori.get(richiesta)) {
+        for (FattoreDiConversione f : hashListaFattori.get(richiesta)) {
             if (f.getNome_c2().equals(offerta)) {
                 return (int) Math.rint(oreRichiesta * f.getFattore());
             }

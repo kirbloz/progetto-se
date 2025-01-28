@@ -1,7 +1,12 @@
 package it.unibs.projectIngesoft.attivita;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * FattoreDiConversione rappresenta un fattore di conversione tra due categorie.
@@ -83,4 +88,6 @@ public class FattoreDiConversione {
     public String toString() {
         return nome_c1 + " " + nome_c2 + " " + fattore;
     }
+
+
 }
