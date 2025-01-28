@@ -3,6 +3,7 @@ package it.unibs.projectIngesoft.main;
 import it.unibs.projectIngesoft.gestori.*;
 import it.unibs.projectIngesoft.libraries.Menu;
 import it.unibs.projectIngesoft.mappers.CategorieMapper;
+import it.unibs.projectIngesoft.mappers.CompGeoMapper;
 import it.unibs.projectIngesoft.mappers.ProposteMapper;
 import it.unibs.projectIngesoft.parsing.SerializerJSON;
 import it.unibs.projectIngesoft.utente.Configuratore;
@@ -127,7 +128,8 @@ public class Main {
      */
     private static void loopComprensoriGeografici(Menu menuComprensoriGeografici) {
         int scelta;
-        ComprensorioGeograficoModel gestoreComprensori = new ComprensorioGeograficoModel(COMPRENSORI_GEOGRAFICI_XML_FILEPATH);
+        ComprensorioGeograficoModel gestoreComprensori = new ComprensorioGeograficoModel(
+                new CompGeoMapper("comprensoriGeografici.json", new SerializerJSON<>()) /*COMPRENSORI_GEOGRAFICI_XML_FILEPATH*/);
         do {
             scelta = menuComprensoriGeografici.scegli();
             gestoreComprensori.entryPoint(scelta);
@@ -169,7 +171,7 @@ public class Main {
      */
     private static void loopFattori(Menu menuFattori) {
         int scelta;
-        FattoriModel fattoriModel = new FattoriModel(FATTORI_DI_CONVERSIONE_XML_FILEPATH);
+        FattoriModel fattoriModel = new FattoriModel(/*FATTORI_DI_CONVERSIONE_XML_FILEPATH*/);
         do {
             scelta = menuFattori.scegli();
             fattoriModel.entryPoint(scelta);
