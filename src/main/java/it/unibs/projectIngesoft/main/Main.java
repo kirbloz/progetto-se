@@ -138,9 +138,7 @@ public class Main {
 
     private static void loopProposte(Menu menuProposta, Utente utenteAttivo) {
         int scelta;
-        ProposteModel proposteModel = new ProposteModel(PROPOSTE_XML_FILEPATH,
-                FATTORI_DI_CONVERSIONE_XML_FILEPATH,
-                utenteAttivo,
+        ProposteModel proposteModel = new ProposteModel(utenteAttivo,
                 new ProposteMapper(PROPOSTE_XML_FILEPATH, new SerializerJSON<>()));
         do {
             scelta = menuProposta.scegli();
