@@ -28,15 +28,15 @@ public class UtentiModel {
 
     private static List<Utente> utenti;
     private Utente defaultUtente;
-    private UtentiMapper listHandler;
+    private UtentiMapper mapper;
 
-    public UtentiModel(UtentiMapper listHandler) {
-        this.listHandler = listHandler;
-        utenti = listHandler.read();
-        this.defaultUtente = listHandler.readDefaultUtente();
+    public UtentiModel(UtentiMapper mapper) {
+        this.mapper = mapper;
+        utenti = mapper.read();
+        this.defaultUtente =  mapper.readDefaultUtente();
     }
 
-    private static ArrayList<Utente> getListaUtenti() {
+    private static List<Utente> getListaUtenti() {
         if (utenti == null) {
             utenti = new ArrayList<>();
         }
@@ -61,11 +61,11 @@ public class UtentiModel {
         assert utenti != null;
         if (!utenti.contains(utente)) {
             utenti.add(utente);
-            //writeList(this.utenti);
+            mapper.write(utenti);
         }
     }
 
-    public Utente register(ArrayList<String> possibiliComprensori) {
+    public Utente register(List<String> possibiliComprensori) {
         String comprensorio;
         String username;
         String password;
@@ -83,7 +83,7 @@ public class UtentiModel {
         }
 
         username = InputDatiTerminale.leggiStringaNonVuota(MSG_RICHIESTA_USERNAME);
-        while (!(cercaConUsername(username) == null)) {
+        while ((cercaConUsername(username) != null)) {
             System.out.println(MSG_UTENTE_ESISTENTE);
             username = InputDatiTerminale.leggiStringaNonVuota(MSG_RICHIESTA_USERNAME);
         }
@@ -147,7 +147,7 @@ public class UtentiModel {
             newPassword = InputDatiTerminale.leggiStringaNonVuota(MSG_RICHIESTA_NEW_PASSWORD);
         } while (!existsUsername(newUsername));
         C1.cambioCredenziali(newUsername, newPassword);
-        //writeList();
+        mapper.write(utenti);
     }
 
     /**

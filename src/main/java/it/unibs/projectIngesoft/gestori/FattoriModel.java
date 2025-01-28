@@ -3,7 +3,6 @@ package it.unibs.projectIngesoft.gestori;
 
 import it.unibs.projectIngesoft.attivita.Categoria;
 import it.unibs.projectIngesoft.attivita.FattoreDiConversione;
-import it.unibs.projectIngesoft.attivita.Proposta;
 import it.unibs.projectIngesoft.libraries.InputDatiTerminale;
 import it.unibs.projectIngesoft.mappers.FattoriMapper;
 
@@ -23,55 +22,28 @@ public class FattoriModel {
     public static final double MIN_FATTORE = 0.5;
     public static final double MAX_FATTORE = 2.0;
 
-
-    //private final String filePath;
     private Map<String, List<FattoreDiConversione>> hashListaFattori;
     private final FattoriMapper mapper;
 
-    public FattoriModel(/*String filePath,*/ FattoriMapper mapper) {
-        //this.filePath = filePath;
+    public FattoriModel( FattoriMapper mapper) {
         this.hashListaFattori = new HashMap<>();
         this.mapper = mapper;
         hashListaFattori = mapper.read();
         if(hashListaFattori==null) {
             hashListaFattori = new HashMap<>();
         }
-        //deserializeXML(); //load dati
     }
 
     /**
      * Costruttore vuoto e finto. Non fa nulla.
      */
     public FattoriModel() {
-        //this.filePath = "";
         this.mapper = null;
         //empty constructor
         System.out.println("fake fattoriModel");
     }
 
-    /**
-     * Serializza l'oggetto fattori trasformato dalla classe FattoriWrapper.
-     * Sfrutto l'implementazione statica della classe Serializer.
-     */
-    /*public void serializeXML() {
-        assert this.filePath != null;
-        assert this.fattori != null;
-        //SerializerJSON.serialize(this.filePath, new FattoriWrapper(fattori));
-    }*/
-
-    /**
-     * De-serializza l'oggetto fattori tramite la classe FattoriWrapper.
-     * Sfrutto l'implementazione statica della classe Serializer.
-     */
-    /*public void deserializeXML() {
-        FattoriWrapper tempWrapper = SerializerJSON.deserialize(new TypeReference<>() {
-        }, filePath);
-        if (tempWrapper != null) {
-            fattori = tempWrapper.toHashMap();
-        }
-    }*/
-
-    public HashMap<String, List<FattoreDiConversione>> getHashListaFattori() {
+    public Map<String, List<FattoreDiConversione>> getHashListaFattori() {
         return new HashMap<>(hashListaFattori);
     }
 
@@ -162,7 +134,6 @@ public class FattoriModel {
             hashListaFattori.put(factorNameBuilder(nomeRadice, foglie.getFirst().getNome()), new ArrayList<>());
         }
         mapper.write(hashListaFattori);
-        //serializeXML(); // memorizza su file
     }
 
     /**

@@ -51,15 +51,14 @@ public class ProposteModel {
     @JacksonXmlElementWrapper(localName = "listaProposte")
     @JacksonXmlProperty(localName = "Proposta")
     private Map<String, List<Proposta>> hashListaProposte;
+    // TODO sostituire con un'interazione con il controller
     private final FattoriModel gestFatt;
-    private final String filePath;
     private final Utente utenteAttivo;
 
     private final ProposteMapper mapper;
 
-    public ProposteModel(String proposteFilepath, String fattoriFilePath, Utente utenteAttivo, ProposteMapper mapper) {
+    public ProposteModel(Utente utenteAttivo, ProposteMapper mapper) {
         this.gestFatt = new FattoriModel();
-        this.filePath = proposteFilepath;
 
         this.hashListaProposte = new HashMap<>();
         this.utenteAttivo = utenteAttivo;
@@ -70,40 +69,14 @@ public class ProposteModel {
     }
 
 
-    public HashMap<String, List<Proposta>> getHashListaProposte() {
+    public Map<String, List<Proposta>> getHashListaProposte() {
         return new HashMap<>(hashListaProposte);
     }
-
-    /**
-     * Serializza this.listaProposte.
-     * Sfrutto l'implementazione statica della classe Serializer.
-     */
-    /*private void serializeXML() {
-        assert this.hashListaProposte != null;
-        assert this.filePath != null;
-        //SerializerJSON.serialize(this.filePath, new ProposteWrapper(listaProposte));
-    }*/
-
-    /**
-     * De-serializza this.listaProposte.
-     * Sfrutto l'implementazione statica della classe Serializer.
-     */
-    /*private void deserializeXML() {
-        assert this.hashListaProposte != null;
-
-        ProposteWrapper tempWrapper = SerializerJSON.deserialize(new TypeReference<>() {
-        }, filePath);
-        if (tempWrapper != null) {
-            listaProposte = tempWrapper.toHashMap();
-        }
-
-    }*/
 
     public void addProposta(Proposta proposta) {
         assert this.hashListaProposte != null;
         this.hashListaProposte.computeIfAbsent(proposta.getComprensorio(), k -> new ArrayList<>()).add(proposta);
         mapper.write(new HashMap<>(hashListaProposte));
-        //serializeXML();
     }
 
     /**
@@ -187,8 +160,7 @@ public class ProposteModel {
 
         catena.add(nuovaProposta); // aggiungo la nuova così posso chiuderle tutte
         catena.forEach(Proposta::setChiusa);
-        mapper.write(new HashMap<>(hashListaProposte));
-        //serializeXML(); // aggiorno i dati salvati con i nuovi stati
+        mapper.write(new HashMap<>(hashListaProposte)); // aggiorno i dati salvati con i nuovi stati
     }
 
     private ArrayList<Proposta> concatenaCompatibili(Proposta first, Proposta last, ArrayList<Proposta> proposteComprensorio) {
@@ -289,7 +261,7 @@ public class ProposteModel {
             daCambiare.setRitirata();
         }
         System.out.println(MSG_STATO_MODIFICATO.formatted(statoNuovo));
-        //serializeXML();
+
         mapper.write(new HashMap<>(hashListaProposte));
     }
 
@@ -372,8 +344,6 @@ public class ProposteModel {
                     System.out.println(MSG_FORMATTED_PROPOSTA_PRONTA.formatted(autore.getUsername(), comprensorio, email));
                     proposta.notificata();
                 });
-
-        //serializeXML();
         mapper.write(new HashMap<>(hashListaProposte));
     }
 

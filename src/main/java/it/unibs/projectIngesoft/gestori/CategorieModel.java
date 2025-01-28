@@ -1,15 +1,12 @@
 package it.unibs.projectIngesoft.gestori;
 
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import it.unibs.projectIngesoft.attivita.Albero;
 import it.unibs.projectIngesoft.attivita.Categoria;
 import it.unibs.projectIngesoft.attivita.ValoreDominio;
 import it.unibs.projectIngesoft.libraries.InputDatiTerminale;
 import it.unibs.projectIngesoft.libraries.Menu;
 import it.unibs.projectIngesoft.mappers.CategorieMapper;
-import it.unibs.projectIngesoft.parsing.JacksonSerializer;
-import it.unibs.projectIngesoft.parsing.SerializerJSON;
 
 import java.util.List;
 
@@ -80,11 +77,17 @@ public class CategorieModel  {
         this.mapper = listHandler;
 
         //deserializeXML(); // load dati
-        this.tree.setRadici(listHandler.read());
+        this.tree.setRadici(mapper.read());
     }
 
     public List<Categoria> getRadici(){
+        this.tree.setRadici(mapper.read());
         return tree.getRadici();
+    }
+
+    public void setRadici(List<Categoria> radici) {
+        tree.setRadici(radici);
+        mapper.write(tree.getRadici());
     }
 
     /**
