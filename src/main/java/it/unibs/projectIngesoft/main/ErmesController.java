@@ -5,9 +5,13 @@ import it.unibs.projectIngesoft.libraries.EventListener;
 import it.unibs.projectIngesoft.mappers.UtentiMapper;
 import it.unibs.projectIngesoft.gestori.UtentiModel;
 import it.unibs.projectIngesoft.parsing.SerializerJSON;
+import it.unibs.projectIngesoft.utente.Configuratore;
 import it.unibs.projectIngesoft.utente.Utente;
 import it.unibs.projectIngesoft.controller.UtentiController;
 import it.unibs.projectIngesoft.view.AccessoView;
+import it.unibs.projectIngesoft.view.ConfiguratoreView;
+import it.unibs.projectIngesoft.view.FruitoreView;
+import it.unibs.projectIngesoft.view.UtenteViewableTerminal;
 
 public class ErmesController implements EventListener {
 
@@ -19,8 +23,10 @@ public class ErmesController implements EventListener {
     }
 
     public void mainLoop(){
+        UtenteViewableTerminal view;
+
         //Dove svilupperemo la logica principale del programma, visto che il main lo lasceremo pressoché vuoto
-        do {
+        //do {
             UtentiMapper utentiMapper = new UtentiMapper("users.json",
                     "defeaultCredentials.json",
                                         new SerializerJSON<>(),
@@ -29,15 +35,40 @@ public class ErmesController implements EventListener {
             AccessoController controllerAccesso = new AccessoController(utentiModel);
             AccessoView viewAccesso = new AccessoView(controllerAccesso);
 
-            controllerAccesso.events.subscribe("utenteOttenuto", this);
-            viewAccesso.menuIniziale();
+            //controllerAccesso.events.subscribe("utenteOttenuto", this);
+            //viewAccesso.menuIniziale();
 
-            this.utenteAttivo = utentiController.effettuaAccesso();
+            /*this.utenteAttivo = utentiController.effettuaAccesso();
+
+            if(this.utenteAttivo instanceof Configuratore){
+                view = new ConfiguratoreView();
+            }else{
+                view = new FruitoreView();
+            }*/
 
 
-        }while(true);
+        //}while(true);
+        /*boolean exit = false;
+        while (!exit) {
+            view.stampaMenu();
+            int choice = view.getUserSelection();
+            switch (choice) {
+                case 1:
+                    //fai qualcosa
+                    break;
+                case 2:
+                    //fai altro
+                    break;
+                case 3:
+                    exit = true;
+                    break;
+                default:
+                    //view.printMessage("Opzione non valida. Riprova.");
+            }
+        }*/
 
     }
+
 
 
     @Override
