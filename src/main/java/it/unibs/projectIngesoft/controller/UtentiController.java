@@ -33,6 +33,7 @@ public class UtentiController {
 
     private Utente gestioneMenuIniziale(){
         Utente utenteAttivo = null;
+        int option = 1;
         switch(option){
             case 1:
                 utenteAttivo = login();

@@ -3,6 +3,7 @@ package it.unibs.projectIngesoft.gestori;
 import com.fasterxml.jackson.core.type.TypeReference;
 import it.unibs.projectIngesoft.attivita.ComprensorioGeografico;
 import it.unibs.projectIngesoft.libraries.InputDatiTerminale;
+import it.unibs.projectIngesoft.mappers.CompGeoMapper;
 import it.unibs.projectIngesoft.parsing.SerializerJSON;
 
 import java.util.ArrayList;
@@ -19,40 +20,45 @@ public class ComprensorioGeograficoModel {
     public static final String STR_END_INPUT = "fine";
     public static final String WARNING_NO_COMPRENSORI = ">> (!!) Non ci sono comprensori memorizzati.";
 
-    private final String filePath;
+    //private final String filePath;
     private List<ComprensorioGeografico> listaComprensoriGeografici;
+    private final CompGeoMapper mapper;
 
-    public ComprensorioGeograficoModel(String filePath) {
-        this.filePath = filePath;
-        this.listaComprensoriGeografici = new ArrayList<>();
-        deserializeXML(); // load dati
+    public ComprensorioGeograficoModel(/*String filePath*/CompGeoMapper mapper) {
+        this.mapper = mapper;
+        //this.filePath = filePath;
+        this.listaComprensoriGeografici =  mapper.read();
+        if(this.listaComprensoriGeografici == null) {
+            this.listaComprensoriGeografici = new ArrayList<>();
+        }
+        //deserializeXML(); // load dati
     }
 
     /**
      * De-serializza l'attributo listaComprensoriGeografici.
      * Sfrutto l'implementazione statica della classe Serializer.
      */
-    public void deserializeXML() {
+    /*public void deserializeXML() {
         assert this.filePath != null;
         if (this.listaComprensoriGeografici == null)
             listaComprensoriGeografici = new ArrayList<>();
 
-        /*List<ComprensorioGeografico> listaLetta = SerializerJSON.deserialize(new TypeReference<>() {
+        List<ComprensorioGeografico> listaLetta = SerializerJSON.deserialize(new TypeReference<>() {
         }, this.filePath);
         this.listaComprensoriGeografici.clear();
         if (listaLetta != null)
-            this.listaComprensoriGeografici.addAll(listaLetta);*/
-    }
+            this.listaComprensoriGeografici.addAll(listaLetta);
+    }*/
 
     /**
      * Serializza l'attributo listaComprensoriGeografici.
      * Sfrutto l'implementazione statica della classe Serializer.
      */
-    public void serializeXML() {
+    /*public void serializeXML() {
         assert this.listaComprensoriGeografici != null;
         assert this.filePath != null;
         //SerializerJSON.serialize(this.filePath, this.listaComprensoriGeografici);
-    }
+    }*/
 
     /**
      * Richiama il metodo necessario in base alla selezione dal menu principale.
@@ -67,10 +73,11 @@ public class ComprensorioGeograficoModel {
         }
     }
 
-    private void addComprensorio(ComprensorioGeografico comprensorio) { //Aggiunge il comprensorio alla lista e serializza
+    public void addComprensorio(ComprensorioGeografico comprensorio) { //Aggiunge il comprensorio alla lista e serializza
         if (!this.listaComprensoriGeografici.contains(comprensorio)) {
             this.listaComprensoriGeografici.add(comprensorio);
-            serializeXML();
+            //serializeXML();
+            mapper.write(listaComprensoriGeografici);
         }
     }
 

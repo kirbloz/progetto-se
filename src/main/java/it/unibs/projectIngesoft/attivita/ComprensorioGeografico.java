@@ -1,5 +1,7 @@
 package it.unibs.projectIngesoft.attivita;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,7 +10,9 @@ import java.util.List;
  */
 public class ComprensorioGeografico {
 
+    @JsonProperty
     private String nomeComprensorio;
+    @JsonProperty
     private List<String> listaComuni;
 
     /**
