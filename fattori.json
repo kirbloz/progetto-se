@@ -1,0 +1,2049 @@
+{
+  "Attività di svago:Lezioni di Scacchi" : [ {
+    "nome_c1" : "Attività di svago:Lezioni di Scacchi",
+    "nome_c2" : "Attività di svago:Lezioni di Sudoku",
+    "fattore" : 2.0
+  }, {
+    "nome_c1" : "Attività di svago:Lezioni di Scacchi",
+    "nome_c2" : "Lezioni di musica:Lezioni di storia della musica",
+    "fattore" : 0.8666666666666667
+  }, {
+    "nome_c1" : "Attività di svago:Lezioni di Scacchi",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Letteratura Italiana",
+    "fattore" : 1.3333333333333333
+  }, {
+    "nome_c1" : "Attività di svago:Lezioni di Scacchi",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Filosofia",
+    "fattore" : 1.1904761904761905
+  }, {
+    "nome_c1" : "Attività di svago:Lezioni di Scacchi",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Storia",
+    "fattore" : 0.6349206349206349
+  }, {
+    "nome_c1" : "Attività di svago:Lezioni di Scacchi",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Storia dell'Arte",
+    "fattore" : 0.9523809523809523
+  }, {
+    "nome_c1" : "Attività di svago:Lezioni di Scacchi",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Matematica",
+    "fattore" : 1.0582010582010581
+  }, {
+    "nome_c1" : "Attività di svago:Lezioni di Scacchi",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Fisica",
+    "fattore" : 0.8658008658008658
+  }, {
+    "nome_c1" : "Attività di svago:Lezioni di Scacchi",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Chimica",
+    "fattore" : 0.9523809523809523
+  }, {
+    "nome_c1" : "Attività di svago:Lezioni di Scacchi",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Biologia",
+    "fattore" : 1.0476190476190477
+  }, {
+    "nome_c1" : "Attività di svago:Lezioni di Scacchi",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Scienze della Terra",
+    "fattore" : 1.1428571428571428
+  }, {
+    "nome_c1" : "Attività di svago:Lezioni di Scacchi",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Inglese",
+    "fattore" : 1.3333333333333333
+  }, {
+    "nome_c1" : "Attività di svago:Lezioni di Scacchi",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Spagnolo",
+    "fattore" : 1.3333333333333333
+  }, {
+    "nome_c1" : "Attività di svago:Lezioni di Scacchi",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Francese",
+    "fattore" : 1.2380952380952381
+  }, {
+    "nome_c1" : "Attività di svago:Lezioni di Scacchi",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Tedesco",
+    "fattore" : 0.5
+  }, {
+    "nome_c1" : "Attività di svago:Lezioni di Scacchi",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Latino",
+    "fattore" : 0.761904761904762
+  }, {
+    "nome_c1" : "Attività di svago:Lezioni di Scacchi",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Greco",
+    "fattore" : 1.3333333333333333
+  }, {
+    "nome_c1" : "Attività di svago:Lezioni di Scacchi",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Arabo",
+    "fattore" : 1.3333333333333333
+  }, {
+    "nome_c1" : "Attività di svago:Lezioni di Scacchi",
+    "nome_c2" : "Ripetizioni Scolastiche:Svago",
+    "fattore" : 0.9523809523809523
+  }, {
+    "nome_c1" : "Attività di svago:Lezioni di Scacchi",
+    "nome_c2" : "Ripetizioni Scolastiche:Giochi di Logica",
+    "fattore" : 0.9523809523809523
+  }, {
+    "nome_c1" : "Attività di svago:Lezioni di Scacchi",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Informatica",
+    "fattore" : 0.9523809523809523
+  }, {
+    "nome_c1" : "Attività di svago:Lezioni di Scacchi",
+    "nome_c2" : "Lezioni di musica:Lezioni di solfeggio",
+    "fattore" : 0.6666666666666666
+  } ],
+  "Ripetizioni Scolastiche:Svago" : [ {
+    "nome_c1" : "Ripetizioni Scolastiche:Svago",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Letteratura Italiana",
+    "fattore" : 1.0
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Svago",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Filosofia",
+    "fattore" : 1.0
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Svago",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Storia",
+    "fattore" : 1.25
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Svago",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Storia dell'Arte",
+    "fattore" : 0.625
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Svago",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Matematica",
+    "fattore" : 1.6666666666666667
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Svago",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Fisica",
+    "fattore" : 1.25
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Svago",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Informatica",
+    "fattore" : 1.0
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Svago",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Chimica",
+    "fattore" : 1.0
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Svago",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Biologia",
+    "fattore" : 0.6666666666666666
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Svago",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Scienze della Terra",
+    "fattore" : 0.5263157894736842
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Svago",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Inglese",
+    "fattore" : 2.0
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Svago",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Spagnolo",
+    "fattore" : 0.6666666666666666
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Svago",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Francese",
+    "fattore" : 1.0
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Svago",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Tedesco",
+    "fattore" : 1.0
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Svago",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Latino",
+    "fattore" : 1.1111111111111112
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Svago",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Greco",
+    "fattore" : 1.1111111111111112
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Svago",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Arabo",
+    "fattore" : 1.0
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Svago",
+    "nome_c2" : "Ripetizioni Scolastiche:Giochi di Logica",
+    "fattore" : 1.0
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Svago",
+    "nome_c2" : "Lezioni di musica:Lezioni di solfeggio",
+    "fattore" : 0.7
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Svago",
+    "nome_c2" : "Lezioni di musica:Lezioni di storia della musica",
+    "fattore" : 0.9099999999999999
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Svago",
+    "nome_c2" : "Attività di svago:Lezioni di Scacchi",
+    "fattore" : 1.05
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Svago",
+    "nome_c2" : "Attività di svago:Lezioni di Sudoku",
+    "fattore" : 2.0
+  } ],
+  "Ripetizioni Scolastiche:Ripetizioni di Latino" : [ {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Latino",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Letteratura Italiana",
+    "fattore" : 0.8333333333333334
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Latino",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Filosofia",
+    "fattore" : 0.5263157894736842
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Latino",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Storia",
+    "fattore" : 1.0
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Latino",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Storia dell'Arte",
+    "fattore" : 1.1111111111111112
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Latino",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Matematica",
+    "fattore" : 0.5
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Latino",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Fisica",
+    "fattore" : 1.1111111111111112
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Latino",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Informatica",
+    "fattore" : 1.25
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Latino",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Chimica",
+    "fattore" : 0.6666666666666666
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Latino",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Biologia",
+    "fattore" : 1.0
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Latino",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Scienze della Terra",
+    "fattore" : 1.0
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Latino",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Inglese",
+    "fattore" : 1.1111111111111112
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Latino",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Spagnolo",
+    "fattore" : 1.0
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Latino",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Francese",
+    "fattore" : 1.4285714285714286
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Latino",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Tedesco",
+    "fattore" : 1.6666666666666667
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Latino",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Greco",
+    "fattore" : 1.2
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Latino",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Arabo",
+    "fattore" : 1.1
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Latino",
+    "nome_c2" : "Ripetizioni Scolastiche:Svago",
+    "fattore" : 0.9
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Latino",
+    "nome_c2" : "Ripetizioni Scolastiche:Giochi di Logica",
+    "fattore" : 0.9
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Latino",
+    "nome_c2" : "Lezioni di musica:Lezioni di solfeggio",
+    "fattore" : 0.8749999999999999
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Latino",
+    "nome_c2" : "Lezioni di musica:Lezioni di storia della musica",
+    "fattore" : 1.1375
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Latino",
+    "nome_c2" : "Attività di svago:Lezioni di Scacchi",
+    "fattore" : 1.3124999999999998
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Latino",
+    "nome_c2" : "Attività di svago:Lezioni di Sudoku",
+    "fattore" : 2.0
+  } ],
+  "Ripetizioni Scolastiche:Ripetizioni di Fisica" : [ {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Fisica",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Letteratura Italiana",
+    "fattore" : 1.1111111111111112
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Fisica",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Filosofia",
+    "fattore" : 2.0
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Fisica",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Storia",
+    "fattore" : 0.9090909090909091
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Fisica",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Storia dell'Arte",
+    "fattore" : 1.6666666666666667
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Fisica",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Matematica",
+    "fattore" : 1.25
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Fisica",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Informatica",
+    "fattore" : 1.1
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Fisica",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Chimica",
+    "fattore" : 1.0
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Fisica",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Biologia",
+    "fattore" : 1.4
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Fisica",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Scienze della Terra",
+    "fattore" : 1.2
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Fisica",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Inglese",
+    "fattore" : 1.4
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Fisica",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Spagnolo",
+    "fattore" : 1.9
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Fisica",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Francese",
+    "fattore" : 0.5
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Fisica",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Tedesco",
+    "fattore" : 1.2
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Fisica",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Latino",
+    "fattore" : 0.9
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Fisica",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Greco",
+    "fattore" : 1.5
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Fisica",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Arabo",
+    "fattore" : 1.2
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Fisica",
+    "nome_c2" : "Ripetizioni Scolastiche:Svago",
+    "fattore" : 0.8
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Fisica",
+    "nome_c2" : "Ripetizioni Scolastiche:Giochi di Logica",
+    "fattore" : 0.9
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Fisica",
+    "nome_c2" : "Lezioni di musica:Lezioni di solfeggio",
+    "fattore" : 0.77
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Fisica",
+    "nome_c2" : "Lezioni di musica:Lezioni di storia della musica",
+    "fattore" : 1.001
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Fisica",
+    "nome_c2" : "Attività di svago:Lezioni di Scacchi",
+    "fattore" : 1.155
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Fisica",
+    "nome_c2" : "Attività di svago:Lezioni di Sudoku",
+    "fattore" : 2.0
+  } ],
+  "Ripetizioni Scolastiche:Ripetizioni di Chimica" : [ {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Chimica",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Letteratura Italiana",
+    "fattore" : 0.7692307692307692
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Chimica",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Filosofia",
+    "fattore" : 1.1111111111111112
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Chimica",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Storia",
+    "fattore" : 0.625
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Chimica",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Storia dell'Arte",
+    "fattore" : 0.5
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Chimica",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Matematica",
+    "fattore" : 0.5
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Chimica",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Fisica",
+    "fattore" : 1.0
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Chimica",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Informatica",
+    "fattore" : 1.0
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Chimica",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Biologia",
+    "fattore" : 0.6
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Chimica",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Scienze della Terra",
+    "fattore" : 0.9
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Chimica",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Inglese",
+    "fattore" : 1.1
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Chimica",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Spagnolo",
+    "fattore" : 1.4
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Chimica",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Francese",
+    "fattore" : 0.6
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Chimica",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Tedesco",
+    "fattore" : 0.7
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Chimica",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Latino",
+    "fattore" : 1.5
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Chimica",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Greco",
+    "fattore" : 1.9
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Chimica",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Arabo",
+    "fattore" : 0.8
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Chimica",
+    "nome_c2" : "Ripetizioni Scolastiche:Svago",
+    "fattore" : 1.0
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Chimica",
+    "nome_c2" : "Ripetizioni Scolastiche:Giochi di Logica",
+    "fattore" : 1.0
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Chimica",
+    "nome_c2" : "Lezioni di musica:Lezioni di solfeggio",
+    "fattore" : 0.7
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Chimica",
+    "nome_c2" : "Lezioni di musica:Lezioni di storia della musica",
+    "fattore" : 0.9099999999999999
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Chimica",
+    "nome_c2" : "Attività di svago:Lezioni di Scacchi",
+    "fattore" : 1.05
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Chimica",
+    "nome_c2" : "Attività di svago:Lezioni di Sudoku",
+    "fattore" : 2.0
+  } ],
+  "Ripetizioni Scolastiche:Ripetizioni di Storia dell'Arte" : [ {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Storia dell'Arte",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Letteratura Italiana",
+    "fattore" : 0.7142857142857143
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Storia dell'Arte",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Filosofia",
+    "fattore" : 1.6666666666666667
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Storia dell'Arte",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Storia",
+    "fattore" : 1.1111111111111112
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Storia dell'Arte",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Matematica",
+    "fattore" : 1.0
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Storia dell'Arte",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Fisica",
+    "fattore" : 0.6
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Storia dell'Arte",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Informatica",
+    "fattore" : 1.0
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Storia dell'Arte",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Chimica",
+    "fattore" : 2.0
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Storia dell'Arte",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Biologia",
+    "fattore" : 2.0
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Storia dell'Arte",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Scienze della Terra",
+    "fattore" : 1.0
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Storia dell'Arte",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Inglese",
+    "fattore" : 1.5
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Storia dell'Arte",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Spagnolo",
+    "fattore" : 0.5
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Storia dell'Arte",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Francese",
+    "fattore" : 0.7
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Storia dell'Arte",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Tedesco",
+    "fattore" : 0.87
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Storia dell'Arte",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Latino",
+    "fattore" : 0.9
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Storia dell'Arte",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Greco",
+    "fattore" : 1.0
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Storia dell'Arte",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Arabo",
+    "fattore" : 1.5
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Storia dell'Arte",
+    "nome_c2" : "Ripetizioni Scolastiche:Svago",
+    "fattore" : 1.6
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Storia dell'Arte",
+    "nome_c2" : "Ripetizioni Scolastiche:Giochi di Logica",
+    "fattore" : 2.0
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Storia dell'Arte",
+    "nome_c2" : "Lezioni di musica:Lezioni di solfeggio",
+    "fattore" : 0.7
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Storia dell'Arte",
+    "nome_c2" : "Lezioni di musica:Lezioni di storia della musica",
+    "fattore" : 0.9099999999999999
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Storia dell'Arte",
+    "nome_c2" : "Attività di svago:Lezioni di Scacchi",
+    "fattore" : 1.05
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Storia dell'Arte",
+    "nome_c2" : "Attività di svago:Lezioni di Sudoku",
+    "fattore" : 2.0
+  } ],
+  "Ripetizioni Scolastiche:Ripetizioni di Matematica" : [ {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Matematica",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Letteratura Italiana",
+    "fattore" : 1.6666666666666667
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Matematica",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Filosofia",
+    "fattore" : 0.5
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Matematica",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Storia",
+    "fattore" : 2.0
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Matematica",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Storia dell'Arte",
+    "fattore" : 1.0
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Matematica",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Fisica",
+    "fattore" : 0.8
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Matematica",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Informatica",
+    "fattore" : 0.9
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Matematica",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Chimica",
+    "fattore" : 2.0
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Matematica",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Biologia",
+    "fattore" : 1.0
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Matematica",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Scienze della Terra",
+    "fattore" : 1.1
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Matematica",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Inglese",
+    "fattore" : 0.6
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Matematica",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Spagnolo",
+    "fattore" : 1.2
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Matematica",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Francese",
+    "fattore" : 1.4
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Matematica",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Tedesco",
+    "fattore" : 1.8
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Matematica",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Latino",
+    "fattore" : 2.0
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Matematica",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Greco",
+    "fattore" : 1.0
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Matematica",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Arabo",
+    "fattore" : 0.9
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Matematica",
+    "nome_c2" : "Ripetizioni Scolastiche:Svago",
+    "fattore" : 0.6
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Matematica",
+    "nome_c2" : "Ripetizioni Scolastiche:Giochi di Logica",
+    "fattore" : 0.7
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Matematica",
+    "nome_c2" : "Lezioni di musica:Lezioni di solfeggio",
+    "fattore" : 0.6299999999999999
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Matematica",
+    "nome_c2" : "Lezioni di musica:Lezioni di storia della musica",
+    "fattore" : 0.819
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Matematica",
+    "nome_c2" : "Attività di svago:Lezioni di Scacchi",
+    "fattore" : 0.9450000000000001
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Matematica",
+    "nome_c2" : "Attività di svago:Lezioni di Sudoku",
+    "fattore" : 1.8900000000000001
+  } ],
+  "Lezioni di musica:Lezioni di storia della musica" : [ {
+    "nome_c1" : "Lezioni di musica:Lezioni di storia della musica",
+    "nome_c2" : "Lezioni di musica:Lezioni di solfeggio",
+    "fattore" : 0.7692307692307692
+  }, {
+    "nome_c1" : "Lezioni di musica:Lezioni di storia della musica",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Letteratura Italiana",
+    "fattore" : 2.0
+  }, {
+    "nome_c1" : "Lezioni di musica:Lezioni di storia della musica",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Filosofia",
+    "fattore" : 1.3736263736263736
+  }, {
+    "nome_c1" : "Lezioni di musica:Lezioni di storia della musica",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Storia",
+    "fattore" : 0.7326007326007327
+  }, {
+    "nome_c1" : "Lezioni di musica:Lezioni di storia della musica",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Storia dell'Arte",
+    "fattore" : 1.098901098901099
+  }, {
+    "nome_c1" : "Lezioni di musica:Lezioni di storia della musica",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Matematica",
+    "fattore" : 1.221001221001221
+  }, {
+    "nome_c1" : "Lezioni di musica:Lezioni di storia della musica",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Fisica",
+    "fattore" : 0.999000999000999
+  }, {
+    "nome_c1" : "Lezioni di musica:Lezioni di storia della musica",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Chimica",
+    "fattore" : 1.098901098901099
+  }, {
+    "nome_c1" : "Lezioni di musica:Lezioni di storia della musica",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Biologia",
+    "fattore" : 1.208791208791209
+  }, {
+    "nome_c1" : "Lezioni di musica:Lezioni di storia della musica",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Scienze della Terra",
+    "fattore" : 1.3186813186813187
+  }, {
+    "nome_c1" : "Lezioni di musica:Lezioni di storia della musica",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Inglese",
+    "fattore" : 2.0
+  }, {
+    "nome_c1" : "Lezioni di musica:Lezioni di storia della musica",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Spagnolo",
+    "fattore" : 1.7582417582417584
+  }, {
+    "nome_c1" : "Lezioni di musica:Lezioni di storia della musica",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Francese",
+    "fattore" : 1.4285714285714288
+  }, {
+    "nome_c1" : "Lezioni di musica:Lezioni di storia della musica",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Tedesco",
+    "fattore" : 0.5494505494505495
+  }, {
+    "nome_c1" : "Lezioni di musica:Lezioni di storia della musica",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Latino",
+    "fattore" : 0.8791208791208792
+  }, {
+    "nome_c1" : "Lezioni di musica:Lezioni di storia della musica",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Greco",
+    "fattore" : 2.0
+  }, {
+    "nome_c1" : "Lezioni di musica:Lezioni di storia della musica",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Arabo",
+    "fattore" : 2.0
+  }, {
+    "nome_c1" : "Lezioni di musica:Lezioni di storia della musica",
+    "nome_c2" : "Ripetizioni Scolastiche:Svago",
+    "fattore" : 1.098901098901099
+  }, {
+    "nome_c1" : "Lezioni di musica:Lezioni di storia della musica",
+    "nome_c2" : "Ripetizioni Scolastiche:Giochi di Logica",
+    "fattore" : 1.098901098901099
+  }, {
+    "nome_c1" : "Lezioni di musica:Lezioni di storia della musica",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Informatica",
+    "fattore" : 1.098901098901099
+  }, {
+    "nome_c1" : "Lezioni di musica:Lezioni di storia della musica",
+    "nome_c2" : "Attività di svago:Lezioni di Scacchi",
+    "fattore" : 1.1538461538461537
+  }, {
+    "nome_c1" : "Lezioni di musica:Lezioni di storia della musica",
+    "nome_c2" : "Attività di svago:Lezioni di Sudoku",
+    "fattore" : 2.0
+  } ],
+  "Lezioni di musica:Lezioni di solfeggio" : [ {
+    "nome_c1" : "Lezioni di musica:Lezioni di solfeggio",
+    "nome_c2" : "Lezioni di musica:Lezioni di storia della musica",
+    "fattore" : 1.3
+  }, {
+    "nome_c1" : "Lezioni di musica:Lezioni di solfeggio",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Letteratura Italiana",
+    "fattore" : 2.0
+  }, {
+    "nome_c1" : "Lezioni di musica:Lezioni di solfeggio",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Filosofia",
+    "fattore" : 1.7857142857142858
+  }, {
+    "nome_c1" : "Lezioni di musica:Lezioni di solfeggio",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Storia",
+    "fattore" : 0.9523809523809523
+  }, {
+    "nome_c1" : "Lezioni di musica:Lezioni di solfeggio",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Storia dell'Arte",
+    "fattore" : 1.4285714285714286
+  }, {
+    "nome_c1" : "Lezioni di musica:Lezioni di solfeggio",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Matematica",
+    "fattore" : 1.5873015873015874
+  }, {
+    "nome_c1" : "Lezioni di musica:Lezioni di solfeggio",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Fisica",
+    "fattore" : 1.2987012987012987
+  }, {
+    "nome_c1" : "Lezioni di musica:Lezioni di solfeggio",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Chimica",
+    "fattore" : 1.4285714285714286
+  }, {
+    "nome_c1" : "Lezioni di musica:Lezioni di solfeggio",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Biologia",
+    "fattore" : 1.5714285714285716
+  }, {
+    "nome_c1" : "Lezioni di musica:Lezioni di solfeggio",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Scienze della Terra",
+    "fattore" : 1.7142857142857142
+  }, {
+    "nome_c1" : "Lezioni di musica:Lezioni di solfeggio",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Inglese",
+    "fattore" : 2.0
+  }, {
+    "nome_c1" : "Lezioni di musica:Lezioni di solfeggio",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Spagnolo",
+    "fattore" : 2.0
+  }, {
+    "nome_c1" : "Lezioni di musica:Lezioni di solfeggio",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Francese",
+    "fattore" : 1.8571428571428572
+  }, {
+    "nome_c1" : "Lezioni di musica:Lezioni di solfeggio",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Tedesco",
+    "fattore" : 0.7142857142857143
+  }, {
+    "nome_c1" : "Lezioni di musica:Lezioni di solfeggio",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Latino",
+    "fattore" : 1.142857142857143
+  }, {
+    "nome_c1" : "Lezioni di musica:Lezioni di solfeggio",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Greco",
+    "fattore" : 2.0
+  }, {
+    "nome_c1" : "Lezioni di musica:Lezioni di solfeggio",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Arabo",
+    "fattore" : 2.0
+  }, {
+    "nome_c1" : "Lezioni di musica:Lezioni di solfeggio",
+    "nome_c2" : "Ripetizioni Scolastiche:Svago",
+    "fattore" : 1.4285714285714286
+  }, {
+    "nome_c1" : "Lezioni di musica:Lezioni di solfeggio",
+    "nome_c2" : "Ripetizioni Scolastiche:Giochi di Logica",
+    "fattore" : 1.4285714285714286
+  }, {
+    "nome_c1" : "Lezioni di musica:Lezioni di solfeggio",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Informatica",
+    "fattore" : 1.4285714285714286
+  }, {
+    "nome_c1" : "Lezioni di musica:Lezioni di solfeggio",
+    "nome_c2" : "Attività di svago:Lezioni di Scacchi",
+    "fattore" : 1.5
+  }, {
+    "nome_c1" : "Lezioni di musica:Lezioni di solfeggio",
+    "nome_c2" : "Attività di svago:Lezioni di Sudoku",
+    "fattore" : 2.0
+  } ],
+  "Attività di svago:Lezioni di Sudoku" : [ {
+    "nome_c1" : "Attività di svago:Lezioni di Sudoku",
+    "nome_c2" : "Attività di svago:Lezioni di Scacchi",
+    "fattore" : 0.5
+  }, {
+    "nome_c1" : "Attività di svago:Lezioni di Sudoku",
+    "nome_c2" : "Lezioni di musica:Lezioni di storia della musica",
+    "fattore" : 0.5
+  }, {
+    "nome_c1" : "Attività di svago:Lezioni di Sudoku",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Letteratura Italiana",
+    "fattore" : 0.6666666666666666
+  }, {
+    "nome_c1" : "Attività di svago:Lezioni di Sudoku",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Filosofia",
+    "fattore" : 0.5952380952380952
+  }, {
+    "nome_c1" : "Attività di svago:Lezioni di Sudoku",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Storia",
+    "fattore" : 0.5
+  }, {
+    "nome_c1" : "Attività di svago:Lezioni di Sudoku",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Storia dell'Arte",
+    "fattore" : 0.5
+  }, {
+    "nome_c1" : "Attività di svago:Lezioni di Sudoku",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Matematica",
+    "fattore" : 0.5291005291005291
+  }, {
+    "nome_c1" : "Attività di svago:Lezioni di Sudoku",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Fisica",
+    "fattore" : 0.5
+  }, {
+    "nome_c1" : "Attività di svago:Lezioni di Sudoku",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Chimica",
+    "fattore" : 0.5
+  }, {
+    "nome_c1" : "Attività di svago:Lezioni di Sudoku",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Biologia",
+    "fattore" : 0.5238095238095238
+  }, {
+    "nome_c1" : "Attività di svago:Lezioni di Sudoku",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Scienze della Terra",
+    "fattore" : 0.5714285714285714
+  }, {
+    "nome_c1" : "Attività di svago:Lezioni di Sudoku",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Inglese",
+    "fattore" : 0.6666666666666666
+  }, {
+    "nome_c1" : "Attività di svago:Lezioni di Sudoku",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Spagnolo",
+    "fattore" : 0.6666666666666666
+  }, {
+    "nome_c1" : "Attività di svago:Lezioni di Sudoku",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Francese",
+    "fattore" : 0.6190476190476191
+  }, {
+    "nome_c1" : "Attività di svago:Lezioni di Sudoku",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Tedesco",
+    "fattore" : 0.5
+  }, {
+    "nome_c1" : "Attività di svago:Lezioni di Sudoku",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Latino",
+    "fattore" : 0.5
+  }, {
+    "nome_c1" : "Attività di svago:Lezioni di Sudoku",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Greco",
+    "fattore" : 0.6666666666666666
+  }, {
+    "nome_c1" : "Attività di svago:Lezioni di Sudoku",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Arabo",
+    "fattore" : 0.6666666666666666
+  }, {
+    "nome_c1" : "Attività di svago:Lezioni di Sudoku",
+    "nome_c2" : "Ripetizioni Scolastiche:Svago",
+    "fattore" : 0.5
+  }, {
+    "nome_c1" : "Attività di svago:Lezioni di Sudoku",
+    "nome_c2" : "Ripetizioni Scolastiche:Giochi di Logica",
+    "fattore" : 0.5
+  }, {
+    "nome_c1" : "Attività di svago:Lezioni di Sudoku",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Informatica",
+    "fattore" : 0.5
+  }, {
+    "nome_c1" : "Attività di svago:Lezioni di Sudoku",
+    "nome_c2" : "Lezioni di musica:Lezioni di solfeggio",
+    "fattore" : 0.5
+  } ],
+  "Ripetizioni Scolastiche:Ripetizioni di Spagnolo" : [ {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Spagnolo",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Letteratura Italiana",
+    "fattore" : 1.0
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Spagnolo",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Filosofia",
+    "fattore" : 0.8333333333333334
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Spagnolo",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Storia",
+    "fattore" : 1.0
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Spagnolo",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Storia dell'Arte",
+    "fattore" : 2.0
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Spagnolo",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Matematica",
+    "fattore" : 0.8333333333333334
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Spagnolo",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Fisica",
+    "fattore" : 0.5263157894736842
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Spagnolo",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Informatica",
+    "fattore" : 0.625
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Spagnolo",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Chimica",
+    "fattore" : 0.7142857142857143
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Spagnolo",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Biologia",
+    "fattore" : 1.1111111111111112
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Spagnolo",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Scienze della Terra",
+    "fattore" : 0.5
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Spagnolo",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Inglese",
+    "fattore" : 0.5
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Spagnolo",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Francese",
+    "fattore" : 2.0
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Spagnolo",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Tedesco",
+    "fattore" : 1.0
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Spagnolo",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Latino",
+    "fattore" : 1.0
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Spagnolo",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Greco",
+    "fattore" : 0.6
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Spagnolo",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Arabo",
+    "fattore" : 1.2
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Spagnolo",
+    "nome_c2" : "Ripetizioni Scolastiche:Svago",
+    "fattore" : 1.5
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Spagnolo",
+    "nome_c2" : "Ripetizioni Scolastiche:Giochi di Logica",
+    "fattore" : 1.2
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Spagnolo",
+    "nome_c2" : "Lezioni di musica:Lezioni di solfeggio",
+    "fattore" : 0.5
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Spagnolo",
+    "nome_c2" : "Lezioni di musica:Lezioni di storia della musica",
+    "fattore" : 0.56875
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Spagnolo",
+    "nome_c2" : "Attività di svago:Lezioni di Scacchi",
+    "fattore" : 0.75
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Spagnolo",
+    "nome_c2" : "Attività di svago:Lezioni di Sudoku",
+    "fattore" : 1.5
+  } ],
+  "Ripetizioni Scolastiche:Ripetizioni di Francese" : [ {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Francese",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Letteratura Italiana",
+    "fattore" : 1.0
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Francese",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Filosofia",
+    "fattore" : 1.0
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Francese",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Storia",
+    "fattore" : 0.6666666666666666
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Francese",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Storia dell'Arte",
+    "fattore" : 1.4285714285714286
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Francese",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Matematica",
+    "fattore" : 0.7142857142857143
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Francese",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Fisica",
+    "fattore" : 2.0
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Francese",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Informatica",
+    "fattore" : 0.7692307692307692
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Francese",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Chimica",
+    "fattore" : 1.6666666666666667
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Francese",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Biologia",
+    "fattore" : 0.9090909090909091
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Francese",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Scienze della Terra",
+    "fattore" : 1.0
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Francese",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Inglese",
+    "fattore" : 0.9090909090909091
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Francese",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Spagnolo",
+    "fattore" : 0.5
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Francese",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Tedesco",
+    "fattore" : 0.6
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Francese",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Latino",
+    "fattore" : 0.7
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Francese",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Greco",
+    "fattore" : 0.8
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Francese",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Arabo",
+    "fattore" : 1.0
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Francese",
+    "nome_c2" : "Ripetizioni Scolastiche:Svago",
+    "fattore" : 1.0
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Francese",
+    "nome_c2" : "Ripetizioni Scolastiche:Giochi di Logica",
+    "fattore" : 1.0
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Francese",
+    "nome_c2" : "Lezioni di musica:Lezioni di solfeggio",
+    "fattore" : 0.5384615384615384
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Francese",
+    "nome_c2" : "Lezioni di musica:Lezioni di storia della musica",
+    "fattore" : 0.6999999999999998
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Francese",
+    "nome_c2" : "Attività di svago:Lezioni di Scacchi",
+    "fattore" : 0.8076923076923077
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Francese",
+    "nome_c2" : "Attività di svago:Lezioni di Sudoku",
+    "fattore" : 1.6153846153846154
+  } ],
+  "Ripetizioni Scolastiche:Ripetizioni di Inglese" : [ {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Inglese",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Letteratura Italiana",
+    "fattore" : 1.4285714285714286
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Inglese",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Filosofia",
+    "fattore" : 1.25
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Inglese",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Storia",
+    "fattore" : 1.1111111111111112
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Inglese",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Storia dell'Arte",
+    "fattore" : 0.6666666666666666
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Inglese",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Matematica",
+    "fattore" : 1.6666666666666667
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Inglese",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Fisica",
+    "fattore" : 0.7142857142857143
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Inglese",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Informatica",
+    "fattore" : 0.5
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Inglese",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Chimica",
+    "fattore" : 0.9090909090909091
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Inglese",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Biologia",
+    "fattore" : 1.1111111111111112
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Inglese",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Scienze della Terra",
+    "fattore" : 0.5263157894736842
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Inglese",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Spagnolo",
+    "fattore" : 2.0
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Inglese",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Francese",
+    "fattore" : 1.1
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Inglese",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Tedesco",
+    "fattore" : 0.7
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Inglese",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Latino",
+    "fattore" : 0.9
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Inglese",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Greco",
+    "fattore" : 1.0
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Inglese",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Arabo",
+    "fattore" : 0.8
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Inglese",
+    "nome_c2" : "Ripetizioni Scolastiche:Svago",
+    "fattore" : 0.5
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Inglese",
+    "nome_c2" : "Ripetizioni Scolastiche:Giochi di Logica",
+    "fattore" : 0.6
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Inglese",
+    "nome_c2" : "Lezioni di musica:Lezioni di solfeggio",
+    "fattore" : 0.5
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Inglese",
+    "nome_c2" : "Lezioni di musica:Lezioni di storia della musica",
+    "fattore" : 0.5
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Inglese",
+    "nome_c2" : "Attività di svago:Lezioni di Scacchi",
+    "fattore" : 0.75
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Inglese",
+    "nome_c2" : "Attività di svago:Lezioni di Sudoku",
+    "fattore" : 1.5
+  } ],
+  "Ripetizioni Scolastiche:Ripetizioni di Filosofia" : [ {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Filosofia",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Letteratura Italiana",
+    "fattore" : 0.9090909090909091
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Filosofia",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Storia",
+    "fattore" : 0.9
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Filosofia",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Storia dell'Arte",
+    "fattore" : 0.6
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Filosofia",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Matematica",
+    "fattore" : 2.0
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Filosofia",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Fisica",
+    "fattore" : 0.5
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Filosofia",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Informatica",
+    "fattore" : 0.8
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Filosofia",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Chimica",
+    "fattore" : 0.9
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Filosofia",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Biologia",
+    "fattore" : 1.5
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Filosofia",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Scienze della Terra",
+    "fattore" : 1.7
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Filosofia",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Inglese",
+    "fattore" : 0.8
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Filosofia",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Spagnolo",
+    "fattore" : 1.2
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Filosofia",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Francese",
+    "fattore" : 1.0
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Filosofia",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Tedesco",
+    "fattore" : 1.1
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Filosofia",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Latino",
+    "fattore" : 1.9
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Filosofia",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Greco",
+    "fattore" : 0.7
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Filosofia",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Arabo",
+    "fattore" : 0.9
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Filosofia",
+    "nome_c2" : "Ripetizioni Scolastiche:Svago",
+    "fattore" : 1.0
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Filosofia",
+    "nome_c2" : "Ripetizioni Scolastiche:Giochi di Logica",
+    "fattore" : 0.5
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Filosofia",
+    "nome_c2" : "Lezioni di musica:Lezioni di solfeggio",
+    "fattore" : 0.5599999999999999
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Filosofia",
+    "nome_c2" : "Lezioni di musica:Lezioni di storia della musica",
+    "fattore" : 0.728
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Filosofia",
+    "nome_c2" : "Attività di svago:Lezioni di Scacchi",
+    "fattore" : 0.84
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Filosofia",
+    "nome_c2" : "Attività di svago:Lezioni di Sudoku",
+    "fattore" : 1.68
+  } ],
+  "Ripetizioni Scolastiche:Ripetizioni di Arabo" : [ {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Arabo",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Letteratura Italiana",
+    "fattore" : 1.6666666666666667
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Arabo",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Filosofia",
+    "fattore" : 1.1111111111111112
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Arabo",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Storia",
+    "fattore" : 2.0
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Arabo",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Storia dell'Arte",
+    "fattore" : 0.6666666666666666
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Arabo",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Matematica",
+    "fattore" : 1.1111111111111112
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Arabo",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Fisica",
+    "fattore" : 0.8333333333333334
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Arabo",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Informatica",
+    "fattore" : 0.5
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Arabo",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Chimica",
+    "fattore" : 1.25
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Arabo",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Biologia",
+    "fattore" : 1.25
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Arabo",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Scienze della Terra",
+    "fattore" : 0.5882352941176471
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Arabo",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Inglese",
+    "fattore" : 1.25
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Arabo",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Spagnolo",
+    "fattore" : 0.8333333333333334
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Arabo",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Francese",
+    "fattore" : 1.0
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Arabo",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Tedesco",
+    "fattore" : 0.5
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Arabo",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Latino",
+    "fattore" : 0.9090909090909091
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Arabo",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Greco",
+    "fattore" : 1.1111111111111112
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Arabo",
+    "nome_c2" : "Ripetizioni Scolastiche:Svago",
+    "fattore" : 1.0
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Arabo",
+    "nome_c2" : "Ripetizioni Scolastiche:Giochi di Logica",
+    "fattore" : 1.0
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Arabo",
+    "nome_c2" : "Lezioni di musica:Lezioni di solfeggio",
+    "fattore" : 0.5
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Arabo",
+    "nome_c2" : "Lezioni di musica:Lezioni di storia della musica",
+    "fattore" : 0.5
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Arabo",
+    "nome_c2" : "Attività di svago:Lezioni di Scacchi",
+    "fattore" : 0.75
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Arabo",
+    "nome_c2" : "Attività di svago:Lezioni di Sudoku",
+    "fattore" : 1.5
+  } ],
+  "Ripetizioni Scolastiche:Ripetizioni di Storia" : [ {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Storia",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Letteratura Italiana",
+    "fattore" : 1.25
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Storia",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Filosofia",
+    "fattore" : 1.1111111111111112
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Storia",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Storia dell'Arte",
+    "fattore" : 0.9
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Storia",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Matematica",
+    "fattore" : 0.5
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Storia",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Fisica",
+    "fattore" : 1.1
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Storia",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Informatica",
+    "fattore" : 1.5
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Storia",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Chimica",
+    "fattore" : 1.6
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Storia",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Biologia",
+    "fattore" : 1.2
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Storia",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Scienze della Terra",
+    "fattore" : 0.8
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Storia",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Inglese",
+    "fattore" : 0.9
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Storia",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Spagnolo",
+    "fattore" : 1.0
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Storia",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Francese",
+    "fattore" : 1.5
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Storia",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Tedesco",
+    "fattore" : 0.8
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Storia",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Latino",
+    "fattore" : 1.0
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Storia",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Greco",
+    "fattore" : 1.3
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Storia",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Arabo",
+    "fattore" : 0.5
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Storia",
+    "nome_c2" : "Ripetizioni Scolastiche:Svago",
+    "fattore" : 0.8
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Storia",
+    "nome_c2" : "Ripetizioni Scolastiche:Giochi di Logica",
+    "fattore" : 0.9
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Storia",
+    "nome_c2" : "Lezioni di musica:Lezioni di solfeggio",
+    "fattore" : 1.05
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Storia",
+    "nome_c2" : "Lezioni di musica:Lezioni di storia della musica",
+    "fattore" : 1.365
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Storia",
+    "nome_c2" : "Attività di svago:Lezioni di Scacchi",
+    "fattore" : 1.5750000000000002
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Storia",
+    "nome_c2" : "Attività di svago:Lezioni di Sudoku",
+    "fattore" : 2.0
+  } ],
+  "Ripetizioni Scolastiche:Ripetizioni di Tedesco" : [ {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Tedesco",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Letteratura Italiana",
+    "fattore" : 1.1111111111111112
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Tedesco",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Filosofia",
+    "fattore" : 0.9090909090909091
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Tedesco",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Storia",
+    "fattore" : 1.25
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Tedesco",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Storia dell'Arte",
+    "fattore" : 1.1494252873563218
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Tedesco",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Matematica",
+    "fattore" : 0.5555555555555556
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Tedesco",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Fisica",
+    "fattore" : 0.8333333333333334
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Tedesco",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Informatica",
+    "fattore" : 2.0
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Tedesco",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Chimica",
+    "fattore" : 1.4285714285714286
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Tedesco",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Biologia",
+    "fattore" : 1.1111111111111112
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Tedesco",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Scienze della Terra",
+    "fattore" : 1.0
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Tedesco",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Inglese",
+    "fattore" : 1.4285714285714286
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Tedesco",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Spagnolo",
+    "fattore" : 1.0
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Tedesco",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Francese",
+    "fattore" : 1.6666666666666667
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Tedesco",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Latino",
+    "fattore" : 0.6
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Tedesco",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Greco",
+    "fattore" : 2.0
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Tedesco",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Arabo",
+    "fattore" : 2.0
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Tedesco",
+    "nome_c2" : "Ripetizioni Scolastiche:Svago",
+    "fattore" : 1.0
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Tedesco",
+    "nome_c2" : "Ripetizioni Scolastiche:Giochi di Logica",
+    "fattore" : 1.1
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Tedesco",
+    "nome_c2" : "Lezioni di musica:Lezioni di solfeggio",
+    "fattore" : 1.4
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Tedesco",
+    "nome_c2" : "Lezioni di musica:Lezioni di storia della musica",
+    "fattore" : 1.8199999999999998
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Tedesco",
+    "nome_c2" : "Attività di svago:Lezioni di Scacchi",
+    "fattore" : 2.0
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Tedesco",
+    "nome_c2" : "Attività di svago:Lezioni di Sudoku",
+    "fattore" : 2.0
+  } ],
+  "Ripetizioni Scolastiche:Ripetizioni di Scienze della Terra" : [ {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Scienze della Terra",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Letteratura Italiana",
+    "fattore" : 0.5882352941176471
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Scienze della Terra",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Filosofia",
+    "fattore" : 0.5882352941176471
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Scienze della Terra",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Storia",
+    "fattore" : 1.25
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Scienze della Terra",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Storia dell'Arte",
+    "fattore" : 1.0
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Scienze della Terra",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Matematica",
+    "fattore" : 0.9090909090909091
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Scienze della Terra",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Fisica",
+    "fattore" : 0.8333333333333334
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Scienze della Terra",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Informatica",
+    "fattore" : 0.8333333333333334
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Scienze della Terra",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Chimica",
+    "fattore" : 1.1111111111111112
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Scienze della Terra",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Biologia",
+    "fattore" : 1.0
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Scienze della Terra",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Inglese",
+    "fattore" : 1.9
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Scienze della Terra",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Spagnolo",
+    "fattore" : 2.0
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Scienze della Terra",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Francese",
+    "fattore" : 1.0
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Scienze della Terra",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Tedesco",
+    "fattore" : 1.0
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Scienze della Terra",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Latino",
+    "fattore" : 1.0
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Scienze della Terra",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Greco",
+    "fattore" : 1.2
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Scienze della Terra",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Arabo",
+    "fattore" : 1.7
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Scienze della Terra",
+    "nome_c2" : "Ripetizioni Scolastiche:Svago",
+    "fattore" : 1.9
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Scienze della Terra",
+    "nome_c2" : "Ripetizioni Scolastiche:Giochi di Logica",
+    "fattore" : 2.0
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Scienze della Terra",
+    "nome_c2" : "Lezioni di musica:Lezioni di solfeggio",
+    "fattore" : 0.5833333333333334
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Scienze della Terra",
+    "nome_c2" : "Lezioni di musica:Lezioni di storia della musica",
+    "fattore" : 0.7583333333333333
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Scienze della Terra",
+    "nome_c2" : "Attività di svago:Lezioni di Scacchi",
+    "fattore" : 0.875
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Scienze della Terra",
+    "nome_c2" : "Attività di svago:Lezioni di Sudoku",
+    "fattore" : 1.75
+  } ],
+  "Ripetizioni Scolastiche:Ripetizioni di Letteratura Italiana" : [ {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Letteratura Italiana",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Filosofia",
+    "fattore" : 1.1
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Letteratura Italiana",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Storia",
+    "fattore" : 0.8
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Letteratura Italiana",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Storia dell'Arte",
+    "fattore" : 1.4
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Letteratura Italiana",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Matematica",
+    "fattore" : 0.6
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Letteratura Italiana",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Fisica",
+    "fattore" : 0.9
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Letteratura Italiana",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Informatica",
+    "fattore" : 0.5
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Letteratura Italiana",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Chimica",
+    "fattore" : 1.3
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Letteratura Italiana",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Biologia",
+    "fattore" : 1.2
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Letteratura Italiana",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Scienze della Terra",
+    "fattore" : 1.7
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Letteratura Italiana",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Inglese",
+    "fattore" : 0.7
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Letteratura Italiana",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Spagnolo",
+    "fattore" : 1.0
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Letteratura Italiana",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Francese",
+    "fattore" : 1.0
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Letteratura Italiana",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Tedesco",
+    "fattore" : 0.9
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Letteratura Italiana",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Latino",
+    "fattore" : 1.2
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Letteratura Italiana",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Greco",
+    "fattore" : 1.6
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Letteratura Italiana",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Arabo",
+    "fattore" : 0.6
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Letteratura Italiana",
+    "nome_c2" : "Ripetizioni Scolastiche:Svago",
+    "fattore" : 1.0
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Letteratura Italiana",
+    "nome_c2" : "Ripetizioni Scolastiche:Giochi di Logica",
+    "fattore" : 1.0
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Letteratura Italiana",
+    "nome_c2" : "Lezioni di musica:Lezioni di solfeggio",
+    "fattore" : 0.5
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Letteratura Italiana",
+    "nome_c2" : "Lezioni di musica:Lezioni di storia della musica",
+    "fattore" : 0.5
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Letteratura Italiana",
+    "nome_c2" : "Attività di svago:Lezioni di Scacchi",
+    "fattore" : 0.75
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Letteratura Italiana",
+    "nome_c2" : "Attività di svago:Lezioni di Sudoku",
+    "fattore" : 1.5
+  } ],
+  "Ripetizioni Scolastiche:Giochi di Logica" : [ {
+    "nome_c1" : "Ripetizioni Scolastiche:Giochi di Logica",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Letteratura Italiana",
+    "fattore" : 1.0
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Giochi di Logica",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Filosofia",
+    "fattore" : 2.0
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Giochi di Logica",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Storia",
+    "fattore" : 1.1111111111111112
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Giochi di Logica",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Storia dell'Arte",
+    "fattore" : 0.5
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Giochi di Logica",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Matematica",
+    "fattore" : 1.4285714285714286
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Giochi di Logica",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Fisica",
+    "fattore" : 1.1111111111111112
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Giochi di Logica",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Informatica",
+    "fattore" : 1.0
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Giochi di Logica",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Chimica",
+    "fattore" : 1.0
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Giochi di Logica",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Biologia",
+    "fattore" : 0.625
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Giochi di Logica",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Scienze della Terra",
+    "fattore" : 0.5
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Giochi di Logica",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Inglese",
+    "fattore" : 1.6666666666666667
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Giochi di Logica",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Spagnolo",
+    "fattore" : 0.8333333333333334
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Giochi di Logica",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Francese",
+    "fattore" : 1.0
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Giochi di Logica",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Tedesco",
+    "fattore" : 0.9090909090909091
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Giochi di Logica",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Latino",
+    "fattore" : 1.1111111111111112
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Giochi di Logica",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Greco",
+    "fattore" : 1.1111111111111112
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Giochi di Logica",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Arabo",
+    "fattore" : 1.0
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Giochi di Logica",
+    "nome_c2" : "Ripetizioni Scolastiche:Svago",
+    "fattore" : 1.0
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Giochi di Logica",
+    "nome_c2" : "Lezioni di musica:Lezioni di solfeggio",
+    "fattore" : 0.7
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Giochi di Logica",
+    "nome_c2" : "Lezioni di musica:Lezioni di storia della musica",
+    "fattore" : 0.9099999999999999
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Giochi di Logica",
+    "nome_c2" : "Attività di svago:Lezioni di Scacchi",
+    "fattore" : 1.05
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Giochi di Logica",
+    "nome_c2" : "Attività di svago:Lezioni di Sudoku",
+    "fattore" : 2.0
+  } ],
+  "Ripetizioni Scolastiche:Ripetizioni di Biologia" : [ {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Biologia",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Letteratura Italiana",
+    "fattore" : 0.8333333333333334
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Biologia",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Filosofia",
+    "fattore" : 0.6666666666666666
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Biologia",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Storia",
+    "fattore" : 0.8333333333333334
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Biologia",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Storia dell'Arte",
+    "fattore" : 0.5
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Biologia",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Matematica",
+    "fattore" : 1.0
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Biologia",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Fisica",
+    "fattore" : 0.7142857142857143
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Biologia",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Informatica",
+    "fattore" : 0.9090909090909091
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Biologia",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Chimica",
+    "fattore" : 1.6666666666666667
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Biologia",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Scienze della Terra",
+    "fattore" : 1.0
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Biologia",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Inglese",
+    "fattore" : 0.9
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Biologia",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Spagnolo",
+    "fattore" : 0.9
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Biologia",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Francese",
+    "fattore" : 1.1
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Biologia",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Tedesco",
+    "fattore" : 0.9
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Biologia",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Latino",
+    "fattore" : 1.0
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Biologia",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Greco",
+    "fattore" : 0.6
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Biologia",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Arabo",
+    "fattore" : 0.8
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Biologia",
+    "nome_c2" : "Ripetizioni Scolastiche:Svago",
+    "fattore" : 1.5
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Biologia",
+    "nome_c2" : "Ripetizioni Scolastiche:Giochi di Logica",
+    "fattore" : 1.6
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Biologia",
+    "nome_c2" : "Lezioni di musica:Lezioni di solfeggio",
+    "fattore" : 0.6363636363636362
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Biologia",
+    "nome_c2" : "Lezioni di musica:Lezioni di storia della musica",
+    "fattore" : 0.8272727272727272
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Biologia",
+    "nome_c2" : "Attività di svago:Lezioni di Scacchi",
+    "fattore" : 0.9545454545454545
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Biologia",
+    "nome_c2" : "Attività di svago:Lezioni di Sudoku",
+    "fattore" : 1.909090909090909
+  } ],
+  "Ripetizioni Scolastiche:Ripetizioni di Informatica" : [ {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Informatica",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Letteratura Italiana",
+    "fattore" : 2.0
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Informatica",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Filosofia",
+    "fattore" : 1.25
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Informatica",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Storia",
+    "fattore" : 0.6666666666666666
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Informatica",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Storia dell'Arte",
+    "fattore" : 1.0
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Informatica",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Matematica",
+    "fattore" : 1.1111111111111112
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Informatica",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Fisica",
+    "fattore" : 0.9090909090909091
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Informatica",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Chimica",
+    "fattore" : 1.0
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Informatica",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Biologia",
+    "fattore" : 1.1
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Informatica",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Scienze della Terra",
+    "fattore" : 1.2
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Informatica",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Inglese",
+    "fattore" : 2.0
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Informatica",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Spagnolo",
+    "fattore" : 1.6
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Informatica",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Francese",
+    "fattore" : 1.3
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Informatica",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Tedesco",
+    "fattore" : 0.5
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Informatica",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Latino",
+    "fattore" : 0.8
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Informatica",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Greco",
+    "fattore" : 2.0
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Informatica",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Arabo",
+    "fattore" : 2.0
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Informatica",
+    "nome_c2" : "Ripetizioni Scolastiche:Svago",
+    "fattore" : 1.0
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Informatica",
+    "nome_c2" : "Ripetizioni Scolastiche:Giochi di Logica",
+    "fattore" : 1.0
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Informatica",
+    "nome_c2" : "Lezioni di musica:Lezioni di solfeggio",
+    "fattore" : 0.7
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Informatica",
+    "nome_c2" : "Lezioni di musica:Lezioni di storia della musica",
+    "fattore" : 0.9099999999999999
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Informatica",
+    "nome_c2" : "Attività di svago:Lezioni di Scacchi",
+    "fattore" : 1.05
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Informatica",
+    "nome_c2" : "Attività di svago:Lezioni di Sudoku",
+    "fattore" : 2.0
+  } ],
+  "Ripetizioni Scolastiche:Ripetizioni di Greco" : [ {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Greco",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Letteratura Italiana",
+    "fattore" : 0.625
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Greco",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Filosofia",
+    "fattore" : 1.4285714285714286
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Greco",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Storia",
+    "fattore" : 0.7692307692307692
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Greco",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Storia dell'Arte",
+    "fattore" : 1.0
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Greco",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Matematica",
+    "fattore" : 1.0
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Greco",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Fisica",
+    "fattore" : 0.6666666666666666
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Greco",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Informatica",
+    "fattore" : 0.5
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Greco",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Chimica",
+    "fattore" : 0.5263157894736842
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Greco",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Biologia",
+    "fattore" : 1.6666666666666667
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Greco",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Scienze della Terra",
+    "fattore" : 0.8333333333333334
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Greco",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Inglese",
+    "fattore" : 1.0
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Greco",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Spagnolo",
+    "fattore" : 1.6666666666666667
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Greco",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Francese",
+    "fattore" : 1.25
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Greco",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Tedesco",
+    "fattore" : 0.5
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Greco",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Latino",
+    "fattore" : 0.8333333333333334
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Greco",
+    "nome_c2" : "Ripetizioni Scolastiche:Ripetizioni di Arabo",
+    "fattore" : 0.9
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Greco",
+    "nome_c2" : "Ripetizioni Scolastiche:Svago",
+    "fattore" : 0.9
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Greco",
+    "nome_c2" : "Ripetizioni Scolastiche:Giochi di Logica",
+    "fattore" : 0.9
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Greco",
+    "nome_c2" : "Lezioni di musica:Lezioni di solfeggio",
+    "fattore" : 0.5
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Greco",
+    "nome_c2" : "Lezioni di musica:Lezioni di storia della musica",
+    "fattore" : 0.5
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Greco",
+    "nome_c2" : "Attività di svago:Lezioni di Scacchi",
+    "fattore" : 0.75
+  }, {
+    "nome_c1" : "Ripetizioni Scolastiche:Ripetizioni di Greco",
+    "nome_c2" : "Attività di svago:Lezioni di Sudoku",
+    "fattore" : 1.5
+  } ]
+}

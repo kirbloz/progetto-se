@@ -1,7 +1,6 @@
 package it.unibs.projectIngesoft.parsing;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 
 import java.io.File;
