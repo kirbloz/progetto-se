@@ -1,10 +1,8 @@
 package it.unibs.projectIngesoft.gestori;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import it.unibs.projectIngesoft.attivita.ComprensorioGeografico;
 import it.unibs.projectIngesoft.libraries.InputDatiTerminale;
 import it.unibs.projectIngesoft.mappers.CompGeoMapper;
-import it.unibs.projectIngesoft.parsing.SerializerJSON;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,45 +18,16 @@ public class ComprensorioGeograficoModel {
     public static final String STR_END_INPUT = "fine";
     public static final String WARNING_NO_COMPRENSORI = ">> (!!) Non ci sono comprensori memorizzati.";
 
-    //private final String filePath;
     private List<ComprensorioGeografico> listaComprensoriGeografici;
     private final CompGeoMapper mapper;
 
-    public ComprensorioGeograficoModel(/*String filePath*/CompGeoMapper mapper) {
+    public ComprensorioGeograficoModel(CompGeoMapper mapper) {
         this.mapper = mapper;
-        //this.filePath = filePath;
         this.listaComprensoriGeografici =  mapper.read();
         if(this.listaComprensoriGeografici == null) {
             this.listaComprensoriGeografici = new ArrayList<>();
         }
-        //deserializeXML(); // load dati
     }
-
-    /**
-     * De-serializza l'attributo listaComprensoriGeografici.
-     * Sfrutto l'implementazione statica della classe Serializer.
-     */
-    /*public void deserializeXML() {
-        assert this.filePath != null;
-        if (this.listaComprensoriGeografici == null)
-            listaComprensoriGeografici = new ArrayList<>();
-
-        List<ComprensorioGeografico> listaLetta = SerializerJSON.deserialize(new TypeReference<>() {
-        }, this.filePath);
-        this.listaComprensoriGeografici.clear();
-        if (listaLetta != null)
-            this.listaComprensoriGeografici.addAll(listaLetta);
-    }*/
-
-    /**
-     * Serializza l'attributo listaComprensoriGeografici.
-     * Sfrutto l'implementazione statica della classe Serializer.
-     */
-    /*public void serializeXML() {
-        assert this.listaComprensoriGeografici != null;
-        assert this.filePath != null;
-        //SerializerJSON.serialize(this.filePath, this.listaComprensoriGeografici);
-    }*/
 
     /**
      * Richiama il metodo necessario in base alla selezione dal menu principale.
@@ -76,7 +45,6 @@ public class ComprensorioGeograficoModel {
     public void addComprensorio(ComprensorioGeografico comprensorio) { //Aggiunge il comprensorio alla lista e serializza
         if (!this.listaComprensoriGeografici.contains(comprensorio)) {
             this.listaComprensoriGeografici.add(comprensorio);
-            //serializeXML();
             mapper.write(listaComprensoriGeografici);
         }
     }
@@ -133,7 +101,7 @@ public class ComprensorioGeograficoModel {
             System.out.println(WARNING_NOME_COMPRENSORIO_NON_ESISTE);
     }
 
-    /**
+    /** TODO spostare nella view
      * Visualizza le informazioni di un certo comprensorio geografico.
      *
      * @param comprensorio, nome del comprensorio da visualizzare
@@ -142,11 +110,9 @@ public class ComprensorioGeograficoModel {
         System.out.println(comprensorio.toString());
     }
 
-    public ArrayList<String> listaNomiComprensoriGeografici() {
-        ArrayList<String> listaNomiComprensoriGeografici = new ArrayList<>();
-        for(ComprensorioGeografico comprensorio : listaComprensoriGeografici){
-            listaNomiComprensoriGeografici.add(comprensorio.getNomeComprensorio());
-        }
-        return listaNomiComprensoriGeografici;
+    public List<String> listaNomiComprensoriGeografici() {
+        return listaComprensoriGeografici.stream()
+                .map(ComprensorioGeografico::getNomeComprensorio)
+                .toList();
     }
 }
