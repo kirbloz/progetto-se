@@ -1,22 +1,15 @@
 package mapper;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import it.unibs.projectIngesoft.attivita.Proposta;
-import it.unibs.projectIngesoft.attivita.ProposteWrapper;
 import it.unibs.projectIngesoft.gestori.ProposteModel;
 import it.unibs.projectIngesoft.mappers.ProposteMapper;
 import it.unibs.projectIngesoft.parsing.SerializerJSON;
 import it.unibs.projectIngesoft.parsing.SerializerXML;
 import it.unibs.projectIngesoft.utente.Configuratore;
-import it.unibs.projectIngesoft.utente.Fruitore;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -38,25 +31,10 @@ public class ProposteMapperTest {
                     new SerializerXML<Map<String, List<Proposta>>>());
         }
 
-        model = new ProposteModel("proposte.json",
-                "fake",
-                new Configuratore("pippo", "pluto"),
+        model = new ProposteModel(new Configuratore("pippo", "pluto"),
                 mapper);
 
         System.out.println(model.getHashListaProposte());
-    }
-
-
-    void readXML() throws JsonProcessingException {
-        Map<String, List<Proposta>> hashListaProposte = new HashMap<>();
-        XmlMapper xmlMapper = new XmlMapper();
-        ProposteWrapper tempWrapper = xmlMapper.readValue("proposte.xml", new TypeReference<>() {
-        });
-        if (tempWrapper != null) {
-            hashListaProposte = tempWrapper.toHashMap();
-        }
-        System.out.println(hashListaProposte);
-
     }
 
     @Test
@@ -111,4 +89,5 @@ public class ProposteMapperTest {
 
 
     }
+
 }

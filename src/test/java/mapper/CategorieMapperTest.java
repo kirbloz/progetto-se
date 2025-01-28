@@ -153,7 +153,12 @@ public class CategorieMapperTest {
 
 
 
+
         System.out.println(tree.getRadici());
+        //model.setRadici(tree.getRadici());
+        model.getRadici();
+        System.out.println(model.getRadici());
+
         //SerializerJSON.serialize("categorieTest.json", tree.getRadici());
 
         // non so come controllare???

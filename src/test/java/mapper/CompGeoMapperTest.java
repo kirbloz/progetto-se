@@ -6,12 +6,9 @@ import it.unibs.projectIngesoft.mappers.CompGeoMapper;
 import it.unibs.projectIngesoft.parsing.SerializerJSON;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
-public class CompGeoMapperTest {
+class CompGeoMapperTest {
 
     ComprensorioGeograficoModel model;
 
@@ -50,7 +47,6 @@ public class CompGeoMapperTest {
     void read() {
         assert !model.listaNomiComprensoriGeografici().isEmpty();
         System.out.println(model.listaNomiComprensoriGeografici());
-
     }
 
 }
