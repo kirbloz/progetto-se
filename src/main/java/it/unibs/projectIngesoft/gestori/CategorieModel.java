@@ -76,7 +76,7 @@ public class CategorieModel  {
      */
     public CategorieModel(String fattoriFilePath, CategorieMapper listHandler) {
         this.tree = new Albero();
-        this.gestFatt = new FattoriModel(fattoriFilePath);
+        this.gestFatt = new FattoriModel();
         this.mapper = listHandler;
 
         //deserializeXML(); // load dati
