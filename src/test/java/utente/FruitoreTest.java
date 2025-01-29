@@ -1,8 +1,9 @@
 package utente;
 
 import it.unibs.projectIngesoft.attivita.ComprensorioGeografico;
-import it.unibs.projectIngesoft.gestori.UtentiModel;
+import it.unibs.projectIngesoft.model.UtentiModel;
 import it.unibs.projectIngesoft.libraries.InputDatiTerminale;
+import it.unibs.projectIngesoft.libraries.InputInjector;
 import it.unibs.projectIngesoft.mappers.UtentiMapper;
 import it.unibs.projectIngesoft.parsing.SerializerJSON;
 import it.unibs.projectIngesoft.utente.Fruitore;
@@ -25,12 +26,9 @@ class FruitoreTest {
     private UtentiMapper mapper;
     private List<Utente> cleanTestData;
 
-    private final static InputStream systemIn = System.in;
-    private ByteArrayInputStream typeIn;
 
     @BeforeEach
     void prepareTest() {
-
         mapper = new UtentiMapper("usersTest.json",
                 "defaultCredentials.json",
                 new SerializerJSON<List<Utente>>(),
@@ -49,15 +47,9 @@ class FruitoreTest {
 
     @AfterEach
     void tearDown() {
-        System.setIn(systemIn);
         mapper.write(cleanTestData);
-        //System.setOut(systemOut);
     }
 
-    void provideInput(String data) {
-        ByteArrayInputStream testIn = new ByteArrayInputStream(data.getBytes());
-        System.setIn(testIn);
-    }
 
     @Test
     void testInputInjectionSystemIN() {
@@ -75,16 +67,12 @@ class FruitoreTest {
 
         String simulatedUserInput = "1";
 
-        provideInput(simulatedUserInput);
+        InputInjector.inject(simulatedUserInput);
         //System.setIn(new ByteArrayInputStream(simulatedUserInput.getBytes()));
 
         int result = InputDatiTerminale.leggiIntero("");
 
         assert result == 1;
-
-        // tear down
-        System.setIn(systemIn);
-        //System.setOut(systemOut);
 
 
     }
@@ -98,18 +86,8 @@ class FruitoreTest {
     @Test
     void cambioCredenzialiFruitore_UsernameEPassword() throws Exception {
 
-        //check funzione interna
-        /*model.addUtente(fruitore);
-        if (model.ricercaUtente("user", "pwd") >= 0)
-            fruitore.cambioCredenziali("newUser", "newPwd");
-        assert fruitore.getUsername().equals("newUser");
-        assert fruitore.getPassword().equals("newPwd");
-        //check check esterno
-        assert null != model.verificaCredenziali(new String[]{"newUser", "newPwd"});*/
-
         model.addUtente(fruitore);
-        //System.out.println(UtentiModel.getListaUtenti());
-        provideInput("fruitore\npwd1\n");
+        InputInjector.inject("fruitore\npwd1\n");
         model.cambioCredenziali(fruitore);
 
         assert fruitore.getUsername().equals("fruitore")
@@ -118,9 +96,11 @@ class FruitoreTest {
 
     @Test
     void cambioCredenzialiFruitore_SoloPassword() {
-        fruitore.cambioCredenziali("user", "newPwd");
-        assert fruitore.getUsername().equals("user");
-        assert fruitore.getPassword().equals("newPwd");
+        model.addUtente(fruitore);
+        InputInjector.inject(fruitore.getUsername() + "\npwd1\n");
+        model.cambioCredenziali(fruitore);
+
+        assert fruitore.getPassword().equals("pwd1");
     }
 
     @Test
@@ -147,6 +127,8 @@ class FruitoreTest {
         assert fruitore.getUsername().equals("newUser");
         assert fruitore.getPassword().equals("pwd");*/
     }
+
+
 
 
 }
