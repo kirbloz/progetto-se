@@ -26,7 +26,6 @@ public class FattoriModel {
     private final FattoriMapper mapper;
 
     public FattoriModel( FattoriMapper mapper) {
-        this.hashListaFattori = new HashMap<>();
         this.mapper = mapper;
         hashListaFattori = mapper.read();
         if(hashListaFattori==null) {
