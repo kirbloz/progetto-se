@@ -69,15 +69,14 @@ public class CategorieModel  {
     /**
      * Costruttore per inizializzare i percorsi dei file e de-serializzare l'albero.
      *
-     * @param fattoriFilePath   percorso del file dei fattori
      */
-    public CategorieModel(String fattoriFilePath, CategorieMapper listHandler) {
+    public CategorieModel(CategorieMapper mapper) {
         this.tree = new Albero();
         this.gestFatt = new FattoriModel();
-        this.mapper = listHandler;
+        this.mapper = mapper;
 
         //deserializeXML(); // load dati
-        this.tree.setRadici(mapper.read());
+        this.tree.setRadici(this.mapper.read());
     }
 
     public List<Categoria> getRadici(){
