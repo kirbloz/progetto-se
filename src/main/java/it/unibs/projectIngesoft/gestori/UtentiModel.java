@@ -145,7 +145,7 @@ public class UtentiModel {
         do {
             newUsername = InputDatiTerminale.leggiStringaNonVuota(MSG_RICHIESTA_NEW_USERNAME);
             newPassword = InputDatiTerminale.leggiStringaNonVuota(MSG_RICHIESTA_NEW_PASSWORD);
-        } while (!existsUsername(newUsername));
+        } while (existsUsername(newUsername));
         C1.cambioCredenziali(newUsername, newPassword);
         mapper.write(utenti);
     }
