@@ -1,6 +1,6 @@
 package utente;
 
-import it.unibs.projectIngesoft.gestori.UtentiModel;
+import it.unibs.projectIngesoft.model.UtentiModel;
 import it.unibs.projectIngesoft.parsing.SerializerJSON;
 import it.unibs.projectIngesoft.mappers.UtentiMapper;
 import it.unibs.projectIngesoft.utente.Configuratore;

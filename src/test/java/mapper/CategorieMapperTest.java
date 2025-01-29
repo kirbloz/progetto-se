@@ -3,18 +3,12 @@ package mapper;
 import it.unibs.projectIngesoft.attivita.Albero;
 import it.unibs.projectIngesoft.attivita.Categoria;
 import it.unibs.projectIngesoft.attivita.ValoreDominio;
-import it.unibs.projectIngesoft.gestori.CategorieModel;
-import it.unibs.projectIngesoft.gestori.UtentiModel;
+import it.unibs.projectIngesoft.model.CategorieModel;
 import it.unibs.projectIngesoft.mappers.CategorieMapper;
-import it.unibs.projectIngesoft.mappers.UtentiMapper;
 import it.unibs.projectIngesoft.parsing.SerializerJSON;
-import it.unibs.projectIngesoft.parsing.SerializerXML;
-import it.unibs.projectIngesoft.utente.Utente;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.List;
 
 public class CategorieMapperTest {

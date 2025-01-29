@@ -1,7 +1,7 @@
 package mapper;
 
 import it.unibs.projectIngesoft.attivita.ComprensorioGeografico;
-import it.unibs.projectIngesoft.gestori.ComprensorioGeograficoModel;
+import it.unibs.projectIngesoft.model.ComprensorioGeograficoModel;
 import it.unibs.projectIngesoft.mappers.CompGeoMapper;
 import it.unibs.projectIngesoft.parsing.SerializerJSON;
 import org.junit.jupiter.api.BeforeEach;

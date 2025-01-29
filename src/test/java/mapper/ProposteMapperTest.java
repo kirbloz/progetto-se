@@ -2,7 +2,7 @@ package mapper;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import it.unibs.projectIngesoft.attivita.Proposta;
-import it.unibs.projectIngesoft.gestori.ProposteModel;
+import it.unibs.projectIngesoft.model.ProposteModel;
 import it.unibs.projectIngesoft.mappers.ProposteMapper;
 import it.unibs.projectIngesoft.parsing.SerializerJSON;
 import it.unibs.projectIngesoft.parsing.SerializerXML;
