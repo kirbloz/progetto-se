@@ -1,0 +1,7 @@
+[ {
+  "nomeComprensorio" : "Brescia",
+  "listaComuni" : [ "Brescia", "Alfianello", "Berlingo", "Chiari", "Sirmione" ]
+}, {
+  "nomeComprensorio" : "Bergamo",
+  "listaComuni" : [ "Bergamo", "Albino", "Carona", "Cassiglio", "Membro", "Zorro" ]
+} ]

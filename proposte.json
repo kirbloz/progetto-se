@@ -1,0 +1,34 @@
+{
+  "comprensorioDue" : [ {
+    "richiesta" : "offerta2",
+    "offerta" : "richiesta2",
+    "oreRichiesta" : 1,
+    "oreOfferta" : 1,
+    "stato" : "APERTA",
+    "autore" : "fruitoreTre",
+    "comprensorioDiAppartenenza" : "comprensorioDue",
+    "cronologiaStati" : [ "APERTA" ],
+    "daNotificare" : false
+  } ],
+  "comprensorio" : [ {
+    "richiesta" : "richiesta",
+    "offerta" : "offerta",
+    "oreRichiesta" : 1,
+    "oreOfferta" : 1,
+    "stato" : "APERTA",
+    "autore" : "fruitore",
+    "comprensorioDiAppartenenza" : "comprensorio",
+    "cronologiaStati" : [ "APERTA" ],
+    "daNotificare" : false
+  }, {
+    "richiesta" : "offerta",
+    "offerta" : "richiesta",
+    "oreRichiesta" : 1,
+    "oreOfferta" : 1,
+    "stato" : "APERTA",
+    "autore" : "fruitoreDue",
+    "comprensorioDiAppartenenza" : "comprensorio",
+    "cronologiaStati" : [ "APERTA" ],
+    "daNotificare" : false
+  } ]
+}
