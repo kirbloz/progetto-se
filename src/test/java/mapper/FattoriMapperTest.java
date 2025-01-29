@@ -1,20 +1,15 @@
 package mapper;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import it.unibs.projectIngesoft.attivita.FattoreDiConversione;
-import it.unibs.projectIngesoft.gestori.FattoriModel;
+import it.unibs.projectIngesoft.model.FattoriModel;
 import it.unibs.projectIngesoft.mappers.FattoriMapper;
-import it.unibs.projectIngesoft.parsing.JacksonSerializer;
 import it.unibs.projectIngesoft.parsing.SerializerJSON;
 import it.unibs.projectIngesoft.parsing.SerializerXML;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 

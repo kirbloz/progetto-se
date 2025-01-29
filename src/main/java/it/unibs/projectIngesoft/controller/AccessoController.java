@@ -1,6 +1,6 @@
 package it.unibs.projectIngesoft.controller;
 
-import it.unibs.projectIngesoft.gestori.UtentiModel;
+import it.unibs.projectIngesoft.model.UtentiModel;
 import it.unibs.projectIngesoft.libraries.EventListener;
 import it.unibs.projectIngesoft.libraries.EventManager;
 import it.unibs.projectIngesoft.utente.Utente;
@@ -51,4 +51,22 @@ public class AccessoController implements EventListener {
     private void register() {
 
     }
+
+    /// DA qui la roba ha un senso (Forse)
+    private Utente login(){ //todo controllare il funzionamento del return con le eccezioni
+        boolean riuscito = true;
+        do{
+            String[] credenziali = accessoView.richiestaCredenziali();
+            try{
+                //NOTA: questo ritorna un Configuratore con firstAccess true se si usano le credenziali di default
+                return utentiModel.verificaCredenziali(credenziali);
+            }catch (Exception e){
+                riuscito = false;
+                accessoView.stampaErroreCredenziali("Login fallito");
+            }
+        }while(!riuscito);
+        return null;
+    }
+
+
 }

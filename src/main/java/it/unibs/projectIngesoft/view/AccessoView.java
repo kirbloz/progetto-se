@@ -9,9 +9,8 @@ import it.unibs.projectIngesoft.libraries.Menu;
 import javax.swing.text.View;
 
 // classe generica per la view del login a priori
-public class AccessoView implements EventListener {
+public class AccessoView /*implements EventListener*/ {
 
-    public static final String PRIMO_ACCESSO = "primoAccesso";
     public static final String MSG_RICHIESTA_USERNAME = "Inserisci il tuo username: ";
     public static final String MSG_RICHIESTA_PASSWORD = "Inserisci la tua password: ";
 
@@ -21,26 +20,30 @@ public class AccessoView implements EventListener {
             "Login",
             "Registrazione"
     };
-
+    /*
     //Eventi
-    private static final String[] eventi = {PRIMO_ACCESSO, "credenzialiInserite"};
+    private static final String[] eventi = {"primoAccesso", "credenzialiInserite"};
 
     public EventManager events;
+    */
     private AccessoController controllerAccesso;
 
     public AccessoView(AccessoController controllerAccesso) {
         this.controllerAccesso = controllerAccesso;
+        /*
         events = new EventManager(eventi);
         events.subscribe(PRIMO_ACCESSO, controllerAccesso);
         events.subscribe("credenzialiInserite", controllerAccesso);
         controllerAccesso.events.subscribe("richiestaLogin", this);
+         */
     }
-
     ////////////// CORPO //////////////
-    public void menuIniziale() {
+    public int menuIniziale() {
         Menu menuIniziale = new Menu(TITLE_STARTING_MENU,vociMenuIniziale);
-        int scelta = menuIniziale.scegli();
+        return menuIniziale.scegli();
+        /*
         events.notify(PRIMO_ACCESSO, scelta);
+         */
     }
 
     public String[] richiestaCredenziali() {
@@ -53,6 +56,7 @@ public class AccessoView implements EventListener {
         System.out.println("Errore nella stampa" + msg);
     }
 
+    /*
     @Override
     public void update(String eventType, Object o) {
         switch (eventType){
@@ -61,4 +65,5 @@ public class AccessoView implements EventListener {
                 break;
         }
     }
+    */
 }

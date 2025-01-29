@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
-import it.unibs.projectIngesoft.gestori.UtentiModel;
+import it.unibs.projectIngesoft.model.UtentiModel;
 import it.unibs.projectIngesoft.utente.Fruitore;
 
 import java.util.Stack;

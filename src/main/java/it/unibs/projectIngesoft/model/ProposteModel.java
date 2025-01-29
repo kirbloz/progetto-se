@@ -1,4 +1,4 @@
-package it.unibs.projectIngesoft.gestori;
+package it.unibs.projectIngesoft.model;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;

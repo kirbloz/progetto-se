@@ -1,9 +1,8 @@
-package it.unibs.projectIngesoft.gestori;
+package it.unibs.projectIngesoft.model;
 
 
 import it.unibs.projectIngesoft.attivita.Categoria;
 import it.unibs.projectIngesoft.attivita.FattoreDiConversione;
-import it.unibs.projectIngesoft.libraries.InputDatiTerminale;
 import it.unibs.projectIngesoft.mappers.FattoriMapper;
 
 import java.util.ArrayList;
@@ -26,7 +25,6 @@ public class FattoriModel {
     private final FattoriMapper mapper;
 
     public FattoriModel( FattoriMapper mapper) {
-        this.hashListaFattori = new HashMap<>();
         this.mapper = mapper;
         hashListaFattori = mapper.read();
         if(hashListaFattori==null) {

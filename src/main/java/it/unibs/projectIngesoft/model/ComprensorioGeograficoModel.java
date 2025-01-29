@@ -1,4 +1,4 @@
-package it.unibs.projectIngesoft.gestori;
+package it.unibs.projectIngesoft.model;
 
 import it.unibs.projectIngesoft.attivita.ComprensorioGeografico;
 import it.unibs.projectIngesoft.libraries.InputDatiTerminale;

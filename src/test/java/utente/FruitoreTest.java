@@ -1,17 +1,13 @@
 package utente;
 
 import it.unibs.projectIngesoft.attivita.ComprensorioGeografico;
-import it.unibs.projectIngesoft.gestori.UtentiModel;
+import it.unibs.projectIngesoft.model.UtentiModel;
 import it.unibs.projectIngesoft.mappers.UtentiMapper;
-import it.unibs.projectIngesoft.parsing.JacksonSerializer;
 import it.unibs.projectIngesoft.parsing.SerializerJSON;
-import it.unibs.projectIngesoft.parsing.SerializerXML;
 import it.unibs.projectIngesoft.utente.*;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.Test;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
