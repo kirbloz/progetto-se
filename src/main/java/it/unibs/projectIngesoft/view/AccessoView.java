@@ -26,10 +26,10 @@ public class AccessoView /*implements EventListener*/ {
 
     public EventManager events;
     */
-    private AccessoController controllerAccesso;
+    //private AccessoController controllerAccesso;
 
-    public AccessoView(AccessoController controllerAccesso) {
-        this.controllerAccesso = controllerAccesso;
+    public AccessoView(/*AccessoController controllerAccesso*/) {
+        //this.controllerAccesso = controllerAccesso;
         /*
         events = new EventManager(eventi);
         events.subscribe(PRIMO_ACCESSO, controllerAccesso);

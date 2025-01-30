@@ -4,6 +4,7 @@ import it.unibs.projectIngesoft.model.UtentiModel;
 import it.unibs.projectIngesoft.libraries.EventListener;
 import it.unibs.projectIngesoft.libraries.EventManager;
 import it.unibs.projectIngesoft.utente.Utente;
+import it.unibs.projectIngesoft.view.AccessoView;
 
 public class AccessoController implements EventListener {
 
@@ -12,10 +13,12 @@ public class AccessoController implements EventListener {
 
     public EventManager events;
     UtentiModel utentiModel;
+    private AccessoView view;
 
     public AccessoController(UtentiModel utentiModel) {
         this.utentiModel = utentiModel;
         events = new EventManager(UTENTE_OTTENUTO, RICHIESTA_LOGIN);
+        view = new AccessoView();
     }
 
     @Override
@@ -44,7 +47,7 @@ public class AccessoController implements EventListener {
         }
     }
 
-    private void login() {
+    private void login(String msg) {
         events.notify(RICHIESTA_LOGIN, null);
     }
 
@@ -53,20 +56,20 @@ public class AccessoController implements EventListener {
     }
 
     /// DA qui la roba ha un senso (Forse)
-    private Utente login(){ //todo controllare il funzionamento del return con le eccezioni
+    public Utente login(){ //todo controllare il funzionamento del return con le eccezioni
         boolean riuscito = true;
         do{
-            String[] credenziali = accessoView.richiestaCredenziali();
+            String[] credenziali = view.richiestaCredenziali();
             try{
                 //NOTA: questo ritorna un Configuratore con firstAccess true se si usano le credenziali di default
                 return utentiModel.verificaCredenziali(credenziali);
             }catch (Exception e){
                 riuscito = false;
-                accessoView.stampaErroreCredenziali("Login fallito");
+                view.stampaErroreCredenziali("Login fallito");
+
             }
         }while(!riuscito);
+
         return null;
     }
-
-
 }
