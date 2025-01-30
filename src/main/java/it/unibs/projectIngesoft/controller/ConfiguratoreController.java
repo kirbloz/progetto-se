@@ -5,6 +5,7 @@ import it.unibs.projectIngesoft.attivita.FattoreDiConversione;
 import it.unibs.projectIngesoft.libraries.InputDatiTerminale;
 import it.unibs.projectIngesoft.libraries.Utilitas;
 import it.unibs.projectIngesoft.model.FattoriModel;
+import it.unibs.projectIngesoft.model.*;
 import it.unibs.projectIngesoft.view.ConfiguratoreView;
 
 import java.util.ArrayList;
@@ -17,8 +18,42 @@ import static it.unibs.projectIngesoft.view.ConfiguratoreView.MSG_INSERISCI_FOGL
 
 public class ConfiguratoreController {
 
-	private FattoriModel fattoriModel;
-	private ConfiguratoreView configuratoreView;
+
+    private ConfiguratoreView view;
+
+    private CategorieModel categorieModel;
+    private FattoriModel fattoriModel;
+    private ProposteModel proposteModel;
+    private ComprensorioGeograficoModel compGeoModel;
+    private UtentiModel utentiModel;
+
+    public ConfiguratoreController(ConfiguratoreView view,
+                                   CategorieModel categorieModel,
+                                   FattoriModel fattoriModel,
+                                   ProposteModel proposteModel,
+                                   ComprensorioGeograficoModel compGeoModel,
+                                   UtentiModel utentiModel) {
+        this.view = view;
+        this.categorieModel = categorieModel;
+        this.fattoriModel = fattoriModel;
+        this.proposteModel = proposteModel;
+        this.compGeoModel = compGeoModel;
+        this.utentiModel = utentiModel;
+    }
+
+    /**
+     * Richiama il metodo necessario in base alla selezione dal menu principale.
+     */
+    public void entryPoint() {
+        int scelta = 0;
+        view.visualizzaMenuCategorie();
+        scelta = view.getUserSelection();
+        switch (scelta) {
+            case 1 -> subMenuAggiungiGerarchia();
+            case 2 -> visualizzaGerarchie();
+        }
+    }
+
 
 	//todo da rifattorizzare per l'utilizzo nel controller
 	/**
@@ -79,5 +114,23 @@ public class ConfiguratoreController {
 			//Todo assumo che non si chiami questo metodo se non sono state create categorie foglia (spero wade non sia un idiota e non lo chiami)
 			fattoriModel.inserisciSingolaFogliaNellaHashmap(nomeRadice, foglie);
 		}
+	}
+
+	public void aggiungiRadice() {
+		ConfiguratoreView configView = (ConfiguratoreView) view;
+
+		String nomeRadice = "";
+		do {
+			nomeRadice = configView.visualizzaInserimentoCategoriaRadice(categorieModel);
+		} while (categorieModel.esisteRadice(nomeRadice));
+
+		String nomeCampo = configView.visualizzaInserimentoCampoCategoria();
+
+		categorieModel.aggiungiCategoriaRadice(nomeRadice, nomeCampo);
+
+	}
+
+	public void visualizzaGerarchie() {
+		view.visualizzaListaRadici(categorieModel.getRadici());
 	}
 }

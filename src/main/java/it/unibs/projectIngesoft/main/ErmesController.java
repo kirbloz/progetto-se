@@ -31,7 +31,7 @@ public class ErmesController /*implements EventListener*/ {
 
             UtentiModel modelUtenti = new UtentiModel(utentiMapper);
             AccessoController controllerAccesso = new AccessoController(modelUtenti);
-            AccessoView viewAccesso = new AccessoView(controllerAccesso);
+            //AccessoView viewAccesso = new AccessoView(controllerAccesso);
 
 
 
@@ -71,7 +71,6 @@ public class ErmesController /*implements EventListener*/ {
 
 
 
-    @Override
     public void update(String eventType, Object o) {
         switch(eventType){
             case "utenteOttenuto":

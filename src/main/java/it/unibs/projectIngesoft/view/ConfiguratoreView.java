@@ -5,6 +5,8 @@ import it.unibs.projectIngesoft.libraries.InputDatiTerminale;
 import it.unibs.projectIngesoft.libraries.Utilitas;
 
 import java.util.List;
+import it.unibs.projectIngesoft.libraries.Menu;
+import it.unibs.projectIngesoft.model.CategorieModel;
 
 public class ConfiguratoreView implements UtenteViewableTerminal {
 
@@ -54,19 +56,165 @@ public class ConfiguratoreView implements UtenteViewableTerminal {
     /// fine roba da FattoriModel
 
 
-    @Override
+    // STRINGHE PER CATEGORIE
+
+    public static final String HEADER_VISUALIZZA_GERARCHIE = ">> Visualizza gerarchie di categorie <<\n";
+    public static final String HEADER_VISUALIZZA_RADICE = ">> Visualizza gerarchia di %s <<\n";
+
+    public static final String TITLE_SUBMENU_AGGIUNGI_GERARCHIA = "AGGIUNGI GERARCHIA";
+    public static final String[] VOCI_SUBMENU_AGGIUNGI_GERARCHIA = new String[]{
+            "Aggiungi Categoria",
+    };
+
+
+    public static final String ASK_INSERISCI_DESCRIZIONE_VALORE_DOMINIO = ">> Vuoi inserire una descrizione per questo valore?";
+    public static final String MSG_INSERIMENTO_NUOVO_DOMINIO = ">> Inserisci il nome del dominio della nuova categoria:\n> ";
+    public static final String MSG_INSERIMENTO_VALORE_DOMINIO = ">> Inserisci il valore di %s nel dominio di {%s}\n> ";
+    public static final String MSG_INSERIMENTO_DOMINIO_PER_FIGLIE = ">> Inserisci il nome del dominio per eventuali figlie della nuova categoria:\n> ";
+
+    public static final String ASK_CATEGORIA_IS_FOGLIA = ">> Questa Categoria è Foglia?";
+
+    public static final String MSG_INSERIMENTO_NOME_CATEGORIA_MADRE = ">> Inserisci il nome della CATEGORIA MADRE per %s:\n> ";
+
+    public static final String MSG_INSERIMENTO_RADICE = ">> Scegli un nome per il nuovo albero di categorie che non esista già.\n";
+    public static final String MSG_PRINT_LISTA_RADICI = ">> Di seguito tutte le categorie radice.\n";
+
+    public static final String MSG_SELEZIONE_RADICE = ">> Inserisci il nome di una categoria radice\n";
+    public static final String MSG_INPUT_NOME_RADICE = ">> Inserisci il nome della categoria radice\n> ";
+    public static final String MSG_INPUT_SCELTA_CAMPO = ">> Scegli un campo tra quelli delle categorie non foglia\n";
+
+    public static final String MSG_INPUT_NUOVO_NOME_RADICE = ">> Inserisci il nome della NUOVA CATEGORIA RADICE:\n> ";
+    public static final String MSG_INSERIMENTO_NUOVA_CATEGORIA = ">> Inserisci il nome della NUOVA CATEGORIA:\n> ";
+
+    public static final String MSG_INPUT_DESCRIZIONE_VALORE_DOMINIO = ">> Inserisci la descrizione (da 0 a 100 caratteri):\n> ";
+    public static final String CONFIRM_DESCRIZIONE_AGGIUNTA = ">> Descrizione aggiunta <<";
+
+    public static final String WARNING_RADICE_ESISTE = ">> (!!) Per favore indica una categoria radice che non esiste già\n";
+    public static final String WARNING_RADICE_NON_ESISTE = ">> (!!) Per favore indica una categoria radice che esiste";
+    public static final String WARNING_CATEGORIA_ESISTE = ">> (!!) Per favore indica una categoria che non esista già in questo albero gerarchico.\n";
+    public static final String WARNING_CATEGORIA_NF_NON_ESISTE = ">> (!!) Per favore indica una categoria non foglia dell'albero gerarchico selezionato.\n";
+    public static final String WARNING_NO_GERARCHIE_MEMORIZZATE = ">> (!!) Nessuna gerarchia memorizzata.";
+
+
+    // STRINGHE PER PROPOSTE
+
+
+    // STRINGHE PER COMPRENSORI
+
+
     public void stampaMenu() {
         System.out.println("TO IMPLEMENT");
     }
 
-    @Override
+
     public int getUserSelection() {
+
         return InputDatiTerminale.leggiInteroConMinimo(">> Selezione (>0): ", 0);
+
+    }
+
+
+    public String getUserInput(String prompt) {
+        return InputDatiTerminale.leggiStringaNonVuota(prompt);
     }
 
     @Override
     public String getUserInput() {
-        return InputDatiTerminale.leggiStringaNonVuota(">> Input stringa: ");
+        return "";
+    }
+
+
+    public int visualizzaMenuCategorie() {
+        Menu menuCategorie = new Menu(ConfiguratoreView.TITLE_MENU_CATEGORIE,
+                ConfiguratoreView.vociCategorieConfiguratore);
+
+        return menuCategorie.scegli();
+
+        /*switch (scelta) {
+            case 1 -> subMenuAggiungiGerarchia();
+            case 2 -> visualizzaListaRadici();
+            default -> {
+            }
+        }*/
+    }
+
+    public int visualizzaMenuAggiungiGerarchia() {
+        Menu subMenu = new Menu(TITLE_SUBMENU_AGGIUNGI_GERARCHIA, VOCI_SUBMENU_AGGIUNGI_GERARCHIA);
+        return subMenu.scegli();
+    }
+
+
+    public String visualizzaInserimentoCategoriaRadice(CategorieModel model) {
+        visualizzaListaRadici(model.getRadici());
+        return getUserInput(MSG_INSERIMENTO_RADICE + MSG_PRINT_LISTA_RADICI);
+    }
+
+    public String visualizzaInserimentoCampoCategoria() {
+        return getUserInput(MSG_INSERIMENTO_NUOVO_DOMINIO);
+    }
+
+
+    public void uscitaMenu(String menu) {
+        switch (menu) {
+            case "aggiungiGerarchia":
+                System.out.println(">> USCITA ZIOPERA");
+        }
+    }
+
+
+    /**
+     * Visualizza una stringa di descrizione delle categorie radici,
+     * senza eventuali figlie.
+     *
+     * @param radici lista radici.
+     */
+    public void visualizzaListaRadici(List<Categoria> radici) {
+        if (radici.isEmpty())
+            return;
+        System.out.println(HEADER_VISUALIZZA_GERARCHIE);
+        for (Categoria radice : radici) {
+            System.out.println("> RADICE");
+            visualizzaCategoria(radice);
+        }
+        System.out.println();
+    }
+
+
+    public void visualizzaCategoria(Categoria categoria) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("[ ").append(categoria.getNome()).append(" ]\n");
+
+        if (!categoria.isRadice()) {  // se non è una radice, allora si stampano i dati della categoria madre
+            sb.append("Madre: ").append(categoria.getNomeMadre())
+                    .append("\n");
+            sb.append("Dominio: ").append(categoria.getCampo())
+                    .append(" = ").append(categoria.getValoreDominio()).
+                    append("\n");
+        }
+        if (!categoria.isFoglia()) { // se non è foglia, si stampa il dominio impresso alle figlie
+            sb.append("Dominio Figlie: ").append(categoria.getCampoFiglie())
+                    .append("\n");
+        } else {
+            sb.append("> Foglia\n");
+        }
+        System.out.println(sb);
+        System.out.println();
+    }
+
+    public void visualizzaFiglieCategoria(Categoria categoria) {
+        if (!categoria.hasFiglie()) {
+            System.out.println("\t﹂ Nessuna figlia.");
+            return;
+        }
+
+        List<Categoria> figlie = categoria.getCategorieFiglie();
+
+        figlie.forEach(figlia -> {
+            System.out.println();
+            visualizzaCategoria(figlia);
+        });
+
+        System.out.println();
     }
 
 

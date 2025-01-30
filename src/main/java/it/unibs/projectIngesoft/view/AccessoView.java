@@ -14,6 +14,8 @@ public class AccessoView /*implements EventListener*/ {
     public static final String MSG_RICHIESTA_USERNAME = "Inserisci il tuo username: ";
     public static final String MSG_RICHIESTA_PASSWORD = "Inserisci la tua password: ";
 
+    public static final String MSG_USCITA_SUBMENU = ">> Uscita dal submenu.. <<";
+
     public static final String MSG_PROGRAM_EXIT = "> ARRIVEDERCI <";
     public static final String TITLE_STARTING_MENU = "BENVENUTO";
     public static final String[] vociMenuIniziale = new String[]{

@@ -157,12 +157,11 @@ public class Main {
      */
     private static void loopCategorie(Menu menuCategorie, boolean isConfiguratore) {
         int scelta;
-        CategorieModel categorieModelCat = new CategorieModel(/*CATEGORIE_XML_FILEPATH,*/
-                FATTORI_DI_CONVERSIONE_XML_FILEPATH,
+        CategorieModel categorieModelCat = new CategorieModel(
                 new CategorieMapper(CATEGORIE_XML_FILEPATH, new SerializerJSON<>()));
         do {
             scelta = menuCategorie.scegli();
-            categorieModelCat.entryPoint(scelta, isConfiguratore);
+            //categorieModelCat.entryPoint(scelta, isConfiguratore);
         } while (scelta != 0);
     }
 

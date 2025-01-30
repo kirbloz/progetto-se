@@ -185,7 +185,10 @@ public class Categoria {
 
         if (this.categorieFiglie == null)
             this.categorieFiglie = new ArrayList<>();
+        if (this.categorieFiglie.isEmpty())
+            this.isFoglia = true;
         this.categorieFiglie.add(categoria);
+
     }
 
     @JsonIgnore
@@ -253,7 +256,7 @@ public class Categoria {
      *
      * @return stringa formattata
      */
-    @Override
+    /*@Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append(this.simpleToString());
@@ -262,14 +265,14 @@ public class Categoria {
             sb.append(figlieToString());
 
         return sb.toString();
-    }
+    }*/
 
     /**
      * Genera una stringa di descrizione della categoria limitata, senza eventuali figlie.
      *
      * @return stringa formattata
      */
-    public String simpleToString() {
+    /*public String simpleToString() {
         StringBuilder sb = new StringBuilder();
         sb.append("[ ").append(this.getNome()).append(" ]\n");
 
@@ -284,14 +287,14 @@ public class Categoria {
         }
 
         return sb.toString();
-    }
+    }*/
 
     /**
      * Stampa le figlie della Categoria.
      *
      * @return stringa formattata
      */
-    public String figlieToString() {
+    /*public String figlieToString() {
         StringBuilder sb = new StringBuilder();
         if (getNumCategorieFiglie() > 0) {
             for (int i = 0; i < getNumCategorieFiglie(); i++)
@@ -300,5 +303,9 @@ public class Categoria {
             sb.append("\t﹂ Nessuna figlia.");
 
         return sb.toString();
+    }*/
+
+    public boolean hasFiglie() {
+        return isFoglia;
     }
 }
