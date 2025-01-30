@@ -10,7 +10,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static it.unibs.projectIngesoft.view.ConfiguratoreView.*;
+import it.unibs.projectIngesoft.libraries.Utilitas;
+import static it.unibs.projectIngesoft.libraries.Utilitas.MAX_FATTORE;
+import static it.unibs.projectIngesoft.libraries.Utilitas.MIN_FATTORE;
 
 /**
  * Si occupa di calcolare, memorizzare e leggere i Fattori di Conversione relativi alle Categorie.
@@ -18,22 +20,20 @@ import static it.unibs.projectIngesoft.view.ConfiguratoreView.*;
  */
 public class FattoriModel {
 
-    public static final double MIN_FATTORE = 0.5;
-    public static final double MAX_FATTORE = 2.0;
 
-    private Map<String, List<FattoreDiConversione>> hashListaFattori;
+    private Map<String, List<FattoreDiConversione>> hashMapFattori;
     private final FattoriMapper mapper;
 
-    public FattoriModel( FattoriMapper mapper) {
+    public FattoriModel(FattoriMapper mapper) {
         this.mapper = mapper;
-        hashListaFattori = mapper.read();
-        if(hashListaFattori==null) {
-            hashListaFattori = new HashMap<>();
+        hashMapFattori = mapper.read();
+        if(hashMapFattori == null) {
+            hashMapFattori = new HashMap<>();
         }
     }
 
     /**
-     * Costruttore vuoto e finto. Non fa nulla.
+     * Costruttore vuoto e finto. Non fa nulla. /todo e allora perché esiste ed è usato 3 volte diomerda?
      */
     public FattoriModel() {
         this.mapper = null;
@@ -41,29 +41,110 @@ public class FattoriModel {
         System.out.println("fake fattoriModel");
     }
 
-    public Map<String, List<FattoreDiConversione>> getHashListaFattori() {
-        return new HashMap<>(hashListaFattori);
+    ////////////////////////////////////////////////////// CORPO //////////////////////////////////////////////////////
+
+    //TODO refactoring in progress
+    public void inserisciFattoriDiConversione(String nomeFogliaEsternaFormattata, String nomeFogliaInternaFormattata, double fattoreDiConversioneEsternoInterno, ArrayList<FattoreDiConversione> nuoviDaNuovaRadice) {
+        /// Nuovo calcolo inversi
+        nuoviDaNuovaRadice.addAll(calcolaInversi(nuoviDaNuovaRadice));
+
+        // caso hashmap non è vuota ma c'è solo una chiave => hai solo una foglia esterna
+        // OPPURE hashmap non è vuota e c'è più di una chiave => situazione standard
+        if (!hashMapFattori.isEmpty()) {
+            // 4. fa i calcolini e salva i fattori nella hashmap
+            FattoreDiConversione primoFattoreEsternoInterno = new FattoreDiConversione(nomeFogliaEsternaFormattata, nomeFogliaInternaFormattata, fattoreDiConversioneEsternoInterno);
+            ArrayList<FattoreDiConversione> fattoriEsterni = calcoloFattoriEsterni(primoFattoreEsternoInterno, nuoviDaNuovaRadice);
+
+            aggiungiArrayListDiFattori(nuoviDaNuovaRadice);
+            aggiungiArrayListDiFattori(fattoriEsterni);
+            //todo this is checked: should work
+        }
+        // caso hashmap è vuota e hai i nuovi => è la prima radice ed ha più di una foglia,
+        else if (!nuoviDaNuovaRadice.isEmpty()) {
+            // 1. aggiungi i nuovi fattori (sono gli unici)
+            aggiungiArrayListDiFattori(nuoviDaNuovaRadice);
+            //todo this is checked: should work
+        }
+
+        mapper.write(hashMapFattori);
     }
 
-    public boolean contieneLHashmapQuestaChiave(String chiave) {
-        return hashListaFattori.containsKey(chiave);
+    public void inserisciSingolaFogliaNellaHashmap(String nomeRadice, List<Categoria> foglie){
+        // caso hashmap è vuota e non hai i nuovi => è la prima radice ed hai solo una foglia nuova
+        // 1. prepara la chiave e un arraylist vuoto, non puoi calcolare nessun fattore
+        hashMapFattori.put(Utilitas.factorNameBuilder(nomeRadice, foglie.getFirst().getNome()), new ArrayList<>());
+        //todo if(wade != stronzo) this.should_work
     }
+
+    private ArrayList<FattoreDiConversione> calcolaInversi(ArrayList<FattoreDiConversione> fattoriIJ) {
+        ArrayList<FattoreDiConversione> fattoriInversi = new ArrayList<>();
+        for (FattoreDiConversione f : fattoriIJ) {
+            fattoriInversi.add(generaInverso(f));
+        }
+        return fattoriInversi;
+    }
+
+    public boolean isEmpty(){
+        return hashMapFattori.isEmpty();
+    }
+
+    /*
+     * Dato il nome di una categoria ritorna una stringa formattata con tutti i fattori di conversione relativi a quella categoria
+     *
+     * @param categoriaFormattata, nome categoria nel formato root:leaf
+     * @return String
+     *
+    public String stringaFattoriDataCategoria(String categoriaFormattata) {
+        StringBuilder sb = new StringBuilder();
+        if (hashListaFattori.containsKey(categoriaFormattata)) {
+            for (FattoreDiConversione f : hashListaFattori.get(categoriaFormattata)) {
+                String valoreFormattato = String.format("%.3f", f.getFattore());
+                sb.append("[ ")
+                        .append(f.getNome_c1()).append(", ").append(f.getNome_c2())
+                        .append(", ").append(valoreFormattato).append(" ]\n");
+            }
+            return sb.toString();
+        } else return WARNING_CATEGORIA_NON_ESISTE;
+    }
+
+    /*
+    /**
+     * Richiama il metodo necessario in base alla selezione dal menu.
+     *
+     * @param scelta, selezione dal menu
+     *
+    public void entryPoint(int scelta) {
+        switch (scelta) {
+            case 1 -> visualizzaFattori();
+            default -> System.out.println("Nulla da mostrare");
+        }
+    }
+    */
+
+
+
+
+    ////////////////////////////////////////////////// RIFATTORIZZATO //////////////////////////////////////////////////
 
     /**
      * Inserisce un nuovo fattore nell'HashMap, verificando eventuali duplicati.
      * Garantisce il formato di chiave (string root:leaf) e valore (oggetto FdC)
      *
-     * @param tempKey,   nome della prima categoria della coppia
-     * @param tempValue, oggetto FdC da inserire nella lista
+     * @param chiaveFattore,   nome della prima categoria della coppia
+     * @param fattoreDaInserire, oggetto FdC da inserire nella lista
      */
-    public void addFattore(String tempKey, FattoreDiConversione tempValue) {
+    public void addFattore(String chiaveFattore, FattoreDiConversione fattoreDaInserire) {
         /// Nota: aggiungo qui il controllo sul valore del fattore
-        FattoreDiConversione fattore = controllaESostituisciValoriFuoriScala(tempValue);
-        // computeIfAbsent verifica se la chiave tempKey esiste già: se non esiste, la aggiunge e crea una nuova arraylist come valore
-        // in entrambi i casi, aggiunge il fattore alla lista.
-        this.hashListaFattori.computeIfAbsent(tempKey, k -> new ArrayList<>()).add(fattore);
+        FattoreDiConversione fattore = controllaESostituisciValoriFuoriScala(fattoreDaInserire);
+        // computeIfAbsent verifica se la chiave chiaveFattore esiste già: se non esiste, la aggiunge e crea una nuova arraylist come valore.
+        // In entrambi i casi, aggiunge il fattore alla lista.
+        this.hashMapFattori.computeIfAbsent(chiaveFattore, k -> new ArrayList<>()).add(fattore);
     }
 
+    /**
+     * controlla ed eventualmente sostituisce (se fuori scala) il valore del fattoreDaControllare
+     * @param fattoreDaControllare, fattore da controllare
+     */
     private FattoreDiConversione controllaESostituisciValoriFuoriScala(FattoreDiConversione fattoreDaControllare) {
         if (fattoreDaControllare.getFattore() > MAX_FATTORE) {
             return new FattoreDiConversione(fattoreDaControllare.getNome_c1(), fattoreDaControllare.getNome_c2(), MAX_FATTORE);
@@ -82,152 +163,32 @@ public class FattoriModel {
         for (FattoreDiConversione f : fattori) {
             addFattore(f.getNome_c1(), f);
         }
-        mapper.write(hashListaFattori);
+        mapper.write(hashMapFattori);
     }
 
 
     /**
-     * Chiede all'utente i fattori di conversione minimi necessari al calcolo dei restanti e avvia il calcolo degli altri.
-     *
-     * @param nomeRadice, categoria radice della gerarchia per cui si aggiungono i fattori
-     * @param foglie,     foglie della gerarchia
+     * Getter normalissimo
      */
-    public void inserisciFattoriDiConversione(String nomeRadice, List<Categoria> foglie) {
-        //0. preparo i fattori tra le foglie della nuova gerarchia
-        ArrayList<FattoreDiConversione> nuoviDaNuovaRadice = calcolaNuoviFattori(nomeRadice, foglie);
-
-        // caso hashmap non è vuota ma c'è solo una chiave => hai solo una foglia esterna
-        // OPPURE hashmap non è vuota e c'è più di una chiave => situazione standard
-        if (!hashListaFattori.isEmpty()) {
-            // 1. scegliere una categoria per cui i fattori siano GIA' stati calcolati
-            // -> permette di calcolare tutti i nuovi chiedendo un solo inserimento di valore del fattore
-            for (String key : hashListaFattori.keySet()) {
-                System.out.println(key);
-            }
-            String nomeFogliaEsternaFormattata = selezioneFoglia(MSG_INSERISCI_FOGLIA_ESTERNA);
-            // 2. scegliere una categoria delle nuove, da utilizzare per il primo fattore di conversione
-            String nomeFogliaInternaFormattata = selezioneFogliaDaLista(nomeRadice, foglie);
-
-            // TODO levare user interaction
-            //3. chiedi il fattore di conversione tra le 2 [x in (Old:A New:A x)]
-            double fattoreDiConversioneEsternoInterno = InputDatiTerminale.leggiDoubleConRange(
-                    INSERISCI_IL_FATTORE_TRA.formatted(nomeFogliaEsternaFormattata, nomeFogliaInternaFormattata),
-                    MIN_FATTORE, MAX_FATTORE);
-
-            // 4. fa i calcolini e salva i fattori nella hashmap
-            FattoreDiConversione primoFattoreEsternoInterno = new FattoreDiConversione(nomeFogliaEsternaFormattata, nomeFogliaInternaFormattata, fattoreDiConversioneEsternoInterno);
-            ArrayList<FattoreDiConversione> fattoriEsterni = calcoloFattoriEsterni(primoFattoreEsternoInterno, nuoviDaNuovaRadice);
-
-            aggiungiArrayListDiFattori(nuoviDaNuovaRadice);
-            aggiungiArrayListDiFattori(fattoriEsterni);
-
-        }
-        // caso hashmap è vuota e hai i nuovi => è la prima radice ed ha più di una foglia,
-        else if (!nuoviDaNuovaRadice.isEmpty()) {
-            // 1. aggiungi i nuovi fattori (sono gli unici)
-            aggiungiArrayListDiFattori(nuoviDaNuovaRadice);
-        }
-        // caso hashmap è vuota e non hai i nuovi => è la prima radice ed hai solo una foglia nuova
-        else {
-            // 1. prepara la chiave e un arraylist vuoto, non puoi calcolare nessun fattore
-            hashListaFattori.put(factorNameBuilder(nomeRadice, foglie.getFirst().getNome()), new ArrayList<>());
-        }
-        mapper.write(hashListaFattori);
+    public Map<String, List<FattoreDiConversione>> getHashMapFattori() {
+        return new HashMap<>(hashMapFattori);
     }
 
     /**
-     * Cicla le foglie dalla prima all'ultima per generare tutte le coppie di valori possibili
-     * (combinazione senza ripetizione) e per ogni coppia generata chiede il fattore all'utente.
-     * Genera il FattoreDiConversione + il suo inverso e li memorizza.
-     *
-     * @param nomeRadice, nome della radice delle foglie
-     * @param foglie,     lista di foglie
-     * @return lista di fattori di conversione
+     * Controlla se la stringa "chiave" è una chiave della hashmap
+     * @param chiave, stringa da controllare
+     * @return true, se la chiave è presente nel keyset, false altrimenti
      */
-    private ArrayList<FattoreDiConversione> calcolaNuoviFattori(String nomeRadice, List<Categoria> foglie) {
-        if (foglie.isEmpty())
-            return new ArrayList<>();
-        // se esiste almeno una foglia, allora calcola i fattori
-        ArrayList<FattoreDiConversione> nuoviDaNuovaRadice = new ArrayList<>();
-        for (int i = 0; i < foglie.size(); i++) {
-            String nomeFogliai = factorNameBuilder(nomeRadice, foglie.get(i).getNome());
-            for (int j = i + 1; j < foglie.size(); j++) {
-                String nomeFogliaj = factorNameBuilder(nomeRadice, foglie.get(j).getNome());
-                // TODO levare user interaction
-                double fattore_ij = InputDatiTerminale.leggiDoubleConRange(INSERISCI_IL_FATTORE_TRA.formatted(nomeFogliai, nomeFogliaj), MIN_FATTORE, MAX_FATTORE);
-
-                FattoreDiConversione fattoreIJ = new FattoreDiConversione(nomeFogliai, nomeFogliaj, fattore_ij);
-                FattoreDiConversione fattoreJI = generaInverso(fattoreIJ);
-
-                nuoviDaNuovaRadice.add(fattoreIJ);
-                nuoviDaNuovaRadice.add(fattoreJI);
-            }
-        }
-        return nuoviDaNuovaRadice;
-    }
-
-    /**
-     * Permette di scegliere una categoria foglia tra quelle appena create.
-     * Guida l'immissione del nome e radice della categoria.
-     *
-     * @param nomeRadice, nome della radice delle foglie
-     * @param foglie,     lista di foglie appena create
-     * @return stringa formattata come "radice:foglia"
-     */
-    private String selezioneFogliaDaLista(String nomeRadice, List<Categoria> foglie) {
-        // stampa categorie interne (foglie della nuova radice)
-        System.out.println(MSG_INSERISCI_FOGLIA_INTERNA);
-        for (Categoria foglia : foglie) {
-            System.out.println(factorNameBuilder(nomeRadice, foglia.getNome()));
-        }
-        // immissione della foglia e verifica che sia corretto [New:A in (Old:A New:A x)]
-        String nomeFogliaNonFormattato;
-        boolean fogliaEsiste = false;
-        do {// TODO levare user interaction
-            nomeFogliaNonFormattato = InputDatiTerminale.leggiStringaNonVuota(MSG_INSERISCI_NOME_FOGLIA);
-            for (Categoria foglia : foglie) {
-                if (foglia.getNome().equals(nomeFogliaNonFormattato)) {
-                    fogliaEsiste = true;
-                    break;
-                }
-            }
-        } while (!fogliaEsiste);
-
-        return factorNameBuilder(nomeRadice, nomeFogliaNonFormattato);
-    }
-
-    /**
-     * Permette di scegliere una categoria foglia tra quelle che già hanno tutti i fattori di conversione calcolati
-     * e memorizzati. Guida l'immissione del nome e radice della categoria.
-     *
-     * @return stringa formattata come "radice:foglia"
-     */
-    public String selezioneFoglia(String messaggio) {
-        for (String key : hashListaFattori.keySet()) {
-            System.out.println(key);
-        }
-        // inserimento guidato e controllo [Old:A in (Old:A New:A x)]
-        return inserimentoNomeFogliaFormattato(messaggio);
-    }
-
-    public String inserimentoNomeFogliaFormattato(String messaggio) {
-        System.out.println(messaggio);
-        String nomeFogliaFormattato;
-        do {
-            nomeFogliaFormattato = factorNameBuilder(// TODO levare user interaction
-                    InputDatiTerminale.leggiStringaNonVuota(MSG_INSERISCI_NOME_RADICE),
-                    InputDatiTerminale.leggiStringaNonVuota(MSG_INSERISCI_NOME_FOGLIA)
-            );
-        } while (!hashListaFattori.containsKey(nomeFogliaFormattato));
-        return nomeFogliaFormattato;
+    public boolean existsKeyInHashmapFattori(String chiave) {
+        return hashMapFattori.containsKey(chiave);
     }
 
 
-    /**
+    /**TODO doublecheck funzionamento logico
      * Calcola tutti i fattori che hanno una foglia nuova e una preesistente,
      * ovvero appartenente a una gerarchia diversa da quella nuova.
      *
-     * @param primoFattoreEsternoInterno, fattore creato tra una foglia nuova e una preesistente.
+     * @param primoFattoreEsternoInterno, fattore creato tra una foglia preesistente e una nuova.
      *                                    Permette il calcolo di tutti gli altri
      * @param fattoriInterni,             fattori di conversione tra tutte le foglie della gerarchia appena creata
      * @return fattoriEsterni, lista di fattori appena calcolati
@@ -265,7 +226,7 @@ public class FattoriModel {
         //per ogni nuovo fattore nel formato (Interno:X Esterno:A)
         for (FattoreDiConversione fattoreInternoASingoloEsterno : nuoviInterniASingoloEsterno) {
             //Per ogni Fattore che ha come Key la foglia Esterno:A
-            for (FattoreDiConversione fattoreInMemoria : hashListaFattori.get(fattoreInternoASingoloEsterno.getNome_c2())) {
+            for (FattoreDiConversione fattoreInMemoria : hashMapFattori.get(fattoreInternoASingoloEsterno.getNome_c2())) {
                 //Genero i fattori con tutto il resto del fuori
                 FattoreDiConversione fattoreInternoEsterno = new FattoreDiConversione(fattoreInternoASingoloEsterno.getNome_c1(), fattoreInMemoria.getNome_c2(), fattoreInternoASingoloEsterno.getFattore() * fattoreInMemoria.getFattore());
                 FattoreDiConversione fattoreEsternoInterno = generaInverso(fattoreInternoEsterno);
@@ -281,6 +242,7 @@ public class FattoriModel {
         return fattoriCalcolati;
     }
 
+
     /**
      * Dato un fattore ne restituisce l'inverso
      *
@@ -291,66 +253,24 @@ public class FattoriModel {
         return new FattoreDiConversione(fattore.getNome_c2(), fattore.getNome_c1(), 1 / fattore.getFattore());
     }
 
+
+
     /**
-     * Costruisce la stringa che rappresenta univocamente un fattore.
-     * Concatena il nome della radice, un ":" e il nome della categoria foglia di riferimento.
-     *
-     * @param root, categoria radice della categoria foglia
-     * @param leaf, categoria foglia di riferimento
-     * @return stringa formattata
+     * Restituisce la lista di FattoriDiConversione richiesta tramite coppia radice-foglia
      */
-    public String factorNameBuilder(String root, String leaf) {
-        return root + ":" + leaf;
+    public List<FattoreDiConversione> getFattoriFromFoglia(String radice, String foglia) {
+        if (hashMapFattori.isEmpty()) {
+            return null;
+        }
+        return hashMapFattori.get(Utilitas.factorNameBuilder(radice, foglia));
     }
 
     /**
-     * Dato il nome di una categoria ritorna una stringa formattata con tutti i fattori di conversione relativi a quella categoria
-     *
-     * @param categoriaFormattata, nome categoria nel formato root:leaf
-     * @return String
+     * Restituisce array di stringhe contenenti i keyset
+     * @return keySet, array di stringhe contenenti i keyset
      */
-    public String stringaFattoriDataCategoria(String categoriaFormattata) {
-        StringBuilder sb = new StringBuilder();
-        if (hashListaFattori.containsKey(categoriaFormattata)) {
-            for (FattoreDiConversione f : hashListaFattori.get(categoriaFormattata)) {
-                String valoreFormattato = String.format("%.3f", f.getFattore());
-                sb.append("[ ")
-                        .append(f.getNome_c1()).append(", ").append(f.getNome_c2())
-                        .append(", ").append(valoreFormattato).append(" ]\n");
-            }
-            return sb.toString();
-        } else return WARNING_CATEGORIA_NON_ESISTE;
-    }
-
-    /**
-     * Visualizza in maniera ordinata i fattori di conversione con tutte le loro informazioni.
-     * I fattori sono raggruppati in base alla prima categoria.
-     */
-    private void visualizzaFattori() {
-        if (hashListaFattori.isEmpty()) {
-            System.out.println(WARNING_NO_FATTORI_MEMORIZZATI);
-            return;
-        }
-        for (String key : hashListaFattori.keySet()) {
-            System.out.println(key);
-        }
-        System.out.println(MSG_INSERISCI_CATEGORIA_VISUALIZZA_FATTORI);
-        // TODO levare user interaction
-        String radice = InputDatiTerminale.leggiStringaNonVuota(MSG_INSERISCI_NOME_RADICE);
-        String foglia = InputDatiTerminale.leggiStringaNonVuota(MSG_INSERISCI_NOME_FOGLIA);
-        System.out.println(stringaFattoriDataCategoria(factorNameBuilder(radice, foglia)));
-    }
-
-    /**
-     * Richiama il metodo necessario in base alla selezione dal menu.
-     *
-     * @param scelta, selezione dal menu
-     */
-    public void entryPoint(int scelta) {
-        switch (scelta) {
-            case 1 -> visualizzaFattori();
-            default -> System.out.println("Nulla da mostrare");
-        }
+    public String[] getKeysets(){
+        return hashMapFattori.keySet().toArray(new String[0]);
     }
 
     /**
@@ -364,7 +284,7 @@ public class FattoriModel {
      * se non esistono fattori di conversione tra le categorie indicate, ritorna -1
      */
     public int calcolaRapportoOre(String richiesta, String offerta, int oreRichiesta) {
-        for (FattoreDiConversione f : hashListaFattori.get(richiesta)) {
+        for (FattoreDiConversione f : hashMapFattori.get(richiesta)) {
             if (f.getNome_c2().equals(offerta)) {
                 return (int) Math.rint(oreRichiesta * f.getFattore());
             }

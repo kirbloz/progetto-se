@@ -1,6 +1,10 @@
 package it.unibs.projectIngesoft.view;
 
+import it.unibs.projectIngesoft.attivita.Categoria;
 import it.unibs.projectIngesoft.libraries.InputDatiTerminale;
+import it.unibs.projectIngesoft.libraries.Utilitas;
+
+import java.util.List;
 
 public class ConfiguratoreView implements UtenteViewableTerminal {
 
@@ -64,4 +68,75 @@ public class ConfiguratoreView implements UtenteViewableTerminal {
     public String getUserInput() {
         return InputDatiTerminale.leggiStringaNonVuota(">> Input stringa: ");
     }
+
+
+
+
+
+
+
+    /////////////////////////////////////////////// VIEW per i fattori /////////////////////////////////////////////////
+    // TODO rivedere perché i vari check li fa il model tramite controller
+    public String inserimentoNomeFogliaFormattato(String messaggio) {
+        System.out.println(messaggio);
+        String nomeFogliaFormattato;
+        do {
+            nomeFogliaFormattato = Utilitas.factorNameBuilder(
+                    InputDatiTerminale.leggiStringaNonVuota(MSG_INSERISCI_NOME_RADICE),
+                    InputDatiTerminale.leggiStringaNonVuota(MSG_INSERISCI_NOME_FOGLIA)
+            );
+        } while (!hashMapFattori.containsKey(nomeFogliaFormattato));
+        return nomeFogliaFormattato;
+    }
+
+    public void stampaOpzioni(String[] opzioni) {
+        for (String opt : opzioni) {
+            System.out.println(opt);
+        }
+    }
+
+    // TODO rivedere
+    /**
+     * Permette di scegliere una categoria foglia tra quelle che già hanno tutti i fattori di conversione calcolati
+     * e memorizzati. Guida l'immissione del nome e radice della categoria.
+     *
+     * @return stringa formattata come "radice:foglia"
+     */
+    public String selezioneFoglia(String messaggio) {
+        // inserimento guidato e controllo [Old:A in (Old:A New:A x)]
+        return inserimentoNomeFogliaFormattato(messaggio);
+    }
+    //todo rivedere
+    /**
+     * Permette di scegliere una categoria foglia tra quelle appena create.
+     * Guida l'immissione del nome e radice della categoria.
+     *
+     * @param nomeRadice, nome della radice delle foglie
+     * @param foglie,     lista di foglie appena create
+     * @return stringa formattata come "radice:foglia"
+     */
+	public String selezioneFogliaDaLista(String nomeRadice, List<Categoria> foglie) {
+        // stampa categorie interne (foglie della nuova radice)
+        System.out.println(MSG_INSERISCI_FOGLIA_INTERNA);
+        for (Categoria foglia : foglie) {
+            System.out.println(Utilitas.factorNameBuilder(nomeRadice, foglia.getNome()));
+        }
+        // immissione della foglia e verifica che sia corretto [New:A in (Old:A New:A x)]
+        String nomeFogliaNonFormattato;
+        boolean fogliaEsiste = false;
+        do {
+            nomeFogliaNonFormattato = InputDatiTerminale.leggiStringaNonVuota(MSG_INSERISCI_NOME_FOGLIA);
+            for (Categoria foglia : foglie) {
+                if (foglia.getNome().equals(nomeFogliaNonFormattato)) {
+                    fogliaEsiste = true;
+                    break;
+                }
+            }
+        } while (!fogliaEsiste);
+
+        return Utilitas.factorNameBuilder(nomeRadice, nomeFogliaNonFormattato);
+    }
+
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 }

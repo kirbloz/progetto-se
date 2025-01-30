@@ -43,7 +43,7 @@ public class FattoriMapperTest {
 
     @Test
     void read(){
-        assert !model.getHashListaFattori().get("catUno").isEmpty();
+        assert !model.getHashMapFattori().get("catUno").isEmpty();
 
     }
 
