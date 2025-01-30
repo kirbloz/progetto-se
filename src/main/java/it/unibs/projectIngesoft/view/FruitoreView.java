@@ -1,6 +1,7 @@
 package it.unibs.projectIngesoft.view;
 
 import it.unibs.projectIngesoft.libraries.InputDatiTerminale;
+import it.unibs.projectIngesoft.libraries.Menu;
 
 public class FruitoreView implements UtenteViewableTerminal {
 
@@ -67,5 +68,10 @@ public class FruitoreView implements UtenteViewableTerminal {
     @Override
     public String getUserInput() {
         return InputDatiTerminale.leggiStringaNonVuota(">> Input stringa: ");
+    }
+
+    public int visualizzaMenuPrincipale() {
+        Menu menu = new Menu(TITLE_MAIN_MENU,  vociMainFruitore);
+        return menu.scegli();
     }
 }

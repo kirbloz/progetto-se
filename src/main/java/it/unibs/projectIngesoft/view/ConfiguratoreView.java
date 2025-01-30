@@ -108,7 +108,6 @@ public class ConfiguratoreView implements UtenteViewableTerminal {
 
 
     public int getUserSelection() {
-
         return InputDatiTerminale.leggiInteroConMinimo(">> Selezione (>0): ", 0);
 
     }
@@ -124,18 +123,18 @@ public class ConfiguratoreView implements UtenteViewableTerminal {
     }
 
 
+    public int visualizzaMenuPrincipale() {
+        Menu menu = new Menu(ConfiguratoreView.TITLE_MAIN_MENU,
+                vociMainConfiguratore);
+        return menu.scegli();
+    }
+
+
     public int visualizzaMenuCategorie() {
         Menu menuCategorie = new Menu(ConfiguratoreView.TITLE_MENU_CATEGORIE,
-                ConfiguratoreView.vociCategorieConfiguratore);
-
+                vociCategorieConfiguratore);
         return menuCategorie.scegli();
 
-        /*switch (scelta) {
-            case 1 -> subMenuAggiungiGerarchia();
-            case 2 -> visualizzaListaRadici();
-            default -> {
-            }
-        }*/
     }
 
     public int visualizzaMenuAggiungiGerarchia() {
@@ -158,6 +157,8 @@ public class ConfiguratoreView implements UtenteViewableTerminal {
         switch (menu) {
             case "aggiungiGerarchia":
                 System.out.println(">> USCITA ZIOPERA");
+            case "programma":
+                System.out.println(">> USCITA PROGRAMA");
         }
     }
 
@@ -228,13 +229,14 @@ public class ConfiguratoreView implements UtenteViewableTerminal {
     public String inserimentoNomeFogliaFormattato(String messaggio) {
         System.out.println(messaggio);
         String nomeFogliaFormattato;
-        do {
+        /*do {
             nomeFogliaFormattato = Utilitas.factorNameBuilder(
                     InputDatiTerminale.leggiStringaNonVuota(MSG_INSERISCI_NOME_RADICE),
                     InputDatiTerminale.leggiStringaNonVuota(MSG_INSERISCI_NOME_FOGLIA)
             );
         } while (!hashMapFattori.containsKey(nomeFogliaFormattato));
-        return nomeFogliaFormattato;
+        return nomeFogliaFormattato;*/
+        return null;
     }
 
     public void stampaOpzioni(String[] opzioni) {
@@ -284,6 +286,8 @@ public class ConfiguratoreView implements UtenteViewableTerminal {
 
         return Utilitas.factorNameBuilder(nomeRadice, nomeFogliaNonFormattato);
     }
+
+
 
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
