@@ -1,42 +1,83 @@
 package it.unibs.projectIngesoft.main;
 
 import it.unibs.projectIngesoft.controller.AccessoController;
-import it.unibs.projectIngesoft.mappers.UtentiMapper;
-import it.unibs.projectIngesoft.model.UtentiModel;
+import it.unibs.projectIngesoft.controller.ConfiguratoreController;
+import it.unibs.projectIngesoft.controller.FruitoreController;
+import it.unibs.projectIngesoft.mappers.*;
+import it.unibs.projectIngesoft.model.*;
 import it.unibs.projectIngesoft.parsing.SerializerJSON;
+import it.unibs.projectIngesoft.utente.Configuratore;
+import it.unibs.projectIngesoft.utente.Fruitore;
 import it.unibs.projectIngesoft.utente.Utente;
-import it.unibs.projectIngesoft.controller.UtentiController;
-import it.unibs.projectIngesoft.view.AccessoView;
+import it.unibs.projectIngesoft.view.ConfiguratoreView;
+import it.unibs.projectIngesoft.view.FruitoreView;
 import it.unibs.projectIngesoft.view.UtenteViewableTerminal;
 
-public class ErmesController /*implements EventListener*/ {
+public class ErmesController {
 
     Utente utenteAttivo;
-    UtentiController utentiController;
+    UtentiModel modelUtenti;
 
     public ErmesController() {
+        UtentiMapper utentiMapper = new UtentiMapper("users.json",
+                "defaultCredentials.json",
+                new SerializerJSON<>(),
+                new SerializerJSON<>());
+        modelUtenti = new UtentiModel(utentiMapper);
 
     }
 
-    public void mainLoop(){
+    public void mainLoop() {
         UtenteViewableTerminal view;
 
 
-        //Dove svilupperemo la logica principale del programma, visto che il main lo lasceremo pressoché vuoto
-        //do {
-            UtentiMapper utentiMapper = new UtentiMapper("users.json",
-                    "defeaultCredentials.json",
-                                        new SerializerJSON<>(),
-                                        new SerializerJSON<>());
+        AccessoController controllerAccesso = new AccessoController(modelUtenti);
+        Utente utenteAttivo = controllerAccesso.run();
 
-            UtentiModel modelUtenti = new UtentiModel(utentiMapper);
-            AccessoController controllerAccesso = new AccessoController(modelUtenti);
-            //AccessoView viewAccesso = new AccessoView(controllerAccesso);
+        CategorieModel categorieModel = new CategorieModel(
+                new CategorieMapper("categorieTest.json",
+                        new SerializerJSON<>()));
+
+        FattoriModel fattoriModel = new FattoriModel(
+                new FattoriMapper("fattoriTest.json",
+                        new SerializerJSON<>()));
+
+        ProposteModel proposteModel = new ProposteModel(utenteAttivo,
+                new ProposteMapper("proposteTest.json",
+                        new SerializerJSON<>()));
+
+        ComprensorioGeograficoModel compGeoModel = new ComprensorioGeograficoModel(
+                new CompGeoMapper("comprensoriGeograficiTest.json",
+                        new SerializerJSON<>()));
+
+
+        if (utenteAttivo instanceof Configuratore) {
+            ConfiguratoreController controller = new ConfiguratoreController(
+                    new ConfiguratoreView(),
+                    categorieModel,
+                    fattoriModel,
+                    proposteModel,
+                    compGeoModel,
+                    modelUtenti
+            );
+            controller.run();
+
+        }else{
+            FruitoreController controller = new FruitoreController(
+                    new FruitoreView(),
+                    categorieModel,
+                    fattoriModel,
+                    proposteModel,
+                    compGeoModel,
+                    modelUtenti
+            );
+            controller.run();
+        }
 
 
 
-            //controllerAccesso.events.subscribe("utenteOttenuto", this);
-            //viewAccesso.menuIniziale();
+        //controllerAccesso.events.subscribe("utenteOttenuto", this);
+        //viewAccesso.menuIniziale();
 
             /*this.utenteAttivo = utentiController.effettuaAccesso();
 
@@ -69,12 +110,4 @@ public class ErmesController /*implements EventListener*/ {
 
     }
 
-
-
-    public void update(String eventType, Object o) {
-        switch(eventType){
-            case "utenteOttenuto":
-                this.utenteAttivo = (Utente)o;
-        }
-    }
 }
