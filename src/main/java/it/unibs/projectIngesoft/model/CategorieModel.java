@@ -7,61 +7,22 @@ import it.unibs.projectIngesoft.attivita.ValoreDominio;
 import it.unibs.projectIngesoft.libraries.InputDatiTerminale;
 import it.unibs.projectIngesoft.libraries.Menu;
 import it.unibs.projectIngesoft.mappers.CategorieMapper;
+import it.unibs.projectIngesoft.view.UtenteViewableTerminal;
 
 import java.util.List;
 
+import static it.unibs.projectIngesoft.view.AccessoView.MSG_USCITA_SUBMENU;
+import static it.unibs.projectIngesoft.view.ConfiguratoreView.*;
+import static it.unibs.projectIngesoft.view.FruitoreView.*;
+
 public class CategorieModel  {
 
-    public static final String HEADER_VISUALIZZA_GERARCHIE = ">> Visualizza gerarchie di categorie <<\n";
-    public static final String HEADER_VISUALIZZA_RADICE = ">> Visualizza gerarchia di %s <<\n";
-    public static final String HEADER_ESPLORA_GERARCHIE = "\n>> ESPLORA GERARCHIE <<\n";
-    public static final String HEADER_ESPLORAZIONE_LIVELLO = "\n>> LIVELLO CORRENTE [ %s ] <<\n";
-
-    private static final String TITLE_SUBMENU_AGGIUNGI_GERARCHIA = "AGGIUNGI GERARCHIA";
-    public static final String MSG_USCITA_SUBMENU = ">> Uscita dal submenu.. <<";
-    private static final String[] VOCI_SUBMENU_AGGIUNGI_GERARCHIA = new String[]{
-            "Aggiungi Categoria",
-    };
-
-    private static final String TITLE_SUBMENU_ESPLORA_GERARCHIA = "ESPLORA GERARCHIA";
-    private static final String[] VOCI_SUBMENU_ESPLORA_GERARCHIA = new String[]{
-            "Esplora un nuovo livello",
-            "Torna indietro di un livello"
-    };
-
-    public static final String ASK_INSERISCI_DESCRIZIONE_VALORE_DOMINIO = ">> Vuoi inserire una descrizione per questo valore?";
-    public static final String MSG_INSERIMENTO_NUOVO_DOMINIO = ">> Inserisci il nome del dominio della nuova categoria:\n> ";
-    public static final String MSG_INSERIMENTO_VALORE_DOMINIO = ">> Inserisci il valore di %s nel dominio di {%s}\n> ";
-    public static final String MSG_INSERIMENTO_DOMINIO_PER_FIGLIE = ">> Inserisci il nome del dominio per eventuali figlie della nuova categoria:\n> ";
-
-    public static final String ASK_CATEGORIA_IS_FOGLIA = ">> Questa Categoria è Foglia?";
-
-    public static final String MSG_INSERIMENTO_NOME_CATEGORIA_MADRE = ">> Inserisci il nome della CATEGORIA MADRE per %s:\n> ";
-
-    public static final String MSG_INSERIMENTO_RADICE = ">> Scegli un nome per il nuovo albero di categorie che non esista già.\n";
-    public static final String MSG_PRINT_LISTA_RADICI = ">> Di seguito tutte le categorie radice.\n";
-
-    public static final String MSG_SELEZIONE_RADICE = ">> Inserisci il nome di una categoria radice\n";
-    public static final String MSG_INPUT_NOME_RADICE = ">> Inserisci il nome della categoria radice\n> ";
-    public static final String MSG_INPUT_SCELTA_CAMPO = ">> Scegli un campo tra quelli delle categorie non foglia\n";
-
-    public static final String MSG_INPUT_NUOVO_NOME_RADICE = ">> Inserisci il nome della NUOVA CATEGORIA RADICE:\n> ";
-    public static final String MSG_INSERIMENTO_NUOVA_CATEGORIA = ">> Inserisci il nome della NUOVA CATEGORIA:\n> ";
-
-    public static final String MSG_INPUT_DESCRIZIONE_VALORE_DOMINIO = ">> Inserisci la descrizione (da 0 a 100 caratteri):\n> ";
-    public static final String CONFIRM_DESCRIZIONE_AGGIUNTA = ">> Descrizione aggiunta <<";
-
-    public static final String WARNING_RADICE_ESISTE = ">> (!!) Per favore indica una categoria radice che non esiste già\n";
-    public static final String WARNING_RADICE_NON_ESISTE = ">> (!!) Per favore indica una categoria radice che esiste";
-    public static final String WARNING_NO_RAMI_DA_ESPLORARE = ">> (!!) Non ci sono nuovi rami da esplorare";
-    public static final String WARNING_CATEGORIA_ESISTE = ">> (!!) Per favore indica una categoria che non esista già in questo albero gerarchico.\n";
-    public static final String WARNING_CATEGORIA_NF_NON_ESISTE = ">> (!!) Per favore indica una categoria non foglia dell'albero gerarchico selezionato.\n";
-    public static final String WARNING_NO_GERARCHIE_MEMORIZZATE = ">> (!!) Nessuna gerarchia memorizzata.";
 
 
     private Albero tree;
     //private final String filePath;
     private CategorieMapper mapper;
+
 
     // questa cosa??? sarebbe da levare. la comunicazione va fatta tra controllers
     private FattoriModel gestFatt;
@@ -94,14 +55,15 @@ public class CategorieModel  {
      *
      * @param scelta, selezione dal menu
      */
-    public void entryPoint(int scelta, boolean isConfiguratore) {
+    /*public void entryPoint(int scelta, boolean isConfiguratore) {
         if (isConfiguratore) {
             switch (scelta) {
                 case 1 -> subMenuAggiungiGerarchia();
-                case 2 -> visualizzaGerarchie();
+                case 2 -> visualizzaListaRadici();
                 default -> {
                 }
             }
+            view.visualizzaMenuCategorie();
         } else {
             switch (scelta) {
                 case 1 -> esploraGerarchie();
@@ -111,14 +73,14 @@ public class CategorieModel  {
             }
         }
 
-    }
+    }*/
 
     /**
      * Metodo per la creazione di un'intera gerarchia.
      * Guida l'inserimento di una radice ed eventuali Categorie, con tutte le loro informazioni.
      * Terminato l'inserimento, salva su file XML i dati.
      */
-    public void subMenuAggiungiGerarchia() {
+    /*public void subMenuAggiungiGerarchia() {
         Menu subMenu = new Menu(TITLE_SUBMENU_AGGIUNGI_GERARCHIA, VOCI_SUBMENU_AGGIUNGI_GERARCHIA);
 
         // 0. predispone una radice e la salva localmente
@@ -145,7 +107,7 @@ public class CategorieModel  {
         //3. salvataggio dei dati
         mapper.write(getRadici());
         //serializeXML();
-    }
+    }*/
 
     /**
      * Partendo dalla radice di una gerarchia, chiama se stessa ricorsivamente per controllare che tutte le categorie
@@ -225,7 +187,7 @@ public class CategorieModel  {
     private String inserimentoNomeCategoriaRadice() {
         String tempNomeRadice;
         do {
-            System.out.println(MSG_INSERIMENTO_RADICE + MSG_PRINT_LISTA_RADICI + radiciToString());
+            System.out.println(MSG_INSERIMENTO_RADICE + MSG_PRINT_LISTA_RADICI + "radiciToString()");
             tempNomeRadice = InputDatiTerminale.leggiStringaNonVuota(MSG_INPUT_NUOVO_NOME_RADICE);
 
             if (this.esisteRadice(tempNomeRadice))
@@ -237,7 +199,7 @@ public class CategorieModel  {
     private String selezioneNomeCategoriaRadice() {
         String tempNomeRadice;
         do {
-            System.out.println(MSG_SELEZIONE_RADICE + MSG_PRINT_LISTA_RADICI + radiciToString());
+            System.out.println(MSG_SELEZIONE_RADICE + MSG_PRINT_LISTA_RADICI + "radiciToString()");
             tempNomeRadice = InputDatiTerminale.leggiStringaNonVuota(MSG_INPUT_NOME_RADICE);
 
             if (!this.esisteRadice(tempNomeRadice))
@@ -328,7 +290,7 @@ public class CategorieModel  {
     /**
      * Permette la creazione di una categoria radice.
      */
-    public void aggiungiCategoriaRadice() {
+    /*public void aggiungiCategoriaRadice() {
         // 1. chiede un nome univoco tra le radici
         String tempNome = inserimentoNomeCategoriaRadice();
         // 2. chiedi nome del dominio (campo) che questa categoria imporrà alle sue figlie
@@ -337,21 +299,26 @@ public class CategorieModel  {
         this.tree.aggiungiRadice(new Categoria(tempNome, tempCampo));
         //serializeXML();
         mapper.write(tree.getRadici());
+    }*/
+
+    public void aggiungiCategoriaRadice(String nomeCategoria, String nomeCampo) {
+      this.tree.aggiungiRadice(new Categoria(nomeCategoria, nomeCampo));
+        mapper.write(tree.getRadici());
     }
 
-    private boolean esisteRadice(String tempNome) {
+    public boolean esisteRadice(String tempNome) {
         return this.tree.contains(tempNome);
     }
 
     /**
      * Stampa a video una struttura pseudo-tree-like delle gerarchie di radici presenti nel programma.
      */
-    public void visualizzaGerarchie() {
+    /*public void visualizzaListaRadici() {
         if (tree.getRadici().isEmpty())
             return;
         System.out.println(HEADER_VISUALIZZA_GERARCHIE);
         System.out.println(this);
-    }
+    }*/
 
     /**
      * Stampa a video le info di un singolo albero gerarchico.
@@ -369,27 +336,27 @@ public class CategorieModel  {
      *
      * @return stringa formattata
      */
-    public String radiciToString() {
+    /*public String radiciToString() {
         if (tree.getRadici().isEmpty())
             return "";
         StringBuilder sb = new StringBuilder();
         for (Categoria radice : tree.getRadici())
             sb.append(radice.simpleToString()).append("\n");
         return sb.toString();
-    }
+    }*/
 
     /**
      * Produce una stringa con le info degli alberi gerarchici.
      *
      * @return stringa formattata
      */
-    @Override
+    /*@Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         for (Categoria radice : tree.getRadici())
             sb.append("> RADICE\n").append(radice).append("\n\n");
         return sb.toString();
-    }
+    }*/
 
     /* VERSIONE 2 */
 
@@ -440,7 +407,7 @@ public class CategorieModel  {
         System.out.println(String.format(HEADER_ESPLORAZIONE_LIVELLO, dominio));
 
         for (Categoria categoria : livello) {
-            System.out.println(categoria.simpleToString());
+            System.out.println("CHIAMA VIEW.VISUALIZZACATEGORIA");
         }
     }
 
