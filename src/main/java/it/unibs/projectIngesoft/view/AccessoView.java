@@ -40,13 +40,13 @@ public class AccessoView /*implements EventListener*/ {
          */
     }
     ////////////// CORPO //////////////
-    public int menuIniziale() {
+    /*public int menuIniziale() {
         Menu menuIniziale = new Menu(TITLE_STARTING_MENU,vociMenuIniziale);
         return menuIniziale.scegli();
-        /*
+
         events.notify(PRIMO_ACCESSO, scelta);
-         */
-    }
+
+    }*/
 
     public String[] richiestaCredenziali() {
         String username = InputDatiTerminale.leggiStringaNonVuota(MSG_RICHIESTA_USERNAME);
@@ -56,6 +56,11 @@ public class AccessoView /*implements EventListener*/ {
 
     public void stampaErroreCredenziali(String msg) {
         System.out.println("Errore nella stampa" + msg);
+    }
+
+    public int visualizzaMenuPrincipale() {
+        Menu menuPrincipale = new Menu(TITLE_STARTING_MENU,vociMenuIniziale);
+        return menuPrincipale.scegli();
     }
 
     /*

@@ -1,75 +1,60 @@
 package it.unibs.projectIngesoft.controller;
 
 import it.unibs.projectIngesoft.model.UtentiModel;
-import it.unibs.projectIngesoft.libraries.EventListener;
-import it.unibs.projectIngesoft.libraries.EventManager;
 import it.unibs.projectIngesoft.utente.Utente;
 import it.unibs.projectIngesoft.view.AccessoView;
 
-public class AccessoController implements EventListener {
+public class AccessoController {
 
-    public static final String RICHIESTA_LOGIN = "richiestaLogin";
-    private static final String UTENTE_OTTENUTO = "utenteOttenuto";
-
-    public EventManager events;
-    UtentiModel utentiModel;
+    private UtentiModel utentiModel;
     private AccessoView view;
 
     public AccessoController(UtentiModel utentiModel) {
         this.utentiModel = utentiModel;
-        events = new EventManager(UTENTE_OTTENUTO, RICHIESTA_LOGIN);
-        view = new AccessoView();
+        this.view = new AccessoView();
     }
 
-    @Override
-    public void update(String eventType, Object o) {
-        switch (eventType) {
-            case "primoAccesso":
-                switch((int)o) {
-                    case 1:
-                        login();
-                        break;
-                    case 2:
-                        register();
-                        break;
-                    default:
-                        //Send ERROR
-                        break;
-                }
-                break;
-            case "credenzialiInserite":
-                try{
-                    Utente utenteAttivo = utentiModel.verificaCredenziali((String[])o);
-                    events.notify(UTENTE_OTTENUTO, utenteAttivo);
-                }catch(Exception e){
-                    //notify("Error");
-                }
-        }
-    }
 
-    private void login(String msg) {
-        events.notify(RICHIESTA_LOGIN, null);
-    }
-
-    private void register() {
-
-    }
 
     /// DA qui la roba ha un senso (Forse)
-    public Utente login(){ //todo controllare il funzionamento del return con le eccezioni
+    public Utente login() { //todo controllare il funzionamento del return con le eccezioni
         boolean riuscito = true;
-        do{
+        do {
             String[] credenziali = view.richiestaCredenziali();
-            try{
+            try {
                 //NOTA: questo ritorna un Configuratore con firstAccess true se si usano le credenziali di default
                 return utentiModel.verificaCredenziali(credenziali);
-            }catch (Exception e){
+            } catch (Exception e) {
                 riuscito = false;
-                view.stampaErroreCredenziali("Login fallito");
+                view.stampaErroreCredenziali("Login fallito "+ e.getMessage());
 
             }
-        }while(!riuscito);
+        } while (!riuscito);
 
         return null;
     }
+
+    private Utente register() {
+        return null;
+    }
+
+    public Utente run() {
+        Utente utenteAttivo = null;
+
+        do {
+            //1. print menu principale
+            int scelta = view.visualizzaMenuPrincipale();
+            //2. sceglie tra login e register
+            switch (scelta) {
+                case 1 -> utenteAttivo = this.login(); //config & fruitore
+                case 2 -> utenteAttivo = this.register(); //fruitore
+            }
+        } while (utenteAttivo == null);
+
+        //3. gestisce IO con accessoVIew
+        return utenteAttivo;
+
+    }
+
+
 }
