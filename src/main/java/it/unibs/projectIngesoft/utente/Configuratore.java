@@ -25,4 +25,7 @@ public class Configuratore extends Utente{
         this.firstAccess = firstAccess;
     }
 
+    public boolean firstAccess() {
+        return firstAccess;
+    }
 }
