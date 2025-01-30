@@ -102,17 +102,17 @@ public class ProposteModel {
         int oreOfferta;
 
         // 1. inserimento categoria richiesta, ore, e categoria offerta
-        categoriaRichiesta = gestFatt.selezioneFoglia(MSG_INSERISCI_RICHIESTA);
+        ///categoriaRichiesta = gestFatt.selezioneFoglia(MSG_INSERISCI_RICHIESTA);
         oreRichiesta = InputDatiTerminale.leggiInteroPositivo(MSG_RICHIESTA_ORE);
-        categoriaOfferta = gestFatt.selezioneFoglia(MSG_INSERISCI_OFFERTA);
+        //categoriaOfferta = gestFatt.selezioneFoglia(MSG_INSERISCI_OFFERTA);
 
         // 2. calcolo ore per l'offerta
-        oreOfferta = gestFatt.calcolaRapportoOre(categoriaRichiesta, categoriaOfferta, oreRichiesta);
-        if (oreOfferta == -1) {
+        //oreOfferta = gestFatt.calcolaRapportoOre(categoriaRichiesta, categoriaOfferta, oreRichiesta);
+       /* if (oreOfferta == -1) {
             System.out.println(WARNING_IMPOSSIBILE_CALCOLARE_ORE + WARNING_PROPOSTA_ANNULLATA);
             return;
-        }
-        Proposta tempProposta = new Proposta(categoriaRichiesta, categoriaOfferta, oreRichiesta, oreOfferta, (Fruitore) utenteAttivo);
+        }*/
+        /*Proposta tempProposta = new Proposta(categoriaRichiesta, categoriaOfferta, oreRichiesta, oreOfferta, (Fruitore) utenteAttivo);
 
         // 3. conferma e memorizza la proposta
         if (!InputDatiTerminale.yesOrNo("\n" + tempProposta + "\n" + MSG_CONFERMA_PROPOSTA.formatted(oreOfferta))) {
@@ -126,7 +126,7 @@ public class ProposteModel {
             return;
         }
         addProposta(tempProposta);
-        cercaProposteDaChiudere(tempProposta);
+        cercaProposteDaChiudere(tempProposta);*/
     }
 
     /**
@@ -237,11 +237,11 @@ public class ProposteModel {
         boolean found = false;
         do {
             visualizzaProposteModificabili();
-            categoriaRichiesta = gestFatt.inserimentoNomeFogliaFormattato(MSG_SELEZIONE_CATEGORIA_RICHIESTA);
+            //categoriaRichiesta = gestFatt.inserimentoNomeFogliaFormattato(MSG_SELEZIONE_CATEGORIA_RICHIESTA);
             oreRichiesta = InputDatiTerminale.leggiInteroPositivo(MSG_SELEZIONE_ORE);
-            categoriaOfferta = gestFatt.inserimentoNomeFogliaFormattato(MSG_SELEZIONE_CATEGORIA_OFFERTA);
+            //categoriaOfferta = gestFatt.inserimentoNomeFogliaFormattato(MSG_SELEZIONE_CATEGORIA_OFFERTA);
 
-            daCambiare = cercaProposta(comprensorio, categoriaOfferta, categoriaRichiesta, oreRichiesta);
+            //daCambiare = cercaProposta(comprensorio, categoriaOfferta, categoriaRichiesta, oreRichiesta);
 
             if (daCambiare != null && daCambiare.getAutoreUsername().equals(utenteAttivo.getUsername())) {
                 found = daCambiare.getStato() != StatiProposta.CHIUSA;
@@ -303,9 +303,9 @@ public class ProposteModel {
      */
     public void visualizzaPropostePerCategoria() {
         assert hashListaProposte != null;
-        String categoria = gestFatt.selezioneFoglia(MSG_INSERISCI_CATEGORIA);
-        Predicate<Proposta> filtro = p -> p.getOfferta().equals(categoria) || p.getRichiesta().equals(categoria);
-        visualizzaProposte(HEADER_PROPOSTE_CATEGORIA.formatted(categoria), filtro);
+        //String categoria = gestFatt.selezioneFoglia(MSG_INSERISCI_CATEGORIA);
+        //Predicate<Proposta> filtro = p -> p.getOfferta().equals(categoria) || p.getRichiesta().equals(categoria);
+       // visualizzaProposte(HEADER_PROPOSTE_CATEGORIA.formatted(categoria), filtro);
     }
 
     /**
