@@ -100,10 +100,10 @@ public class ConfiguratoreController {
 		//Quando si hanno i fattori tra le nuove foglie (forse non servono gli inversi subito) ed il fattore EsternoInterno
 		//si può calcolare il tutto
 		if(!fattoriModel.isEmpty()) {
-			configuratoreView.stampaOpzioni(fattoriModel.getKeysets());
-			String nomeFogliaEsternaFormattata = configuratoreView.selezioneFoglia(MSG_INSERISCI_FOGLIA_ESTERNA);
+			view.stampaOpzioni(fattoriModel.getKeysets());
+			String nomeFogliaEsternaFormattata = view.selezioneFoglia(MSG_INSERISCI_FOGLIA_ESTERNA);
 			// 2. scegliere una categoria delle nuove, da utilizzare per il primo fattore di conversione
-			String nomeFogliaInternaFormattata = configuratoreView.selezioneFogliaDaLista(nomeRadice, foglie);
+			String nomeFogliaInternaFormattata = view.selezioneFogliaDaLista(nomeRadice, foglie);
 
 			// TODO spostare user interaction
 			//3. chiedi il fattore di conversione tra le 2 [x in (Old:A New:A x)]
