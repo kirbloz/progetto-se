@@ -27,7 +27,6 @@ public class AccessoController {
             } catch (Exception e) {
                 riuscito = false;
                 view.stampaErroreCredenziali("Login fallito "+ e.getMessage());
-
             }
         } while (!riuscito);
 
@@ -35,6 +34,17 @@ public class AccessoController {
     }
 
     private Utente register() {
+        boolean riuscito = true;
+        do{
+            String[] credenziali = view.richiestaCredenzialiRegistrazione();
+            if(utentiModel.verificaCredenzialiRegistrazione(credenziali) == null) {
+                riuscito = false;
+                System.out.println("Registrazione fallita");
+            }
+            else{
+                return utentiModel.verificaCredenzialiRegistrazione(credenziali);
+            }
+        } while (!riuscito);
         return null;
     }
 

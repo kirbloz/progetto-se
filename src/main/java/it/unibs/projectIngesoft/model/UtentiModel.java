@@ -13,16 +13,10 @@ import java.util.regex.Pattern;
 public class UtentiModel {
 
     // da rimuovere e spostare nella view
-    public static final String MSG_RICHIESTA_USERNAME = "Inserisci il tuo username: ";
-    public static final String MSG_RICHIESTA_PASSWORD = "Inserisci la tua password: ";
-    public static final String MSG_RICHIESTA_EMAIL = "Inserisci la tua email: ";
-    public static final String MSG_RICHIESTA_COMPRENSORIO = "Inserisci il comprensorio di appartenenza: ";
+
 
     public static final String MSG_RICHIESTA_NEW_USERNAME = "Inserisci il nuovo username: "; //per cambio username
     public static final String MSG_RICHIESTA_NEW_PASSWORD = "Inserisci la nuova password: "; //per cambio password
-
-    public static final String MSG_UTENTE_ESISTENTE = "L'username e' gia' in uso";
-    public static final String MSG_COMPRENSORIO_NEXIST = "Il comprensorio non esiste!";
     //
 
 
@@ -65,7 +59,7 @@ public class UtentiModel {
         }
     }
 
-    public Utente register(List<String> possibiliComprensori) {
+    /*public Utente register(List<String> possibiliComprensori) {
         String comprensorio;
         String username;
         String password;
@@ -99,7 +93,7 @@ public class UtentiModel {
         fruitore = new Fruitore(username, password, email, comprensorio);
         this.addUtente(fruitore);
         return fruitore;
-    }
+    }*/
 
     private static boolean isValidEmail(String email) {
         String emailRegex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$";
@@ -131,6 +125,25 @@ public class UtentiModel {
                 throw userNotFound = new Exception() ;
 
         return utenti.get(indice);
+    }
+
+    public Utente verificaCredenzialiRegistrazione(String[] credenziali){
+        String comprensorio = credenziali[0];
+        String email = credenziali[1];
+        String username = credenziali[2];
+        String password = credenziali[3];
+
+        //TODO da fare controllo sul comprensorio
+
+        if(!isValidEmail(email)) return null;
+        if(existsUsername(username)) return null;
+
+
+        Fruitore F1 = new Fruitore(comprensorio, email, username, password);
+
+
+        addUtente(F1);
+        return F1;
     }
 
     /**
