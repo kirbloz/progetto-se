@@ -40,14 +40,26 @@ public class CategorieModel  {
         this.tree.setRadici(this.mapper.read());
     }
 
-    public List<Categoria> getRadici(){
+    public void save(){
+        mapper.write(tree.getRadici());
+    }
+
+    public void load(){
         this.tree.setRadici(mapper.read());
+    }
+
+    public List<Categoria> getRadici(){
+        load();
         return tree.getRadici();
     }
 
     public void setRadici(List<Categoria> radici) {
         tree.setRadici(radici);
-        mapper.write(tree.getRadici());
+        this.save();
+    }
+
+    public List<Categoria> getFoglie(String nomeRadice){
+        return tree.getFoglie(nomeRadice);
     }
 
     /**
@@ -115,19 +127,24 @@ public class CategorieModel  {
      *
      * @param radice, categoria di partenza
      */
-    private void impostaCategorieFoglia(Categoria radice) {
+    /*private void impostaCategorieFoglia(Categoria radice) {
         if (radice.getNumCategorieFiglie() == 0 && !radice.isFoglia()) {
             radice.setFoglia();
             return;
         }
 
-        for (Categoria figlia : radice.getCategorieFiglie()) {
-            if (figlia.getNumCategorieFiglie() == 0 && !figlia.isFoglia())
-                figlia.setFoglia();
-            else
+        else
+            for (Categoria figlia : radice.getCategorieFiglie())
                 impostaCategorieFoglia(figlia);
-        }
-    }
+
+
+//        for (Categoria figlia : radice.getCategorieFiglie()) {
+//            if (figlia.getNumCategorieFiglie() == 0 && !figlia.isFoglia())
+//                figlia.setFoglia();
+//            else
+//                impostaCategorieFoglia(figlia);
+//        }
+    }*/
 
     /**
      * Metodo per l'inserimento di una Categoria generica NON RADICE.
@@ -303,8 +320,9 @@ public class CategorieModel  {
 
     public void aggiungiCategoriaRadice(String nomeCategoria, String nomeCampo) {
       this.tree.aggiungiRadice(new Categoria(nomeCategoria, nomeCampo));
-        mapper.write(tree.getRadici());
+
     }
+
 
     public boolean esisteRadice(String tempNome) {
         return this.tree.contains(tempNome);
