@@ -5,14 +5,18 @@ import it.unibs.projectIngesoft.libraries.EventListener;
 import it.unibs.projectIngesoft.libraries.EventManager;
 import it.unibs.projectIngesoft.libraries.InputDatiTerminale;
 import it.unibs.projectIngesoft.libraries.Menu;
+import it.unibs.projectIngesoft.model.ComprensorioGeograficoModel;
 
 import javax.swing.text.View;
+import java.util.Arrays;
 
 // classe generica per la view del login a priori
 public class AccessoView /*implements EventListener*/ {
 
     public static final String MSG_RICHIESTA_USERNAME = "Inserisci il tuo username: ";
     public static final String MSG_RICHIESTA_PASSWORD = "Inserisci la tua password: ";
+    public static final String MSG_RICHIESTA_EMAIL = "Inserisci la tua email: ";
+    public static final String MSG_RICHIESTA_COMPRENSORIO = "Inserisci il comprensorio di appartenenza: ";
 
     public static final String MSG_USCITA_SUBMENU = ">> Uscita dal submenu.. <<";
 
@@ -53,6 +57,14 @@ public class AccessoView /*implements EventListener*/ {
         String password = InputDatiTerminale.leggiStringaNonVuota(MSG_RICHIESTA_PASSWORD);
         return new String[]{username,password};
     }
+
+    public String[] richiestaCredenzialiRegistrazione(){
+        String comprensorio = InputDatiTerminale.leggiStringaNonVuota(MSG_RICHIESTA_COMPRENSORIO);
+        String email = InputDatiTerminale.leggiStringaNonVuota(MSG_RICHIESTA_EMAIL);
+        String[] credenziali = richiestaCredenziali();
+        return new String[]{comprensorio, email, credenziali[0], credenziali[1]};
+    }
+
 
     public void stampaErroreCredenziali(String msg) {
         System.out.println("Errore nella stampa" + msg);
