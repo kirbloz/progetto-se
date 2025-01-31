@@ -94,6 +94,8 @@ public class ConfiguratoreView implements UtenteViewableTerminal {
     public static final String WARNING_CATEGORIA_ESISTE = ">> (!!) Per favore indica una categoria che non esista già in questo albero gerarchico.\n";
     public static final String WARNING_CATEGORIA_NF_NON_ESISTE = ">> (!!) Per favore indica una categoria non foglia dell'albero gerarchico selezionato.\n";
     public static final String WARNING_NO_GERARCHIE_MEMORIZZATE = ">> (!!) Nessuna gerarchia memorizzata.";
+    private static final String MSG_RICHIESTA_USERNAME = "Inserisci un username non ancora utilizzato:";
+    private static final String MSG_RICHIESTA_PASSWORD = "Inserisci la password:";
 
 
     // STRINGHE PER PROPOSTE
@@ -289,6 +291,16 @@ public class ConfiguratoreView implements UtenteViewableTerminal {
 
     public double ottieniFattoreDiConversione(String nomeFogliaEsternaFormattata, String nomeFogliaInternaFormattata) {
         return InputDatiTerminale.leggiDoubleConRange(INSERISCI_IL_FATTORE_TRA.formatted(nomeFogliaEsternaFormattata, nomeFogliaInternaFormattata), Utilitas.MIN_FATTORE, Utilitas.MAX_FATTORE);
+    }
+
+    public String richiestaUsername() {
+        String username = InputDatiTerminale.leggiStringaNonVuota(MSG_RICHIESTA_USERNAME);
+        return username;
+    }
+
+    public String richiestaPassword() {
+        String username = InputDatiTerminale.leggiStringaNonVuota(MSG_RICHIESTA_PASSWORD);
+        return username;
     }
 
 

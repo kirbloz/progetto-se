@@ -28,4 +28,8 @@ public class Configuratore extends Utente{
     public boolean firstAccess() {
         return firstAccess;
     }
+
+	public boolean isFirstAccess() {
+        return firstAccess;
+	}
 }

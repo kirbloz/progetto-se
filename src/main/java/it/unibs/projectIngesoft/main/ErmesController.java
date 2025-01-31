@@ -58,7 +58,8 @@ public class ErmesController {
                     fattoriModel,
                     proposteModel,
                     compGeoModel,
-                    modelUtenti
+                    modelUtenti,
+                    (Configuratore) utenteAttivo
             );
             controller.run();
 
