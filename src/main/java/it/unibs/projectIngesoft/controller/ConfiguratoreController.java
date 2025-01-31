@@ -5,7 +5,6 @@ import it.unibs.projectIngesoft.attivita.FattoreDiConversione;
 import it.unibs.projectIngesoft.libraries.InputDatiTerminale;
 import it.unibs.projectIngesoft.libraries.Utilitas;
 import it.unibs.projectIngesoft.model.*;
-import it.unibs.projectIngesoft.view.AccessoView;
 import it.unibs.projectIngesoft.view.ConfiguratoreView;
 
 import java.util.ArrayList;
@@ -77,9 +76,11 @@ public class ConfiguratoreController {
      * @return lista di fattori di conversione
      */
     private ArrayList<FattoreDiConversione> ottieniFattoriDelleNuoveCategorie(String nomeRadice, List<Categoria> foglie) {
+        //todo levare questo controllo se non serve a nulla
+        //se non esistono foglie non serve a nulla fare i fattori
         if (foglie.isEmpty())
-            return new ArrayList<>();
-        // se esiste almeno una foglia, allora calcola i fattori
+            return null;
+        // se esiste almeno una foglia, allora calcola i fattori //todo se esiste esattamente una foglia Ritorna un new ArrayList vuoto
         ArrayList<FattoreDiConversione> nuoviDaNuovaRadice = new ArrayList<>();
         for (int i = 0; i < foglie.size(); i++) {
             String nomeFogliai = Utilitas.factorNameBuilder(nomeRadice, foglie.get(i).getNome());
@@ -101,25 +102,23 @@ public class ConfiguratoreController {
     private void generaEMemorizzaNuoviFattori(String nomeRadice, List<Categoria> foglie) {
         //1. chiedi i fattori nuovi all'utente sulla base delle categorie appena inserite
         ArrayList<FattoreDiConversione> nuoviDaNuovaRadice = ottieniFattoriDelleNuoveCategorie(nomeRadice, foglie);
+        //è null se non esistono foglie, è vuoto se esiste una sola foglia
+        if (nuoviDaNuovaRadice == null) { //se non esistono foglie non hanno senso i fattori
+            return;
+        }
 
-        //2.1. chiedi le 2 foglie (una nuova(interna) e una preesistene(esterna)) per fare iol confronto
-        //2.2. chiedi il fattore di conversione EsternoInterno
-        // 1. scegliere una categoria per cui i fattori siano GIA' stati calcolati
-        // -> permette di calcolare tutti i nuovi chiedendo un solo inserimento di valore del fattore
-
-
-        //Quando si hanno i fattori tra le nuove foglie (forse non servono gli inversi subito) ed il fattore EsternoInterno
-        //si può calcolare il tutto
+        //se esistono fattori già presenti vanno calcolati i rapporti tra i nuovi (o la singola nuova foglia) e i vecchi
         if (!fattoriModel.isEmpty()) {
+            //2.1. chiedi le 2 foglie (una nuova(interna) e una preesistene(esterna)) per fare iol confronto
+            //2.2. chiedi il fattore di conversione EsternoInterno
             view.stampaOpzioni(fattoriModel.getKeysets());
             String nomeFogliaEsternaFormattata = view.selezioneFoglia(MSG_INSERISCI_FOGLIA_ESTERNA);
             // 2. scegliere una categoria delle nuove, da utilizzare per il primo fattore di conversione
             String nomeFogliaInternaFormattata = view.selezioneFogliaDaLista(nomeRadice, foglie);
 
-            // TODO spostare user interaction
             //3. chiedi il fattore di conversione tra le 2 [x in (Old:A New:A x)]
-            double fattoreDiConversioneEsternoInterno = InputDatiTerminale.leggiDoubleConRange(INSERISCI_IL_FATTORE_TRA.formatted(nomeFogliaEsternaFormattata, nomeFogliaInternaFormattata), MIN_FATTORE, MAX_FATTORE);
-
+            double fattoreDiConversioneEsternoInterno = view.ottieniFattoreDiConversione(nomeFogliaEsternaFormattata, nomeFogliaInternaFormattata);
+            //todo controlla se worka quando c'è una sola nuova categoria (anche gli inversi)
             fattoriModel.inserisciFattoriDiConversione(nomeFogliaEsternaFormattata, nomeFogliaInternaFormattata, fattoreDiConversioneEsternoInterno, nuoviDaNuovaRadice);
         } else {
             //Todo assumo che non si chiami questo metodo se non sono state create categorie foglia (spero wade non sia un idiota e non lo chiami)

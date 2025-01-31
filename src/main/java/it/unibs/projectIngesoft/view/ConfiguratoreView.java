@@ -287,7 +287,9 @@ public class ConfiguratoreView implements UtenteViewableTerminal {
         return Utilitas.factorNameBuilder(nomeRadice, nomeFogliaNonFormattato);
     }
 
-
+    public double ottieniFattoreDiConversione(String nomeFogliaEsternaFormattata, String nomeFogliaInternaFormattata) {
+        return InputDatiTerminale.leggiDoubleConRange(INSERISCI_IL_FATTORE_TRA.formatted(nomeFogliaEsternaFormattata, nomeFogliaInternaFormattata), Utilitas.MIN_FATTORE, Utilitas.MAX_FATTORE);
+    }
 
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
