@@ -8,6 +8,7 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Classe creata per facilitare la serializzazione XML dei dati relativi alle categorie gestite da GestoreCategorie.
@@ -41,6 +42,10 @@ public class Albero {
     public boolean contains(String nomeRadice) {
         assert nomeRadice != null
                 && !nomeRadice.trim().isEmpty() : "Il nome della radice non deve essere null o vuoto";
+        if (radici == null || radici.isEmpty()) {
+            return false;
+        }
+
         for (Categoria tempRadice : this.radici) {
             if (tempRadice.getNome().equals(nomeRadice))
                 return true;
@@ -56,8 +61,9 @@ public class Albero {
     public List<Categoria> getRadici() {
         return radici;
     }
+
     public void setRadici(List<Categoria> radici) {
-        this.radici= radici;
+        this.radici = Objects.requireNonNullElseGet(radici, ArrayList::new);
     }
 
     /**
