@@ -15,6 +15,7 @@ public class CategorieMapper{
         IMPLEMENTARE CATEGORIE WRAPPER.
         PER ORA SCRIVE SOLO LE CATEGORIE RADICE MA C'E' NECESSITA DI MEMORIZZARE
         L'INTERA GERARCHIA. PORCA PUPAZZA!
+        NON SERVE PIU CREDO DOVREBBE FUNZIONARE
      */
 
     public CategorieMapper(String filePath, JacksonSerializer<List<Categoria>> jacksonSerializer) {

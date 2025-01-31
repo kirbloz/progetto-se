@@ -83,6 +83,7 @@ public class Main {
 
         if (isConfiguratore)
             do {
+                //SPOSTATO IN CONFIGURATORE VIEW
                 scelta = menu.scegli();
 
                 switch (scelta) {
@@ -175,7 +176,7 @@ public class Main {
         FattoriModel fattoriModel = new FattoriModel(/*FATTORI_DI_CONVERSIONE_XML_FILEPATH*/);
         do {
             scelta = menuFattori.scegli();
-            fattoriModel.entryPoint(scelta);
+            //fattoriModel.entryPoint(scelta);
         } while (scelta != 0);
 
     }
