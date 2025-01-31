@@ -115,6 +115,7 @@ public class UtentiModel {
             if (username.equals(defaultUtente.getUsername()) && password.equals(defaultUtente.getPassword())) {
                 Configuratore C1 = new Configuratore();
                 C1.setFirstAccess(true);
+                addUtente(C1);
                 return C1;
             }
             // ricerca
@@ -152,22 +153,7 @@ public class UtentiModel {
      *
      * @param C1, utente di cui cambiare le credenziali
      */
-    public void cambioCredenziali(Utente C1) {
-        /*TODO a quanto pare questo metodo assume di aver già controllato che C1 è un utente che esiste
-         questo metodo controlla solo l'unicità
-         quindi existsUsername deve ritornare false però questo non permette di cambiare solo la password
-         aggiungiamo un hotfix
-         */
-        String newUsername;
-        String newPassword;
-        boolean cambioSoloPwd = false;
-
-        do {
-            newUsername = InputDatiTerminale.leggiStringaNonVuota(MSG_RICHIESTA_NEW_USERNAME);
-            newPassword = InputDatiTerminale.leggiStringaNonVuota(MSG_RICHIESTA_NEW_PASSWORD);
-            if(C1.getUsername().equals(newUsername))
-                cambioSoloPwd = true;
-        } while (!cambioSoloPwd && existsUsername(newUsername));
+    public void cambioCredenziali(Utente C1, String newUsername,String newPassword) {
         C1.cambioCredenziali(newUsername, newPassword);
         mapper.write(utenti);
     }

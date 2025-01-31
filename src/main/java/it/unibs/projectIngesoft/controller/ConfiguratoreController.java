@@ -5,6 +5,7 @@ import it.unibs.projectIngesoft.attivita.FattoreDiConversione;
 import it.unibs.projectIngesoft.libraries.InputDatiTerminale;
 import it.unibs.projectIngesoft.libraries.Utilitas;
 import it.unibs.projectIngesoft.model.*;
+import it.unibs.projectIngesoft.utente.Configuratore;
 import it.unibs.projectIngesoft.view.ConfiguratoreView;
 
 import java.util.ArrayList;
@@ -25,27 +26,32 @@ public class ConfiguratoreController {
     private ProposteModel proposteModel;
     private ComprensorioGeograficoModel compGeoModel;
     private UtentiModel utentiModel;
+    private Configuratore utenteAttivo;
 
     public ConfiguratoreController(ConfiguratoreView view,
                                    CategorieModel categorieModel,
                                    FattoriModel fattoriModel,
                                    ProposteModel proposteModel,
                                    ComprensorioGeograficoModel compGeoModel,
-                                   UtentiModel utentiModel) {
+                                   UtentiModel utentiModel, Configuratore utenteAttivo) {
         this.view = view;
         this.categorieModel = categorieModel;
         this.fattoriModel = fattoriModel;
         this.proposteModel = proposteModel;
         this.compGeoModel = compGeoModel;
         this.utentiModel = utentiModel;
+        this.utenteAttivo = utenteAttivo;
     }
 
     /**
      * Richiama il metodo necessario in base alla selezione dal menu principale.
      */
     public void run() {
-        int scelta = 0;
+        if(utenteAttivo.isFirstAccess()){
+            cambioCredenziali();
+        }
 
+        int scelta = 0;
         do {
             scelta = view.visualizzaMenuPrincipale();
 
@@ -61,6 +67,15 @@ public class ConfiguratoreController {
             }
 
         } while (scelta != 0);
+    }
+
+    private void cambioCredenziali() {
+        String username;
+        do {
+            username = view.richiestaUsername();
+        }while(utentiModel.existsUsername(username));
+        String password = view.richiestaPassword();
+        utentiModel.cambioCredenziali(utenteAttivo, username, password);
     }
 
 
