@@ -193,6 +193,8 @@ public class Categoria {
 
     @JsonIgnore
     public int getNumCategorieFiglie() {
+        if(categorieFiglie == null)
+            return 0;
         return categorieFiglie.size();
     }
 
