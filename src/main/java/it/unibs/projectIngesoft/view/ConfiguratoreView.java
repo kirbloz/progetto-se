@@ -8,6 +8,9 @@ import java.util.List;
 import it.unibs.projectIngesoft.libraries.Menu;
 import it.unibs.projectIngesoft.model.CategorieModel;
 
+import static it.unibs.projectIngesoft.libraries.Utilitas.MAX_FATTORE;
+import static it.unibs.projectIngesoft.libraries.Utilitas.MIN_FATTORE;
+
 public class ConfiguratoreView implements UtenteViewableTerminal {
 
     public static final String TITLE_MAIN_MENU = "MENU' PRINCIPALE - SCAMBIO ORE";
@@ -111,7 +114,6 @@ public class ConfiguratoreView implements UtenteViewableTerminal {
 
     public int getUserSelection() {
         return InputDatiTerminale.leggiInteroConMinimo(">> Selezione (>0): ", 0);
-
     }
 
 
@@ -132,8 +134,11 @@ public class ConfiguratoreView implements UtenteViewableTerminal {
     }
 
 
+
+    // CATEGORIE
+
     public int visualizzaMenuCategorie() {
-        Menu menuCategorie = new Menu(ConfiguratoreView.TITLE_MENU_CATEGORIE,
+        Menu menuCategorie = new Menu(TITLE_MENU_CATEGORIE,
                 vociCategorieConfiguratore);
         return menuCategorie.scegli();
 
@@ -144,8 +149,29 @@ public class ConfiguratoreView implements UtenteViewableTerminal {
         return subMenu.scegli();
     }
 
+    public String visualizzaInserimentoNomeCategoria(CategorieModel model, String nomeRadice) {
 
-    public String visualizzaInserimentoCategoriaRadice(CategorieModel model) {
+
+        visualizzaListaRadici(model.getRadici());
+
+        // todo: questi check sono fatti prima di chiamare il metodo?
+        assert nomeRadice != null : "il nome della radice non può essere null";
+        assert model.esisteRadice(nomeRadice) : "tempRadice non è il nome di una radice";
+
+        String tempNome;
+        //todo finire di implementare e refattorizzare il metodo
+        do {
+            visualizzaGerarchia(tempRadice); // stampa la gerarchia
+            tempNome = InputDatiTerminale.leggiStringaNonVuota(MSG_INSERIMENTO_NUOVA_CATEGORIA);
+            if (esisteCategoriaNellaGerarchia(tempNome, tempRadice)) {
+                System.out.print(WARNING_CATEGORIA_ESISTE);
+            }
+        } while (esisteCategoriaNellaGerarchia(tempNome, tempRadice));
+        return tempNome;
+        return getUserInput(MSG_INSERIMENTO_RADICE + MSG_PRINT_LISTA_RADICI);
+    }
+
+    public String visualizzaInserimentoNomeCategoriaRadice(CategorieModel model) {
         visualizzaListaRadici(model.getRadici());
         return getUserInput(MSG_INSERIMENTO_RADICE + MSG_PRINT_LISTA_RADICI);
     }
@@ -161,6 +187,8 @@ public class ConfiguratoreView implements UtenteViewableTerminal {
                 System.out.println(">> USCITA ZIOPERA");
             case "programma":
                 System.out.println(">> USCITA PROGRAMA");
+            case "submenu":
+                System.out.println(">> USCITA submenu");
         }
     }
 
@@ -172,7 +200,7 @@ public class ConfiguratoreView implements UtenteViewableTerminal {
      * @param radici lista radici.
      */
     public void visualizzaListaRadici(List<Categoria> radici) {
-        if (radici.isEmpty())
+        if (radici == null || radici.isEmpty())
             return;
         System.out.println(HEADER_VISUALIZZA_GERARCHIE);
         for (Categoria radice : radici) {
@@ -221,6 +249,10 @@ public class ConfiguratoreView implements UtenteViewableTerminal {
     }
 
 
+    public double visualizzaInserimentoFdCInternoEsterno(String nomeFogliaEsternaFormattata, String nomeFogliaInternaFormattata){
+        return InputDatiTerminale.leggiDoubleConRange(INSERISCI_IL_FATTORE_TRA.formatted(nomeFogliaEsternaFormattata, nomeFogliaInternaFormattata), MIN_FATTORE, MAX_FATTORE);
+    }
+
 
 
 
@@ -254,9 +286,15 @@ public class ConfiguratoreView implements UtenteViewableTerminal {
      *
      * @return stringa formattata come "radice:foglia"
      */
-    public String selezioneFoglia(String messaggio) {
+    public String visualizzaSelezioneFogliaFormattata(String messaggio) {
         // inserimento guidato e controllo [Old:A in (Old:A New:A x)]
-        return inserimentoNomeFogliaFormattato(messaggio);
+        //return inserimentoNomeFogliaFormattato(messaggio);
+        System.out.println(messaggio);
+        String nomeFogliaFormattato = Utilitas.factorNameBuilder(
+                    InputDatiTerminale.leggiStringaNonVuota(MSG_INSERISCI_NOME_RADICE),
+                    InputDatiTerminale.leggiStringaNonVuota(MSG_INSERISCI_NOME_FOGLIA)
+            );
+        return nomeFogliaFormattato;
     }
     //todo rivedere
     /**
@@ -274,6 +312,7 @@ public class ConfiguratoreView implements UtenteViewableTerminal {
             System.out.println(Utilitas.factorNameBuilder(nomeRadice, foglia.getNome()));
         }
         // immissione della foglia e verifica che sia corretto [New:A in (Old:A New:A x)]
+        // todo non so se va bene sta cosa ziopera
         String nomeFogliaNonFormattato;
         boolean fogliaEsiste = false;
         do {
