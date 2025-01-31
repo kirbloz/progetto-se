@@ -5,7 +5,9 @@ import it.unibs.projectIngesoft.attivita.ValoreDominio;
 import it.unibs.projectIngesoft.controller.ConfiguratoreController;
 import it.unibs.projectIngesoft.libraries.InputInjector;
 import it.unibs.projectIngesoft.mappers.CategorieMapper;
+import it.unibs.projectIngesoft.mappers.FattoriMapper;
 import it.unibs.projectIngesoft.model.CategorieModel;
+import it.unibs.projectIngesoft.model.FattoriModel;
 import it.unibs.projectIngesoft.parsing.SerializerJSON;
 import it.unibs.projectIngesoft.view.ConfiguratoreView;
 import org.junit.jupiter.api.AfterEach;
@@ -26,7 +28,7 @@ public class CategorieTest {
 
     @BeforeEach
     void prepareTest() {
-        mapper = new CategorieMapper("categorieTest.json",
+        mapper = new CategorieMapper("categorieTest1.json",
                 new SerializerJSON<List<Categoria>>()
         );
 
@@ -42,30 +44,44 @@ public class CategorieTest {
         mapper.write(cleanTestData);
     }
 
-    void aggiungiUnaRadiceDiTest(){
-
-    }
-
     @Test
-    void aggiungiGerarchiaTest_RadiceUnivoca_NomeUnivoco_Foglia() {
-        //todo partially implemented
+    void aggiungiUnaRadice(){
 
         assert !model.esisteRadice("nomeTest");
 
-        //aggiungiUnaRadiceDiTest();
         ConfiguratoreController controller = new ConfiguratoreController(new ConfiguratoreView(),
                 model,
                 null,
                 null,
                 null,
                 null);
+
         InputInjector.inject("nomeTest\ncampoTest\n");
         controller.aggiungiRadice();
 
         assert model.esisteRadice("nomeTest");
 
         //controller.addGerarchia così aggiungeremo di più di una singola radice
-        assert !false;
+    }
+
+    @Test
+    void aggiungiGerarchiaTest_RadiceUnivoca_NomeUnivoco_Foglia() {
+        ConfiguratoreController controller = new ConfiguratoreController(new ConfiguratoreView(),
+                model,
+                new FattoriModel(new FattoriMapper(
+                        "fattoriTest1.json",
+                        new SerializerJSON<>()
+                )),
+                null,
+                null,
+                null);
+
+        String data = "radiceTest\ncampoTest\n";
+        data = data + "0\n";
+
+        InputInjector.inject(data);
+        controller.aggiungiGerarchia();
+
     }
 
 
