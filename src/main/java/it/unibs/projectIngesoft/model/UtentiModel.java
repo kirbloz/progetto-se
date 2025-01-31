@@ -139,7 +139,7 @@ public class UtentiModel {
         if(existsUsername(username)) return null;
 
 
-        Fruitore F1 = new Fruitore(comprensorio, email, username, password);
+        Fruitore F1 = new Fruitore(username, password, email, comprensorio);
 
 
         addUtente(F1);
