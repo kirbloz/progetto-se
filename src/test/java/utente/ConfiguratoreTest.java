@@ -1,13 +1,11 @@
 package utente;
 
 import it.unibs.projectIngesoft.controller.AccessoController;
-import it.unibs.projectIngesoft.controller.UtentiController;
 import it.unibs.projectIngesoft.libraries.InputInjector;
 import it.unibs.projectIngesoft.model.UtentiModel;
 import it.unibs.projectIngesoft.parsing.SerializerJSON;
 import it.unibs.projectIngesoft.mappers.UtentiMapper;
 import it.unibs.projectIngesoft.utente.Configuratore;
-import it.unibs.projectIngesoft.utente.Utente;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
