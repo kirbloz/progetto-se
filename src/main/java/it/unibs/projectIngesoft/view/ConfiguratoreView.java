@@ -284,7 +284,7 @@ public class ConfiguratoreView implements UtenteViewableTerminal {
             nomeMadre = getUserInput(String.format(MSG_INSERIMENTO_NOME_CATEGORIA_MADRE, nomeCategoria));
             if(!possibiliMadri.contains(nomeMadre))
                 System.out.println(WARNING_CATEGORIA_NF_NON_ESISTE);
-        }while (possibiliMadri.contains(nomeMadre));
+        }while (!possibiliMadri.contains(nomeMadre));
 
         return nomeMadre;
     }
