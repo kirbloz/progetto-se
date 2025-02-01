@@ -204,35 +204,15 @@ public class ConfiguratoreController {
         } while (scelta != 0);
 
         //1.5 imposto a foglie tutte le categorie che non hanno figlie
-        impostaCategorieFoglia(radice);
+        radice.impostaCategorieFoglia();
 
         // 2. procedura per i fattori
-        List<Categoria> foglie = categorieModel.getFoglie(radice.getNome());
-        generaEMemorizzaNuoviFattori(radice.getNome(), foglie);
+        generaEMemorizzaNuoviFattori(radice.getNome(), radice.getFoglie());
 
         //3. salvataggio dei dati
         categorieModel.save();
     }
 
-    /**
-     * Partendo dalla radice di una gerarchia, chiama se stessa ricorsivamente per controllare che tutte le categorie
-     * che non hanno figlie siano impostate come foglie.
-     *
-     * @param radice, categoria di partenza
-     */
-    private void impostaCategorieFoglia(Categoria radice) {
-        if (radice.getNumCategorieFiglie() == 0 && !radice.isFoglia()) {
-            radice.setFoglia();
-            return;
-        }
-
-        for (Categoria figlia : radice.getCategorieFiglie()) {
-            if (figlia.getNumCategorieFiglie() == 0 && !figlia.isFoglia())
-                figlia.setFoglia();
-            else
-                impostaCategorieFoglia(figlia);
-        }
-    }
 
     /**
      * Metodo per l'inserimento di una Categoria generica NON RADICE.
