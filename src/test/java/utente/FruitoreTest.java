@@ -87,8 +87,8 @@ class FruitoreTest {
     void cambioCredenzialiFruitore_UsernameEPassword() throws Exception {
 
         model.addUtente(fruitore);
-        InputInjector.inject("fruitore\npwd1\n");
-        model.cambioCredenziali(fruitore);
+        //InputInjector.inject("fruitore\npwd1\n");
+        model.cambioCredenziali(fruitore, "fruitore", "pwd1");
 
         assert fruitore.getUsername().equals("fruitore")
                 && fruitore.getPassword().equals("pwd1");
@@ -97,8 +97,8 @@ class FruitoreTest {
     @Test
     void cambioCredenzialiFruitore_SoloPassword() {
         model.addUtente(fruitore);
-        InputInjector.inject(fruitore.getUsername() + "\npwd1\n");
-        model.cambioCredenziali(fruitore);
+        //InputInjector.inject(fruitore.getUsername() + "\npwd1\n");
+        model.cambioCredenziali(fruitore, fruitore.getUsername(), "pwd1");
 
         assert fruitore.getPassword().equals("pwd1");
     }
