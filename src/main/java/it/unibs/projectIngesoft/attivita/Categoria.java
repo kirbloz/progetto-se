@@ -274,6 +274,24 @@ public class Categoria {
         return lista;
     }
 
+    /**
+     * Partendo dalla radice di una gerarchia, chiama se stessa ricorsivamente per controllare che tutte le categorie
+     * che non hanno figlie siano impostate come foglie.
+     *
+     */
+    public void impostaCategorieFoglia() {
+        if (this.getNumCategorieFiglie() == 0 && !this.isFoglia()) {
+            this.setFoglia();
+            return;
+        }
+
+        for (Categoria figlia : this.getCategorieFiglie()) {
+            if (figlia.getNumCategorieFiglie() == 0 && !figlia.isFoglia())
+                figlia.setFoglia();
+            else
+                figlia.impostaCategorieFoglia();
+        }
+    }
 
     // CAT NF
 
