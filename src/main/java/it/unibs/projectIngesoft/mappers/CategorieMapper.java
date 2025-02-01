@@ -3,6 +3,8 @@ package it.unibs.projectIngesoft.mappers;
 import com.fasterxml.jackson.core.type.TypeReference;
 import it.unibs.projectIngesoft.attivita.Categoria;
 import it.unibs.projectIngesoft.parsing.JacksonSerializer;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class CategorieMapper{
@@ -32,8 +34,9 @@ public class CategorieMapper{
 
     public List<Categoria> read() {
         assert this.filePath != null;
-        return this.jacksonSerializer.deserialize(new TypeReference<>() {
+        List<Categoria> data = this.jacksonSerializer.deserialize(new TypeReference<>() {
         }, this.filePath);
+        return data == null ? new ArrayList<>() : data;
     }
 
 }
