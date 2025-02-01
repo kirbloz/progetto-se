@@ -5,10 +5,9 @@ import it.unibs.projectIngesoft.attivita.ValoreDominio;
 import it.unibs.projectIngesoft.controller.ConfiguratoreController;
 import it.unibs.projectIngesoft.libraries.InputInjector;
 import it.unibs.projectIngesoft.mappers.CategorieMapper;
-import it.unibs.projectIngesoft.mappers.FattoriMapper;
 import it.unibs.projectIngesoft.model.CategorieModel;
-import it.unibs.projectIngesoft.model.FattoriModel;
 import it.unibs.projectIngesoft.parsing.SerializerJSON;
+import it.unibs.projectIngesoft.utente.Configuratore;
 import it.unibs.projectIngesoft.view.ConfiguratoreView;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -17,14 +16,13 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CategorieTest {
+class CategorieTest {
 
     private CategorieModel model;
     //private CategorieController controller;
 
     private CategorieMapper mapper;
     private List<Categoria> cleanTestData;
-
 
     @BeforeEach
     void prepareTest() {
@@ -45,7 +43,7 @@ public class CategorieTest {
     }
 
     @Test
-    void aggiungiUnaRadice(){
+    void aggiungiUnaRadice() {
 
         assert !model.esisteRadice("nomeTest");
 
@@ -54,7 +52,8 @@ public class CategorieTest {
                 null,
                 null,
                 null,
-                null);
+                null,
+                new Configuratore("default", "test"));
 
         InputInjector.inject("nomeTest\ncampoTest\n");
         controller.aggiungiRadice();
@@ -68,15 +67,18 @@ public class CategorieTest {
     void aggiungiGerarchiaTest_RadiceUnivoca_NomeUnivoco_Foglia() {
         ConfiguratoreController controller = new ConfiguratoreController(new ConfiguratoreView(),
                 model,
-                new FattoriModel(new FattoriMapper(
-                        "fattoriTest1.json",
-                        new SerializerJSON<>()
-                )),
                 null,
                 null,
-                null);
+                null,
+                null,
+                new Configuratore("default", "test"));
 
-        String data = "radiceTest\ncampoTest\n";
+        model.aggiungiCategoriaRadice("radiceTest", "testing");
+
+        String data = "\nradiceTest\nradiceTest2\ncampoTest\n";
+        data = data + "1\nfigliaTest\nradice\nradiceTest2\nvaloreFiglia\nN\nS\n";
+        data = data + "1\nfigliaTest2\nfigliaTest\nradiceTest2\nvaloreFiglia2\nS" +
+                "\ndescrizione\nN\ndominioFake\n";
         data = data + "0\n";
 
         InputInjector.inject(data);
@@ -93,13 +95,13 @@ public class CategorieTest {
 
     @Test
     void aggiungiDescrizioneValoreDominio() {
-        //aggiungiUnaRadiceDiTest();
         ConfiguratoreController controller = new ConfiguratoreController(new ConfiguratoreView(),
                 model,
                 null,
                 null,
                 null,
-                null);
+                null,
+                new Configuratore("default", "test"));
 
         InputInjector.inject("nomeTest\ncampoTest\n");
         controller.aggiungiRadice();
