@@ -180,7 +180,7 @@ public class Categoria {
         return categorieFiglie;
     }
 
-    public void addCategoriaFiglia(Categoria categoria) {
+    public void aggiungiCategoriaFiglia(Categoria categoria) {
         assert categoria != null : "non si possono aggiungere categorie null";
 
         if (this.categorieFiglie == null)
@@ -204,7 +204,7 @@ public class Categoria {
      * @return lista delle foglie
      */
     @JsonIgnore
-    protected List<Categoria> getFoglie() {
+    public List<Categoria> getFoglie() {
         List<Categoria> foglie = new ArrayList<>();
 
         if (this.isFoglia())
@@ -225,9 +225,13 @@ public class Categoria {
     public boolean isFoglia() {
         return isFoglia;
     }
+    @JsonIgnore
+    public boolean isNotFoglia() {
+        return !isFoglia;
+    }
 
     /**
-     * Cerca una categoria partendo dal nome.
+     * Cerca una categoria tra quelle memorizzate partendo dal nome.
      * La cerca prima come sè stessa, e poi tra le sue figlie.
      *
      * @param nomeCat, nome della categoria da cercare
@@ -249,6 +253,44 @@ public class Categoria {
             }
         }
         return found;
+    }
+
+
+    public static List<Categoria> appiatisciGerarchiaSuLista(Categoria categoria, List<Categoria> lista) {
+        if (categoria == null)
+            return lista;
+
+        lista.add(categoria);
+        if (categoria.isFoglia())
+            return lista;
+
+        List<Categoria> figlie = categoria.getCategorieFiglie();
+        for (Categoria figlia : figlie) {
+            if (!figlia.isFoglia() && figlia.getCategorieFiglie() != null) {
+                appiatisciGerarchiaSuLista(figlia, lista);
+            }
+        }
+        // stop or exit condition
+        return lista;
+    }
+
+    /**
+     * Partendo dalla radice di una gerarchia, chiama se stessa ricorsivamente per controllare che tutte le categorie
+     * che non hanno figlie siano impostate come foglie.
+     *
+     */
+    public void impostaCategorieFoglia() {
+        if (this.getNumCategorieFiglie() == 0 && !this.isFoglia()) {
+            this.setFoglia();
+            return;
+        }
+
+        for (Categoria figlia : this.getCategorieFiglie()) {
+            if (figlia.getNumCategorieFiglie() == 0 && !figlia.isFoglia())
+                figlia.setFoglia();
+            else
+                figlia.impostaCategorieFoglia();
+        }
     }
 
     // CAT NF
@@ -306,7 +348,6 @@ public class Categoria {
 
         return sb.toString();
     }*/
-
     public boolean hasFiglie() {
         return isFoglia;
     }

@@ -12,6 +12,7 @@ import it.unibs.projectIngesoft.view.ConfiguratoreView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 
 import static it.unibs.projectIngesoft.libraries.Utilitas.MAX_FATTORE;
 import static it.unibs.projectIngesoft.libraries.Utilitas.MIN_FATTORE;
@@ -81,14 +82,13 @@ public class ConfiguratoreController {
         String username;
         do {
             username = view.richiestaUsername();
-        }while(utentiModel.existsUsername(username));
+        } while (utentiModel.existsUsername(username));
         String password = view.richiestaPassword();
         utentiModel.cambioCredenziali(utenteAttivo, username, password);
     }
 
 
-
-    public void runControllerCategorie(){
+    public void runControllerCategorie() {
         int scelta = 0;
         do {
             scelta = view.visualizzaMenuCategorie();
@@ -100,11 +100,11 @@ public class ConfiguratoreController {
         } while (scelta != 0);
     }
 
-    public void runControllerFattori(){
+    public void runControllerFattori() {
 
     }
 
-    public void runControllerProposte(){
+    public void runControllerProposte() {
 
     }
 
@@ -198,9 +198,12 @@ public class ConfiguratoreController {
         String nomeCampo = configView.visualizzaInserimentoCampoCategoria();
 
         categorieModel.aggiungiCategoriaRadice(nomeRadice, nomeCampo);
-        categorieModel.save();
     }
 
+    /**
+     * Guida l'inserimento di una gerarchia. Permette di inserire categorie e configurarle.
+     * Poi richiama la procedura per inserire i fattori di conversione.
+     */
     public void aggiungiGerarchia() {
         int scelta = 0;
 
@@ -218,35 +221,15 @@ public class ConfiguratoreController {
         } while (scelta != 0);
 
         //1.5 imposto a foglie tutte le categorie che non hanno figlie
-        impostaCategorieFoglia(radice);
+        radice.impostaCategorieFoglia();
 
         // 2. procedura per i fattori
-        List<Categoria> foglie = categorieModel.getFoglie(radice.getNome());
-        generaEMemorizzaNuoviFattori(radice.getNome(), foglie);
+        generaEMemorizzaNuoviFattori(radice.getNome(), radice.getFoglie());
 
         //3. salvataggio dei dati
         categorieModel.save();
     }
 
-    /**
-     * Partendo dalla radice di una gerarchia, chiama se stessa ricorsivamente per controllare che tutte le categorie
-     * che non hanno figlie siano impostate come foglie.
-     *
-     * @param radice, categoria di partenza
-     */
-    private void impostaCategorieFoglia(Categoria radice) {
-        if (radice.getNumCategorieFiglie() == 0 && !radice.isFoglia()) {
-            radice.setFoglia();
-            return;
-        }
-
-        for (Categoria figlia : radice.getCategorieFiglie()) {
-            if (figlia.getNumCategorieFiglie() == 0 && !figlia.isFoglia())
-                figlia.setFoglia();
-            else
-                impostaCategorieFoglia(figlia);
-        }
-    }
 
     /**
      * Metodo per l'inserimento di una Categoria generica NON RADICE.
@@ -256,41 +239,38 @@ public class ConfiguratoreController {
      */
     private void aggiungiCategoria(Categoria radice) {
         assert radice != null : "la radice non deve essere null";
+        assert this.categorieModel.esisteRadice(radice.getNome()) : "non è il nome di una radice";
 
-        String descrizioneValoreDominio;
-        ValoreDominio valoreDominio;
+
 
         // 1. chiede nome
-        String nomeCategoria = view.visualizzaInserimentoCategoria(radice.getNome());
+        String nomeCategoria = view.inserimentoNomeNuovaCategoria(categorieModel, radice);
         assert nomeCategoria != null
                 && !nomeCategoria.isEmpty() : "Il nome della categoria non deve essere null o vuoto";
+
         // 1.1 chiede madre per nuova radice, verificando che esista
-        Categoria categoriaMadre = this.inserimentoNomeCategoriaMadre(radice.getNome(), nomeCategoria);
-        assert categoriaMadre != null : "La madre della categoria non deve essere null";
+        // todo metodo da testare
+        String nomeCategoriaMadre = view.inserimentoNomeCategoriaMadre(nomeCategoria,
+                getListaNomiCategorieGerarchiaFiltrata(radice, Categoria::isNotFoglia));
+        Categoria categoriaMadre = radice.cercaCategoria(nomeCategoriaMadre);
+
 
         // 2. chiede valore del dominio ereditato + descrizione
-        String nomeValoreDominio = this.inserimentoValoreDominio(nomeCategoria, categoriaMadre);
-        assert nomeValoreDominio != null
-                && !nomeValoreDominio.isEmpty() : "Il nome del valore del dominio non deve essere null o vuoto";
-
-        boolean insertDescription = InputDatiTerminale.yesOrNo(ASK_INSERISCI_DESCRIZIONE_VALORE_DOMINIO);
-        if (insertDescription) {
-            descrizioneValoreDominio = InputDatiTerminale.stringReaderSpecificLength(MSG_INPUT_DESCRIZIONE_VALORE_DOMINIO, 0, 100);
-            assert descrizioneValoreDominio != null : "La descrizione del valore del dominio non deve essere null";
-            valoreDominio = new ValoreDominio(nomeValoreDominio, descrizioneValoreDominio);
+        String nomeValoreDominio = view.inserimentoValoreDominio(nomeCategoria, categoriaMadre);
+        ValoreDominio valoreDominio;
+        boolean insertDescription = view.getUserChoiceYoN(ASK_INSERISCI_DESCRIZIONE_VALORE_DOMINIO);
+        valoreDominio = insertDescription
+                ? new ValoreDominio(nomeValoreDominio, view.getUserInputMinMaxLength(MSG_INPUT_DESCRIZIONE_VALORE_DOMINIO, 0, 100))
+                : new ValoreDominio(nomeValoreDominio);
+        if (insertDescription)
             System.out.println(CONFIRM_DESCRIZIONE_AGGIUNTA);
-        } else {
-            valoreDominio = new ValoreDominio(nomeValoreDominio);
-        }
 
         // 3. chiede se è foglia
-        boolean isFoglia = InputDatiTerminale.yesOrNo(ASK_CATEGORIA_IS_FOGLIA);
+        boolean isFoglia = view.getUserChoiceYoN(ASK_CATEGORIA_IS_FOGLIA);
 
         // 3.1 se non è foglia, inserisce il dominio che imprime alle figlie
         String nomeCampoFiglie = isFoglia ?
-                "" : InputDatiTerminale.leggiStringaNonVuota(MSG_INSERIMENTO_DOMINIO_PER_FIGLIE);
-        assert isFoglia || nomeCampoFiglie != null
-                && !nomeCampoFiglie.isEmpty() : "Il nome del campo delle figlie non deve essere null o vuoto";
+                "" : view.getUserInput(MSG_INSERIMENTO_DOMINIO_PER_FIGLIE);
 
         // 4. creazione dell'oggetto Categoria
         Categoria tempCategoria = isFoglia
@@ -298,9 +278,22 @@ public class ConfiguratoreController {
                 : new Categoria(nomeCategoria, nomeCampoFiglie, categoriaMadre, valoreDominio);
 
         // 5. aggiunta della categoria figlia alla madre
-        categorieModel.aggiungiCategoriaFiglia(categoriaMadre, tempCategoria);
-        //categoriaMadre.addCategoriaFiglia(tempCategoria);
-        assert categoriaMadre.getCategorieFiglie().contains(tempCategoria) : "La categoria madre deve contenere la nuova categoria figlia";
+        categoriaMadre.aggiungiCategoriaFiglia(tempCategoria);
+        //assert categoriaMadre.getCategorieFiglie().contains(tempCategoria) : "La categoria madre deve contenere la nuova categoria figlia";
+
+    }
+
+    public List<Categoria> getListaCategorieGerarchiaFiltrata(Categoria radice, Predicate<Categoria> filtro) {
+        List<Categoria> lista = Categoria.appiatisciGerarchiaSuLista(radice, new ArrayList<>());
+        return lista.stream().filter(filtro).toList();
+
+    }
+
+    public List<String> getListaNomiCategorieGerarchiaFiltrata(Categoria radice, Predicate<Categoria> filtro) {
+        return getListaCategorieGerarchiaFiltrata(radice, filtro)
+                .stream()
+                .map(Categoria::getNome)
+                .toList();
 
     }
 

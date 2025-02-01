@@ -131,6 +131,14 @@ public class ConfiguratoreView implements UtenteViewableTerminal {
         return "";
     }
 
+    public String getUserInputMinMaxLength(String prompt, int minLength, int maxLength) {
+        return InputDatiTerminale.stringReaderSpecificLength(prompt, minLength, maxLength);
+    }
+
+    public boolean getUserChoiceYoN(String prompt){
+        return InputDatiTerminale.yesOrNo(prompt);
+    }
+
 
     public int visualizzaMenuPrincipale() {
         Menu menu = new Menu(ConfiguratoreView.TITLE_MAIN_MENU,
@@ -152,28 +160,6 @@ public class ConfiguratoreView implements UtenteViewableTerminal {
     public int visualizzaMenuAggiungiGerarchia() {
         Menu subMenu = new Menu(TITLE_SUBMENU_AGGIUNGI_GERARCHIA, VOCI_SUBMENU_AGGIUNGI_GERARCHIA);
         return subMenu.scegli();
-    }
-
-    public String visualizzaInserimentoNomeCategoria(CategorieModel model, String nomeRadice) {
-
-
-        visualizzaListaRadici(model.getRadici());
-
-        // todo: questi check sono fatti prima di chiamare il metodo?
-        assert nomeRadice != null : "il nome della radice non può essere null";
-        assert model.esisteRadice(nomeRadice) : "tempRadice non è il nome di una radice";
-
-        String tempNome;
-        //todo finire di implementare e refattorizzare il metodo
-        do {
-            visualizzaGerarchia(tempRadice); // stampa la gerarchia
-            tempNome = InputDatiTerminale.leggiStringaNonVuota(MSG_INSERIMENTO_NUOVA_CATEGORIA);
-            if (esisteCategoriaNellaGerarchia(tempNome, tempRadice)) {
-                System.out.print(WARNING_CATEGORIA_ESISTE);
-            }
-        } while (esisteCategoriaNellaGerarchia(tempNome, tempRadice));
-        return tempNome;
-        return getUserInput(MSG_INSERIMENTO_RADICE + MSG_PRINT_LISTA_RADICI);
     }
 
     public String visualizzaInserimentoNomeCategoriaRadice(CategorieModel model) {
@@ -258,8 +244,64 @@ public class ConfiguratoreView implements UtenteViewableTerminal {
         return InputDatiTerminale.leggiDoubleConRange(INSERISCI_IL_FATTORE_TRA.formatted(nomeFogliaEsternaFormattata, nomeFogliaInternaFormattata), MIN_FATTORE, MAX_FATTORE);
     }
 
+/// ///////INSERIMENTO PER CASI D'USO CATEGORIE //////
+    /**
+     * Guida l'input del nome di una nuova Categoria per una gerarchia.
+     *
+     * @param tempRadice, radice della gerarchia a cui aggiungere la nuova Categoria
+     * @return nome della nuova Categoria
+     */
+    public String inserimentoNomeNuovaCategoria(CategorieModel model, Categoria radice) {
+        assert radice != null : "radice non può essere null";
+        //assert this.esisteRadice(tempRadice) : "tempRadice non è il nome di una radice";
+        // questo è garantito prima di entrare nel metodo
 
+        String tempNome;
+        do {
+            visualizzaCategoria(radice); // stampa la gerarchia
+            tempNome = InputDatiTerminale.leggiStringaNonVuota(MSG_INSERIMENTO_NUOVA_CATEGORIA);
+            if (model.esisteCategoriaNellaGerarchia(tempNome, radice.getNome())) {
+                System.out.print(WARNING_CATEGORIA_ESISTE);
+            }
+        } while (model.esisteCategoriaNellaGerarchia(tempNome, radice.getNome()));
+        return tempNome;
+    }
 
+    /**
+     * Guida l'immissione del nome della Categoria a cui assegnare nomeCategoria come figlia.
+     * Controlla che si inserisca il nome di una Categoria che può avere figlie.
+     *
+     * @param nomeCategoriaRadice, Categoria radice della gerarchia di riferimento
+     * @param nomeCategoria,       Categoria figlia da assegnare alla madre
+     * @return Categoria a cui la Categoria figlia sarà assegnata
+     */
+    public String inserimentoNomeCategoriaMadre(String nomeCategoria, List<String> possibiliMadri) {
+        String nomeMadre;
+        do{
+            nomeMadre = getUserInput(String.format(MSG_INSERIMENTO_NOME_CATEGORIA_MADRE, nomeCategoria));
+            if(!possibiliMadri.contains(nomeMadre))
+                System.out.println(WARNING_CATEGORIA_NF_NON_ESISTE);
+        }while (possibiliMadri.contains(nomeMadre));
+
+        return nomeMadre;
+    }
+
+    /**
+     * Guida l'immissione di una stringa imponendo un vincolo di univocit&agrave; tra i valori del dominio che le Categorie "sorelle"
+     * assumono.
+     *
+     * @param tempNome,       Categoria a cui assegnare il nome del ValoreDominio
+     * @param categoriaMadre, Categoria madre da cui si eredita il dominio e da cui ottenere i valori delle "sorelle"
+     * @return nome del ValoreDominio
+     */
+    public String inserimentoValoreDominio(String tempNome, Categoria categoriaMadre) {
+        String nomeValore;
+        List<String> valoriSorelle = categoriaMadre.getValoriDominioFiglie();
+        do {
+            nomeValore = InputDatiTerminale.leggiStringaNonVuota(String.format(MSG_INSERIMENTO_VALORE_DOMINIO, tempNome, categoriaMadre.getCampoFiglie()));
+        } while (valoriSorelle.contains(nomeValore));
+        return nomeValore;
+    }
 
 
 
