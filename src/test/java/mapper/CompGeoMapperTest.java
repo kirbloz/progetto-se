@@ -45,8 +45,8 @@ class CompGeoMapperTest {
 
     @Test
     void read() {
-        assert !model.listaNomiComprensoriGeografici().isEmpty();
-        System.out.println(model.listaNomiComprensoriGeografici());
+        assert !model.getListaNomiComprensoriGeografici().isEmpty();
+        System.out.println(model.getListaNomiComprensoriGeografici());
     }
 
 }
