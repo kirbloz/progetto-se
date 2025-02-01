@@ -204,7 +204,7 @@ public class Categoria {
      * @return lista delle foglie
      */
     @JsonIgnore
-    protected List<Categoria> getFoglie() {
+    public List<Categoria> getFoglie() {
         List<Categoria> foglie = new ArrayList<>();
 
         if (this.isFoglia())
