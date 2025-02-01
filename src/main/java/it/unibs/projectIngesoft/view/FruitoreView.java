@@ -40,12 +40,12 @@ public class FruitoreView implements UtenteViewableTerminal {
     public static final String WARNING_NO_RAMI_DA_ESPLORARE = ">> (!!) Non ci sono nuovi rami da esplorare";
 
 
-    @Override
+
     public int visualizzaMenuCategorie() {
         return 0;
     }
 
-    @Override
+
     public void uscitaMenu(String menu) {
 
     }
@@ -60,7 +60,6 @@ public class FruitoreView implements UtenteViewableTerminal {
         return InputDatiTerminale.leggiInteroConMinimo(">> Selezione (>0): ", 0);
     }
 
-    @Override
     public String getUserInput(String prompt) {
         return "";
     }
