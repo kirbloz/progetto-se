@@ -99,6 +99,8 @@ public class ConfiguratoreView implements UtenteViewableTerminal {
     public static final String WARNING_NO_GERARCHIE_MEMORIZZATE = ">> (!!) Nessuna gerarchia memorizzata.";
     private static final String MSG_RICHIESTA_USERNAME = "Inserisci un username non ancora utilizzato:";
     private static final String MSG_RICHIESTA_PASSWORD = "Inserisci la password:";
+    private static final String MSG_INSERISCI_FOGLIA_TRA_QUESTE = "Inserisci una tra le seguenti Categorie:";
+    public static final String MSG_INSERISCI_CATEGORIA = ">> Prego, Inserisci la categoria desiderata:";
 
 
     // STRINGHE PER PROPOSTE
@@ -259,19 +261,6 @@ public class ConfiguratoreView implements UtenteViewableTerminal {
 
 
     /////////////////////////////////////////////// VIEW per i fattori /////////////////////////////////////////////////
-    // TODO rivedere perché i vari check li fa il model tramite controller
-    public String inserimentoNomeFogliaFormattato(String messaggio) {
-        System.out.println(messaggio);
-        String nomeFogliaFormattato;
-        /*do {
-            nomeFogliaFormattato = Utilitas.factorNameBuilder(
-                    InputDatiTerminale.leggiStringaNonVuota(MSG_INSERISCI_NOME_RADICE),
-                    InputDatiTerminale.leggiStringaNonVuota(MSG_INSERISCI_NOME_FOGLIA)
-            );
-        } while (!hashMapFattori.containsKey(nomeFogliaFormattato));
-        return nomeFogliaFormattato;*/
-        return null;
-    }
 
     public void stampaOpzioni(String[] opzioni) {
         for (String opt : opzioni) {
@@ -280,23 +269,7 @@ public class ConfiguratoreView implements UtenteViewableTerminal {
     }
 
     // TODO rivedere
-    /**
-     * Permette di scegliere una categoria foglia tra quelle che già hanno tutti i fattori di conversione calcolati
-     * e memorizzati. Guida l'immissione del nome e radice della categoria.
-     *
-     * @return stringa formattata come "radice:foglia"
-     */
-    public String visualizzaSelezioneFogliaFormattata(String messaggio) {
-        // inserimento guidato e controllo [Old:A in (Old:A New:A x)]
-        //return inserimentoNomeFogliaFormattato(messaggio);
-        System.out.println(messaggio);
-        String nomeFogliaFormattato = Utilitas.factorNameBuilder(
-                    InputDatiTerminale.leggiStringaNonVuota(MSG_INSERISCI_NOME_RADICE),
-                    InputDatiTerminale.leggiStringaNonVuota(MSG_INSERISCI_NOME_FOGLIA)
-            );
-        return nomeFogliaFormattato;
-    }
-    //todo rivedere
+
     /**
      * Permette di scegliere una categoria foglia tra quelle appena create.
      * Guida l'immissione del nome e radice della categoria.
@@ -307,26 +280,50 @@ public class ConfiguratoreView implements UtenteViewableTerminal {
      */
 	public String selezioneFogliaDaLista(String nomeRadice, List<Categoria> foglie) {
         // stampa categorie interne (foglie della nuova radice)
-        System.out.println(MSG_INSERISCI_FOGLIA_INTERNA);
-        for (Categoria foglia : foglie) {
-            System.out.println(Utilitas.factorNameBuilder(nomeRadice, foglia.getNome()));
+        String[] foglieArray = new String[foglie.size()];
+        for (int i = 0; i < foglie.size(); i++) {
+            foglieArray[i] = Utilitas.factorNameBuilder(nomeRadice, foglie.get(i).getNome());
+        }
+        return selezioneFogliaDaLista(foglieArray);
+    }
+
+    public String selezioneFogliaDaLista(String[] foglie) {
+        // stampa categorie interne (foglie della nuova radice)
+        System.out.println(MSG_INSERISCI_FOGLIA_TRA_QUESTE);
+        for (String foglia : foglie) {
+            System.out.println(foglia);
         }
         // immissione della foglia e verifica che sia corretto [New:A in (Old:A New:A x)]
-        // todo non so se va bene sta cosa ziopera
-        String nomeFogliaNonFormattato;
+        String fogliaSelezionata;
         boolean fogliaEsiste = false;
         do {
-            nomeFogliaNonFormattato = InputDatiTerminale.leggiStringaNonVuota(MSG_INSERISCI_NOME_FOGLIA);
-            for (Categoria foglia : foglie) {
-                if (foglia.getNome().equals(nomeFogliaNonFormattato)) {
+            fogliaSelezionata = inserimentoFogliaFormattata(MSG_INSERISCI_CATEGORIA);
+            for (String foglia : foglie) {
+                if (foglia.equals(fogliaSelezionata)) {
                     fogliaEsiste = true;
                     break;
                 }
             }
         } while (!fogliaEsiste);
 
-        return Utilitas.factorNameBuilder(nomeRadice, nomeFogliaNonFormattato);
+        return fogliaSelezionata;
     }
+
+    /**
+     * Permette di scegliere una categoria foglia, chiedendo prima una radice e poi una foglia
+     *
+     * @return stringa formattata come "radice:foglia"
+     */
+    public String inserimentoFogliaFormattata(String messaggio) {
+        // inserimento guidato e controllo [Old:A in (Old:A New:A x)]
+        //return inserimentoNomeFogliaFormattato(messaggio);
+        System.out.println(messaggio);
+		return Utilitas.factorNameBuilder(
+				InputDatiTerminale.leggiStringaNonVuota(MSG_INSERISCI_NOME_RADICE),
+				InputDatiTerminale.leggiStringaNonVuota(MSG_INSERISCI_NOME_FOGLIA)
+		);
+    }
+
 
     public double ottieniFattoreDiConversione(String nomeFogliaEsternaFormattata, String nomeFogliaInternaFormattata) {
         return InputDatiTerminale.leggiDoubleConRange(INSERISCI_IL_FATTORE_TRA.formatted(nomeFogliaEsternaFormattata, nomeFogliaInternaFormattata), Utilitas.MIN_FATTORE, Utilitas.MAX_FATTORE);
