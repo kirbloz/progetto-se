@@ -77,7 +77,7 @@ public class Main {
      * @param menuCategorie, sotto-menu per le categorie
      * @param menuFattori,   sotto-menu per i fattori
      */
-    private static void loopMain(Menu menu, Menu menuCategorie, Menu menuFattori, Menu menuComprensoriGeografici, Menu menuProposte, UtentiModel userHandler, Utente utenteAttivo) {
+    /*private static void loopMain(Menu menu, Menu menuCategorie, Menu menuFattori, Menu menuComprensoriGeografici, Menu menuProposte, UtentiModel userHandler, Utente utenteAttivo) {
         int scelta;
         boolean isConfiguratore = utenteAttivo instanceof Configuratore;
 
@@ -112,7 +112,7 @@ public class Main {
                 }
 
             } while (scelta != 0);
-    }
+    }*/
 
     private static Utente loopMenuIniziale(Menu menu, UtentiModel userHandler, ArrayList<String> listaNomiComprensorio) {
         int scelta;
@@ -120,7 +120,7 @@ public class Main {
         scelta = menu.scegli();
         switch (scelta) {
             case 1 -> utenteLoggato = null; // utenteLoggato =userHandler.login();
-            case 2 -> utenteLoggato = userHandler.register(listaNomiComprensorio);
+            case 2 -> utenteLoggato = null; //utenteLoggato = userHandler.register(listaNomiComprensorio);
             default -> utenteLoggato = null;
         }
         return utenteLoggato;
@@ -132,13 +132,13 @@ public class Main {
      * @param menuComprensoriGeografici, menu gestito
      */
     private static void loopComprensoriGeografici(Menu menuComprensoriGeografici) {
-        int scelta;
+        /*int scelta;
         ComprensorioGeograficoModel gestoreComprensori = new ComprensorioGeograficoModel(
-                new CompGeoMapper("comprensoriGeografici.json", new SerializerJSON<>()) /*COMPRENSORI_GEOGRAFICI_XML_FILEPATH*/);
+                new CompGeoMapper("comprensoriGeografici.json", new SerializerJSON<>()) );
         do {
             scelta = menuComprensoriGeografici.scegli();
             gestoreComprensori.entryPoint(scelta);
-        } while (scelta != 0);
+        } while (scelta != 0);*/
     }
 
     private static void loopProposte(Menu menuProposta, Utente utenteAttivo) {
