@@ -183,12 +183,9 @@ public class Categoria {
     public void aggiungiCategoriaFiglia(Categoria categoria) {
         assert categoria != null : "non si possono aggiungere categorie null";
 
-        if (this.categorieFiglie == null)
-            this.categorieFiglie = new ArrayList<>();
-        if (this.categorieFiglie.isEmpty())
-            this.isFoglia = true;
+        if (this.categorieFiglie == null) this.categorieFiglie = new ArrayList<>();
+        if (this.isFoglia()) this.isFoglia = false;
         this.categorieFiglie.add(categoria);
-
     }
 
     @JsonIgnore
