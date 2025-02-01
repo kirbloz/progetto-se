@@ -49,7 +49,6 @@ public class CategorieModel  {
     }
 
     public List<Categoria> getRadici(){
-        load();
         return tree.getRadici();
     }
 
@@ -152,7 +151,7 @@ public class CategorieModel  {
      *
      * @param radice, Categoria radice di riferimento
      */
-    private void aggiungiCategoria(Categoria radice) {
+    /*private void aggiungiCategoria(Categoria radice) {
         assert radice != null : "la radice non deve essere null";
 
         String descrizioneValoreDominio;
@@ -198,10 +197,10 @@ public class CategorieModel  {
         // 5. aggiunta della categoria figlia alla madre
         categoriaMadre.addCategoriaFiglia(tempCategoria);
         assert categoriaMadre.getCategorieFiglie().contains(tempCategoria) : "La categoria madre deve contenere la nuova categoria figlia";
-    }
+    }*/
 
 
-    private String inserimentoNomeCategoriaRadice() {
+    /*private String inserimentoNomeCategoriaRadice() {
         String tempNomeRadice;
         do {
             System.out.println(MSG_INSERIMENTO_RADICE + MSG_PRINT_LISTA_RADICI + "radiciToString()");
@@ -211,7 +210,7 @@ public class CategorieModel  {
                 System.out.println(WARNING_RADICE_ESISTE);
         } while (this.esisteRadice(tempNomeRadice));
         return tempNomeRadice;
-    }
+    }*/
 
     private String selezioneNomeCategoriaRadice() {
         String tempNomeRadice;
@@ -224,27 +223,27 @@ public class CategorieModel  {
         } while (!this.esisteRadice(tempNomeRadice));
         return tempNomeRadice;
     }
-
-    /**
-     * Guida l'input del nome di una nuova Categoria per una gerarchia.
-     *
-     * @param tempRadice, radice della gerarchia a cui aggiungere la nuova Categoria
-     * @return nome della nuova Categoria
-     */
-    private String inserimentoNomeNuovaCategoria(String tempRadice) {
-        assert tempRadice != null : "il nome della radice non può essere null";
-        assert this.esisteRadice(tempRadice) : "tempRadice non è il nome di una radice";
-
-        String tempNome;
-        do {
-            visualizzaGerarchia(tempRadice); // stampa la gerarchia
-            tempNome = InputDatiTerminale.leggiStringaNonVuota(MSG_INSERIMENTO_NUOVA_CATEGORIA);
-            if (esisteCategoriaNellaGerarchia(tempNome, tempRadice)) {
-                System.out.print(WARNING_CATEGORIA_ESISTE);
-            }
-        } while (esisteCategoriaNellaGerarchia(tempNome, tempRadice));
-        return tempNome;
-    }
+//
+//    /**
+//     * Guida l'input del nome di una nuova Categoria per una gerarchia.
+//     *
+//     * @param tempRadice, radice della gerarchia a cui aggiungere la nuova Categoria
+//     * @return nome della nuova Categoria
+//     */
+//    private String inserimentoNomeNuovaCategoria(String tempRadice) {
+//        assert tempRadice != null : "il nome della radice non può essere null";
+//        assert this.esisteRadice(tempRadice) : "tempRadice non è il nome di una radice";
+//
+//        String tempNome;
+//        do {
+//            visualizzaGerarchia(tempRadice); // stampa la gerarchia
+//            tempNome = InputDatiTerminale.leggiStringaNonVuota(MSG_INSERIMENTO_NUOVA_CATEGORIA);
+//            if (esisteCategoriaNellaGerarchia(tempNome, tempRadice)) {
+//                System.out.print(WARNING_CATEGORIA_ESISTE);
+//            }
+//        } while (esisteCategoriaNellaGerarchia(tempNome, tempRadice));
+//        return tempNome;
+//    }
 
     /**
      * Verifica che la stringa passata non sia già il nome di un'altra Categoria della stessa gerarchia
@@ -253,7 +252,7 @@ public class CategorieModel  {
      * @param tempRadice, radice della gerarchia
      * @return true se esiste una Categoria con quel nome
      */
-    private boolean esisteCategoriaNellaGerarchia(String tempNome, String tempRadice) {
+    public boolean esisteCategoriaNellaGerarchia(String tempNome, String tempRadice) {
         return this.tree.getRadice(tempRadice).cercaCategoria(tempNome) != null;
     }
 
@@ -265,7 +264,7 @@ public class CategorieModel  {
      * @param nomeCategoria,       Categoria figlia da assegnare alla madre
      * @return Categoria a cui la Categoria figlia sarà assegnata
      */
-    private Categoria inserimentoNomeCategoriaMadre(String nomeCategoriaRadice, String nomeCategoria) {
+    /*private Categoria inserimentoNomeCategoriaMadre(String nomeCategoriaRadice, String nomeCategoria) {
         assert nomeCategoriaRadice != null : "il nome della radice non può essere null";
         assert nomeCategoria != null : "il nome della categoria figlia non può essere null";
 
@@ -285,7 +284,7 @@ public class CategorieModel  {
         } while (!esisteMadre);
 
         return categoriaMadre;
-    }
+    }*/
 
     /**
      * Guida l'immissione di una stringa imponendo un vincolo di univocit&agrave; tra i valori del dominio che le Categorie "sorelle"
@@ -295,14 +294,14 @@ public class CategorieModel  {
      * @param categoriaMadre, Categoria madre da cui si eredita il dominio e da cui ottenere i valori delle "sorelle"
      * @return nome del ValoreDominio
      */
-    private String inserimentoValoreDominio(String tempNome, Categoria categoriaMadre) {
+    /*private String inserimentoValoreDominio(String tempNome, Categoria categoriaMadre) {
         String nomeValore;
         List<String> valoriSorelle = categoriaMadre.getValoriDominioFiglie();
         do {
             nomeValore = InputDatiTerminale.leggiStringaNonVuota(String.format(MSG_INSERIMENTO_VALORE_DOMINIO, tempNome, categoriaMadre.getCampoFiglie()));
         } while (valoriSorelle.contains(nomeValore));
         return nomeValore;
-    }
+    }*/
 
     /**
      * Permette la creazione di una categoria radice.

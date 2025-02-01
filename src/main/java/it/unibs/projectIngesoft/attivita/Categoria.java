@@ -180,7 +180,7 @@ public class Categoria {
         return categorieFiglie;
     }
 
-    public void addCategoriaFiglia(Categoria categoria) {
+    public void aggiungiCategoriaFiglia(Categoria categoria) {
         assert categoria != null : "non si possono aggiungere categorie null";
 
         if (this.categorieFiglie == null)
@@ -225,9 +225,13 @@ public class Categoria {
     public boolean isFoglia() {
         return isFoglia;
     }
+    @JsonIgnore
+    public boolean isNotFoglia() {
+        return !isFoglia;
+    }
 
     /**
-     * Cerca una categoria partendo dal nome.
+     * Cerca una categoria tra quelle memorizzate partendo dal nome.
      * La cerca prima come sè stessa, e poi tra le sue figlie.
      *
      * @param nomeCat, nome della categoria da cercare
@@ -250,6 +254,26 @@ public class Categoria {
         }
         return found;
     }
+
+
+    public static List<Categoria> appiatisciGerarchiaSuLista(Categoria categoria, List<Categoria> lista) {
+        if (categoria == null)
+            return lista;
+
+        lista.add(categoria);
+        if (categoria.isFoglia())
+            return lista;
+
+        List<Categoria> figlie = categoria.getCategorieFiglie();
+        for (Categoria figlia : figlie) {
+            if (!figlia.isFoglia() && figlia.getCategorieFiglie() != null) {
+                appiatisciGerarchiaSuLista(figlia, lista);
+            }
+        }
+        // stop or exit condition
+        return lista;
+    }
+
 
     // CAT NF
 
@@ -306,7 +330,6 @@ public class Categoria {
 
         return sb.toString();
     }*/
-
     public boolean hasFiglie() {
         return isFoglia;
     }
