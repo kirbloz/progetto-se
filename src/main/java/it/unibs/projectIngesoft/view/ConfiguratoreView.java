@@ -81,8 +81,8 @@ public class ConfiguratoreView implements UtenteViewableTerminal {
 
     public static final String MSG_INSERIMENTO_NOME_CATEGORIA_MADRE = ">> Inserisci il nome della CATEGORIA MADRE per %s:\n> ";
 
-    public static final String MSG_INSERIMENTO_RADICE = ">> Scegli un nome per il nuovo albero di categorie che non esista già.\n";
-    public static final String MSG_PRINT_LISTA_RADICI = ">> Di seguito tutte le categorie radice.\n";
+    public static final String MSG_INSERIMENTO_RADICE = ">> Scegli un nome per il nuovo albero di categorie che non esista già.\n> ";
+    public static final String MSG_PRINT_LISTA_RADICI = ">> Sopra trovi tutte le categorie radice.\n";
 
     public static final String MSG_SELEZIONE_RADICE = ">> Inserisci il nome di una categoria radice\n";
     public static final String MSG_INPUT_NOME_RADICE = ">> Inserisci il nome della categoria radice\n> ";
@@ -164,7 +164,7 @@ public class ConfiguratoreView implements UtenteViewableTerminal {
 
     public String visualizzaInserimentoNomeCategoriaRadice(CategorieModel model) {
         visualizzaListaRadici(model.getRadici());
-        return getUserInput(MSG_INSERIMENTO_RADICE + MSG_PRINT_LISTA_RADICI);
+        return getUserInput(MSG_PRINT_LISTA_RADICI+MSG_INSERIMENTO_RADICE );
     }
 
     public String visualizzaInserimentoCampoCategoria() {
@@ -191,9 +191,12 @@ public class ConfiguratoreView implements UtenteViewableTerminal {
      * @param radici lista radici.
      */
     public void visualizzaListaRadici(List<Categoria> radici) {
-        if (radici == null || radici.isEmpty())
-            return;
         System.out.println(HEADER_VISUALIZZA_GERARCHIE);
+        if (radici == null || radici.isEmpty()){
+            System.out.println(">> Nessuna radice presente.");
+            return;
+        }
+
         for (Categoria radice : radici) {
             System.out.println("> RADICE");
             visualizzaCategoria(radice);
@@ -298,7 +301,7 @@ public class ConfiguratoreView implements UtenteViewableTerminal {
         String nomeValore;
         List<String> valoriSorelle = categoriaMadre.getValoriDominioFiglie();
         do {
-            nomeValore = InputDatiTerminale.leggiStringaNonVuota(String.format(MSG_INSERIMENTO_VALORE_DOMINIO, tempNome, categoriaMadre.getCampoFiglie()));
+            nomeValore = getUserInput(String.format(MSG_INSERIMENTO_VALORE_DOMINIO, tempNome, categoriaMadre.getCampoFiglie()));
         } while (valoriSorelle.contains(nomeValore));
         return nomeValore;
     }
