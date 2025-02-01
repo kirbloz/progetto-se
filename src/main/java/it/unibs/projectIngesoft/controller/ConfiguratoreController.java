@@ -1,7 +1,6 @@
 package it.unibs.projectIngesoft.controller;
 
 import it.unibs.projectIngesoft.attivita.Categoria;
-import it.unibs.projectIngesoft.attivita.ComprensorioGeografico;
 import it.unibs.projectIngesoft.attivita.FattoreDiConversione;
 import it.unibs.projectIngesoft.attivita.ValoreDominio;
 import it.unibs.projectIngesoft.libraries.InputDatiTerminale;
@@ -21,14 +20,14 @@ import static it.unibs.projectIngesoft.view.ConfiguratoreView.*;
 public class ConfiguratoreController {
 
 
-    private ConfiguratoreView view;
+    private final ConfiguratoreView view;
 
-    private CategorieModel categorieModel;
-    private FattoriModel fattoriModel;
-    private ProposteModel proposteModel;
-    private ComprensorioGeograficoModel compGeoModel;
-    private UtentiModel utentiModel;
-    private Configuratore utenteAttivo;
+    private final CategorieModel categorieModel;
+    private final FattoriModel fattoriModel;
+    private final ProposteModel proposteModel;
+    private final ComprensorioGeograficoModel compGeoModel;
+    private final UtentiModel utentiModel;
+    private final Configuratore utenteAttivo;
 
     public ConfiguratoreController(ConfiguratoreView view,
                                    CategorieModel categorieModel,
@@ -53,14 +52,13 @@ public class ConfiguratoreController {
             cambioCredenziali();
         }
 
-        int scelta = 0;
+        int scelta;
 
         do {
             scelta = view.visualizzaMenuPrincipale();
 
             switch (scelta) {
                 case 0 -> view.uscitaMenu("programma");
-                //System.out.println(AccessoView.MSG_PROGRAM_EXIT);
                 //case 1 ->
                 // userHandler.cambioCredenziali(utenteAttivo); // cambio credenziali
                 case 2 -> runControllerComprensoriGeografici();
@@ -89,13 +87,13 @@ public class ConfiguratoreController {
 
 
     public void runControllerCategorie() {
-        int scelta = 0;
+        int scelta;
         do {
             scelta = view.visualizzaMenuCategorie();
             switch (scelta) { // switch con un solo case per ampliamento futuro
                 case 1 -> this.aggiungiGerarchia();
                 case 2 -> this.visualizzaGerarchie();
-                case 0 -> view.uscitaMenu("submenu");
+                default -> view.uscitaMenu("submenu");
             }
         } while (scelta != 0);
     }
@@ -109,7 +107,7 @@ public class ConfiguratoreController {
     }
 
     public void runControllerComprensoriGeografici(){
-        int scelta = 0;
+        int scelta;
         do {
             scelta = view.visualizzaMenuComprensorio();
             switch (scelta) {
@@ -143,7 +141,7 @@ public class ConfiguratoreController {
         //todo levare questo controllo se non serve a nulla
         //se non esistono foglie non serve a nulla fare i fattori
         if (foglie.isEmpty())
-            return null;
+            return new ArrayList<>();
         // se esiste almeno una foglia, allora calcola i fattori di conversione
         ArrayList<FattoreDiConversione> nuoviDaNuovaRadice = new ArrayList<>();
         for (int i = 0; i < foglie.size(); i++) {
@@ -167,7 +165,7 @@ public class ConfiguratoreController {
         //1. chiedi i fattori nuovi all'utente sulla base delle categorie appena inserite
         ArrayList<FattoreDiConversione> nuoviDaNuovaRadice = ottieniFattoriDelleNuoveCategorie(nomeRadice, foglie);
         //è null se non esistono foglie, è vuoto se esiste una sola foglia
-        if (nuoviDaNuovaRadice == null) { //se non esistono foglie non hanno senso i fattori
+        if (nuoviDaNuovaRadice.isEmpty()) { //se non esistono foglie non hanno senso i fattori
             return; //todo a seconda di come avverrà il lancio di questo metodo questo controllo potrebbe essere inutile (forse si può usare assert btw)
         }
 
@@ -188,9 +186,9 @@ public class ConfiguratoreController {
     }
 
     public void aggiungiRadice() {
-        ConfiguratoreView configView = (ConfiguratoreView) view;
+        ConfiguratoreView configView = view;
 
-        String nomeRadice = "";
+        String nomeRadice;
         do {
             nomeRadice = configView.visualizzaInserimentoNomeCategoriaRadice(categorieModel);
         } while (categorieModel.esisteRadice(nomeRadice));
@@ -241,12 +239,10 @@ public class ConfiguratoreController {
         assert radice != null : "la radice non deve essere null";
         assert this.categorieModel.esisteRadice(radice.getNome()) : "non è il nome di una radice";
 
-
-
         // 1. chiede nome
         String nomeCategoria = view.inserimentoNomeNuovaCategoria(categorieModel, radice);
-        assert nomeCategoria != null
-                && !nomeCategoria.isEmpty() : "Il nome della categoria non deve essere null o vuoto";
+        //assert nomeCategoria != null
+        //        && !nomeCategoria.isEmpty() : "Il nome della categoria non deve essere null o vuoto";
 
         // 1.1 chiede madre per nuova radice, verificando che esista
         // todo metodo da testare
@@ -254,14 +250,16 @@ public class ConfiguratoreController {
                 getListaNomiCategorieGerarchiaFiltrata(radice, Categoria::isNotFoglia));
         Categoria categoriaMadre = radice.cercaCategoria(nomeCategoriaMadre);
 
-
         // 2. chiede valore del dominio ereditato + descrizione
         String nomeValoreDominio = view.inserimentoValoreDominio(nomeCategoria, categoriaMadre);
         ValoreDominio valoreDominio;
+
         boolean insertDescription = view.getUserChoiceYoN(ASK_INSERISCI_DESCRIZIONE_VALORE_DOMINIO);
         valoreDominio = insertDescription
-                ? new ValoreDominio(nomeValoreDominio, view.getUserInputMinMaxLength(MSG_INPUT_DESCRIZIONE_VALORE_DOMINIO, 0, 100))
+                ? new ValoreDominio(nomeValoreDominio,
+                    view.getUserInputMinMaxLength(MSG_INPUT_DESCRIZIONE_VALORE_DOMINIO, 0, 100))
                 : new ValoreDominio(nomeValoreDominio);
+
         if (insertDescription)
             System.out.println(CONFIRM_DESCRIZIONE_AGGIUNTA);
 
@@ -279,7 +277,6 @@ public class ConfiguratoreController {
 
         // 5. aggiunta della categoria figlia alla madre
         categoriaMadre.aggiungiCategoriaFiglia(tempCategoria);
-        //assert categoriaMadre.getCategorieFiglie().contains(tempCategoria) : "La categoria madre deve contenere la nuova categoria figlia";
 
     }
 
