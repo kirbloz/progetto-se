@@ -1,9 +1,11 @@
 package it.unibs.projectIngesoft.view;
 
 import it.unibs.projectIngesoft.attivita.Categoria;
+import it.unibs.projectIngesoft.attivita.ComprensorioGeografico;
 import it.unibs.projectIngesoft.libraries.InputDatiTerminale;
 import it.unibs.projectIngesoft.libraries.Utilitas;
 
+import java.util.ArrayList;
 import java.util.List;
 import it.unibs.projectIngesoft.libraries.Menu;
 import it.unibs.projectIngesoft.model.CategorieModel;
@@ -23,7 +25,7 @@ public class ConfiguratoreView implements UtenteViewableTerminal {
     };
 
     public static final String TITLE_MENU_COMPRENSORIO = "MENU' COMPRENSORI GEOGRAFICI";
-    public static final String[] vociComprensorioGeografico = new String[]{
+    public static final String[] VOCI_COMPRENSORIO_GEOGRAFICO = new String[]{
             "Aggiungi Comprensorio Geografico",
             "Visualizza Comprensorio Geografico"
     };
@@ -101,6 +103,7 @@ public class ConfiguratoreView implements UtenteViewableTerminal {
     private static final String MSG_RICHIESTA_PASSWORD = "Inserisci la password:";
     private static final String MSG_INSERISCI_FOGLIA_TRA_QUESTE = "Inserisci una tra le seguenti Categorie:";
     public static final String MSG_INSERISCI_CATEGORIA = ">> Prego, Inserisci la categoria desiderata:";
+    private static final String MSG_INPUT_NOME = "Inserisci un nome non già in uso:";
 
 
     // STRINGHE PER PROPOSTE
@@ -324,7 +327,6 @@ public class ConfiguratoreView implements UtenteViewableTerminal {
 		);
     }
 
-
     public double ottieniFattoreDiConversione(String nomeFogliaEsternaFormattata, String nomeFogliaInternaFormattata) {
         return InputDatiTerminale.leggiDoubleConRange(INSERISCI_IL_FATTORE_TRA.formatted(nomeFogliaEsternaFormattata, nomeFogliaInternaFormattata), Utilitas.MIN_FATTORE, Utilitas.MAX_FATTORE);
     }
@@ -340,5 +342,70 @@ public class ConfiguratoreView implements UtenteViewableTerminal {
     }
 
 
+
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////// Comprensorio View /////////////////////////////////////////////////
+
+    public int visualizzaMenuComprensorio() {
+        Menu menuCategorie = new Menu(TITLE_MENU_COMPRENSORIO, VOCI_COMPRENSORIO_GEOGRAFICO);
+        return menuCategorie.scegli();
+    }
+
+    public String selezionaNomeDaLista(List<String> lista){
+        System.out.println("Scegli uno tra i seguenti nomi:");
+        for (String nome : lista) {
+            System.out.println(nome);
+        }
+        // immissione della foglia e verifica che sia corretto [New:A in (Old:A New:A x)]
+        String nomeInserito;
+        boolean esisteNome = false;
+        do {
+            nomeInserito = InputDatiTerminale.leggiStringaNonVuota(MSG_INPUT_NOME);
+            for (String nome : lista) {
+                if (nome.equals(nomeInserito)) {
+                    esisteNome = true;
+                    break;
+                }
+            }
+        } while (!esisteNome);
+
+        return nomeInserito;
+    }
+
+    public String selezionaNonGiaInUso(List<String> array) {
+        // immissione della foglia e verifica che sia corretto [New:A in (Old:A New:A x)]
+        String scelto;
+        boolean giaInUso = false;
+        do {
+            scelto = InputDatiTerminale.leggiStringaNonVuota(MSG_INPUT_NOME);
+            for (String s : array) {
+                if (s.equalsIgnoreCase(scelto)) {
+                    giaInUso = true;
+                    break;
+                }
+            }
+        } while (giaInUso);
+
+        return scelto;
+    }
+
+    public List<String> inserimentoComuni() {
+        return InputDatiTerminale.inserisciListaStringheUnivoche("Inserisci Comune", true);
+    }
+
+    /**
+     * visualizza un comprensorio
+     * @param nome
+     * @param comuni
+     */
+    public void visualizzaComprensorio(String nome, List<String> comuni) {
+        System.out.println(nome.toUpperCase());
+        for (String s : comuni) {
+            System.out.println(s);
+        }
+    }
+
+    public void stampaErroreComprensoriVuoto() {
+        System.out.println("Errore: Non esistono Comprensori da Stampare");
+    }
 }

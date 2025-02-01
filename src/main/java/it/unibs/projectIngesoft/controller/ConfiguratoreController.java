@@ -1,6 +1,7 @@
 package it.unibs.projectIngesoft.controller;
 
 import it.unibs.projectIngesoft.attivita.Categoria;
+import it.unibs.projectIngesoft.attivita.ComprensorioGeografico;
 import it.unibs.projectIngesoft.attivita.FattoreDiConversione;
 import it.unibs.projectIngesoft.attivita.ValoreDominio;
 import it.unibs.projectIngesoft.libraries.InputDatiTerminale;
@@ -108,6 +109,22 @@ public class ConfiguratoreController {
     }
 
     public void runControllerComprensoriGeografici(){
+        int scelta = 0;
+        do {
+            scelta = view.visualizzaMenuComprensorio();
+            switch (scelta) {
+                case 1 -> aggiungiComprensorio();
+                case 2 -> stampaComprensorio();
+                case 0 -> view.uscitaMenu("submenu");
+            }
+        } while (scelta != 0);
+    }
+    /**
+     * Richiama il metodo necessario in base alla selezione dal menu principale.
+     *
+     * @param scelta, selezione dal menu
+     */
+    public void entryPoint(int scelta) {
 
     }
 
@@ -292,4 +309,27 @@ public class ConfiguratoreController {
     }
 
 
+
+
+
+    ////////////////////////////////////////////////// COMPRENSORIO ////////////////////////////////////////////////////
+
+    private void aggiungiComprensorio() {
+        String nomeComprensorio = view.selezionaNonGiaInUso(compGeoModel.getListaNomiComprensoriGeografici());
+
+        List<String> comuniDaInserire = view.inserimentoComuni(); //fai in inputdati un inserimento ArraydiStringhe univoche
+
+        // Memorizzazione del nuovo comprensorio
+        compGeoModel.aggiungiComprensorio(nomeComprensorio, comuniDaInserire);
+    }
+
+    private void stampaComprensorio() {
+        if (compGeoModel.isEmpty()) {
+            view.stampaErroreComprensoriVuoto();
+            return;
+        }
+        String comprensorioDaStampare = view.selezionaNomeDaLista(compGeoModel.getListaNomiComprensoriGeografici());
+
+        view.visualizzaComprensorio(comprensorioDaStampare, compGeoModel.getStringComuniByComprensorioName(comprensorioDaStampare));
+    }
 }
