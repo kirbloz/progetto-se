@@ -3,8 +3,10 @@ package it.unibs.projectIngesoft.libraries;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.InputMismatchException;
+import java.util.List;
 
 /**
  * Fornisce metodi di utilità generale per gestire l'input di dati.
@@ -263,5 +265,39 @@ public class InputDatiTerminale {
         } while (!finito);
 
         return valoreLetto;
+    }
+
+    public static List<String> inserisciListaStringheUnivoche(String messaggioDiInserimento, boolean caseSensitive) {
+        List<String> listaStringhe = new ArrayList<String>();
+        boolean continuare = false;
+        do{
+            String s = leggiStringaNonVuota(messaggioDiInserimento);
+            if(caseSensitive){
+                boolean giaPresente = false;
+                for(String stringaInLista : listaStringhe){
+                    if(stringaInLista.equalsIgnoreCase(s)){
+                        giaPresente = true;
+                        break;
+                    }
+                }
+                if(!giaPresente){
+                    listaStringhe.add(s);
+                }
+            }else{
+                boolean giaPresente = false;
+                for(String stringaInLista : listaStringhe){
+                    if(stringaInLista.equals(s)){
+                        giaPresente = true;
+                        break;
+                    }
+                }
+                if(!giaPresente){
+                    listaStringhe.add(s);
+                }
+            }
+            continuare = yesOrNo("Continuare l'inserimento?");
+        }while(continuare);
+
+        return listaStringhe;
     }
 }
