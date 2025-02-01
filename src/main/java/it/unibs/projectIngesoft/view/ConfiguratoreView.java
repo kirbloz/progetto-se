@@ -128,6 +128,14 @@ public class ConfiguratoreView implements UtenteViewableTerminal {
         return "";
     }
 
+    public String getUserInputMinMaxLength(String prompt, int minLength, int maxLength) {
+        return InputDatiTerminale.stringReaderSpecificLength(prompt, minLength, maxLength);
+    }
+
+    public boolean getUserChoiceYoN(String prompt){
+        return InputDatiTerminale.yesOrNo(prompt);
+    }
+
 
     public int visualizzaMenuPrincipale() {
         Menu menu = new Menu(ConfiguratoreView.TITLE_MAIN_MENU,
