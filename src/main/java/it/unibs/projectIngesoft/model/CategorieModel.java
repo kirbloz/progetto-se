@@ -53,6 +53,10 @@ public class CategorieModel  {
         return tree.getRadici();
     }
 
+    public Categoria getRadice(String nomeRadice){
+        return tree.getRadice(nomeRadice);
+    }
+
     public void setRadici(List<Categoria> radici) {
         tree.setRadici(radici);
         this.save();
@@ -213,7 +217,7 @@ public class CategorieModel  {
         return tempNomeRadice;
     }*/
 
-    private String selezioneNomeCategoriaRadice() {
+    /*private String selezioneNomeCategoriaRadice() {
         String tempNomeRadice;
         do {
             System.out.println(MSG_SELEZIONE_RADICE + MSG_PRINT_LISTA_RADICI + "radiciToString()");
@@ -223,7 +227,7 @@ public class CategorieModel  {
                 System.out.println(WARNING_RADICE_NON_ESISTE);
         } while (!this.esisteRadice(tempNomeRadice));
         return tempNomeRadice;
-    }
+    }*/
 //
 //    /**
 //     * Guida l'input del nome di una nuova Categoria per una gerarchia.
@@ -343,10 +347,10 @@ public class CategorieModel  {
      *
      * @param nomeRadice, nome della categoria radice dell'albero da mostrare
      */
-    public void visualizzaGerarchia(String nomeRadice) {
+    /*public void visualizzaGerarchia(String nomeRadice) {
         System.out.println(String.format(HEADER_VISUALIZZA_RADICE, nomeRadice));
         System.out.println(this.tree.getRadice(nomeRadice) + " \n");
-    }
+    }*/
 
     /**
      * Produce una stringa con le info delle radici.
@@ -383,8 +387,8 @@ public class CategorieModel  {
      * Un livello equivale a un dominio che una categoria imprime sulle figlie,
      * quindi mostrerà categorie sorelle.
      */
-    public void esploraGerarchie() {
-        System.out.println(HEADER_ESPLORA_GERARCHIE);
+    //public void esploraGerarchie() {
+        /*System.out.println(HEADER_ESPLORA_GERARCHIE);
 
         if (tree.getRadici().isEmpty()) {
             System.out.println(WARNING_NO_GERARCHIE_MEMORIZZATE);
@@ -418,19 +422,19 @@ public class CategorieModel  {
             // aggiorno i valori
             madreCorrente = nuovaMadre == null ? madreCorrente : nuovaMadre;
             livello = madreCorrente.getCategorieFiglie();
-        } while (scelta != 0);
-    }
+        } while (scelta != 0);*/
+    //}
 
-    private static void visualizzaLivello(String dominio, List<Categoria> livello) {
+    /*private static void visualizzaLivello(String dominio, List<Categoria> livello) {
         System.out.println(String.format(HEADER_ESPLORAZIONE_LIVELLO, dominio));
 
         for (Categoria categoria : livello) {
             System.out.println("CHIAMA VIEW.VISUALIZZACATEGORIA");
         }
-    }
+    }*/
 
 
-    private String selezionaValoreCampo(List<Categoria> livello) {
+    /*private String selezionaValoreCampo(List<Categoria> livello) {
         String[] valoriFiglie = livello.stream()
                 .filter(categoria -> !categoria.isFoglia())
                 //.map(Categoria::getCampoFiglie)
@@ -450,5 +454,5 @@ public class CategorieModel  {
                 .filter(categoria -> categoria.getValoreDominio().getNome().equals(nuovoValore))
                 .findFirst()
                 .orElse(null);
-    }
+    }*/
 }
