@@ -14,8 +14,9 @@ public class AccessoController {
     private ComprensorioGeograficoModel comprensorioModel;
     private AccessoView view;
 
-    public AccessoController(UtentiModel utentiModel) {
+    public AccessoController(UtentiModel utentiModel, ComprensorioGeograficoModel comprensorioModel) {
         this.utentiModel = utentiModel;
+        this.comprensorioModel = comprensorioModel;
         this.view = new AccessoView();
     }
 

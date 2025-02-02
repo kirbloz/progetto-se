@@ -30,8 +30,11 @@ public class ErmesController {
     public void mainLoop() {
         UtenteViewableTerminal view;
 
+        ComprensorioGeograficoModel compGeoModel = new ComprensorioGeograficoModel(
+                new CompGeoMapper("comprensoriGeograficiTest.json",
+                        new SerializerJSON<>()));
 
-        AccessoController controllerAccesso = new AccessoController(modelUtenti);
+        AccessoController controllerAccesso = new AccessoController(modelUtenti, compGeoModel);
         Utente utenteAttivo = controllerAccesso.run();
 
         CategorieModel categorieModel = new CategorieModel(
@@ -44,10 +47,6 @@ public class ErmesController {
 
         ProposteModel proposteModel = new ProposteModel(utenteAttivo,
                 new ProposteMapper("proposteTest.json",
-                        new SerializerJSON<>()));
-
-        ComprensorioGeograficoModel compGeoModel = new ComprensorioGeograficoModel(
-                new CompGeoMapper("comprensoriGeograficiTest.json",
                         new SerializerJSON<>()));
 
 
