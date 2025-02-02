@@ -74,39 +74,44 @@ public class FruitoreView implements UtenteViewableTerminal {
     public static final String MSG_INSERISCI_NOME_RADICE = ">> Inserisci il nome della categoria RADICE:\n> ";
 
 
+
     //@Override
     public int visualizzaMenuCategorie() {
+        //todo da implementare
         return 0;
     }
 
-   //@Override
+    public int visualizzaMenuProposte() {
+        //todo da implementare
+        return 0;
+    }
+
+
     public void uscitaMenu(String menu) {
 
     }
 
-    @Override
-    public void stampaMenu() {
-        System.out.println("TO IMPLEMENT");
-    }
 
-    @Override
-    public int getUserSelection() {
-        return InputDatiTerminale.leggiInteroConMinimo(">> Selezione (>0): ", 0);
-    }
-
-    //@Override
     public String getUserInput(String prompt) {
+        return InputDatiTerminale.leggiStringaNonVuota(prompt);
+    }
+
+    public String richiestaUsername() {
+        //duplicato in configuratore view
+        //valutare se spostare in una classe utilities
         return "";
     }
 
-    @Override
-    public String getUserInput() {
-        return InputDatiTerminale.leggiStringaNonVuota(">> Input stringa: ");
+    public String richiestaPassword() {
+        //duplicato in configuratore view
+        //valutare se spostare in una classe utilities
+        return "";
     }
 
-    public int visualizzaMenuPrincipale() {
-        Menu menu = new Menu(TITLE_MAIN_MENU,  vociMainFruitore);
-        return menu.scegli();
+    ///////////////////////// PROPOSTE //////////////////////////
+
+    public void visualizzaProposte(){
+        //todo da implementare
     }
 
     public int selezioneOreOfferta(){

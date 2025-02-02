@@ -1,9 +1,11 @@
 package it.unibs.projectIngesoft.view;
 
 import it.unibs.projectIngesoft.attivita.Categoria;
+import it.unibs.projectIngesoft.attivita.ComprensorioGeografico;
 import it.unibs.projectIngesoft.libraries.InputDatiTerminale;
 import it.unibs.projectIngesoft.libraries.Utilitas;
 
+import java.util.ArrayList;
 import java.util.List;
 import it.unibs.projectIngesoft.libraries.Menu;
 import it.unibs.projectIngesoft.model.CategorieModel;
@@ -23,7 +25,7 @@ public class ConfiguratoreView implements UtenteViewableTerminal {
     };
 
     public static final String TITLE_MENU_COMPRENSORIO = "MENU' COMPRENSORI GEOGRAFICI";
-    public static final String[] vociComprensorioGeografico = new String[]{
+    public static final String[] VOCI_COMPRENSORIO_GEOGRAFICO = new String[]{
             "Aggiungi Comprensorio Geografico",
             "Visualizza Comprensorio Geografico"
     };
@@ -79,8 +81,8 @@ public class ConfiguratoreView implements UtenteViewableTerminal {
 
     public static final String MSG_INSERIMENTO_NOME_CATEGORIA_MADRE = ">> Inserisci il nome della CATEGORIA MADRE per %s:\n> ";
 
-    public static final String MSG_INSERIMENTO_RADICE = ">> Scegli un nome per il nuovo albero di categorie che non esista già.\n";
-    public static final String MSG_PRINT_LISTA_RADICI = ">> Di seguito tutte le categorie radice.\n";
+    public static final String MSG_INSERIMENTO_RADICE = ">> Scegli un nome per il nuovo albero di categorie che non esista già.\n> ";
+    public static final String MSG_PRINT_LISTA_RADICI = ">> Sopra trovi tutte le categorie radice.\n";
 
     public static final String MSG_SELEZIONE_RADICE = ">> Inserisci il nome di una categoria radice\n";
     public static final String MSG_INPUT_NOME_RADICE = ">> Inserisci il nome della categoria radice\n> ";
@@ -97,10 +99,12 @@ public class ConfiguratoreView implements UtenteViewableTerminal {
     public static final String WARNING_CATEGORIA_ESISTE = ">> (!!) Per favore indica una categoria che non esista già in questo albero gerarchico.\n";
     public static final String WARNING_CATEGORIA_NF_NON_ESISTE = ">> (!!) Per favore indica una categoria non foglia dell'albero gerarchico selezionato.\n";
     public static final String WARNING_NO_GERARCHIE_MEMORIZZATE = ">> (!!) Nessuna gerarchia memorizzata.";
-    private static final String MSG_RICHIESTA_USERNAME = "Inserisci un username non ancora utilizzato:";
-    private static final String MSG_RICHIESTA_PASSWORD = "Inserisci la password:";
-    private static final String MSG_INSERISCI_FOGLIA_TRA_QUESTE = "Inserisci una tra le seguenti Categorie:";
-    public static final String MSG_INSERISCI_CATEGORIA = ">> Prego, Inserisci la categoria desiderata:";
+    private static final String MSG_RICHIESTA_USERNAME = ">> Inserisci un username non ancora utilizzato: ";
+    private static final String MSG_RICHIESTA_PASSWORD = ">> Inserisci la password: ";
+    private static final String MSG_INSERISCI_FOGLIA_TRA_QUESTE = ">> Inserisci una tra le seguenti categorie foglia:\n> ";
+    public static final String MSG_INSERISCI_CATEGORIA = ">> Prego, Inserisci la categoria desiderata:\n> ";
+    private static final String MSG_INPUT_NOME = ">> Inserisci un nome non già in uso:\n> ";
+    public static final String NOME_COMPRENSORIO_FORMATTED = " [ %s ]";
 
 
     // STRINGHE PER PROPOSTE
@@ -109,28 +113,32 @@ public class ConfiguratoreView implements UtenteViewableTerminal {
     // STRINGHE PER COMPRENSORI
 
 
-    public void stampaMenu() {
-        System.out.println("TO IMPLEMENT");
-    }
+    //public void stampaMenu() {
+    //    System.out.println("TO IMPLEMENT");
+    //}
 
 
-    public int getUserSelection() {
-        return InputDatiTerminale.leggiInteroConMinimo(">> Selezione (>0): ", 0);
-    }
+    //public int getUserSelection() {return InputDatiTerminale.leggiInteroConMinimo(">> Selezione (>0): ", 0);}
 
 
     public String getUserInput(String prompt) {
         return InputDatiTerminale.leggiStringaNonVuota(prompt);
     }
 
-    @Override
-    public String getUserInput() {
-        return "";
+    public String getUserInputMinMaxLength(String prompt, int minLength, int maxLength) {
+        return InputDatiTerminale.stringReaderSpecificLength(prompt, minLength, maxLength);
     }
 
+    public boolean getUserChoiceYoN(String prompt){
+        return InputDatiTerminale.yesOrNo(prompt);
+    }
+
+    public double getUserInputMinMaxDouble(String prompt, double min, double max) {
+        return InputDatiTerminale.leggiDoubleConRange(prompt, min, max);
+    }
 
     public int visualizzaMenuPrincipale() {
-        Menu menu = new Menu(ConfiguratoreView.TITLE_MAIN_MENU,
+        Menu menu = new Menu(TITLE_MAIN_MENU,
                 vociMainConfiguratore);
         return menu.scegli();
     }
@@ -151,31 +159,9 @@ public class ConfiguratoreView implements UtenteViewableTerminal {
         return subMenu.scegli();
     }
 
-    public String visualizzaInserimentoNomeCategoria(CategorieModel model, String nomeRadice) {
-
-
-        visualizzaListaRadici(model.getRadici());
-
-        // todo: questi check sono fatti prima di chiamare il metodo?
-        assert nomeRadice != null : "il nome della radice non può essere null";
-        assert model.esisteRadice(nomeRadice) : "tempRadice non è il nome di una radice";
-
-        String tempNome;
-        //todo finire di implementare e refattorizzare il metodo
-        do {
-            visualizzaGerarchia(tempRadice); // stampa la gerarchia
-            tempNome = InputDatiTerminale.leggiStringaNonVuota(MSG_INSERIMENTO_NUOVA_CATEGORIA);
-            if (esisteCategoriaNellaGerarchia(tempNome, tempRadice)) {
-                System.out.print(WARNING_CATEGORIA_ESISTE);
-            }
-        } while (esisteCategoriaNellaGerarchia(tempNome, tempRadice));
-        return tempNome;
-        return getUserInput(MSG_INSERIMENTO_RADICE + MSG_PRINT_LISTA_RADICI);
-    }
-
     public String visualizzaInserimentoNomeCategoriaRadice(CategorieModel model) {
         visualizzaListaRadici(model.getRadici());
-        return getUserInput(MSG_INSERIMENTO_RADICE + MSG_PRINT_LISTA_RADICI);
+        return getUserInput(MSG_PRINT_LISTA_RADICI+MSG_INSERIMENTO_RADICE );
     }
 
     public String visualizzaInserimentoCampoCategoria() {
@@ -186,11 +172,11 @@ public class ConfiguratoreView implements UtenteViewableTerminal {
     public void uscitaMenu(String menu) {
         switch (menu) {
             case "aggiungiGerarchia":
-                System.out.println(">> USCITA ZIOPERA");
+                System.out.println(">> USCITA MENU AGGIUNTA GERARCHIA..");
             case "programma":
-                System.out.println(">> USCITA PROGRAMA");
+                System.out.println(">> USCITA PROGRAMA..");
             case "submenu":
-                System.out.println(">> USCITA submenu");
+                System.out.println(">> USCITA SUBMENU..");
         }
     }
 
@@ -202,14 +188,23 @@ public class ConfiguratoreView implements UtenteViewableTerminal {
      * @param radici lista radici.
      */
     public void visualizzaListaRadici(List<Categoria> radici) {
-        if (radici == null || radici.isEmpty())
-            return;
         System.out.println(HEADER_VISUALIZZA_GERARCHIE);
+        if (radici == null || radici.isEmpty()){
+            System.out.println(">> Nessuna radice presente.");
+            return;
+        }
+
         for (Categoria radice : radici) {
             System.out.println("> RADICE");
             visualizzaCategoria(radice);
         }
         System.out.println();
+    }
+
+    public void visualizzaGerarchia(Categoria radice){
+        visualizzaCategoria(radice);
+        visualizzaFiglieCategoria(radice);
+
     }
 
 
@@ -228,14 +223,13 @@ public class ConfiguratoreView implements UtenteViewableTerminal {
             sb.append("Dominio Figlie: ").append(categoria.getCampoFiglie())
                     .append("\n");
         } else {
-            sb.append("> Foglia\n");
+            sb.append("> Foglia");
         }
         System.out.println(sb);
-        System.out.println();
     }
 
     public void visualizzaFiglieCategoria(Categoria categoria) {
-        if (!categoria.hasFiglie()) {
+        if (categoria.hasFiglie()) {
             System.out.println("\t﹂ Nessuna figlia.");
             return;
         }
@@ -245,6 +239,7 @@ public class ConfiguratoreView implements UtenteViewableTerminal {
         figlie.forEach(figlia -> {
             System.out.println();
             visualizzaCategoria(figlia);
+            visualizzaFiglieCategoria(figlia);
         });
 
         System.out.println();
@@ -256,7 +251,78 @@ public class ConfiguratoreView implements UtenteViewableTerminal {
     }
 
 
+    public int visualizzaMenuFattori(){
+        Menu menu = new Menu(TITLE_MENU_FATTORI,
+                vociFattori);
+        return menu.scegli();
+    }
 
+    public void visualizzaFattori(){
+        //todo da implementare
+        //c'era già in fattoriModel, non serve scrivere da capo
+    }
+
+
+
+/// ///////INSERIMENTO PER CASI D'USO CATEGORIE //////
+    /**
+     * Guida l'input del nome di una nuova Categoria per una gerarchia.
+     *
+     * @param model, classe Model che gestisce le gerarchie.
+     * @param radice, radice della gerarchia a cui aggiungere la nuova Categoria
+     * @return nome della nuova Categoria
+     */
+    public String inserimentoNomeNuovaCategoria(CategorieModel model, Categoria radice) {
+        assert radice != null : "radice non può essere null";
+        //assert this.esisteRadice(tempRadice) : "tempRadice non è il nome di una radice";
+        // questo è garantito prima di entrare nel metodo
+
+        String tempNome;
+        do {
+            visualizzaGerarchia(radice); // stampa la gerarchia
+            tempNome = getUserInput(MSG_INSERIMENTO_NUOVA_CATEGORIA);
+            if (model.esisteCategoriaNellaGerarchia(tempNome, radice.getNome())) {
+                System.out.print(WARNING_CATEGORIA_ESISTE);
+            }
+        } while (model.esisteCategoriaNellaGerarchia(tempNome, radice.getNome()));
+        return tempNome;
+    }
+
+    /**
+     * Guida l'immissione del nome della Categoria a cui assegnare nomeCategoria come figlia.
+     * Controlla che si inserisca il nome di una Categoria che può avere figlie.
+     *
+     * @param nomeCategoria,       Categoria figlia da assegnare alla madre
+     * @param possibiliMadri,      Lista delle categorie tra cui scegliere la madre.
+     * @return Categoria a cui la Categoria figlia sarà assegnata
+     */
+    public String inserimentoNomeCategoriaMadre(String nomeCategoria, List<String> possibiliMadri) {
+        String nomeMadre;
+        do{
+            nomeMadre = getUserInput(String.format(MSG_INSERIMENTO_NOME_CATEGORIA_MADRE, nomeCategoria));
+            if(!possibiliMadri.contains(nomeMadre))
+                System.out.println(WARNING_CATEGORIA_NF_NON_ESISTE);
+        }while (!possibiliMadri.contains(nomeMadre));
+
+        return nomeMadre;
+    }
+
+    /**
+     * Guida l'immissione di una stringa imponendo un vincolo di univocit&agrave; tra i valori del dominio che le Categorie "sorelle"
+     * assumono.
+     *
+     * @param tempNome,       Categoria a cui assegnare il nome del ValoreDominio
+     * @param categoriaMadre, Categoria madre da cui si eredita il dominio e da cui ottenere i valori delle "sorelle"
+     * @return nome del ValoreDominio
+     */
+    public String inserimentoValoreDominio(String tempNome, Categoria categoriaMadre) {
+        String nomeValore;
+        List<String> valoriSorelle = categoriaMadre.getValoriDominioFiglie();
+        do {
+            nomeValore = getUserInput(String.format(MSG_INSERIMENTO_VALORE_DOMINIO, tempNome, categoriaMadre.getCampoFiglie()));
+        } while (valoriSorelle.contains(nomeValore));
+        return nomeValore;
+    }
 
 
 
@@ -319,26 +385,89 @@ public class ConfiguratoreView implements UtenteViewableTerminal {
         //return inserimentoNomeFogliaFormattato(messaggio);
         System.out.println(messaggio);
 		return Utilitas.factorNameBuilder(
-				InputDatiTerminale.leggiStringaNonVuota(MSG_INSERISCI_NOME_RADICE),
-				InputDatiTerminale.leggiStringaNonVuota(MSG_INSERISCI_NOME_FOGLIA)
+				getUserInput(MSG_INSERISCI_NOME_RADICE),
+                getUserInput(MSG_INSERISCI_NOME_FOGLIA)
 		);
     }
-
 
     public double ottieniFattoreDiConversione(String nomeFogliaEsternaFormattata, String nomeFogliaInternaFormattata) {
         return InputDatiTerminale.leggiDoubleConRange(INSERISCI_IL_FATTORE_TRA.formatted(nomeFogliaEsternaFormattata, nomeFogliaInternaFormattata), Utilitas.MIN_FATTORE, Utilitas.MAX_FATTORE);
     }
 
     public String richiestaUsername() {
-        String username = InputDatiTerminale.leggiStringaNonVuota(MSG_RICHIESTA_USERNAME);
-        return username;
+        return getUserInput(MSG_RICHIESTA_USERNAME);
     }
 
     public String richiestaPassword() {
-        String username = InputDatiTerminale.leggiStringaNonVuota(MSG_RICHIESTA_PASSWORD);
-        return username;
+        return getUserInput(MSG_RICHIESTA_PASSWORD);
     }
 
 
+
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////// Comprensorio View /////////////////////////////////////////////////
+
+    public int visualizzaMenuComprensorio() {
+        Menu menuCategorie = new Menu(TITLE_MENU_COMPRENSORIO, VOCI_COMPRENSORIO_GEOGRAFICO);
+        return menuCategorie.scegli();
+    }
+
+    public String selezionaNomeDaLista(List<String> lista){
+        System.out.println(">> Scegli uno tra i seguenti nomi: ");
+        for (String nome : lista) {
+            System.out.println(nome);
+        }
+        // immissione della foglia e verifica che sia corretto [New:A in (Old:A New:A x)]
+        String nomeInserito;
+        boolean esisteNome = false;
+        do {
+            nomeInserito = getUserInput(MSG_INPUT_NOME);
+            for (String nome : lista) {
+                if (nome.equals(nomeInserito)) {
+                    esisteNome = true;
+                    break;
+                }
+            }
+        } while (!esisteNome);
+
+        return nomeInserito;
+    }
+
+    // todo questo metodo e quello sopra devono per forza essere due cose separate?
+    public String selezionaNonGiaInUso(List<String> array) {
+        // immissione della foglia e verifica che sia corretto [New:A in (Old:A New:A x)]
+        String scelto;
+        boolean giaInUso = false;
+        do {
+            scelto = getUserInput(MSG_INPUT_NOME);
+            for (String s : array) {
+                if (s.equalsIgnoreCase(scelto)) {
+                    giaInUso = true;
+                    break;
+                }
+            }
+        } while (giaInUso);
+
+        return scelto;
+    }
+
+    public List<String> inserimentoComuni() {
+        return InputDatiTerminale.inserisciListaStringheUnivoche(">> Inserisci Comune: ", true);
+    }
+
+    /**
+     * visualizza un comprensorio
+     * @param nome
+     * @param comuni
+     */
+    public void visualizzaComprensorio(String nome, List<String> comuni) {
+        System.out.println(NOME_COMPRENSORIO_FORMATTED.formatted(nome.toUpperCase()));
+        for (String s : comuni) {
+            System.out.println(s);
+        }
+    }
+
+    public void stampaErroreComprensoriVuoto() {
+        System.out.println(">> Nessun comprensorio da visualizzare.");
+    }
 }

@@ -52,13 +52,13 @@ public class ProposteModel {
     @JacksonXmlProperty(localName = "Proposta")
     private Map<String, List<Proposta>> hashListaProposte;
     // TODO sostituire con un'interazione con il controller
-    private final FattoriModel gestFatt;
+    //private final FattoriModel gestFatt;
     private final Utente utenteAttivo;
 
     private final ProposteMapper mapper;
 
     public ProposteModel(Utente utenteAttivo, ProposteMapper mapper) {
-        this.gestFatt = new FattoriModel();
+       // this.gestFatt = new FattoriModel();
 
         this.hashListaProposte = new HashMap<>();
         this.utenteAttivo = utenteAttivo;
@@ -210,7 +210,7 @@ public class ProposteModel {
      * L'autore è sempre un Fruitore.
      */
     private void cambiaStatoProposta() {
-        assert utenteAttivo instanceof Fruitore;
+        /*assert utenteAttivo instanceof Fruitore;
         String comprensorio = ((Fruitore) utenteAttivo).getComprensorioDiAppartenenza();
 
         boolean esisteAlmenoUnaPropostaPerLUtenteLoggatoOra = false;
@@ -262,7 +262,7 @@ public class ProposteModel {
         }
         System.out.println(MSG_STATO_MODIFICATO.formatted(statoNuovo));
 
-        mapper.write(new HashMap<>(hashListaProposte));
+        mapper.write(new HashMap<>(hashListaProposte));*/
     }
 
     /**

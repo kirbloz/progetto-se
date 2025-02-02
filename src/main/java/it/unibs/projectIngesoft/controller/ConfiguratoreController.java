@@ -11,6 +11,7 @@ import it.unibs.projectIngesoft.view.ConfiguratoreView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 
 import static it.unibs.projectIngesoft.libraries.Utilitas.MAX_FATTORE;
 import static it.unibs.projectIngesoft.libraries.Utilitas.MIN_FATTORE;
@@ -19,14 +20,14 @@ import static it.unibs.projectIngesoft.view.ConfiguratoreView.*;
 public class ConfiguratoreController {
 
 
-    private ConfiguratoreView view;
+    private final ConfiguratoreView view;
 
-    private CategorieModel categorieModel;
-    private FattoriModel fattoriModel;
-    private ProposteModel proposteModel;
-    private ComprensorioGeograficoModel compGeoModel;
-    private UtentiModel utentiModel;
-    private Configuratore utenteAttivo;
+    private final CategorieModel categorieModel;
+    private final FattoriModel fattoriModel;
+    private final ProposteModel proposteModel;
+    private final ComprensorioGeograficoModel compGeoModel;
+    private final UtentiModel utentiModel;
+    private final Configuratore utenteAttivo;
 
     public ConfiguratoreController(ConfiguratoreView view,
                                    CategorieModel categorieModel,
@@ -51,15 +52,14 @@ public class ConfiguratoreController {
             cambioCredenziali();
         }
 
-        int scelta = 0;
+        int scelta;
 
         do {
             scelta = view.visualizzaMenuPrincipale();
 
             switch (scelta) {
                 case 0 -> view.uscitaMenu("programma");
-                //System.out.println(AccessoView.MSG_PROGRAM_EXIT);
-                //case 1 ->
+                case 1 -> cambioCredenziali();
                 // userHandler.cambioCredenziali(utenteAttivo); // cambio credenziali
                 case 2 -> runControllerComprensoriGeografici();
                 //loopComprensoriGeografici(menuComprensoriGeografici); // menu comprensorio
@@ -80,38 +80,66 @@ public class ConfiguratoreController {
         String username;
         do {
             username = view.richiestaUsername();
-        }while(utentiModel.existsUsername(username));
+        } while (utentiModel.existsUsername(username));
         String password = view.richiestaPassword();
         utentiModel.cambioCredenziali(utenteAttivo, username, password);
     }
 
 
-
-    public void runControllerCategorie(){
-        int scelta = 0;
+    public void runControllerCategorie() {
+        int scelta;
         do {
             scelta = view.visualizzaMenuCategorie();
             switch (scelta) { // switch con un solo case per ampliamento futuro
                 case 1 -> this.aggiungiGerarchia();
                 case 2 -> this.visualizzaGerarchie();
+                default -> view.uscitaMenu("submenu");
+            }
+        } while (scelta != 0);
+    }
+
+    public void runControllerFattori() {
+        int scelta;
+        do {
+            scelta = view.visualizzaMenuFattori();
+            switch (scelta) {
+                case 1 -> view.visualizzaFattori(); //todo da implementare
+                default -> {
+                }
+            }
+        } while (scelta != 0);
+    }
+
+    public void runControllerProposte() {
+        int scelta;
+        do {
+            scelta = view.visualizzaMenuComprensorio();
+            switch (scelta) {
+                case 1 -> visualizzaPropostePerCategoria();
+                case 2 -> visualizzaProposteDaNotificare();
+                //case 3 -> cambiaStatoProposta(); // questo non è nei casi d'uso del configuratore. o sbaglio?
                 case 0 -> view.uscitaMenu("submenu");
             }
         } while (scelta != 0);
     }
 
-    public void runControllerFattori(){
-
+    //todo test - funziona?
+    public void runControllerComprensoriGeografici() {
+        int scelta;
+        do {
+            scelta = view.visualizzaMenuComprensorio();
+            switch (scelta) {
+                case 1 -> aggiungiComprensorio();
+                case 2 -> scegliComprensorioDaVisualizzare();
+                case 0 -> view.uscitaMenu("submenu");
+            }
+        } while (scelta != 0);
     }
 
-    public void runControllerProposte(){
 
-    }
+    /// //////////////////////////// CATEGORIE /////////////////////////////////////////////////
 
-    public void runControllerComprensoriGeografici(){
-
-    }
-
-    //todo da rifattorizzare per l'utilizzo nel controller
+    //todo da rifattorizzare per l'utilizzo nel controller -> fatto
 
     /**
      * Cicla le foglie dalla prima all'ultima per generare tutte le coppie di valori possibili
@@ -123,21 +151,19 @@ public class ConfiguratoreController {
      * @return lista di fattori di conversione
      */
     private ArrayList<FattoreDiConversione> ottieniFattoriDelleNuoveCategorie(String nomeRadice, List<Categoria> foglie) {
-        //todo levare questo controllo se non serve a nulla
         //se non esistono foglie non serve a nulla fare i fattori
         if (foglie.isEmpty())
-            return null;
+            return new ArrayList<>();
         // se esiste almeno una foglia, allora calcola i fattori di conversione
         ArrayList<FattoreDiConversione> nuoviDaNuovaRadice = new ArrayList<>();
         for (int i = 0; i < foglie.size(); i++) {
             String nomeFogliai = Utilitas.factorNameBuilder(nomeRadice, foglie.get(i).getNome());
             for (int j = i + 1; j < foglie.size(); j++) {
                 String nomeFogliaj = Utilitas.factorNameBuilder(nomeRadice, foglie.get(j).getNome());
-                // TODO levare user interaction
-                double fattore_ij = InputDatiTerminale.leggiDoubleConRange(INSERISCI_IL_FATTORE_TRA.formatted(nomeFogliai, nomeFogliaj), MIN_FATTORE, MAX_FATTORE);
+                // TODO levare user interaction -> fatto
+                double fattore_ij = view.getUserInputMinMaxDouble(INSERISCI_IL_FATTORE_TRA.formatted(nomeFogliai, nomeFogliaj), MIN_FATTORE, MAX_FATTORE);
 
                 FattoreDiConversione fattoreIJ = new FattoreDiConversione(nomeFogliai, nomeFogliaj, fattore_ij);
-
 
                 nuoviDaNuovaRadice.add(fattoreIJ);
             }
@@ -145,17 +171,22 @@ public class ConfiguratoreController {
         return nuoviDaNuovaRadice;
     }
 
-    //TODO chiama questa funzione quando hai finito l'inserimento di una nuova radice con tutte le sue categorie dimmerda
     private void generaEMemorizzaNuoviFattori(String nomeRadice, List<Categoria> foglie) {
         //1. chiedi i fattori nuovi all'utente sulla base delle categorie appena inserite
         ArrayList<FattoreDiConversione> nuoviDaNuovaRadice = ottieniFattoriDelleNuoveCategorie(nomeRadice, foglie);
         //è null se non esistono foglie, è vuoto se esiste una sola foglia
-        if (nuoviDaNuovaRadice == null) { //se non esistono foglie non hanno senso i fattori
+        if (nuoviDaNuovaRadice.isEmpty()) { //se non esistono foglie non hanno senso i fattori
             return; //todo a seconda di come avverrà il lancio di questo metodo questo controllo potrebbe essere inutile (forse si può usare assert btw)
         }
+        //todo martino io sostituirei questo check con quello che facciamo anche sopra
+        /*
+        //se non esistono foglie non serve a nulla fare i fattori
+        if (foglie.isEmpty())
+            return new ArrayList<>();
+         */
 
         //se esistono fattori già presenti vanno calcolati i rapporti tra i nuovi (o la singola nuova foglia) e i vecchi
-        if (!fattoriModel.isEmpty()) {//todo wade porco dio attacca il cervello se devi modificare il codice altrui
+        if (!fattoriModel.isEmpty()) {
             //2.1. chiedi le 2 foglie (una nuova(interna) e una preesistene(esterna)) per fare iol confronto
             String nomeFogliaEsternaFormattata = view.selezioneFogliaDaLista(fattoriModel.getKeysets());
             // 2. scegliere una categoria delle nuove, da utilizzare per il primo fattore di conversione
@@ -171,9 +202,9 @@ public class ConfiguratoreController {
     }
 
     public void aggiungiRadice() {
-        ConfiguratoreView configView = (ConfiguratoreView) view;
+        ConfiguratoreView configView = view;
 
-        String nomeRadice = "";
+        String nomeRadice;
         do {
             nomeRadice = configView.visualizzaInserimentoNomeCategoriaRadice(categorieModel);
         } while (categorieModel.esisteRadice(nomeRadice));
@@ -181,11 +212,14 @@ public class ConfiguratoreController {
         String nomeCampo = configView.visualizzaInserimentoCampoCategoria();
 
         categorieModel.aggiungiCategoriaRadice(nomeRadice, nomeCampo);
-        categorieModel.save();
     }
 
+    /**
+     * Guida l'inserimento di una gerarchia. Permette di inserire categorie e configurarle.
+     * Poi richiama la procedura per inserire i fattori di conversione.
+     */
     public void aggiungiGerarchia() {
-        int scelta = 0;
+        int scelta;
 
         // 0. predispone una radice e la salva localmente
         this.aggiungiRadice();
@@ -201,35 +235,15 @@ public class ConfiguratoreController {
         } while (scelta != 0);
 
         //1.5 imposto a foglie tutte le categorie che non hanno figlie
-        impostaCategorieFoglia(radice);
+        radice.impostaCategorieFoglia();
 
         // 2. procedura per i fattori
-        List<Categoria> foglie = categorieModel.getFoglie(radice.getNome());
-        generaEMemorizzaNuoviFattori(radice.getNome(), foglie);
+        generaEMemorizzaNuoviFattori(radice.getNome(), radice.getFoglie());
 
         //3. salvataggio dei dati
         categorieModel.save();
     }
 
-    /**
-     * Partendo dalla radice di una gerarchia, chiama se stessa ricorsivamente per controllare che tutte le categorie
-     * che non hanno figlie siano impostate come foglie.
-     *
-     * @param radice, categoria di partenza
-     */
-    private void impostaCategorieFoglia(Categoria radice) {
-        if (radice.getNumCategorieFiglie() == 0 && !radice.isFoglia()) {
-            radice.setFoglia();
-            return;
-        }
-
-        for (Categoria figlia : radice.getCategorieFiglie()) {
-            if (figlia.getNumCategorieFiglie() == 0 && !figlia.isFoglia())
-                figlia.setFoglia();
-            else
-                impostaCategorieFoglia(figlia);
-        }
-    }
 
     /**
      * Metodo per l'inserimento di una Categoria generica NON RADICE.
@@ -239,41 +253,36 @@ public class ConfiguratoreController {
      */
     private void aggiungiCategoria(Categoria radice) {
         assert radice != null : "la radice non deve essere null";
-
-        String descrizioneValoreDominio;
-        ValoreDominio valoreDominio;
+        assert this.categorieModel.esisteRadice(radice.getNome()) : "non è il nome di una radice";
 
         // 1. chiede nome
-        String nomeCategoria = view.visualizzaInserimentoCategoria(radice.getNome());
-        assert nomeCategoria != null
-                && !nomeCategoria.isEmpty() : "Il nome della categoria non deve essere null o vuoto";
+        String nomeCategoria = view.inserimentoNomeNuovaCategoria(categorieModel, radice);
+
         // 1.1 chiede madre per nuova radice, verificando che esista
-        Categoria categoriaMadre = this.inserimentoNomeCategoriaMadre(radice.getNome(), nomeCategoria);
-        assert categoriaMadre != null : "La madre della categoria non deve essere null";
+        // todo metodo da testare
+        String nomeCategoriaMadre = view.inserimentoNomeCategoriaMadre(nomeCategoria,
+                getListaNomiCategorieGerarchiaFiltrata(radice, Categoria::isNotFoglia));
+        Categoria categoriaMadre = radice.cercaCategoria(nomeCategoriaMadre);
 
         // 2. chiede valore del dominio ereditato + descrizione
-        String nomeValoreDominio = this.inserimentoValoreDominio(nomeCategoria, categoriaMadre);
-        assert nomeValoreDominio != null
-                && !nomeValoreDominio.isEmpty() : "Il nome del valore del dominio non deve essere null o vuoto";
+        String nomeValoreDominio = view.inserimentoValoreDominio(nomeCategoria, categoriaMadre);
+        ValoreDominio valoreDominio;
 
-        boolean insertDescription = InputDatiTerminale.yesOrNo(ASK_INSERISCI_DESCRIZIONE_VALORE_DOMINIO);
-        if (insertDescription) {
-            descrizioneValoreDominio = InputDatiTerminale.stringReaderSpecificLength(MSG_INPUT_DESCRIZIONE_VALORE_DOMINIO, 0, 100);
-            assert descrizioneValoreDominio != null : "La descrizione del valore del dominio non deve essere null";
-            valoreDominio = new ValoreDominio(nomeValoreDominio, descrizioneValoreDominio);
+        boolean insertDescription = view.getUserChoiceYoN(ASK_INSERISCI_DESCRIZIONE_VALORE_DOMINIO);
+        valoreDominio = insertDescription
+                ? new ValoreDominio(nomeValoreDominio,
+                view.getUserInputMinMaxLength(MSG_INPUT_DESCRIZIONE_VALORE_DOMINIO, 0, 100))
+                : new ValoreDominio(nomeValoreDominio);
+
+        if (insertDescription)
             System.out.println(CONFIRM_DESCRIZIONE_AGGIUNTA);
-        } else {
-            valoreDominio = new ValoreDominio(nomeValoreDominio);
-        }
 
         // 3. chiede se è foglia
-        boolean isFoglia = InputDatiTerminale.yesOrNo(ASK_CATEGORIA_IS_FOGLIA);
+        boolean isFoglia = view.getUserChoiceYoN(ASK_CATEGORIA_IS_FOGLIA);
 
         // 3.1 se non è foglia, inserisce il dominio che imprime alle figlie
         String nomeCampoFiglie = isFoglia ?
-                "" : InputDatiTerminale.leggiStringaNonVuota(MSG_INSERIMENTO_DOMINIO_PER_FIGLIE);
-        assert isFoglia || nomeCampoFiglie != null
-                && !nomeCampoFiglie.isEmpty() : "Il nome del campo delle figlie non deve essere null o vuoto";
+                "" : view.getUserInput(MSG_INSERIMENTO_DOMINIO_PER_FIGLIE);
 
         // 4. creazione dell'oggetto Categoria
         Categoria tempCategoria = isFoglia
@@ -281,15 +290,82 @@ public class ConfiguratoreController {
                 : new Categoria(nomeCategoria, nomeCampoFiglie, categoriaMadre, valoreDominio);
 
         // 5. aggiunta della categoria figlia alla madre
-        categorieModel.aggiungiCategoriaFiglia(categoriaMadre, tempCategoria);
-        //categoriaMadre.addCategoriaFiglia(tempCategoria);
-        assert categoriaMadre.getCategorieFiglie().contains(tempCategoria) : "La categoria madre deve contenere la nuova categoria figlia";
+        categoriaMadre.aggiungiCategoriaFiglia(tempCategoria);
+
+    }
+
+    public List<Categoria> getListaCategorieGerarchiaFiltrata(Categoria radice, Predicate<Categoria> filtro) {
+        List<Categoria> lista = Categoria.appiatisciGerarchiaSuLista(radice, new ArrayList<>());
+        return lista.stream().filter(filtro).toList();
+
+    }
+
+    public List<String> getListaNomiCategorieGerarchiaFiltrata(Categoria radice, Predicate<Categoria> filtro) {
+        return getListaCategorieGerarchiaFiltrata(radice, filtro)
+                .stream()
+                .map(Categoria::getNome)
+                .toList();
 
     }
 
     public void visualizzaGerarchie() {
-        view.visualizzaListaRadici(categorieModel.getRadici());
+        for (Categoria radice : categorieModel.getRadici())
+            view.visualizzaGerarchia(radice);
     }
 
 
+    /// /////////////////////////////////////////////// COMPRENSORIO ////////////////////////////////////////////////////
+
+    private void aggiungiComprensorio() {
+        String nomeComprensorio = view.selezionaNonGiaInUso(compGeoModel.getListaNomiComprensoriGeografici());
+
+        List<String> comuniDaInserire = view.inserimentoComuni(); //fai in inputdati un inserimento ArraydiStringhe univoche
+
+        // Memorizzazione del nuovo comprensorio
+        compGeoModel.aggiungiComprensorio(nomeComprensorio, comuniDaInserire);
+    }
+
+    private void scegliComprensorioDaVisualizzare() {
+        if (compGeoModel.isEmpty()) {
+            view.stampaErroreComprensoriVuoto();
+            return;
+        }
+        //todo per qualche motivo, a video si legge "inserisci un nome non già in uso".. che è sbagliato
+        String comprensorioDaStampare = view.selezionaNomeDaLista(compGeoModel.getListaNomiComprensoriGeografici());
+
+        view.visualizzaComprensorio(comprensorioDaStampare, compGeoModel.getStringComuniByComprensorioName(comprensorioDaStampare));
+    }
+
+    /// ///////////////////////////////////////////// PROPOSTE ///////////////////////////////////////////////////////
+
+    /**
+     * todo implementare/rifattorizzare
+     * Duplicato da ProposteModel
+     */
+    public void visualizzaPropostePerCategoria() {
+        //assert hashListaProposte != null;
+        //String categoria = gestFatt.selezioneFoglia(MSG_INSERISCI_CATEGORIA);
+        //Predicate<Proposta> filtro = p -> p.getOfferta().equals(categoria) || p.getRichiesta().equals(categoria);
+        // visualizzaProposte(HEADER_PROPOSTE_CATEGORIA.formatted(categoria), filtro);
+    }
+
+    /**
+     * todo implementare/rifattorizzare
+     * Duplicato da ProposteModel
+     */
+    public void visualizzaProposteDaNotificare() {
+        /*assert hashListaProposte != null;
+        System.out.println(HEADER_PROPOSTE_PRONTE);
+
+        getFilteredProposte(Proposta::isDaNotificare)
+                .forEach(proposta -> {
+                    System.out.println(proposta);
+                    Fruitore autore = proposta.getAutore();
+                    String email = autore.getEmail();
+                    String comprensorio = autore.getComprensorioDiAppartenenza();
+                    System.out.println(MSG_FORMATTED_PROPOSTA_PRONTA.formatted(autore.getUsername(), comprensorio, email));
+                    proposta.notificata();
+                });
+        mapper.write(new HashMap<>(hashListaProposte));*/
+    }
 }

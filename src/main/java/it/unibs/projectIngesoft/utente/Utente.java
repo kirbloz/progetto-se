@@ -46,8 +46,8 @@ public class Utente {
     }
 
     public void setUsername(String username) {
-        assert username != null
-                && !username.trim().isEmpty() : "lo username non deve essere null o vuoto";
+        assert username != null : "lo username non può essere null";
+                //&& !username.trim().isEmpty() : "lo username non deve essere null o vuoto";
         this.username = username;
     }
 
@@ -56,8 +56,8 @@ public class Utente {
     }
 
     public void setPassword(String password) {
-        assert password != null
-                && !password.trim().isEmpty() : "la password non deve essere null o vuoto";
+        assert password != null : "la password non può essere null";
+               // && !password.trim().isEmpty() : "la password non deve essere null o vuoto";
         this.password = password;
     }
 
