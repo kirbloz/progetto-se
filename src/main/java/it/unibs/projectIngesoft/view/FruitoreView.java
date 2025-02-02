@@ -50,21 +50,12 @@ public class FruitoreView implements UtenteViewableTerminal {
 
     }
 
-    @Override
-    public void stampaMenu() {
-        System.out.println("TO IMPLEMENT");
-    }
-
-    @Override
-    public int getUserSelection() {
-        return InputDatiTerminale.leggiInteroConMinimo(">> Selezione (>0): ", 0);
-    }
 
     public String getUserInput(String prompt) {
         return "";
     }
 
-    @Override
+
     public String getUserInput() {
         return InputDatiTerminale.leggiStringaNonVuota(">> Input stringa: ");
     }
