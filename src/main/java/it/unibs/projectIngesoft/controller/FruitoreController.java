@@ -1,9 +1,14 @@
 package it.unibs.projectIngesoft.controller;
 
+import it.unibs.projectIngesoft.attivita.Categoria;
 import it.unibs.projectIngesoft.model.*;
 import it.unibs.projectIngesoft.utente.Fruitore;
-import it.unibs.projectIngesoft.view.AccessoView;
 import it.unibs.projectIngesoft.view.FruitoreView;
+
+import java.util.List;
+
+import static it.unibs.projectIngesoft.view.ConfiguratoreView.*;
+import static it.unibs.projectIngesoft.view.FruitoreView.WARNING_NO_RAMI_DA_ESPLORARE;
 
 public class FruitoreController {
 
@@ -100,46 +105,93 @@ public class FruitoreController {
      * todo implementare/rifattorizzare
      */
     public void esploraGerarchie() {
-        /*System.out.println(HEADER_ESPLORA_GERARCHIE);
+        List<String> nomiRadici = categorieModel.getRadici().stream().map(Categoria::getNome).toList();
 
-        if (tree.getRadici().isEmpty()) {
-            System.out.println(WARNING_NO_GERARCHIE_MEMORIZZATE);
-            return;
+        if (nomiRadici.isEmpty()) {
+            //System.out.println(WARNING_NO_GERARCHIE_MEMORIZZATE);
+            view.print(WARNING_NO_GERARCHIE_MEMORIZZATE);
         }
-        Menu subMenu = new Menu(TITLE_SUBMENU_ESPLORA_GERARCHIA, VOCI_SUBMENU_ESPLORA_GERARCHIA);
+        //int scelta = view.visualizzaMenuEsploraGerarchia();
         int scelta;
 
         // 0. seleziono la radice della gerarchia da esplorare
-        Categoria radice = tree.getRadice(selezioneNomeCategoriaRadice());
+        Categoria radice = inserimentoNomeCategoria(categorieModel.getRadici());
         Categoria madreCorrente = radice; // categoria madre del livello che si sta visualizzando al momento
-        List<Categoria> livello = madreCorrente.getCategorieFiglie();
+        //List<Categoria> livello = madreCorrente.getCategorieFiglie();
 
         do {
             // 1. print del livello corrente
-            visualizzaLivello(madreCorrente.getCampoFiglie(), livello);
+            view.visualizzaLivello(madreCorrente.getCampoFiglie(), madreCorrente);
             // 2. print menu
             Categoria nuovaMadre = madreCorrente;
-            scelta = subMenu.scegli();
+            scelta = view.visualizzaMenuEsploraGerarchia();
             switch (scelta) {
                 case 1 -> { // esplora
-                    String nuovoCampo = selezionaValoreCampo(livello);
+                    String nuovoCampo = inserimentoValoreCampo(madreCorrente.getCategorieFiglie());
                     nuovaMadre = nuovoCampo == null ?
-                            madreCorrente : selezionaCategoriaDaValoreCampo(nuovoCampo, livello);
+                            madreCorrente : selezionaCategoriaDaValoreCampo(nuovoCampo, madreCorrente.getCategorieFiglie());
                 }
                 // torna indietro di un livello
                 case 2 -> nuovaMadre = madreCorrente.isRadice() ?
                         madreCorrente : radice.cercaCategoria(madreCorrente.getNomeMadre());
-                default -> System.out.println(MSG_USCITA_SUBMENU);
+                default -> view.uscitaMenu("esplora");//System.out.println(MSG_USCITA_SUBMENU);
             }
             // aggiorno i valori
             madreCorrente = nuovaMadre == null ? madreCorrente : nuovaMadre;
-            livello = madreCorrente.getCategorieFiglie();
-        } while (scelta != 0);*/
+            //livello = madreCorrente.getCategorieFiglie();
+        } while (scelta != 0);
     }
 
 
+    /**
+     * Duplicato parzialmente da ConfiguratoreView::inserimentoNomeCategoriaMadre
+     *
+     * @param categorie
+     * @return
+     */
+    public Categoria inserimentoNomeCategoria(List<Categoria> categorie) {
+        /*String nomeMadre;
+        do{
+            view.visualizzaRadici(categorie);
+            nomeMadre = getUserInput(String.format(MSG_INSERIMENTO_NOME_CATEGORIA_MADRE, nomeCategoria));
+            if(!possibiliMadri.contains(nomeMadre))
+                System.out.println(WARNING_CATEGORIA_NF_NON_ESISTE);
+        }while (!possibiliMadri.contains(nomeMadre));
 
+        return nomeMadre;*/
 
+        String tempNomeRadice;
+        do {
+            view.visualizzaRadici(categorie);
+            tempNomeRadice = view.getUserInput(MSG_SELEZIONE_RADICE /*+ MSG_INPUT_NOME_RADICE*/);
+
+            if (!categorieModel.esisteRadice(tempNomeRadice))
+                view.print(WARNING_RADICE_NON_ESISTE);
+        } while (!categorieModel.esisteRadice(tempNomeRadice));
+        return categorieModel.getRadice(tempNomeRadice);
+    }
+
+    public String inserimentoValoreCampo(List<Categoria> livello) {
+        String[] valoriFiglie = livello.stream()
+                .filter(categoria -> !categoria.isFoglia())
+                //.map(Categoria::getCampoFiglie)
+                .map(categoria -> categoria.getValoreDominio().getNome())
+                .toArray(String[]::new);
+
+        if (valoriFiglie.length == 0) {
+            view.print(WARNING_NO_RAMI_DA_ESPLORARE);
+            return null;
+        }
+
+        return view.getUserInput(MSG_INPUT_SCELTA_CAMPO, valoriFiglie);
+    }
+
+    private Categoria selezionaCategoriaDaValoreCampo(String nuovoValore, List<Categoria> livello) {
+        return livello.stream()
+                .filter(categoria -> categoria.getValoreDominio().getNome().equals(nuovoValore))
+                .findFirst()
+                .orElse(null);
+    }
 
     ///////////////////////// PROPOSTE //////////////////////////
     /**
