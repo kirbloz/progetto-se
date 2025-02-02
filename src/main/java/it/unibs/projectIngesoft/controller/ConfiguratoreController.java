@@ -130,12 +130,14 @@ public class ConfiguratoreController {
             scelta = view.visualizzaMenuComprensorio();
             switch (scelta) {
                 case 1 -> aggiungiComprensorio();
-                case 2 -> stampaComprensorio();
+                case 2 -> scegliComprensorioDaVisualizzare();
                 case 0 -> view.uscitaMenu("submenu");
             }
         } while (scelta != 0);
     }
 
+
+    /// //////////////////////////// CATEGORIE /////////////////////////////////////////////////
 
     //todo da rifattorizzare per l'utilizzo nel controller -> fatto
 
@@ -312,9 +314,6 @@ public class ConfiguratoreController {
     }
 
 
-
-
-
     /// /////////////////////////////////////////////// COMPRENSORIO ////////////////////////////////////////////////////
 
     private void aggiungiComprensorio() {
@@ -326,11 +325,12 @@ public class ConfiguratoreController {
         compGeoModel.aggiungiComprensorio(nomeComprensorio, comuniDaInserire);
     }
 
-    private void stampaComprensorio() {
+    private void scegliComprensorioDaVisualizzare() {
         if (compGeoModel.isEmpty()) {
             view.stampaErroreComprensoriVuoto();
             return;
         }
+        //todo per qualche motivo, a video si legge "inserisci un nome non già in uso".. che è sbagliato
         String comprensorioDaStampare = view.selezionaNomeDaLista(compGeoModel.getListaNomiComprensoriGeografici());
 
         view.visualizzaComprensorio(comprensorioDaStampare, compGeoModel.getStringComuniByComprensorioName(comprensorioDaStampare));
