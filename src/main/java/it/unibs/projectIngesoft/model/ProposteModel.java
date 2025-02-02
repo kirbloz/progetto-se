@@ -210,7 +210,7 @@ public class ProposteModel {
      * L'autore è sempre un Fruitore.
      */
     private void cambiaStatoProposta() {
-        assert utenteAttivo instanceof Fruitore;
+        /*assert utenteAttivo instanceof Fruitore;
         String comprensorio = ((Fruitore) utenteAttivo).getComprensorioDiAppartenenza();
 
         boolean esisteAlmenoUnaPropostaPerLUtenteLoggatoOra = false;
@@ -262,7 +262,7 @@ public class ProposteModel {
         }
         System.out.println(MSG_STATO_MODIFICATO.formatted(statoNuovo));
 
-        mapper.write(new HashMap<>(hashListaProposte));
+        mapper.write(new HashMap<>(hashListaProposte));*/
     }
 
     /**
