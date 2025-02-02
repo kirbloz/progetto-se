@@ -25,7 +25,7 @@ public class CategorieModel  {
 
 
     // questa cosa??? sarebbe da levare. la comunicazione va fatta tra controllers
-    private FattoriModel gestFatt;
+    //private FattoriModel gestFatt;
 
     /**
      * Costruttore per inizializzare i percorsi dei file e de-serializzare l'albero.
@@ -33,11 +33,12 @@ public class CategorieModel  {
      */
     public CategorieModel(CategorieMapper mapper) {
         this.tree = new Albero();
-        this.gestFatt = new FattoriModel();
+        //this.gestFatt = new FattoriModel();
         this.mapper = mapper;
 
         //deserializeXML(); // load dati
-        this.tree.setRadici(this.mapper.read());
+        //this.tree.setRadici(this.mapper.read());
+        load();
     }
 
     public void save(){
@@ -149,7 +150,7 @@ public class CategorieModel  {
      * Metodo per l'inserimento di una Categoria generica NON RADICE.
      * Non modificabile.
      *
-     * @param radice, Categoria radice di riferimento
+     *  radice, Categoria radice di riferimento
      */
     /*private void aggiungiCategoria(Categoria radice) {
         assert radice != null : "la radice non deve essere null";

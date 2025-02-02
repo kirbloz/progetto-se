@@ -158,12 +158,12 @@ public class Main {
      */
     private static void loopCategorie(Menu menuCategorie, boolean isConfiguratore) {
         int scelta;
-        CategorieModel categorieModelCat = new CategorieModel(
+        /*CategorieModel categorieModelCat = new CategorieModel(
                 new CategorieMapper(CATEGORIE_XML_FILEPATH, new SerializerJSON<>()));
         do {
             scelta = menuCategorie.scegli();
             //categorieModelCat.entryPoint(scelta, isConfiguratore);
-        } while (scelta != 0);
+        } while (scelta != 0);*/
     }
 
     /**
@@ -172,12 +172,12 @@ public class Main {
      * @param menuFattori, menu gestito
      */
     private static void loopFattori(Menu menuFattori) {
-        int scelta;
-        FattoriModel fattoriModel = new FattoriModel(/*FATTORI_DI_CONVERSIONE_XML_FILEPATH*/);
+        /*int scelta;
+        FattoriModel fattoriModel = new FattoriModel();
         do {
             scelta = menuFattori.scegli();
             //fattoriModel.entryPoint(scelta);
-        } while (scelta != 0);
+        } while (scelta != 0);*/
 
     }
 }

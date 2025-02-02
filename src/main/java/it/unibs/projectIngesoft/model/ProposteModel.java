@@ -52,13 +52,13 @@ public class ProposteModel {
     @JacksonXmlProperty(localName = "Proposta")
     private Map<String, List<Proposta>> hashListaProposte;
     // TODO sostituire con un'interazione con il controller
-    private final FattoriModel gestFatt;
+    //private final FattoriModel gestFatt;
     private final Utente utenteAttivo;
 
     private final ProposteMapper mapper;
 
     public ProposteModel(Utente utenteAttivo, ProposteMapper mapper) {
-        this.gestFatt = new FattoriModel();
+       // this.gestFatt = new FattoriModel();
 
         this.hashListaProposte = new HashMap<>();
         this.utenteAttivo = utenteAttivo;
