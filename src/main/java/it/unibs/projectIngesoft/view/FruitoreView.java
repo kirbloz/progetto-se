@@ -9,7 +9,7 @@ import java.util.List;
 
 import static it.unibs.projectIngesoft.view.ConfiguratoreView.MSG_PRINT_LISTA_RADICI;
 
-public class FruitoreView implements UtenteViewableTerminal {
+public class FruitoreView {
 
     public static final String TITLE_MAIN_MENU = "MENU' PRINCIPALE - SCAMBIO ORE";
     public static final String[] vociMainFruitore = new String[]{

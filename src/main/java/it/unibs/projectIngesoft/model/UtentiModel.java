@@ -95,7 +95,7 @@ public class UtentiModel {
         return fruitore;
     }*/
 
-    private static boolean isValidEmail(String email) {
+    public static boolean isValidEmail(String email) {
         String emailRegex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$";
         Pattern pat = Pattern.compile(emailRegex);
         if (email == null) {
@@ -198,4 +198,9 @@ public class UtentiModel {
         return -1;
     }
 
+    public Utente aggungiFruitore(String username, String password, String email, String comprensorio) {
+        Fruitore f = new Fruitore(username, password, email, comprensorio);
+        addUtente(f);
+        return f;
+    }
 }
