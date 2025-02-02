@@ -289,7 +289,8 @@ public class ConfiguratoreController {
     }
 
     public void visualizzaGerarchie() {
-        view.visualizzaListaRadici(categorieModel.getRadici());
+        for (Categoria radice : categorieModel.getRadici())
+            view.visualizzaGerarchia(radice);
     }
 
 

@@ -204,6 +204,12 @@ public class ConfiguratoreView implements UtenteViewableTerminal {
         System.out.println();
     }
 
+    public void visualizzaGerarchia(Categoria radice){
+        visualizzaCategoria(radice);
+        visualizzaFiglieCategoria(radice);
+
+    }
+
 
     public void visualizzaCategoria(Categoria categoria) {
         StringBuilder sb = new StringBuilder();
@@ -220,14 +226,13 @@ public class ConfiguratoreView implements UtenteViewableTerminal {
             sb.append("Dominio Figlie: ").append(categoria.getCampoFiglie())
                     .append("\n");
         } else {
-            sb.append("> Foglia\n");
+            sb.append("> Foglia");
         }
         System.out.println(sb);
-        System.out.println();
     }
 
     public void visualizzaFiglieCategoria(Categoria categoria) {
-        if (!categoria.hasFiglie()) {
+        if (categoria.hasFiglie()) {
             System.out.println("\t﹂ Nessuna figlia.");
             return;
         }
@@ -237,6 +242,7 @@ public class ConfiguratoreView implements UtenteViewableTerminal {
         figlie.forEach(figlia -> {
             System.out.println();
             visualizzaCategoria(figlia);
+            visualizzaFiglieCategoria(figlia);
         });
 
         System.out.println();
@@ -251,7 +257,8 @@ public class ConfiguratoreView implements UtenteViewableTerminal {
     /**
      * Guida l'input del nome di una nuova Categoria per una gerarchia.
      *
-     * @param tempRadice, radice della gerarchia a cui aggiungere la nuova Categoria
+     * @param model, classe Model che gestisce le gerarchie.
+     * @param radice, radice della gerarchia a cui aggiungere la nuova Categoria
      * @return nome della nuova Categoria
      */
     public String inserimentoNomeNuovaCategoria(CategorieModel model, Categoria radice) {
@@ -261,8 +268,8 @@ public class ConfiguratoreView implements UtenteViewableTerminal {
 
         String tempNome;
         do {
-            visualizzaCategoria(radice); // stampa la gerarchia
-            tempNome = InputDatiTerminale.leggiStringaNonVuota(MSG_INSERIMENTO_NUOVA_CATEGORIA);
+            visualizzaGerarchia(radice); // stampa la gerarchia
+            tempNome = getUserInput(MSG_INSERIMENTO_NUOVA_CATEGORIA);
             if (model.esisteCategoriaNellaGerarchia(tempNome, radice.getNome())) {
                 System.out.print(WARNING_CATEGORIA_ESISTE);
             }
