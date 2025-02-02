@@ -41,7 +41,18 @@ public class FruitoreView implements UtenteViewableTerminal {
 
 
 
+    public int visualizzaMenuPrincipale() {
+        Menu menu = new Menu(TITLE_MAIN_MENU,  vociMainFruitore);
+        return menu.scegli();
+    }
+
     public int visualizzaMenuCategorie() {
+        //todo da implementare
+        return 0;
+    }
+
+    public int visualizzaMenuProposte() {
+        //todo da implementare
         return 0;
     }
 
@@ -52,16 +63,25 @@ public class FruitoreView implements UtenteViewableTerminal {
 
 
     public String getUserInput(String prompt) {
+        return InputDatiTerminale.leggiStringaNonVuota(prompt);
+    }
+
+    public String richiestaUsername() {
+        //duplicato in configuratore view
+        //valutare se spostare in una classe utilities
         return "";
     }
 
-
-    public String getUserInput() {
-        return InputDatiTerminale.leggiStringaNonVuota(">> Input stringa: ");
+    public String richiestaPassword() {
+        //duplicato in configuratore view
+        //valutare se spostare in una classe utilities
+        return "";
     }
 
-    public int visualizzaMenuPrincipale() {
-        Menu menu = new Menu(TITLE_MAIN_MENU,  vociMainFruitore);
-        return menu.scegli();
+    ///////////////////////// PROPOSTE //////////////////////////
+
+    public void visualizzaProposte(){
+        //todo da implementare
     }
+
 }

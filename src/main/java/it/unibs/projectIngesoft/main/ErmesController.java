@@ -70,7 +70,8 @@ public class ErmesController {
                     fattoriModel,
                     proposteModel,
                     compGeoModel,
-                    modelUtenti
+                    modelUtenti,
+                    (Fruitore) utenteAttivo
             );
             controller.run();
         }
