@@ -1,7 +1,11 @@
 package it.unibs.projectIngesoft.view;
 
+import it.unibs.projectIngesoft.attivita.Proposta;
 import it.unibs.projectIngesoft.libraries.InputDatiTerminale;
 import it.unibs.projectIngesoft.libraries.Menu;
+import it.unibs.projectIngesoft.libraries.Utilitas;
+
+import java.util.function.Predicate;
 
 public class FruitoreView implements UtenteViewableTerminal {
 
@@ -39,13 +43,43 @@ public class FruitoreView implements UtenteViewableTerminal {
 
     public static final String WARNING_NO_RAMI_DA_ESPLORARE = ">> (!!) Non ci sono nuovi rami da esplorare";
 
+    public static final String HEADER_PROPOSTE_PRONTE = ">> PROPOSTE PRONTE <<";
+    public static final String HEADER_PROPOSTE_MODIFICABILI = ">> PROPOSTE MODIFICABILI<<\n";
+    public static final String HEADER_PROPOSTE_AUTORE = ">> PROPOSTE DI %s <<\n";
+    public static final String HEADER_PROPOSTE_CATEGORIA = ">> PROPOSTE CON %s <<\n";
 
-    @Override
+    public static final String HEADER_PROPOSTE_CHIUSE = ">> PROPOSTE CHIUSE\n";
+    public static final String HEADER_PROPOSTE_RITIRATE = ">> PROPOSTE RITIRATE\n";
+    public static final String HEADER_PROPOSTE_APERTE = ">> PROPOSTE APERTE\n";
+
+    public static final String MSG_INSERISCI_RICHIESTA = ">> Inserisci una categoria valida di cui vuoi effettuare la RICHIESTA.";
+    public static final String MSG_INSERISCI_OFFERTA = ">> Inserisci una categoria valida che sei disposto a OFFRIRE in cambio.";
+    public static final String MSG_RICHIESTA_ORE = ">> Inserisci il numero di ORE che vuoi richiedere:\n> ";
+    public static final String MSG_CONFERMA_PROPOSTA = ">> Dovrai offrire %d ore in cambio. Confermi?%n> ";
+
+    private static final String MSG_INSERISCI_CATEGORIA = ">> Inserisci una categoria di cui ricercare le proposte";
+    public static final String MSG_FORMATTED_PROPOSTA_PRONTA = "%s, %s\n >>> Indirizzo email: %s\n";
+
+    public static final String MSG_SELEZIONE_CATEGORIA_RICHIESTA = ">> Inserisci la categoria RICHIESTA per la selezione: ";
+    public static final String MSG_SELEZIONE_ORE = ">> Inserisci il monte ORE RICHIESTE per la selezione: ";
+    public static final String MSG_SELEZIONE_CATEGORIA_OFFERTA = ">> Inserisci la categoria OFFERTA per la selezione: ";
+    public static final String MSG_CONFERMA_CAMBIO_STATO = ">> Vuoi cambiare lo stato della proposta da %s a %s?";
+    public static final String MSG_STATO_MODIFICATO = ">> Stato modificato in %s";
+
+    public static final String WARNING_IMPOSSIBILE_CALCOLARE_ORE = ">> Impossibile Calcolare il numero di ore da offrire.\n";
+    public static final String WARNING_PROPOSTA_ANNULLATA = ">> Proposta annullata";
+    public static final String WARNING_PROPOSTA_DUPLICATA = ">> Proposta duplicata! Procedura annullata.";
+    public static final String MSG_NON_HAI_PROPOSTE_NON_CHIUSE = ">> Non hai proposte non chiuse";
+    public static final String MSG_INSERISCI_NOME_FOGLIA = ">> Inserisci il nome della categoria FOGLIA:\n> ";
+    public static final String MSG_INSERISCI_NOME_RADICE = ">> Inserisci il nome della categoria RADICE:\n> ";
+
+
+    //@Override
     public int visualizzaMenuCategorie() {
         return 0;
     }
 
-    @Override
+   //@Override
     public void uscitaMenu(String menu) {
 
     }
@@ -60,7 +94,7 @@ public class FruitoreView implements UtenteViewableTerminal {
         return InputDatiTerminale.leggiInteroConMinimo(">> Selezione (>0): ", 0);
     }
 
-    @Override
+    //@Override
     public String getUserInput(String prompt) {
         return "";
     }
@@ -74,4 +108,24 @@ public class FruitoreView implements UtenteViewableTerminal {
         Menu menu = new Menu(TITLE_MAIN_MENU,  vociMainFruitore);
         return menu.scegli();
     }
+
+    public int selezioneOreOfferta(){
+        return InputDatiTerminale.leggiInteroPositivo(MSG_SELEZIONE_ORE);
+    }
+
+    public boolean confermaCambioStato(String statoAttuale, String statoNuovo){
+        return InputDatiTerminale.yesOrNo(MSG_CONFERMA_CAMBIO_STATO.formatted(statoAttuale, statoNuovo));
+    }
+
+    public String inserimentoFogliaFormattata(String messaggio) {
+        // inserimento guidato e controllo [Old:A in (Old:A New:A x)]
+        //return inserimentoNomeFogliaFormattato(messaggio);
+        System.out.println(messaggio);
+        return Utilitas.factorNameBuilder(
+                InputDatiTerminale.leggiStringaNonVuota(MSG_INSERISCI_NOME_RADICE),
+                InputDatiTerminale.leggiStringaNonVuota(MSG_INSERISCI_NOME_FOGLIA)
+        );
+    }
+
+
 }
