@@ -2,6 +2,8 @@ package utente;
 
 import it.unibs.projectIngesoft.controller.AccessoController;
 import it.unibs.projectIngesoft.libraries.InputInjector;
+import it.unibs.projectIngesoft.mappers.CompGeoMapper;
+import it.unibs.projectIngesoft.model.ComprensorioGeograficoModel;
 import it.unibs.projectIngesoft.model.UtentiModel;
 import it.unibs.projectIngesoft.parsing.SerializerJSON;
 import it.unibs.projectIngesoft.mappers.UtentiMapper;
@@ -27,7 +29,7 @@ public class ConfiguratoreTest {
 
     @Test
     void primoAccessoConfiguratore() {
-        AccessoController accessoController = new AccessoController(model);
+        AccessoController accessoController = new AccessoController(model, null);
         String simulatedInput = "admin\n1234\n";
         InputInjector.inject(simulatedInput);
 
