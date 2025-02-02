@@ -99,14 +99,32 @@ public class ConfiguratoreController {
     }
 
     public void runControllerFattori() {
-
+        int scelta;
+        do {
+            scelta = view.visualizzaMenuFattori();
+            switch (scelta) {
+                case 1 -> view.visualizzaFattori(); //todo da implementare
+                default -> {
+                }
+            }
+        } while (scelta != 0);
     }
 
     public void runControllerProposte() {
-
+        int scelta;
+        do {
+            scelta = view.visualizzaMenuComprensorio();
+            switch (scelta) {
+                case 1 -> visualizzaPropostePerCategoria();
+                case 2 -> visualizzaProposteDaNotificare();
+                //case 3 -> cambiaStatoProposta(); // questo non è nei casi d'uso del configuratore. o sbaglio?
+                case 0 -> view.uscitaMenu("submenu");
+            }
+        } while (scelta != 0);
     }
 
-    public void runControllerComprensoriGeografici(){
+    //todo test - funziona?
+    public void runControllerComprensoriGeografici() {
         int scelta;
         do {
             scelta = view.visualizzaMenuComprensorio();
@@ -199,7 +217,7 @@ public class ConfiguratoreController {
      * Poi richiama la procedura per inserire i fattori di conversione.
      */
     public void aggiungiGerarchia() {
-        int scelta = 0;
+        int scelta;
 
         // 0. predispone una radice e la salva localmente
         this.aggiungiRadice();
@@ -316,5 +334,38 @@ public class ConfiguratoreController {
         String comprensorioDaStampare = view.selezionaNomeDaLista(compGeoModel.getListaNomiComprensoriGeografici());
 
         view.visualizzaComprensorio(comprensorioDaStampare, compGeoModel.getStringComuniByComprensorioName(comprensorioDaStampare));
+    }
+
+    /// ///////////////////////////////////////////// PROPOSTE ///////////////////////////////////////////////////////
+
+    /**
+     * todo implementare/rifattorizzare
+     * Duplicato da ProposteModel
+     */
+    public void visualizzaPropostePerCategoria() {
+        //assert hashListaProposte != null;
+        //String categoria = gestFatt.selezioneFoglia(MSG_INSERISCI_CATEGORIA);
+        //Predicate<Proposta> filtro = p -> p.getOfferta().equals(categoria) || p.getRichiesta().equals(categoria);
+        // visualizzaProposte(HEADER_PROPOSTE_CATEGORIA.formatted(categoria), filtro);
+    }
+
+    /**
+     * todo implementare/rifattorizzare
+     * Duplicato da ProposteModel
+     */
+    public void visualizzaProposteDaNotificare() {
+        /*assert hashListaProposte != null;
+        System.out.println(HEADER_PROPOSTE_PRONTE);
+
+        getFilteredProposte(Proposta::isDaNotificare)
+                .forEach(proposta -> {
+                    System.out.println(proposta);
+                    Fruitore autore = proposta.getAutore();
+                    String email = autore.getEmail();
+                    String comprensorio = autore.getComprensorioDiAppartenenza();
+                    System.out.println(MSG_FORMATTED_PROPOSTA_PRONTA.formatted(autore.getUsername(), comprensorio, email));
+                    proposta.notificata();
+                });
+        mapper.write(new HashMap<>(hashListaProposte));*/
     }
 }
