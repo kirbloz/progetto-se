@@ -113,16 +113,12 @@ public class ConfiguratoreView implements UtenteViewableTerminal {
     // STRINGHE PER COMPRENSORI
 
 
-    //public void stampaMenu() {
-    //    System.out.println("TO IMPLEMENT");
-    //}
-
-
-    //public int getUserSelection() {return InputDatiTerminale.leggiInteroConMinimo(">> Selezione (>0): ", 0);}
-
-
     public String getUserInput(String prompt) {
         return InputDatiTerminale.leggiStringaNonVuota(prompt);
+    }
+
+    public String getUserInput(String prompt, String[] array) {
+        return InputDatiTerminale.stringReaderNotInAvailable(prompt, array);
     }
 
     public String getUserInputMinMaxLength(String prompt, int minLength, int maxLength) {
@@ -161,7 +157,7 @@ public class ConfiguratoreView implements UtenteViewableTerminal {
 
     public String visualizzaInserimentoNomeCategoriaRadice(CategorieModel model) {
         visualizzaListaRadici(model.getRadici());
-        return getUserInput(MSG_PRINT_LISTA_RADICI+MSG_INSERIMENTO_RADICE );
+        return getUserInput(MSG_PRINT_LISTA_RADICI+MSG_INSERIMENTO_RADICE);
     }
 
     public String visualizzaInserimentoCampoCategoria() {
@@ -173,10 +169,13 @@ public class ConfiguratoreView implements UtenteViewableTerminal {
         switch (menu) {
             case "aggiungiGerarchia":
                 System.out.println(">> USCITA MENU AGGIUNTA GERARCHIA..");
+                break;
             case "programma":
                 System.out.println(">> USCITA PROGRAMA..");
+                break;
             case "submenu":
                 System.out.println(">> USCITA SUBMENU..");
+                break;
         }
     }
 
@@ -437,8 +436,9 @@ public class ConfiguratoreView implements UtenteViewableTerminal {
     public String selezionaNonGiaInUso(List<String> array) {
         // immissione della foglia e verifica che sia corretto [New:A in (Old:A New:A x)]
         String scelto;
-        boolean giaInUso = false;
+        boolean giaInUso;
         do {
+            giaInUso = false;
             scelto = getUserInput(MSG_INPUT_NOME);
             for (String s : array) {
                 if (s.equalsIgnoreCase(scelto)) {
@@ -449,6 +449,10 @@ public class ConfiguratoreView implements UtenteViewableTerminal {
         } while (giaInUso);
 
         return scelto;
+    }
+
+    public String inserimentoNomeComprensorio(String[] array){
+        return getUserInput(MSG_INPUT_NOME, array);
     }
 
     public List<String> inserimentoComuni() {

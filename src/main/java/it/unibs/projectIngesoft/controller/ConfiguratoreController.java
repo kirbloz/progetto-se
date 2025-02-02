@@ -316,8 +316,10 @@ public class ConfiguratoreController {
 
     /// /////////////////////////////////////////////// COMPRENSORIO ////////////////////////////////////////////////////
 
-    private void aggiungiComprensorio() {
-        String nomeComprensorio = view.selezionaNonGiaInUso(compGeoModel.getListaNomiComprensoriGeografici());
+    public void aggiungiComprensorio() {
+        // metodo spostato nella libreria InputDatiTerminale come "stringReaderNotInAvailable"
+        //String nomeComprensorio = view.selezionaNonGiaInUso(compGeoModel.getListaNomiComprensoriGeografici());
+        String nomeComprensorio = view.inserimentoNomeComprensorio(compGeoModel.getListaNomiComprensoriGeografici().toArray(String[]::new));
 
         List<String> comuniDaInserire = view.inserimentoComuni(); //fai in inputdati un inserimento ArraydiStringhe univoche
 
@@ -325,7 +327,7 @@ public class ConfiguratoreController {
         compGeoModel.aggiungiComprensorio(nomeComprensorio, comuniDaInserire);
     }
 
-    private void scegliComprensorioDaVisualizzare() {
+    public void scegliComprensorioDaVisualizzare() {
         if (compGeoModel.isEmpty()) {
             view.stampaErroreComprensoriVuoto();
             return;
