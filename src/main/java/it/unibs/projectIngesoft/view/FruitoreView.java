@@ -186,7 +186,6 @@ public class FruitoreView {
 
     public String inserimentoFogliaFormattata(String messaggio) {
         // inserimento guidato e controllo [Old:A in (Old:A New:A x)]
-        //return inserimentoNomeFogliaFormattato(messaggio);
         System.out.println(messaggio);
         return Utilitas.factorNameBuilder(
                 InputDatiTerminale.leggiStringaNonVuota(MSG_INSERISCI_NOME_RADICE),
@@ -208,4 +207,27 @@ public class FruitoreView {
         }
     }
 
+    public int inserimentoOre() {
+        return InputDatiTerminale.leggiInteroPositivo(MSG_RICHIESTA_ORE);
+    }
+
+    public void visualizzaErroreInserimentoCategoria() {
+        System.out.println("Errore inserimento categoria!");
+    }
+
+    public void visualizzaErroreCalcoloOre() {
+        System.out.println("Errore Calcolo Ore!");
+    }
+
+    public boolean confermaInserimento(String categoriaRichiesta, String categoriaOfferta, int oreRichiesta, int oreOfferta) {
+        return InputDatiTerminale.yesOrNo("\n" + categoriaRichiesta + " : " + oreRichiesta + "\n" + categoriaOfferta + " : " + oreOfferta + "\n" + MSG_CONFERMA_PROPOSTA.formatted(oreOfferta));
+    }
+
+    public void visualizzaMessaggioAnnulla() {
+        System.out.println("Annullo...");
+    }
+
+    public void visualizzaMessaggioErroreDuplicato() {
+        System.out.println("Errore: Proposta già esistente!");
+    }
 }

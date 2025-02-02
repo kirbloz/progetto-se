@@ -1,11 +1,14 @@
 package it.unibs.projectIngesoft.controller;
 
 import it.unibs.projectIngesoft.attivita.Categoria;
+import it.unibs.projectIngesoft.attivita.Proposta;
+import it.unibs.projectIngesoft.libraries.InputDatiTerminale;
 import it.unibs.projectIngesoft.model.*;
 import it.unibs.projectIngesoft.utente.Fruitore;
 import it.unibs.projectIngesoft.view.FruitoreView;
 
 import java.util.List;
+import java.util.function.Predicate;
 
 import static it.unibs.projectIngesoft.view.ConfiguratoreView.*;
 import static it.unibs.projectIngesoft.view.FruitoreView.WARNING_NO_RAMI_DA_ESPLORARE;
@@ -194,9 +197,7 @@ public class FruitoreController {
     }
 
     ///////////////////////// PROPOSTE //////////////////////////
-    /**
-     * todo da implementare
-     * Codice duplicato da ProposteModel
+    /**todo finire
      * Guida la creazione di una nuova proposta di scambio di prestazioni d'opera
      */
     public void effettuaProposta() {
@@ -206,31 +207,51 @@ public class FruitoreController {
         int oreOfferta;
 
         // 1. inserimento categoria richiesta, ore, e categoria offerta
-        ///categoriaRichiesta = gestFatt.selezioneFoglia(MSG_INSERISCI_RICHIESTA);
-        //oreRichiesta = InputDatiTerminale.leggiInteroPositivo(MSG_RICHIESTA_ORE);
-        //categoriaOfferta = gestFatt.selezioneFoglia(MSG_INSERISCI_OFFERTA);
+        boolean esisteCategoriaRichiesta = false;
+        do{
+            categoriaRichiesta = view.inserimentoFogliaFormattata("Inserisci Categoria Richiesta: ");
+            if(fattoriModel.existsKeyInHashmapFattori(categoriaRichiesta)){
+               esisteCategoriaRichiesta = true;
+            }else {
+                view.visualizzaErroreInserimentoCategoria();
+            }
+        }while(!esisteCategoriaRichiesta);
+
+        oreRichiesta = view.inserimentoOre();
+
+        boolean esisteCategoriaOfferta = false;
+        do{
+            categoriaOfferta = view.inserimentoFogliaFormattata("Inserisci Categoria Offerta: ");
+            if(fattoriModel.existsKeyInHashmapFattori(categoriaOfferta)){
+                esisteCategoriaRichiesta = true;
+            }else {
+                view.visualizzaErroreInserimentoCategoria();
+            }
+        }while(!esisteCategoriaOfferta);
 
         // 2. calcolo ore per l'offerta
-        //oreOfferta = gestFatt.calcolaRapportoOre(categoriaRichiesta, categoriaOfferta, oreRichiesta);
-       /* if (oreOfferta == -1) {
-            System.out.println(WARNING_IMPOSSIBILE_CALCOLARE_ORE + WARNING_PROPOSTA_ANNULLATA);
+        oreOfferta = fattoriModel.calcolaRapportoOre(categoriaRichiesta, categoriaOfferta, oreRichiesta);
+        if (oreOfferta == -1) {
+            view.visualizzaErroreCalcoloOre();
             return;
-        }*/
-        /*Proposta tempProposta = new Proposta(categoriaRichiesta, categoriaOfferta, oreRichiesta, oreOfferta, (Fruitore) utenteAttivo);
+        }
 
         // 3. conferma e memorizza la proposta
-        if (!InputDatiTerminale.yesOrNo("\n" + tempProposta + "\n" + MSG_CONFERMA_PROPOSTA.formatted(oreOfferta))) {
-            System.out.println(WARNING_PROPOSTA_ANNULLATA);
+        if (!view.confermaInserimento(categoriaRichiesta, categoriaOfferta, oreRichiesta, oreOfferta)) {
+            view.visualizzaMessaggioAnnulla();
             return;
         }
 
+        Proposta tempProposta = new Proposta(categoriaRichiesta, categoriaOfferta, oreRichiesta, oreOfferta, (Fruitore) utenteAttivo);
+
         // 3.1 se confermi ma è duplicata, segnala e non aggiunge
-        if (controllaPropostaDuplicata(tempProposta)) {
-            System.out.println(WARNING_PROPOSTA_DUPLICATA);
+        if (proposteModel.controllaPropostaDuplicata(tempProposta)) {
+            view.visualizzaMessaggioErroreDuplicato();
             return;
         }
-        addProposta(tempProposta);
-        cercaProposteDaChiudere(tempProposta);*/
+
+        proposteModel.addProposta(tempProposta);
+        proposteModel.cercaProposteDaChiudere(tempProposta);
     }
 
     /**
@@ -296,5 +317,16 @@ public class FruitoreController {
         mapper.write(new HashMap<>(hashListaProposte));*/
     }
 
-
+    /**
+     * Mostra le proposte filtrando per categoria, che appaia come offerta o richiesta.
+     * Guida l'immissione della categoria.
+     */
+    public void visualizzaPropostePerCategoria() {
+        /*
+        assert hashListaProposte != null;
+        String categoria = gestFatt.selezioneFoglia(MSG_INSERISCI_CATEGORIA);
+        Predicate<Proposta> filtro = p -> p.getOfferta().equals(categoria) || p.getRichiesta().equals(categoria);
+        visualizzaProposte(HEADER_PROPOSTE_CATEGORIA.formatted(categoria), filtro);
+        */
+    }
 }

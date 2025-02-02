@@ -93,48 +93,11 @@ public class ProposteModel {
     }
 
     /**
-     * Guida la creazione di una nuova proposta di scambio di prestazioni d'opera
-     */
-    public void effettuaProposta() {
-        String categoriaRichiesta;
-        String categoriaOfferta;
-        int oreRichiesta;
-        int oreOfferta;
-
-        // 1. inserimento categoria richiesta, ore, e categoria offerta
-        ///categoriaRichiesta = gestFatt.selezioneFoglia(MSG_INSERISCI_RICHIESTA);
-        oreRichiesta = InputDatiTerminale.leggiInteroPositivo(MSG_RICHIESTA_ORE);
-        //categoriaOfferta = gestFatt.selezioneFoglia(MSG_INSERISCI_OFFERTA);
-
-        // 2. calcolo ore per l'offerta
-        //oreOfferta = gestFatt.calcolaRapportoOre(categoriaRichiesta, categoriaOfferta, oreRichiesta);
-       /* if (oreOfferta == -1) {
-            System.out.println(WARNING_IMPOSSIBILE_CALCOLARE_ORE + WARNING_PROPOSTA_ANNULLATA);
-            return;
-        }*/
-        /*Proposta tempProposta = new Proposta(categoriaRichiesta, categoriaOfferta, oreRichiesta, oreOfferta, (Fruitore) utenteAttivo);
-
-        // 3. conferma e memorizza la proposta
-        if (!InputDatiTerminale.yesOrNo("\n" + tempProposta + "\n" + MSG_CONFERMA_PROPOSTA.formatted(oreOfferta))) {
-            System.out.println(WARNING_PROPOSTA_ANNULLATA);
-            return;
-        }
-
-        // 3.1 se confermi ma è duplicata, segnala e non aggiunge
-        if (controllaPropostaDuplicata(tempProposta)) {
-            System.out.println(WARNING_PROPOSTA_DUPLICATA);
-            return;
-        }
-        addProposta(tempProposta);
-        cercaProposteDaChiudere(tempProposta);*/
-    }
-
-    /**
      * Controlla se esiste già una proposta così nel comprensorio, da parte dello stesso utente.
      *
      * @return true se esiste, false altrimenti
      */
-    private boolean controllaPropostaDuplicata(Proposta proposta) {
+	public boolean controllaPropostaDuplicata(Proposta proposta) {
         String comprensorio = UtentiModel.getInformazioniFruitore(proposta.getAutoreUsername()).getComprensorioDiAppartenenza();
         return getListaProposteComprensorio(comprensorio).stream()
                 .filter(p -> p.getStato() == StatiProposta.APERTA)
@@ -146,7 +109,7 @@ public class ProposteModel {
     }
 
 
-    private void cercaProposteDaChiudere(Proposta nuovaProposta) {
+    public void cercaProposteDaChiudere(Proposta nuovaProposta) {
         assert hashListaProposte != null;
 
         ArrayList<Proposta> catena = new ArrayList<>();
@@ -210,7 +173,7 @@ public class ProposteModel {
      * L'autore è sempre un Fruitore.
      */
     private void cambiaStatoProposta() {
-        /*assert utenteAttivo instanceof Fruitore;
+        assert utenteAttivo instanceof Fruitore;
         String comprensorio = ((Fruitore) utenteAttivo).getComprensorioDiAppartenenza();
 
         boolean esisteAlmenoUnaPropostaPerLUtenteLoggatoOra = false;
@@ -262,7 +225,7 @@ public class ProposteModel {
         }
         System.out.println(MSG_STATO_MODIFICATO.formatted(statoNuovo));
 
-        mapper.write(new HashMap<>(hashListaProposte));*/
+        mapper.write(new HashMap<>(hashListaProposte));
     }
 
     /**
@@ -297,16 +260,6 @@ public class ProposteModel {
         System.out.println(proposteToString(filtro));
     }
 
-    /**
-     * Mostra le proposte filtrando per categoria, che appaia come offerta o richiesta.
-     * Guida l'immissione della categoria.
-     */
-    public void visualizzaPropostePerCategoria() {
-        assert hashListaProposte != null;
-        //String categoria = gestFatt.selezioneFoglia(MSG_INSERISCI_CATEGORIA);
-        //Predicate<Proposta> filtro = p -> p.getOfferta().equals(categoria) || p.getRichiesta().equals(categoria);
-       // visualizzaProposte(HEADER_PROPOSTE_CATEGORIA.formatted(categoria), filtro);
-    }
 
     /**
      * Mostra le proposte filtrando per autore.
@@ -369,10 +322,17 @@ public class ProposteModel {
         return aperte.append(chiuse).append(ritirate).toString();
     }
 
+    /**
+     * restituisce uno stream di Proposte Filtrato
+     * @param filtro
+     * @return
+     */
     private Stream<Proposta> getFilteredProposte(Predicate<Proposta> filtro) {
         return hashListaProposte.keySet().stream().flatMap(comprensorio -> hashListaProposte.get(comprensorio).stream()).filter(filtro);
     }
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /* todo either useless or to move
     public void entryPoint(int scelta) {
         if (utenteAttivo.getClass() == Configuratore.class) {
             switch (scelta) {
@@ -391,5 +351,5 @@ public class ProposteModel {
                 }
             }
         }
-    }
+    }*/
 }
