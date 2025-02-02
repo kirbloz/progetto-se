@@ -3,7 +3,6 @@ package it.unibs.projectIngesoft.controller;
 import it.unibs.projectIngesoft.attivita.Categoria;
 import it.unibs.projectIngesoft.attivita.FattoreDiConversione;
 import it.unibs.projectIngesoft.attivita.ValoreDominio;
-import it.unibs.projectIngesoft.libraries.InputDatiTerminale;
 import it.unibs.projectIngesoft.libraries.Utilitas;
 import it.unibs.projectIngesoft.model.*;
 import it.unibs.projectIngesoft.utente.Configuratore;
@@ -48,7 +47,7 @@ public class ConfiguratoreController {
      * Richiama il metodo necessario in base alla selezione dal menu principale.
      */
     public void run() {
-        if(utenteAttivo.isFirstAccess()){
+        if (utenteAttivo.isFirstAccess()) {
             cambioCredenziali();
         }
 
@@ -59,14 +58,10 @@ public class ConfiguratoreController {
 
             switch (scelta) {
                 case 0 -> view.uscitaMenu("programma");
-                case 1 -> cambioCredenziali();
-                // userHandler.cambioCredenziali(utenteAttivo); // cambio credenziali
-                case 2 -> runControllerComprensoriGeografici();
-                //loopComprensoriGeografici(menuComprensoriGeografici); // menu comprensorio
-                case 3 -> runControllerCategorie();
-                //loopCategorie(menuCategorie, isConfiguratore); // menu categorie
-                case 4 -> runControllerFattori();
-                // loopFattori(menuFattori); // menu fattori
+                case 1 -> cambioCredenziali(); // cambio credenziali
+                case 2 -> runControllerComprensoriGeografici(); // menu comprensorio
+                case 3 -> runControllerCategorie(); // menu categorie
+                case 4 -> runControllerFattori(); // menu fattori
                 case 5 -> runControllerProposte();
                 // loopProposte(menuProposte, utenteAttivo);
                 default -> {
@@ -93,7 +88,7 @@ public class ConfiguratoreController {
             switch (scelta) { // switch con un solo case per ampliamento futuro
                 case 1 -> this.aggiungiGerarchia();
                 case 2 -> this.visualizzaGerarchie();
-                default -> view.uscitaMenu("submenu");
+                case 0 -> view.uscitaMenu("submenu");
             }
         } while (scelta != 0);
     }
@@ -316,8 +311,10 @@ public class ConfiguratoreController {
 
     /// /////////////////////////////////////////////// COMPRENSORIO ////////////////////////////////////////////////////
 
-    private void aggiungiComprensorio() {
-        String nomeComprensorio = view.selezionaNonGiaInUso(compGeoModel.getListaNomiComprensoriGeografici());
+    public void aggiungiComprensorio() {
+        // metodo spostato nella libreria InputDatiTerminale come "stringReaderNotInAvailable"
+        //String nomeComprensorio = view.selezionaNonGiaInUso(compGeoModel.getListaNomiComprensoriGeografici());
+        String nomeComprensorio = view.inserimentoNomeComprensorio(compGeoModel.getListaNomiComprensoriGeografici().toArray(String[]::new));
 
         List<String> comuniDaInserire = view.inserimentoComuni(); //fai in inputdati un inserimento ArraydiStringhe univoche
 
@@ -325,7 +322,7 @@ public class ConfiguratoreController {
         compGeoModel.aggiungiComprensorio(nomeComprensorio, comuniDaInserire);
     }
 
-    private void scegliComprensorioDaVisualizzare() {
+    public void scegliComprensorioDaVisualizzare() {
         if (compGeoModel.isEmpty()) {
             view.stampaErroreComprensoriVuoto();
             return;
