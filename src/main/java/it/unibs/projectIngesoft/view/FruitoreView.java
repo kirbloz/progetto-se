@@ -86,6 +86,10 @@ public class FruitoreView implements UtenteViewableTerminal {
         return 0;
     }
 
+    public int visualizzaMenuPrincipale() {
+        Menu menu = new Menu(TITLE_MAIN_MENU,  vociMainFruitore);
+        return menu.scegli();
+    }
 
     public void uscitaMenu(String menu) {
 
