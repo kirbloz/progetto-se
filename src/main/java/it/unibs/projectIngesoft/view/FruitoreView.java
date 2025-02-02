@@ -7,7 +7,7 @@ import it.unibs.projectIngesoft.libraries.Utilitas;
 
 import java.util.function.Predicate;
 
-public class FruitoreView implements UtenteViewableTerminal {
+public class FruitoreView {
 
     public static final String TITLE_MAIN_MENU = "MENU' PRINCIPALE - SCAMBIO ORE";
     public static final String[] vociMainFruitore = new String[]{

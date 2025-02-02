@@ -1,12 +1,17 @@
 package it.unibs.projectIngesoft.controller;
 
+import it.unibs.projectIngesoft.model.ComprensorioGeograficoModel;
 import it.unibs.projectIngesoft.model.UtentiModel;
+import it.unibs.projectIngesoft.utente.Fruitore;
 import it.unibs.projectIngesoft.utente.Utente;
 import it.unibs.projectIngesoft.view.AccessoView;
+
+import static it.unibs.projectIngesoft.model.UtentiModel.isValidEmail;
 
 public class AccessoController {
 
     private UtentiModel utentiModel;
+    private ComprensorioGeograficoModel comprensorioModel;
     private AccessoView view;
 
     public AccessoController(UtentiModel utentiModel) {
@@ -34,18 +39,30 @@ public class AccessoController {
     }
 
     private Utente register() {
-        boolean riuscito = true;
+        boolean riuscito = false;
+        String[] credenziali;
         do{
-            String[] credenziali = view.richiestaCredenzialiRegistrazione();
-            if(utentiModel.verificaCredenzialiRegistrazione(credenziali) == null) {
-                riuscito = false;
-                System.out.println("Registrazione fallita");
-            }
-            else{
-                return utentiModel.verificaCredenzialiRegistrazione(credenziali);
+            credenziali = view.richiestaCredenziali();
+            if(!utentiModel.existsUsername(credenziali[0])) {
+                riuscito = true;
+            }else{
+                view.visualizzaErroreUsernameGiaInUso();
             }
         } while (!riuscito);
-        return null;
+        String comprensorio = view.selezionaNomeDaLista(comprensorioModel.getListaNomiComprensoriGeografici());
+
+        boolean mailValid = false;
+        String email;
+        do {
+            email = view.inserisciEmail();
+            mailValid = isValidEmail(email);
+            if(!mailValid) {
+                view.visualizzaErroreMailNonValida();
+            }
+        }while (!mailValid);
+
+        return utentiModel.aggungiFruitore(credenziali[0], credenziali[1], email, comprensorio);
+
     }
 
     public Utente run() {
