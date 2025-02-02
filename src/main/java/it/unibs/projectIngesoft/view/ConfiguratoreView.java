@@ -99,11 +99,12 @@ public class ConfiguratoreView implements UtenteViewableTerminal {
     public static final String WARNING_CATEGORIA_ESISTE = ">> (!!) Per favore indica una categoria che non esista già in questo albero gerarchico.\n";
     public static final String WARNING_CATEGORIA_NF_NON_ESISTE = ">> (!!) Per favore indica una categoria non foglia dell'albero gerarchico selezionato.\n";
     public static final String WARNING_NO_GERARCHIE_MEMORIZZATE = ">> (!!) Nessuna gerarchia memorizzata.";
-    private static final String MSG_RICHIESTA_USERNAME = "Inserisci un username non ancora utilizzato:";
-    private static final String MSG_RICHIESTA_PASSWORD = "Inserisci la password:";
-    private static final String MSG_INSERISCI_FOGLIA_TRA_QUESTE = "Inserisci una tra le seguenti Categorie:";
-    public static final String MSG_INSERISCI_CATEGORIA = ">> Prego, Inserisci la categoria desiderata:";
-    private static final String MSG_INPUT_NOME = "Inserisci un nome non già in uso:";
+    private static final String MSG_RICHIESTA_USERNAME = ">> Inserisci un username non ancora utilizzato: ";
+    private static final String MSG_RICHIESTA_PASSWORD = ">> Inserisci la password: ";
+    private static final String MSG_INSERISCI_FOGLIA_TRA_QUESTE = ">> Inserisci una tra le seguenti categorie foglia:\n> ";
+    public static final String MSG_INSERISCI_CATEGORIA = ">> Prego, Inserisci la categoria desiderata:\n> ";
+    private static final String MSG_INPUT_NOME = ">> Inserisci un nome non già in uso:\n> ";
+    public static final String NOME_COMPRENSORIO_FORMATTED = " [ %s ]";
 
 
     // STRINGHE PER PROPOSTE
@@ -412,7 +413,7 @@ public class ConfiguratoreView implements UtenteViewableTerminal {
     }
 
     public String selezionaNomeDaLista(List<String> lista){
-        System.out.println("Scegli uno tra i seguenti nomi:");
+        System.out.println(">> Scegli uno tra i seguenti nomi: ");
         for (String nome : lista) {
             System.out.println(nome);
         }
@@ -420,7 +421,7 @@ public class ConfiguratoreView implements UtenteViewableTerminal {
         String nomeInserito;
         boolean esisteNome = false;
         do {
-            nomeInserito = InputDatiTerminale.leggiStringaNonVuota(MSG_INPUT_NOME);
+            nomeInserito = getUserInput(MSG_INPUT_NOME);
             for (String nome : lista) {
                 if (nome.equals(nomeInserito)) {
                     esisteNome = true;
@@ -432,12 +433,13 @@ public class ConfiguratoreView implements UtenteViewableTerminal {
         return nomeInserito;
     }
 
+    // todo questo metodo e quello sopra devono per forza essere due cose separate?
     public String selezionaNonGiaInUso(List<String> array) {
         // immissione della foglia e verifica che sia corretto [New:A in (Old:A New:A x)]
         String scelto;
         boolean giaInUso = false;
         do {
-            scelto = InputDatiTerminale.leggiStringaNonVuota(MSG_INPUT_NOME);
+            scelto = getUserInput(MSG_INPUT_NOME);
             for (String s : array) {
                 if (s.equalsIgnoreCase(scelto)) {
                     giaInUso = true;
@@ -450,7 +452,7 @@ public class ConfiguratoreView implements UtenteViewableTerminal {
     }
 
     public List<String> inserimentoComuni() {
-        return InputDatiTerminale.inserisciListaStringheUnivoche("Inserisci Comune", true);
+        return InputDatiTerminale.inserisciListaStringheUnivoche(">> Inserisci Comune: ", true);
     }
 
     /**
@@ -459,13 +461,13 @@ public class ConfiguratoreView implements UtenteViewableTerminal {
      * @param comuni
      */
     public void visualizzaComprensorio(String nome, List<String> comuni) {
-        System.out.println(nome.toUpperCase());
+        System.out.println(NOME_COMPRENSORIO_FORMATTED.formatted(nome.toUpperCase()));
         for (String s : comuni) {
             System.out.println(s);
         }
     }
 
     public void stampaErroreComprensoriVuoto() {
-        System.out.println("Errore: Non esistono Comprensori da Stampare");
+        System.out.println(">> Nessun comprensorio da visualizzare.");
     }
 }
