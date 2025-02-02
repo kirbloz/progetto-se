@@ -59,7 +59,7 @@ public class ConfiguratoreController {
 
             switch (scelta) {
                 case 0 -> view.uscitaMenu("programma");
-                //case 1 ->
+                case 1 -> cambioCredenziali();
                 // userHandler.cambioCredenziali(utenteAttivo); // cambio credenziali
                 case 2 -> runControllerComprensoriGeografici();
                 //loopComprensoriGeografici(menuComprensoriGeografici); // menu comprensorio

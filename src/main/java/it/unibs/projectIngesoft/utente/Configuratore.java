@@ -13,7 +13,9 @@ public class Configuratore extends Utente{
     boolean firstAccess;
 
     public Configuratore() {
-        super();
+        //super();
+        super("", "");
+        //per evitare nullpointerexception durante il primo accesso
         firstAccess = false;
     }
 
