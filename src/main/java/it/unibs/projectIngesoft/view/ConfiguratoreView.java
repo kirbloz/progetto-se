@@ -112,23 +112,16 @@ public class ConfiguratoreView implements UtenteViewableTerminal {
     // STRINGHE PER COMPRENSORI
 
 
-    public void stampaMenu() {
-        System.out.println("TO IMPLEMENT");
-    }
+    //public void stampaMenu() {
+    //    System.out.println("TO IMPLEMENT");
+    //}
 
 
-    public int getUserSelection() {
-        return InputDatiTerminale.leggiInteroConMinimo(">> Selezione (>0): ", 0);
-    }
+    //public int getUserSelection() {return InputDatiTerminale.leggiInteroConMinimo(">> Selezione (>0): ", 0);}
 
 
     public String getUserInput(String prompt) {
         return InputDatiTerminale.leggiStringaNonVuota(prompt);
-    }
-
-    @Override
-    public String getUserInput() {
-        return "";
     }
 
     public String getUserInputMinMaxLength(String prompt, int minLength, int maxLength) {
@@ -139,9 +132,12 @@ public class ConfiguratoreView implements UtenteViewableTerminal {
         return InputDatiTerminale.yesOrNo(prompt);
     }
 
+    public double getUserInputMinMaxDouble(String prompt, double min, double max) {
+        return InputDatiTerminale.leggiDoubleConRange(prompt, min, max);
+    }
 
     public int visualizzaMenuPrincipale() {
-        Menu menu = new Menu(ConfiguratoreView.TITLE_MAIN_MENU,
+        Menu menu = new Menu(TITLE_MAIN_MENU,
                 vociMainConfiguratore);
         return menu.scegli();
     }
@@ -175,11 +171,11 @@ public class ConfiguratoreView implements UtenteViewableTerminal {
     public void uscitaMenu(String menu) {
         switch (menu) {
             case "aggiungiGerarchia":
-                System.out.println(">> USCITA ZIOPERA");
+                System.out.println(">> USCITA MENU AGGIUNTA GERARCHIA..");
             case "programma":
-                System.out.println(">> USCITA PROGRAMA");
+                System.out.println(">> USCITA PROGRAMA..");
             case "submenu":
-                System.out.println(">> USCITA submenu");
+                System.out.println(">> USCITA SUBMENU..");
         }
     }
 
@@ -281,8 +277,8 @@ public class ConfiguratoreView implements UtenteViewableTerminal {
      * Guida l'immissione del nome della Categoria a cui assegnare nomeCategoria come figlia.
      * Controlla che si inserisca il nome di una Categoria che può avere figlie.
      *
-     * @param nomeCategoriaRadice, Categoria radice della gerarchia di riferimento
      * @param nomeCategoria,       Categoria figlia da assegnare alla madre
+     * @param possibiliMadri,      Lista delle categorie tra cui scegliere la madre.
      * @return Categoria a cui la Categoria figlia sarà assegnata
      */
     public String inserimentoNomeCategoriaMadre(String nomeCategoria, List<String> possibiliMadri) {
@@ -374,8 +370,8 @@ public class ConfiguratoreView implements UtenteViewableTerminal {
         //return inserimentoNomeFogliaFormattato(messaggio);
         System.out.println(messaggio);
 		return Utilitas.factorNameBuilder(
-				InputDatiTerminale.leggiStringaNonVuota(MSG_INSERISCI_NOME_RADICE),
-				InputDatiTerminale.leggiStringaNonVuota(MSG_INSERISCI_NOME_FOGLIA)
+				getUserInput(MSG_INSERISCI_NOME_RADICE),
+                getUserInput(MSG_INSERISCI_NOME_FOGLIA)
 		);
     }
 
@@ -384,13 +380,11 @@ public class ConfiguratoreView implements UtenteViewableTerminal {
     }
 
     public String richiestaUsername() {
-        String username = InputDatiTerminale.leggiStringaNonVuota(MSG_RICHIESTA_USERNAME);
-        return username;
+        return getUserInput(MSG_RICHIESTA_USERNAME);
     }
 
     public String richiestaPassword() {
-        String username = InputDatiTerminale.leggiStringaNonVuota(MSG_RICHIESTA_PASSWORD);
-        return username;
+        return getUserInput(MSG_RICHIESTA_PASSWORD);
     }
 
 
