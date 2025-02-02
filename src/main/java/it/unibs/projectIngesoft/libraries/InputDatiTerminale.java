@@ -300,4 +300,22 @@ public class InputDatiTerminale {
 
         return listaStringhe;
     }
+
+    public static String stringReaderNotInAvailable(String prompt, String[] array){
+        String scelto;
+        boolean giaInUso;
+        do {
+            giaInUso = false;
+            scelto = leggiStringaNonVuota(prompt);
+            for (String s : array) {
+                if (s.equalsIgnoreCase(scelto)) {
+                    giaInUso = true;
+                    break;
+                }
+            }
+        } while (giaInUso);
+
+        return scelto;
+    }
+
 }
