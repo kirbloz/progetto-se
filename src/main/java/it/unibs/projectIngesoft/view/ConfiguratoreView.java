@@ -249,6 +249,20 @@ public class ConfiguratoreView implements UtenteViewableTerminal {
         return InputDatiTerminale.leggiDoubleConRange(INSERISCI_IL_FATTORE_TRA.formatted(nomeFogliaEsternaFormattata, nomeFogliaInternaFormattata), MIN_FATTORE, MAX_FATTORE);
     }
 
+
+    public int visualizzaMenuFattori(){
+        Menu menu = new Menu(TITLE_MENU_FATTORI,
+                vociFattori);
+        return menu.scegli();
+    }
+
+    public void visualizzaFattori(){
+        //todo da implementare
+        //c'era già in fattoriModel, non serve scrivere da capo
+    }
+
+
+
 /// ///////INSERIMENTO PER CASI D'USO CATEGORIE //////
     /**
      * Guida l'input del nome di una nuova Categoria per una gerarchia.
