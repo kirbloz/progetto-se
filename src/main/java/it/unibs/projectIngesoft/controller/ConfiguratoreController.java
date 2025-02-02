@@ -117,16 +117,9 @@ public class ConfiguratoreController {
             }
         } while (scelta != 0);
     }
-    /**
-     * Richiama il metodo necessario in base alla selezione dal menu principale.
-     *
-     * @param scelta, selezione dal menu
-     */
-    public void entryPoint(int scelta) {
 
-    }
 
-    //todo da rifattorizzare per l'utilizzo nel controller
+    //todo da rifattorizzare per l'utilizzo nel controller -> fatto
 
     /**
      * Cicla le foglie dalla prima all'ultima per generare tutte le coppie di valori possibili
@@ -138,7 +131,6 @@ public class ConfiguratoreController {
      * @return lista di fattori di conversione
      */
     private ArrayList<FattoreDiConversione> ottieniFattoriDelleNuoveCategorie(String nomeRadice, List<Categoria> foglie) {
-        //todo levare questo controllo se non serve a nulla
         //se non esistono foglie non serve a nulla fare i fattori
         if (foglie.isEmpty())
             return new ArrayList<>();
@@ -148,11 +140,10 @@ public class ConfiguratoreController {
             String nomeFogliai = Utilitas.factorNameBuilder(nomeRadice, foglie.get(i).getNome());
             for (int j = i + 1; j < foglie.size(); j++) {
                 String nomeFogliaj = Utilitas.factorNameBuilder(nomeRadice, foglie.get(j).getNome());
-                // TODO levare user interaction
-                double fattore_ij = InputDatiTerminale.leggiDoubleConRange(INSERISCI_IL_FATTORE_TRA.formatted(nomeFogliai, nomeFogliaj), MIN_FATTORE, MAX_FATTORE);
+                // TODO levare user interaction -> fatto
+                double fattore_ij = view.getUserInputMinMaxDouble(INSERISCI_IL_FATTORE_TRA.formatted(nomeFogliai, nomeFogliaj), MIN_FATTORE, MAX_FATTORE);
 
                 FattoreDiConversione fattoreIJ = new FattoreDiConversione(nomeFogliai, nomeFogliaj, fattore_ij);
-
 
                 nuoviDaNuovaRadice.add(fattoreIJ);
             }
@@ -160,7 +151,6 @@ public class ConfiguratoreController {
         return nuoviDaNuovaRadice;
     }
 
-    //TODO chiama questa funzione quando hai finito l'inserimento di una nuova radice con tutte le sue categorie dimmerda
     private void generaEMemorizzaNuoviFattori(String nomeRadice, List<Categoria> foglie) {
         //1. chiedi i fattori nuovi all'utente sulla base delle categorie appena inserite
         ArrayList<FattoreDiConversione> nuoviDaNuovaRadice = ottieniFattoriDelleNuoveCategorie(nomeRadice, foglie);
@@ -168,9 +158,15 @@ public class ConfiguratoreController {
         if (nuoviDaNuovaRadice.isEmpty()) { //se non esistono foglie non hanno senso i fattori
             return; //todo a seconda di come avverrà il lancio di questo metodo questo controllo potrebbe essere inutile (forse si può usare assert btw)
         }
+        //todo martino io sostituirei questo check con quello che facciamo anche sopra
+        /*
+        //se non esistono foglie non serve a nulla fare i fattori
+        if (foglie.isEmpty())
+            return new ArrayList<>();
+         */
 
         //se esistono fattori già presenti vanno calcolati i rapporti tra i nuovi (o la singola nuova foglia) e i vecchi
-        if (!fattoriModel.isEmpty()) {//todo wade porco dio attacca il cervello se devi modificare il codice altrui
+        if (!fattoriModel.isEmpty()) {
             //2.1. chiedi le 2 foglie (una nuova(interna) e una preesistene(esterna)) per fare iol confronto
             String nomeFogliaEsternaFormattata = view.selezioneFogliaDaLista(fattoriModel.getKeysets());
             // 2. scegliere una categoria delle nuove, da utilizzare per il primo fattore di conversione
@@ -241,8 +237,6 @@ public class ConfiguratoreController {
 
         // 1. chiede nome
         String nomeCategoria = view.inserimentoNomeNuovaCategoria(categorieModel, radice);
-        //assert nomeCategoria != null
-        //        && !nomeCategoria.isEmpty() : "Il nome della categoria non deve essere null o vuoto";
 
         // 1.1 chiede madre per nuova radice, verificando che esista
         // todo metodo da testare
@@ -257,7 +251,7 @@ public class ConfiguratoreController {
         boolean insertDescription = view.getUserChoiceYoN(ASK_INSERISCI_DESCRIZIONE_VALORE_DOMINIO);
         valoreDominio = insertDescription
                 ? new ValoreDominio(nomeValoreDominio,
-                    view.getUserInputMinMaxLength(MSG_INPUT_DESCRIZIONE_VALORE_DOMINIO, 0, 100))
+                view.getUserInputMinMaxLength(MSG_INPUT_DESCRIZIONE_VALORE_DOMINIO, 0, 100))
                 : new ValoreDominio(nomeValoreDominio);
 
         if (insertDescription)
@@ -302,7 +296,7 @@ public class ConfiguratoreController {
 
 
 
-    ////////////////////////////////////////////////// COMPRENSORIO ////////////////////////////////////////////////////
+    /// /////////////////////////////////////////////// COMPRENSORIO ////////////////////////////////////////////////////
 
     private void aggiungiComprensorio() {
         String nomeComprensorio = view.selezionaNonGiaInUso(compGeoModel.getListaNomiComprensoriGeografici());
