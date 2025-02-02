@@ -32,14 +32,6 @@ public class FattoriModel {
         }
     }
 
-    /**
-     * Costruttore vuoto e finto. Non fa nulla. /todo e allora perché esiste ed è usato 3 volte diomerda?
-     */
-    /*public FattoriModel() {
-        this.mapper = null;
-        //empty constructor
-        System.out.println("fake fattoriModel");
-    }*/
 
     ////////////////////////////////////////////////////// CORPO //////////////////////////////////////////////////////
 
