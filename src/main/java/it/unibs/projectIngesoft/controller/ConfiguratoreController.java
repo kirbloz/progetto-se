@@ -147,9 +147,6 @@ public class ConfiguratoreController {
      * @return lista di fattori di conversione
      */
     private ArrayList<FattoreDiConversione> ottieniFattoriDelleNuoveCategorie(String nomeRadice, List<Categoria> foglie) {
-        //se non esistono foglie non serve a nulla fare i fattori
-        if (foglie.isEmpty())
-            return null;
         // se esiste almeno una foglia, allora calcola i fattori di conversione
         ArrayList<FattoreDiConversione> nuoviDaNuovaRadice = new ArrayList<>();
         for (int i = 0; i < foglie.size(); i++) {
@@ -167,18 +164,17 @@ public class ConfiguratoreController {
     }
 
     private void generaEMemorizzaNuoviFattori(String nomeRadice, List<Categoria> foglie) {
+        if(foglie.isEmpty()) return;
+
         //1. chiedi i fattori nuovi all'utente sulla base delle categorie appena inserite
         ArrayList<FattoreDiConversione> nuoviDaNuovaRadice = ottieniFattoriDelleNuoveCategorie(nomeRadice, foglie);
-        //è null se non esistono foglie, è vuoto se esiste una sola foglia
-        if (nuoviDaNuovaRadice == null) { //se non esistono foglie non hanno senso i fattori
-            return;
-        }
+        //è vuoto se esiste una sola foglia
 
         //se esistono fattori già presenti vanno calcolati i rapporti tra i nuovi (o la singola nuova foglia) e i vecchi
         if (!fattoriModel.isEmpty()) {
             //2.1. chiedi le 2 foglie (una nuova(interna) e una preesistene(esterna)) per fare iol confronto
             String nomeFogliaEsternaFormattata = view.selezioneFogliaDaLista(fattoriModel.getKeysets());
-            // 2. scegliere una categoria delle nuove, da utilizzare per il primo fattore di conversione
+            // 2. scegliere una categoria delle nuove, da utilizzare per il primo fattore di conversione (se non esistono nuovi fattori la scelta è tra una sola foglia)
             String nomeFogliaInternaFormattata = view.selezioneFogliaDaLista(nomeRadice, foglie);
             //2.2. chiedi il fattore di conversione EsternoInterno [x in (Old:A, New:A, x)]
             double fattoreDiConversioneEsternoInterno = view.ottieniFattoreDiConversione(nomeFogliaEsternaFormattata, nomeFogliaInternaFormattata);
