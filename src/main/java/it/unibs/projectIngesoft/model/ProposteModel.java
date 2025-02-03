@@ -228,18 +228,17 @@ public class ProposteModel {
     /**
      * A partire dai dettagli di una proposta, verifica se questa esiste tra le proposte memorizzate.
      *
-     * @param comprensorio,       comprensorio della proposta
      * @param categoriaOfferta,   categoria dell'offerta
      * @param categoriaRichiesta, categoria della richiesta
      * @param oreRichiesta,       ore richieste
      * @return Proposta se esiste, null altrimenti
      */
-    private Proposta cercaPropostaCambiabile(String comprensorio, String categoriaOfferta, String categoriaRichiesta, int oreRichiesta, Fruitore autore) {
+	public Proposta cercaPropostaCambiabile(String categoriaOfferta, String categoriaRichiesta, int oreRichiesta, Fruitore autore) {
 
         Predicate<Proposta> filtro = p -> p.getOfferta().equals(categoriaOfferta)
                 && p.getOreRichiesta() == oreRichiesta
                 && p.getRichiesta().equals(categoriaRichiesta)
-                && p.getComprensorio().equals(comprensorio)
+                && p.getComprensorio().equals(autore.getComprensorioDiAppartenenza())
 				&& p.getAutore().equals(autore)
 				&& p.getStato() != StatiProposta.CHIUSA;
 
@@ -377,15 +376,20 @@ public class ProposteModel {
 
     //c'è già il metodo visualizzaProposteModificabili -> todo ok modifico questo
 	public List<Proposta> getProposteModificabiliPerAutore(Fruitore autore){
-		//List<Proposta> proposteValide = new ArrayList<>();
-		/*for(Proposta proposta : hashListaProposte.get(autore.getComprensorioDiAppartenenza())){
+		/*
+        List<Proposta> proposteValide = new ArrayList<>();
+		for(Proposta proposta : hashListaProposte.get(autore.getComprensorioDiAppartenenza())){
 			if (proposta.getStato() != StatiProposta.CHIUSA && proposta.getAutoreUsername().equals(autore.getUsername())) {
                     proposteValide.add(proposta);
                 }
-		}*/
-        Predicate<Proposta> filtro = p -> p.getAutoreUsername().equals(/*utenteAttivo*/autore.getUsername())
+		}
+        return proposteValide;
+        */
+
+        Predicate<Proposta> filtro = p -> p.getAutoreUsername().equals(autore.getUsername())
                 && p.getStato() != StatiProposta.CHIUSA;
 		return getFilteredProposte(filtro).toList();
+
 	}
 	
 	public void cambiaStato(Proposta daCambiare){

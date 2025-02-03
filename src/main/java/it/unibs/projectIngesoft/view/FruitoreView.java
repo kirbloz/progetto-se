@@ -1,6 +1,8 @@
 package it.unibs.projectIngesoft.view;
 
 import it.unibs.projectIngesoft.attivita.Categoria;
+import it.unibs.projectIngesoft.attivita.Proposta;
+import it.unibs.projectIngesoft.attivita.StatiProposta;
 import it.unibs.projectIngesoft.libraries.InputDatiTerminale;
 import it.unibs.projectIngesoft.libraries.Menu;
 import it.unibs.projectIngesoft.libraries.Utilitas;
@@ -266,4 +268,5 @@ public class FruitoreView {
 
         return getUserChoiceYoN(MSG_CONFERMA_CAMBIO_STATO.formatted(statoAttuale, statoNuovo));
     }
+
 }

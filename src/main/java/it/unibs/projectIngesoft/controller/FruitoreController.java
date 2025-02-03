@@ -279,11 +279,11 @@ public class FruitoreController {
         do {
             view.visualizzaProposte(proposteModel.getProposteModificabiliPerAutore(utenteAttivo));
 
-            categoriaRichiesta = view.inserimentoFogliaFormattato(MSG_SELEZIONE_CATEGORIA_RICHIESTA);
+            categoriaRichiesta = view.inserimentoFogliaFormattata("Inserisci Richiesta");
             oreRichiesta = view.inserimentoOre();
-            categoriaOfferta = view.inserimentoFogliaFormattato(MSG_SELEZIONE_CATEGORIA_OFFERTA);
+            categoriaOfferta = view.inserimentoFogliaFormattata("Inserisci Offerta");
 
-            daCambiare = cercaProposta(comprensorio, categoriaOfferta, categoriaRichiesta, oreRichiesta, utenteAttivo); //ma il wadelo ha fallato questo o sto delirando
+            daCambiare = proposteModel.cercaPropostaCambiabile(categoriaOfferta, categoriaRichiesta, oreRichiesta, utenteAttivo); //ma il wadelo ha fallato questo o sto delirando
 			
             if (daCambiare != null ) {
                 found = true;
