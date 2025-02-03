@@ -262,7 +262,7 @@ public class FruitoreController {
     private void cambiaStatoProposta() {
         //assert utenteAttivo instanceof Fruitore;
 
-        if (!proposteModel.esisteAlmenoUnaPropostaPerLUtente(utenteAttivo)) {
+        if (!proposteModel.esisteAlmenoUnaPropostaPerAutore(utenteAttivo)) {
             //System.out.println(MSG_NON_HAI_PROPOSTE_NON_CHIUSE);
 			view.visualizzaErroreProposteInesistenti();
             return;
@@ -277,9 +277,10 @@ public class FruitoreController {
         // 1. inserimento categoria richiesta, ore, e categoria offerta
         boolean found = false;
         do {
-            view.visualizzaProposte(proposteModel.getProposteCambiabiliDi(utenteAttivo));
+            view.visualizzaProposte(proposteModel.getProposteModificabiliPerAutore(utenteAttivo));
+
             categoriaRichiesta = view.inserimentoFogliaFormattato(MSG_SELEZIONE_CATEGORIA_RICHIESTA);
-            oreRichiesta = view.inserimentoOre;
+            oreRichiesta = view.inserimentoOre();
             categoriaOfferta = view.inserimentoFogliaFormattato(MSG_SELEZIONE_CATEGORIA_OFFERTA);
 
             daCambiare = cercaProposta(comprensorio, categoriaOfferta, categoriaRichiesta, oreRichiesta, utenteAttivo); //ma il wadelo ha fallato questo o sto delirando

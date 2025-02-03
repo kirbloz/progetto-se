@@ -29,10 +29,7 @@ public class ProposteModel {
     public static final String HEADER_PROPOSTE_RITIRATE = ">> PROPOSTE RITIRATE\n";
     public static final String HEADER_PROPOSTE_APERTE = ">> PROPOSTE APERTE\n";
 
-    public static final String MSG_INSERISCI_RICHIESTA = ">> Inserisci una categoria valida di cui vuoi effettuare la RICHIESTA.";
-    public static final String MSG_INSERISCI_OFFERTA = ">> Inserisci una categoria valida che sei disposto a OFFRIRE in cambio.";
-    public static final String MSG_RICHIESTA_ORE = ">> Inserisci il numero di ORE che vuoi richiedere:\n> ";
-    public static final String MSG_CONFERMA_PROPOSTA = ">> Dovrai offrire %d ore in cambio. Confermi?%n> ";
+
 
     private static final String MSG_INSERISCI_CATEGORIA = ">> Inserisci una categoria di cui ricercare le proposte";
     public static final String MSG_FORMATTED_PROPOSTA_PRONTA = "%s, %s\n >>> Indirizzo email: %s\n";
@@ -357,9 +354,13 @@ public class ProposteModel {
 	
 	
 	//////////////////// Nuovi Metodi /////////////////////////////////
-	
-	public boolean esisteAlmenoUnaPropostaPerLUtente(Utente utente){
-        String comprensorio = utente.getComprensorioDiAppartenenza();
+
+    // todo questo metodo è replicabile semplicemente chiamando getFilteredProposte e controllando che il risultato
+    // non sia empty
+    // ho cambiato il nome perchè si cerca per autore, non utente.
+    // c'è sempre la certezza che questi metodi siano chiamati con fruitori
+	public boolean esisteAlmenoUnaPropostaPerAutore(Fruitore autore){
+        /*String comprensorio = utente.getComprensorioDiAppartenenza();
 		
 		if (hashListaProposte != null && hashListaProposte.get(comprensorio) != null) {
             for (Proposta proposta : hashListaProposte.get(comprensorio)) {
@@ -368,21 +369,29 @@ public class ProposteModel {
                 }
             }
         }
-		return false
+		return false;*/
+        Predicate<Proposta> filtro = p -> p.getAutoreUsername().equals(/*utenteAttivo*/autore.getUsername())
+                && p.getStato() != StatiProposta.CHIUSA;
+        return getFilteredProposte(filtro).findAny().isPresent(); //versione stream equivalente a !isEmpty()
 	}
-	
-	public List<Proposta> getProposteCambiabiliDi(Utente utente){
-		List<Proposta> proposteValide = new List<>();
-		for(Proposta p : hashListaProposte.get(utente.getComprensorioDiAppartenenza())){
-			if (proposta.getStato() != StatiProposta.CHIUSA && proposta.getAutoreUsername().equals(utente.getUsername())) {
-                    proposteValide.add(p);
+
+    //c'è già il metodo visualizzaProposteModificabili -> todo ok modifico questo
+	public List<Proposta> getProposteModificabiliPerAutore(Fruitore autore){
+		//List<Proposta> proposteValide = new ArrayList<>();
+		/*for(Proposta proposta : hashListaProposte.get(autore.getComprensorioDiAppartenenza())){
+			if (proposta.getStato() != StatiProposta.CHIUSA && proposta.getAutoreUsername().equals(autore.getUsername())) {
+                    proposteValide.add(proposta);
                 }
-		}
-		return proposteValide;
+		}*/
+        Predicate<Proposta> filtro = p -> p.getAutoreUsername().equals(/*utenteAttivo*/autore.getUsername())
+                && p.getStato() != StatiProposta.CHIUSA;
+		return getFilteredProposte(filtro).toList();
 	}
 	
 	public void cambiaStato(Proposta daCambiare){
-		(daCambiare.getStato() == StatiProposta.APERTA) ? daCambiare.setStato(StatiProposta.RITIRATA) : daCambiare.setStato(StatiProposta.APERTA);
+		//(daCambiare.getStato() == StatiProposta.APERTA) ? daCambiare.setStato(StatiProposta.RITIRATA) : daCambiare.setStato(StatiProposta.APERTA);
+        if(daCambiare.getStato() == StatiProposta.APERTA) daCambiare.setRitirata();
+        else daCambiare.setAperta();
 		
         mapper.write(new HashMap<>(hashListaProposte));
 	}
