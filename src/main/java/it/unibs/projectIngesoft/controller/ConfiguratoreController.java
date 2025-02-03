@@ -110,7 +110,7 @@ public class ConfiguratoreController {
     public void runControllerProposte() {
         int scelta;
         do {
-            scelta = view.visualizzaMenuComprensorio();
+            scelta = view.visualizzaMenuProposte();
             switch (scelta) {
                 case 1 -> visualizzaPropostePerCategoria();
                 case 2 -> visualizzaProposteDaNotificare();

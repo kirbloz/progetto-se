@@ -491,8 +491,12 @@ public class ConfiguratoreView implements UtenteViewableTerminal {
 
 
     /// ///////////////////////////// proposte ////////////////////////////////////
-    ///
-    ///
+
+    public int visualizzaMenuProposte() {
+        Menu menuCategorie = new Menu(TITLE_MENU_PROPOSTE, vociProposteConfiguratore);
+        return menuCategorie.scegli();
+    }
+
     public void visualizzaProposte(List<Proposta> lista) {
         //todo da implementare -> copiata da proposteToString(..)
         if (lista.isEmpty()) {
