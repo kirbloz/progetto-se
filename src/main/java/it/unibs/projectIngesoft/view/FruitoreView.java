@@ -90,8 +90,8 @@ public class FruitoreView {
     }
 
     public int visualizzaMenuProposte() {
-        //todo da implementare
-        return 0;
+        Menu menu = new Menu(TITLE_MENU_PROPOSTE, vociProposteFruitore);
+        return menu.scegli();
     }
 
     public int visualizzaMenuPrincipale() {

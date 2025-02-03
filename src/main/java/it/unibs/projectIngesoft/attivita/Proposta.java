@@ -72,8 +72,7 @@ public class Proposta {
     public boolean isOffertaCompatibile(Proposta p) {
         //return this.richiesta.equals(p.offerta) && this.oreRichiesta == p.oreOfferta;
         //return this.getOfferta().equals(p.getRichiesta());
-        return this.getOfferta().equals(p.getRichiesta())
-                && this.getOreOfferta() == p.getOreRichiesta();
+        return this.getStato() == StatiProposta.APERTA && p.getStato() == StatiProposta.APERTA && this.getOfferta().equals(p.getRichiesta()) && this.getOreOfferta() == p.getOreRichiesta();
     }
 
     //Getters & Setters

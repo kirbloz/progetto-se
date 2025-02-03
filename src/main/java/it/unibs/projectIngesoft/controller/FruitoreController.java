@@ -48,11 +48,8 @@ public class FruitoreController {
             switch (scelta) {
                 case 0 -> view.uscitaMenu("programma");//System.out.println(AccessoView.MSG_PROGRAM_EXIT);
                 case 1 -> cambioCredenziali();
-                //case 1 -> userHandler.cambioCredenziali(utenteAttivo);
                 case 2 -> runControllerProposte();
-                //case 2 -> loopProposte(menuProposte, utenteAttivo);
                 case 3 -> runControllerCategorie();
-                //case 3 -> loopCategorie(menuCategorie, isConfiguratore);
                 default -> {
                 } // già gestito dalla classe Menu
             }
@@ -115,7 +112,9 @@ public class FruitoreController {
         int scelta;
 
         // 0. seleziono la radice della gerarchia da esplorare
-        Categoria radice = inserimentoNomeCategoria(categorieModel.getRadici());
+        List<Categoria> listaRadiciNonFoglia = categorieModel.getRadici()
+                .stream().filter(c -> !c.isFoglia()).toList();
+        Categoria radice = inserimentoNomeCategoria(listaRadiciNonFoglia);
         Categoria madreCorrente = radice; // categoria madre del livello che si sta visualizzando al momento
         //List<Categoria> livello = madreCorrente.getCategorieFiglie();
 
@@ -221,7 +220,7 @@ public class FruitoreController {
         do{
             categoriaOfferta = view.inserimentoFogliaFormattata("offerta"/*">> Inserisci Categoria Offerta: "*/);
             if(fattoriModel.existsKeyInHashmapFattori(categoriaOfferta)){
-                esisteCategoriaRichiesta = true;
+                esisteCategoriaOfferta = true;
             }else {
                 view.visualizzaErroreInserimentoCategoria();
             }
@@ -274,7 +273,7 @@ public class FruitoreController {
         String categoriaOfferta;
         int oreRichiesta;
 		
-        Proposta daCambiare = null;
+        Proposta daCambiare;
 
         // 1. inserimento categoria richiesta, ore, e categoria offerta
         boolean found = false;

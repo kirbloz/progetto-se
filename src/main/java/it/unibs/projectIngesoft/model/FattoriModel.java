@@ -278,7 +278,8 @@ public class FattoriModel {
     public int calcolaRapportoOre(String richiesta, String offerta, int oreRichiesta) {
         for (FattoreDiConversione f : hashMapFattori.get(richiesta)) {
             if (f.getNome_c2().equals(offerta)) {
-                return (int) Math.rint(oreRichiesta * f.getFattore());
+                int risultato = (int) Math.rint(oreRichiesta * f.getFattore());
+                return risultato == 0 ? 1 : risultato;
             }
         }
         return -1;

@@ -49,8 +49,8 @@ public class ConfiguratoreController {
      */
     public void run() {
         if (utenteAttivo.isFirstAccess()) {
-            cambioCredenziali();
             utenteAttivo.setFirstAccess(false);
+            cambioCredenziali();
         }
 
         int scelta;
@@ -100,7 +100,7 @@ public class ConfiguratoreController {
         do {
             scelta = view.visualizzaMenuFattori();
             switch (scelta) {
-                case 1 -> view.visualizzaFattori(); //todo da implementare
+                case 1 -> visualizzaFattori(); //todo da implementare
                 default -> {
                 }
             }
@@ -110,7 +110,7 @@ public class ConfiguratoreController {
     public void runControllerProposte() {
         int scelta;
         do {
-            scelta = view.visualizzaMenuComprensorio();
+            scelta = view.visualizzaMenuProposte();
             switch (scelta) {
                 case 1 -> visualizzaPropostePerCategoria();
                 case 2 -> visualizzaProposteDaNotificare();
@@ -184,6 +184,10 @@ public class ConfiguratoreController {
         } else {
             fattoriModel.inserisciSingolaFogliaNellaHashmap(nomeRadice, foglie);
         }
+    }
+
+    public void visualizzaFattori( ){
+        view.visualizzaFattori(fattoriModel.getHashMapFattori(), view.selezioneFogliaDaLista(fattoriModel.getKeysets()));
     }
 
     public void aggiungiRadice() {
