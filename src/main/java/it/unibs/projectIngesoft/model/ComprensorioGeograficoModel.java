@@ -29,16 +29,7 @@ public class ComprensorioGeograficoModel {
     }
 
     /////////////////////////////////////////////// Rifattorizzati /////////////////////////////////////////////////////
-    /**
-     * Aggiunge il comprensorio alla lista e serializza
-     */
 
-    public void addComprensorio(ComprensorioGeografico comprensorio) {
-        if (!this.listaComprensoriGeografici.contains(comprensorio)) {
-            this.listaComprensoriGeografici.add(comprensorio);
-            mapper.write(listaComprensoriGeografici);
-        }
-    }
 
     //Todo messo public da usare nel controller, ma se uso le String[] come in fattori non serve
     public boolean isNomeGiaUsato(String nomeComprensorio) {
@@ -67,9 +58,12 @@ public class ComprensorioGeograficoModel {
         return null;
     }
 
-    //todo chiamare dal controller una volta ottenute le robe dall'input
     public void aggiungiComprensorio(String nomeComprensorio, List<String> comuni) {
-        addComprensorio(new ComprensorioGeografico(nomeComprensorio, comuni));
+        ComprensorioGeografico tempComp = new ComprensorioGeografico(nomeComprensorio, comuni);
+        if (getStringComuniByComprensorioName(nomeComprensorio) == null) {
+            this.listaComprensoriGeografici.add(tempComp);
+            mapper.write(listaComprensoriGeografici);
+        }
     }
 
     public boolean isEmpty() {

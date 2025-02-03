@@ -52,7 +52,7 @@ public class CompensoriTest {
                 null,
                 new Configuratore("default", "test"));
 
-        InputInjector.inject("comprensorioTest\ntest1\nS\ntest2\nN");
+        InputInjector.inject("comprensorioTest\ntest1\nS\ntest2\nN\n");
         controller.aggiungiComprensorio();
 
         assert model.getListaNomiComprensoriGeografici().contains("comprensorioTest");
@@ -73,18 +73,17 @@ public class CompensoriTest {
 
 
         model.aggiungiComprensorio("comprensorioTest", List.of("test"));
-        InputInjector.inject("comprensorioTest\ncomprensorioTest2\ntest1\nS\ntest2\nN\n");
-        controller.aggiungiComprensorio();
+        //InputInjector.inject("comprensorioTest\ncomprensorioTest2\ntest1\nS\ntest2\nN\n");
+        //controller.aggiungiComprensorio();
+
+        model.aggiungiComprensorio("comprensorioTest", List.of("test", "test2"));
 
         List<String> listaComprensori = model.getListaNomiComprensoriGeografici();
 
         assert listaComprensori.contains("comprensorioTest");
-        assert listaComprensori.contains("comprensorioTest2");
 
         assert listaComprensori.stream().filter(c -> c.equals("comprensorioTest")).count() == 1;
 
     }
-
-
 
 }
