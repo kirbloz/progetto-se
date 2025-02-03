@@ -61,18 +61,6 @@ public class FruitoreController {
 
     }
 
-    /**
-     * Duplicato da configuratore controller.
-     */
-    private void cambioCredenziali() {
-        String username;
-        do {
-            username = view.richiestaUsername();
-        } while (utentiModel.existsUsername(username));
-        String password = view.richiestaPassword();
-        utentiModel.cambioCredenziali(utenteAttivo, username, password);
-    }
-
     public void runControllerCategorie() {
         int scelta;
         do {
@@ -83,7 +71,6 @@ public class FruitoreController {
             }
         } while (scelta != 0);
     }
-
 
     public void runControllerProposte() {
         int scelta;
@@ -100,6 +87,18 @@ public class FruitoreController {
 
 
     ///////////////////////// CATEGORIE //////////////////////////
+
+    /**
+     * Duplicato da configuratore controller.
+     */
+    private void cambioCredenziali() {
+        String username;
+        do {
+            username = view.richiestaUsername();
+        } while (utentiModel.existsUsername(username));
+        String password = view.richiestaPassword();
+        utentiModel.cambioCredenziali(utenteAttivo, username, password);
+    }
 
     /**
      * Duplicato da CategorieModel

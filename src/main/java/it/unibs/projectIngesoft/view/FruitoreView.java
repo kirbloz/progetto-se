@@ -9,6 +9,8 @@ import it.unibs.projectIngesoft.libraries.Utilitas;
 
 import java.util.List;
 
+import static it.unibs.projectIngesoft.view.AccessoView.MSG_RICHIESTA_PASSWORD;
+import static it.unibs.projectIngesoft.view.AccessoView.MSG_RICHIESTA_USERNAME;
 import static it.unibs.projectIngesoft.view.ConfiguratoreView.MSG_PRINT_LISTA_RADICI;
 
 public class FruitoreView {
@@ -164,15 +166,11 @@ public class FruitoreView {
     }
 
     public String richiestaUsername() {
-        //duplicato in configuratore view
-        //valutare se spostare in una classe utilities
-        return "";
+        return InputDatiTerminale.leggiStringaNonVuota(MSG_RICHIESTA_USERNAME);
     }
 
     public String richiestaPassword() {
-        //duplicato in configuratore view
-        //valutare se spostare in una classe utilities
-        return "";
+        return InputDatiTerminale.leggiStringaNonVuota(MSG_RICHIESTA_PASSWORD);
     }
 
     /// ////////////////////// PROPOSTE //////////////////////////
