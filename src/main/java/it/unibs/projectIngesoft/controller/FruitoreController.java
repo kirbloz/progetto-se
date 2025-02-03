@@ -2,13 +2,11 @@ package it.unibs.projectIngesoft.controller;
 
 import it.unibs.projectIngesoft.attivita.Categoria;
 import it.unibs.projectIngesoft.attivita.Proposta;
-import it.unibs.projectIngesoft.libraries.InputDatiTerminale;
 import it.unibs.projectIngesoft.model.*;
 import it.unibs.projectIngesoft.utente.Fruitore;
 import it.unibs.projectIngesoft.view.FruitoreView;
 
 import java.util.List;
-import java.util.function.Predicate;
 
 import static it.unibs.projectIngesoft.view.ConfiguratoreView.*;
 import static it.unibs.projectIngesoft.view.FruitoreView.WARNING_NO_RAMI_DA_ESPLORARE;
@@ -92,7 +90,7 @@ public class FruitoreController {
         do {
             scelta = view.visualizzaMenuProposte();
             switch (scelta) { // switch con un solo case per ampliamento futuro
-                case 1 -> view.visualizzaProposte();
+                case 1 -> view.visualizzaProposte(proposteModel.getProposteModificabiliPerAutore(utenteAttivo));
                 case 2 -> this.effettuaProposta();
                 case 3 -> this.cambiaStatoProposta();
                 case 0 -> view.uscitaMenu("submenu");
