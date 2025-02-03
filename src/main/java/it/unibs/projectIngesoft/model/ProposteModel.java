@@ -54,8 +54,6 @@ public class ProposteModel {
     private final ProposteMapper mapper;
 
     public ProposteModel(Utente utenteAttivo, ProposteMapper mapper) {
-       // this.gestFatt = new FattoriModel();
-
         this.hashListaProposte = new HashMap<>();
         this.utenteAttivo = utenteAttivo;
 
@@ -64,7 +62,6 @@ public class ProposteModel {
         if(hashListaProposte == null) {
             hashListaProposte = new HashMap<>();
         }
-
     }
 
 
@@ -92,7 +89,7 @@ public class ProposteModel {
     }
 
     public void save(){
-        mapper.write(new HashMap<>(hashListaProposte));
+        mapper.write(hashListaProposte);
     }
 
     /**
@@ -126,7 +123,7 @@ public class ProposteModel {
 
         catena.add(nuovaProposta); // aggiungo la nuova così posso chiuderle tutte
         catena.forEach(Proposta::setChiusa);
-        mapper.write(new HashMap<>(hashListaProposte)); // aggiorno i dati salvati con i nuovi stati //todo perché fai new?
+        save(); // aggiorno i dati salvati con i nuovi stati //todo perché fai new?
     }
 
     private ArrayList<Proposta> concatenaCompatibili(Proposta first, Proposta last, ArrayList<Proposta> proposteComprensorio) {
@@ -176,7 +173,7 @@ public class ProposteModel {
      * L'autore è sempre un Fruitore.
      */
     private void cambiaStatoProposta() {
-        assert utenteAttivo instanceof Fruitore;
+        /*assert utenteAttivo instanceof Fruitore;
         String comprensorio = ((Fruitore) utenteAttivo).getComprensorioDiAppartenenza();
 
         boolean esisteAlmenoUnaPropostaPerLUtenteLoggatoOra = false;
@@ -228,7 +225,7 @@ public class ProposteModel {
         }
         System.out.println(MSG_STATO_MODIFICATO.formatted(statoNuovo));
 
-        mapper.write(new HashMap<>(hashListaProposte));
+        save();*/
     }
 
     /**
@@ -399,14 +396,12 @@ public class ProposteModel {
 	}
 	
 	public void cambiaStato(Proposta daCambiare){
-		//(daCambiare.getStato() == StatiProposta.APERTA) ? daCambiare.setStato(StatiProposta.RITIRATA) : daCambiare.setStato(StatiProposta.APERTA);
-        if(daCambiare.getStato() == StatiProposta.APERTA) daCambiare.setRitirata();
+		if(daCambiare.getStato() == StatiProposta.APERTA) daCambiare.setRitirata();
         else {
             daCambiare.setAperta();
             cercaProposteDaChiudere(daCambiare);
         }
-		
-        mapper.write(new HashMap<>(hashListaProposte));
+        save();
 	}
 
     public List<Proposta> getPropostePerAutore(Fruitore autore) {
