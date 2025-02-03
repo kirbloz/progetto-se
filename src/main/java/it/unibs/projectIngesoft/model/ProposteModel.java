@@ -126,7 +126,7 @@ public class ProposteModel {
 
         catena.add(nuovaProposta); // aggiungo la nuova così posso chiuderle tutte
         catena.forEach(Proposta::setChiusa);
-        mapper.write(new HashMap<>(hashListaProposte)); // aggiorno i dati salvati con i nuovi stati
+        mapper.write(new HashMap<>(hashListaProposte)); // aggiorno i dati salvati con i nuovi stati //todo perché fai new?
     }
 
     private ArrayList<Proposta> concatenaCompatibili(Proposta first, Proposta last, ArrayList<Proposta> proposteComprensorio) {
