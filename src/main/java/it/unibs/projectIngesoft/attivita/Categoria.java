@@ -15,44 +15,32 @@ import java.util.List;
  * all'interno di un albero di categorie. Ogni categoria può avere un valore di dominio ereditato dalla madre,
  * e può definire un campo per le categorie figlie.
  */
-@JacksonXmlRootElement(localName = "Categoria")
 public class Categoria {
 
     @JsonProperty("nome")
-    @JacksonXmlProperty(localName = "nome")
     protected String nome;
 
     @JsonProperty("valoreDominio")
-    @JacksonXmlProperty(localName = "valoreDominio")
     protected ValoreDominio valoreDominio;
 
     @JsonProperty("isRadice")
-    @JacksonXmlProperty(localName = "isRadice")
     private boolean isRadice;
 
     @JsonProperty("isFoglia")
-    @JacksonXmlProperty(localName = "isFoglia")
     private boolean isFoglia;
 
     @JsonProperty("nomeMadre")
-    @JacksonXmlProperty(localName = "nomeMadre")
     private String nomeMadre;
 
     // campo che QUESTA categoria eredita dalla madre
     @JsonProperty("campo")
-    @JacksonXmlProperty(localName = "campo")
     private String campo;
 
     // campo definito come dominio a cui appartengono le figlie di QUESTA categoria
     @JsonProperty("campoFiglie")
-    @JacksonXmlProperty(localName = "campoFiglie")
     private String campoFiglie;
 
-
-    //@JsonProperty("Categoria")
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    @JacksonXmlElementWrapper(localName = "categorieFiglie")
-    @JacksonXmlProperty(localName = "Categoria")
     private ArrayList<Categoria> categorieFiglie;
 
     /**

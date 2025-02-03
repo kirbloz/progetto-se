@@ -1,24 +1,20 @@
 package it.unibs.projectIngesoft.attivita;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonRootName;
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * ValoreDominio è una classe che rappresenta i singoli valori che esistono all'interno di un "dominio concettuale".
  * Può essere ripetuto all'interno di più domini ed ha opzionalmente una descrizione.
  */
-
-
 @JsonInclude(JsonInclude.Include.NON_NULL)
-//@JsonRootName("valoreDominio")
 public class ValoreDominio {
 
     // obbligatorio
-    @JacksonXmlProperty(localName="nome")
+    @JsonProperty
     private String nome;
     // opzionale
-    @JacksonXmlProperty(localName="descrizione")
+    @JsonProperty
     private String descrizione;
 
     /**
@@ -63,8 +59,7 @@ public class ValoreDominio {
     }
 
     public void setDescrizione(String descrizione) {
-        assert descrizione != null
-                /*&& !descrizione.trim().isEmpty()*/ : "La descrizione non deve essere null";
+        assert descrizione != null : "La descrizione non deve essere null";
         this.descrizione = descrizione;
     }
 

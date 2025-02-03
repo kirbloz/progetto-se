@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 
 @JsonTypeInfo(
@@ -19,10 +18,8 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 @JsonRootName("")
 public class Utente {
 
-    @JacksonXmlProperty(localName = "username")
     @JsonProperty
     protected String username;
-    @JacksonXmlProperty(localName = "password")
     @JsonProperty("password")
     protected String password;
 

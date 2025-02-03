@@ -12,7 +12,6 @@ import java.util.List;
  * FattoreDiConversione rappresenta un fattore di conversione tra due categorie.
  * Viene utilizzata per calcolare il fattore di conversione delle ore da una categoria a un'altra.
  */
-@JacksonXmlRootElement(localName = "FattoreDiConversione")
 public class FattoreDiConversione {
 
     @JsonProperty("nome_c1")

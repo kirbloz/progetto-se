@@ -13,17 +13,9 @@ import java.util.Objects;
 /**
  * Classe creata per facilitare la serializzazione XML dei dati relativi alle categorie gestite da GestoreCategorie.
  */
-@JacksonXmlRootElement(localName = "Albero")
-@JsonIgnoreProperties(ignoreUnknown = true)
-@JsonTypeName("Albero")
+
 public class Albero {
 
-    /*
-     * Queste annotazioni permettono di evitare la serializzazione come "<ArrayList><item>..." che poi causa
-     * problemi durante la de-serializzazione.
-     */
-    @JacksonXmlProperty(localName = "radice")
-    @JacksonXmlElementWrapper(useWrapping = false)
     private List<Categoria> radici;
 
     /**

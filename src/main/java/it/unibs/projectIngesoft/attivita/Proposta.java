@@ -2,45 +2,33 @@ package it.unibs.projectIngesoft.attivita;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import it.unibs.projectIngesoft.model.UtentiModel;
 import it.unibs.projectIngesoft.utente.Fruitore;
 
 import java.util.Stack;
 
-@JacksonXmlRootElement(localName = "Proposta")
 public class Proposta {
 
     @JsonProperty
-    @JacksonXmlProperty(localName = "richiesta")
     private String richiesta;
     @JsonProperty
-    @JacksonXmlProperty(localName = "offerta")
     private String offerta;
     @JsonProperty
-    @JacksonXmlProperty(localName = "oreRichiesta")
     private int oreRichiesta;
     @JsonProperty
-    @JacksonXmlProperty(localName = "oreOfferta")
     private int oreOfferta;
     @JsonProperty
-    @JacksonXmlProperty(localName = "stato")
     private StatiProposta stato;
     @JsonProperty
-    @JacksonXmlProperty(localName = "autore")
     private String autore;
     @JsonProperty
-    @JacksonXmlProperty(localName = "comprensorioDiAppartenenza")
     private String comprensorioDiAppartenenza;
     @JsonProperty
-    @JacksonXmlProperty(localName = "cronologiaStati")
     private Stack<StatiProposta> cronologiaStati;
     @JsonProperty
-    @JacksonXmlProperty(localName = "daNotificare")
     private boolean daNotificare;
 
-    public Proposta() {
+    protected Proposta() {
 
     }
 
@@ -66,6 +54,7 @@ public class Proposta {
 
     /**
      * La compatibilità vuole che la richiesta della proposta passata sia uguale all'offerta della proposta corrente.
+     *
      * @param p, proposta da controllare
      * @return true se l'offerta di this può soddisfare la richiesta di p (param)
      */
@@ -93,11 +82,36 @@ public class Proposta {
     }
 
     @JsonIgnore
+    public String getComprensorio() {
+        return this.comprensorioDiAppartenenza;
+    }
+
+    @JsonIgnore
+    public String getRichiesta() {
+        return richiesta;
+    }
+
+    @JsonIgnore
+    public String getOfferta() {
+        return offerta;
+    }
+
+    @JsonIgnore
+    public int getOreOfferta() {
+        return oreOfferta;
+    }
+
+    @JsonIgnore
+    public int getOreRichiesta() {
+        return oreRichiesta;
+    }
+
+    @JsonIgnore
     public boolean isDaNotificare() {
         return daNotificare;
     }
 
-    public void notificata(){
+    public void notificata() {
         this.daNotificare = false;
     }
 
@@ -121,31 +135,6 @@ public class Proposta {
 
     public void aggiornaStoricoStati() {
         cronologiaStati.push(this.stato);
-    }
-
-    @JsonIgnore
-    public String getComprensorio() {
-        return this.comprensorioDiAppartenenza;
-    }
-
-    @JsonIgnore
-    public String getRichiesta() {
-        return richiesta;
-    }
-
-    @JsonIgnore
-    public String getOfferta() {
-        return offerta;
-    }
-
-    @JsonIgnore
-    public int getOreOfferta() {
-        return oreOfferta;
-    }
-
-    @JsonIgnore
-    public int getOreRichiesta() {
-        return oreRichiesta;
     }
 
 }

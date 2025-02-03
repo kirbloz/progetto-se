@@ -6,14 +6,12 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 public class Configuratore extends Utente{
 
-    @JacksonXmlProperty(/*isAttribute = true,*/ localName = "type")
     @JsonProperty("type")
     private String type = "Configuratore";
 
     boolean firstAccess;
 
     public Configuratore() {
-        //super();
         super("", "");
         //per evitare nullpointerexception durante il primo accesso
         firstAccess = false;
@@ -25,10 +23,6 @@ public class Configuratore extends Utente{
 
     public void setFirstAccess(boolean firstAccess) {
         this.firstAccess = firstAccess;
-    }
-
-    public boolean firstAccess() {
-        return firstAccess;
     }
 
 	public boolean isFirstAccess() {
