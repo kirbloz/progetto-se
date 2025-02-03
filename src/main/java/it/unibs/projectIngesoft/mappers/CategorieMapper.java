@@ -7,22 +7,13 @@ import it.unibs.projectIngesoft.parsing.JacksonSerializer;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CategorieMapper{
+public class CategorieMapper implements Mapper<List<Categoria>> {
 
     private final String filePath;
-
     private final JacksonSerializer<List<Categoria>> jacksonSerializer;
-    // TODO
-    /*
-        IMPLEMENTARE CATEGORIE WRAPPER.
-        PER ORA SCRIVE SOLO LE CATEGORIE RADICE MA C'E' NECESSITA DI MEMORIZZARE
-        L'INTERA GERARCHIA. PORCA PUPAZZA!
-        NON SERVE PIU CREDO DOVREBBE FUNZIONARE
-     */
 
     public CategorieMapper(String filePath, JacksonSerializer<List<Categoria>> jacksonSerializer) {
         this.filePath = filePath;
-        //readList(); o set ListaUtenti
         this.jacksonSerializer = jacksonSerializer;
     }
 

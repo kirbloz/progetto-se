@@ -7,7 +7,7 @@ import it.unibs.projectIngesoft.parsing.JacksonSerializer;
 import java.util.List;
 import java.util.Map;
 
-public class FattoriMapper {
+public class FattoriMapper implements Mapper<Map<String, List<FattoreDiConversione>>>{
 
     private final String filePath;
     private final JacksonSerializer<Map<String, List<FattoreDiConversione>>> jacksonSerializer;

@@ -6,7 +6,7 @@ import it.unibs.projectIngesoft.utente.Utente;
 
 import java.util.List;
 
-public class UtentiMapper{
+public class UtentiMapper implements Mapper<List<Utente>> {
 
     private final String filePath;
     private final String defaultCredentialsFilePath;
@@ -14,18 +14,13 @@ public class UtentiMapper{
     private final JacksonSerializer<List<Utente>> listUtentiSerializer;
     private final JacksonSerializer<Utente> utenteSerializer;
 
-    public UtentiMapper(String filePath, String defaultCredentialsFilePath,JacksonSerializer<List<Utente>> listUtentiSerializer, JacksonSerializer<Utente> utenteSerializer  ) {
+    public UtentiMapper(String filePath, String defaultCredentialsFilePath, JacksonSerializer<List<Utente>> listUtentiSerializer, JacksonSerializer<Utente> utenteSerializer) {
         this.filePath = filePath;
         this.defaultCredentialsFilePath = defaultCredentialsFilePath;
         this.listUtentiSerializer = listUtentiSerializer;
         this.utenteSerializer = utenteSerializer;
-        //readList(); o set ListaUtenti
     }
 
-    /**
-     * Sfrutto l'implementazione statica della classe Serializer per implementare l'interfaccia IIOList.
-     */
-    //@Override
     public void write(List<Utente> utenti) {
         assert utenti != null;
         assert this.filePath != null;
@@ -36,8 +31,8 @@ public class UtentiMapper{
         assert this.filePath != null;
         assert this.defaultCredentialsFilePath != null;
 
-            return this.listUtentiSerializer.deserialize(new TypeReference<>() {
-            }, this.filePath);
+        return this.listUtentiSerializer.deserialize(new TypeReference<>() {
+        }, this.filePath);
     }
 
     public Utente readDefaultUtente() {
@@ -45,9 +40,7 @@ public class UtentiMapper{
         Utente defaultUtente = utenteSerializer.deserialize(new TypeReference<>() {
         }, this.defaultCredentialsFilePath);
         assert defaultUtente != null : "l'utente default non può essere null, deve esistere";
-
         return defaultUtente;
     }
-
 
 }
