@@ -90,7 +90,7 @@ public class FruitoreController {
         do {
             scelta = view.visualizzaMenuProposte();
             switch (scelta) { // switch con un solo case per ampliamento futuro
-                case 1 -> view.visualizzaProposte(proposteModel.getProposteModificabiliPerAutore(utenteAttivo));
+                case 1 -> this.visualizzaProposteEffettuate();
                 case 2 -> this.effettuaProposta();
                 case 3 -> this.cambiaStatoProposta();
                 case 0 -> view.uscitaMenu("submenu");
@@ -193,6 +193,7 @@ public class FruitoreController {
                 .findFirst()
                 .orElse(null);
     }
+    ////////////////////////////////////////////// Fine CATEGORIE //////////////////////////////////////////////////////
 
     ///////////////////////// PROPOSTE //////////////////////////
     /**todo finire
@@ -260,7 +261,7 @@ public class FruitoreController {
      * L'autore è sempre un Fruitore.
      */
     private void cambiaStatoProposta() {
-        //assert utenteAttivo instanceof Fruitore;
+        assert utenteAttivo instanceof Fruitore;
 
         if (!proposteModel.esisteAlmenoUnaPropostaPerAutore(utenteAttivo)) {
             //System.out.println(MSG_NON_HAI_PROPOSTE_NON_CHIUSE);
@@ -299,16 +300,7 @@ public class FruitoreController {
 		}
     }
 
-    /**
-     * Mostra le proposte filtrando per categoria, che appaia come offerta o richiesta.
-     * Guida l'immissione della categoria.
-     */
-    public void visualizzaPropostePerCategoria() {
-        /*
-        assert hashListaProposte != null;
-        String categoria = gestFatt.selezioneFoglia(MSG_INSERISCI_CATEGORIA);
-        Predicate<Proposta> filtro = p -> p.getOfferta().equals(categoria) || p.getRichiesta().equals(categoria);
-        visualizzaProposte(HEADER_PROPOSTE_CATEGORIA.formatted(categoria), filtro);
-        */
+    private void visualizzaProposteEffettuate(){
+        view.visualizzaProposte(proposteModel.getPropostePerAutore(utenteAttivo));
     }
 }

@@ -399,4 +399,9 @@ public class ProposteModel {
 		
         mapper.write(new HashMap<>(hashListaProposte));
 	}
+
+    public List<Proposta> getPropostePerAutore(Fruitore autore) {
+        Predicate<Proposta> filtro = p -> p.getAutoreUsername().equals(autore.getUsername());
+        return getFilteredProposte(filtro).toList();
+    }
 }
