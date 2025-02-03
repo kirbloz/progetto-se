@@ -230,4 +230,19 @@ public class FruitoreView {
     public void visualizzaMessaggioErroreDuplicato() {
         System.out.println("Errore: Proposta già esistente!");
     }
+	
+	public void visualizzaErroreProposteInesistenti(){
+		System.out.println("Errore: non esistono proposte valide!");
+	}
+	
+	public boolean viualizzaConfermaCambioStatoProposta(Proposta p){
+		StatiProposta statoAttuale = p.getStato();
+        StatiProposta statoNuovo = (statoAttuale == StatiProposta.APERTA) ? StatiProposta.RITIRATA : StatiProposta.APERTA;
+
+        if (!InputDatiTerminale.yesOrNo(MSG_CONFERMA_CAMBIO_STATO.formatted(statoAttuale, statoNuovo))){
+            return false; // non conferma
+        } else {
+            return true;
+        }
+	}
 }

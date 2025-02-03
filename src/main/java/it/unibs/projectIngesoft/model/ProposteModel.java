@@ -237,12 +237,14 @@ public class ProposteModel {
      * @param oreRichiesta,       ore richieste
      * @return Proposta se esiste, null altrimenti
      */
-    private Proposta cercaProposta(String comprensorio, String categoriaOfferta, String categoriaRichiesta, int oreRichiesta) {
+    private Proposta cercaPropostaCambiabile(String comprensorio, String categoriaOfferta, String categoriaRichiesta, int oreRichiesta, Fruitore autore) {
 
         Predicate<Proposta> filtro = p -> p.getOfferta().equals(categoriaOfferta)
                 && p.getOreRichiesta() == oreRichiesta
                 && p.getRichiesta().equals(categoriaRichiesta)
-                && p.getComprensorio().equals(comprensorio);
+                && p.getComprensorio().equals(comprensorio)
+				&& p.getAutore().equals(autore)
+				&& p.getStato() != StatiProposta.CHIUSA;
 
         return getFilteredProposte(filtro)
                 .findFirst()
@@ -352,4 +354,36 @@ public class ProposteModel {
             }
         }
     }*/
+	
+	
+	//////////////////// Nuovi Metodi /////////////////////////////////
+	
+	public boolean esisteAlmenoUnaPropostaPerLUtente(Utente utente){
+        String comprensorio = utente.getComprensorioDiAppartenenza();
+		
+		if (hashListaProposte != null && hashListaProposte.get(comprensorio) != null) {
+            for (Proposta proposta : hashListaProposte.get(comprensorio)) {
+                if (proposta.getStato() != StatiProposta.CHIUSA && proposta.getAutoreUsername().equals(utente.getUsername())) {
+                    return true;
+                }
+            }
+        }
+		return false
+	}
+	
+	public List<Proposta> getProposteCambiabiliDi(Utente utente){
+		List<Proposta> proposteValide = new List<>();
+		for(Proposta p : hashListaProposte.get(utente.getComprensorioDiAppartenenza())){
+			if (proposta.getStato() != StatiProposta.CHIUSA && proposta.getAutoreUsername().equals(utente.getUsername())) {
+                    proposteValide.add(p);
+                }
+		}
+		return proposteValide;
+	}
+	
+	public void cambiaStato(Proposta daCambiare){
+		(daCambiare.getStato() == StatiProposta.APERTA) ? daCambiare.setStato(StatiProposta.RITIRATA) : daCambiare.setStato(StatiProposta.APERTA);
+		
+        mapper.write(new HashMap<>(hashListaProposte));
+	}
 }
