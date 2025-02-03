@@ -49,8 +49,8 @@ public class ConfiguratoreController {
      */
     public void run() {
         if (utenteAttivo.isFirstAccess()) {
-            cambioCredenziali();
             utenteAttivo.setFirstAccess(false);
+            cambioCredenziali();
         }
 
         int scelta;
