@@ -8,10 +8,17 @@ import it.unibs.projectIngesoft.view.FruitoreView;
 
 import java.util.List;
 
-import static it.unibs.projectIngesoft.view.ConfiguratoreView.*;
-import static it.unibs.projectIngesoft.view.FruitoreView.WARNING_NO_RAMI_DA_ESPLORARE;
+
+
+import static it.unibs.projectIngesoft.view.FruitoreView.*;
 
 public class FruitoreController {
+
+    public static final String WARNING_RADICE_NON_ESISTE = ">> (!!) Per favore indica una categoria radice che esiste";
+    public static final String MSG_SELEZIONE_RADICE = ">> Inserisci il nome di una categoria radice\n";
+    public static final String MSG_INPUT_NOME_RADICE = ">> Inserisci il nome della categoria radice\n> ";
+    public static final String MSG_INPUT_SCELTA_CAMPO = ">> Scegli un campo tra quelli delle categorie non foglia\n";
+
 
     private FruitoreView view;
 
@@ -239,7 +246,7 @@ public class FruitoreController {
             return;
         }
 
-        Proposta tempProposta = new Proposta(categoriaRichiesta, categoriaOfferta, oreRichiesta, oreOfferta, (Fruitore) utenteAttivo);
+        Proposta tempProposta = new Proposta(categoriaRichiesta, categoriaOfferta, oreRichiesta, oreOfferta, utenteAttivo);
 
         // 3.1 se confermi ma è duplicata, segnala e non aggiunge
         if (proposteModel.controllaPropostaDuplicata(tempProposta)) {
@@ -262,7 +269,6 @@ public class FruitoreController {
         assert utenteAttivo instanceof Fruitore;
 
         if (!proposteModel.esisteAlmenoUnaPropostaPerAutore(utenteAttivo)) {
-            //System.out.println(MSG_NON_HAI_PROPOSTE_NON_CHIUSE);
 			view.visualizzaErroreProposteInesistenti();
             return;
         }
@@ -280,15 +286,14 @@ public class FruitoreController {
         do {
             view.visualizzaProposte(proposteModel.getProposteModificabiliPerAutore(utenteAttivo));
 
-            categoriaRichiesta = view.inserimentoFogliaFormattata("Inserisci Richiesta");
+            categoriaRichiesta = view.inserimentoFogliaFormattata(MSG_SELEZIONE_CATEGORIA_RICHIESTA);
             oreRichiesta = view.inserimentoOre();
-            categoriaOfferta = view.inserimentoFogliaFormattata("Inserisci Offerta");
+            categoriaOfferta = view.inserimentoFogliaFormattata(MSG_SELEZIONE_CATEGORIA_RICHIESTA);
 
             daCambiare = proposteModel.cercaPropostaCambiabile(categoriaOfferta, categoriaRichiesta, oreRichiesta, utenteAttivo); //ma il wadelo ha fallato questo o sto delirando
 			
-            if (daCambiare != null ) {
+            if (daCambiare != null )
                 found = true;
-            }
 			
         } while (!found);
 
@@ -301,7 +306,7 @@ public class FruitoreController {
     }
 
     private void visualizzaProposteEffettuate(){
-        view.visualizzaProposteAutoreHeader();
+        view.visualizzaProposteAutoreHeader(utenteAttivo.getUsername());
         view.visualizzaProposte(proposteModel.getPropostePerAutore(utenteAttivo));
     }
 }

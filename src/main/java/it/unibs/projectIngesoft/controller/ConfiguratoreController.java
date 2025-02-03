@@ -100,7 +100,7 @@ public class ConfiguratoreController {
         do {
             scelta = view.visualizzaMenuFattori();
             switch (scelta) {
-                case 1 -> visualizzaFattori(); //todo da implementare
+                case 1 -> visualizzaFattori();
                 default -> {
                 }
             }
