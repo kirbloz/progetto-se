@@ -89,6 +89,10 @@ public class ProposteModel {
         else return new ArrayList<>();
     }
 
+    public void save(){
+        mapper.write(new HashMap<>(hashListaProposte));
+    }
+
     /**
      * Controlla se esiste già una proposta così nel comprensorio, da parte dello stesso utente.
      *
