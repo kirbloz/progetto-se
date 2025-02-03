@@ -401,7 +401,10 @@ public class ProposteModel {
 	public void cambiaStato(Proposta daCambiare){
 		//(daCambiare.getStato() == StatiProposta.APERTA) ? daCambiare.setStato(StatiProposta.RITIRATA) : daCambiare.setStato(StatiProposta.APERTA);
         if(daCambiare.getStato() == StatiProposta.APERTA) daCambiare.setRitirata();
-        else daCambiare.setAperta();
+        else {
+            daCambiare.setAperta();
+            cercaProposteDaChiudere(daCambiare);
+        }
 		
         mapper.write(new HashMap<>(hashListaProposte));
 	}
