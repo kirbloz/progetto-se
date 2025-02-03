@@ -176,8 +176,30 @@ public class FruitoreView {
 
     /// ////////////////////// PROPOSTE //////////////////////////
 
-    public void visualizzaProposte() {
-        //todo da implementare
+    public void visualizzaProposte(List<Proposta> lista) {
+        //todo da implementare -> copiata da proposteToString(..)
+        if (lista.isEmpty())
+            print(">> (!!) Nessuna proposta da visualizzare.");
+
+        StringBuilder aperte = new StringBuilder();
+        StringBuilder chiuse = new StringBuilder();
+        StringBuilder ritirate = new StringBuilder();
+        aperte.append(HEADER_PROPOSTE_APERTE);
+        chiuse.append(HEADER_PROPOSTE_CHIUSE);
+        ritirate.append(HEADER_PROPOSTE_RITIRATE);
+
+        lista.forEach(
+                proposta -> {
+                    switch (proposta.getStato()) {
+                        case StatiProposta.APERTA -> aperte.append(proposta).append("\n");
+                        case StatiProposta.CHIUSA -> chiuse.append(proposta).append("\n");
+                        case StatiProposta.RITIRATA -> ritirate.append(proposta).append("\n");
+                    }
+                });
+
+        print(aperte.toString());
+        print(chiuse.toString());
+        print(ritirate.toString());
     }
 
     public int selezioneOreOfferta() {
