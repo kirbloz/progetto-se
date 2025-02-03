@@ -38,7 +38,6 @@ public class FruitoreView {
 
     // CATEGORIE
 
-    public static final String HEADER_ESPLORA_GERARCHIE = "\n>> ESPLORA GERARCHIE <<\n";
     public static final String HEADER_ESPLORAZIONE_LIVELLO = "\n>> LIVELLO CORRENTE [ %s ] <<\n";
 
     public static final String TITLE_SUBMENU_ESPLORA_GERARCHIA = "ESPLORA GERARCHIA";
@@ -49,10 +48,9 @@ public class FruitoreView {
 
     public static final String WARNING_NO_RAMI_DA_ESPLORARE = ">> (!!) Non ci sono nuovi rami da esplorare";
 
-    public static final String HEADER_PROPOSTE_PRONTE = ">> PROPOSTE PRONTE <<";
+
     public static final String HEADER_PROPOSTE_MODIFICABILI = ">> PROPOSTE MODIFICABILI<<\n";
     public static final String HEADER_PROPOSTE_AUTORE = ">> PROPOSTE DI %s <<\n";
-    public static final String HEADER_PROPOSTE_CATEGORIA = ">> PROPOSTE CON %s <<\n";
 
     public static final String HEADER_PROPOSTE_CHIUSE = ">> PROPOSTE CHIUSE\n";
     public static final String HEADER_PROPOSTE_RITIRATE = ">> PROPOSTE RITIRATE\n";
@@ -71,6 +69,7 @@ public class FruitoreView {
     public static final String MSG_SELEZIONE_CATEGORIA_OFFERTA = ">> Inserisci la categoria OFFERTA per la selezione: ";
     public static final String MSG_CONFERMA_CAMBIO_STATO = ">> Vuoi cambiare lo stato della proposta da %s a %s?";
     public static final String MSG_STATO_MODIFICATO = ">> Stato modificato in %s";
+
 
     public static final String WARNING_IMPOSSIBILE_CALCOLARE_ORE = ">> Impossibile Calcolare il numero di ore da offrire.\n";
     public static final String WARNING_PROPOSTA_ANNULLATA = ">> Proposta annullata";
@@ -100,8 +99,7 @@ public class FruitoreView {
     }
 
     public int visualizzaMenuEsploraGerarchia() {
-        System.out.println(HEADER_ESPLORA_GERARCHIE);
-        Menu subMenu = new Menu(TITLE_SUBMENU_ESPLORA_GERARCHIA, VOCI_SUBMENU_ESPLORA_GERARCHIA);
+       Menu subMenu = new Menu(TITLE_SUBMENU_ESPLORA_GERARCHIA, VOCI_SUBMENU_ESPLORA_GERARCHIA);
         return subMenu.scegli();
 
     }
@@ -136,16 +134,16 @@ public class FruitoreView {
     public void visualizzaLivello(String dominio, Categoria categoriaMadre) {
         //visualizza categoria
         //visualizza possibili campi
-        System.out.println(String.format(HEADER_ESPLORAZIONE_LIVELLO, dominio));
-        if(categoriaMadre.isRadice())
-            System.out.println(MSG_PRIMO_LIVELLO);
+        print(String.format(HEADER_ESPLORAZIONE_LIVELLO, dominio));
+        if (categoriaMadre.isRadice())
+            print(MSG_PRIMO_LIVELLO);
 
         for (Categoria categoria : categoriaMadre.getCategorieFiglie()) {
             visualizzaCategoria(categoria);
         }
     }
 
-    public void print(String msg){
+    public void print(String msg) {
         System.out.println(msg);
     }
 
@@ -177,8 +175,10 @@ public class FruitoreView {
 
     public void visualizzaProposte(List<Proposta> lista) {
         //todo da implementare -> copiata da proposteToString(..)
-        if (lista.isEmpty())
+        if (lista.isEmpty()) {
             print(">> (!!) Nessuna proposta da visualizzare.");
+            return;
+        }
 
         StringBuilder aperte = new StringBuilder();
         StringBuilder chiuse = new StringBuilder();
@@ -235,28 +235,28 @@ public class FruitoreView {
     }
 
     public void visualizzaErroreInserimentoCategoria() {
-        System.out.println("Errore inserimento categoria!");
+        print("Errore inserimento categoria!");
     }
 
     public void visualizzaErroreCalcoloOre() {
-        System.out.println("Errore Calcolo Ore!");
+        print(WARNING_IMPOSSIBILE_CALCOLARE_ORE);
     }
 
     //todo formattare meglio la stringa per la stampa perchè così si fa fatica a leggerla
     public boolean confermaInserimento(String categoriaRichiesta, String categoriaOfferta, int oreRichiesta, int oreOfferta) {
-        return InputDatiTerminale.yesOrNo("\n" + categoriaRichiesta + " : " + oreRichiesta + "\n" + categoriaOfferta + " : " + oreOfferta + "\n" + MSG_CONFERMA_PROPOSTA.formatted(oreOfferta));
+        return getUserChoiceYoN("\n" + categoriaRichiesta + " : " + oreRichiesta + "\n" + categoriaOfferta + " : " + oreOfferta + "\n" + MSG_CONFERMA_PROPOSTA.formatted(oreOfferta));
     }
 
     public void visualizzaMessaggioAnnulla() {
-        System.out.println(WARNING_PROPOSTA_ANNULLATA);
+        print(WARNING_PROPOSTA_ANNULLATA);
     }
 
     public void visualizzaMessaggioErroreDuplicato() {
-        System.out.println(WARNING_PROPOSTA_DUPLICATA);
+        print(WARNING_PROPOSTA_DUPLICATA);
     }
 
     public void visualizzaErroreProposteInesistenti() {
-        System.out.println("(!!) Errore: non esistono proposte valide!");
+        print(MSG_NON_HAI_PROPOSTE_NON_CHIUSE);
     }
 
     public boolean viualizzaConfermaCambioStatoProposta(Proposta p) {
@@ -266,11 +266,11 @@ public class FruitoreView {
         return getUserChoiceYoN(MSG_CONFERMA_CAMBIO_STATO.formatted(statoAttuale, statoNuovo));
     }
 
-    public void visualizzaProposteModificabiliHeader(){
+    public void visualizzaProposteModificabiliHeader() {
         print(HEADER_PROPOSTE_MODIFICABILI);
     }
 
-    public void visualizzaProposteAutoreHeader(){
-        print(HEADER_PROPOSTE_AUTORE );
+    public void visualizzaProposteAutoreHeader(String autore) {
+        print(HEADER_PROPOSTE_AUTORE.formatted(autore));
     }
 }

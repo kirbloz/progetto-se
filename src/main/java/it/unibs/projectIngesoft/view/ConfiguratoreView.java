@@ -86,11 +86,8 @@ public class ConfiguratoreView implements UtenteViewableTerminal {
     public static final String MSG_INSERIMENTO_NOME_CATEGORIA_MADRE = ">> Inserisci il nome della CATEGORIA MADRE per %s:\n> ";
 
     public static final String MSG_INSERIMENTO_RADICE = ">> Scegli un nome per il nuovo albero di categorie che non esista già.\n> ";
-    public static final String MSG_PRINT_LISTA_RADICI = ">> Sopra trovi tutte le categorie radice.\n";
+    public static final String MSG_PRINT_LISTA_RADICI = ">> Qui trovi tutte le categorie radice.\n";
 
-    public static final String MSG_SELEZIONE_RADICE = ">> Inserisci il nome di una categoria radice\n";
-    public static final String MSG_INPUT_NOME_RADICE = ">> Inserisci il nome della categoria radice\n> ";
-    public static final String MSG_INPUT_SCELTA_CAMPO = ">> Scegli un campo tra quelli delle categorie non foglia\n";
 
     public static final String MSG_INPUT_NUOVO_NOME_RADICE = ">> Inserisci il nome della NUOVA CATEGORIA RADICE:\n> ";
     public static final String MSG_INSERIMENTO_NUOVA_CATEGORIA = ">> Inserisci il nome della NUOVA CATEGORIA:\n> ";
@@ -99,7 +96,6 @@ public class ConfiguratoreView implements UtenteViewableTerminal {
     public static final String CONFIRM_DESCRIZIONE_AGGIUNTA = ">> Descrizione aggiunta <<";
 
     public static final String WARNING_RADICE_ESISTE = ">> (!!) Per favore indica una categoria radice che non esiste già\n";
-    public static final String WARNING_RADICE_NON_ESISTE = ">> (!!) Per favore indica una categoria radice che esiste";
     public static final String WARNING_CATEGORIA_ESISTE = ">> (!!) Per favore indica una categoria che non esista già in questo albero gerarchico.\n";
     public static final String WARNING_CATEGORIA_NF_NON_ESISTE = ">> (!!) Per favore indica una categoria non foglia dell'albero gerarchico selezionato.\n";
     public static final String WARNING_NO_GERARCHIE_MEMORIZZATE = ">> (!!) Nessuna gerarchia memorizzata.";
@@ -114,9 +110,8 @@ public class ConfiguratoreView implements UtenteViewableTerminal {
     // STRINGHE PER PROPOSTE
 
     public static final String HEADER_PROPOSTE_PRONTE = ">> PROPOSTE PRONTE <<";
-    public static final String HEADER_PROPOSTE_MODIFICABILI = ">> PROPOSTE MODIFICABILI<<\n";
-    public static final String HEADER_PROPOSTE_AUTORE = ">> PROPOSTE DI %s <<\n";
     public static final String HEADER_PROPOSTE_CATEGORIA = ">> PROPOSTE CON %s <<\n";
+
 
     public static final String HEADER_PROPOSTE_CHIUSE = ">> PROPOSTE CHIUSE\n";
     public static final String HEADER_PROPOSTE_RITIRATE = ">> PROPOSTE RITIRATE\n";
@@ -189,13 +184,13 @@ public class ConfiguratoreView implements UtenteViewableTerminal {
     public void uscitaMenu(String menu) {
         switch (menu) {
             case "aggiungiGerarchia":
-                System.out.println(">> USCITA MENU AGGIUNTA GERARCHIA..");
+                print(">> USCITA MENU AGGIUNTA GERARCHIA..");
                 break;
             case "programma":
-                System.out.println(">> USCITA PROGRAMA..");
+                print(">> USCITA PROGRAMMA..");
                 break;
             case "submenu":
-                System.out.println(">> USCITA SUBMENU..");
+                print(">> USCITA SUBMENU..");
                 break;
         }
     }
@@ -208,17 +203,17 @@ public class ConfiguratoreView implements UtenteViewableTerminal {
      * @param radici lista radici.
      */
     public void visualizzaListaRadici(List<Categoria> radici) {
-        System.out.println(HEADER_VISUALIZZA_GERARCHIE);
+        print(HEADER_VISUALIZZA_GERARCHIE);
         if (radici == null || radici.isEmpty()){
-            System.out.println(">> Nessuna radice presente.");
+            print(">> Nessuna radice presente.");
             return;
         }
 
         for (Categoria radice : radici) {
-            System.out.println("> RADICE");
+            print("> RADICE");
             visualizzaCategoria(radice);
         }
-        System.out.println();
+        print("");
     }
 
     public void visualizzaGerarchia(Categoria radice){
@@ -245,31 +240,23 @@ public class ConfiguratoreView implements UtenteViewableTerminal {
         } else {
             sb.append("> Foglia");
         }
-        System.out.println(sb);
+        print(sb.toString());
     }
 
     public void visualizzaFiglieCategoria(Categoria categoria) {
         if (categoria.hasFiglie()) {
-            System.out.println("\t﹂ Nessuna figlia.");
+            print("\t﹂ Nessuna figlia.");
             return;
         }
 
         List<Categoria> figlie = categoria.getCategorieFiglie();
-
         figlie.forEach(figlia -> {
-            System.out.println();
             visualizzaCategoria(figlia);
             visualizzaFiglieCategoria(figlia);
         });
 
         System.out.println();
     }
-
-
-    public double visualizzaInserimentoFdCInternoEsterno(String nomeFogliaEsternaFormattata, String nomeFogliaInternaFormattata){
-        return InputDatiTerminale.leggiDoubleConRange(INSERISCI_IL_FATTORE_TRA.formatted(nomeFogliaEsternaFormattata, nomeFogliaInternaFormattata), MIN_FATTORE, MAX_FATTORE);
-    }
-
 
 
     /*
