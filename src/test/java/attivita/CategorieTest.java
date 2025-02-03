@@ -39,7 +39,7 @@ class CategorieTest {
 
     @AfterEach
     void tearDown() {
-        mapper.write(cleanTestData);
+        //mapper.write(cleanTestData);
     }
 
     @Test

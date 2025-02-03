@@ -22,7 +22,7 @@ public class CategorieMapperTest {
     @BeforeEach
     void prepareTest() {
 
-        CategorieMapper mapper = new CategorieMapper("categorieTest.json",
+        CategorieMapper mapper = new CategorieMapper("categorieTest1.json",
                 new SerializerJSON<List<Categoria>>());
 
         this.model = new CategorieModel(
@@ -151,8 +151,9 @@ public class CategorieMapperTest {
 
 
         System.out.println(tree.getRadici());
-        model.getRadici();
+        model.setRadici(tree.getRadici());
         System.out.println(model.getRadici());
+        model.save();
 
         //SerializerJSON.serialize("categorieTest.json", tree.getRadici());
 

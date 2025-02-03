@@ -7,6 +7,7 @@ import it.unibs.projectIngesoft.mappers.ProposteMapper;
 import it.unibs.projectIngesoft.parsing.SerializerJSON;
 import it.unibs.projectIngesoft.parsing.SerializerXML;
 import it.unibs.projectIngesoft.utente.Configuratore;
+import it.unibs.projectIngesoft.utente.Fruitore;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -24,7 +25,7 @@ public class ProposteMapperTest {
         xml = false;
 
         if (!xml) {
-            this.mapper = new ProposteMapper("proposte.json",
+            this.mapper = new ProposteMapper("proposteTest.json",
                     new SerializerJSON<Map<String, List<Proposta>>>());
         } else {
             this.mapper = new ProposteMapper("proposte.xml",
@@ -42,9 +43,9 @@ public class ProposteMapperTest {
         if (xml)
             return;
 
-        /*ProposteModel model = new ProposteModel("proposte.json",
-                "fattori.json",
-                new Configuratore("admin", "pwd"));
+        ProposteModel model = new ProposteModel(new Configuratore("admin", "pwd"),
+                this.mapper
+                );
 
         model.addProposta(new Proposta("richiesta",
                 "offerta",
@@ -73,18 +74,13 @@ public class ProposteMapperTest {
 
         mapper.write(model.getHashListaProposte());
 
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
-
-        String jacksonData = objectMapper.writeValueAsString(model.getHashListaProposte());
-        System.out.println(jacksonData);*/
     }
 
     @Test
     void readTest() {
         Map<String, List<Proposta>> hashListaProposte;
         hashListaProposte = mapper.read();
-        //System.out.println(hashListaProposte);
+        System.out.println(hashListaProposte);
         assert model.getHashListaProposte() != null;
 
 
