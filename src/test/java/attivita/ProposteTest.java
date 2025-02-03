@@ -1,6 +1,7 @@
 package attivita;
 
 import it.unibs.projectIngesoft.attivita.Proposta;
+import it.unibs.projectIngesoft.attivita.StatiProposta;
 import it.unibs.projectIngesoft.libraries.InputInjector;
 import it.unibs.projectIngesoft.mappers.ProposteMapper;
 import it.unibs.projectIngesoft.model.ProposteModel;
@@ -52,21 +53,51 @@ public class ProposteTest {
     }
 
     @Test
-    void cambiaStatoProposta(){
-        assert false;
+    void cambiaStatoPropostaRitirata(){
+        Fruitore utenteAttivo = new Fruitore("user", "pwd", "valid@email.com", "comprensorio");
+
+        Proposta P = new Proposta("Matematica", "Fisica", 10, 10, utenteAttivo);
+        P.setRitirata();
+        assert P.getStato().equals(StatiProposta.RITIRATA);
+    }
+
+    @Test
+    void cambiaStatoPropostaChiusa(){
+        Fruitore utenteAttivo = new Fruitore("user", "pwd", "valid@email.com", "comprensorio");
+
+        Proposta P = new Proposta("Matematica", "Fisica", 10, 10, utenteAttivo);
+        P.setChiusa();
+        assert P.getStato().equals(StatiProposta.CHIUSA);
     }
 
 
     @Test
     void controllaProposteSoddisfatte_Due(){
-        assert false;
+        Fruitore utenteAttivo = new Fruitore("user", "pwd", "valid@email.com", "comprensorio");
+
+        Proposta P1 = new Proposta("Matematica", "Fisica", 10, 10, utenteAttivo);
+        Proposta P2 = new Proposta("Fisica", "Matematica", 10, 10, utenteAttivo);
+        model.addProposta(P1);
+        model.addProposta(P2);
+
+        model.cercaProposteDaChiudere(P1);
+
+        assert P1.getStato().equals(StatiProposta.CHIUSA) && P2.getStato().equals(StatiProposta.CHIUSA);
     }
 
     @Test
     void controllaProposteSoddisfatte_Tre_A_Catena(){
-        assert false;
+        Fruitore utenteAttivo = new Fruitore("user", "pwd", "valid@email.com", "comprensorio");
+
+        Proposta P1 = new Proposta("Matematica", "Fisica", 10, 10, utenteAttivo);
+        Proposta P2 = new Proposta("Fisica", "Geografia", 10, 10, utenteAttivo);
+        Proposta P3 = new Proposta("Geografia", "Matematica", 10, 10, utenteAttivo);
+        model.addProposta(P1);
+        model.addProposta(P2);
+        model.addProposta(P3);
+
+        model.cercaProposteDaChiudere(P1);
+
+        assert P1.getStato().equals(StatiProposta.CHIUSA) && P2.getStato().equals(StatiProposta.CHIUSA) && P3.getStato().equals(StatiProposta.CHIUSA);
     }
-
-
-
 }
