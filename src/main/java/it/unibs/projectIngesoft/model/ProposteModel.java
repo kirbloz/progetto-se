@@ -6,7 +6,6 @@ import it.unibs.projectIngesoft.attivita.Proposta;
 import it.unibs.projectIngesoft.attivita.StatiProposta;
 import it.unibs.projectIngesoft.libraries.InputDatiTerminale;
 import it.unibs.projectIngesoft.mappers.ProposteMapper;
-import it.unibs.projectIngesoft.utente.Configuratore;
 import it.unibs.projectIngesoft.utente.Fruitore;
 import it.unibs.projectIngesoft.utente.Utente;
 
@@ -32,7 +31,7 @@ public class ProposteModel {
 
 
     private static final String MSG_INSERISCI_CATEGORIA = ">> Inserisci una categoria di cui ricercare le proposte";
-    public static final String MSG_FORMATTED_PROPOSTA_PRONTA = "%s, %s\n >>> Indirizzo email: %s\n";
+
 
     public static final String MSG_SELEZIONE_CATEGORIA_RICHIESTA = ">> Inserisci la categoria RICHIESTA per la selezione: ";
     public static final String MSG_SELEZIONE_ORE = ">> Inserisci il monte ORE RICHIESTE per la selezione: ";
@@ -329,7 +328,7 @@ public class ProposteModel {
      * @param filtro
      * @return
      */
-    private Stream<Proposta> getFilteredProposte(Predicate<Proposta> filtro) {
+    public Stream<Proposta> getFilteredProposte(Predicate<Proposta> filtro) {
         return hashListaProposte.keySet().stream().flatMap(comprensorio -> hashListaProposte.get(comprensorio).stream()).filter(filtro);
     }
 
