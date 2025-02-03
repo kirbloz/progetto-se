@@ -116,11 +116,4 @@ class CategorieTest {
         //questa concatenazione è nauseabonda, non abbiamo un metodo di controller vero?
     }
 
-    @Test
-    void checkCalcoloFattoriIntermedi() {
-        assert !false;
-        //servirà capire con il fattori model
-        //martino ti invoco @martibarimaff
-    }
-
 }
