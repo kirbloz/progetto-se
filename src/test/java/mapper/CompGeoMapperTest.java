@@ -1,11 +1,11 @@
 package mapper;
 
-import it.unibs.projectIngesoft.attivita.ComprensorioGeografico;
-import it.unibs.projectIngesoft.model.ComprensorioGeograficoModel;
 import it.unibs.projectIngesoft.mappers.CompGeoMapper;
+import it.unibs.projectIngesoft.model.ComprensorioGeograficoModel;
 import it.unibs.projectIngesoft.parsing.SerializerJSON;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import java.util.Arrays;
 
 class CompGeoMapperTest {
@@ -23,7 +23,7 @@ class CompGeoMapperTest {
 
     @Test
     void write() {
-        ComprensorioGeografico tempComp1 =
+        /*ComprensorioGeografico tempComp1 =
                 new ComprensorioGeografico("Brescia",
                         Arrays.asList("Brescia",
                                 "Alfianello",
@@ -39,8 +39,21 @@ class CompGeoMapperTest {
                                 "Membro",
                                 "Zorro"));
         model.addComprensorio(tempComp1);
-        model.addComprensorio(tempComp2);
+        model.addComprensorio(tempComp2);*/
+        model.aggiungiComprensorio("Brescia",
+                Arrays.asList("Brescia",
+                        "Alfianello",
+                        "Berlingo",
+                        "Chiari",
+                        "Sirmione"));
 
+        model.aggiungiComprensorio("Bergamo",
+                Arrays.asList("Bergamo",
+                        "Albino",
+                        "Carona",
+                        "Cassiglio",
+                        "Membro",
+                        "Zorro"));
     }
 
     @Test
