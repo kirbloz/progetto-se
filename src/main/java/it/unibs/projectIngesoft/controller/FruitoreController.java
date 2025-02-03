@@ -112,7 +112,9 @@ public class FruitoreController {
         int scelta;
 
         // 0. seleziono la radice della gerarchia da esplorare
-        Categoria radice = inserimentoNomeCategoria(categorieModel.getRadici());
+        List<Categoria> listaRadiciNonFoglia = categorieModel.getRadici()
+                .stream().filter(c -> !c.isFoglia()).toList();
+        Categoria radice = inserimentoNomeCategoria(listaRadiciNonFoglia);
         Categoria madreCorrente = radice; // categoria madre del livello che si sta visualizzando al momento
         //List<Categoria> livello = madreCorrente.getCategorieFiglie();
 
