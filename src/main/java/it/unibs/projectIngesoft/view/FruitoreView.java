@@ -80,7 +80,6 @@ public class FruitoreView {
     public static final String WARNING_NO_GERARCHIE_MEMORIZZATE = ">> (!!) Nessuna gerarchia memorizzata.";
     public static final String MSG_PRIMO_LIVELLO = ">> PRIMO LIVELLO";
 
-
     //@Override
     public int visualizzaMenuCategorie() {
         //todo da implementare
@@ -257,16 +256,23 @@ public class FruitoreView {
     public void visualizzaMessaggioErroreDuplicato() {
         System.out.println(WARNING_PROPOSTA_DUPLICATA);
     }
-	
-	public void visualizzaErroreProposteInesistenti(){
-		System.out.println("Errore: non esistono proposte valide!");
-	}
-	
-	public boolean viualizzaConfermaCambioStatoProposta(Proposta p){
-		StatiProposta statoAttuale = p.getStato();
+
+    public void visualizzaErroreProposteInesistenti() {
+        System.out.println("(!!) Errore: non esistono proposte valide!");
+    }
+
+    public boolean viualizzaConfermaCambioStatoProposta(Proposta p) {
+        StatiProposta statoAttuale = p.getStato();
         StatiProposta statoNuovo = (statoAttuale == StatiProposta.APERTA) ? StatiProposta.RITIRATA : StatiProposta.APERTA;
 
         return getUserChoiceYoN(MSG_CONFERMA_CAMBIO_STATO.formatted(statoAttuale, statoNuovo));
     }
 
+    public void visualizzaProposteModificabiliHeader(){
+        print(HEADER_PROPOSTE_MODIFICABILI);
+    }
+
+    public void visualizzaProposteAutoreHeader(){
+        print(HEADER_PROPOSTE_AUTORE );
+    }
 }

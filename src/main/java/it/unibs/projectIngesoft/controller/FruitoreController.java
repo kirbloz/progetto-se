@@ -269,6 +269,8 @@ public class FruitoreController {
             return;
         }
 
+        view.visualizzaProposteModificabiliHeader();
+
         String categoriaRichiesta;
         String categoriaOfferta;
         int oreRichiesta;
@@ -301,6 +303,7 @@ public class FruitoreController {
     }
 
     private void visualizzaProposteEffettuate(){
+        view.visualizzaProposteAutoreHeader();
         view.visualizzaProposte(proposteModel.getPropostePerAutore(utenteAttivo));
     }
 }
