@@ -15,12 +15,20 @@ import it.unibs.projectIngesoft.view.UtenteViewableTerminal;
 
 public class ErmesController {
 
-    Utente utenteAttivo;
+    private static final String FATTORI_DI_CONVERSIONE_JSON_FILEPATH = "fattoriTest.json";
+    private static final String UTENTI_JSON_FILEPATH = "usersTest.json";
+    private static final String UTENTI_DEF_CREDS_JSON_FILEPATH = "defaultCredentials.json";
+    private static final String CATEGORIE_JSON_FILEPATH = "categorieTest.json";
+    private static final String COMPRENSORI_GEOGRAFICI_JSON_FILEPATH = "comprensoriGeograficiTest.json";
+    private static final String PROPOSTE_JSON_FILEPATH = "proposteTest.json";
+
+
+    //Utente utenteAttivo;
     UtentiModel modelUtenti;
 
     public ErmesController() {
-        UtentiMapper utentiMapper = new UtentiMapper("users.json",
-                "defaultCredentials.json",
+        UtentiMapper utentiMapper = new UtentiMapper(UTENTI_JSON_FILEPATH,
+                UTENTI_DEF_CREDS_JSON_FILEPATH,
                 new SerializerJSON<>(),
                 new SerializerJSON<>());
         modelUtenti = new UtentiModel(utentiMapper);
@@ -28,25 +36,23 @@ public class ErmesController {
     }
 
     public void mainLoop() {
-        UtenteViewableTerminal view;
-
         ComprensorioGeograficoModel compGeoModel = new ComprensorioGeograficoModel(
-                new CompGeoMapper("comprensoriGeograficiTest.json",
+                new CompGeoMapper(COMPRENSORI_GEOGRAFICI_JSON_FILEPATH,
                         new SerializerJSON<>()));
 
         AccessoController controllerAccesso = new AccessoController(modelUtenti, compGeoModel);
         Utente utenteAttivo = controllerAccesso.run();
 
         CategorieModel categorieModel = new CategorieModel(
-                new CategorieMapper("categorieTest.json",
+                new CategorieMapper(CATEGORIE_JSON_FILEPATH,
                         new SerializerJSON<>()));
 
         FattoriModel fattoriModel = new FattoriModel(
-                new FattoriMapper("fattoriTest.json",
+                new FattoriMapper(FATTORI_DI_CONVERSIONE_JSON_FILEPATH,
                         new SerializerJSON<>()));
 
         ProposteModel proposteModel = new ProposteModel(utenteAttivo,
-                new ProposteMapper("proposteTest.json",
+                new ProposteMapper(PROPOSTE_JSON_FILEPATH,
                         new SerializerJSON<>()));
 
 
@@ -75,39 +81,6 @@ public class ErmesController {
             controller.run();
         }
 
-
-
-        //controllerAccesso.events.subscribe("utenteOttenuto", this);
-        //viewAccesso.menuIniziale();
-
-            /*this.utenteAttivo = utentiController.effettuaAccesso();
-
-            if(this.utenteAttivo instanceof Configuratore){
-                view = new ConfiguratoreView();
-            }else{
-                view = new FruitoreView();
-            }*/
-
-
-        //}while(true);
-        /*boolean exit = false;
-        while (!exit) {
-            view.stampaMenu();
-            int choice = view.getUserSelection();
-            switch (choice) {
-                case 1:
-                    //fai qualcosa
-                    break;
-                case 2:
-                    //fai altro
-                    break;
-                case 3:
-                    exit = true;
-                    break;
-                default:
-                    //view.printMessage("Opzione non valida. Riprova.");
-            }
-        }*/
 
     }
 

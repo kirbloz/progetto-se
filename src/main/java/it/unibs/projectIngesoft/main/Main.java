@@ -15,12 +15,6 @@ import java.util.ArrayList;
 
 public class Main {
 
-    protected static final String FATTORI_DI_CONVERSIONE_XML_FILEPATH = "fattori.xml";
-    protected static final String UTENTI_XML_FILEPATH = "users.xml";
-    protected static final String UTENTI_DEF_CREDS_XML_FILEPATH = "defaultCredentials.xml";
-    public static final String CATEGORIE_XML_FILEPATH = "categorie.xml";
-    public static final String COMPRENSORI_GEOGRAFICI_XML_FILEPATH = "comprensoriGeografici.xml";
-    private static final String PROPOSTE_XML_FILEPATH = "proposte.xml";
 
 
     public static void main(String[] args) {
@@ -73,9 +67,6 @@ public class Main {
     /**
      * Metodo che gestisce il menu principale
      *
-     * @param menu,          menu principale
-     * @param menuCategorie, sotto-menu per le categorie
-     * @param menuFattori,   sotto-menu per i fattori
      */
     /*private static void loopMain(Menu menu, Menu menuCategorie, Menu menuFattori, Menu menuComprensoriGeografici, Menu menuProposte, UtentiModel userHandler, Utente utenteAttivo) {
         int scelta;
@@ -142,13 +133,13 @@ public class Main {
     }
 
     private static void loopProposte(Menu menuProposta, Utente utenteAttivo) {
-        int scelta;
+        /*int scelta;
         ProposteModel proposteModel = new ProposteModel(utenteAttivo,
                 new ProposteMapper(PROPOSTE_XML_FILEPATH, new SerializerJSON<>()));
         do {
             scelta = menuProposta.scegli();
-            proposteModel.entryPoint(scelta);
-        } while (scelta != 0);
+            //proposteModel.entryPoint(scelta);
+        } while (scelta != 0);*/
     }
 
     /**
