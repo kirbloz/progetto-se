@@ -2,6 +2,7 @@ package it.unibs.projectIngesoft.controller;
 
 import it.unibs.projectIngesoft.attivita.Categoria;
 import it.unibs.projectIngesoft.attivita.FattoreDiConversione;
+import it.unibs.projectIngesoft.attivita.Proposta;
 import it.unibs.projectIngesoft.attivita.ValoreDominio;
 import it.unibs.projectIngesoft.libraries.Utilitas;
 import it.unibs.projectIngesoft.model.*;
@@ -134,7 +135,6 @@ public class ConfiguratoreController {
 
     /// //////////////////////////// CATEGORIE /////////////////////////////////////////////////
 
-    //todo da rifattorizzare per l'utilizzo nel controller -> fatto
 
     /**
      * Cicla le foglie dalla prima all'ultima per generare tutte le coppie di valori possibili
@@ -148,14 +148,13 @@ public class ConfiguratoreController {
     private ArrayList<FattoreDiConversione> ottieniFattoriDelleNuoveCategorie(String nomeRadice, List<Categoria> foglie) {
         //se non esistono foglie non serve a nulla fare i fattori
         if (foglie.isEmpty())
-            return new ArrayList<>();
+            return null;
         // se esiste almeno una foglia, allora calcola i fattori di conversione
         ArrayList<FattoreDiConversione> nuoviDaNuovaRadice = new ArrayList<>();
         for (int i = 0; i < foglie.size(); i++) {
             String nomeFogliai = Utilitas.factorNameBuilder(nomeRadice, foglie.get(i).getNome());
             for (int j = i + 1; j < foglie.size(); j++) {
                 String nomeFogliaj = Utilitas.factorNameBuilder(nomeRadice, foglie.get(j).getNome());
-                // TODO levare user interaction -> fatto
                 double fattore_ij = view.getUserInputMinMaxDouble(INSERISCI_IL_FATTORE_TRA.formatted(nomeFogliai, nomeFogliaj), MIN_FATTORE, MAX_FATTORE);
 
                 FattoreDiConversione fattoreIJ = new FattoreDiConversione(nomeFogliai, nomeFogliaj, fattore_ij);
@@ -170,15 +169,9 @@ public class ConfiguratoreController {
         //1. chiedi i fattori nuovi all'utente sulla base delle categorie appena inserite
         ArrayList<FattoreDiConversione> nuoviDaNuovaRadice = ottieniFattoriDelleNuoveCategorie(nomeRadice, foglie);
         //è null se non esistono foglie, è vuoto se esiste una sola foglia
-        if (nuoviDaNuovaRadice.isEmpty()) { //se non esistono foglie non hanno senso i fattori
-            return; //todo a seconda di come avverrà il lancio di questo metodo questo controllo potrebbe essere inutile (forse si può usare assert btw)
+        if (nuoviDaNuovaRadice == null) { //se non esistono foglie non hanno senso i fattori
+            return;
         }
-        //todo martino io sostituirei questo check con quello che facciamo anche sopra
-        /*
-        //se non esistono foglie non serve a nulla fare i fattori
-        if (foglie.isEmpty())
-            return new ArrayList<>();
-         */
 
         //se esistono fattori già presenti vanno calcolati i rapporti tra i nuovi (o la singola nuova foglia) e i vecchi
         if (!fattoriModel.isEmpty()) {
