@@ -100,7 +100,7 @@ public class ConfiguratoreController {
         do {
             scelta = view.visualizzaMenuFattori();
             switch (scelta) {
-                case 1 -> view.visualizzaFattori(); //todo da implementare
+                case 1 -> visualizzaFattori(); //todo da implementare
                 default -> {
                 }
             }
@@ -184,6 +184,10 @@ public class ConfiguratoreController {
         } else {
             fattoriModel.inserisciSingolaFogliaNellaHashmap(nomeRadice, foglie);
         }
+    }
+
+    public void visualizzaFattori( ){
+        view.visualizzaFattori(fattoriModel.getHashMapFattori(), view.selezioneFogliaDaLista(fattoriModel.getKeysets()));
     }
 
     public void aggiungiRadice() {

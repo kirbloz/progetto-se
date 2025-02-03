@@ -1,16 +1,17 @@
 package it.unibs.projectIngesoft.view;
 
-import it.unibs.projectIngesoft.attivita.Categoria;
-import it.unibs.projectIngesoft.attivita.ComprensorioGeografico;
-import it.unibs.projectIngesoft.attivita.Proposta;
-import it.unibs.projectIngesoft.attivita.StatiProposta;
+import it.unibs.projectIngesoft.attivita.*;
 import it.unibs.projectIngesoft.libraries.InputDatiTerminale;
 import it.unibs.projectIngesoft.libraries.Utilitas;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import it.unibs.projectIngesoft.libraries.Menu;
 import it.unibs.projectIngesoft.model.CategorieModel;
+import it.unibs.projectIngesoft.model.FattoriModel;
 import it.unibs.projectIngesoft.utente.Fruitore;
 
 import static it.unibs.projectIngesoft.libraries.Utilitas.MAX_FATTORE;
@@ -169,6 +170,12 @@ public class ConfiguratoreView implements UtenteViewableTerminal {
         return subMenu.scegli();
     }
 
+    public int visualizzaMenuFattori(){
+        Menu menu = new Menu(TITLE_MENU_FATTORI,
+                vociFattori);
+        return menu.scegli();
+    }
+
     public String visualizzaInserimentoNomeCategoriaRadice(CategorieModel model) {
         visualizzaListaRadici(model.getRadici());
         return getUserInput(MSG_PRINT_LISTA_RADICI+MSG_INSERIMENTO_RADICE);
@@ -264,27 +271,42 @@ public class ConfiguratoreView implements UtenteViewableTerminal {
     }
 
 
-    public int visualizzaMenuFattori(){
-        Menu menu = new Menu(TITLE_MENU_FATTORI,
-                vociFattori);
-        return menu.scegli();
-    }
 
-    public void visualizzaFattori(){
-        //todo da implementare
-        //c'era già in fattoriModel, non serve scrivere da capo
-    }
+    /*
+        * Dato il nome di una categoria ritorna una stringa formattata con tutti i fattori di conversione relativi a quella categoria
+        *
+        * @param categoriaFormattata, nome categoria nel formato root:leaf
+        * @return String
+        */
+       public void visualizzaFattori(Map<String, List<FattoreDiConversione>> hashListaFattori, String categoriaFormattata){
+
+           StringBuilder sb = new StringBuilder();
+           if (hashListaFattori.containsKey(categoriaFormattata)) {
+               for (FattoreDiConversione f : hashListaFattori.get(categoriaFormattata)) {
+                   String valoreFormattato = String.format("%.3f", f.getFattore());
+                   sb.append("[ ")
+                           .append(f.getNome_c1()).append(", ").append(f.getNome_c2())
+                           .append(", ").append(valoreFormattato).append(" ]\n");
+               }
+               print(sb.toString());
+           } else
+                   print(WARNING_CATEGORIA_NON_ESISTE);
+
+           //todo da implementare
+           //c'era già in fattoriModel, non serve scrivere da capo
+
+       }
 
 
 
-/// ///////INSERIMENTO PER CASI D'USO CATEGORIE //////
-    /**
-     * Guida l'input del nome di una nuova Categoria per una gerarchia.
-     *
-     * @param model, classe Model che gestisce le gerarchie.
-     * @param radice, radice della gerarchia a cui aggiungere la nuova Categoria
-     * @return nome della nuova Categoria
-     */
+   /// ///////INSERIMENTO PER CASI D'USO CATEGORIE //////
+       /**
+        * Guida l'input del nome di una nuova Categoria per una gerarchia.
+        *
+        * @param model, classe Model che gestisce le gerarchie.
+        * @param radice, radice della gerarchia a cui aggiungere la nuova Categoria
+        * @return nome della nuova Categoria
+        */
     public String inserimentoNomeNuovaCategoria(CategorieModel model, Categoria radice) {
         assert radice != null : "radice non può essere null";
         //assert this.esisteRadice(tempRadice) : "tempRadice non è il nome di una radice";
@@ -414,8 +436,6 @@ public class ConfiguratoreView implements UtenteViewableTerminal {
     public String richiestaPassword() {
         return getUserInput(MSG_RICHIESTA_PASSWORD);
     }
-
-
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////// Comprensorio View /////////////////////////////////////////////////
