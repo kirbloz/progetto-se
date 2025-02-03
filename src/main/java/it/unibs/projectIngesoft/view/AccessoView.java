@@ -67,7 +67,7 @@ public class AccessoView /*implements EventListener*/ {
     }
 
     public void stampaErroreCredenziali(String msg) {
-        System.out.println("Errore nella stampa" + msg);
+        System.out.println(msg);
     }
 
     public int visualizzaMenuPrincipale() {

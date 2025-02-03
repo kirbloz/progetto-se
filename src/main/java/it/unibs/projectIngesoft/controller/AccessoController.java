@@ -32,7 +32,7 @@ public class AccessoController {
                 return utentiModel.verificaCredenziali(credenziali);
             } catch (Exception e) {
                 riuscito = false;
-                view.stampaErroreCredenziali("Login fallito "+ e.getMessage());
+                view.stampaErroreCredenziali("Login fallito, credenziali errate.");
             }
         } while (!riuscito);
 
