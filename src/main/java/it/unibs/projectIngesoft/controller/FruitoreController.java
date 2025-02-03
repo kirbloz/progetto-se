@@ -262,59 +262,42 @@ public class FruitoreController {
      * L'autore è sempre un Fruitore.
      */
     private void cambiaStatoProposta() {
-        /*assert utenteAttivo instanceof Fruitore;
-        String comprensorio = ((Fruitore) utenteAttivo).getComprensorioDiAppartenenza();
+        //assert utenteAttivo instanceof Fruitore;
 
-        boolean esisteAlmenoUnaPropostaPerLUtenteLoggatoOra = false;
-        if (hashListaProposte != null && hashListaProposte.get(comprensorio) != null) {
-            for (Proposta proposta : hashListaProposte.get(comprensorio)) {
-                if (proposta.getStato() != StatiProposta.CHIUSA && proposta.getAutoreUsername().equals(utenteAttivo.getUsername())) {
-                    esisteAlmenoUnaPropostaPerLUtenteLoggatoOra = true;
-                    break;
-                }
-            }
-        }
-
-        if (!esisteAlmenoUnaPropostaPerLUtenteLoggatoOra) {
-            System.out.println(MSG_NON_HAI_PROPOSTE_NON_CHIUSE);
+        if (!proposteModel.esisteAlmenoUnaPropostaPerLUtente(utenteAttivo)) {
+            //System.out.println(MSG_NON_HAI_PROPOSTE_NON_CHIUSE);
+			view.visualizzaErroreProposteInesistenti();
             return;
         }
 
         String categoriaRichiesta;
         String categoriaOfferta;
         int oreRichiesta;
+		
         Proposta daCambiare = null;
 
         // 1. inserimento categoria richiesta, ore, e categoria offerta
         boolean found = false;
         do {
-            visualizzaProposteModificabili();
-            //categoriaRichiesta = gestFatt.inserimentoNomeFogliaFormattato(MSG_SELEZIONE_CATEGORIA_RICHIESTA);
-            oreRichiesta = InputDatiTerminale.leggiInteroPositivo(MSG_SELEZIONE_ORE);
-            //categoriaOfferta = gestFatt.inserimentoNomeFogliaFormattato(MSG_SELEZIONE_CATEGORIA_OFFERTA);
+            view.visualizzaProposte(proposteModel.getProposteCambiabiliDi(utenteAttivo));
+            categoriaRichiesta = view.inserimentoFogliaFormattato(MSG_SELEZIONE_CATEGORIA_RICHIESTA);
+            oreRichiesta = view.inserimentoOre;
+            categoriaOfferta = view.inserimentoFogliaFormattato(MSG_SELEZIONE_CATEGORIA_OFFERTA);
 
-            //daCambiare = cercaProposta(comprensorio, categoriaOfferta, categoriaRichiesta, oreRichiesta);
-
-            if (daCambiare != null && daCambiare.getAutoreUsername().equals(utenteAttivo.getUsername())) {
-                found = daCambiare.getStato() != StatiProposta.CHIUSA;
+            daCambiare = cercaProposta(comprensorio, categoriaOfferta, categoriaRichiesta, oreRichiesta, utenteAttivo); //ma il wadelo ha fallato questo o sto delirando
+			
+            if (daCambiare != null ) {
+                found = true;
             }
+			
         } while (!found);
 
         // 2. cambio stato guidato e conferma
-        StatiProposta statoAttuale = daCambiare.getStato();
-        StatiProposta statoNuovo = (statoAttuale == StatiProposta.APERTA) ? StatiProposta.RITIRATA : StatiProposta.APERTA;
-
-        if (!InputDatiTerminale.yesOrNo(MSG_CONFERMA_CAMBIO_STATO.formatted(statoAttuale, statoNuovo)))
-            return; // non conferma
-        if (statoAttuale == StatiProposta.RITIRATA) {
-            daCambiare.setAperta();
-            cercaProposteDaChiudere(daCambiare);
-        } else {
-            daCambiare.setRitirata();
-        }
-        System.out.println(MSG_STATO_MODIFICATO.formatted(statoNuovo));
-
-        mapper.write(new HashMap<>(hashListaProposte));*/
+		boolean conferma = view.viualizzaConfermaCambioStatoProposta(daCambiare);
+		
+        if(conferma){
+			proposteModel.cambiaStato(daCambiare);
+		}
     }
 
     /**
