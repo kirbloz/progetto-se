@@ -2,6 +2,8 @@ package it.unibs.projectIngesoft.view;
 
 import it.unibs.projectIngesoft.attivita.Categoria;
 import it.unibs.projectIngesoft.attivita.ComprensorioGeografico;
+import it.unibs.projectIngesoft.attivita.Proposta;
+import it.unibs.projectIngesoft.attivita.StatiProposta;
 import it.unibs.projectIngesoft.libraries.InputDatiTerminale;
 import it.unibs.projectIngesoft.libraries.Utilitas;
 
@@ -9,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import it.unibs.projectIngesoft.libraries.Menu;
 import it.unibs.projectIngesoft.model.CategorieModel;
+import it.unibs.projectIngesoft.utente.Fruitore;
 
 import static it.unibs.projectIngesoft.libraries.Utilitas.MAX_FATTORE;
 import static it.unibs.projectIngesoft.libraries.Utilitas.MIN_FATTORE;
@@ -109,6 +112,15 @@ public class ConfiguratoreView implements UtenteViewableTerminal {
 
     // STRINGHE PER PROPOSTE
 
+    public static final String HEADER_PROPOSTE_PRONTE = ">> PROPOSTE PRONTE <<";
+    public static final String HEADER_PROPOSTE_MODIFICABILI = ">> PROPOSTE MODIFICABILI<<\n";
+    public static final String HEADER_PROPOSTE_AUTORE = ">> PROPOSTE DI %s <<\n";
+    public static final String HEADER_PROPOSTE_CATEGORIA = ">> PROPOSTE CON %s <<\n";
+
+    public static final String HEADER_PROPOSTE_CHIUSE = ">> PROPOSTE CHIUSE\n";
+    public static final String HEADER_PROPOSTE_RITIRATE = ">> PROPOSTE RITIRATE\n";
+    public static final String HEADER_PROPOSTE_APERTE = ">> PROPOSTE APERTE\n";
+    public static final String MSG_FORMATTED_PROPOSTA_PRONTA = "%s, %s\n >>> Indirizzo email: %s\n";
 
     // STRINGHE PER COMPRENSORI
 
@@ -133,13 +145,15 @@ public class ConfiguratoreView implements UtenteViewableTerminal {
         return InputDatiTerminale.leggiDoubleConRange(prompt, min, max);
     }
 
+    public void print(String msg){
+        System.out.println(msg);
+    }
+
     public int visualizzaMenuPrincipale() {
         Menu menu = new Menu(TITLE_MAIN_MENU,
                 vociMainConfiguratore);
         return menu.scegli();
     }
-
-
 
     // CATEGORIE
 
@@ -465,13 +479,67 @@ public class ConfiguratoreView implements UtenteViewableTerminal {
      * @param comuni
      */
     public void visualizzaComprensorio(String nome, List<String> comuni) {
-        System.out.println(NOME_COMPRENSORIO_FORMATTED.formatted(nome.toUpperCase()));
+        print(NOME_COMPRENSORIO_FORMATTED.formatted(nome.toUpperCase()));
         for (String s : comuni) {
-            System.out.println(s);
+            print(s);
         }
     }
 
     public void stampaErroreComprensoriVuoto() {
-        System.out.println(">> Nessun comprensorio da visualizzare.");
+        print(">> Nessun comprensorio da visualizzare.");
     }
+
+
+    /// ///////////////////////////// proposte ////////////////////////////////////
+    ///
+    ///
+    public void visualizzaProposte(List<Proposta> lista) {
+        //todo da implementare -> copiata da proposteToString(..)
+        if (lista.isEmpty()) {
+            print(">> (!!) Nessuna proposta da visualizzare.");
+            return;
+        }
+
+        StringBuilder aperte = new StringBuilder();
+        StringBuilder chiuse = new StringBuilder();
+        StringBuilder ritirate = new StringBuilder();
+        aperte.append(HEADER_PROPOSTE_APERTE);
+        chiuse.append(HEADER_PROPOSTE_CHIUSE);
+        ritirate.append(HEADER_PROPOSTE_RITIRATE);
+
+        lista.forEach(
+                proposta -> {
+                    switch (proposta.getStato()) {
+                        case StatiProposta.APERTA -> aperte.append(proposta).append("\n");
+                        case StatiProposta.CHIUSA -> chiuse.append(proposta).append("\n");
+                        case StatiProposta.RITIRATA -> ritirate.append(proposta).append("\n");
+                    }
+                });
+
+        print(aperte.toString());
+        print(chiuse.toString());
+        print(ritirate.toString());
+    }
+
+    public void visualizzaProposteDaNotificare(List<Proposta> listaDaNotificare){
+        listaDaNotificare.forEach(proposta -> {
+                    System.out.println(proposta);
+                    Fruitore autore = proposta.getAutore();
+                    String email = autore.getEmail();
+                    String comprensorio = autore.getComprensorioDiAppartenenza();
+                    print(MSG_FORMATTED_PROPOSTA_PRONTA.formatted(autore.getUsername(), comprensorio, email));
+                    proposta.notificata();
+                });
+    }
+
+    public void visualizzaProposteCategoriaHeader(String categoria){
+        print(HEADER_PROPOSTE_CATEGORIA.formatted(categoria));
+    }
+
+    public void visualizzaPropostePronteHeader(){
+        print(HEADER_PROPOSTE_PRONTE);
+    }
+
+
+
 }

@@ -329,33 +329,23 @@ public class ConfiguratoreController {
     /// ///////////////////////////////////////////// PROPOSTE ///////////////////////////////////////////////////////
 
     /**
-     * todo implementare/rifattorizzare
+     * todo testare
      * Duplicato da ProposteModel
      */
     public void visualizzaPropostePerCategoria() {
-        //assert hashListaProposte != null;
-        //String categoria = gestFatt.selezioneFoglia(MSG_INSERISCI_CATEGORIA);
-        //Predicate<Proposta> filtro = p -> p.getOfferta().equals(categoria) || p.getRichiesta().equals(categoria);
-        // visualizzaProposte(HEADER_PROPOSTE_CATEGORIA.formatted(categoria), filtro);
+        String categoria = view.selezioneFogliaDaLista(fattoriModel.getKeysets());
+        Predicate<Proposta> filtro = p -> p.getOfferta().equals(categoria) || p.getRichiesta().equals(categoria);
+        view.visualizzaProposteCategoriaHeader(categoria);
+        view.visualizzaProposte(proposteModel.getFilteredProposte(filtro).toList());
     }
 
     /**
-     * todo implementare/rifattorizzare
+     * todo testare
      * Duplicato da ProposteModel
      */
     public void visualizzaProposteDaNotificare() {
-        /*assert hashListaProposte != null;
-        System.out.println(HEADER_PROPOSTE_PRONTE);
-
-        getFilteredProposte(Proposta::isDaNotificare)
-                .forEach(proposta -> {
-                    System.out.println(proposta);
-                    Fruitore autore = proposta.getAutore();
-                    String email = autore.getEmail();
-                    String comprensorio = autore.getComprensorioDiAppartenenza();
-                    System.out.println(MSG_FORMATTED_PROPOSTA_PRONTA.formatted(autore.getUsername(), comprensorio, email));
-                    proposta.notificata();
-                });
-        mapper.write(new HashMap<>(hashListaProposte));*/
+        view.visualizzaPropostePronteHeader();
+        view.visualizzaProposteDaNotificare(proposteModel.getFilteredProposte(Proposta::isDaNotificare).toList());
+        proposteModel.save();
     }
 }
