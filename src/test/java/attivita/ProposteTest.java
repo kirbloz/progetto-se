@@ -1,6 +1,7 @@
 package attivita;
 
 import it.unibs.projectIngesoft.attivita.Proposta;
+import it.unibs.projectIngesoft.libraries.InputInjector;
 import it.unibs.projectIngesoft.mappers.ProposteMapper;
 import it.unibs.projectIngesoft.model.ProposteModel;
 import it.unibs.projectIngesoft.parsing.SerializerJSON;
@@ -43,7 +44,11 @@ public class ProposteTest {
 
     @Test
     void aggiungiProposta(){
-        assert false;
+        Fruitore utenteAttivo = new Fruitore("user", "pwd", "valid@email.com", "comprensorio");
+
+        Proposta P = new Proposta("Matematica", "Fisica", 10, 10, utenteAttivo);
+        model.addProposta(P);
+        assert model.getListaProposteComprensorio(utenteAttivo.getComprensorioDiAppartenenza()).contains(P);
     }
 
     @Test
