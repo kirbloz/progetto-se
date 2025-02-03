@@ -202,13 +202,6 @@ public class FruitoreView {
         print(ritirate.toString());
     }
 
-    public int selezioneOreOfferta() {
-        return InputDatiTerminale.leggiInteroPositivo(MSG_SELEZIONE_ORE);
-    }
-
-    public boolean confermaCambioStato(String statoAttuale, String statoNuovo) {
-        return InputDatiTerminale.yesOrNo(MSG_CONFERMA_CAMBIO_STATO.formatted(statoAttuale, statoNuovo));
-    }
 
     public String inserimentoFogliaFormattata(String messaggio) {
         // inserimento guidato e controllo [Old:A in (Old:A New:A x)]
