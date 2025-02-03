@@ -209,7 +209,7 @@ public class FruitoreController {
         // 1. inserimento categoria richiesta, ore, e categoria offerta
         boolean esisteCategoriaRichiesta = false;
         do{
-            categoriaRichiesta = view.inserimentoFogliaFormattata("Inserisci Categoria Richiesta: ");
+            categoriaRichiesta = view.inserimentoFogliaFormattata("richiesta"/*">> Inserisci Categoria Richiesta: "*/);
             if(fattoriModel.existsKeyInHashmapFattori(categoriaRichiesta)){
                esisteCategoriaRichiesta = true;
             }else {
@@ -221,7 +221,7 @@ public class FruitoreController {
 
         boolean esisteCategoriaOfferta = false;
         do{
-            categoriaOfferta = view.inserimentoFogliaFormattata("Inserisci Categoria Offerta: ");
+            categoriaOfferta = view.inserimentoFogliaFormattata("offerta"/*">> Inserisci Categoria Offerta: "*/);
             if(fattoriModel.existsKeyInHashmapFattori(categoriaOfferta)){
                 esisteCategoriaRichiesta = true;
             }else {

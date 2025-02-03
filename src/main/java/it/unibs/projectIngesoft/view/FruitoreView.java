@@ -158,6 +158,10 @@ public class FruitoreView {
         return InputDatiTerminale.stringReaderFromAvailable(prompt, valori);
     }
 
+    public boolean getUserChoiceYoN(String prompt) {
+        return InputDatiTerminale.yesOrNo(prompt);
+    }
+
     public String richiestaUsername() {
         //duplicato in configuratore view
         //valutare se spostare in una classe utilities
@@ -186,7 +190,12 @@ public class FruitoreView {
 
     public String inserimentoFogliaFormattata(String messaggio) {
         // inserimento guidato e controllo [Old:A in (Old:A New:A x)]
-        System.out.println(messaggio);
+        switch (messaggio) {
+            case "richiesta" -> System.out.println(MSG_INSERISCI_RICHIESTA);
+            case "offerta" -> System.out.println(MSG_INSERISCI_OFFERTA);
+            default -> System.out.println(messaggio);
+        }
+
         return Utilitas.factorNameBuilder(
                 InputDatiTerminale.leggiStringaNonVuota(MSG_INSERISCI_NOME_RADICE),
                 InputDatiTerminale.leggiStringaNonVuota(MSG_INSERISCI_NOME_FOGLIA)
@@ -219,16 +228,17 @@ public class FruitoreView {
         System.out.println("Errore Calcolo Ore!");
     }
 
+    //todo formattare meglio la stringa per la stampa perchè così si fa fatica a leggerla
     public boolean confermaInserimento(String categoriaRichiesta, String categoriaOfferta, int oreRichiesta, int oreOfferta) {
         return InputDatiTerminale.yesOrNo("\n" + categoriaRichiesta + " : " + oreRichiesta + "\n" + categoriaOfferta + " : " + oreOfferta + "\n" + MSG_CONFERMA_PROPOSTA.formatted(oreOfferta));
     }
 
     public void visualizzaMessaggioAnnulla() {
-        System.out.println("Annullo...");
+        System.out.println(WARNING_PROPOSTA_ANNULLATA);
     }
 
     public void visualizzaMessaggioErroreDuplicato() {
-        System.out.println("Errore: Proposta già esistente!");
+        System.out.println(WARNING_PROPOSTA_DUPLICATA);
     }
 	
 	public void visualizzaErroreProposteInesistenti(){
@@ -239,10 +249,6 @@ public class FruitoreView {
 		StatiProposta statoAttuale = p.getStato();
         StatiProposta statoNuovo = (statoAttuale == StatiProposta.APERTA) ? StatiProposta.RITIRATA : StatiProposta.APERTA;
 
-        if (!InputDatiTerminale.yesOrNo(MSG_CONFERMA_CAMBIO_STATO.formatted(statoAttuale, statoNuovo))){
-            return false; // non conferma
-        } else {
-            return true;
-        }
-	}
+        return getUserChoiceYoN(MSG_CONFERMA_CAMBIO_STATO.formatted(statoAttuale, statoNuovo));
+    }
 }
