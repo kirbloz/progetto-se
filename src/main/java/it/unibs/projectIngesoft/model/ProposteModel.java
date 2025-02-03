@@ -61,6 +61,9 @@ public class ProposteModel {
 
         this.mapper = mapper;
         hashListaProposte = mapper.read();
+        if(hashListaProposte == null) {
+            hashListaProposte = new HashMap<>();
+        }
 
     }
 
@@ -72,7 +75,7 @@ public class ProposteModel {
     public void addProposta(Proposta proposta) {
         assert this.hashListaProposte != null;
         this.hashListaProposte.computeIfAbsent(proposta.getComprensorio(), k -> new ArrayList<>()).add(proposta);
-        mapper.write(new HashMap<>(hashListaProposte));
+        save();
     }
 
     /**
@@ -285,7 +288,7 @@ public class ProposteModel {
     }
 
 
-    public void visualizzaProposteDaNotificare() {
+    /*public void visualizzaProposteDaNotificare() {
         assert hashListaProposte != null;
         System.out.println(HEADER_PROPOSTE_PRONTE);
 
@@ -299,7 +302,7 @@ public class ProposteModel {
                     proposta.notificata();
                 });
         mapper.write(new HashMap<>(hashListaProposte));
-    }
+    }*/
 
     public String proposteToString(Predicate<Proposta> filtro) {
         assert hashListaProposte != null;
