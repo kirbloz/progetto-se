@@ -13,11 +13,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
-import static it.unibs.projectIngesoft.libraries.Utilitas.MAX_FATTORE;
-import static it.unibs.projectIngesoft.libraries.Utilitas.MIN_FATTORE;
-import static it.unibs.projectIngesoft.view.ConfiguratoreView.*;
-
 public class ConfiguratoreController {
+
+    public static final String MSG_INPUT_DESCRIZIONE_VALORE_DOMINIO = ">> Inserisci la descrizione (da 0 a 100 caratteri):\n> ";
+    public static final String CONFIRM_DESCRIZIONE_AGGIUNTA = ">> Descrizione aggiunta <<";
+    public static final String ASK_INSERISCI_DESCRIZIONE_VALORE_DOMINIO = ">> Vuoi inserire una descrizione per questo valore?";
+    public static final String MSG_INSERIMENTO_DOMINIO_PER_FIGLIE = ">> Inserisci il nome del dominio per eventuali figlie della nuova categoria:\n> ";
+
+    public static final String ASK_CATEGORIA_IS_FOGLIA = ">> Questa Categoria è Foglia?";
 
 
     private final ConfiguratoreView view;
@@ -100,7 +103,6 @@ public class ConfiguratoreController {
             switch (scelta) {
                 case 1 -> visualizzaPropostePerCategoria();
                 case 2 -> visualizzaProposteDaNotificare();
-                //case 3 -> cambiaStatoProposta(); // questo non è nei casi d'uso del configuratore. o sbaglio?
                 case 0 -> view.uscitaMenu("submenu");
             }
         } while (scelta != 0);
@@ -146,7 +148,8 @@ public class ConfiguratoreController {
             String nomeFogliai = Utilitas.factorNameBuilder(nomeRadice, foglie.get(i).getNome());
             for (int j = i + 1; j < foglie.size(); j++) {
                 String nomeFogliaj = Utilitas.factorNameBuilder(nomeRadice, foglie.get(j).getNome());
-                double fattoreIJ = view.getUserInputMinMaxDouble(INSERISCI_IL_FATTORE_TRA.formatted(nomeFogliai, nomeFogliaj), MIN_FATTORE, MAX_FATTORE);
+                //double fattoreIJ = view.getUserInputMinMaxDouble(INSERISCI_IL_FATTORE_TRA.formatted(nomeFogliai, nomeFogliaj), MIN_FATTORE, MAX_FATTORE);
+                double fattoreIJ = view.ottieniFattoreDiConversione(nomeFogliai, nomeFogliaj);
                 nuoviDaNuovaRadice.add(new FattoreDiConversione(nomeFogliai, nomeFogliaj, fattoreIJ));
             }
         }
@@ -249,7 +252,7 @@ public class ConfiguratoreController {
         boolean insertDescription = view.getUserChoiceYoN(ASK_INSERISCI_DESCRIZIONE_VALORE_DOMINIO);
         if (insertDescription) {
             String description = view.getUserInputMinMaxLength(MSG_INPUT_DESCRIZIONE_VALORE_DOMINIO, 0, 100);
-            System.out.println(CONFIRM_DESCRIZIONE_AGGIUNTA);
+            view.print(CONFIRM_DESCRIZIONE_AGGIUNTA);
             return new ValoreDominio(domainValueName, description);
         }
         return new ValoreDominio(domainValueName);
@@ -301,10 +304,6 @@ public class ConfiguratoreController {
 
     /// ///////////////////////////////////////////// PROPOSTE ///////////////////////////////////////////////////////
 
-    /**
-     * todo testare
-     * Duplicato da ProposteModel
-     */
     public void visualizzaPropostePerCategoria() {
         String categoria = view.selezioneFogliaDaLista(fattoriModel.getKeysets());
         Predicate<Proposta> filtro = p -> p.getOfferta().equals(categoria) || p.getRichiesta().equals(categoria);
@@ -312,10 +311,6 @@ public class ConfiguratoreController {
         view.visualizzaProposte(proposteModel.getFilteredProposte(filtro).toList());
     }
 
-    /**
-     * todo testare
-     * Duplicato da ProposteModel
-     */
     public void visualizzaProposteDaNotificare() {
         view.visualizzaPropostePronteHeader();
         view.visualizzaProposteDaNotificare(proposteModel.getFilteredProposte(Proposta::isDaNotificare).toList());
