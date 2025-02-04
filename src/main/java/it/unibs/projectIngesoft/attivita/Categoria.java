@@ -155,6 +155,23 @@ public class Categoria {
         this.valoreDominio = valoreDominio;
     }
 
+    @JsonIgnore
+    public boolean isRadice() {
+        return isRadice;
+    }
+    @JsonIgnore
+    public boolean isFoglia() {
+        return isFoglia;
+    }
+    @JsonIgnore
+    public boolean isNotFoglia() {
+        return !isFoglia;
+    }
+    @JsonIgnore
+    public boolean hasFiglie() {
+        return isFoglia;
+    }
+
     public List<String> getValoriDominioFiglie() {
         List<String> temp = new ArrayList<>();
         if (categorieFiglie == null)
@@ -169,8 +186,6 @@ public class Categoria {
     }
 
     public void aggiungiCategoriaFiglia(Categoria categoria) {
-        assert categoria != null : "non si possono aggiungere categorie null";
-
         if (this.categorieFiglie == null) this.categorieFiglie = new ArrayList<>();
         if (this.isFoglia()) this.isFoglia = false;
         this.categorieFiglie.add(categoria);
@@ -201,19 +216,6 @@ public class Categoria {
         return foglie;
     }
 
-    @JsonIgnore
-    public boolean isRadice() {
-        return isRadice;
-    }
-
-    @JsonIgnore
-    public boolean isFoglia() {
-        return isFoglia;
-    }
-    @JsonIgnore
-    public boolean isNotFoglia() {
-        return !isFoglia;
-    }
 
     /**
      * Cerca una categoria tra quelle memorizzate partendo dal nome.
@@ -255,7 +257,7 @@ public class Categoria {
                 appiatisciGerarchiaSuLista(figlia, lista);
             }
         }
-        // stop or exit condition
+
         return lista;
     }
 
@@ -333,7 +335,5 @@ public class Categoria {
 
         return sb.toString();
     }*/
-    public boolean hasFiglie() {
-        return isFoglia;
-    }
+
 }
