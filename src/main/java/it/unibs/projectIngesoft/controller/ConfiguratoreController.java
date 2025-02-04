@@ -118,6 +118,14 @@ public class ConfiguratoreController {
         } while (scelta != 0);
     }
 
+    private void cambioCredenziali() {
+        String username;
+        do {
+            username = view.richiestaUsername();
+        } while (utentiModel.existsUsername(username));
+        String password = view.richiestaPassword();
+        utentiModel.cambioCredenziali(utenteAttivo, username, password);
+    }
 
     /// //////////////////////////// CATEGORIE /////////////////////////////////////////////////
 
