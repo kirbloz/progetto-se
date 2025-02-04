@@ -54,32 +54,19 @@ public class ConfiguratoreController {
         }
 
         int scelta;
-
         do {
             scelta = view.visualizzaMenuPrincipale();
-
             switch (scelta) {
                 case 0 -> view.uscitaMenu("programma");
-                case 1 -> cambioCredenziali(); // cambio credenziali
-                case 2 -> runControllerComprensoriGeografici(); // menu comprensorio
-                case 3 -> runControllerCategorie(); // menu categorie
-                case 4 -> runControllerFattori(); // menu fattori
+                case 1 -> cambioCredenziali();
+                case 2 -> runControllerComprensoriGeografici();
+                case 3 -> runControllerCategorie();
+                case 4 -> runControllerFattori();
                 case 5 -> runControllerProposte();
-                // loopProposte(menuProposte, utenteAttivo);
                 default -> {
-                } // già gestito dalla classe Menu
+                }
             }
-
         } while (scelta != 0);
-    }
-
-    private void cambioCredenziali() {
-        String username;
-        do {
-            username = view.richiestaUsername();
-        } while (utentiModel.existsUsername(username));
-        String password = view.richiestaPassword();
-        utentiModel.cambioCredenziali(utenteAttivo, username, password);
     }
 
 
@@ -101,8 +88,7 @@ public class ConfiguratoreController {
             scelta = view.visualizzaMenuFattori();
             switch (scelta) {
                 case 1 -> visualizzaFattori();
-                default -> {
-                }
+                case 0 -> view.uscitaMenu("submenu");
             }
         } while (scelta != 0);
     }
@@ -120,7 +106,6 @@ public class ConfiguratoreController {
         } while (scelta != 0);
     }
 
-    //todo test - funziona?
     public void runControllerComprensoriGeografici() {
         int scelta;
         do {
@@ -153,23 +138,19 @@ public class ConfiguratoreController {
             String nomeFogliai = Utilitas.factorNameBuilder(nomeRadice, foglie.get(i).getNome());
             for (int j = i + 1; j < foglie.size(); j++) {
                 String nomeFogliaj = Utilitas.factorNameBuilder(nomeRadice, foglie.get(j).getNome());
-                double fattore_ij = view.getUserInputMinMaxDouble(INSERISCI_IL_FATTORE_TRA.formatted(nomeFogliai, nomeFogliaj), MIN_FATTORE, MAX_FATTORE);
-
-                FattoreDiConversione fattoreIJ = new FattoreDiConversione(nomeFogliai, nomeFogliaj, fattore_ij);
-
-                nuoviDaNuovaRadice.add(fattoreIJ);
+                double fattoreIJ = view.getUserInputMinMaxDouble(INSERISCI_IL_FATTORE_TRA.formatted(nomeFogliai, nomeFogliaj), MIN_FATTORE, MAX_FATTORE);
+                nuoviDaNuovaRadice.add(new FattoreDiConversione(nomeFogliai, nomeFogliaj, fattoreIJ));
             }
         }
         return nuoviDaNuovaRadice;
     }
 
     private void generaEMemorizzaNuoviFattori(String nomeRadice, List<Categoria> foglie) {
-        if(foglie.isEmpty()) return;
+        if (foglie.isEmpty()) return;
 
         //1. chiedi i fattori nuovi all'utente sulla base delle categorie appena inserite
         ArrayList<FattoreDiConversione> nuoviDaNuovaRadice = ottieniFattoriDelleNuoveCategorie(nomeRadice, foglie);
         //è vuoto se esiste una sola foglia
-
         //se esistono fattori già presenti vanno calcolati i rapporti tra i nuovi (o la singola nuova foglia) e i vecchi
         if (!fattoriModel.isEmpty()) {
             //2.1. chiedi le 2 foglie (una nuova(interna) e una preesistene(esterna)) per fare iol confronto
@@ -178,8 +159,6 @@ public class ConfiguratoreController {
             String nomeFogliaInternaFormattata = view.selezioneFogliaDaLista(nomeRadice, foglie);
             //2.2. chiedi il fattore di conversione EsternoInterno [x in (Old:A, New:A, x)]
             double fattoreDiConversioneEsternoInterno = view.ottieniFattoreDiConversione(nomeFogliaEsternaFormattata, nomeFogliaInternaFormattata);
-
-            //todo controlla se worka quando c'è una sola nuova categoria (anche gli inversi)
             fattoriModel.inserisciFattoriDiConversione(nomeFogliaEsternaFormattata, nomeFogliaInternaFormattata, fattoreDiConversioneEsternoInterno, nuoviDaNuovaRadice);
         } else {
             fattoriModel.inserisciSingolaFogliaNellaHashmap(nomeRadice, foglie);
@@ -208,13 +187,12 @@ public class ConfiguratoreController {
      * Poi richiama la procedura per inserire i fattori di conversione.
      */
     public void aggiungiGerarchia() {
-        int scelta;
-
         // 0. predispone una radice e la salva localmente
         this.aggiungiRadice();
         Categoria radice = categorieModel.getRadici().getLast();
 
         // 1. loop per l'inserimento di categorie nella gerarchia della radice appena creata
+        int scelta;
         do {
             scelta = view.visualizzaMenuAggiungiGerarchia();
             switch (scelta) { // switch con un solo case per ampliamento futuro
@@ -225,10 +203,8 @@ public class ConfiguratoreController {
 
         //1.5 imposto a foglie tutte le categorie che non hanno figlie
         radice.impostaCategorieFoglia();
-
         // 2. procedura per i fattori
         generaEMemorizzaNuoviFattori(radice.getNome(), radice.getFoglie());
-
         //3. salvataggio dei dati
         categorieModel.save();
     }
@@ -294,7 +270,6 @@ public class ConfiguratoreController {
                 .stream()
                 .map(Categoria::getNome)
                 .toList();
-
     }
 
     public void visualizzaGerarchie() {
@@ -306,13 +281,8 @@ public class ConfiguratoreController {
     /// /////////////////////////////////////////////// COMPRENSORIO ////////////////////////////////////////////////////
 
     public void aggiungiComprensorio() {
-        // metodo spostato nella libreria InputDatiTerminale come "stringReaderNotInAvailable"
-        //String nomeComprensorio = view.selezionaNonGiaInUso(compGeoModel.getListaNomiComprensoriGeografici());
         String nomeComprensorio = view.inserimentoNomeComprensorio(compGeoModel.getListaNomiComprensoriGeografici().toArray(String[]::new));
-
         List<String> comuniDaInserire = view.inserimentoComuni(); //fai in inputdati un inserimento ArraydiStringhe univoche
-
-        // Memorizzazione del nuovo comprensorio
         compGeoModel.aggiungiComprensorio(nomeComprensorio, comuniDaInserire);
     }
 
@@ -321,9 +291,7 @@ public class ConfiguratoreController {
             view.stampaErroreComprensoriVuoto();
             return;
         }
-        //todo per qualche motivo, a video si legge "inserisci un nome non già in uso".. che è sbagliato
         String comprensorioDaStampare = view.selezionaNomeDaLista(compGeoModel.getListaNomiComprensoriGeografici());
-
         view.visualizzaComprensorio(comprensorioDaStampare, compGeoModel.getStringComuniByComprensorioName(comprensorioDaStampare));
     }
 
