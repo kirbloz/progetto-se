@@ -16,7 +16,6 @@ public class FruitoreController {
 
     public static final String WARNING_RADICE_NON_ESISTE = ">> (!!) Per favore indica una categoria radice che esiste";
     public static final String MSG_SELEZIONE_RADICE = ">> Inserisci il nome di una categoria radice\n";
-    public static final String MSG_INPUT_NOME_RADICE = ">> Inserisci il nome della categoria radice\n> ";
     public static final String MSG_INPUT_SCELTA_CAMPO = ">> Scegli un campo tra quelli delle categorie non foglia\n";
 
 
@@ -156,19 +155,10 @@ public class FruitoreController {
      * @return
      */
     public Categoria inserimentoNomeCategoria(List<Categoria> categorie) {
-        /*String nomeMadre;
-        do{
-            view.visualizzaRadici(categorie);
-            nomeMadre = getUserInput(String.format(MSG_INSERIMENTO_NOME_CATEGORIA_MADRE, nomeCategoria));
-            if(!possibiliMadri.contains(nomeMadre))
-                System.out.println(WARNING_CATEGORIA_NF_NON_ESISTE);
-        }while (!possibiliMadri.contains(nomeMadre));
-
-        return nomeMadre;*/
 
         String tempNomeRadice;
         do {
-            view.visualizzaRadici(categorie);
+            view.visualizzaListaRadici(categorie);
             tempNomeRadice = view.getUserInput(MSG_SELEZIONE_RADICE /*+ MSG_INPUT_NOME_RADICE*/);
 
             if (!categorieModel.esisteRadice(tempNomeRadice))
@@ -198,7 +188,6 @@ public class FruitoreController {
                 .findFirst()
                 .orElse(null);
     }
-    ////////////////////////////////////////////// Fine CATEGORIE //////////////////////////////////////////////////////
 
     ///////////////////////// PROPOSTE //////////////////////////
     /**todo finire
@@ -213,7 +202,7 @@ public class FruitoreController {
         // 1. inserimento categoria richiesta, ore, e categoria offerta
         boolean esisteCategoriaRichiesta = false;
         do{
-            categoriaRichiesta = view.inserimentoFogliaFormattata("richiesta"/*">> Inserisci Categoria Richiesta: "*/);
+            categoriaRichiesta = view.inserimentoFogliaFormattata(MSG_INSERISCI_RICHIESTA/*">> Inserisci Categoria Richiesta: "*/);
             if(fattoriModel.existsKeyInHashmapFattori(categoriaRichiesta)){
                esisteCategoriaRichiesta = true;
             }else {
@@ -225,7 +214,7 @@ public class FruitoreController {
 
         boolean esisteCategoriaOfferta = false;
         do{
-            categoriaOfferta = view.inserimentoFogliaFormattata("offerta"/*">> Inserisci Categoria Offerta: "*/);
+            categoriaOfferta = view.inserimentoFogliaFormattata(MSG_INSERISCI_OFFERTA/*">> Inserisci Categoria Offerta: "*/);
             if(fattoriModel.existsKeyInHashmapFattori(categoriaOfferta)){
                 esisteCategoriaOfferta = true;
             }else {
@@ -266,7 +255,6 @@ public class FruitoreController {
      * L'autore è sempre un Fruitore.
      */
     private void cambiaStatoProposta() {
-        assert utenteAttivo instanceof Fruitore;
 
         if (!proposteModel.esisteAlmenoUnaPropostaPerAutore(utenteAttivo)) {
 			view.visualizzaErroreProposteInesistenti();
@@ -288,20 +276,19 @@ public class FruitoreController {
 
             categoriaRichiesta = view.inserimentoFogliaFormattata(MSG_SELEZIONE_CATEGORIA_RICHIESTA);
             oreRichiesta = view.inserimentoOre();
-            categoriaOfferta = view.inserimentoFogliaFormattata(MSG_SELEZIONE_CATEGORIA_RICHIESTA);
+            categoriaOfferta = view.inserimentoFogliaFormattata(MSG_SELEZIONE_CATEGORIA_OFFERTA);
 
-            daCambiare = proposteModel.cercaPropostaCambiabile(categoriaOfferta, categoriaRichiesta, oreRichiesta, utenteAttivo); //ma il wadelo ha fallato questo o sto delirando
-			
+            daCambiare = proposteModel.cercaPropostaCambiabile(categoriaOfferta, categoriaRichiesta, oreRichiesta, utenteAttivo);
             if (daCambiare != null )
                 found = true;
 			
         } while (!found);
 
         // 2. cambio stato guidato e conferma
-		boolean conferma = view.viualizzaConfermaCambioStatoProposta(daCambiare);
-		
+		boolean conferma = view.visualizzaInserimentoConfermaCambioStatoProposta(daCambiare);
         if(conferma){
 			proposteModel.cambiaStato(daCambiare);
+            view.visualizzaConfermaCambioStatoProposta();
 		}
     }
 
