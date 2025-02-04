@@ -5,17 +5,13 @@ import it.unibs.projectIngesoft.attivita.Proposta;
 import it.unibs.projectIngesoft.attivita.StatiProposta;
 import it.unibs.projectIngesoft.libraries.InputDatiTerminale;
 import it.unibs.projectIngesoft.libraries.Menu;
-import it.unibs.projectIngesoft.libraries.Utilitas;
-
-import java.util.List;
 
 import static it.unibs.projectIngesoft.view.AccessoView.MSG_RICHIESTA_PASSWORD;
 import static it.unibs.projectIngesoft.view.AccessoView.MSG_RICHIESTA_USERNAME;
-import static it.unibs.projectIngesoft.view.ConfiguratoreView.MSG_PRINT_LISTA_RADICI;
 
-public class FruitoreView {
+public class FruitoreView extends ErmesTerminaleView{
 
-    public static final String TITLE_MAIN_MENU = "MENU' PRINCIPALE - SCAMBIO ORE";
+    //public static final String TITLE_MAIN_MENU = "MENU' PRINCIPALE - SCAMBIO ORE";
     public static final String[] vociMainFruitore = new String[]{
             "Cambia Credenziali",
             //"Effettua proposta di scambio",
@@ -52,9 +48,9 @@ public class FruitoreView {
     public static final String HEADER_PROPOSTE_MODIFICABILI = ">> PROPOSTE MODIFICABILI<<\n";
     public static final String HEADER_PROPOSTE_AUTORE = ">> PROPOSTE DI %s <<\n";
 
-    public static final String HEADER_PROPOSTE_CHIUSE = ">> PROPOSTE CHIUSE\n";
-    public static final String HEADER_PROPOSTE_RITIRATE = ">> PROPOSTE RITIRATE\n";
-    public static final String HEADER_PROPOSTE_APERTE = ">> PROPOSTE APERTE\n";
+    //public static final String HEADER_PROPOSTE_CHIUSE = ">> PROPOSTE CHIUSE\n";
+    //public static final String HEADER_PROPOSTE_RITIRATE = ">> PROPOSTE RITIRATE\n";
+    //public static final String HEADER_PROPOSTE_APERTE = ">> PROPOSTE APERTE\n";
 
     public static final String MSG_INSERISCI_RICHIESTA = ">> Inserisci una categoria valida di cui vuoi effettuare la RICHIESTA.";
     public static final String MSG_INSERISCI_OFFERTA = ">> Inserisci una categoria valida che sei disposto a OFFRIRE in cambio.";
@@ -75,15 +71,12 @@ public class FruitoreView {
     public static final String WARNING_PROPOSTA_ANNULLATA = ">> Proposta annullata";
     public static final String WARNING_PROPOSTA_DUPLICATA = ">> Proposta duplicata! Procedura annullata.";
     public static final String MSG_NON_HAI_PROPOSTE_NON_CHIUSE = ">> Non hai proposte non chiuse";
-    public static final String MSG_INSERISCI_NOME_FOGLIA = ">> Inserisci il nome della categoria FOGLIA:\n> ";
-    public static final String MSG_INSERISCI_NOME_RADICE = ">> Inserisci il nome della categoria RADICE:\n> ";
 
     public static final String WARNING_NO_GERARCHIE_MEMORIZZATE = ">> (!!) Nessuna gerarchia memorizzata.";
     public static final String MSG_PRIMO_LIVELLO = ">> PRIMO LIVELLO";
 
     //@Override
     public int visualizzaMenuCategorie() {
-        //todo da implementare
         Menu menu = new Menu(TITLE_MENU_CATEGORIE, vociCategorieFruitore);
         return menu.scegli();
     }
@@ -101,39 +94,9 @@ public class FruitoreView {
     public int visualizzaMenuEsploraGerarchia() {
        Menu subMenu = new Menu(TITLE_SUBMENU_ESPLORA_GERARCHIA, VOCI_SUBMENU_ESPLORA_GERARCHIA);
         return subMenu.scegli();
-
-    }
-
-    public void visualizzaRadici(List<Categoria> radici) {
-        System.out.println(MSG_PRINT_LISTA_RADICI);
-        for (Categoria radice : radici)
-            visualizzaCategoria(radice);
-    }
-
-    public void visualizzaCategoria(Categoria categoria) {
-        StringBuilder sb = new StringBuilder();
-        sb.append("[ ").append(categoria.getNome()).append(" ]\n");
-
-        if (!categoria.isRadice()) {  // se non è una radice, allora si stampano i dati della categoria madre
-            sb.append("Madre: ").append(categoria.getNomeMadre())
-                    .append("\n");
-            sb.append("Dominio: ").append(categoria.getCampo())
-                    .append(" = ").append(categoria.getValoreDominio()).
-                    append("\n");
-        }
-        if (!categoria.isFoglia()) { // se non è foglia, si stampa il dominio impresso alle figlie
-            sb.append("Dominio Figlie: ").append(categoria.getCampoFiglie())
-                    .append("\n");
-        } else {
-            sb.append("> Foglia");
-        }
-        System.out.println(sb);
-
     }
 
     public void visualizzaLivello(String dominio, Categoria categoriaMadre) {
-        //visualizza categoria
-        //visualizza possibili campi
         print(String.format(HEADER_ESPLORAZIONE_LIVELLO, dominio));
         if (categoriaMadre.isRadice())
             print(MSG_PRIMO_LIVELLO);
@@ -141,26 +104,6 @@ public class FruitoreView {
         for (Categoria categoria : categoriaMadre.getCategorieFiglie()) {
             visualizzaCategoria(categoria);
         }
-    }
-
-    public void print(String msg) {
-        System.out.println(msg);
-    }
-
-    public String getUserInput(String prompt) {
-        return InputDatiTerminale.leggiStringaNonVuota(prompt);
-    }
-
-    public double getUserInputMinMaxDouble(String prompt, double min, double max) {
-        return InputDatiTerminale.leggiDoubleConRange(prompt, min, max);
-    }
-
-    public String getUserInput(String prompt, String[] valori) {
-        return InputDatiTerminale.stringReaderFromAvailable(prompt, valori);
-    }
-
-    public boolean getUserChoiceYoN(String prompt) {
-        return InputDatiTerminale.yesOrNo(prompt);
     }
 
     public String richiestaUsername() {
@@ -172,49 +115,6 @@ public class FruitoreView {
     }
 
     /// ////////////////////// PROPOSTE //////////////////////////
-
-    public void visualizzaProposte(List<Proposta> lista) {
-        //todo da implementare -> copiata da proposteToString(..)
-        if (lista.isEmpty()) {
-            print(">> (!!) Nessuna proposta da visualizzare.");
-            return;
-        }
-
-        StringBuilder aperte = new StringBuilder();
-        StringBuilder chiuse = new StringBuilder();
-        StringBuilder ritirate = new StringBuilder();
-        aperte.append(HEADER_PROPOSTE_APERTE);
-        chiuse.append(HEADER_PROPOSTE_CHIUSE);
-        ritirate.append(HEADER_PROPOSTE_RITIRATE);
-
-        lista.forEach(
-                proposta -> {
-                    switch (proposta.getStato()) {
-                        case StatiProposta.APERTA -> aperte.append(proposta).append("\n");
-                        case StatiProposta.CHIUSA -> chiuse.append(proposta).append("\n");
-                        case StatiProposta.RITIRATA -> ritirate.append(proposta).append("\n");
-                    }
-                });
-
-        print(aperte.toString());
-        print(chiuse.toString());
-        print(ritirate.toString());
-    }
-
-
-    public String inserimentoFogliaFormattata(String messaggio) {
-        // inserimento guidato e controllo [Old:A in (Old:A New:A x)]
-        switch (messaggio) {
-            case "richiesta" -> System.out.println(MSG_INSERISCI_RICHIESTA);
-            case "offerta" -> System.out.println(MSG_INSERISCI_OFFERTA);
-            default -> System.out.println(messaggio);
-        }
-
-        return Utilitas.factorNameBuilder(
-                InputDatiTerminale.leggiStringaNonVuota(MSG_INSERISCI_NOME_RADICE),
-                InputDatiTerminale.leggiStringaNonVuota(MSG_INSERISCI_NOME_FOGLIA)
-        );
-    }
 
     public void uscitaMenu(String menu) {
         switch (menu) {
@@ -259,11 +159,15 @@ public class FruitoreView {
         print(MSG_NON_HAI_PROPOSTE_NON_CHIUSE);
     }
 
-    public boolean viualizzaConfermaCambioStatoProposta(Proposta p) {
+    public boolean visualizzaInserimentoConfermaCambioStatoProposta(Proposta p) {
         StatiProposta statoAttuale = p.getStato();
         StatiProposta statoNuovo = (statoAttuale == StatiProposta.APERTA) ? StatiProposta.RITIRATA : StatiProposta.APERTA;
 
         return getUserChoiceYoN(MSG_CONFERMA_CAMBIO_STATO.formatted(statoAttuale, statoNuovo));
+    }
+
+    public void visualizzaConfermaCambioStatoProposta(){
+        print(MSG_STATO_MODIFICATO);
     }
 
     public void visualizzaProposteModificabiliHeader() {
