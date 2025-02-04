@@ -162,23 +162,25 @@ public class ConfiguratoreView extends ErmesTerminaleView {
      */
     public void visualizzaFattori(Map<String, List<FattoreDiConversione>> hashListaFattori, String categoriaFormattata) {
 
-           StringBuilder sb = new StringBuilder();
-           if (hashListaFattori.containsKey(categoriaFormattata)) {
-               for (FattoreDiConversione f : hashListaFattori.get(categoriaFormattata)) {
-                   String valoreFormattato = String.format("%.3f", f.getFattore());
-                   sb.append("[ ")
-                           .append(f.getNome_c1()).append(", ").append(f.getNome_c2())
-                           .append(", ").append(valoreFormattato).append(" ]\n");
-               }
-               print(sb.toString());
-           } else
-                   print(WARNING_CATEGORIA_NON_ESISTE);
+        if (!hashListaFattori.containsKey(categoriaFormattata)) {
+            print(WARNING_CATEGORIA_NON_ESISTE);
+            return;
+        }
 
-           //todo da implementare
-           //c'era già in fattoriModel, non serve scrivere da capo
+        if (hashListaFattori.get(categoriaFormattata).isEmpty()) {
+            print(WARNING_NO_FATTORI_MEMORIZZATI);
+            return;
+        }
 
-       }
-
+        StringBuilder sb = new StringBuilder();
+        for (FattoreDiConversione f : hashListaFattori.get(categoriaFormattata)) {
+            String valoreFormattato = String.format(Locale.US, "%.3f", f.getFattore());
+            sb.append("[ ")
+                    .append(f.getNome_c1()).append(", ").append(f.getNome_c2())
+                    .append(", ").append(valoreFormattato).append(" ]\n");
+        }
+        print(sb.toString());
+    }
 
 
     /// ///////INSERIMENTO PER CASI D'USO CATEGORIE //////
