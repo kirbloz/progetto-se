@@ -173,20 +173,16 @@ public class ConfiguratoreController {
         }
     }
 
-    public void visualizzaFattori( ){
+    public void visualizzaFattori() {
         view.visualizzaFattori(fattoriModel.getHashMapFattori(), view.selezioneFogliaDaLista(fattoriModel.getKeysets()));
     }
 
     public void aggiungiRadice() {
-        ConfiguratoreView configView = view;
-
         String nomeRadice;
         do {
-            nomeRadice = configView.visualizzaInserimentoNomeCategoriaRadice(categorieModel);
+            nomeRadice = view.visualizzaInserimentoNomeCategoriaRadice(categorieModel);
         } while (categorieModel.esisteRadice(nomeRadice));
-
-        String nomeCampo = configView.visualizzaInserimentoCampoCategoria();
-
+        String nomeCampo = view.visualizzaInserimentoCampoCategoria();
         categorieModel.aggiungiCategoriaRadice(nomeRadice, nomeCampo);
     }
 
@@ -225,45 +221,45 @@ public class ConfiguratoreController {
      * @param radice, Categoria radice di riferimento
      */
     private void aggiungiCategoria(Categoria radice) {
-        assert radice != null : "la radice non deve essere null";
-        assert this.categorieModel.esisteRadice(radice.getNome()) : "non è il nome di una radice";
-
         // 1. chiede nome
         String nomeCategoria = view.inserimentoNomeNuovaCategoria(categorieModel, radice);
 
         // 1.1 chiede madre per nuova radice, verificando che esista
-        // todo metodo da testare
         String nomeCategoriaMadre = view.inserimentoNomeCategoriaMadre(nomeCategoria,
                 getListaNomiCategorieGerarchiaFiltrata(radice, Categoria::isNotFoglia));
         Categoria categoriaMadre = radice.cercaCategoria(nomeCategoriaMadre);
 
         // 2. chiede valore del dominio ereditato + descrizione
         String nomeValoreDominio = view.inserimentoValoreDominio(nomeCategoria, categoriaMadre);
-        ValoreDominio valoreDominio;
-
-        boolean insertDescription = view.getUserChoiceYoN(ASK_INSERISCI_DESCRIZIONE_VALORE_DOMINIO);
-        valoreDominio = insertDescription
-                ? new ValoreDominio(nomeValoreDominio,
-                view.getUserInputMinMaxLength(MSG_INPUT_DESCRIZIONE_VALORE_DOMINIO, 0, 100))
-                : new ValoreDominio(nomeValoreDominio);
-
-        if (insertDescription)
-            System.out.println(CONFIRM_DESCRIZIONE_AGGIUNTA);
+        ValoreDominio valoreDominio = creaValoreDominio(nomeValoreDominio);
 
         // 3. chiede se è foglia
         boolean isFoglia = view.getUserChoiceYoN(ASK_CATEGORIA_IS_FOGLIA);
-
         // 3.1 se non è foglia, inserisce il dominio che imprime alle figlie
         String nomeCampoFiglie = isFoglia ?
                 "" : view.getUserInput(MSG_INSERIMENTO_DOMINIO_PER_FIGLIE);
 
         // 4. creazione dell'oggetto Categoria
-        Categoria tempCategoria = isFoglia
-                ? new Categoria(nomeCategoria, categoriaMadre, valoreDominio)
-                : new Categoria(nomeCategoria, nomeCampoFiglie, categoriaMadre, valoreDominio);
-
+        Categoria tempCategoria = creaCategoriaNonRadice(nomeCategoria, categoriaMadre, valoreDominio, nomeCampoFiglie, isFoglia);
         // 5. aggiunta della categoria figlia alla madre
         categoriaMadre.aggiungiCategoriaFiglia(tempCategoria);
+    }
+
+    public ValoreDominio creaValoreDominio(String domainValueName) {
+        boolean insertDescription = view.getUserChoiceYoN(ASK_INSERISCI_DESCRIZIONE_VALORE_DOMINIO);
+        if (insertDescription) {
+            String description = view.getUserInputMinMaxLength(MSG_INPUT_DESCRIZIONE_VALORE_DOMINIO, 0, 100);
+            System.out.println(CONFIRM_DESCRIZIONE_AGGIUNTA);
+            return new ValoreDominio(domainValueName, description);
+        }
+        return new ValoreDominio(domainValueName);
+    }
+
+    public Categoria creaCategoriaNonRadice(String nome, Categoria madre, ValoreDominio valoreDominio, String campoFiglie, boolean isFoglia) {
+        if(isFoglia)
+                return new Categoria(nome, madre, valoreDominio);
+        else
+            return new Categoria(nome, campoFiglie, madre, valoreDominio);
 
     }
 
