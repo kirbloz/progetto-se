@@ -33,7 +33,7 @@ public class ConfiguratoreTest {
         InputInjector.inject(simulatedInput);
 
         Configuratore utenteAttivo = (Configuratore) accessoController.login();
-        assert utenteAttivo.firstAccess();
+        assert utenteAttivo.isFirstAccess();
     }
 
     @Test
@@ -53,7 +53,7 @@ public class ConfiguratoreTest {
         InputInjector.inject("unique\npassword\n0");
         controller.run();
 
-        assert !utenteAttivo.firstAccess();
+        assert !utenteAttivo.isFirstAccess();
     }
 
     @Test
