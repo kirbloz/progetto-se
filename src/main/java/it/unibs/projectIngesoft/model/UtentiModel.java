@@ -1,6 +1,6 @@
 package it.unibs.projectIngesoft.model;
 
-import it.unibs.projectIngesoft.libraries.InputDatiTerminale;
+
 import it.unibs.projectIngesoft.mappers.UtentiMapper;
 import it.unibs.projectIngesoft.utente.Configuratore;
 import it.unibs.projectIngesoft.utente.Fruitore;
@@ -27,6 +27,9 @@ public class UtentiModel {
     public UtentiModel(UtentiMapper mapper) {
         this.mapper = mapper;
         utenti = mapper.read();
+        if(utenti == null) {
+            utenti = new ArrayList<>();
+        }
         this.defaultUtente =  mapper.readDefaultUtente();
     }
 
@@ -120,15 +123,13 @@ public class UtentiModel {
             }
             // ricerca
             indice = ricercaUtente(username, password);
-            //todo queste prossime righe sono terribili
-        Exception userNotFound;
         if (indice == -1)
-                throw userNotFound = new Exception() ;
+                throw new Exception();
 
         return utenti.get(indice);
     }
 
-    public Utente verificaCredenzialiRegistrazione(String[] credenziali){
+    /*public Utente verificaCredenzialiRegistrazione(String[] credenziali){
         String comprensorio = credenziali[0];
         String email = credenziali[1];
         String username = credenziali[2];
@@ -145,7 +146,7 @@ public class UtentiModel {
 
         addUtente(F1);
         return F1;
-    }
+    }*/
 
     /**
      * Effettua il controllo sulle nuove credenziali (per mantenere l'unicità dello username)
