@@ -88,6 +88,7 @@ public class ConfiguratoreView extends ErmesTerminaleView {
     public static final String WARNING_NO_COMPRENSORI_DA_VISUALIZZARE = ">> Nessun comprensorio da visualizzare.";
     public static final String INPUT_NOME_COMUNE = ">> Inserisci il nome del COMUNE: ";
     public static final String MSG_SCEGLI_NOMI_LISTA = ">> Scegli uno tra i seguenti nomi: ";
+    public static final String MSG_SCELTA_CATEGORIA = ">> Scegli la categoria.";
 
     // STRINGHE PER COMPRENSORI
 
@@ -273,7 +274,7 @@ public class ConfiguratoreView extends ErmesTerminaleView {
         String fogliaSelezionata;
         boolean fogliaEsiste = false;
         do {
-            fogliaSelezionata = inserimentoFogliaFormattata(">> Scegli la categoria di cui visualizzare le proposte.");
+            fogliaSelezionata = inserimentoFogliaFormattata(MSG_SCELTA_CATEGORIA);
             for (String foglia : foglie) {
                 if (foglia.equals(fogliaSelezionata)) {
                     fogliaEsiste = true;
