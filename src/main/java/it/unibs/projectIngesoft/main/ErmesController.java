@@ -1,87 +1,106 @@
 package it.unibs.projectIngesoft.main;
 
+import it.unibs.projectIngesoft.config.ErmesConfig;
 import it.unibs.projectIngesoft.controller.AccessoController;
+import it.unibs.projectIngesoft.controller.BaseController;
 import it.unibs.projectIngesoft.controller.ConfiguratoreController;
 import it.unibs.projectIngesoft.controller.FruitoreController;
 import it.unibs.projectIngesoft.mappers.*;
 import it.unibs.projectIngesoft.model.*;
-import it.unibs.projectIngesoft.parsing.SerializerJSON;
+import it.unibs.projectIngesoft.parsing.SerializerFactory;
 import it.unibs.projectIngesoft.utente.Configuratore;
 import it.unibs.projectIngesoft.utente.Fruitore;
 import it.unibs.projectIngesoft.utente.Utente;
 import it.unibs.projectIngesoft.view.ConfiguratoreView;
 import it.unibs.projectIngesoft.view.FruitoreView;
-import it.unibs.projectIngesoft.view.UtenteViewableTerminal;
+import it.unibs.projectIngesoft.view.ViewFactory;
 
 public class ErmesController {
 
-    private static final String FATTORI_DI_CONVERSIONE_JSON_FILEPATH = "fattoriTest.json";
-    private static final String UTENTI_JSON_FILEPATH = "usersTest.json";
-    private static final String UTENTI_DEF_CREDS_JSON_FILEPATH = "defaultCredentials.json";
-    private static final String CATEGORIE_JSON_FILEPATH = "categorieTest.json";
-    private static final String COMPRENSORI_GEOGRAFICI_JSON_FILEPATH = "comprensoriGeograficiTest.json";
-    private static final String PROPOSTE_JSON_FILEPATH = "proposteTest.json";
+    private final SerializerFactory serializerFactory;
+    private final ErmesConfig config;
 
+    private final UtentiModel modelUtenti;
+    private final ComprensorioGeograficoModel compGeoModel;
+    private final CategorieModel categorieModel;
+    private final FattoriModel fattoriModel;
+    private Utente utenteAttivo;
 
-    //Utente utenteAttivo;
-    UtentiModel modelUtenti;
+    public ErmesController(SerializerFactory serializerFactory) {
+        this.serializerFactory = serializerFactory;
 
-    public ErmesController() {
-        UtentiMapper utentiMapper = new UtentiMapper(UTENTI_JSON_FILEPATH,
-                UTENTI_DEF_CREDS_JSON_FILEPATH,
-                new SerializerJSON<>(),
-                new SerializerJSON<>());
-        modelUtenti = new UtentiModel(utentiMapper);
+        this.config = new ErmesConfig();
+        this.modelUtenti = initializeUtentiModel();
+        this.compGeoModel = initializeCompGeoModel();
+        this.categorieModel = initializeCategorieModel();
+        this.fattoriModel = initializeFattoriModel();
+    }
 
+    private UtentiModel initializeUtentiModel() {
+        return new UtentiModel(new UtentiMapper(
+                config.getUtentiPath(),
+                config.getDefaultCredsPath(),
+                serializerFactory.createSerializer(),
+                serializerFactory.createSerializer()
+        ));
+    }
+
+    private ComprensorioGeograficoModel initializeCompGeoModel() {
+        return new ComprensorioGeograficoModel(
+                new CompGeoMapper(config.getComprensoriPath(),
+                        serializerFactory.createSerializer())
+        );
+    }
+
+    private CategorieModel initializeCategorieModel() {
+        return new CategorieModel(
+                new CategorieMapper(config.getCategoriePath(),
+                        serializerFactory.createSerializer())
+        );
+    }
+
+    private FattoriModel initializeFattoriModel() {
+        return new FattoriModel(
+                new FattoriMapper(config.getFattoriPath(),
+                        serializerFactory.createSerializer())
+        );
+    }
+
+    private ProposteModel initializeProposteModel(Utente utenteAttivo){
+        return new ProposteModel(utenteAttivo,
+                new ProposteMapper(config.getPropostePath(),
+                        serializerFactory.createSerializer()));
     }
 
     public void mainLoop() {
-        ComprensorioGeograficoModel compGeoModel = new ComprensorioGeograficoModel(
-                new CompGeoMapper(COMPRENSORI_GEOGRAFICI_JSON_FILEPATH,
-                        new SerializerJSON<>()));
-
         AccessoController controllerAccesso = new AccessoController(modelUtenti, compGeoModel);
-        Utente utenteAttivo = controllerAccesso.run();
+        utenteAttivo = controllerAccesso.run();
 
-        CategorieModel categorieModel = new CategorieModel(
-                new CategorieMapper(CATEGORIE_JSON_FILEPATH,
-                        new SerializerJSON<>()));
+        // inizializza con le info sull'utente attivo
+        ProposteModel proposteModel = initializeProposteModel(utenteAttivo);
 
-        FattoriModel fattoriModel = new FattoriModel(
-                new FattoriMapper(FATTORI_DI_CONVERSIONE_JSON_FILEPATH,
-                        new SerializerJSON<>()));
+        // crea il controller in base al tipo di utente
+        BaseController<?> controller = createController(proposteModel);
+        controller.run();
+    }
 
-        ProposteModel proposteModel = new ProposteModel(utenteAttivo,
-                new ProposteMapper(PROPOSTE_JSON_FILEPATH,
-                        new SerializerJSON<>()));
+    private BaseController<?> createController(ProposteModel proposteModel) {
+        switch (utenteAttivo.getClass().getSimpleName()) { // si mantiene la logica condizionale in questo punto perchè è quello
+            // responsabile della creazione dei controller che dipendono direttamente dal tipo di utente.
+            // è anche l'unico punto dove diventano necessari i cast, tuttavia saranno sempre "esatti" perchè
+            // ErmesTerminaleView viene creata in base al tipo  di utente
+            case "Configuratore" -> {
+                return new ConfiguratoreController((ConfiguratoreView) ViewFactory.createView(utenteAttivo),
+                        categorieModel, fattoriModel, proposteModel, compGeoModel, modelUtenti, (Configuratore) utenteAttivo);
+            }
+            case "Fruitore" -> {
+                return new FruitoreController((FruitoreView) ViewFactory.createView(utenteAttivo),
+                        categorieModel, fattoriModel, proposteModel, compGeoModel, modelUtenti, (Fruitore) utenteAttivo);
+            }
+            default ->
+                    throw new IllegalStateException("Unsupported user type: " + utenteAttivo.getClass().getSimpleName());
 
-
-        if (utenteAttivo instanceof Configuratore) {
-            ConfiguratoreController controller = new ConfiguratoreController(
-                    new ConfiguratoreView(),
-                    categorieModel,
-                    fattoriModel,
-                    proposteModel,
-                    compGeoModel,
-                    modelUtenti,
-                    (Configuratore) utenteAttivo
-            );
-            controller.run();
-
-        }else{
-            FruitoreController controller = new FruitoreController(
-                    new FruitoreView(),
-                    categorieModel,
-                    fattoriModel,
-                    proposteModel,
-                    compGeoModel,
-                    modelUtenti,
-                    (Fruitore) utenteAttivo
-            );
-            controller.run();
         }
-
-
     }
 
 }
