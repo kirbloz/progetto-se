@@ -32,10 +32,6 @@ public class FattoriModel {
         }
     }
 
-    public FattoriModel() {
-        this.mapper = new FattoriMapper();
-        hashMapFattori = new HashMap<>();
-    }
 
     ////////////////////////////////////////////////////// CORPO //////////////////////////////////////////////////////
 
