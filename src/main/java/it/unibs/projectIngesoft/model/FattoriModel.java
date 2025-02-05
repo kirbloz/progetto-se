@@ -32,6 +32,10 @@ public class FattoriModel {
         }
     }
 
+    public FattoriModel() {
+        this.mapper = new FattoriMapper();
+        hashMapFattori = new HashMap<>();
+    }
 
     ////////////////////////////////////////////////////// CORPO //////////////////////////////////////////////////////
 
@@ -40,23 +44,12 @@ public class FattoriModel {
         /// Nuovo calcolo inversi
         nuoviDaNuovaRadice.addAll(calcolaInversi(nuoviDaNuovaRadice));
 
-        // caso hashmap non è vuota ma c'è solo una chiave => hai solo una foglia esterna
-        // OPPURE hashmap non è vuota e c'è più di una chiave => situazione standard
-        if (!hashMapFattori.isEmpty()) {
             // 4. fa i calcolini e salva i fattori nella hashmap
             FattoreDiConversione primoFattoreEsternoInterno = new FattoreDiConversione(nomeFogliaEsternaFormattata, nomeFogliaInternaFormattata, fattoreDiConversioneEsternoInterno);
             ArrayList<FattoreDiConversione> fattoriEsterni = calcoloFattoriEsterni(primoFattoreEsternoInterno, nuoviDaNuovaRadice);
 
             aggiungiArrayListDiFattori(nuoviDaNuovaRadice);
             aggiungiArrayListDiFattori(fattoriEsterni);
-            //todo this is checked: should work
-        }
-        // caso hashmap è vuota e hai i nuovi => è la prima radice ed ha più di una foglia,
-        else if (!nuoviDaNuovaRadice.isEmpty()) {
-            // 1. aggiungi i nuovi fattori (sono gli unici)
-            aggiungiArrayListDiFattori(nuoviDaNuovaRadice);
-            //todo this is checked: should work
-        }
 
         mapper.write(hashMapFattori);
     }
@@ -79,41 +72,6 @@ public class FattoriModel {
     public boolean isEmpty(){
         return hashMapFattori.isEmpty();
     }
-
-    /*
-     * Dato il nome di una categoria ritorna una stringa formattata con tutti i fattori di conversione relativi a quella categoria
-     *
-     * @param categoriaFormattata, nome categoria nel formato root:leaf
-     * @return String
-     *
-    public String stringaFattoriDataCategoria(String categoriaFormattata) {
-        StringBuilder sb = new StringBuilder();
-        if (hashListaFattori.containsKey(categoriaFormattata)) {
-            for (FattoreDiConversione f : hashListaFattori.get(categoriaFormattata)) {
-                String valoreFormattato = String.format("%.3f", f.getFattore());
-                sb.append("[ ")
-                        .append(f.getNome_c1()).append(", ").append(f.getNome_c2())
-                        .append(", ").append(valoreFormattato).append(" ]\n");
-            }
-            return sb.toString();
-        } else return WARNING_CATEGORIA_NON_ESISTE;
-    }
-
-    /*
-    /**
-     * Richiama il metodo necessario in base alla selezione dal menu.
-     *
-     * @param scelta, selezione dal menu
-     *
-    public void entryPoint(int scelta) {
-        switch (scelta) {
-            case 1 -> visualizzaFattori();
-            default -> System.out.println("Nulla da mostrare");
-        }
-    }
-    */
-
-
 
 
     ////////////////////////////////////////////////// RIFATTORIZZATO //////////////////////////////////////////////////

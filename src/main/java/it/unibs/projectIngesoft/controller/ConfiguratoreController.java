@@ -173,6 +173,10 @@ public class ConfiguratoreController extends BaseController<Configuratore>{
             //2.2. chiedi il fattore di conversione EsternoInterno [x in (Old:A, New:A, x)]
             double fattoreDiConversioneEsternoInterno = view.ottieniFattoreDiConversione(nomeFogliaEsternaFormattata, nomeFogliaInternaFormattata);
             fattoriModel.inserisciFattoriDiConversione(nomeFogliaEsternaFormattata, nomeFogliaInternaFormattata, fattoreDiConversioneEsternoInterno, nuoviDaNuovaRadice);
+        }else if (!nuoviDaNuovaRadice.isEmpty()) {
+            // 1. aggiungi i nuovi fattori (sono gli unici)
+            fattoriModel.aggiungiArrayListDiFattori(nuoviDaNuovaRadice);
+            //todo just added, i thouth it was there already but idk
         } else {
             fattoriModel.inserisciSingolaFogliaNellaHashmap(nomeRadice, foglie);
         }
