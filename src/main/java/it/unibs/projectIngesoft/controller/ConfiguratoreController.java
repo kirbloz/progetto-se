@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
-public class ConfiguratoreController {
+public class ConfiguratoreController extends BaseController<Configuratore>{
 
     public static final String MSG_INPUT_DESCRIZIONE_VALORE_DOMINIO = ">> Inserisci la descrizione (da 0 a 100 caratteri):\n> ";
     public static final String CONFIRM_DESCRIZIONE_AGGIUNTA = ">> Descrizione aggiunta <<";
@@ -25,12 +25,12 @@ public class ConfiguratoreController {
 
     private final ConfiguratoreView view;
 
-    private final CategorieModel categorieModel;
+    /*private final CategorieModel categorieModel;
     private final FattoriModel fattoriModel;
     private final ProposteModel proposteModel;
     private final ComprensorioGeograficoModel compGeoModel;
     private final UtentiModel utentiModel;
-    private final Configuratore utenteAttivo;
+    private final Configuratore utenteAttivo;*/
 
     public ConfiguratoreController(ConfiguratoreView view,
                                    CategorieModel categorieModel,
@@ -38,13 +38,15 @@ public class ConfiguratoreController {
                                    ProposteModel proposteModel,
                                    ComprensorioGeograficoModel compGeoModel,
                                    UtentiModel utentiModel, Configuratore utenteAttivo) {
-        this.view = view;
+        /*this.view = view;
         this.categorieModel = categorieModel;
         this.fattoriModel = fattoriModel;
         this.proposteModel = proposteModel;
         this.compGeoModel = compGeoModel;
         this.utentiModel = utentiModel;
-        this.utenteAttivo = utenteAttivo;
+        this.utenteAttivo = utenteAttivo;*/
+        super(view, categorieModel, fattoriModel, proposteModel, compGeoModel, utentiModel, utenteAttivo);
+        this.view = view;
     }
 
     /**

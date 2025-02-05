@@ -12,7 +12,7 @@ import java.util.List;
 
 import static it.unibs.projectIngesoft.view.FruitoreView.*;
 
-public class FruitoreController {
+public class FruitoreController extends BaseController <Fruitore> {
 
     public static final String WARNING_RADICE_NON_ESISTE = ">> (!!) Per favore indica una categoria radice che esiste";
     public static final String MSG_SELEZIONE_RADICE = ">> Inserisci il nome di una categoria radice\n";
@@ -21,12 +21,12 @@ public class FruitoreController {
 
     private FruitoreView view;
 
-    private CategorieModel categorieModel;
+    /*private CategorieModel categorieModel;
     private FattoriModel fattoriModel;
     private ProposteModel proposteModel;
     private ComprensorioGeograficoModel compGeoModel;
     private UtentiModel utentiModel;
-    private Fruitore utenteAttivo;
+    private Fruitore utenteAttivo;*/
 
     public FruitoreController(FruitoreView view,
                               CategorieModel categorieModel,
@@ -35,13 +35,15 @@ public class FruitoreController {
                               ComprensorioGeograficoModel compGeoModel,
                               UtentiModel utentiModel,
                               Fruitore utenteAttivo) {
-        this.view = view;
+        /*this.view = view;
         this.categorieModel = categorieModel;
         this.fattoriModel = fattoriModel;
         this.proposteModel = proposteModel;
         this.compGeoModel = compGeoModel;
         this.utentiModel = utentiModel;
-        this.utenteAttivo = utenteAttivo;
+        this.utenteAttivo = utenteAttivo;*/
+        super(view, categorieModel, fattoriModel, proposteModel, compGeoModel, utentiModel, utenteAttivo);
+        this.view = view;
     }
 
 
@@ -52,7 +54,7 @@ public class FruitoreController {
             scelta = view.visualizzaMenuPrincipale();
 
             switch (scelta) {
-                case 0 -> view.uscitaMenu("programma");//System.out.println(AccessoView.MSG_PROGRAM_EXIT);
+                case 0 -> view.uscitaMenu("programma");
                 case 1 -> cambioCredenziali();
                 case 2 -> runControllerProposte();
                 case 3 -> runControllerCategorie();
