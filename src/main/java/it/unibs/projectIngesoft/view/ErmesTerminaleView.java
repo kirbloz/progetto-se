@@ -50,7 +50,7 @@ public abstract class ErmesTerminaleView {
 
     public String inserimentoFogliaFormattata(String messaggio) {
         // inserimento guidato e controllo [Old:A in (Old:A New:A x)]
-        System.out.println(messaggio);
+        print(messaggio);
         return Utilitas.factorNameBuilder(
                 getUserInput(MSG_INSERISCI_NOME_RADICE),
                 getUserInput(MSG_INSERISCI_NOME_FOGLIA)
@@ -75,7 +75,7 @@ public abstract class ErmesTerminaleView {
         } else {
             sb.append("> Foglia");
         }
-        System.out.println(sb);
+        print(sb.toString());
     }
 
     public void visualizzaFiglieCategoria(Categoria categoria) {
@@ -90,7 +90,7 @@ public abstract class ErmesTerminaleView {
             visualizzaFiglieCategoria(figlia);
         });
 
-        System.out.println();
+        print("");
     }
 
     public void visualizzaListaRadici(List<Categoria> radici) {
