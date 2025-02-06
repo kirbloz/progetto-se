@@ -318,7 +318,7 @@ public class ConfiguratoreView extends ErmesTerminaleView {
     }
 
     public String inserimentoNomeComprensorio(String[] array) {
-        return getUserInput(MSG_INPUT_NOME, array);
+        return getUserInputFromNotAvailable(MSG_INPUT_NOME, array);
     }
 
     public List<String> inserimentoComuni() {

@@ -176,7 +176,7 @@ public class FruitoreController extends BaseController <Fruitore> {
             return null;
         }
 
-        return view.getUserInput(MSG_INPUT_SCELTA_CAMPO, valoriFiglie);
+        return view.getUserInputFromAvailable(MSG_INPUT_SCELTA_CAMPO, valoriFiglie);
     }
 
     private Categoria selezionaCategoriaDaValoreCampo(String nuovoValore, List<Categoria> livello) {

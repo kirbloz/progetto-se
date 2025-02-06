@@ -35,8 +35,13 @@ public abstract class ErmesTerminaleView {
         return InputDatiTerminale.leggiStringaNonVuota(prompt);
     }
 
-    public String getUserInput(String prompt, String[] array) {
+    public String getUserInputFromNotAvailable(String prompt, String[] array) {
         return InputDatiTerminale.stringReaderNotInAvailable(prompt, array);
+    }
+
+    public String getUserInputFromAvailable(String prompt, String[] array){
+        return InputDatiTerminale.stringReaderFromAvailable(prompt, array);
+
     }
 
     public String getUserInputMinMaxLength(String prompt, int minLength, int maxLength) {
