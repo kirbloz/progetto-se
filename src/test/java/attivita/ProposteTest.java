@@ -1,11 +1,12 @@
 package attivita;
 
-import it.unibs.projectIngesoft.attivita.Proposta;
-import it.unibs.projectIngesoft.attivita.StatiProposta;
-import it.unibs.projectIngesoft.RepositoryLogic.ProposteRepository;
-import it.unibs.projectIngesoft.model.ProposteModel;
-import it.unibs.projectIngesoft.parsing.SerializerJSON;
-import it.unibs.projectIngesoft.utente.Fruitore;
+
+import it.unibs.projectIngesoft.core.domain.entities.Proposta;
+import it.unibs.projectIngesoft.core.domain.entities.StatiProposta;
+import it.unibs.projectIngesoft.core.domain.entities.utenti.Fruitore;
+import it.unibs.projectIngesoft.core.domain.model.ProposteModel;
+import it.unibs.projectIngesoft.persistence.implementations.ProposteRepository;
+import it.unibs.projectIngesoft.persistence.serialization.SerializerJSON;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

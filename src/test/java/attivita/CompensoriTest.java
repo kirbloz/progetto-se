@@ -1,13 +1,14 @@
 package attivita;
 
-import it.unibs.projectIngesoft.attivita.ComprensorioGeografico;
-import it.unibs.projectIngesoft.controller.ConfiguratoreController;
+
+import it.unibs.projectIngesoft.core.domain.entities.ComprensorioGeografico;
+import it.unibs.projectIngesoft.core.domain.entities.utenti.Configuratore;
+import it.unibs.projectIngesoft.core.domain.model.ComprensorioGeograficoModel;
 import it.unibs.projectIngesoft.libraries.InputInjector;
-import it.unibs.projectIngesoft.RepositoryLogic.CompGeoRepository;
-import it.unibs.projectIngesoft.model.ComprensorioGeograficoModel;
-import it.unibs.projectIngesoft.parsing.SerializerJSON;
-import it.unibs.projectIngesoft.utente.Configuratore;
-import it.unibs.projectIngesoft.view.ConfiguratoreView;
+import it.unibs.projectIngesoft.persistence.implementations.CompGeoRepository;
+import it.unibs.projectIngesoft.persistence.serialization.SerializerJSON;
+import it.unibs.projectIngesoft.presentation.controllers.ConfiguratoreController;
+import it.unibs.projectIngesoft.presentation.view.ConfiguratoreView;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -71,5 +72,4 @@ public class CompensoriTest {
         assert listaComprensori.stream().filter(c -> c.equals("comprensorioTest")).count() == 1;
 
     }
-
 }
