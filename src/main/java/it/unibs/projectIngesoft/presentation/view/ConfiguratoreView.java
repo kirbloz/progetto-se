@@ -63,10 +63,12 @@ public class ConfiguratoreView extends ErmesTerminaleView {
 
     public static final String WARNING_CATEGORIA_ESISTE = ">> (!!) Per favore indica una categoria che non esista già in questo albero gerarchico.\n";
     public static final String WARNING_CATEGORIA_NF_NON_ESISTE = ">> (!!) Per favore indica una categoria non foglia dell'albero gerarchico selezionato.\n";
+    public static final String MSG_SELEZIONE_TRA_ESISTENTI = ">> Inserisci uno tra questi:\n> ";
 
 
     private static final String MSG_INPUT_NOME = ">> Inserisci un nome non già in uso:\n> ";
     public static final String NOME_COMPRENSORIO_FORMATTED = " [ %s ]";
+
 
     /// Copiato da FattoriModel
     public static final String INSERISCI_IL_FATTORE_TRA = ">> Inserisci il fattore tra [%s] e [%s]:\n> ";
@@ -305,15 +307,15 @@ public class ConfiguratoreView extends ErmesTerminaleView {
         // immissione della foglia e verifica che sia corretto [New:A in (Old:A New:A x)]
         String nomeInserito;
         boolean esisteNome = false;
-        do {
-            nomeInserito = getUserInput(MSG_INPUT_NOME);
-            for (String nome : lista) {
+        //do {
+            nomeInserito = getUserInputFromAvailable(MSG_SELEZIONE_TRA_ESISTENTI, lista.toArray(String[]::new));
+            /*for (String nome : lista) {
                 if (nome.equals(nomeInserito)) {
                     esisteNome = true;
                     break;
                 }
-            }
-        } while (!esisteNome);
+            }*/
+        //} while (!esisteNome);
 
         return nomeInserito;
     }
