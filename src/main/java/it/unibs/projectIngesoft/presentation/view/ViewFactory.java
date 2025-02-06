@@ -4,7 +4,7 @@ import it.unibs.projectIngesoft.core.domain.entities.utenti.Utente;
 
 public class ViewFactory {
     public static ErmesTerminaleView createView(Utente utente) {
-        String nomeClasse = "it.unibs.projectIngesoft.view." + utente.getClass().getSimpleName() + "View";
+        String nomeClasse = "it.unibs.projectIngesoft.presentation.view." + utente.getClass().getSimpleName() + "View";
         try {
             Class<? extends ErmesTerminaleView> viewClass = Class.forName(nomeClasse).asSubclass(ErmesTerminaleView.class);
             return viewClass.getDeclaredConstructor().newInstance();
