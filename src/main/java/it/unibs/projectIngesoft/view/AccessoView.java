@@ -1,14 +1,7 @@
 package it.unibs.projectIngesoft.view;
 
-import it.unibs.projectIngesoft.controller.AccessoController;
-import it.unibs.projectIngesoft.libraries.EventListener;
-import it.unibs.projectIngesoft.libraries.EventManager;
 import it.unibs.projectIngesoft.libraries.InputDatiTerminale;
 import it.unibs.projectIngesoft.libraries.Menu;
-import it.unibs.projectIngesoft.model.ComprensorioGeograficoModel;
-
-import javax.swing.text.View;
-import java.util.Arrays;
 import java.util.List;
 
 // classe generica per la view del login a priori
@@ -18,6 +11,9 @@ public class AccessoView /*implements EventListener*/ {
     public static final String MSG_RICHIESTA_PASSWORD = "Inserisci la tua password: ";
     public static final String MSG_RICHIESTA_EMAIL = "Inserisci la tua email: ";
     public static final String MSG_RICHIESTA_COMPRENSORIO = " Inserisci il tuo comprensorio di Appartenenza tra quelli sopra: ";
+
+    public static final String WARNING_USERNAME_ESISTE_GIA = ">> Errore: Username già in uso";
+    public static final String WARNING_INVALID_MAIL = ">> Errore: Email non valida";
 
     public static final String TITLE_STARTING_MENU = "BENVENUTO";
     public static final String[] vociMenuIniziale = new String[]{
@@ -45,7 +41,7 @@ public class AccessoView /*implements EventListener*/ {
     }
 
     public void visualizzaErroreUsernameGiaInUso() {
-        System.out.println("Errore: Username già in uso");
+        System.out.println(WARNING_USERNAME_ESISTE_GIA);
     }
 
     public String selezionaNomeDaLista(List<String> lista){
@@ -77,7 +73,7 @@ public class AccessoView /*implements EventListener*/ {
     }
 
     public void visualizzaErroreMailNonValida() {
-        System.out.println("Errore: Email non valida");
+        System.out.println(WARNING_INVALID_MAIL);
     }
 
 }
