@@ -52,9 +52,15 @@ public abstract class ErmesTerminaleView {
         return InputDatiTerminale.yesOrNo(prompt);
     }
 
-    public double getUserInputMinMaxDouble(String prompt, double min, double max) {
-        return InputDatiTerminale.leggiDoubleConRange(prompt, min, max);
+    public String richiestaUsername() {
+        return getUserInput(MSG_RICHIESTA_USERNAME);
     }
+
+    public String richiestaPassword() {
+        return getUserInput(MSG_RICHIESTA_PASSWORD);
+    }
+
+
 
     public String inserimentoFogliaFormattata(String messaggio) {
         // inserimento guidato e controllo [Old:A in (Old:A New:A x)]

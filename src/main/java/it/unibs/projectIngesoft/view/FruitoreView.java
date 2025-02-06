@@ -6,15 +6,11 @@ import it.unibs.projectIngesoft.attivita.StatiProposta;
 import it.unibs.projectIngesoft.libraries.InputDatiTerminale;
 import it.unibs.projectIngesoft.libraries.Menu;
 
-import static it.unibs.projectIngesoft.view.AccessoView.MSG_RICHIESTA_PASSWORD;
-import static it.unibs.projectIngesoft.view.AccessoView.MSG_RICHIESTA_USERNAME;
-
 public class FruitoreView extends ErmesTerminaleView{
 
     //public static final String TITLE_MAIN_MENU = "MENU' PRINCIPALE - SCAMBIO ORE";
     public static final String[] vociMainFruitore = new String[]{
             "Cambia Credenziali",
-            //"Effettua proposta di scambio",
             "Menu Proposte",
             "Menu Categorie",
     };
@@ -96,14 +92,6 @@ public class FruitoreView extends ErmesTerminaleView{
         for (Categoria categoria : categoriaMadre.getCategorieFiglie()) {
             visualizzaCategoria(categoria);
         }
-    }
-
-    public String richiestaUsername() {
-        return InputDatiTerminale.leggiStringaNonVuota(MSG_RICHIESTA_USERNAME);
-    }
-
-    public String richiestaPassword() {
-        return InputDatiTerminale.leggiStringaNonVuota(MSG_RICHIESTA_PASSWORD);
     }
 
     /// ////////////////////// PROPOSTE //////////////////////////
