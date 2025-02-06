@@ -9,7 +9,6 @@ import it.unibs.projectIngesoft.core.domain.model.*;
 import it.unibs.projectIngesoft.libraries.Utilitas;
 import it.unibs.projectIngesoft.core.domain.entities.utenti.Configuratore;
 import it.unibs.projectIngesoft.presentation.view.ConfiguratoreView;
-import it.unibs.projectIngesoft.core.domain.entities.utenti.Fruitore;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -184,16 +183,11 @@ public class ConfiguratoreController extends BaseController<Configuratore>{
         categorieModel.aggiungiCategoriaRadice(nomeRadice, nomeCampo);
     }
 
-    /**
-     * Guida l'inserimento di una gerarchia. Permette di inserire categorie e configurarle.
-     * Poi richiama la procedura per inserire i fattori di conversione.
-     */
+
     public void aggiungiGerarchia() {
-        // 0. predispone una radice e la salva localmente
         this.aggiungiRadice();
         Categoria radice = categorieModel.getRadici().getLast();
 
-        // 1. loop per l'inserimento di categorie nella gerarchia della radice appena creata
         int scelta;
         do {
             scelta = view.visualizzaMenuAggiungiGerarchia();
@@ -203,28 +197,19 @@ public class ConfiguratoreController extends BaseController<Configuratore>{
             }
         } while (scelta != 0);
 
-        //1.5 imposto a foglie tutte le categorie che non hanno figlie
         radice.impostaCategorieFoglia();
-        // 2. procedura per i fattori
         generaEMemorizzaNuoviFattori(radice.getNome(), radice.getFoglie());
-        //3. salvataggio dei dati
         categorieModel.save();
     }
 
 
-    /**
-     * Metodo per l'inserimento di una Categoria generica NON RADICE.
-     * Non modificabile.
-     *
-     * @param radice, Categoria radice di riferimento
-     */
     private void aggiungiCategoria(Categoria radice) {
         // 1. chiede nome
         String nomeCategoria = view.inserimentoNomeNuovaCategoria(categorieModel, radice);
 
         // 1.1 chiede madre per nuova radice, verificando che esista
         String nomeCategoriaMadre = view.inserimentoNomeCategoriaMadre(nomeCategoria,
-                getListaNomiCategorieGerarchiaFiltrata(radice, Categoria::isNotFoglia));
+                categorieModel.getListaNomiCategorieGerarchiaFiltrata(radice, Categoria::isNotFoglia));
         Categoria categoriaMadre = radice.cercaCategoria(nomeCategoriaMadre);
 
         // 2. chiede valore del dominio ereditato + descrizione
@@ -259,19 +244,6 @@ public class ConfiguratoreController extends BaseController<Configuratore>{
         else
             return new Categoria(nome, campoFiglie, madre, valoreDominio);
 
-    }
-
-    public List<Categoria> getListaCategorieGerarchiaFiltrata(Categoria radice, Predicate<Categoria> filtro) {
-        List<Categoria> lista = Categoria.appiatisciGerarchiaSuLista(radice, new ArrayList<>());
-        return lista.stream().filter(filtro).toList();
-
-    }
-
-    public List<String> getListaNomiCategorieGerarchiaFiltrata(Categoria radice, Predicate<Categoria> filtro) {
-        return getListaCategorieGerarchiaFiltrata(radice, filtro)
-                .stream()
-                .map(Categoria::getNome)
-                .toList();
     }
 
 

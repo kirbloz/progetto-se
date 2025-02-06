@@ -70,17 +70,5 @@ public class FattoreDiConversione {
         this.fattore = fattore;
     }
 
-    /**
-     * Rappresenta l'oggetto come una stringa formattata.
-     * Inutile in questo momento perchè la classe GestoreFattori recupera e formatta
-     * le informazioni autonomamente.
-     *
-     * @return stringa formattata
-     */
-    @Override
-    public String toString() {
-        return nome_c1 + " " + nome_c2 + " " + fattore;
-    }
-
 
 }

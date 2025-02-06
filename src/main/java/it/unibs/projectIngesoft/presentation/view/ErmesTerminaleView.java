@@ -157,4 +157,6 @@ public abstract class ErmesTerminaleView {
         print(chiuse.toString());
         print(ritirate.toString());
     }
+
+    public abstract void uscitaMenu(String prompt);
 }

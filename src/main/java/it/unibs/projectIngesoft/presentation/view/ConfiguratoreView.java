@@ -3,11 +3,11 @@ package it.unibs.projectIngesoft.presentation.view;
 import it.unibs.projectIngesoft.core.domain.entities.Categoria;
 import it.unibs.projectIngesoft.core.domain.entities.FattoreDiConversione;
 import it.unibs.projectIngesoft.core.domain.entities.Proposta;
+import it.unibs.projectIngesoft.core.domain.entities.utenti.Fruitore;
+import it.unibs.projectIngesoft.core.domain.model.CategorieModel;
 import it.unibs.projectIngesoft.libraries.InputDatiTerminale;
 import it.unibs.projectIngesoft.libraries.Menu;
 import it.unibs.projectIngesoft.libraries.Utilitas;
-import it.unibs.projectIngesoft.core.domain.model.CategorieModel;
-import it.unibs.projectIngesoft.core.domain.entities.utenti.Fruitore;
 
 import java.util.List;
 import java.util.Locale;
@@ -150,15 +150,12 @@ public class ConfiguratoreView extends ErmesTerminaleView {
         visualizzaFiglieCategoria(radice);
     }
 
-    public void visualizzaGerarchie(List<Categoria> radici){
-        if(radici.isEmpty())
+    public void visualizzaGerarchie(List<Categoria> radici) {
+        if (radici.isEmpty())
             visualizzaErroreNoGerarchieMemorizzate();
         for (Categoria radice : radici)
             visualizzaGerarchia(radice);
     }
-
-
-
 
 
     /*
@@ -251,17 +248,6 @@ public class ConfiguratoreView extends ErmesTerminaleView {
 
     /// //////////////////////////////////////////// VIEW per i fattori /////////////////////////////////////////////////
 
-
-    // TODO rivedere
-
-    /**
-     * Permette di scegliere una categoria foglia tra quelle appena create.
-     * Guida l'immissione del nome e radice della categoria.
-     *
-     * @param nomeRadice, nome della radice delle foglie
-     * @param foglie,     lista di foglie appena create
-     * @return stringa formattata come "radice:foglia"
-     */
     public String selezioneFogliaDaLista(String nomeRadice, List<Categoria> foglie) {
         // stampa categorie interne (foglie della nuova radice)
         String[] foglieArray = new String[foglie.size()];
@@ -295,29 +281,13 @@ public class ConfiguratoreView extends ErmesTerminaleView {
         return InputDatiTerminale.leggiDoubleConRange(INSERISCI_IL_FATTORE_TRA.formatted(nomeFogliaEsternaFormattata, nomeFogliaInternaFormattata), Utilitas.MIN_FATTORE, Utilitas.MAX_FATTORE);
     }
 
-
-
-    /// ///////////////////////////////////////////// Comprensorio View /////////////////////////////////////////////////
-
     public String selezionaNomeDaLista(List<String> lista) {
         System.out.println(MSG_SCEGLI_NOMI_LISTA);
         for (String nome : lista) {
             System.out.println(nome);
         }
         // immissione della foglia e verifica che sia corretto [New:A in (Old:A New:A x)]
-        String nomeInserito;
-        boolean esisteNome = false;
-        //do {
-            nomeInserito = getUserInputFromAvailable(MSG_SELEZIONE_TRA_ESISTENTI, lista.toArray(String[]::new));
-            /*for (String nome : lista) {
-                if (nome.equals(nomeInserito)) {
-                    esisteNome = true;
-                    break;
-                }
-            }*/
-        //} while (!esisteNome);
-
-        return nomeInserito;
+        return getUserInputFromAvailable(MSG_SELEZIONE_TRA_ESISTENTI, lista.toArray(String[]::new));
     }
 
     public String inserimentoNomeComprensorio(String[] array) {
@@ -339,10 +309,6 @@ public class ConfiguratoreView extends ErmesTerminaleView {
         print(WARNING_NO_COMPRENSORI_DA_VISUALIZZARE);
     }
 
-
-    /// ///////////////////////////// proposte ////////////////////////////////////
-
-
     public void visualizzaProposteDaNotificare(Map<Fruitore, List<Proposta>> mapDaNotificare) {
         if (mapDaNotificare.isEmpty()) {
             print(WARNING_NO_PROPOSTE_DA_VISUALIZZARE);
@@ -358,17 +324,6 @@ public class ConfiguratoreView extends ErmesTerminaleView {
                 proposta.notificata();
             }
         }
-
-
-        /*
-        mapDaNotificare.forEach(proposta -> {
-            System.out.println(proposta);
-            Fruitore autore = proposta.getAutore();
-            String email = autore.getEmail();
-            String comprensorio = autore.getComprensorioDiAppartenenza();
-            print(MSG_FORMATTED_PROPOSTA_PRONTA.formatted(autore.getUsername(), comprensorio, email));
-            proposta.notificata();
-        });*/
     }
 
     public void visualizzaProposteCategoriaHeader(String categoria) {
