@@ -1,17 +1,16 @@
 package attivita;
 
-import it.unibs.projectIngesoft.RepositoryLogic.CategorieRepository;
-import it.unibs.projectIngesoft.RepositoryLogic.FattoriDiConversioneRepository;
-import it.unibs.projectIngesoft.attivita.Categoria;
-import it.unibs.projectIngesoft.attivita.FattoreDiConversione;
-import it.unibs.projectIngesoft.attivita.ValoreDominio;
-import it.unibs.projectIngesoft.controller.ConfiguratoreController;
+
+import it.unibs.projectIngesoft.core.domain.entities.Categoria;
+import it.unibs.projectIngesoft.core.domain.entities.utenti.Configuratore;
+import it.unibs.projectIngesoft.core.domain.model.CategorieModel;
+import it.unibs.projectIngesoft.core.domain.model.FattoriModel;
 import it.unibs.projectIngesoft.libraries.InputInjector;
-import it.unibs.projectIngesoft.model.CategorieModel;
-import it.unibs.projectIngesoft.model.FattoriModel;
-import it.unibs.projectIngesoft.parsing.SerializerJSON;
-import it.unibs.projectIngesoft.utente.Configuratore;
-import it.unibs.projectIngesoft.view.ConfiguratoreView;
+import it.unibs.projectIngesoft.persistence.implementations.CategorieRepository;
+import it.unibs.projectIngesoft.persistence.implementations.FattoriDiConversioneRepository;
+import it.unibs.projectIngesoft.persistence.serialization.SerializerJSON;
+import it.unibs.projectIngesoft.presentation.controllers.ConfiguratoreController;
+import it.unibs.projectIngesoft.presentation.view.ConfiguratoreView;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,9 +18,6 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Optional;
-
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class FattoriTest {
 
@@ -74,7 +70,6 @@ public class FattoriTest {
         InputInjector.inject(data);
         controller.aggiungiGerarchia();
 
-
-        //controller.generaEMemorizzaNuoviFattori("radiceTest", );
+        controller.generaEMemorizzaNuoviFattori("radiceTest", categorieModel.getFoglie("radiceTest"));
     }
 }
