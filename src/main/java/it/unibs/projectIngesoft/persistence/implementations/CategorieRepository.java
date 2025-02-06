@@ -8,14 +8,10 @@ import it.unibs.projectIngesoft.persistence.serialization.Serializer;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CategorieRepository implements Repository<List<Categoria>> {
-
-    private final String filePath;
-    private final Serializer<List<Categoria>> serializer;
+public class CategorieRepository extends SerializerBasedRepository<List<Categoria>> {
 
     public CategorieRepository(String filePath, Serializer<List<Categoria>> serializer) {
-        this.filePath = filePath;
-        this.serializer = serializer;
+        super(filePath, serializer);
     }
 
     public void save(List<Categoria> list) {

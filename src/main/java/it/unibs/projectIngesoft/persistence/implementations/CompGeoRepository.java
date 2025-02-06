@@ -1,20 +1,17 @@
 package it.unibs.projectIngesoft.persistence.implementations;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import it.unibs.projectIngesoft.attivita.ComprensorioGeografico;
-import it.unibs.projectIngesoft.parsing.Serializer;
+import it.unibs.projectIngesoft.core.domain.entities.ComprensorioGeografico;
+import it.unibs.projectIngesoft.persistence.SerializerBasedRepository;
+import it.unibs.projectIngesoft.persistence.serialization.Serializer;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CompGeoRepository implements Repository<List<ComprensorioGeografico>> {
-
-    private final String filePath;
-    private final Serializer<List<ComprensorioGeografico>> serializer;
+public class CompGeoRepository extends SerializerBasedRepository<List<ComprensorioGeografico>> {
 
     public CompGeoRepository(String filePath, Serializer<List<ComprensorioGeografico>> serializer) {
-        this.filePath = filePath;
-        this.serializer = serializer;
+        super(filePath, serializer);
     }
 
     public void save(List<ComprensorioGeografico> listaComprensori) {

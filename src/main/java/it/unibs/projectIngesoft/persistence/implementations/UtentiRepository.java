@@ -1,7 +1,6 @@
 package it.unibs.projectIngesoft.persistence.implementations;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import it.unibs.projectIngesoft.persistence.Repository;
 import it.unibs.projectIngesoft.persistence.SerializerBasedRepository;
 import it.unibs.projectIngesoft.persistence.serialization.Serializer;
 import it.unibs.projectIngesoft.core.domain.entities.utenti.Utente;
@@ -9,29 +8,27 @@ import it.unibs.projectIngesoft.core.domain.entities.utenti.Utente;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UtentiRepository implements Repository<List<Utente>> {
+public class UtentiRepository extends SerializerBasedRepository<List<Utente>> {
 
-    private final String filePath;
+
     private final String defaultCredentialsFilePath;
 
-    private final Serializer<List<Utente>> listUtentiSerializer;
     private final Serializer<Utente> utenteSerializer;
 
     public UtentiRepository(String filePath, String defaultCredentialsFilePath, Serializer<List<Utente>> listUtentiSerializer, Serializer<Utente> utenteSerializer) {
-        this.filePath = filePath;
+        super(filePath, listUtentiSerializer);
         this.defaultCredentialsFilePath = defaultCredentialsFilePath;
-        this.listUtentiSerializer = listUtentiSerializer;
         this.utenteSerializer = utenteSerializer;
     }
 
     public void save(List<Utente> utenti) {
         if (utenti == null) utenti = new ArrayList<>();
-        this.listUtentiSerializer.serialize(this.filePath, utenti);
+        this.serializer.serialize(this.filePath, utenti);
     }
 
     public List<Utente> load() {
         assert this.filePath != null;
-        List<Utente> data = this.listUtentiSerializer.deserialize(new TypeReference<>() {
+        List<Utente> data = this.serializer.deserialize(new TypeReference<>() {
         }, this.filePath);
         return data == null ? new ArrayList<>() : data;
     }
