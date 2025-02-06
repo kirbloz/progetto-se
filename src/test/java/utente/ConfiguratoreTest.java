@@ -1,13 +1,14 @@
 package utente;
 
-import it.unibs.projectIngesoft.controller.AccessoController;
-import it.unibs.projectIngesoft.controller.ConfiguratoreController;
+
+import it.unibs.projectIngesoft.core.domain.entities.utenti.Configuratore;
+import it.unibs.projectIngesoft.core.domain.model.UtentiModel;
 import it.unibs.projectIngesoft.libraries.InputInjector;
-import it.unibs.projectIngesoft.RepositoryLogic.UtentiRepository;
-import it.unibs.projectIngesoft.model.UtentiModel;
-import it.unibs.projectIngesoft.parsing.SerializerJSON;
-import it.unibs.projectIngesoft.utente.Configuratore;
-import it.unibs.projectIngesoft.view.ConfiguratoreView;
+import it.unibs.projectIngesoft.persistence.implementations.UtentiRepository;
+import it.unibs.projectIngesoft.persistence.serialization.SerializerJSON;
+import it.unibs.projectIngesoft.presentation.controllers.AccessoController;
+import it.unibs.projectIngesoft.presentation.controllers.ConfiguratoreController;
+import it.unibs.projectIngesoft.presentation.view.ConfiguratoreView;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
