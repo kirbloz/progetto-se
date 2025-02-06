@@ -113,6 +113,7 @@ public class FruitoreController extends BaseController <Fruitore> {
 
         if (nomiRadici.isEmpty()) {
             view.print(WARNING_NO_GERARCHIE_MEMORIZZATE);
+            return;
         }
         int scelta;
 
