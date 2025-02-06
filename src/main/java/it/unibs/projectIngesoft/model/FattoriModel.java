@@ -26,10 +26,21 @@ public class FattoriModel {
 
     public FattoriModel(FattoriMapper mapper) {
         this.mapper = mapper;
-        hashMapFattori = mapper.read();
-        if(hashMapFattori == null) {
-            hashMapFattori = new HashMap<>();
-        }
+        load();
+    }
+
+    public void save(){
+        mapper.write(hashMapFattori);
+    }
+
+    public void load(){
+        Map<String, List<FattoreDiConversione>> data = mapper.read();
+        this.hashMapFattori = (data == null ? new HashMap<>() : data);
+    }
+
+    public void setHashMapFattori( Map<String, List<FattoreDiConversione>> hashMapFattori ){
+        if(hashMapFattori!=null)
+            this.hashMapFattori = hashMapFattori;
     }
 
 
@@ -46,7 +57,7 @@ public class FattoriModel {
             aggiungiArrayListDiFattori(nuoviDaNuovaRadice);
             aggiungiArrayListDiFattori(fattoriEsterni);
 
-        mapper.write(hashMapFattori);
+        save();
     }
 
     public void inserisciSingolaFogliaNellaHashmap(String nomeRadice, List<Categoria> foglie){
@@ -107,7 +118,7 @@ public class FattoriModel {
         for (FattoreDiConversione f : fattori) {
             addFattore(f.getNome_c1(), f);
         }
-        mapper.write(hashMapFattori);
+        save();
     }
 
 
