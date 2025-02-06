@@ -8,7 +8,6 @@ public class Fruitore extends Utente{
     private String email;
     @JsonProperty
     private String comprensorioDiAppartenenza;
-
     @JsonProperty("type")
     private String type = "Fruitore";
 
@@ -22,12 +21,16 @@ public class Fruitore extends Utente{
         this.comprensorioDiAppartenenza = comprensorioDiAppartenenza;
     }
 
-    //Getters & Setters
     public String getComprensorioDiAppartenenza() {
         return comprensorioDiAppartenenza;
     }
 
     public String getEmail(){
         return email;
+    }
+
+    @Override
+    public String getType() {
+        return type;
     }
 }

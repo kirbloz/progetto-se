@@ -26,4 +26,9 @@ public class Configuratore extends Utente{
 	public boolean isFirstAccess() {
         return firstAccess;
 	}
+
+    @Override
+    public String getType() {
+        return type;
+    }
 }
