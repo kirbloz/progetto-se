@@ -5,8 +5,8 @@ import it.unibs.projectIngesoft.attivita.FattoreDiConversione;
 import it.unibs.projectIngesoft.attivita.ValoreDominio;
 import it.unibs.projectIngesoft.controller.ConfiguratoreController;
 import it.unibs.projectIngesoft.libraries.InputInjector;
-import it.unibs.projectIngesoft.mappers.CategorieMapper;
-import it.unibs.projectIngesoft.mappers.FattoriMapper;
+import it.unibs.projectIngesoft.mappers.CategorieRepository;
+import it.unibs.projectIngesoft.mappers.FattoriDiConversioneRepository;
 import it.unibs.projectIngesoft.model.CategorieModel;
 import it.unibs.projectIngesoft.model.FattoriModel;
 import it.unibs.projectIngesoft.parsing.SerializerJSON;
@@ -28,25 +28,25 @@ class CategorieTest {
     private CategorieModel categorieModel;
     //private CategorieController controller;
 
-    private CategorieMapper mapper;
+    private CategorieRepository mapper;
     private List<Categoria> cleanTestData;
 
     @BeforeEach
     void prepareTest() {
-        mapper = new CategorieMapper("categorieTest.json",
+        mapper = new CategorieRepository("categorieTest.json",
                 new SerializerJSON<>()
         );
 
         cleanTestData = new ArrayList<>();
-        cleanTestData = mapper.read();
+        cleanTestData = mapper.load();
 
-        this.categorieModel = new CategorieModel(mapper);
+        //this.categorieModel = new CategorieModel(mapper);
 
     }
 
     @AfterEach
     void tearDown() {
-        mapper.write(cleanTestData);
+        mapper.save(cleanTestData);
     }
 
     @Test
@@ -74,7 +74,7 @@ class CategorieTest {
     void aggiungiGerarchia_RadiceNomeUnivoco_RadiceFoglia_FattoriInseritiCorrettamente() {
         //todo questa roba controlla fattori.....
         Categoria radiceFoglia = new Categoria("radiceTest", "testing");
-        FattoriModel fattoriModel = new FattoriModel(new FattoriMapper("fattoriTest.json", new SerializerJSON<>()));
+        FattoriModel fattoriModel = new FattoriModel(new FattoriDiConversioneRepository("fattoriTest.json", new SerializerJSON<>()));
         ConfiguratoreController controller = new ConfiguratoreController(new ConfiguratoreView(),
                 categorieModel, fattoriModel,
                 null,

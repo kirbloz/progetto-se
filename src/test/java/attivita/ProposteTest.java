@@ -2,8 +2,7 @@ package attivita;
 
 import it.unibs.projectIngesoft.attivita.Proposta;
 import it.unibs.projectIngesoft.attivita.StatiProposta;
-import it.unibs.projectIngesoft.libraries.InputInjector;
-import it.unibs.projectIngesoft.mappers.ProposteMapper;
+import it.unibs.projectIngesoft.mappers.ProposteRepository;
 import it.unibs.projectIngesoft.model.ProposteModel;
 import it.unibs.projectIngesoft.parsing.SerializerJSON;
 import it.unibs.projectIngesoft.utente.Fruitore;
@@ -19,18 +18,18 @@ public class ProposteTest {
 
     private ProposteModel model;
 
-    private ProposteMapper mapper;
+    private ProposteRepository mapper;
     private Map<String, List<Proposta>> cleanTestData;
 
 
     @BeforeEach
     void prepareTest() {
-        mapper = new ProposteMapper("proposteTest.json",
+        mapper = new ProposteRepository("proposteTest.json",
                 new SerializerJSON<Map<String, List<Proposta>>>()
         );
 
         cleanTestData = new HashMap<>();
-        cleanTestData = mapper.read();
+        cleanTestData = mapper.load();
 
         // creare i test con configuratore E quelli con utenteAttivo
         Fruitore utenteAttivo = new Fruitore("user", "pwd", "valid@email.com", "comprensorio");
@@ -40,7 +39,7 @@ public class ProposteTest {
 
     @AfterEach
     void tearDown() {
-        mapper.write(new HashMap<>(cleanTestData));
+        mapper.save(new HashMap<>(cleanTestData));
     }
 
     @Test
