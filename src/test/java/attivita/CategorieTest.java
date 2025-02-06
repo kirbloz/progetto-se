@@ -1,11 +1,14 @@
 package attivita;
 
 import it.unibs.projectIngesoft.attivita.Categoria;
+import it.unibs.projectIngesoft.attivita.FattoreDiConversione;
 import it.unibs.projectIngesoft.attivita.ValoreDominio;
 import it.unibs.projectIngesoft.controller.ConfiguratoreController;
 import it.unibs.projectIngesoft.libraries.InputInjector;
 import it.unibs.projectIngesoft.mappers.CategorieMapper;
+import it.unibs.projectIngesoft.mappers.FattoriMapper;
 import it.unibs.projectIngesoft.model.CategorieModel;
+import it.unibs.projectIngesoft.model.FattoriModel;
 import it.unibs.projectIngesoft.parsing.SerializerJSON;
 import it.unibs.projectIngesoft.utente.Configuratore;
 import it.unibs.projectIngesoft.view.ConfiguratoreView;
@@ -14,11 +17,15 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 class CategorieTest {
 
-    private CategorieModel model;
+    private CategorieModel categorieModel;
     //private CategorieController controller;
 
     private CategorieMapper mapper;
@@ -26,29 +33,29 @@ class CategorieTest {
 
     @BeforeEach
     void prepareTest() {
-        mapper = new CategorieMapper("categorieTest1.json",
-                new SerializerJSON<List<Categoria>>()
+        mapper = new CategorieMapper("categorieTest.json",
+                new SerializerJSON<>()
         );
 
         cleanTestData = new ArrayList<>();
         cleanTestData = mapper.read();
 
-        this.model = new CategorieModel(mapper);
+        this.categorieModel = new CategorieModel(mapper);
 
     }
 
     @AfterEach
     void tearDown() {
-        //mapper.write(cleanTestData);
+        mapper.write(cleanTestData);
     }
 
     @Test
     void aggiungiUnaRadice() {
 
-        assert !model.esisteRadice("nomeTest");
+        assert !categorieModel.esisteRadice("nomeTest");
 
         ConfiguratoreController controller = new ConfiguratoreController(new ConfiguratoreView(),
-                model,
+                categorieModel,
                 null,
                 null,
                 null,
@@ -58,31 +65,54 @@ class CategorieTest {
         InputInjector.inject("nomeTest\ncampoTest\n");
         controller.aggiungiRadice();
 
-        assert model.esisteRadice("nomeTest");
+        assert categorieModel.esisteRadice("nomeTest");
 
         //controller.addGerarchia così aggiungeremo di più di una singola radice
     }
 
     @Test
-    void aggiungiGerarchiaTest_RadiceUnivoca_NomeUnivoco_Foglia() {
+    void aggiungiGerarchia_RadiceNomeUnivoco_RadiceFoglia_FattoriInseritiCorrettamente() {
+        //todo questa roba controlla fattori.....
+        Categoria radiceFoglia = new Categoria("radiceTest", "testing");
+        FattoriModel fattoriModel = new FattoriModel(new FattoriMapper("fattoriTest.json", new SerializerJSON<>()));
         ConfiguratoreController controller = new ConfiguratoreController(new ConfiguratoreView(),
-                model,
-                null,
+                categorieModel, fattoriModel,
                 null,
                 null,
                 null,
                 new Configuratore("default", "test"));
 
-        model.aggiungiCategoriaRadice("radiceTest", "testing");
+        this.categorieModel.setRadici(new ArrayList<>());
+        fattoriModel.setHashMapFattori(new HashMap<>());
 
-        String data = "\nradiceTest\nradiceTest2\ncampoTest\n";
+        // riproduzione di aggiungi gerarchia
+        categorieModel.aggiungiCategoriaRadice(radiceFoglia.getNome(), radiceFoglia.getCampoFiglie());
+        radiceFoglia.impostaCategorieFoglia();
+        fattoriModel.inserisciSingolaFogliaNellaHashmap(radiceFoglia.getNome(), radiceFoglia.getFoglie());
+
+        String data = "radiceTest2\ncampoTest\n";
         data = data + "1\nfigliaTest\nradice\nradiceTest2\nvaloreFiglia\nN\nS\n";
         data = data + "1\nfigliaTest2\nfigliaTest\nradiceTest2\nvaloreFiglia2\nS" +
                 "\ndescrizione\nN\ndominioFake\n";
-        data = data + "0\n";
+        data = data + "0\n0.5\nradiceTest\nradiceTest\nradiceTest2\nfigliaTest\n1";
 
         InputInjector.inject(data);
         controller.aggiungiGerarchia();
+
+       // assertTrue(fattoriModel.existsKeyInHashmapFattori("radiceTest:radiceTest"));
+        assertTrue(fattoriModel.existsKeyInHashmapFattori("radiceTest2:figliaTest"));
+        assertTrue(fattoriModel.existsKeyInHashmapFattori("radiceTest2:figliaTest2"));
+
+        Optional<FattoreDiConversione> fattore1 = fattoriModel.getFattoriFromFoglia("radiceTest","radiceTest")
+                .stream().filter(f -> f.getNome_c2().equals("radiceTest2:figliaTest")).findAny();
+        Optional<FattoreDiConversione> fattore2 = fattoriModel.getFattoriFromFoglia("radiceTest2","figliaTest")
+                .stream().filter(f -> f.getNome_c2().equals("radiceTest2:figliaTest2")).findAny();
+        Optional<FattoreDiConversione> fattore3 = fattoriModel.getFattoriFromFoglia("radiceTest2","figliaTest2")
+                .stream().filter(f -> f.getNome_c2().equals("radiceTest2:figliaTest")).findAny();
+
+        assertTrue(fattore1.isPresent());
+        assertTrue(fattore2.isPresent());
+        assertTrue(fattore3.isPresent());
 
     }
 
@@ -96,7 +126,7 @@ class CategorieTest {
     @Test
     void aggiungiDescrizioneValoreDominio() {
         ConfiguratoreController controller = new ConfiguratoreController(new ConfiguratoreView(),
-                model,
+                categorieModel,
                 null,
                 null,
                 null,
@@ -107,13 +137,18 @@ class CategorieTest {
         controller.aggiungiRadice();
 
         Categoria categoria = new Categoria("test",
-                model.getRadici().getLast(),
+                categorieModel.getRadici().getLast(),
                 new ValoreDominio("nomeValoreTest"));
 
         assert categoria.getValoreDominio().getDescrizione().isEmpty();
         categoria.getValoreDominio().setDescrizione("test");
         assert categoria.getValoreDominio().getDescrizione().equals("test");
-        //questa concatenazione è nauseabonda, non abbiamo un metodo di controller vero?
+    }
+
+
+    @Test
+    void esploraGerarchie_PassoSceltaNuovoLivelloTest(){
+        assert false;
     }
 
 }

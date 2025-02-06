@@ -35,7 +35,7 @@ public class ProposteTest {
         // creare i test con configuratore E quelli con utenteAttivo
         Fruitore utenteAttivo = new Fruitore("user", "pwd", "valid@email.com", "comprensorio");
 
-        this.model = new ProposteModel(utenteAttivo, mapper);
+        this.model = new ProposteModel(mapper);
     }
 
     @AfterEach
