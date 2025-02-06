@@ -7,6 +7,7 @@ import it.unibs.projectIngesoft.persistence.implementations.CategorieRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 
 public class CategorieModel {
     //private Albero tree;
@@ -51,22 +52,10 @@ public class CategorieModel {
     public void setRadici(List<Categoria> radici) {
         if (radici == null)
             radici = new ArrayList<>();
-        this.setRadici(radici);
+        this.radici = radici;
         save();
     }
 
-    /*public List<Categoria> getFoglie(String nomeRadice) {
-        return new ArrayList<>(radici.getFoglie(nomeRadice));
-    }*/
-
-
-    /**
-     * Verifica che la stringa passata non sia già il nome di un'altra Categoria della stessa gerarchia
-     *
-     * @param tempNome    nome da controllare
-     * @param tempRadice, radice della gerarchia
-     * @return true se esiste una Categoria con quel nome
-     */
     public boolean esisteCategoriaNellaGerarchia(String tempNome, String tempRadice) {
         return this.getRadice(tempRadice).cercaCategoria(tempNome) != null;
     }
@@ -87,5 +76,17 @@ public class CategorieModel {
         return false;
     }
 
+    public List<Categoria> getListaCategorieGerarchiaFiltrata(Categoria radice, Predicate<Categoria> filtro) {
+        List<Categoria> lista = Categoria.appiatisciGerarchiaSuLista(radice, new ArrayList<>());
+        return lista.stream().filter(filtro).toList();
+
+    }
+
+    public List<String> getListaNomiCategorieGerarchiaFiltrata(Categoria radice, Predicate<Categoria> filtro) {
+        return getListaCategorieGerarchiaFiltrata(radice, filtro)
+                .stream()
+                .map(Categoria::getNome)
+                .toList();
+    }
 
 }
