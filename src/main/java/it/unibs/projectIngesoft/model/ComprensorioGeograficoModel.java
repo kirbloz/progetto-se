@@ -8,6 +8,7 @@ import java.util.List;
 
 public class ComprensorioGeograficoModel {
 
+    //todo rimuovere?
     private static final String MSG_INSERISCI_COMUNE = ">> Inserire nome del comune da inserire oppure fine per terminare l'inserimento:\n> ";
     private static final String MSG_INSERISCI_NOME_NUOVO_COMPRENSORIO = ">> Inserire il nome del comprensorio geografico:\n> ";
     private static final String MSG_RICERCA_COMPRENSORIO = ">> Inserire il nome del comprensorio da visualizzare:\n> ";
@@ -30,19 +31,6 @@ public class ComprensorioGeograficoModel {
 
     /////////////////////////////////////////////// Rifattorizzati /////////////////////////////////////////////////////
 
-
-    //Todo messo public da usare nel controller, ma se uso le String[] come in fattori non serve
-    public boolean isNomeGiaUsato(String nomeComprensorio) {
-        for (ComprensorioGeografico comprensorio : this.listaComprensoriGeografici) {
-            if (comprensorio.getNomeComprensorio().equalsIgnoreCase(nomeComprensorio)) {
-                System.out.println(WARNING_NOME_COMPRENSORIO_GIA_USATO);
-                return true;
-            }
-        }
-        return false;
-    }
-
-    //todo da usare nel controller per il controllo di unicità nella view
     public List<String> getListaNomiComprensoriGeografici() {
         return listaComprensoriGeografici.stream()
                 .map(ComprensorioGeografico::getNomeComprensorio)

@@ -53,7 +53,6 @@ public class ConfiguratoreView extends ErmesTerminaleView {
             "Aggiungi Categoria",
     };
 
-
     public static final String MSG_INSERIMENTO_NUOVO_DOMINIO = ">> Inserisci il nome del dominio della nuova categoria:\n> ";
     public static final String MSG_INSERIMENTO_VALORE_DOMINIO = ">> Inserisci il valore di %s nel dominio di {%s}\n> ";
 
@@ -65,9 +64,6 @@ public class ConfiguratoreView extends ErmesTerminaleView {
     public static final String WARNING_CATEGORIA_ESISTE = ">> (!!) Per favore indica una categoria che non esista già in questo albero gerarchico.\n";
     public static final String WARNING_CATEGORIA_NF_NON_ESISTE = ">> (!!) Per favore indica una categoria non foglia dell'albero gerarchico selezionato.\n";
 
-    private static final String MSG_RICHIESTA_USERNAME = ">> Inserisci un username non ancora utilizzato: ";
-    private static final String MSG_RICHIESTA_PASSWORD = ">> Inserisci la password: ";
-
 
     private static final String MSG_INPUT_NOME = ">> Inserisci un nome non già in uso:\n> ";
     public static final String NOME_COMPRENSORIO_FORMATTED = " [ %s ]";
@@ -77,8 +73,6 @@ public class ConfiguratoreView extends ErmesTerminaleView {
 
     public static final String WARNING_CATEGORIA_NON_ESISTE = ">> (!!) La foglia richiesta non esiste o non esistono fattori relativi a questa foglia";
     public static final String WARNING_NO_FATTORI_MEMORIZZATI = ">> (!!) Non ci sono Fattori di Conversione memorizzati";
-    /// fine roba da FattoriModel
-
 
     // STRINGHE PER PROPOSTE
 
@@ -89,6 +83,7 @@ public class ConfiguratoreView extends ErmesTerminaleView {
     public static final String INPUT_NOME_COMUNE = ">> Inserisci il nome del COMUNE: ";
     public static final String MSG_SCEGLI_NOMI_LISTA = ">> Scegli uno tra i seguenti nomi: ";
     public static final String MSG_SCELTA_CATEGORIA = ">> Scegli la categoria.";
+    public static final String WARNING_NO_GERARCHIE_MEMORIZZATE = ">> Nessuna gerarchia memorizzata.";
 
     // STRINGHE PER COMPRENSORI
 
@@ -289,13 +284,6 @@ public class ConfiguratoreView extends ErmesTerminaleView {
         return InputDatiTerminale.leggiDoubleConRange(INSERISCI_IL_FATTORE_TRA.formatted(nomeFogliaEsternaFormattata, nomeFogliaInternaFormattata), Utilitas.MIN_FATTORE, Utilitas.MAX_FATTORE);
     }
 
-    public String richiestaUsername() {
-        return getUserInput(MSG_RICHIESTA_USERNAME);
-    }
-
-    public String richiestaPassword() {
-        return getUserInput(MSG_RICHIESTA_PASSWORD);
-    }
 
 
     /// ///////////////////////////////////////////// Comprensorio View /////////////////////////////////////////////////

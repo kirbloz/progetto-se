@@ -107,16 +107,13 @@ public class FruitoreController extends BaseController <Fruitore> {
 
     /**
      * Duplicato da CategorieModel
-     * todo implementare/rifattorizzare
      */
     public void esploraGerarchie() {
         List<String> nomiRadici = categorieModel.getRadici().stream().map(Categoria::getNome).toList();
 
         if (nomiRadici.isEmpty()) {
-            //System.out.println(WARNING_NO_GERARCHIE_MEMORIZZATE);
             view.print(WARNING_NO_GERARCHIE_MEMORIZZATE);
         }
-        //int scelta = view.visualizzaMenuEsploraGerarchia();
         int scelta;
 
         // 0. seleziono la radice della gerarchia da esplorare
@@ -124,7 +121,6 @@ public class FruitoreController extends BaseController <Fruitore> {
                 .stream().filter(c -> !c.isFoglia()).toList();
         Categoria radice = inserimentoNomeCategoria(listaRadiciNonFoglia);
         Categoria madreCorrente = radice; // categoria madre del livello che si sta visualizzando al momento
-        //List<Categoria> livello = madreCorrente.getCategorieFiglie();
 
         do {
             // 1. print del livello corrente
@@ -145,7 +141,6 @@ public class FruitoreController extends BaseController <Fruitore> {
             }
             // aggiorno i valori
             madreCorrente = nuovaMadre == null ? madreCorrente : nuovaMadre;
-            //livello = madreCorrente.getCategorieFiglie();
         } while (scelta != 0);
     }
 
@@ -192,7 +187,7 @@ public class FruitoreController extends BaseController <Fruitore> {
     }
 
     ///////////////////////// PROPOSTE //////////////////////////
-    /**todo finire
+    /**
      * Guida la creazione di una nuova proposta di scambio di prestazioni d'opera
      */
     public void effettuaProposta() {
@@ -250,7 +245,6 @@ public class FruitoreController extends BaseController <Fruitore> {
     }
 
     /**
-     * todo da implementare/rifattorizzare
      * Codice duplicato da ProposteModel
      * L'autore di una proposta può cambiare il suo stato tra RITIRATA e APERTA.
      * Guida la selezione della proposta.

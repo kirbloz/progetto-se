@@ -35,7 +35,6 @@ public class FattoriModel {
 
     ////////////////////////////////////////////////////// CORPO //////////////////////////////////////////////////////
 
-    //TODO refactoring in progress
     public void inserisciFattoriDiConversione(String nomeFogliaEsternaFormattata, String nomeFogliaInternaFormattata, double fattoreDiConversioneEsternoInterno, ArrayList<FattoreDiConversione> nuoviDaNuovaRadice) {
         /// Nuovo calcolo inversi
         nuoviDaNuovaRadice.addAll(calcolaInversi(nuoviDaNuovaRadice));
@@ -54,7 +53,6 @@ public class FattoriModel {
         // caso hashmap è vuota e non hai i nuovi => è la prima radice ed hai solo una foglia nuova
         // 1. prepara la chiave e un arraylist vuoto, non puoi calcolare nessun fattore
         hashMapFattori.put(Utilitas.factorNameBuilder(nomeRadice, foglie.getFirst().getNome()), new ArrayList<>());
-        //todo if(wade != stronzo) this.should_work
     }
 
     private ArrayList<FattoreDiConversione> calcolaInversi(ArrayList<FattoreDiConversione> fattoriIJ) {
@@ -130,7 +128,7 @@ public class FattoriModel {
     }
 
 
-    /**TODO doublecheck funzionamento logico
+    /**
      * Calcola tutti i fattori che hanno una foglia nuova e una preesistente,
      * ovvero appartenente a una gerarchia diversa da quella nuova.
      *

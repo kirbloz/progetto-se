@@ -66,8 +66,8 @@ public class ErmesController {
         );
     }
 
-    private ProposteModel initializeProposteModel(Utente utenteAttivo){
-        return new ProposteModel(utenteAttivo,
+    private ProposteModel initializeProposteModel(){
+        return new ProposteModel(
                 new ProposteMapper(config.getPropostePath(),
                         serializerFactory.createSerializer()));
     }
@@ -77,7 +77,7 @@ public class ErmesController {
         utenteAttivo = controllerAccesso.run();
 
         // inizializza con le info sull'utente attivo
-        ProposteModel proposteModel = initializeProposteModel(utenteAttivo);
+        ProposteModel proposteModel = initializeProposteModel();
 
         // crea il controller in base al tipo di utente
         BaseController<?> controller = createController(proposteModel);

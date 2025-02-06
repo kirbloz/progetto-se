@@ -10,8 +10,9 @@ import java.util.List;
 
 public class CategorieModel  {
     private Albero tree;
-
     private CategorieMapper mapper;
+
+
     /**
      * Costruttore per inizializzare i percorsi dei file e de-serializzare l'albero.
      *

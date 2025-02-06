@@ -12,6 +12,9 @@ public abstract class ErmesTerminaleView {
 
     public static final String TITLE_MAIN_MENU = "MENU' PRINCIPALE - SCAMBIO ORE";
 
+    private static final String MSG_RICHIESTA_USERNAME = ">> Inserisci un username non ancora utilizzato: ";
+    private static final String MSG_RICHIESTA_PASSWORD = ">> Inserisci la password: ";
+
     public static final String MSG_PRINT_LISTA_RADICI = ">> Qui trovi tutte le categorie radice.\n";
 
 

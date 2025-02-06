@@ -2,7 +2,6 @@ package it.unibs.projectIngesoft.controller;
 
 import it.unibs.projectIngesoft.model.ComprensorioGeograficoModel;
 import it.unibs.projectIngesoft.model.UtentiModel;
-import it.unibs.projectIngesoft.utente.Fruitore;
 import it.unibs.projectIngesoft.utente.Utente;
 import it.unibs.projectIngesoft.view.AccessoView;
 
@@ -20,10 +19,7 @@ public class AccessoController {
         this.view = new AccessoView();
     }
 
-
-
-    /// DA qui la roba ha un senso (Forse)
-    public Utente login() { //todo controllare il funzionamento del return con le eccezioni
+    public Utente login() {
         boolean riuscito = true;
         do {
             String[] credenziali = view.richiestaCredenziali();

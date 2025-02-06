@@ -150,8 +150,7 @@ public class ConfiguratoreController extends BaseController<Configuratore>{
             String nomeFogliai = Utilitas.factorNameBuilder(nomeRadice, foglie.get(i).getNome());
             for (int j = i + 1; j < foglie.size(); j++) {
                 String nomeFogliaj = Utilitas.factorNameBuilder(nomeRadice, foglie.get(j).getNome());
-                //double fattoreIJ = view.getUserInputMinMaxDouble(INSERISCI_IL_FATTORE_TRA.formatted(nomeFogliai, nomeFogliaj), MIN_FATTORE, MAX_FATTORE);
-                double fattoreIJ = view.ottieniFattoreDiConversione(nomeFogliai, nomeFogliaj);
+               double fattoreIJ = view.ottieniFattoreDiConversione(nomeFogliai, nomeFogliaj);
                 nuoviDaNuovaRadice.add(new FattoreDiConversione(nomeFogliai, nomeFogliaj, fattoreIJ));
             }
         }

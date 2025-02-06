@@ -17,53 +17,22 @@ public class AccessoView /*implements EventListener*/ {
     public static final String MSG_RICHIESTA_USERNAME = "Inserisci il tuo username: ";
     public static final String MSG_RICHIESTA_PASSWORD = "Inserisci la tua password: ";
     public static final String MSG_RICHIESTA_EMAIL = "Inserisci la tua email: ";
-    public static final String MSG_RICHIESTA_COMPRENSORIO = "Inserisci il comprensorio di appartenenza: ";
+    public static final String MSG_RICHIESTA_COMPRENSORIO = " Inserisci il tuo comprensorio di Appartenenza tra quelli sopra: ";
 
-    public static final String MSG_USCITA_SUBMENU = ">> Uscita dal submenu.. <<";
-
-    public static final String MSG_PROGRAM_EXIT = "> ARRIVEDERCI <";
     public static final String TITLE_STARTING_MENU = "BENVENUTO";
     public static final String[] vociMenuIniziale = new String[]{
             "Login",
             "Registrazione"
     };
-    /*
-    //Eventi
-    private static final String[] eventi = {"primoAccesso", "credenzialiInserite"};
-
-    public EventManager events;
-    */
-    //private AccessoController controllerAccesso;
 
     public AccessoView(/*AccessoController controllerAccesso*/) {
-        //this.controllerAccesso = controllerAccesso;
-        /*
-        events = new EventManager(eventi);
-        events.subscribe(PRIMO_ACCESSO, controllerAccesso);
-        events.subscribe("credenzialiInserite", controllerAccesso);
-        controllerAccesso.events.subscribe("richiestaLogin", this);
-         */
+
     }
-    ////////////// CORPO //////////////
-    /*public int menuIniziale() {
-        Menu menuIniziale = new Menu(TITLE_STARTING_MENU,vociMenuIniziale);
-        return menuIniziale.scegli();
-
-        events.notify(PRIMO_ACCESSO, scelta);
-
-    }*/
 
     public String[] richiestaCredenziali() {
         String username = InputDatiTerminale.leggiStringaNonVuota(MSG_RICHIESTA_USERNAME);
         String password = InputDatiTerminale.leggiStringaNonVuota(MSG_RICHIESTA_PASSWORD);
         return new String[]{username,password};
-    }
-
-    public String[] richiestaCredenzialiRegistrazione(){
-        String comprensorio = InputDatiTerminale.leggiStringaNonVuota(MSG_RICHIESTA_COMPRENSORIO);
-        String email = InputDatiTerminale.leggiStringaNonVuota(MSG_RICHIESTA_EMAIL);
-        String[] credenziali = richiestaCredenziali();
-        return new String[]{comprensorio, email, credenziali[0], credenziali[1]};
     }
 
     public void stampaErroreCredenziali(String msg) {
@@ -88,7 +57,7 @@ public class AccessoView /*implements EventListener*/ {
         String nomeInserito;
         boolean esisteNome = false;
         do {
-            nomeInserito = InputDatiTerminale.leggiStringaNonVuota("Inserisci il tuo comprensorio di Appartenenza tra quelli sopra");
+            nomeInserito = InputDatiTerminale.leggiStringaNonVuota(MSG_RICHIESTA_COMPRENSORIO);
             for (String nome : lista) {
                 if (nome.equals(nomeInserito)) {
                     esisteNome = true;
@@ -111,14 +80,4 @@ public class AccessoView /*implements EventListener*/ {
         System.out.println("Errore: Email non valida");
     }
 
-    /*
-    @Override
-    public void update(String eventType, Object o) {
-        switch (eventType){
-            case "richiestaLogin":
-                events.notify("credenzialiInserite", richiestaCredenziali());
-                break;
-        }
-    }
-    */
 }
