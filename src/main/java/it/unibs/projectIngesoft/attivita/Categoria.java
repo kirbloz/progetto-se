@@ -1,6 +1,7 @@
 package it.unibs.projectIngesoft.attivita;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -12,6 +13,8 @@ import java.util.List;
  * all'interno di un albero di categorie. Ogni categoria può avere un valore di dominio ereditato dalla madre,
  * e può definire un campo per le categorie figlie.
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Categoria {
 
     @JsonProperty("nome")
@@ -113,10 +116,15 @@ public class Categoria {
     }
 
     public String getNomeValoreDominio() {
+        if(this.valoreDominio == null)
+            return "";
         return this.valoreDominio.getNome();
     }
 
-    public String getDescrizioneValoreDominio(){ return this.valoreDominio.getDescrizione(); }
+    public String getDescrizioneValoreDominio(){
+        if(this.valoreDominio == null)
+            return "";
+        return this.valoreDominio.getDescrizione(); }
 
     public String getCampo() {
         return campo;

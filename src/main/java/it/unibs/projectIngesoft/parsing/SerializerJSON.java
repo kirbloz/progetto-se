@@ -5,6 +5,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.StreamReadFeature;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 
@@ -14,7 +15,7 @@ import java.io.IOException;
 /**
  * Utility per serializzare oggetti su file XML tramite Jackson, libreria maven.
  */
-public class SerializerJSON<T> implements JacksonSerializer<T>{
+public class SerializerJSON<T> implements Serializer<T> {
 
     @Override
     public void serialize(String filePath, Object obj) {
@@ -27,6 +28,7 @@ public class SerializerJSON<T> implements JacksonSerializer<T>{
                     .build();
             ObjectMapper objectMapper = new ObjectMapper(factory);
             objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
+            objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
             objectMapper.writeValue(file, obj);
         } catch (JsonProcessingException e) {
@@ -52,10 +54,13 @@ public class SerializerJSON<T> implements JacksonSerializer<T>{
                     .build();
 
             ObjectMapper objectMapper = new ObjectMapper(factory);
+            objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
             objectMapper.configure(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT, true);
             data = objectMapper.readValue(file, type);
 
-        } catch (IOException e) {
+        } catch (JsonMappingException e){
+            return null;
+        }catch (IOException e) {
             throw new RuntimeException(e);
         }
         return data;

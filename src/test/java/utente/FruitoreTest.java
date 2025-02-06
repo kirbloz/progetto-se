@@ -3,8 +3,8 @@ package utente;
 import it.unibs.projectIngesoft.controller.AccessoController;
 import it.unibs.projectIngesoft.controller.FruitoreController;
 import it.unibs.projectIngesoft.libraries.InputInjector;
-import it.unibs.projectIngesoft.mappers.CompGeoMapper;
-import it.unibs.projectIngesoft.mappers.UtentiMapper;
+import it.unibs.projectIngesoft.mappers.CompGeoRepository;
+import it.unibs.projectIngesoft.mappers.UtentiRepository;
 import it.unibs.projectIngesoft.model.ComprensorioGeograficoModel;
 import it.unibs.projectIngesoft.model.UtentiModel;
 import it.unibs.projectIngesoft.parsing.SerializerJSON;
@@ -27,20 +27,20 @@ class FruitoreTest {
     private Fruitore fruitoreTest;
     private UtentiModel utentiModel;
 
-    private UtentiMapper mapper;
+    private UtentiRepository mapper;
     private List<Utente> cleanTestData;
 
 
     @BeforeEach
     void prepareTest() {
-        mapper = new UtentiMapper("usersTest.json",
+        mapper = new UtentiRepository("usersTest.json",
                 "defaultCredentials.json",
                 new SerializerJSON<>(),
                 new SerializerJSON<>()
         );
 
         cleanTestData = new ArrayList<>();
-        cleanTestData = mapper.read();
+        cleanTestData = mapper.load();
 
         this.utentiModel = new UtentiModel(mapper);
         this.fruitoreTest = new Fruitore("user", "pwd", "valid@email.com", "comprensorio");
@@ -49,13 +49,13 @@ class FruitoreTest {
 
     @AfterEach
     void tearDown() {
-        mapper.write(cleanTestData);
+        mapper.save(cleanTestData);
     }
 
     @Test
     void primoAccessoFruitore_Registrazione() {
         ComprensorioGeograficoModel compGeoModel = new ComprensorioGeograficoModel(
-                new CompGeoMapper("mockfile.json", new SerializerJSON<>()));
+                new CompGeoRepository("mockfile.json", new SerializerJSON<>()));
         AccessoController accessoController = new AccessoController(utentiModel, compGeoModel);
 
         compGeoModel.aggiungiComprensorio("Brescia", List.of(new String[]{"test"}));

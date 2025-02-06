@@ -24,6 +24,7 @@ public class ErmesController {
     private final ComprensorioGeograficoModel compGeoModel;
     private final CategorieModel categorieModel;
     private final FattoriModel fattoriModel;
+    private final ProposteModel proposteModel;
     private Utente utenteAttivo;
 
     public ErmesController(SerializerFactory serializerFactory) {
@@ -34,10 +35,11 @@ public class ErmesController {
         this.compGeoModel = initializeCompGeoModel();
         this.categorieModel = initializeCategorieModel();
         this.fattoriModel = initializeFattoriModel();
+        proposteModel = initializeProposteModel();
     }
 
     private UtentiModel initializeUtentiModel() {
-        return new UtentiModel(new UtentiMapper(
+        return new UtentiModel(new UtentiRepository(
                 config.getUtentiPath(),
                 config.getDefaultCredsPath(),
                 serializerFactory.createSerializer(),
@@ -47,28 +49,28 @@ public class ErmesController {
 
     private ComprensorioGeograficoModel initializeCompGeoModel() {
         return new ComprensorioGeograficoModel(
-                new CompGeoMapper(config.getComprensoriPath(),
+                new CompGeoRepository(config.getComprensoriPath(),
                         serializerFactory.createSerializer())
         );
     }
 
     private CategorieModel initializeCategorieModel() {
         return new CategorieModel(
-                new CategorieMapper(config.getCategoriePath(),
+                new CategorieRepository(config.getCategoriePath(),
                         serializerFactory.createSerializer())
         );
     }
 
     private FattoriModel initializeFattoriModel() {
         return new FattoriModel(
-                new FattoriMapper(config.getFattoriPath(),
+                new FattoriDiConversioneRepository(config.getFattoriPath(),
                         serializerFactory.createSerializer())
         );
     }
 
     private ProposteModel initializeProposteModel(){
         return new ProposteModel(
-                new ProposteMapper(config.getPropostePath(),
+                new ProposteRepository(config.getPropostePath(),
                         serializerFactory.createSerializer()));
     }
 
@@ -76,8 +78,7 @@ public class ErmesController {
         AccessoController controllerAccesso = new AccessoController(modelUtenti, compGeoModel);
         utenteAttivo = controllerAccesso.run();
 
-        // inizializza con le info sull'utente attivo
-        ProposteModel proposteModel = initializeProposteModel();
+
 
         // crea il controller in base al tipo di utente
         BaseController<?> controller = createController(proposteModel);

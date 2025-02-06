@@ -1,7 +1,7 @@
 package it.unibs.projectIngesoft.model;
 
 import it.unibs.projectIngesoft.attivita.ComprensorioGeografico;
-import it.unibs.projectIngesoft.mappers.CompGeoMapper;
+import it.unibs.projectIngesoft.mappers.CompGeoRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,11 +19,11 @@ public class ComprensorioGeograficoModel {
     public static final String WARNING_NO_COMPRENSORI = ">> (!!) Non ci sono comprensori memorizzati.";
 
     private List<ComprensorioGeografico> listaComprensoriGeografici;
-    private final CompGeoMapper mapper;
+    private final CompGeoRepository repository;
 
-    public ComprensorioGeograficoModel(CompGeoMapper mapper) {
-        this.mapper = mapper;
-        this.listaComprensoriGeografici =  mapper.read();
+    public ComprensorioGeograficoModel(CompGeoRepository repository) {
+        this.repository = repository;
+        this.listaComprensoriGeografici =  repository.load();
         if(this.listaComprensoriGeografici == null) {
             this.listaComprensoriGeografici = new ArrayList<>();
         }
@@ -50,7 +50,7 @@ public class ComprensorioGeograficoModel {
         ComprensorioGeografico tempComp = new ComprensorioGeografico(nomeComprensorio, comuni);
         if (getStringComuniByComprensorioName(nomeComprensorio) == null) {
             this.listaComprensoriGeografici.add(tempComp);
-            mapper.write(listaComprensoriGeografici);
+            repository.save(listaComprensoriGeografici);
         }
     }
 

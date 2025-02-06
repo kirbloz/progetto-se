@@ -3,7 +3,7 @@ package utente;
 import it.unibs.projectIngesoft.controller.AccessoController;
 import it.unibs.projectIngesoft.controller.ConfiguratoreController;
 import it.unibs.projectIngesoft.libraries.InputInjector;
-import it.unibs.projectIngesoft.mappers.UtentiMapper;
+import it.unibs.projectIngesoft.mappers.UtentiRepository;
 import it.unibs.projectIngesoft.model.UtentiModel;
 import it.unibs.projectIngesoft.parsing.SerializerJSON;
 import it.unibs.projectIngesoft.utente.Configuratore;
@@ -19,7 +19,7 @@ class ConfiguratoreTest {
 
     @BeforeEach
     void prepareTest() {
-        UtentiMapper mapper = new UtentiMapper("usersJSONTEST.json",
+        UtentiRepository mapper = new UtentiRepository("usersJSONTEST.json",
                 "defaultCredentials.json",
                 new SerializerJSON<>(),
                 new SerializerJSON<>());

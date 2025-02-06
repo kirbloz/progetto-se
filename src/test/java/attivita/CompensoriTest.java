@@ -3,7 +3,7 @@ package attivita;
 import it.unibs.projectIngesoft.attivita.ComprensorioGeografico;
 import it.unibs.projectIngesoft.controller.ConfiguratoreController;
 import it.unibs.projectIngesoft.libraries.InputInjector;
-import it.unibs.projectIngesoft.mappers.CompGeoMapper;
+import it.unibs.projectIngesoft.mappers.CompGeoRepository;
 import it.unibs.projectIngesoft.model.ComprensorioGeograficoModel;
 import it.unibs.projectIngesoft.parsing.SerializerJSON;
 import it.unibs.projectIngesoft.utente.Configuratore;
@@ -13,7 +13,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class CompensoriTest {
@@ -21,17 +20,17 @@ public class CompensoriTest {
     private ComprensorioGeograficoModel model;
     //private CategorieController controller;
 
-    private CompGeoMapper mapper;
+    private CompGeoRepository mapper;
     private List<ComprensorioGeografico> cleanTestData;
 
     @BeforeEach
     void prepareTest() {
-        mapper = new CompGeoMapper("comprensoriGeograficiTest.json",
+        mapper = new CompGeoRepository("comprensoriGeograficiTest.json",
                 new SerializerJSON<List<ComprensorioGeografico>>()
         );
 
         cleanTestData = new ArrayList<>();
-        cleanTestData = mapper.read();
+        cleanTestData = mapper.load();
 
         this.model = new ComprensorioGeograficoModel(mapper);
 
@@ -39,7 +38,7 @@ public class CompensoriTest {
 
     @AfterEach
     void tearDown() {
-        mapper.write(cleanTestData);
+        mapper.save(cleanTestData);
     }
 
     @Test
