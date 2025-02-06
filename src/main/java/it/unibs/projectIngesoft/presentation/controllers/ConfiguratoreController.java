@@ -4,6 +4,7 @@ import it.unibs.projectIngesoft.core.domain.entities.Categoria;
 import it.unibs.projectIngesoft.core.domain.entities.FattoreDiConversione;
 import it.unibs.projectIngesoft.core.domain.entities.Proposta;
 import it.unibs.projectIngesoft.core.domain.entities.ValoreDominio;
+import it.unibs.projectIngesoft.core.domain.entities.utenti.Fruitore;
 import it.unibs.projectIngesoft.core.domain.model.*;
 import it.unibs.projectIngesoft.libraries.Utilitas;
 import it.unibs.projectIngesoft.core.domain.entities.utenti.Configuratore;
