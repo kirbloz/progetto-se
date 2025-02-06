@@ -3,37 +3,37 @@ package it.unibs.projectIngesoft.model;
 
 import it.unibs.projectIngesoft.attivita.Albero;
 import it.unibs.projectIngesoft.attivita.Categoria;
-import it.unibs.projectIngesoft.mappers.CategorieMapper;
+import it.unibs.projectIngesoft.mappers.CategorieRepository;
+import it.unibs.projectIngesoft.mappers.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class CategorieModel  {
     private Albero tree;
-    private CategorieMapper mapper;
+    private final Repository<List<Categoria>> repository;
 
 
     /**
      * Costruttore per inizializzare i percorsi dei file e de-serializzare l'albero.
      *
      */
-    public CategorieModel(CategorieMapper mapper) {
+    public CategorieModel(CategorieRepository repository) {
         this.tree = new Albero();
-        this.mapper = mapper;
-        load();
+        this.repository = repository;
     }
 
     public void save(){
-        mapper.write(tree.getRadici());
+        repository.save(tree.getRadici());
     }
 
     public void load(){
-        List<Categoria> data = mapper.read();
+        List<Categoria> data = repository.load();
         this.tree.setRadici(data == null ? new ArrayList<>() : data);
     }
 
     public List<Categoria> getRadici(){
-        return tree.getRadici();
+        return new ArrayList<>(tree.getRadici());
     }
 
     public Categoria getRadice(String nomeRadice){
@@ -44,11 +44,11 @@ public class CategorieModel  {
         if(radici == null)
             radici = new ArrayList<>();
         tree.setRadici(radici);
-        this.save();
+        save();
     }
 
     public List<Categoria> getFoglie(String nomeRadice){
-        return tree.getFoglie(nomeRadice);
+        return new ArrayList<>(tree.getFoglie(nomeRadice));
     }
 
 

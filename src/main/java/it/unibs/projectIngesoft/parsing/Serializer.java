@@ -2,11 +2,9 @@ package it.unibs.projectIngesoft.parsing;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 
-import java.util.List;
+public interface Serializer<T> {
 
-public interface JacksonSerializer<T> {
-
-    void serialize(String filePath, T obj);
+    void serialize(String filePath, T data);
     T deserialize(TypeReference<T> type, String filePath);
 
 }

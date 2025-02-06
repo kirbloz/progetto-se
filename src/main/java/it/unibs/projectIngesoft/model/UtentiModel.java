@@ -1,7 +1,7 @@
 package it.unibs.projectIngesoft.model;
 
 
-import it.unibs.projectIngesoft.mappers.UtentiMapper;
+import it.unibs.projectIngesoft.mappers.UtentiRepository;
 import it.unibs.projectIngesoft.utente.Configuratore;
 import it.unibs.projectIngesoft.utente.Fruitore;
 import it.unibs.projectIngesoft.utente.Utente;
@@ -14,15 +14,15 @@ public class UtentiModel {
 
     private static List<Utente> utenti;
     private Utente defaultUtente;
-    private UtentiMapper mapper;
+    private UtentiRepository repository;
 
-    public UtentiModel(UtentiMapper mapper) {
-        this.mapper = mapper;
-        utenti = mapper.read();
+    public UtentiModel(UtentiRepository repository) {
+        this.repository = repository;
+        utenti = repository.load();
         if(utenti == null) {
             utenti = new ArrayList<>();
         }
-        this.defaultUtente =  mapper.readDefaultUtente();
+        this.defaultUtente =  repository.loadDefaultUtente();
     }
 
     private static List<Utente> getListaUtenti() {
@@ -50,7 +50,7 @@ public class UtentiModel {
         assert utenti != null;
         if (!utenti.contains(utente)) {
             utenti.add(utente);
-            mapper.write(utenti);
+            repository.save(utenti);
         }
     }
 
@@ -93,7 +93,7 @@ public class UtentiModel {
      */
     public void cambioCredenziali(Utente C1, String newUsername,String newPassword) {
         C1.cambioCredenziali(newUsername, newPassword);
-        mapper.write(utenti);
+        repository.save(utenti);
     }
 
     /**

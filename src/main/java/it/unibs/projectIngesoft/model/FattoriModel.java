@@ -3,7 +3,7 @@ package it.unibs.projectIngesoft.model;
 
 import it.unibs.projectIngesoft.attivita.Categoria;
 import it.unibs.projectIngesoft.attivita.FattoreDiConversione;
-import it.unibs.projectIngesoft.mappers.FattoriMapper;
+import it.unibs.projectIngesoft.mappers.FattoriDiConversioneRepository;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,19 +22,19 @@ public class FattoriModel {
 
 
     private Map<String, List<FattoreDiConversione>> hashMapFattori;
-    private final FattoriMapper mapper;
+    private final FattoriDiConversioneRepository repository;
 
-    public FattoriModel(FattoriMapper mapper) {
-        this.mapper = mapper;
+    public FattoriModel(FattoriDiConversioneRepository repository) {
+        this.repository = repository;
         load();
     }
 
     public void save(){
-        mapper.write(hashMapFattori);
+        repository.save(hashMapFattori);
     }
 
     public void load(){
-        Map<String, List<FattoreDiConversione>> data = mapper.read();
+        Map<String, List<FattoreDiConversione>> data = repository.load();
         this.hashMapFattori = (data == null ? new HashMap<>() : data);
     }
 
