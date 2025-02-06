@@ -6,7 +6,6 @@ import it.unibs.projectIngesoft.presentation.view.ErmesTerminaleView;
 
 public abstract class BaseController<T extends Utente> {
 
-    protected final ErmesTerminaleView view;
     protected final CategorieModel categorieModel;
     protected final FattoriModel fattoriModel;
     protected final ProposteModel proposteModel;
@@ -15,14 +14,12 @@ public abstract class BaseController<T extends Utente> {
     protected final T utenteAttivo;
 
     protected BaseController(
-            ErmesTerminaleView view,
             CategorieModel categorieModel,
             FattoriModel fattoriModel,
             ProposteModel proposteModel,
             ComprensorioGeograficoModel compGeoModel,
             UtentiModel utentiModel,
             T utenteAttivo) {
-        this.view = view;
         this.categorieModel = categorieModel;
         this.fattoriModel = fattoriModel;
         this.proposteModel = proposteModel;
