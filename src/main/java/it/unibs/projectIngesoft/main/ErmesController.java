@@ -80,11 +80,11 @@ public class ErmesController {
         utenteAttivo = controllerAccesso.run();
 
         // crea il controller in base al tipo di utente
-        BaseController<?> controller = createController(proposteModel);
+        BaseController<?> controller = createController();
         controller.run();
     }
 
-    private BaseController<?> createController(ProposteModel proposteModel) {
+    private BaseController<?> createController() {
         switch (utenteAttivo.getClass().getSimpleName()) { // si mantiene la logica condizionale in questo punto perchè è quello
             // responsabile della creazione dei controller che dipendono direttamente dal tipo di utente.
             // è anche l'unico punto dove diventano necessari i cast, tuttavia saranno sempre "esatti" perchè
