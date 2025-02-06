@@ -129,7 +129,8 @@ public class FruitoreController extends BaseController <Fruitore> {
             // 2. print menu
             Categoria nuovaMadre = madreCorrente;
             scelta = view.visualizzaMenuEsploraGerarchia();
-            switch (scelta) {
+            nuovaMadre = selezionaNuovaMadreLivello(scelta, madreCorrente, radice);
+            /*switch (scelta) {
                 case 1 -> { // esplora
                     String nuovoCampo = inserimentoValoreCampo(madreCorrente.getCategorieFiglie());
                     nuovaMadre = nuovoCampo == null ?
@@ -138,13 +139,30 @@ public class FruitoreController extends BaseController <Fruitore> {
                 // torna indietro di un livello
                 case 2 -> nuovaMadre = madreCorrente.isRadice() ?
                         madreCorrente : radice.cercaCategoria(madreCorrente.getNomeMadre());
-                default -> view.uscitaMenu("esplora");//System.out.println(MSG_USCITA_SUBMENU);
-            }
+                default -> view.uscitaMenu("esplora");
+            }*/
             // aggiorno i valori
             madreCorrente = nuovaMadre == null ? madreCorrente : nuovaMadre;
         } while (scelta != 0);
     }
 
+    public Categoria selezionaNuovaMadreLivello(int scelta, Categoria madreCorrente, Categoria radice){
+        switch (scelta) {
+            case 1 -> { // esplora
+                String nuovoCampo = inserimentoValoreCampo(madreCorrente.getCategorieFiglie());
+                return nuovoCampo == null ?
+                        madreCorrente : selezionaCategoriaDaValoreCampo(nuovoCampo, madreCorrente.getCategorieFiglie());
+            }
+            // torna indietro di un livello
+            case 2 -> { return madreCorrente.isRadice() ?
+                    madreCorrente : radice.cercaCategoria(madreCorrente.getNomeMadre());}
+
+            default -> {
+                view.uscitaMenu("esplora");
+                return null;
+            }
+        }
+    }
 
     /**
      * Duplicato parzialmente da ConfiguratoreView::inserimentoNomeCategoriaMadre
