@@ -81,7 +81,7 @@ public class ConfiguratoreController extends BaseController<Configuratore>{
             scelta = view.visualizzaMenuCategorie();
             switch (scelta) { // switch con un solo case per ampliamento futuro
                 case 1 -> this.aggiungiGerarchia();
-                case 2 -> this.visualizzaGerarchie();
+                case 2 -> view.visualizzaGerarchie(categorieModel.getRadici());
                 case 0 -> view.uscitaMenu("submenu");
             }
         } while (scelta != 0);
@@ -282,11 +282,6 @@ public class ConfiguratoreController extends BaseController<Configuratore>{
                 .stream()
                 .map(Categoria::getNome)
                 .toList();
-    }
-
-    public void visualizzaGerarchie() {
-        for (Categoria radice : categorieModel.getRadici())
-            view.visualizzaGerarchia(radice);
     }
 
 

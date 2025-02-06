@@ -149,6 +149,14 @@ public class ConfiguratoreView extends ErmesTerminaleView {
         visualizzaFiglieCategoria(radice);
     }
 
+    public void visualizzaGerarchie(List<Categoria> radici){
+        if(radici.isEmpty())
+            print(WARNING_NO_GERARCHIE_MEMORIZZATE);
+        for (Categoria radice : radici)
+            visualizzaGerarchia(radice);
+    }
+
+
 
     /*
      * Dato il nome di una categoria ritorna una stringa formattata con tutti i fattori di conversione relativi a quella categoria
