@@ -74,7 +74,7 @@ public class ErmesController {
                         serializerFactory.createSerializer()));
     }
 
-    public void mainLoop() {
+    public void run() {
         AccessoController controllerAccesso = new AccessoController(modelUtenti, compGeoModel);
         utenteAttivo = controllerAccesso.run();
         // crea il controller in base al tipo di utente attivo

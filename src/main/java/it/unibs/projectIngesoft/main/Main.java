@@ -6,7 +6,7 @@ public class Main {
 
     public static void main(String[] args) {
         ErmesController ermesController = new ErmesController(new JsonSerializerFactory());
-        ermesController.mainLoop();
+        ermesController.run();
     }
 
 }
