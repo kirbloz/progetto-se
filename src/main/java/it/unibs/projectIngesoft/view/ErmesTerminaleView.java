@@ -74,8 +74,8 @@ public abstract class ErmesTerminaleView {
             sb.append("Madre: ").append(categoria.getNomeMadre())
                     .append("\n");
             sb.append("Dominio: ").append(categoria.getCampo())
-                    .append(" = ").append(categoria.getValoreDominio()).
-                    append("\n");
+                    .append(" = ").append(buildValoreDominioString(categoria))
+                    .append("\n");
         }
         if (!categoria.isFoglia()) { // se non è foglia, si stampa il dominio impresso alle figlie
             sb.append("Dominio Figlie: ").append(categoria.getCampoFiglie())
@@ -84,6 +84,14 @@ public abstract class ErmesTerminaleView {
             sb.append("> Foglia");
         }
         print(sb.toString());
+    }
+
+    private String buildValoreDominioString(Categoria categoria) {
+        StringBuilder valoreDominioString = new StringBuilder();
+        valoreDominioString.append(categoria.getNomeValoreDominio());
+        if (!categoria.getDescrizioneValoreDominio().trim().isEmpty())
+            valoreDominioString.append(", '").append(categoria.getDescrizioneValoreDominio()).append("'");
+        return valoreDominioString.toString();
     }
 
     public void visualizzaFiglieCategoria(Categoria categoria) {
