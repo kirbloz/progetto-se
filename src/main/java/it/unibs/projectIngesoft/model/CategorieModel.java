@@ -28,7 +28,8 @@ public class CategorieModel  {
     }
 
     public void load(){
-        this.tree.setRadici(mapper.read());
+        List<Categoria> data = mapper.read();
+        this.tree.setRadici(data == null ? new ArrayList<>() : data);
     }
 
     public List<Categoria> getRadici(){
@@ -64,9 +65,7 @@ public class CategorieModel  {
 
     public void aggiungiCategoriaRadice(String nomeCategoria, String nomeCampo) {
       this.tree.aggiungiRadice(new Categoria(nomeCategoria, nomeCampo));
-
     }
-
 
     public boolean esisteRadice(String tempNome) {
         return this.tree.contains(tempNome);
