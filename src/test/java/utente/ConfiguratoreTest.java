@@ -3,34 +3,37 @@ package utente;
 import it.unibs.projectIngesoft.controller.AccessoController;
 import it.unibs.projectIngesoft.controller.ConfiguratoreController;
 import it.unibs.projectIngesoft.libraries.InputInjector;
+import it.unibs.projectIngesoft.mappers.UtentiMapper;
 import it.unibs.projectIngesoft.model.UtentiModel;
 import it.unibs.projectIngesoft.parsing.SerializerJSON;
-import it.unibs.projectIngesoft.mappers.UtentiMapper;
 import it.unibs.projectIngesoft.utente.Configuratore;
 import it.unibs.projectIngesoft.view.ConfiguratoreView;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class ConfiguratoreTest {
+class ConfiguratoreTest {
 
-    private UtentiModel model;
-    private Configuratore configuratore;
+    private UtentiModel utentiModel;
+
+    private Configuratore configuratoreTest;
 
     @BeforeEach
-    void prepareTest(){
+    void prepareTest() {
         UtentiMapper mapper = new UtentiMapper("usersJSONTEST.json",
                 "defaultCredentials.json",
                 new SerializerJSON<>(),
                 new SerializerJSON<>());
-        this.configuratore = new Configuratore("admin", "pwd");
-        this.model = new UtentiModel(mapper);
+
+        this.configuratoreTest = new Configuratore("admin", "pwd");
+
+        this.utentiModel = new UtentiModel(mapper);
     }
 
     @Test
     void primoAccessoConfiguratore() {
-        AccessoController accessoController = new AccessoController(model, null);
-        String simulatedInput = "admin\n1234\n";
-        InputInjector.inject(simulatedInput);
+        AccessoController accessoController = new AccessoController(utentiModel, null);
+        String data = "admin\n1234\n";
+        InputInjector.inject(data);
 
         Configuratore utenteAttivo = (Configuratore) accessoController.login();
         assert utenteAttivo.isFirstAccess();
@@ -42,15 +45,12 @@ public class ConfiguratoreTest {
         utenteAttivo.setFirstAccess(true);
 
         ConfiguratoreController controller = new ConfiguratoreController(
-        new ConfiguratoreView(),
-        null,
-        null,
-        null,
-                null,
-                model,
-                utenteAttivo
+                new ConfiguratoreView(), null, null, null, null,
+                utentiModel, utenteAttivo
         );
-        InputInjector.inject("unique\npassword\n0");
+
+        String data = "unique\npassword\n0";
+        InputInjector.inject(data);
         controller.run();
 
         assert !utenteAttivo.isFirstAccess();
@@ -58,24 +58,24 @@ public class ConfiguratoreTest {
 
     @Test
     void cambioCredenzialiConfiguratore_UsernameEPassword() {
-        configuratore.cambioCredenziali("newAdmin", "newPwd");
-        assert configuratore.getUsername().equals("newAdmin");
-        assert configuratore.getPassword().equals("newPwd");
+        configuratoreTest.cambioCredenziali("newAdmin", "newPwd");
+        assert configuratoreTest.getUsername().equals("newAdmin");
+        assert configuratoreTest.getPassword().equals("newPwd");
     }
 
 
     @Test
-    void cambioCredenzialiConfiguratore_SoloPassword(){
-        configuratore.cambioCredenziali("admin", "newPwd");
-        assert configuratore.getUsername().equals("admin");
-        assert configuratore.getPassword().equals("newPwd");
+    void cambioCredenzialiConfiguratore_SoloPassword() {
+        configuratoreTest.cambioCredenziali("admin", "newPwd");
+        assert configuratoreTest.getUsername().equals("admin");
+        assert configuratoreTest.getPassword().equals("newPwd");
     }
 
     @Test
-    void cambioCredenzialiConfiguratore_SoloUsername(){
-        configuratore.cambioCredenziali("newAdmin", "pwd");
-        assert configuratore.getUsername().equals("newAdmin");
-        assert configuratore.getPassword().equals("pwd");
+    void cambioCredenzialiConfiguratore_SoloUsername() {
+        configuratoreTest.cambioCredenziali("newAdmin", "pwd");
+        assert configuratoreTest.getUsername().equals("newAdmin");
+        assert configuratoreTest.getPassword().equals("pwd");
     }
 
 

@@ -63,13 +63,13 @@ public class CompensoriTest {
 
     @Test
     void aggiuntaComprensorioUnivoco() {
-        ConfiguratoreController controller = new ConfiguratoreController(new ConfiguratoreView(),
+        /*ConfiguratoreController controller = new ConfiguratoreController(new ConfiguratoreView(),
                 null,
                 null,
                 null,
                 model,
                 null,
-                new Configuratore("default", "test"));
+                new Configuratore("default", "test"));*/
 
 
         model.aggiungiComprensorio("comprensorioTest", List.of("test"));

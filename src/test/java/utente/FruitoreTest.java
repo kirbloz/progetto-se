@@ -1,27 +1,31 @@
 package utente;
 
-import it.unibs.projectIngesoft.attivita.ComprensorioGeografico;
-import it.unibs.projectIngesoft.model.UtentiModel;
-import it.unibs.projectIngesoft.libraries.InputDatiTerminale;
+import it.unibs.projectIngesoft.controller.AccessoController;
+import it.unibs.projectIngesoft.controller.FruitoreController;
 import it.unibs.projectIngesoft.libraries.InputInjector;
+import it.unibs.projectIngesoft.mappers.CompGeoMapper;
 import it.unibs.projectIngesoft.mappers.UtentiMapper;
+import it.unibs.projectIngesoft.model.ComprensorioGeograficoModel;
+import it.unibs.projectIngesoft.model.UtentiModel;
 import it.unibs.projectIngesoft.parsing.SerializerJSON;
 import it.unibs.projectIngesoft.utente.Fruitore;
 import it.unibs.projectIngesoft.utente.Utente;
+import it.unibs.projectIngesoft.view.FruitoreView;
+import it.unibs.projectIngesoft.view.ViewFactory;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 class FruitoreTest {
 
-    private ComprensorioGeografico comprensorio;
-    private Utente fruitore;
-    private UtentiModel model;
+    private Fruitore fruitoreTest;
+    private UtentiModel utentiModel;
 
     private UtentiMapper mapper;
     private List<Utente> cleanTestData;
@@ -31,17 +35,15 @@ class FruitoreTest {
     void prepareTest() {
         mapper = new UtentiMapper("usersTest.json",
                 "defaultCredentials.json",
-                new SerializerJSON<List<Utente>>(),
-                new SerializerJSON<Utente>()
+                new SerializerJSON<>(),
+                new SerializerJSON<>()
         );
 
         cleanTestData = new ArrayList<>();
         cleanTestData = mapper.read();
 
-        this.model = new UtentiModel(mapper);
-
-        this.comprensorio = new ComprensorioGeografico("comprensorio", List.of("comune1"));
-        this.fruitore = new Fruitore("user", "pwd", "valid@email.address", "comprensorio");
+        this.utentiModel = new UtentiModel(mapper);
+        this.fruitoreTest = new Fruitore("user", "pwd", "valid@email.com", "comprensorio");
     }
 
 
@@ -50,85 +52,68 @@ class FruitoreTest {
         mapper.write(cleanTestData);
     }
 
-
     @Test
-    void testInputInjectionSystemIN() {
-
-        //String user = InputDatiTerminale.leggiStringa(">> INPUT: ");
-
-        /*InputStream systemIn = System.in;
-        PrintStream systemOut = System.out;
-        ByteArrayInputStream typeIn;
-        ByteArrayOutputStream typeOut;*/
-
-        // set up
-        /*typeOut = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(typeOut));*/
-
-        String simulatedUserInput = "1";
-
-        InputInjector.inject(simulatedUserInput);
-        //System.setIn(new ByteArrayInputStream(simulatedUserInput.getBytes()));
-
-        int result = InputDatiTerminale.leggiIntero("");
-
-        assert result == 1;
-
-
-    }
-
     void primoAccessoFruitore_Registrazione() {
-        // todo
-        // qui c'è il problema di avere uno stub che simuli il check del "database utenti"
-        // si attende di fare il refactoring che astragga il meccanismo di serializzazione xml
+        ComprensorioGeograficoModel compGeoModel = new ComprensorioGeograficoModel(
+                new CompGeoMapper("mockfile.json", new SerializerJSON<>()));
+        AccessoController accessoController = new AccessoController(utentiModel, compGeoModel);
+
+        compGeoModel.aggiungiComprensorio("Brescia", List.of(new String[]{"test"}));
+        String data = "2\nadmin\n1234\nBrescia\nvalid@email.com\n";
+        InputInjector.inject(data);
+
+        Fruitore utenteAttivo = (Fruitore) accessoController.run();
+        assertEquals("admin", utenteAttivo.getUsername());
+        assertEquals("1234", utenteAttivo.getPassword());
+        assertEquals("Brescia", utenteAttivo.getComprensorioDiAppartenenza());
+        assertEquals("valid@email.com", utenteAttivo.getEmail());
+
     }
 
     @Test
-    void cambioCredenzialiFruitore_UsernameEPassword() throws Exception {
+    void cambioCredenzialiFruitore_UsernameEPassword() {
 
-        model.addUtente(fruitore);
-        //InputInjector.inject("fruitore\npwd1\n");
-        model.cambioCredenziali(fruitore, "fruitore", "pwd1");
+        utentiModel.addUtente(fruitoreTest);
+        utentiModel.cambioCredenziali(fruitoreTest, "fruitoreTest", "pwd1");
 
-        assert fruitore.getUsername().equals("fruitore")
-                && fruitore.getPassword().equals("pwd1");
+        assertEquals("fruitoreTest", fruitoreTest.getUsername());
+        assertEquals("pwd1", fruitoreTest.getPassword());
     }
 
     @Test
     void cambioCredenzialiFruitore_SoloPassword() {
-        model.addUtente(fruitore);
-        //InputInjector.inject(fruitore.getUsername() + "\npwd1\n");
-        model.cambioCredenziali(fruitore, fruitore.getUsername(), "pwd1");
+        utentiModel.addUtente(fruitoreTest);
+        utentiModel.cambioCredenziali(fruitoreTest, fruitoreTest.getUsername(), "pwd1");
 
-        assert fruitore.getPassword().equals("pwd1");
+        assert fruitoreTest.getPassword().equals("pwd1");
     }
 
     @Test
     void cambioCredenzialiFruitore_SoloUsername() {
-        fruitore.cambioCredenziali("newUser", "pwd");
-        assert fruitore.getUsername().equals("newUser");
-        assert fruitore.getPassword().equals("pwd");
+        fruitoreTest.cambioCredenziali("newUser", "pwd");
+        assert fruitoreTest.getUsername().equals("newUser");
+        assert fruitoreTest.getPassword().equals("pwd");
     }
 
 
     @Test
-    void cambioCredenzialiFruitore_SoloUsername_EsisteGia() {
+    void cambioCredenzialiUsernameEsisteGia() {
 
-        String newUsername = "tizianoFerro";
+        utentiModel.addUtente(fruitoreTest);
+        utentiModel.addUtente(new Fruitore("user2", "pwd", "valid@email.com", "Brescia"));
 
-        assert model.existsUsername(newUsername);
+       String data = "1\nuser2\nuser3\npwd\n0";
+        InputInjector.inject(data);
 
+        FruitoreController fruitCont = new FruitoreController(
+                (FruitoreView) ViewFactory.createView(fruitoreTest),
+                null, null, null, null, utentiModel, fruitoreTest);
 
-        // qui c'è il problema di avere uno stub che simuli il check del "database utenti"
-        // si attende di fare il refactoring che astragga il meccanismo di serializzazione xml
+        fruitCont.run();
 
-        /*Fruitore fruitoreDue = new Fruitore("user2", "pwd", "valid2@email.address", "comprensorio");
-        fruitore.cambioCredenziali("newUser", "pwd");
-        assert fruitore.getUsername().equals("newUser");
-        assert fruitore.getPassword().equals("pwd");*/
+        assertEquals("user3", fruitoreTest.getUsername());
+        assertTrue(utentiModel.existsUsername("user2"));
     }
-
-
 
 
 }
