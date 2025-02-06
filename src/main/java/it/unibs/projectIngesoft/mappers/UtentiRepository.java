@@ -1,9 +1,11 @@
 package it.unibs.projectIngesoft.mappers;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import it.unibs.projectIngesoft.attivita.Categoria;
 import it.unibs.projectIngesoft.parsing.Serializer;
 import it.unibs.projectIngesoft.utente.Utente;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class UtentiRepository implements Repository<List<Utente>> {
@@ -22,17 +24,15 @@ public class UtentiRepository implements Repository<List<Utente>> {
     }
 
     public void save(List<Utente> utenti) {
-        if(utenti == null)
-            return;
+        if (utenti == null) utenti = new ArrayList<>();
         this.listUtentiSerializer.serialize(this.filePath, utenti);
     }
 
     public List<Utente> load() {
         assert this.filePath != null;
-        assert this.defaultCredentialsFilePath != null;
-
-        return this.listUtentiSerializer.deserialize(new TypeReference<>() {
+        List<Utente> data = this.listUtentiSerializer.deserialize(new TypeReference<>() {
         }, this.filePath);
+        return data == null ? new ArrayList<>() : data;
     }
 
     public Utente loadDefaultUtente() {

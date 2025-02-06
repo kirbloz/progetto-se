@@ -3,6 +3,8 @@ package it.unibs.projectIngesoft.mappers;
 import com.fasterxml.jackson.core.type.TypeReference;
 import it.unibs.projectIngesoft.attivita.ComprensorioGeografico;
 import it.unibs.projectIngesoft.parsing.Serializer;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class CompGeoRepository implements Repository<List<ComprensorioGeografico>> {
@@ -16,15 +18,16 @@ public class CompGeoRepository implements Repository<List<ComprensorioGeografico
     }
 
     public void save(List<ComprensorioGeografico> listaComprensori) {
-        assert listaComprensori!= null;
         assert this.filePath != null;
+        if (listaComprensori == null) listaComprensori = new ArrayList<>();
         serializer.serialize(this.filePath, listaComprensori);
     }
 
     public List<ComprensorioGeografico> load() {
         assert this.filePath != null;
-        return this.serializer.deserialize(new TypeReference<>() {
+        List<ComprensorioGeografico> data = this.serializer.deserialize(new TypeReference<>() {
         }, this.filePath);
+        return data == null ? new ArrayList<>() : data;
     }
 
 }

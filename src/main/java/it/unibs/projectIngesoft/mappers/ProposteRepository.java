@@ -2,8 +2,12 @@ package it.unibs.projectIngesoft.mappers;
 
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import it.unibs.projectIngesoft.attivita.Categoria;
 import it.unibs.projectIngesoft.attivita.Proposta;
 import it.unibs.projectIngesoft.parsing.Serializer;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -18,15 +22,16 @@ public class ProposteRepository implements Repository<Map<String, List<Proposta>
     }
 
     public void save(Map<String, List<Proposta>> listaProposte) {
-        assert listaProposte!= null;
         assert this.filePath != null;
+        if (listaProposte == null) listaProposte = new HashMap<>();
         serializer.serialize(this.filePath, listaProposte);
     }
 
     public Map<String, List<Proposta>> load() {
         assert this.filePath != null;
-        return this.serializer.deserialize(new TypeReference<>() {
+        Map<String, List<Proposta>> data = this.serializer.deserialize(new TypeReference<>() {
         }, this.filePath);
+        return data == null ? new HashMap<>() : data;
     }
 
 }
