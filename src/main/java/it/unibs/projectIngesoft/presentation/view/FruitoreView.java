@@ -6,7 +6,7 @@ import it.unibs.projectIngesoft.core.domain.entities.StatiProposta;
 import it.unibs.projectIngesoft.libraries.InputDatiTerminale;
 import it.unibs.projectIngesoft.libraries.Menu;
 
-public class FruitoreView extends ErmesTerminaleView{
+public class FruitoreView extends ErmesTerminaleView {
 
     //public static final String TITLE_MAIN_MENU = "MENU' PRINCIPALE - SCAMBIO ORE";
     public static final String[] vociMainFruitore = new String[]{
@@ -27,9 +27,7 @@ public class FruitoreView extends ErmesTerminaleView{
             "Modifica stato proposta"
     };
 
-
     // CATEGORIE
-
     public static final String HEADER_ESPLORAZIONE_LIVELLO = "\n>> LIVELLO CORRENTE [ %s ] <<\n";
 
     public static final String TITLE_SUBMENU_ESPLORA_GERARCHIA = "ESPLORA GERARCHIA";
@@ -37,8 +35,6 @@ public class FruitoreView extends ErmesTerminaleView{
             "Esplora un nuovo livello",
             "Torna indietro di un livello"
     };
-
-
 
     public static final String HEADER_PROPOSTE_MODIFICABILI = ">> PROPOSTE MODIFICABILI<<\n";
     public static final String HEADER_PROPOSTE_AUTORE = ">> PROPOSTE DI %s <<\n";
@@ -56,6 +52,9 @@ public class FruitoreView extends ErmesTerminaleView{
     public static final String MSG_NON_HAI_PROPOSTE_NON_CHIUSE = ">> Non hai proposte non chiuse";
 
     public static final String MSG_PRIMO_LIVELLO = ">> PRIMO LIVELLO";
+    public static final String WARNING_CATEGORIA_OFFERTA_RICHIESTA_UGUALI = ">> (!!) Non puoi richiedere e offrire la stessa categoria.";
+    public static final String WARNING_NO_CATEGORIE_FOGLIA = ">> Nessuna categoria foglia presente.";
+    public static final String STRINGHE_FORMATTED = "[ %s ]";
 
     //@Override
     public int visualizzaMenuCategorie() {
@@ -74,7 +73,7 @@ public class FruitoreView extends ErmesTerminaleView{
     }
 
     public int visualizzaMenuEsploraGerarchia() {
-       Menu subMenu = new Menu(TITLE_SUBMENU_ESPLORA_GERARCHIA, VOCI_SUBMENU_ESPLORA_GERARCHIA);
+        Menu subMenu = new Menu(TITLE_SUBMENU_ESPLORA_GERARCHIA, VOCI_SUBMENU_ESPLORA_GERARCHIA);
         return subMenu.scegli();
     }
 
@@ -116,7 +115,6 @@ public class FruitoreView extends ErmesTerminaleView{
         print(WARNING_IMPOSSIBILE_CALCOLARE_ORE);
     }
 
-    //todo formattare meglio la stringa per la stampa perchè così si fa fatica a leggerla
     public boolean confermaInserimento(String categoriaRichiesta, String categoriaOfferta, int oreRichiesta, int oreOfferta) {
         return getUserChoiceYoN("\n" + categoriaRichiesta + " : " + oreRichiesta + "\n" + categoriaOfferta + " : " + oreOfferta + "\n" + MSG_CONFERMA_PROPOSTA.formatted(oreOfferta));
     }
@@ -140,7 +138,7 @@ public class FruitoreView extends ErmesTerminaleView{
         return getUserChoiceYoN(MSG_CONFERMA_CAMBIO_STATO.formatted(statoAttuale, statoNuovo));
     }
 
-    public void visualizzaConfermaCambioStatoProposta(){
+    public void visualizzaConfermaCambioStatoProposta() {
         print(MSG_STATO_MODIFICATO);
     }
 
@@ -150,5 +148,18 @@ public class FruitoreView extends ErmesTerminaleView{
 
     public void visualizzaProposteAutoreHeader(String autore) {
         print(HEADER_PROPOSTE_AUTORE.formatted(autore));
+    }
+
+    public void visualizzaErroreRichiestaUgualeOfferta() {
+        print(WARNING_CATEGORIA_OFFERTA_RICHIESTA_UGUALI);
+    }
+
+    public void visualizzaErroreNessunaCategoriaFoglia(){
+        print(WARNING_NO_CATEGORIE_FOGLIA);
+    }
+
+    public void visualizzaListaStringheFormattate(String[] array){
+        for(String s : array)
+            print(STRINGHE_FORMATTED.formatted(s));
     }
 }

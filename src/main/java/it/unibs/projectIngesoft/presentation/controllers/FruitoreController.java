@@ -112,25 +112,22 @@ public class FruitoreController extends BaseController <Fruitore> {
         Categoria madreCorrente = radice; // categoria madre del livello che si sta visualizzando al momento
 
         do {
-            // 1. print del livello corrente
             view.visualizzaLivello(madreCorrente.getCampoFiglie(), madreCorrente);
-            // 2. print menu
-            Categoria nuovaMadre = madreCorrente;
+            Categoria nuovaMadre;
+
             scelta = view.visualizzaMenuEsploraGerarchia();
             nuovaMadre = selezionaNuovaMadreLivello(scelta, madreCorrente, radice);
-            // aggiorno i valori
             madreCorrente = nuovaMadre == null ? madreCorrente : nuovaMadre;
         } while (scelta != 0);
     }
 
     public Categoria selezionaNuovaMadreLivello(int scelta, Categoria madreCorrente, Categoria radice){
         switch (scelta) {
-            case 1 -> { // esplora
+            case 1 -> {
                 String nuovoCampo = inserimentoValoreCampo(madreCorrente.getCategorieFiglie());
                 return nuovoCampo == null ?
                         madreCorrente : selezionaCategoriaDaValoreCampo(nuovoCampo, madreCorrente.getCategorieFiglie());
             }
-            // torna indietro di un livello
             case 2 -> { return madreCorrente.isRadice() ?
                     madreCorrente : radice.cercaCategoria(madreCorrente.getNomeMadre());}
 
@@ -192,28 +189,13 @@ public class FruitoreController extends BaseController <Fruitore> {
         int oreRichiesta;
         int oreOfferta;
 
-        // 1. inserimento categoria richiesta, ore, e categoria offerta
-        boolean esisteCategoriaRichiesta = false;
-        do{
-            categoriaRichiesta = view.inserimentoFogliaFormattata(MSG_INSERISCI_RICHIESTA/*">> Inserisci Categoria Richiesta: "*/);
-            if(fattoriModel.existsKeyInHashmapFattori(categoriaRichiesta)){
-               esisteCategoriaRichiesta = true;
-            }else {
-                view.visualizzaErroreInserimentoCategoria();
-            }
-        }while(!esisteCategoriaRichiesta);
-
-        oreRichiesta = view.inserimentoOre();
-
-        boolean esisteCategoriaOfferta = false;
-        do{
-            categoriaOfferta = view.inserimentoFogliaFormattata(MSG_INSERISCI_OFFERTA/*">> Inserisci Categoria Offerta: "*/);
-            if(fattoriModel.existsKeyInHashmapFattori(categoriaOfferta)){
-                esisteCategoriaOfferta = true;
-            }else {
-                view.visualizzaErroreInserimentoCategoria();
-            }
-        }while(!esisteCategoriaOfferta);
+        do {
+            categoriaRichiesta = inserimentoFogliaFormattataFromAvailable(MSG_INSERISCI_RICHIESTA);
+            oreRichiesta = view.inserimentoOre();
+            categoriaOfferta = inserimentoFogliaFormattataFromAvailable(MSG_INSERISCI_OFFERTA);
+            if (categoriaRichiesta.equals(categoriaOfferta))
+                view.visualizzaErroreRichiestaUgualeOfferta();
+        }while(!categoriaRichiesta.equals(categoriaOfferta));
 
         // 2. calcolo ore per l'offerta
         oreOfferta = fattoriModel.calcolaRapportoOre(categoriaRichiesta, categoriaOfferta, oreRichiesta);
@@ -227,9 +209,7 @@ public class FruitoreController extends BaseController <Fruitore> {
             view.visualizzaMessaggioAnnulla();
             return;
         }
-
         Proposta tempProposta = new Proposta(categoriaRichiesta, categoriaOfferta, oreRichiesta, oreOfferta, utenteAttivo);
-
         // 3.1 se confermi ma è duplicata, segnala e non aggiunge
         if (proposteModel.controllaPropostaDuplicata(tempProposta)) {
             view.visualizzaMessaggioErroreDuplicato();
@@ -240,12 +220,28 @@ public class FruitoreController extends BaseController <Fruitore> {
         proposteModel.cercaProposteDaChiudere(tempProposta);
     }
 
-    /**
-     * Codice duplicato da ProposteModel
-     * L'autore di una proposta può cambiare il suo stato tra RITIRATA e APERTA.
-     * Guida la selezione della proposta.
-     * L'autore è sempre un Fruitore.
-     */
+    public String inserimentoFogliaFormattataFromAvailable(String prompt){
+
+        if(fattoriModel.isEmpty()) {
+            view.visualizzaErroreNessunaCategoriaFoglia();
+        }
+
+        view.visualizzaListaStringheFormattate(fattoriModel.getKeysets());
+        boolean esisteCategoriaRichiesta = false;
+        String categoriaRichiesta;
+        do {
+             categoriaRichiesta = view.inserimentoFogliaFormattata(prompt);
+            if (fattoriModel.existsKeyInHashmapFattori(categoriaRichiesta)) {
+                esisteCategoriaRichiesta = true;
+            }else {
+                view.visualizzaErroreInserimentoCategoria();
+            }
+
+        }while (!esisteCategoriaRichiesta);
+            return categoriaRichiesta;
+    }
+
+
     private void cambiaStatoProposta() {
 
         if (!proposteModel.esisteAlmenoUnaPropostaPerAutore(utenteAttivo)) {
@@ -261,14 +257,13 @@ public class FruitoreController extends BaseController <Fruitore> {
 		
         Proposta daCambiare;
 
-        // 1. inserimento categoria richiesta, ore, e categoria offerta
         boolean found = false;
         do {
             view.visualizzaProposte(proposteModel.getProposteModificabiliPerAutore(utenteAttivo));
 
-            categoriaRichiesta = view.inserimentoFogliaFormattata(MSG_SELEZIONE_CATEGORIA_RICHIESTA);
+            categoriaRichiesta = inserimentoFogliaFormattataFromAvailable(MSG_SELEZIONE_CATEGORIA_RICHIESTA);
             oreRichiesta = view.inserimentoOre();
-            categoriaOfferta = view.inserimentoFogliaFormattata(MSG_SELEZIONE_CATEGORIA_OFFERTA);
+            categoriaOfferta = inserimentoFogliaFormattataFromAvailable(MSG_SELEZIONE_CATEGORIA_OFFERTA);
 
             daCambiare = proposteModel.cercaPropostaCambiabile(categoriaOfferta, categoriaRichiesta, oreRichiesta, utenteAttivo);
             if (daCambiare != null )
