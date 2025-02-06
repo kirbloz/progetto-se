@@ -131,8 +131,7 @@ public class ConfiguratoreController extends BaseController<Configuratore>{
         utentiModel.cambioCredenziali(utenteAttivo, username, password);
     }
 
-    /// //////////////////////////// CATEGORIE /////////////////////////////////////////////////
-
+    /////////////////////////////// CATEGORIE /////////////////////////////////////////////////
 
     /**
      * Cicla le foglie dalla prima all'ultima per generare tutte le coppie di valori possibili
@@ -165,7 +164,7 @@ public class ConfiguratoreController extends BaseController<Configuratore>{
         //è vuoto se esiste una sola foglia
         //se esistono fattori già presenti vanno calcolati i rapporti tra i nuovi (o la singola nuova foglia) e i vecchi
         if (!fattoriModel.isEmpty()) {
-            //2.1. chiedi le 2 foglie (una nuova(interna) e una preesistene(esterna)) per fare iol confronto
+            //2.1. chiedi le 2 foglie (una nuova(interna) e una preesistene(esterna)) per fare il confronto
             String nomeFogliaEsternaFormattata = view.selezioneFogliaDaLista(fattoriModel.getKeysets());
             // 2. scegliere una categoria delle nuove, da utilizzare per il primo fattore di conversione (se non esistono nuovi fattori la scelta è tra una sola foglia)
             String nomeFogliaInternaFormattata = view.selezioneFogliaDaLista(nomeRadice, foglie);
@@ -173,6 +172,7 @@ public class ConfiguratoreController extends BaseController<Configuratore>{
             double fattoreDiConversioneEsternoInterno = view.ottieniFattoreDiConversione(nomeFogliaEsternaFormattata, nomeFogliaInternaFormattata);
             fattoriModel.inserisciFattoriDiConversione(nomeFogliaEsternaFormattata, nomeFogliaInternaFormattata, fattoreDiConversioneEsternoInterno, nuoviDaNuovaRadice);
         }else if (!nuoviDaNuovaRadice.isEmpty()) {
+            nuoviDaNuovaRadice.addAll(fattoriModel.calcolaInversi(nuoviDaNuovaRadice));
             // 1. aggiungi i nuovi fattori (sono gli unici)
             fattoriModel.aggiungiArrayListDiFattori(nuoviDaNuovaRadice);
             //todo just added, i thouth it was there already but idk

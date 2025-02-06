@@ -28,8 +28,10 @@ public class ProposteTest {
                 new SerializerJSON<Map<String, List<Proposta>>>()
         );
 
-        cleanTestData = new HashMap<>();
-        cleanTestData = mapper.load();
+
+        cleanTestData = mapper.read();
+        if(cleanTestData == null)
+            cleanTestData = new HashMap<>();
 
         // creare i test con configuratore E quelli con utenteAttivo
         Fruitore utenteAttivo = new Fruitore("user", "pwd", "valid@email.com", "comprensorio");

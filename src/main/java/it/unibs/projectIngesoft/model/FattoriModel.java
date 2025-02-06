@@ -66,7 +66,7 @@ public class FattoriModel {
         hashMapFattori.put(Utilitas.factorNameBuilder(nomeRadice, foglie.getFirst().getNome()), new ArrayList<>());
     }
 
-    private ArrayList<FattoreDiConversione> calcolaInversi(ArrayList<FattoreDiConversione> fattoriIJ) {
+    public ArrayList<FattoreDiConversione> calcolaInversi(ArrayList<FattoreDiConversione> fattoriIJ) {
         ArrayList<FattoreDiConversione> fattoriInversi = new ArrayList<>();
         for (FattoreDiConversione f : fattoriIJ) {
             fattoriInversi.add(generaInverso(f));
