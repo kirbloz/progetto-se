@@ -11,7 +11,6 @@ import it.unibs.projectIngesoft.persistence.serialization.SerializerJSON;
 import it.unibs.projectIngesoft.presentation.controllers.AccessoController;
 import it.unibs.projectIngesoft.presentation.controllers.FruitoreController;
 import it.unibs.projectIngesoft.presentation.view.FruitoreView;
-import it.unibs.projectIngesoft.presentation.view.ViewFactory;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -106,7 +105,7 @@ class FruitoreTest {
         InputInjector.inject(data);
 
         FruitoreController fruitCont = new FruitoreController(
-                (FruitoreView) ViewFactory.createView(fruitoreTest),
+               new FruitoreView(),
                 null, null, null, null, utentiModel, fruitoreTest);
 
         fruitCont.run();
