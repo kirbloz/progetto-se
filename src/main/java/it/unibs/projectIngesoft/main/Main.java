@@ -1,6 +1,6 @@
 package it.unibs.projectIngesoft.main;
 
-import it.unibs.projectIngesoft.parsing.JsonSerializerFactory;
+import it.unibs.projectIngesoft.persistence.serialization.JsonSerializerFactory;
 
 public class Main {
 
@@ -8,4 +8,5 @@ public class Main {
         ErmesController ermesController = new ErmesController(new JsonSerializerFactory());
         ermesController.mainLoop();
     }
+
 }
