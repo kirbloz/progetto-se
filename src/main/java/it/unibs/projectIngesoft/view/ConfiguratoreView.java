@@ -137,7 +137,7 @@ public class ConfiguratoreView extends ErmesTerminaleView {
 
     public String visualizzaInserimentoNomeCategoriaRadice(CategorieModel model) {
         visualizzaListaRadici(model.getRadici());
-        return getUserInput(MSG_PRINT_LISTA_RADICI + MSG_INSERIMENTO_RADICE);
+        return getUserInput(MSG_INSERIMENTO_RADICE);
     }
 
     public String visualizzaInserimentoCampoCategoria() {
