@@ -141,7 +141,7 @@ public class ConfiguratoreController extends BaseController<Configuratore>{
         return nuoviDaNuovaRadice;
     }
 
-    private void generaEMemorizzaNuoviFattori(String nomeRadice, List<Categoria> foglie) {
+    public void generaEMemorizzaNuoviFattori(String nomeRadice, List<Categoria> foglie) {
         if (foglie.isEmpty()) return;
 
         //1. chiedi i fattori nuovi all'utente sulla base delle categorie appena inserite
