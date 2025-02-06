@@ -8,9 +8,6 @@ import it.unibs.projectIngesoft.libraries.Menu;
 import it.unibs.projectIngesoft.libraries.Utilitas;
 import it.unibs.projectIngesoft.core.domain.model.CategorieModel;
 import it.unibs.projectIngesoft.core.domain.entities.utenti.Fruitore;
-import it.unibs.projectIngesoft.model.CategorieModel;
-import it.unibs.projectIngesoft.utente.Fruitore;
-import it.unibs.projectIngesoft.utente.Utente;
 
 import java.util.List;
 import java.util.Locale;

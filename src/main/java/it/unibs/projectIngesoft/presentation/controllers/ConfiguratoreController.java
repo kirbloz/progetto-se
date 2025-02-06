@@ -8,11 +8,7 @@ import it.unibs.projectIngesoft.core.domain.model.*;
 import it.unibs.projectIngesoft.libraries.Utilitas;
 import it.unibs.projectIngesoft.core.domain.entities.utenti.Configuratore;
 import it.unibs.projectIngesoft.presentation.view.ConfiguratoreView;
-import it.unibs.projectIngesoft.model.*;
-import it.unibs.projectIngesoft.utente.Configuratore;
-import it.unibs.projectIngesoft.utente.Fruitore;
-import it.unibs.projectIngesoft.utente.Utente;
-import it.unibs.projectIngesoft.view.ConfiguratoreView;
+import it.unibs.projectIngesoft.core.domain.entities.utenti.Fruitore;
 
 import java.util.ArrayList;
 import java.util.HashMap;
