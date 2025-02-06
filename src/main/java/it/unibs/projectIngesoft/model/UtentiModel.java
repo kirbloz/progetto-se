@@ -140,4 +140,13 @@ public class UtentiModel {
         addUtente(f);
         return f;
     }
+
+    public Fruitore getUtenteDaUsername(String n) {
+        for (Utente u : utenti) {
+            if (u.getUsername().equals(n) && u.getClass().equals(Fruitore.class)) {
+                return (Fruitore) u;
+            }
+        }
+        return null;
+    }
 }

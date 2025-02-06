@@ -143,7 +143,7 @@ public class ProposteModel {
                 && p.getOreRichiesta() == oreRichiesta
                 && p.getRichiesta().equals(categoriaRichiesta)
                 && p.getComprensorio().equals(autore.getComprensorioDiAppartenenza())
-				&& p.getAutore().equals(autore)
+				&& p.getAutoreUsername().equals(autore.getUsername())
 				&& p.getStato() != StatiProposta.CHIUSA;
 
         return getFilteredProposte(filtro)

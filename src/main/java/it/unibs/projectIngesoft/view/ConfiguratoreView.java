@@ -8,6 +8,7 @@ import it.unibs.projectIngesoft.libraries.Menu;
 import it.unibs.projectIngesoft.libraries.Utilitas;
 import it.unibs.projectIngesoft.model.CategorieModel;
 import it.unibs.projectIngesoft.utente.Fruitore;
+import it.unibs.projectIngesoft.utente.Utente;
 
 import java.util.List;
 import java.util.Locale;
@@ -339,20 +340,32 @@ public class ConfiguratoreView extends ErmesTerminaleView {
     /// ///////////////////////////// proposte ////////////////////////////////////
 
 
-    public void visualizzaProposteDaNotificare(List<Proposta> listaDaNotificare) {
-        if (listaDaNotificare.isEmpty()) {
+    public void visualizzaProposteDaNotificare(Map<Fruitore, List<Proposta>> mapDaNotificare) {
+        if (mapDaNotificare.isEmpty()) {
             print(WARNING_NO_PROPOSTE_DA_VISUALIZZARE);
             return;
         }
 
-        listaDaNotificare.forEach(proposta -> {
+        for (Fruitore autore : mapDaNotificare.keySet()) {
+            for (Proposta proposta : mapDaNotificare.get(autore)) {
+                System.out.println(proposta);
+                String email = autore.getEmail();
+                String comprensorio = autore.getComprensorioDiAppartenenza();
+                print(MSG_FORMATTED_PROPOSTA_PRONTA.formatted(autore.getUsername(), comprensorio, email));
+                proposta.notificata();
+            }
+        }
+
+
+        /*
+        mapDaNotificare.forEach(proposta -> {
             System.out.println(proposta);
             Fruitore autore = proposta.getAutore();
             String email = autore.getEmail();
             String comprensorio = autore.getComprensorioDiAppartenenza();
             print(MSG_FORMATTED_PROPOSTA_PRONTA.formatted(autore.getUsername(), comprensorio, email));
             proposta.notificata();
-        });
+        });*/
     }
 
     public void visualizzaProposteCategoriaHeader(String categoria) {

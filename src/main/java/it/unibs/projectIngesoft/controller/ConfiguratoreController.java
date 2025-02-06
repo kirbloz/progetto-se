@@ -7,10 +7,14 @@ import it.unibs.projectIngesoft.attivita.ValoreDominio;
 import it.unibs.projectIngesoft.libraries.Utilitas;
 import it.unibs.projectIngesoft.model.*;
 import it.unibs.projectIngesoft.utente.Configuratore;
+import it.unibs.projectIngesoft.utente.Fruitore;
+import it.unibs.projectIngesoft.utente.Utente;
 import it.unibs.projectIngesoft.view.ConfiguratoreView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Predicate;
 
 public class ConfiguratoreController extends BaseController<Configuratore>{
@@ -298,7 +302,33 @@ public class ConfiguratoreController extends BaseController<Configuratore>{
 
     public void visualizzaProposteDaNotificare() {
         view.visualizzaPropostePronteHeader();
-        view.visualizzaProposteDaNotificare(proposteModel.getFilteredProposte(Proposta::isDaNotificare).toList());
+        //todo so che fa schifo ma non mi va il cervello
+        Map<Fruitore, List<Proposta>> mapDaNotificare = new HashMap<>();
+        ArrayList<String> nomiAutori = new ArrayList<>();
+        for(Proposta daNotificare : proposteModel.getFilteredProposte(Proposta::isDaNotificare).toList()){
+            boolean giaPresente = false;
+            for (String n : nomiAutori){
+                if(n.equals(daNotificare.getAutoreUsername())) {
+                    giaPresente = true;
+                    break;
+                }
+            }
+            if(!giaPresente) {
+                nomiAutori.add(daNotificare.getAutoreUsername());
+            }
+        }
+
+        for (String n : nomiAutori){
+            ArrayList<Proposta> listaPropostaPerNome = new ArrayList<>();
+            for(Proposta daNotificare : proposteModel.getFilteredProposte(Proposta::isDaNotificare).toList()){
+                if (daNotificare.getAutoreUsername().equals(n)) {
+                    listaPropostaPerNome.add(daNotificare);
+                }
+            }
+            mapDaNotificare.put(utentiModel.getUtenteDaUsername(n), listaPropostaPerNome);
+        }
+
+        view.visualizzaProposteDaNotificare(mapDaNotificare);
         proposteModel.save();
     }
 }
