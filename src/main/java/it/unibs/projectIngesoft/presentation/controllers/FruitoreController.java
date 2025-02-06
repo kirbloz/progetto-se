@@ -44,7 +44,7 @@ public class FruitoreController extends BaseController <Fruitore> {
         this.compGeoModel = compGeoModel;
         this.utentiModel = utentiModel;
         this.utenteAttivo = utenteAttivo;*/
-        super(view, categorieModel, fattoriModel, proposteModel, compGeoModel, utentiModel, utenteAttivo);
+        super(categorieModel, fattoriModel, proposteModel, compGeoModel, utentiModel, utenteAttivo);
         this.view = view;
     }
 

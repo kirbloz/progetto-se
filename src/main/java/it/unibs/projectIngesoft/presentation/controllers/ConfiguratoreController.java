@@ -25,27 +25,13 @@ public class ConfiguratoreController extends BaseController<Configuratore>{
 
     private final ConfiguratoreView view;
 
-    /*private final CategorieModel categorieModel;
-    private final FattoriModel fattoriModel;
-    private final ProposteModel proposteModel;
-    private final ComprensorioGeograficoModel compGeoModel;
-    private final UtentiModel utentiModel;
-    private final Configuratore utenteAttivo;*/
-
     public ConfiguratoreController(ConfiguratoreView view,
                                    CategorieModel categorieModel,
                                    FattoriModel fattoriModel,
                                    ProposteModel proposteModel,
                                    ComprensorioGeograficoModel compGeoModel,
                                    UtentiModel utentiModel, Configuratore utenteAttivo) {
-        /*this.view = view;
-        this.categorieModel = categorieModel;
-        this.fattoriModel = fattoriModel;
-        this.proposteModel = proposteModel;
-        this.compGeoModel = compGeoModel;
-        this.utentiModel = utentiModel;
-        this.utenteAttivo = utenteAttivo;*/
-        super(view, categorieModel, fattoriModel, proposteModel, compGeoModel, utentiModel, utenteAttivo);
+        super(categorieModel, fattoriModel, proposteModel, compGeoModel, utentiModel, utenteAttivo);
         this.view = view;
     }
 
