@@ -21,7 +21,7 @@ public class AccessoView /*implements EventListener*/ {
             "Registrazione"
     };
 
-    public AccessoView(/*AccessoController controllerAccesso*/) {
+    public AccessoView() {
 
     }
 

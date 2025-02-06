@@ -2,7 +2,7 @@ package attivita;
 
 import it.unibs.projectIngesoft.attivita.Proposta;
 import it.unibs.projectIngesoft.attivita.StatiProposta;
-import it.unibs.projectIngesoft.mappers.ProposteRepository;
+import it.unibs.projectIngesoft.RepositoryLogic.ProposteRepository;
 import it.unibs.projectIngesoft.model.ProposteModel;
 import it.unibs.projectIngesoft.parsing.SerializerJSON;
 import it.unibs.projectIngesoft.utente.Fruitore;
@@ -29,7 +29,7 @@ public class ProposteTest {
         );
 
 
-        cleanTestData = mapper.read();
+        cleanTestData = mapper.load();
         if(cleanTestData == null)
             cleanTestData = new HashMap<>();
 

@@ -3,7 +3,7 @@ package attivita;
 import it.unibs.projectIngesoft.attivita.ComprensorioGeografico;
 import it.unibs.projectIngesoft.controller.ConfiguratoreController;
 import it.unibs.projectIngesoft.libraries.InputInjector;
-import it.unibs.projectIngesoft.mappers.CompGeoRepository;
+import it.unibs.projectIngesoft.RepositoryLogic.CompGeoRepository;
 import it.unibs.projectIngesoft.model.ComprensorioGeograficoModel;
 import it.unibs.projectIngesoft.parsing.SerializerJSON;
 import it.unibs.projectIngesoft.utente.Configuratore;
@@ -18,7 +18,6 @@ import java.util.List;
 public class CompensoriTest {
 
     private ComprensorioGeograficoModel model;
-    //private CategorieController controller;
 
     private CompGeoRepository mapper;
     private List<ComprensorioGeografico> cleanTestData;
@@ -62,19 +61,7 @@ public class CompensoriTest {
 
     @Test
     void aggiuntaComprensorioUnivoco() {
-        /*ConfiguratoreController controller = new ConfiguratoreController(new ConfiguratoreView(),
-                null,
-                null,
-                null,
-                model,
-                null,
-                new Configuratore("default", "test"));*/
-
-
         model.aggiungiComprensorio("comprensorioTest", List.of("test"));
-        //InputInjector.inject("comprensorioTest\ncomprensorioTest2\ntest1\nS\ntest2\nN\n");
-        //controller.aggiungiComprensorio();
-
         model.aggiungiComprensorio("comprensorioTest", List.of("test", "test2"));
 
         List<String> listaComprensori = model.getListaNomiComprensoriGeografici();

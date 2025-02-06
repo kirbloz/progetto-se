@@ -1,7 +1,7 @@
 package it.unibs.projectIngesoft.model;
 
 
-import it.unibs.projectIngesoft.mappers.UtentiRepository;
+import it.unibs.projectIngesoft.RepositoryLogic.UtentiRepository;
 import it.unibs.projectIngesoft.utente.Configuratore;
 import it.unibs.projectIngesoft.utente.Fruitore;
 import it.unibs.projectIngesoft.utente.Utente;

@@ -122,7 +122,7 @@ public class FruitoreView extends ErmesTerminaleView{
         print(WARNING_IMPOSSIBILE_CALCOLARE_ORE);
     }
 
-    //todo formattare meglio la stringa per la stampa perchè così si fa fatica a leggerla
+
     public boolean confermaInserimento(String categoriaRichiesta, String categoriaOfferta, int oreRichiesta, int oreOfferta) {
         return getUserChoiceYoN("\n" + categoriaRichiesta + " : " + oreRichiesta + "\n" + categoriaOfferta + " : " + oreOfferta + "\n" + MSG_CONFERMA_PROPOSTA.formatted(oreOfferta));
     }

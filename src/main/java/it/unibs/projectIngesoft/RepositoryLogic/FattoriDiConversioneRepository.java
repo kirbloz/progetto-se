@@ -1,10 +1,9 @@
-package it.unibs.projectIngesoft.mappers;
+package it.unibs.projectIngesoft.RepositoryLogic;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import it.unibs.projectIngesoft.attivita.FattoreDiConversione;
 import it.unibs.projectIngesoft.parsing.Serializer;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

@@ -28,6 +28,10 @@ public class Proposta {
     @JsonProperty
     private boolean daNotificare;
 
+
+    /**
+     * Da non usare! Solo per la deserializzazione di Jackson
+     */
     protected Proposta() {
 
     }
@@ -59,8 +63,6 @@ public class Proposta {
      * @return true se l'offerta di this può soddisfare la richiesta di p (param)
      */
     public boolean isOffertaCompatibile(Proposta p) {
-        //return this.richiesta.equals(p.offerta) && this.oreRichiesta == p.oreOfferta;
-        //return this.getOfferta().equals(p.getRichiesta());
         return this.getStato() == StatiProposta.APERTA && p.getStato() == StatiProposta.APERTA && this.getOfferta().equals(p.getRichiesta()) && this.getOreOfferta() == p.getOreRichiesta();
     }
 

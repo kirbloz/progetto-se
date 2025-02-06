@@ -1,4 +1,4 @@
-package it.unibs.projectIngesoft.mappers;
+package it.unibs.projectIngesoft.RepositoryLogic;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import it.unibs.projectIngesoft.attivita.Categoria;

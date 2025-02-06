@@ -75,10 +75,8 @@ public class AccessoController {
             }
         } while (utenteAttivo == null);
 
-        //3. gestisce IO con accessoVIew
+        //3. gestisce IO con accessoView
         return utenteAttivo;
 
     }
-
-
 }

@@ -4,7 +4,7 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import it.unibs.projectIngesoft.attivita.Proposta;
 import it.unibs.projectIngesoft.attivita.StatiProposta;
-import it.unibs.projectIngesoft.mappers.ProposteRepository;
+import it.unibs.projectIngesoft.RepositoryLogic.ProposteRepository;
 import it.unibs.projectIngesoft.utente.Fruitore;
 
 import java.util.ArrayList;
@@ -30,10 +30,6 @@ public class ProposteModel {
         if(hashListaProposte == null) {
             hashListaProposte = new HashMap<>();
         }
-    }
-
-    public Map<String, List<Proposta>> getHashListaProposte() {
-        return new HashMap<>(hashListaProposte);
     }
 
     public void addProposta(Proposta proposta) {
@@ -89,7 +85,7 @@ public class ProposteModel {
 
         catena.add(nuovaProposta); // aggiungo la nuova così posso chiuderle tutte
         catena.forEach(Proposta::setChiusa);
-        save(); // aggiorno i dati salvati con i nuovi stati //todo perché fai new?
+        save(); // aggiorno i dati salvati con i nuovi stati
     }
 
     private ArrayList<Proposta> concatenaCompatibili(Proposta first, Proposta last, ArrayList<Proposta> proposteComprensorio) {

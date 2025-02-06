@@ -8,5 +8,4 @@ public class Main {
         ErmesController ermesController = new ErmesController(new JsonSerializerFactory());
         ermesController.mainLoop();
     }
-
 }

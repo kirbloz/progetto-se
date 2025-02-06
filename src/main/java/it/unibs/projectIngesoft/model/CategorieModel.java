@@ -3,8 +3,8 @@ package it.unibs.projectIngesoft.model;
 
 import it.unibs.projectIngesoft.attivita.Albero;
 import it.unibs.projectIngesoft.attivita.Categoria;
-import it.unibs.projectIngesoft.mappers.CategorieRepository;
-import it.unibs.projectIngesoft.mappers.Repository;
+import it.unibs.projectIngesoft.RepositoryLogic.CategorieRepository;
+import it.unibs.projectIngesoft.RepositoryLogic.Repository;
 
 import java.util.ArrayList;
 import java.util.List;

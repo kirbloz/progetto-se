@@ -5,8 +5,8 @@ import it.unibs.projectIngesoft.attivita.FattoreDiConversione;
 import it.unibs.projectIngesoft.attivita.ValoreDominio;
 import it.unibs.projectIngesoft.controller.ConfiguratoreController;
 import it.unibs.projectIngesoft.libraries.InputInjector;
-import it.unibs.projectIngesoft.mappers.CategorieRepository;
-import it.unibs.projectIngesoft.mappers.FattoriDiConversioneRepository;
+import it.unibs.projectIngesoft.RepositoryLogic.CategorieRepository;
+import it.unibs.projectIngesoft.RepositoryLogic.FattoriDiConversioneRepository;
 import it.unibs.projectIngesoft.model.CategorieModel;
 import it.unibs.projectIngesoft.model.FattoriModel;
 import it.unibs.projectIngesoft.parsing.SerializerJSON;
@@ -26,7 +26,6 @@ import static org.junit.jupiter.api.Assertions.*;
 class CategorieTest {
 
     private CategorieModel categorieModel;
-    //private CategorieController controller;
 
     private CategorieRepository mapper;
     private List<Categoria> cleanTestData;
@@ -40,7 +39,6 @@ class CategorieTest {
         cleanTestData = new ArrayList<>();
         cleanTestData = mapper.load();
 
-        //this.categorieModel = new CategorieModel(mapper);
 
     }
 
@@ -99,7 +97,6 @@ class CategorieTest {
         InputInjector.inject(data);
         controller.aggiungiGerarchia();
 
-       // assertTrue(fattoriModel.existsKeyInHashmapFattori("radiceTest:radiceTest"));
         assertTrue(fattoriModel.existsKeyInHashmapFattori("radiceTest2:figliaTest"));
         assertTrue(fattoriModel.existsKeyInHashmapFattori("radiceTest2:figliaTest2"));
 
@@ -113,7 +110,6 @@ class CategorieTest {
         assertTrue(fattore1.isPresent());
         assertTrue(fattore2.isPresent());
         assertTrue(fattore3.isPresent());
-
     }
 
 

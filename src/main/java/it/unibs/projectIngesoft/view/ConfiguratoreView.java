@@ -15,7 +15,6 @@ import java.util.Map;
 
 public class ConfiguratoreView extends ErmesTerminaleView {
 
-    //public static final String TITLE_MAIN_MENU = "MENU' PRINCIPALE - SCAMBIO ORE";
     public static final String[] vociMainConfiguratore = new String[]{
             "Cambia Credenziali",
             "Menu Comprensorio ",

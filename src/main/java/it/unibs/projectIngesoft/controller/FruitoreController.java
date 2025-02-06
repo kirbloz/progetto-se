@@ -21,13 +21,6 @@ public class FruitoreController extends BaseController <Fruitore> {
 
     private FruitoreView view;
 
-    /*private CategorieModel categorieModel;
-    private FattoriModel fattoriModel;
-    private ProposteModel proposteModel;
-    private ComprensorioGeograficoModel compGeoModel;
-    private UtentiModel utentiModel;
-    private Fruitore utenteAttivo;*/
-
     public FruitoreController(FruitoreView view,
                               CategorieModel categorieModel,
                               FattoriModel fattoriModel,
@@ -35,13 +28,6 @@ public class FruitoreController extends BaseController <Fruitore> {
                               ComprensorioGeograficoModel compGeoModel,
                               UtentiModel utentiModel,
                               Fruitore utenteAttivo) {
-        /*this.view = view;
-        this.categorieModel = categorieModel;
-        this.fattoriModel = fattoriModel;
-        this.proposteModel = proposteModel;
-        this.compGeoModel = compGeoModel;
-        this.utentiModel = utentiModel;
-        this.utenteAttivo = utenteAttivo;*/
         super(view, categorieModel, fattoriModel, proposteModel, compGeoModel, utentiModel, utenteAttivo);
         this.view = view;
     }
@@ -130,18 +116,6 @@ public class FruitoreController extends BaseController <Fruitore> {
             Categoria nuovaMadre = madreCorrente;
             scelta = view.visualizzaMenuEsploraGerarchia();
             nuovaMadre = selezionaNuovaMadreLivello(scelta, madreCorrente, radice);
-            /*switch (scelta) {
-                case 1 -> { // esplora
-                    String nuovoCampo = inserimentoValoreCampo(madreCorrente.getCategorieFiglie());
-                    nuovaMadre = nuovoCampo == null ?
-                            madreCorrente : selezionaCategoriaDaValoreCampo(nuovoCampo, madreCorrente.getCategorieFiglie());
-                }
-                // torna indietro di un livello
-                case 2 -> nuovaMadre = madreCorrente.isRadice() ?
-                        madreCorrente : radice.cercaCategoria(madreCorrente.getNomeMadre());
-                default -> view.uscitaMenu("esplora");
-            }*/
-            // aggiorno i valori
             madreCorrente = nuovaMadre == null ? madreCorrente : nuovaMadre;
         } while (scelta != 0);
     }
@@ -186,7 +160,6 @@ public class FruitoreController extends BaseController <Fruitore> {
     public String inserimentoValoreCampo(List<Categoria> livello) {
         String[] valoriFiglie = livello.stream()
                 .filter(categoria -> !categoria.isFoglia())
-                //.map(Categoria::getCampoFiglie)
                 .map(categoria -> categoria.getValoreDominio().getNome())
                 .toArray(String[]::new);
 

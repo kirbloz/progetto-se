@@ -1,4 +1,4 @@
-package it.unibs.projectIngesoft.mappers;
+package it.unibs.projectIngesoft.RepositoryLogic;
 
 public interface Repository<T> {
 

@@ -1,7 +1,7 @@
 package it.unibs.projectIngesoft.model;
 
 import it.unibs.projectIngesoft.attivita.ComprensorioGeografico;
-import it.unibs.projectIngesoft.mappers.CompGeoRepository;
+import it.unibs.projectIngesoft.RepositoryLogic.CompGeoRepository;
 
 import java.util.ArrayList;
 import java.util.List;

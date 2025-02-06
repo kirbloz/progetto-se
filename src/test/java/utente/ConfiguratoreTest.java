@@ -3,7 +3,7 @@ package utente;
 import it.unibs.projectIngesoft.controller.AccessoController;
 import it.unibs.projectIngesoft.controller.ConfiguratoreController;
 import it.unibs.projectIngesoft.libraries.InputInjector;
-import it.unibs.projectIngesoft.mappers.UtentiRepository;
+import it.unibs.projectIngesoft.RepositoryLogic.UtentiRepository;
 import it.unibs.projectIngesoft.model.UtentiModel;
 import it.unibs.projectIngesoft.parsing.SerializerJSON;
 import it.unibs.projectIngesoft.utente.Configuratore;

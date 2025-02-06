@@ -3,7 +3,7 @@ package it.unibs.projectIngesoft.model;
 
 import it.unibs.projectIngesoft.attivita.Categoria;
 import it.unibs.projectIngesoft.attivita.FattoreDiConversione;
-import it.unibs.projectIngesoft.mappers.FattoriDiConversioneRepository;
+import it.unibs.projectIngesoft.RepositoryLogic.FattoriDiConversioneRepository;
 
 import java.util.ArrayList;
 import java.util.HashMap;

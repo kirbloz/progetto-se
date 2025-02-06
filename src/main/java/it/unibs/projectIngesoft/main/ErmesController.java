@@ -5,7 +5,7 @@ import it.unibs.projectIngesoft.controller.AccessoController;
 import it.unibs.projectIngesoft.controller.BaseController;
 import it.unibs.projectIngesoft.controller.ConfiguratoreController;
 import it.unibs.projectIngesoft.controller.FruitoreController;
-import it.unibs.projectIngesoft.mappers.*;
+import it.unibs.projectIngesoft.RepositoryLogic.*;
 import it.unibs.projectIngesoft.model.*;
 import it.unibs.projectIngesoft.parsing.SerializerFactory;
 import it.unibs.projectIngesoft.utente.Configuratore;
@@ -89,7 +89,7 @@ public class ErmesController {
         switch (utenteAttivo.getClass().getSimpleName()) { // si mantiene la logica condizionale in questo punto perchè è quello
             // responsabile della creazione dei controller che dipendono direttamente dal tipo di utente.
             // è anche l'unico punto dove diventano necessari i cast, tuttavia saranno sempre "esatti" perchè
-            // ErmesTerminaleView viene creata in base al tipo  di utente
+            // ErmesTerminaleView viene creata in base al tipo di utente
             case "Configuratore" -> {
                 return new ConfiguratoreController((ConfiguratoreView) ViewFactory.createView(utenteAttivo),
                         categorieModel, fattoriModel, proposteModel, compGeoModel, modelUtenti, (Configuratore) utenteAttivo);
