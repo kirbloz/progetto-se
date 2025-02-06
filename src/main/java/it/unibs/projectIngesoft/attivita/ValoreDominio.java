@@ -62,18 +62,4 @@ public class ValoreDominio {
         assert descrizione != null : "La descrizione non deve essere null";
         this.descrizione = descrizione;
     }
-
-    /**
-     * Rappresenta sotto forma di stringa formattata l'oggetto ValoreDominio
-     *
-     * @return stringa formattata
-     */
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(this.getNome());
-        if (!this.getDescrizione().trim().isEmpty())
-            sb.append(", '").append(this.getDescrizione()).append("'");
-        return sb.toString();
-    }
 }
