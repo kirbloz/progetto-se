@@ -115,6 +115,12 @@ public class Categoria {
         return this.valoreDominio;
     }
 
+    public String getNomeValoreDominio() {
+        return this.valoreDominio.getNome();
+    }
+
+    public String getDescrizioneValoreDominio(){ return this.valoreDominio.getDescrizione(); }
+
     public String getCampo() {
         return campo;
     }
