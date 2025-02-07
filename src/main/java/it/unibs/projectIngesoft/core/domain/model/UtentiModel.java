@@ -8,11 +8,12 @@ import it.unibs.projectIngesoft.core.domain.entities.utenti.Utente;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.regex.Pattern;
 
 public class UtentiModel {
 
-    private static List<Utente> utenti;
+    private List<Utente> utenti;
     private final Utente defaultUtente;
     private final AbstractUtentiRepository repository;
 
@@ -23,22 +24,6 @@ public class UtentiModel {
             utenti = new ArrayList<>();
         }
         this.defaultUtente =  repository.loadDefaultUtente();
-    }
-
-    private static List<Utente> getListaUtenti() {
-        if (utenti == null) {
-            utenti = new ArrayList<>();
-        }
-        return new ArrayList<>(utenti);
-    }
-
-    public static Fruitore getInformazioniFruitore(String username) {
-        List<Utente> tempUtenti = getListaUtenti();
-        return tempUtenti.stream()
-                .filter(u -> u instanceof Fruitore && u.getUsername().equals(username))
-                .map(u -> (Fruitore) u)
-                .findFirst()
-                .orElse(null);
     }
 
     /**
@@ -141,12 +126,11 @@ public class UtentiModel {
         return f;
     }
 
-    public Fruitore getUtenteDaUsername(String n) {
-        for (Utente u : utenti) {
-            if (u.getUsername().equals(n) && u.getClass().equals(Fruitore.class)) {
-                return (Fruitore) u;
-            }
-        }
-        return null;
+    public Optional<Fruitore> getFruitoreDaUsername(String username) {
+        List<Utente> tempUtenti = new ArrayList<>(this.utenti);
+        return tempUtenti.stream()
+                .filter(u -> u.getClass().equals(Fruitore.class) && u.getUsername().equals(username))
+                .map(u -> (Fruitore) u)
+                .findFirst();
     }
 }
