@@ -92,19 +92,19 @@ public class ProposteModel {
         save();
     }
 
-    private ArrayList<Proposta> concatenaCompatibili(Proposta first, Proposta last, ArrayList<Proposta> proposteComprensorio) {
+    private List<Proposta> concatenaCompatibili(Proposta first, Proposta last, List<Proposta> proposteComprensorio) {
         assert proposteComprensorio != null;
 
-        ArrayList<Proposta> catena = new ArrayList<>();
+        List<Proposta> catena = new ArrayList<>();
         for (Proposta proposta : proposteComprensorio) {
             if (last.isOffertaCompatibile(proposta)) { // si concatena! ma si richiude anche?
                 catena.add(proposta);
 
                 if (!isCatenaChiusa(first, proposta)) { // non si chiude.. continuo la ricerca
-                    ArrayList<Proposta> proposteComprensorioRidotte = new ArrayList<>(proposteComprensorio);
+                    List<Proposta> proposteComprensorioRidotte = new ArrayList<>(proposteComprensorio);
                     proposteComprensorioRidotte.remove(proposta);
 
-                    ArrayList<Proposta> continuoCatena = new ArrayList<>();
+                    List<Proposta> continuoCatena = new ArrayList<>();
                     continuoCatena.addAll(concatenaCompatibili(first, proposta, proposteComprensorioRidotte));
 
                     if (continuoCatena.isEmpty()) { // allora proposta non porta a nessuna catena conclusa
