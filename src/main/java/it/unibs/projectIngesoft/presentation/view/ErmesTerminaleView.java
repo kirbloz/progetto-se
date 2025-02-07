@@ -160,7 +160,7 @@ public abstract class ErmesTerminaleView {
     public String formattaProposta(Proposta proposta) {
         StringBuilder propostaStringBuilder = new StringBuilder();
         propostaStringBuilder.append("Richiesta:\t[ ").append(proposta.getRichiesta()).append(", ").append(proposta.getOreRichiesta()).append(" ore ]\n");
-        propostaStringBuilder.append("Offerta:\t[ ").append(proposta.getOfferta()).append(", ").append(proposta.getOfferta()).append(" ore ]\n");
+        propostaStringBuilder.append("Offerta:\t[ ").append(proposta.getOfferta()).append(", ").append(proposta.getOreOfferta()).append(" ore ]\n");
         return propostaStringBuilder.toString();
 
     }
