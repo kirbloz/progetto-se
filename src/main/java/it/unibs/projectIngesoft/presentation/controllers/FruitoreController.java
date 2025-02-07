@@ -7,6 +7,7 @@ import it.unibs.projectIngesoft.core.domain.entities.utenti.Fruitore;
 import it.unibs.projectIngesoft.presentation.view.FruitoreView;
 
 import java.util.List;
+import java.util.Optional;
 
 public class FruitoreController extends BaseController <Fruitore> {
 
@@ -173,7 +174,7 @@ public class FruitoreController extends BaseController <Fruitore> {
         String categoriaRichiesta;
         String categoriaOfferta;
         int oreRichiesta;
-        int oreOfferta;
+        Optional<Integer> oreOfferta;
 
         do {
             categoriaRichiesta = inserimentoFogliaFormattataFromAvailable(MSG_INSERISCI_RICHIESTA);
@@ -181,21 +182,20 @@ public class FruitoreController extends BaseController <Fruitore> {
             categoriaOfferta = inserimentoFogliaFormattataFromAvailable(MSG_INSERISCI_OFFERTA);
             if (categoriaRichiesta.equals(categoriaOfferta))
                 view.visualizzaErroreRichiestaUgualeOfferta();
-        }while(!categoriaRichiesta.equals(categoriaOfferta));
+        }while(categoriaRichiesta.equals(categoriaOfferta));
 
 
         oreOfferta = fattoriModel.calcolaRapportoOre(categoriaRichiesta, categoriaOfferta, oreRichiesta);
-        if (oreOfferta == -1) {
+        if (oreOfferta.isEmpty()) {
             view.visualizzaErroreCalcoloOre();
             return;
         }
 
-        // 3. conferma e memorizza la proposta
-        if (!view.confermaInserimento(categoriaRichiesta, categoriaOfferta, oreRichiesta, oreOfferta)) {
+        if (!view.confermaInserimento(categoriaRichiesta, categoriaOfferta, oreRichiesta, oreOfferta.get())) {
             view.visualizzaMessaggioAnnulla();
             return;
         }
-        Proposta tempProposta = new Proposta(categoriaRichiesta, categoriaOfferta, oreRichiesta, oreOfferta, utenteAttivo);
+        Proposta tempProposta = new Proposta(categoriaRichiesta, categoriaOfferta, oreRichiesta, oreOfferta.get(), utenteAttivo);
         // 3.1 se confermi ma è duplicata, segnala e non aggiunge
         if (proposteModel.controllaPropostaDuplicata(tempProposta)) {
             view.visualizzaMessaggioErroreDuplicato();
