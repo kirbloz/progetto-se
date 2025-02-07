@@ -62,7 +62,7 @@ public class FattoriModel {
     }
 
     public List<FattoreDiConversione> calcolaInversi(List<FattoreDiConversione> fattoriIJ) {
-        ArrayList<FattoreDiConversione> fattoriInversi = new ArrayList<>();
+        List<FattoreDiConversione> fattoriInversi = new ArrayList<>();
         for (FattoreDiConversione f : fattoriIJ) {
             fattoriInversi.add(generaInverso(f));
         }
