@@ -154,14 +154,8 @@ public class ProposteModel {
     }
 
 
-    /// ///////////////// Nuovi Metodi /////////////////////////////////
-
-    // todo questo metodo è replicabile semplicemente chiamando getFilteredProposte e controllando che il risultato
-    // non sia empty
-    // ho cambiato il nome perchè si cerca per autore, non utente.
-    // c'è sempre la certezza che questi metodi siano chiamati con fruitori
     public boolean esisteAlmenoUnaPropostaPerAutore(Fruitore autore) {
-        Predicate<Proposta> filtro = p -> p.getAutoreUsername().equals(/*utenteAttivo*/autore.getUsername())
+        Predicate<Proposta> filtro = p -> p.getAutoreUsername().equals(autore.getUsername())
                 && p.getStato() != StatiProposta.CHIUSA;
         return getFilteredProposte(filtro).findAny().isPresent(); //versione stream equivalente a !isEmpty()
     }
