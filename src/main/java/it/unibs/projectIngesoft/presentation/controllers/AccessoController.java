@@ -9,9 +9,9 @@ import static it.unibs.projectIngesoft.core.domain.model.UtentiModel.isValidEmai
 
 public class AccessoController {
 
-    private UtentiModel utentiModel;
-    private ComprensorioGeograficoModel comprensorioModel;
-    private AccessoView view;
+    private final UtentiModel utentiModel;
+    private final ComprensorioGeograficoModel comprensorioModel;
+    private final AccessoView view;
 
     public AccessoController(UtentiModel utentiModel, ComprensorioGeograficoModel comprensorioModel) {
         this.utentiModel = utentiModel;
