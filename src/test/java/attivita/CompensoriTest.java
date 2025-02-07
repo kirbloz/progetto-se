@@ -5,8 +5,9 @@ import it.unibs.projectIngesoft.core.domain.entities.ComprensorioGeografico;
 import it.unibs.projectIngesoft.core.domain.entities.utenti.Configuratore;
 import it.unibs.projectIngesoft.core.domain.model.ComprensorioGeograficoModel;
 import it.unibs.projectIngesoft.libraries.InputInjector;
+import it.unibs.projectIngesoft.persistence.Repository;
 import it.unibs.projectIngesoft.persistence.implementations.CompGeoRepository;
-import it.unibs.projectIngesoft.persistence.serialization.SerializerJSON;
+import it.unibs.projectIngesoft.persistence.serialization.JsonSerializerFactory;
 import it.unibs.projectIngesoft.presentation.controllers.ConfiguratoreController;
 import it.unibs.projectIngesoft.presentation.view.ConfiguratoreView;
 import org.junit.jupiter.api.AfterEach;
@@ -20,25 +21,26 @@ public class CompensoriTest {
 
     private ComprensorioGeograficoModel model;
 
-    private CompGeoRepository mapper;
-    private List<ComprensorioGeografico> cleanTestData;
+    private Repository<List<ComprensorioGeografico>> repositoryComprensori;
+    private List<ComprensorioGeografico> cleanData;
 
     @BeforeEach
     void prepareTest() {
-        mapper = new CompGeoRepository("comprensoriGeograficiTest.json",
-                new SerializerJSON<List<ComprensorioGeografico>>()
+        repositoryComprensori = new CompGeoRepository("comprensoriGeograficiTest.json",
+                new JsonSerializerFactory().createSerializer()
         );
+        saveData();
+        this.model = new ComprensorioGeograficoModel(repositoryComprensori);
+    }
 
-        cleanTestData = new ArrayList<>();
-        cleanTestData = mapper.load();
-
-        this.model = new ComprensorioGeograficoModel(mapper);
-
+    void saveData() {
+        cleanData = new ArrayList<>();
+        cleanData = repositoryComprensori.load();
     }
 
     @AfterEach
     void tearDown() {
-        mapper.save(cleanTestData);
+        repositoryComprensori.save(cleanData);
     }
 
     @Test

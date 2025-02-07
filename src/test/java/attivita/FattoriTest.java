@@ -6,8 +6,10 @@ import it.unibs.projectIngesoft.core.domain.entities.utenti.Configuratore;
 import it.unibs.projectIngesoft.core.domain.model.CategorieModel;
 import it.unibs.projectIngesoft.core.domain.model.FattoriModel;
 import it.unibs.projectIngesoft.libraries.InputInjector;
+import it.unibs.projectIngesoft.persistence.Repository;
 import it.unibs.projectIngesoft.persistence.implementations.CategorieRepository;
 import it.unibs.projectIngesoft.persistence.implementations.FattoriDiConversioneRepository;
+import it.unibs.projectIngesoft.persistence.serialization.JsonSerializerFactory;
 import it.unibs.projectIngesoft.persistence.serialization.SerializerJSON;
 import it.unibs.projectIngesoft.presentation.controllers.ConfiguratoreController;
 import it.unibs.projectIngesoft.presentation.view.ConfiguratoreView;
@@ -24,22 +26,25 @@ public class FattoriTest {
 
     private CategorieModel categorieModel;
 
-    private CategorieRepository mapper;
-    private List<Categoria> cleanTestData;
+    private Repository<List<Categoria>> repositoryCategorie;
+    private List<Categoria> cleanData;
 
     @BeforeEach
     void prepareTest() {
-        mapper = new CategorieRepository("categorieTest.json",
-                new SerializerJSON<>()
+        repositoryCategorie = new CategorieRepository("categorieTest.json",
+                new JsonSerializerFactory().createSerializer()
         );
+        saveData();
+    }
 
-        cleanTestData = new ArrayList<>();
-        cleanTestData = mapper.load();
+    void saveData(){
+        cleanData = new ArrayList<>();
+        cleanData = repositoryCategorie.load();
     }
 
     @AfterEach
     void tearDown() {
-        mapper.save(cleanTestData);
+        repositoryCategorie.save(cleanData);
     }
 
     @Test
@@ -70,6 +75,6 @@ public class FattoriTest {
         InputInjector.inject(data);
         controller.aggiungiGerarchia();
 
-        controller.generaEMemorizzaNuoviFattori("radiceTest", categorieModel.getFoglie("radiceTest"));
+        controller.generaEMemorizzaNuoviFattori("radiceTest", radiceFoglia.getFoglie());
     }
 }

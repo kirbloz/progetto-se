@@ -6,6 +6,7 @@ import it.unibs.projectIngesoft.core.domain.entities.StatiProposta;
 import it.unibs.projectIngesoft.core.domain.entities.utenti.Fruitore;
 import it.unibs.projectIngesoft.core.domain.model.ProposteModel;
 import it.unibs.projectIngesoft.persistence.implementations.ProposteRepository;
+import it.unibs.projectIngesoft.persistence.serialization.JsonSerializerFactory;
 import it.unibs.projectIngesoft.persistence.serialization.SerializerJSON;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -19,30 +20,30 @@ public class ProposteTest {
 
     private ProposteModel model;
 
-    private ProposteRepository mapper;
-    private Map<String, List<Proposta>> cleanTestData;
+    private ProposteRepository proposteRepository;
+    private Map<String, List<Proposta>> cleanData;
 
 
     @BeforeEach
     void prepareTest() {
-        mapper = new ProposteRepository("proposteTest.json",
-                new SerializerJSON<Map<String, List<Proposta>>>()
+        proposteRepository = new ProposteRepository("proposteTest.json",
+                new JsonSerializerFactory().createSerializer()
         );
-
-
-        cleanTestData = mapper.load();
-        if(cleanTestData == null)
-            cleanTestData = new HashMap<>();
-
+        saveData();
         // creare i test con configuratore E quelli con utenteAttivo
-        Fruitore utenteAttivo = new Fruitore("user", "pwd", "valid@email.com", "comprensorio");
+        //Fruitore utenteAttivo = new Fruitore("user", "pwd", "valid@email.com", "comprensorio");
 
-        this.model = new ProposteModel(mapper);
+        this.model = new ProposteModel(proposteRepository);
+    }
+
+    void saveData(){
+        cleanData = new HashMap<>();
+        cleanData = proposteRepository.load();
     }
 
     @AfterEach
     void tearDown() {
-        mapper.save(new HashMap<>(cleanTestData));
+        proposteRepository.save(new HashMap<>(cleanData));
     }
 
     @Test

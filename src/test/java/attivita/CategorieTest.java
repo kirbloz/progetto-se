@@ -1,17 +1,19 @@
 package attivita;
 
-import it.unibs.projectIngesoft.attivita.Categoria;
-import it.unibs.projectIngesoft.attivita.FattoreDiConversione;
-import it.unibs.projectIngesoft.attivita.ValoreDominio;
-import it.unibs.projectIngesoft.controller.ConfiguratoreController;
+
+import it.unibs.projectIngesoft.core.domain.entities.Categoria;
+import it.unibs.projectIngesoft.core.domain.entities.FattoreDiConversione;
+import it.unibs.projectIngesoft.core.domain.entities.ValoreDominio;
+import it.unibs.projectIngesoft.core.domain.entities.utenti.Configuratore;
+import it.unibs.projectIngesoft.core.domain.model.CategorieModel;
+import it.unibs.projectIngesoft.core.domain.model.FattoriModel;
 import it.unibs.projectIngesoft.libraries.InputInjector;
-import it.unibs.projectIngesoft.RepositoryLogic.CategorieRepository;
-import it.unibs.projectIngesoft.RepositoryLogic.FattoriDiConversioneRepository;
-import it.unibs.projectIngesoft.model.CategorieModel;
-import it.unibs.projectIngesoft.model.FattoriModel;
-import it.unibs.projectIngesoft.parsing.SerializerJSON;
-import it.unibs.projectIngesoft.utente.Configuratore;
-import it.unibs.projectIngesoft.view.ConfiguratoreView;
+import it.unibs.projectIngesoft.persistence.Repository;
+import it.unibs.projectIngesoft.persistence.implementations.CategorieRepository;
+import it.unibs.projectIngesoft.persistence.implementations.FattoriDiConversioneRepository;
+import it.unibs.projectIngesoft.persistence.serialization.JsonSerializerFactory;
+import it.unibs.projectIngesoft.presentation.controllers.ConfiguratoreController;
+import it.unibs.projectIngesoft.presentation.view.ConfiguratoreView;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -26,25 +28,25 @@ import static org.junit.jupiter.api.Assertions.*;
 class CategorieTest {
 
     private CategorieModel categorieModel;
-
-    private CategorieRepository mapper;
-    private List<Categoria> cleanTestData;
+    private Repository<List<Categoria>> categorieRepository;
+    private List<Categoria> cleanData;
 
     @BeforeEach
     void prepareTest() {
-        mapper = new CategorieRepository("categorieTest.json",
-                new SerializerJSON<>()
+        categorieRepository = new CategorieRepository("categorieTest.json",
+                new JsonSerializerFactory().createSerializer()
         );
+        saveData();
+    }
 
-        cleanTestData = new ArrayList<>();
-        cleanTestData = mapper.load();
-
-
+    void saveData(){
+        cleanData = new ArrayList<>();
+        cleanData = categorieRepository.load();
     }
 
     @AfterEach
     void tearDown() {
-        mapper.save(cleanTestData);
+        categorieRepository.save(cleanData);
     }
 
     @Test
@@ -72,7 +74,7 @@ class CategorieTest {
     void aggiungiGerarchia_RadiceNomeUnivoco_RadiceFoglia_FattoriInseritiCorrettamente() {
         //todo questa roba controlla fattori.....
         Categoria radiceFoglia = new Categoria("radiceTest", "testing");
-        FattoriModel fattoriModel = new FattoriModel(new FattoriDiConversioneRepository("fattoriTest.json", new SerializerJSON<>()));
+        FattoriModel fattoriModel = new FattoriModel(new FattoriDiConversioneRepository("fattoriTest.json", new JsonSerializerFactory().createSerializer()));
         ConfiguratoreController controller = new ConfiguratoreController(new ConfiguratoreView(),
                 categorieModel, fattoriModel,
                 null,
@@ -100,11 +102,11 @@ class CategorieTest {
         assertTrue(fattoriModel.existsKeyInHashmapFattori("radiceTest2:figliaTest"));
         assertTrue(fattoriModel.existsKeyInHashmapFattori("radiceTest2:figliaTest2"));
 
-        Optional<FattoreDiConversione> fattore1 = fattoriModel.getFattoriFromFoglia("radiceTest","radiceTest")
+        Optional<FattoreDiConversione> fattore1 = fattoriModel.getFattoriFromFoglia("radiceTest:radiceTest")
                 .stream().filter(f -> f.getNome_c2().equals("radiceTest2:figliaTest")).findAny();
-        Optional<FattoreDiConversione> fattore2 = fattoriModel.getFattoriFromFoglia("radiceTest2","figliaTest")
+        Optional<FattoreDiConversione> fattore2 = fattoriModel.getFattoriFromFoglia("radiceTest2:figliaTest")
                 .stream().filter(f -> f.getNome_c2().equals("radiceTest2:figliaTest2")).findAny();
-        Optional<FattoreDiConversione> fattore3 = fattoriModel.getFattoriFromFoglia("radiceTest2","figliaTest2")
+        Optional<FattoreDiConversione> fattore3 = fattoriModel.getFattoriFromFoglia("radiceTest2:figliaTest2")
                 .stream().filter(f -> f.getNome_c2().equals("radiceTest2:figliaTest")).findAny();
 
         assertTrue(fattore1.isPresent());
