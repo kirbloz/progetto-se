@@ -9,7 +9,7 @@ import it.unibs.projectIngesoft.presentation.view.FruitoreView;
 import java.util.List;
 import java.util.Optional;
 
-public class FruitoreController extends BaseController <Fruitore> {
+public class FruitoreController extends UtenteController<Fruitore> {
 
     public static final String WARNING_RADICE_NON_ESISTE = ">> (!!) Per favore indica una categoria radice che esiste";
     public static final String MSG_SELEZIONE_RADICE = ">> Inserisci il nome di una categoria radice\n";
@@ -22,7 +22,7 @@ public class FruitoreController extends BaseController <Fruitore> {
     public static final String MSG_SELEZIONE_CATEGORIA_RICHIESTA = ">> Inserisci la categoria RICHIESTA per la selezione: ";
     public static final String MSG_SELEZIONE_CATEGORIA_OFFERTA = ">> Inserisci la categoria OFFERTA per la selezione: ";
 
-    private FruitoreView view;
+    private final FruitoreView view;
 
     public FruitoreController(FruitoreView view,
                               CategorieModel categorieModel,
