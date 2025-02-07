@@ -117,7 +117,7 @@ public abstract class ErmesTerminaleView {
     }
 
     public void visualizzaListaRadici(List<Categoria> radici) {
-        System.out.println(MSG_PRINT_LISTA_RADICI);
+        print(MSG_PRINT_LISTA_RADICI);
         if (radici == null || radici.isEmpty()) {
             visualizzaErroreNoGerarchieMemorizzate();
             return;
