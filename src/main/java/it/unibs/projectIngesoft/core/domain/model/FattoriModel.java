@@ -46,23 +46,22 @@ public class FattoriModel {
     public void inserisciFattoriDiConversione(String nomeFogliaEsternaFormattata, String nomeFogliaInternaFormattata, double fattoreDiConversioneEsternoInterno, List<FattoreDiConversione> nuoviDaNuovaRadice) {
         nuoviDaNuovaRadice.addAll(calcolaInversi(nuoviDaNuovaRadice));
 
-            // 4. fa i calcolini e salva i fattori nella hashmap
-            FattoreDiConversione primoFattoreEsternoInterno = new FattoreDiConversione(nomeFogliaEsternaFormattata, nomeFogliaInternaFormattata, fattoreDiConversioneEsternoInterno);
-            ArrayList<FattoreDiConversione> fattoriEsterni = calcoloFattoriEsterni(primoFattoreEsternoInterno, nuoviDaNuovaRadice);
+        FattoreDiConversione primoFattoreEsternoInterno = new FattoreDiConversione(nomeFogliaEsternaFormattata, nomeFogliaInternaFormattata, fattoreDiConversioneEsternoInterno);
+        List<FattoreDiConversione> fattoriEsterni = calcoloFattoriEsterni(primoFattoreEsternoInterno, nuoviDaNuovaRadice);
 
-            aggiungiArrayListDiFattori(nuoviDaNuovaRadice);
-            aggiungiArrayListDiFattori(fattoriEsterni);
+        aggiungiArrayListDiFattori(nuoviDaNuovaRadice);
+        aggiungiArrayListDiFattori(fattoriEsterni);
 
         save();
     }
 
-    public void inserisciSingolaFogliaNellaHashmap(String nomeRadice, List<Categoria> foglie){
+    public void inserisciSingolaFogliaNellaHashmap(String nomeRadice, List<Categoria> foglie) {
         // caso hashmap è vuota e non hai i nuovi => è la prima radice ed hai solo una foglia nuova
         // 1. prepara la chiave e un arraylist vuoto, non puoi calcolare nessun fattore
         hashMapFattori.put(Utilitas.factorNameBuilder(nomeRadice, foglie.getFirst().getNome()), new ArrayList<>());
     }
 
-    public ArrayList<FattoreDiConversione> calcolaInversi(ArrayList<FattoreDiConversione> fattoriIJ) {
+    public List<FattoreDiConversione> calcolaInversi(List<FattoreDiConversione> fattoriIJ) {
         ArrayList<FattoreDiConversione> fattoriInversi = new ArrayList<>();
         for (FattoreDiConversione f : fattoriIJ) {
             fattoriInversi.add(generaInverso(f));
@@ -148,7 +147,7 @@ public class FattoriModel {
      * @param fattoriInterni,             fattori di conversione tra tutte le foglie della gerarchia appena creata
      * @return fattoriEsterni, lista di fattori appena calcolati
      */
-    private ArrayList<FattoreDiConversione> calcoloFattoriEsterni(FattoreDiConversione primoFattoreEsternoInterno, ArrayList<FattoreDiConversione> fattoriInterni) {
+    private List<FattoreDiConversione> calcoloFattoriEsterni(FattoreDiConversione primoFattoreEsternoInterno, List<FattoreDiConversione> fattoriInterni) {
         ArrayList<FattoreDiConversione> fattoriCalcolati = new ArrayList<>();
 
         //L'insieme di tutti i fattori che hanno come <c1> la foglia esterna scelta e come <c2> tutte le foglie Interne (quelle passate dal nuovo albero)
@@ -222,10 +221,6 @@ public class FattoriModel {
         for (FattoreDiConversione f : hashMapFattori.get(richiesta)) {
             if (f.getNome_c2().equals(offerta)) {
                 int risultato = (int) Math.rint(oreRichiesta * f.getFattore());
-                return risultato == 0 ? 1 : risultato;
-            }
-        }
-        return -1;
                 return Optional.of(risultato == 0 ? 1 : risultato);
             }
         }
