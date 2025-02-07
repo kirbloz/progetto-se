@@ -7,6 +7,7 @@ import it.unibs.projectIngesoft.core.domain.entities.utenti.Configuratore;
 import it.unibs.projectIngesoft.core.domain.model.CategorieModel;
 import it.unibs.projectIngesoft.core.domain.model.FattoriModel;
 import it.unibs.projectIngesoft.libraries.InputInjector;
+import it.unibs.projectIngesoft.libraries.Utilitas;
 import it.unibs.projectIngesoft.persistence.Repository;
 import it.unibs.projectIngesoft.persistence.implementations.CategorieRepository;
 import it.unibs.projectIngesoft.persistence.implementations.FattoriDiConversioneRepository;
@@ -87,6 +88,19 @@ public class FattoriTest {
 
     @Test
     void inserisciSingolaFogliaNellaHashmap(){
+        FattoriModel fattoriModel = new FattoriModel(new FattoriDiConversioneRepository("fattoriTest.json", new JsonSerializerFactory().createSerializer()));
 
+
+        fattoriModel.setHashMapFattori(new HashMap<>());
+
+        String radice = "radice";
+        Categoria c = new Categoria("nome1");
+        List<Categoria> listaCategorie = new ArrayList<>();
+        listaCategorie.add(c);
+
+        fattoriModel.inserisciSingolaFogliaNellaHashmap(radice,listaCategorie);
+
+
+        assert(fattoriModel.esisteCategoria(Utilitas.factorNameBuilder("radice", "nome1")));
     }
 }
