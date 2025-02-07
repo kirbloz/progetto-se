@@ -203,7 +203,7 @@ public class FattoriModel {
      * @param fattore, fattore di conversione di cui calcolare l'inverso
      * @return fattoreInverso
      */
-    private FattoreDiConversione generaInverso(FattoreDiConversione fattore) {
+    public FattoreDiConversione generaInverso(FattoreDiConversione fattore) {
         return new FattoreDiConversione(fattore.getNome_c2(), fattore.getNome_c1(), 1 / fattore.getFattore());
     }
 

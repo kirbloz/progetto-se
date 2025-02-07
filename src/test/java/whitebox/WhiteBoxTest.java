@@ -112,8 +112,25 @@ public class WhiteBoxTest {
         assert false;
     }
 
+    @Test
     void quartoCamminoWhiteBoxTesting_GeneraEMemorizzaNuoviFattori(){
-        assert false;
+        List<FattoreDiConversione> listaFattoriGiaEsistenti = new ArrayList<>();
+        FattoreDiConversione fattore1 = new FattoreDiConversione("radice:categoriaUno", "radice:categoriaDue", 2.0);
+        FattoreDiConversione fattore2 = fattoriModel.generaInverso(fattore1);
+        listaFattoriGiaEsistenti.add(fattore1);
+        listaFattoriGiaEsistenti.add(fattore2);
+
+        fattoriModel.aggiungiArrayListDiFattori(listaFattoriGiaEsistenti);
+
+        controller.generaEMemorizzaNuoviFattori("radice2", new ArrayList<Categoria>());
+
+
+        assert(fattore1.getNome_c1().equals(fattoriModel.getFattoriFromFoglia("radice:categoriaUno").getFirst().getNome_c1()) &&
+                fattore1.getNome_c2().equals(fattoriModel.getFattoriFromFoglia("radice:categoriaUno").getFirst().getNome_c2()) &&
+                fattore1.getFattore() == fattoriModel.getFattoriFromFoglia("radice:categoriaUno").getFirst().getFattore());
+        assert(fattore2.getNome_c1().equals(fattoriModel.getFattoriFromFoglia("radice:categoriaDue").getFirst().getNome_c1()) &&
+                fattore2.getNome_c2().equals(fattoriModel.getFattoriFromFoglia("radice:categoriaDue").getFirst().getNome_c2()) &&
+                fattore2.getFattore() == fattoriModel.getFattoriFromFoglia("radice:categoriaDue").getFirst().getFattore());
     }
 
 

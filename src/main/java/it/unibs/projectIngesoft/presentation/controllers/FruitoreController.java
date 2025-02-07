@@ -197,7 +197,7 @@ public class FruitoreController extends BaseController <Fruitore> {
         }
         Proposta tempProposta = new Proposta(categoriaRichiesta, categoriaOfferta, oreRichiesta, oreOfferta.get(), utenteAttivo);
         // 3.1 se confermi ma è duplicata, segnala e non aggiunge
-        if (proposteModel.controllaPropostaDuplicata(tempProposta)) {
+        if (proposteModel.controllaPropostaDuplicata(tempProposta, utenteAttivo.getComprensorioDiAppartenenza())) {
             view.visualizzaMessaggioErroreDuplicato();
             return;
         }
