@@ -89,7 +89,7 @@ public class ProposteModel {
 
         catena.add(nuovaProposta); // aggiungo la nuova così posso chiuderle tutte
         catena.forEach(Proposta::setChiusa);
-        save(); // aggiorno i dati salvati con i nuovi stati //todo perché fai new?
+        save();
     }
 
     private ArrayList<Proposta> concatenaCompatibili(Proposta first, Proposta last, ArrayList<Proposta> proposteComprensorio) {
@@ -155,11 +155,6 @@ public class ProposteModel {
                 .orElse(null);
     }
 
-    /**
-     * restituisce uno stream di Proposte Filtrato
-     * @param filtro
-     * @return
-     */
     public Stream<Proposta> getFilteredProposte(Predicate<Proposta> filtro) {
         return hashListaProposte.keySet().stream().flatMap(comprensorio -> hashListaProposte.get(comprensorio).stream()).filter(filtro);
     }
@@ -172,13 +167,11 @@ public class ProposteModel {
     // ho cambiato il nome perchè si cerca per autore, non utente.
     // c'è sempre la certezza che questi metodi siano chiamati con fruitori
 	public boolean esisteAlmenoUnaPropostaPerAutore(Fruitore autore){
-
         Predicate<Proposta> filtro = p -> p.getAutoreUsername().equals(/*utenteAttivo*/autore.getUsername())
                 && p.getStato() != StatiProposta.CHIUSA;
         return getFilteredProposte(filtro).findAny().isPresent(); //versione stream equivalente a !isEmpty()
 	}
 
-    //c'è già il metodo visualizzaProposteModificabili -> todo ok modifico questo
 	public List<Proposta> getProposteModificabiliPerAutore(Fruitore autore){
         Predicate<Proposta> filtro = p -> p.getAutoreUsername().equals(autore.getUsername())
                 && p.getStato() != StatiProposta.CHIUSA;

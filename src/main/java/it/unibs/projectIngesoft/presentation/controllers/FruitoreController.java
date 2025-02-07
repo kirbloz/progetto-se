@@ -79,11 +79,6 @@ public class FruitoreController extends BaseController <Fruitore> {
     }
 
 
-    ///////////////////////// CATEGORIE //////////////////////////
-
-    /**
-     * Duplicato da configuratore controller.
-     */
     private void cambioCredenziali() {
         String username;
         do {
@@ -93,9 +88,6 @@ public class FruitoreController extends BaseController <Fruitore> {
         utentiModel.cambioCredenziali(utenteAttivo, username, password);
     }
 
-    /**
-     * Duplicato da CategorieModel
-     */
     public void esploraGerarchie() {
         List<String> nomiRadici = categorieModel.getRadici().stream().map(Categoria::getNome).toList();
 
@@ -138,12 +130,7 @@ public class FruitoreController extends BaseController <Fruitore> {
         }
     }
 
-    /**
-     * Duplicato parzialmente da ConfiguratoreView::inserimentoNomeCategoriaMadre
-     *
-     * @param categorie
-     * @return
-     */
+
     public Categoria inserimentoNomeCategoria(List<Categoria> categorie) {
 
         String tempNomeRadice;
@@ -179,7 +166,6 @@ public class FruitoreController extends BaseController <Fruitore> {
                 .orElse(null);
     }
 
-    ///////////////////////// PROPOSTE //////////////////////////
     /**
      * Guida la creazione di una nuova proposta di scambio di prestazioni d'opera
      */
@@ -197,7 +183,7 @@ public class FruitoreController extends BaseController <Fruitore> {
                 view.visualizzaErroreRichiestaUgualeOfferta();
         }while(!categoriaRichiesta.equals(categoriaOfferta));
 
-        // 2. calcolo ore per l'offerta
+
         oreOfferta = fattoriModel.calcolaRapportoOre(categoriaRichiesta, categoriaOfferta, oreRichiesta);
         if (oreOfferta == -1) {
             view.visualizzaErroreCalcoloOre();
@@ -243,12 +229,10 @@ public class FruitoreController extends BaseController <Fruitore> {
 
 
     private void cambiaStatoProposta() {
-
         if (!proposteModel.esisteAlmenoUnaPropostaPerAutore(utenteAttivo)) {
 			view.visualizzaErroreProposteInesistenti();
             return;
         }
-
         view.visualizzaProposteModificabiliHeader();
 
         String categoriaRichiesta;

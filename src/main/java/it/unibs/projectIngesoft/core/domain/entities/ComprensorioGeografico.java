@@ -19,7 +19,7 @@ public class ComprensorioGeografico {
      * Costruttore di default necessario per la deserializzazione di Jackson
      */
     public ComprensorioGeografico() {
-        this.listaComuni = new ArrayList<>();
+        this.nomeComprensorio = ""; this.listaComuni = new ArrayList<>();
     }
 
     /**
@@ -33,17 +33,17 @@ public class ComprensorioGeografico {
         this.setListaComuni(listaComuni);
     }
 
-    /**
+    /** todo martino questo lo leviamo?
      * Aggiunge un comune alla lista nel Comprensorio.
      *
      * @param comune, nome del comune da aggiungere
      */
-    public void addComune(String comune) {
+   /* public void addComune(String comune) {
         assert comune != null
                 && !comune.trim().isEmpty() : "Il nome del comune non deve essere null o vuoto";
         if (!listaComuni.contains(comune)) // controlla non ci siano duplicati
             this.listaComuni.add(comune);
-    }
+    }*/
 
     /**
      * Rappresenta il comprensorio geografico come stringa.

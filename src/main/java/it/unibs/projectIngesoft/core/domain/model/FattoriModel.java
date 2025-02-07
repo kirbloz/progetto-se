@@ -3,14 +3,11 @@ package it.unibs.projectIngesoft.core.domain.model;
 
 import it.unibs.projectIngesoft.core.domain.entities.Categoria;
 import it.unibs.projectIngesoft.core.domain.entities.FattoreDiConversione;
+import it.unibs.projectIngesoft.libraries.Utilitas;
 import it.unibs.projectIngesoft.persistence.implementations.FattoriDiConversioneRepository;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
-import it.unibs.projectIngesoft.libraries.Utilitas;
 import static it.unibs.projectIngesoft.libraries.Utilitas.MAX_FATTORE;
 import static it.unibs.projectIngesoft.libraries.Utilitas.MIN_FATTORE;
 
@@ -46,8 +43,7 @@ public class FattoriModel {
 
     ////////////////////////////////////////////////////// CORPO //////////////////////////////////////////////////////
 
-    public void inserisciFattoriDiConversione(String nomeFogliaEsternaFormattata, String nomeFogliaInternaFormattata, double fattoreDiConversioneEsternoInterno, ArrayList<FattoreDiConversione> nuoviDaNuovaRadice) {
-        /// Nuovo calcolo inversi
+    public void inserisciFattoriDiConversione(String nomeFogliaEsternaFormattata, String nomeFogliaInternaFormattata, double fattoreDiConversioneEsternoInterno, List<FattoreDiConversione> nuoviDaNuovaRadice) {
         nuoviDaNuovaRadice.addAll(calcolaInversi(nuoviDaNuovaRadice));
 
             // 4. fa i calcolini e salva i fattori nella hashmap
@@ -85,7 +81,7 @@ public class FattoriModel {
      * Inserisce un nuovo fattore nell'HashMap, verificando eventuali duplicati.
      * Garantisce il formato di chiave (string root:leaf) e valore (oggetto FdC)
      *
-     * @param chiaveFattore,   nome della prima categoria della coppia
+     * @param chiaveFattore,     nome della prima categoria della coppia
      * @param fattoreDaInserire, oggetto FdC da inserire nella lista
      */
     public void addFattore(String chiaveFattore, FattoreDiConversione fattoreDaInserire) {
@@ -98,6 +94,7 @@ public class FattoriModel {
 
     /**
      * controlla ed eventualmente sostituisce (se fuori scala) il valore del fattoreDaControllare
+     *
      * @param fattoreDaControllare, fattore da controllare
      */
     private FattoreDiConversione controllaESostituisciValoriFuoriScala(FattoreDiConversione fattoreDaControllare) {
@@ -121,9 +118,8 @@ public class FattoriModel {
         save();
     }
 
-
     /**
-     * Getter normalissimo
+     * Restituisce la lista di FattoriDiConversione richiesta tramite coppia radice-foglia
      */
     public Map<String, List<FattoreDiConversione>> getHashMapFattori() {
         return new HashMap<>(hashMapFattori);
@@ -131,6 +127,7 @@ public class FattoriModel {
 
     /**
      * Controlla se la stringa "chiave" è una chiave della hashmap
+     *
      * @param chiave, stringa da controllare
      * @return true, se la chiave è presente nel keyset, false altrimenti
      */
@@ -222,6 +219,7 @@ public class FattoriModel {
 
     /**
      * Restituisce array di stringhe contenenti i keyset
+     *
      * @return keySet, array di stringhe contenenti i keyset
      */
     public String[] getKeysets(){

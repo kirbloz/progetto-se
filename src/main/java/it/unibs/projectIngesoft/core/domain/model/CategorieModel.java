@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.function.Predicate;
 
 public class CategorieModel {
-    //private Albero tree;
     private List<Categoria> radici;
     private final Repository<List<Categoria>> repository;
 
@@ -19,7 +18,6 @@ public class CategorieModel {
      * Costruttore per inizializzare i percorsi dei file e de-serializzare l'albero.
      */
     public CategorieModel(CategorieRepository repository) {
-        //this.tree = new Albero();
         this.radici = new ArrayList<>();
         this.repository = repository;
         load();

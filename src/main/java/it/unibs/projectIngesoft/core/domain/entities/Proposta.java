@@ -69,11 +69,6 @@ public class Proposta {
         return autore;
     }
 
-    /*@JsonIgnore
-    public Fruitore getAutore() {
-        return UtentiModel.getInformazioniFruitore(this.getAutoreUsername());
-    }*/
-
     @JsonIgnore
     public StatiProposta getStato() {
         return stato;

@@ -63,7 +63,6 @@ public abstract class ErmesTerminaleView {
     }
 
 
-
     public String inserimentoFogliaFormattata(String messaggio) {
         // inserimento guidato e controllo [Old:A in (Old:A New:A x)]
         print(messaggio);
