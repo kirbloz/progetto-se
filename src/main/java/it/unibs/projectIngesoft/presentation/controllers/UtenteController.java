@@ -3,7 +3,7 @@ package it.unibs.projectIngesoft.presentation.controllers;
 import it.unibs.projectIngesoft.core.domain.model.*;
 import it.unibs.projectIngesoft.core.domain.entities.utenti.Utente;
 
-public abstract class BaseController<T extends Utente> {
+public abstract class UtenteController<T extends Utente> {
 
     protected final CategorieModel categorieModel;
     protected final FattoriModel fattoriModel;
@@ -12,7 +12,7 @@ public abstract class BaseController<T extends Utente> {
     protected final UtentiModel utentiModel;
     protected final T utenteAttivo;
 
-    protected BaseController(
+    protected UtenteController(
             CategorieModel categorieModel,
             FattoriModel fattoriModel,
             ProposteModel proposteModel,
@@ -32,5 +32,7 @@ public abstract class BaseController<T extends Utente> {
      * Ogni controller specifico deve definire il suo comportamento.
      */
     public abstract void run();
+
+    protected abstract void cambioCredenziali();
 
 }
