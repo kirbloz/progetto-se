@@ -171,7 +171,16 @@ public class ConfiguratoreController extends BaseController<Configuratore>{
     }
 
     public void visualizzaFattori() {
-        view.visualizzaFattori(fattoriModel.getHashMapFattori(), view.selezioneFogliaDaLista(fattoriModel.getKeysets()));
+        String categoriaFormattata = view.selezioneFogliaDaLista(fattoriModel.getKeysets());
+        if (!fattoriModel.esisteCategoria(categoriaFormattata)) {
+            view.visualizzaErroreCategoriaNonEsiste();
+            return;
+        }
+        if (!fattoriModel.esistonoFattoriPerCategoria(categoriaFormattata)) {
+            view.visualizzaErroreNoFattoriMemorizzati();
+            return;
+        }
+        view.visualizzaFattori(fattoriModel.getFattoriFromFoglia(categoriaFormattata));
     }
 
     public void aggiungiRadice() {

@@ -121,8 +121,11 @@ public class FattoriModel {
     /**
      * Restituisce la lista di FattoriDiConversione richiesta tramite coppia radice-foglia
      */
-    public Map<String, List<FattoreDiConversione>> getHashMapFattori() {
-        return new HashMap<>(hashMapFattori);
+    public List<FattoreDiConversione> getFattoriFromFoglia(String categoriaFormattata) {
+        if (!esisteCategoria(categoriaFormattata)) {
+            return new ArrayList<>();
+        }
+        return hashMapFattori.get(categoriaFormattata);
     }
 
     /**
@@ -205,18 +208,6 @@ public class FattoriModel {
         return new FattoreDiConversione(fattore.getNome_c2(), fattore.getNome_c1(), 1 / fattore.getFattore());
     }
 
-
-
-    /**
-     * Restituisce la lista di FattoriDiConversione richiesta tramite coppia radice-foglia
-     */
-    public List<FattoreDiConversione> getFattoriFromFoglia(String radice, String foglia) {
-        if (hashMapFattori.isEmpty()) {
-            return null;
-        }
-        return hashMapFattori.get(Utilitas.factorNameBuilder(radice, foglia));
-    }
-
     /**
      * Restituisce array di stringhe contenenti i keyset
      *
@@ -226,17 +217,8 @@ public class FattoriModel {
         return hashMapFattori.keySet().toArray(new String[0]);
     }
 
-    /**
-     * Calcola le ore da erogare della categoria offerta, dato un certo numero di ore
-     * della categoria richiesta. Si usano i fattori di conversione.
-     *
-     * @param richiesta,    categoria richiesta dal propositore
-     * @param offerta,      categoria offerta dal propositore
-     * @param oreRichiesta, ore di categoria richiesta indicate dal propositore
-     * @return numero di ore arrontondato all'intero più vicino;
-     * se non esistono fattori di conversione tra le categorie indicate, ritorna -1
-     */
-    public int calcolaRapportoOre(String richiesta, String offerta, int oreRichiesta) {
+
+    public Optional<Integer> calcolaRapportoOre(String richiesta, String offerta, int oreRichiesta) {
         for (FattoreDiConversione f : hashMapFattori.get(richiesta)) {
             if (f.getNome_c2().equals(offerta)) {
                 int risultato = (int) Math.rint(oreRichiesta * f.getFattore());
@@ -244,5 +226,17 @@ public class FattoriModel {
             }
         }
         return -1;
+                return Optional.of(risultato == 0 ? 1 : risultato);
+            }
+        }
+        return Optional.empty();
+    }
+
+    public boolean esisteCategoria(String categoriaFormattata) {
+        return hashMapFattori.containsKey(categoriaFormattata);
+    }
+
+    public boolean esistonoFattoriPerCategoria(String categoriaFormattata) {
+        return hashMapFattori.get(categoriaFormattata).isEmpty();
     }
 }

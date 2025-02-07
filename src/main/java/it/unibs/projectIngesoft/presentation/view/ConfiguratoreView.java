@@ -164,20 +164,9 @@ public class ConfiguratoreView extends ErmesTerminaleView {
      * @param categoriaFormattata, nome categoria nel formato root:leaf
      * @return String
      */
-    public void visualizzaFattori(Map<String, List<FattoreDiConversione>> hashListaFattori, String categoriaFormattata) {
-
-        if (!hashListaFattori.containsKey(categoriaFormattata)) {
-            print(WARNING_CATEGORIA_NON_ESISTE);
-            return;
-        }
-
-        if (hashListaFattori.get(categoriaFormattata).isEmpty()) {
-            print(WARNING_NO_FATTORI_MEMORIZZATI);
-            return;
-        }
-
+    public void visualizzaFattori(List<FattoreDiConversione> listaFattori) {
         StringBuilder sb = new StringBuilder();
-        for (FattoreDiConversione f : hashListaFattori.get(categoriaFormattata)) {
+        for (FattoreDiConversione f : listaFattori) {
             String valoreFormattato = String.format(Locale.US, "%.3f", f.getFattore());
             sb.append("[ ")
                     .append(f.getNome_c1()).append(", ").append(f.getNome_c2())
@@ -186,6 +175,13 @@ public class ConfiguratoreView extends ErmesTerminaleView {
         print(sb.toString());
     }
 
+    public void visualizzaErroreCategoriaNonEsiste(){
+        print(WARNING_CATEGORIA_NON_ESISTE);
+    }
+
+    public void visualizzaErroreNoFattoriMemorizzati(){
+        print(WARNING_NO_FATTORI_MEMORIZZATI);
+    }
 
     /// ///////INSERIMENTO PER CASI D'USO CATEGORIE //////
     /**
