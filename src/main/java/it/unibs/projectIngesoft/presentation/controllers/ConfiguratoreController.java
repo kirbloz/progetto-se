@@ -131,9 +131,9 @@ public class ConfiguratoreController extends BaseController<Configuratore>{
      * @param foglie,     lista di foglie
      * @return lista di fattori di conversione
      */
-    private ArrayList<FattoreDiConversione> ottieniFattoriDelleNuoveCategorie(String nomeRadice, List<Categoria> foglie) {
+    private List<FattoreDiConversione> ottieniFattoriDelleNuoveCategorie(String nomeRadice, List<Categoria> foglie) {
         // se esiste almeno una foglia, allora calcola i fattori di conversione
-        ArrayList<FattoreDiConversione> nuoviDaNuovaRadice = new ArrayList<>();
+        List<FattoreDiConversione> nuoviDaNuovaRadice = new ArrayList<>();
         for (int i = 0; i < foglie.size(); i++) {
             String nomeFogliai = Utilitas.factorNameBuilder(nomeRadice, foglie.get(i).getNome());
             for (int j = i + 1; j < foglie.size(); j++) {
@@ -149,7 +149,7 @@ public class ConfiguratoreController extends BaseController<Configuratore>{
         if (foglie.isEmpty()) return;
 
         //1. chiedi i fattori nuovi all'utente sulla base delle categorie appena inserite
-        ArrayList<FattoreDiConversione> nuoviDaNuovaRadice = ottieniFattoriDelleNuoveCategorie(nomeRadice, foglie);
+        List<FattoreDiConversione> nuoviDaNuovaRadice = ottieniFattoriDelleNuoveCategorie(nomeRadice, foglie);
         //è vuoto se esiste una sola foglia
         //se esistono fattori già presenti vanno calcolati i rapporti tra i nuovi (o la singola nuova foglia) e i vecchi
         if (!fattoriModel.isEmpty()) {
@@ -164,7 +164,6 @@ public class ConfiguratoreController extends BaseController<Configuratore>{
             nuoviDaNuovaRadice.addAll(fattoriModel.calcolaInversi(nuoviDaNuovaRadice));
             // 1. aggiungi i nuovi fattori (sono gli unici)
             fattoriModel.aggiungiArrayListDiFattori(nuoviDaNuovaRadice);
-            //todo just added, i thouth it was there already but idk
         } else {
             fattoriModel.inserisciSingolaFogliaNellaHashmap(nomeRadice, foglie);
         }
@@ -284,9 +283,10 @@ public class ConfiguratoreController extends BaseController<Configuratore>{
 
     public void visualizzaProposteDaNotificare() {
         view.visualizzaPropostePronteHeader();
-        //todo so che fa schifo ma non mi va il cervello
+
         Map<Fruitore, List<Proposta>> mapDaNotificare = new HashMap<>();
-        ArrayList<String> nomiAutori = new ArrayList<>();
+        List<String> nomiAutori = new ArrayList<>();
+
         for(Proposta daNotificare : proposteModel.getFilteredProposte(Proposta::isDaNotificare).toList()){
             boolean giaPresente = false;
             for (String n : nomiAutori){
@@ -301,16 +301,42 @@ public class ConfiguratoreController extends BaseController<Configuratore>{
         }
 
         for (String n : nomiAutori){
-            ArrayList<Proposta> listaPropostaPerNome = new ArrayList<>();
+            List<Proposta> listaPropostaPerNome = new ArrayList<>();
             for(Proposta daNotificare : proposteModel.getFilteredProposte(Proposta::isDaNotificare).toList()){
                 if (daNotificare.getAutoreUsername().equals(n)) {
                     listaPropostaPerNome.add(daNotificare);
                 }
             }
-            mapDaNotificare.put(utentiModel.getUtenteDaUsername(n), listaPropostaPerNome);
+            if(utentiModel.getFruitoreDaUsername(n).isPresent())
+                mapDaNotificare.put(utentiModel.getFruitoreDaUsername(n).get(), listaPropostaPerNome);
         }
 
         view.visualizzaProposteDaNotificare(mapDaNotificare);
         proposteModel.save();
     }
+
+    /*public void visualizzaProposteDaNotificare() {
+        view.visualizzaPropostePronteHeader();
+
+        Map<Fruitore, List<Proposta>> mapDaNotificare = new HashMap<>();
+        List<Proposta> proposteDaNotificare = proposteModel.getFilteredProposte(Proposta::isDaNotificare).toList();
+
+        // Raggruppa le proposte per autore
+        Map<String, List<Proposta>> propostePerAutore = proposteDaNotificare.stream()
+                .collect(Collectors.groupingBy(Proposta::getAutoreUsername));
+
+        // Popola la mappa da notificare
+        for (Map.Entry<String, List<Proposta>> entry : propostePerAutore.entrySet()) {
+            String autore = entry.getKey();
+            List<Proposta> listaPropostaPerNome = entry.getValue();
+
+            utentiModel.getFruitoreDaUsername(autore).ifPresent(fruitore ->
+                    mapDaNotificare.put(fruitore, listaPropostaPerNome)
+            );
+        }
+
+        view.visualizzaProposteDaNotificare(mapDaNotificare);
+        proposteModel.save();
+    }*/
+
 }
