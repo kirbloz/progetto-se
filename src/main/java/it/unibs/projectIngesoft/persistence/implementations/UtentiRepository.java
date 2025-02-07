@@ -1,14 +1,13 @@
 package it.unibs.projectIngesoft.persistence.implementations;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import it.unibs.projectIngesoft.persistence.SerializerBasedRepository;
 import it.unibs.projectIngesoft.persistence.serialization.Serializer;
 import it.unibs.projectIngesoft.core.domain.entities.utenti.Utente;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class UtentiRepository extends SerializerBasedRepository<List<Utente>> {
+public class UtentiRepository extends AbstractUtentiRepository {
 
 
     private final String defaultCredentialsFilePath;

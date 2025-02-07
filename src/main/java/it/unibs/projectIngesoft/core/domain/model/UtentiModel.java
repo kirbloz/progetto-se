@@ -1,7 +1,7 @@
 package it.unibs.projectIngesoft.core.domain.model;
 
 
-import it.unibs.projectIngesoft.persistence.implementations.UtentiRepository;
+import it.unibs.projectIngesoft.persistence.implementations.AbstractUtentiRepository;
 import it.unibs.projectIngesoft.core.domain.entities.utenti.Configuratore;
 import it.unibs.projectIngesoft.core.domain.entities.utenti.Fruitore;
 import it.unibs.projectIngesoft.core.domain.entities.utenti.Utente;
@@ -14,9 +14,9 @@ public class UtentiModel {
 
     private static List<Utente> utenti;
     private final Utente defaultUtente;
-    private final UtentiRepository repository;
+    private final AbstractUtentiRepository repository;
 
-    public UtentiModel(UtentiRepository repository) {
+    public UtentiModel(AbstractUtentiRepository repository) {
         this.repository = repository;
         utenti = repository.load();
         if(utenti == null) {
