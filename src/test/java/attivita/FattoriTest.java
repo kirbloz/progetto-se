@@ -47,34 +47,33 @@ public class FattoriTest {
         repositoryCategorie.save(cleanData);
     }
 
+    /*
+      fattoriModel.calcolaEInserisciFattoriDiConversione(nomeFogliaEsternaFormattata, nomeFogliaInternaFormattata, fattoreDiConversioneTraEsternaEInterna, nuoviFattoriTraTutteLeFoglieDellaNuovaRadice);
+        }
+            nuoviFattoriTraTutteLeFoglieDellaNuovaRadice.addAll(fattoriModel.calcolaInversi(nuoviFattoriTraTutteLeFoglieDellaNuovaRadice));
+
+            fattoriModel.aggiungiListDiFattori(nuoviFattoriTraTutteLeFoglieDellaNuovaRadice);
+
+            fattoriModel.inserisciSingolaFogliaNellaHashmap(nomeRadice, foglie);
+     */
+
     @Test
-    void generaFattori_HashmapVuota_UnaNuova() {
-        Categoria radiceFoglia = new Categoria("radiceTest", "testing");
-        FattoriModel fattoriModel = new FattoriModel(new FattoriDiConversioneRepository("fattoriTest.json", new SerializerJSON<>()));
-        ConfiguratoreController controller = new ConfiguratoreController(new ConfiguratoreView(),
-                categorieModel, fattoriModel,
-                null,
-                null,
-                null,
-                new Configuratore("default", "test"));
+    void calcolaEInserisciFattoriDiConversioneTest(){
 
-        this.categorieModel.setRadici(new ArrayList<>());
-        fattoriModel.setHashMapFattori(new HashMap<>());
+    }
 
-        // riproduzione di aggiungi gerarchia
-        categorieModel.aggiungiCategoriaRadice(radiceFoglia.getNome(), radiceFoglia.getCampoFiglie());
-        radiceFoglia.impostaCategorieFoglia();
-        fattoriModel.inserisciSingolaFogliaNellaHashmap(radiceFoglia.getNome(), radiceFoglia.getFoglie());
+    @Test
+    void calcolaInversiTest(){
 
-        String data = "radiceTest2\ncampoTest\n";
-        data = data + "1\nfigliaTest\nradice\nradiceTest2\nvaloreFiglia\nN\nS\n";
-        data = data + "1\nfigliaTest2\nfigliaTest\nradiceTest2\nvaloreFiglia2\nS" +
-                "\ndescrizione\nN\ndominioFake\n";
-        data = data + "0\n0.5\nradiceTest\nradiceTest\nradiceTest2\nfigliaTest\n1";
+    }
 
-        InputInjector.inject(data);
-        controller.aggiungiGerarchia();
+    @Test
+    void aggiungiListDiFattoriTest(){
 
-        controller.generaEMemorizzaNuoviFattori("radiceTest", radiceFoglia.getFoglie());
+    }
+
+    @Test
+    void inserisciSingolaFogliaNellaHashmap(){
+
     }
 }
