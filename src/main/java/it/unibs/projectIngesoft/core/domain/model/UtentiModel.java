@@ -13,8 +13,8 @@ import java.util.regex.Pattern;
 public class UtentiModel {
 
     private static List<Utente> utenti;
-    private Utente defaultUtente;
-    private UtentiRepository repository;
+    private final Utente defaultUtente;
+    private final UtentiRepository repository;
 
     public UtentiModel(UtentiRepository repository) {
         this.repository = repository;

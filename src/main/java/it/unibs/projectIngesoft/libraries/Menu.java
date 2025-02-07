@@ -6,7 +6,7 @@ public class Menu {
     private static final String RICHIESTA_INSERIMENTO = "> ";
 
     private final String titolo;
-    private String[] voci;
+    private final String[] voci;
 
     public Menu(String titolo, String[] voci) {
         this.titolo = titolo;
