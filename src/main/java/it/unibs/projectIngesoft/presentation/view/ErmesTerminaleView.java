@@ -146,9 +146,9 @@ public abstract class ErmesTerminaleView {
         lista.forEach(
                 proposta -> {
                     switch (proposta.getStato()) {
-                        case StatiProposta.APERTA -> aperte.append(propostaFormattata(proposta)).append("\n");
-                        case StatiProposta.CHIUSA -> chiuse.append(propostaFormattata(proposta)).append("\n");
-                        case StatiProposta.RITIRATA -> ritirate.append(propostaFormattata(proposta)).append("\n");
+                        case StatiProposta.APERTA -> aperte.append(formattaProposta(proposta)).append("\n");
+                        case StatiProposta.CHIUSA -> chiuse.append(formattaProposta(proposta)).append("\n");
+                        case StatiProposta.RITIRATA -> ritirate.append(formattaProposta(proposta)).append("\n");
                     }
                 });
 
@@ -157,7 +157,7 @@ public abstract class ErmesTerminaleView {
         print(ritirate.toString());
     }
 
-    private String propostaFormattata(Proposta proposta) {
+    public String formattaProposta(Proposta proposta) {
         StringBuilder propostaStringBuilder = new StringBuilder();
         propostaStringBuilder.append("Richiesta:\t[ ").append(proposta.getRichiesta()).append(", ").append(proposta.getOreRichiesta()).append(" ore ]\n");
         propostaStringBuilder.append("Offerta:\t[ ").append(proposta.getOfferta()).append(", ").append(proposta.getOfferta()).append(" ore ]\n");
