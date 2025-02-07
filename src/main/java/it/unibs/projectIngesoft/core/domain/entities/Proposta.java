@@ -123,5 +123,8 @@ public class Proposta {
         cronologiaStati.push(this.stato);
     }
 
+	public void aggiornaUsernameAutore(String nuovoUsername) {
+        this.autore = nuovoUsername;
+	}
 }
 

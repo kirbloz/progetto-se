@@ -84,6 +84,9 @@ public class FruitoreController extends UtenteController<Fruitore> {
             username = view.richiestaUsername();
         } while (utentiModel.existsUsername(username));
         String password = view.richiestaPassword();
+
+        proposteModel.cambiaNomeProposte(utenteAttivo, username);
+
         utentiModel.cambioCredenziali(utenteAttivo, username, password);
     }
 

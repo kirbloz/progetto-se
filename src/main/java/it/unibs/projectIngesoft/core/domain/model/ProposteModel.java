@@ -172,4 +172,11 @@ public class ProposteModel {
         Predicate<Proposta> filtro = p -> p.getAutoreUsername().equals(autore.getUsername());
         return getFilteredProposte(filtro).toList();
     }
+
+    public void cambiaNomeProposte(Fruitore utenteAttivo, String nuovoUsername) {
+        List<Proposta> pList = getPropostePerAutore(utenteAttivo);
+        for (Proposta proposta : pList) {
+            proposta.aggiornaUsernameAutore(nuovoUsername);
+        }
+    }
 }
