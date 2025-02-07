@@ -14,9 +14,6 @@ public class ComprensorioGeograficoModel {
     public ComprensorioGeograficoModel(Repository<List<ComprensorioGeografico>> repository) {
         this.repository = repository;
         this.listaComprensoriGeografici =  repository.load();
-        if(this.listaComprensoriGeografici == null) {
-            this.listaComprensoriGeografici = new ArrayList<>();
-        }
     }
 
     public List<String> getListaNomiComprensoriGeografici() {
