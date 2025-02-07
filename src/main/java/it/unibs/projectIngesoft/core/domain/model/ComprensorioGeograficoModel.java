@@ -31,12 +31,12 @@ public class ComprensorioGeograficoModel {
                 return c.getListaComuni();
             }
         }
-        return null;
+        return new ArrayList<>();
     }
 
     public void aggiungiComprensorio(String nomeComprensorio, List<String> comuni) {
         ComprensorioGeografico tempComp = new ComprensorioGeografico(nomeComprensorio, comuni);
-        if (getStringComuniByComprensorioName(nomeComprensorio) == null) {
+        if (getStringComuniByComprensorioName(nomeComprensorio).isEmpty()) {
             this.listaComprensoriGeografici.add(tempComp);
             repository.save(listaComprensoriGeografici);
         }
