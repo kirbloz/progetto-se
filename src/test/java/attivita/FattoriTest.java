@@ -31,14 +31,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class FattoriTest {
 
-
-    private CategorieModel categorieModel;
-
+    private FattoriModel fattoriModel;
     private Repository<List<Categoria>> repositoryCategorie;
     private List<Categoria> cleanData;
 
     @BeforeEach
     void prepareTest() {
+        fattoriModel = new FattoriModel(new FattoriDiConversioneRepository("fattoriTest.json", new JsonSerializerFactory().createSerializer()));
+
         repositoryCategorie = new CategorieRepository("categorieTest.json",
                 new JsonSerializerFactory().createSerializer()
         );
@@ -57,7 +57,6 @@ public class FattoriTest {
 
     @Test
     void calcolaEInserisciFattoriDiConversioneTest(){
-        FattoriModel fattoriModel = new FattoriModel(new FattoriDiConversioneRepository("fattoriTest.json", new JsonSerializerFactory().createSerializer()));
 
 
         fattoriModel.setHashMapFattori(new HashMap<>());
@@ -81,16 +80,13 @@ public class FattoriTest {
 
     @Test
     void calcolaInversiTest(){
-        Repository<Map<String, List<FattoreDiConversione>>> fattoriRepository;
-        fattoriRepository = new FattoriDiConversioneRepository("mock.json",
-                new JsonSerializerFactory().createSerializer());
-        FattoriModel fattoriModel = new FattoriModel(fattoriRepository);
 
         List<FattoreDiConversione> listFattori = new ArrayList<>();
         FattoreDiConversione F1 = new FattoreDiConversione("radice:cat1", "radice:cat2", 1.5);
+
         listFattori.add(F1);
         listFattori.addAll(fattoriModel.calcolaInversi(listFattori));
-        fattoriModel.aggiungiArrayListDiFattori(listFattori);
+        fattoriModel.aggiungiListDiFattori(listFattori);
 
         assertTrue(fattoriModel.esisteCategoria("radice:cat1"));
         assertTrue(fattoriModel.esisteCategoria("radice:cat2"));
@@ -105,9 +101,6 @@ public class FattoriTest {
 
     @Test
     void inserisciSingolaFogliaNellaHashmap(){
-        FattoriModel fattoriModel = new FattoriModel(new FattoriDiConversioneRepository("fattoriTest.json", new JsonSerializerFactory().createSerializer()));
-
-
         fattoriModel.setHashMapFattori(new HashMap<>());
 
         String radice = "radice";
@@ -118,6 +111,6 @@ public class FattoriTest {
         fattoriModel.inserisciSingolaFogliaNellaHashmap(radice,listaCategorie);
 
 
-        assert(fattoriModel.esisteCategoria(Utilitas.factorNameBuilder("radice", "nome1")));
+        assertTrue(fattoriModel.esisteCategoria(Utilitas.factorNameBuilder("radice", "nome1")));
     }
 }
