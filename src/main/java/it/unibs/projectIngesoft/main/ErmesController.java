@@ -5,7 +5,7 @@ import it.unibs.projectIngesoft.core.domain.entities.utenti.Configuratore;
 import it.unibs.projectIngesoft.core.domain.entities.utenti.Fruitore;
 import it.unibs.projectIngesoft.persistence.implementations.*;
 import it.unibs.projectIngesoft.presentation.controllers.AccessoController;
-import it.unibs.projectIngesoft.presentation.controllers.BaseController;
+import it.unibs.projectIngesoft.presentation.controllers.UtenteController;
 import it.unibs.projectIngesoft.core.domain.model.*;
 import it.unibs.projectIngesoft.persistence.serialization.SerializerFactory;
 import it.unibs.projectIngesoft.core.domain.entities.utenti.Utente;
@@ -74,15 +74,7 @@ public class ErmesController {
                         serializerFactory.createSerializer()));
     }
 
-    public void run() {
-        AccessoController controllerAccesso = new AccessoController(modelUtenti, compGeoModel);
-        utenteAttivo = controllerAccesso.run();
-        // crea il controller in base al tipo di utente attivo
-        BaseController<?> controller = createController();
-        controller.run();
-    }
-
-    private BaseController<?> createController() {
+    private UtenteController<?> createController() {
         switch (utenteAttivo.getType()) {
             case "Configuratore" -> {
                 return new ConfiguratoreController(new ConfiguratoreView(),
@@ -96,6 +88,14 @@ public class ErmesController {
                     throw new IllegalStateException("Unsupported user type: " + utenteAttivo.getClass().getSimpleName());
 
         }
+    }
+
+    public void run() {
+        AccessoController controllerAccesso = new AccessoController(modelUtenti, compGeoModel);
+        utenteAttivo = controllerAccesso.run();
+        // crea il controller in base al tipo di utente attivo
+        UtenteController<?> controller = createController();
+        controller.run();
     }
 
 }
