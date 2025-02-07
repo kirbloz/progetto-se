@@ -216,6 +216,6 @@ public class FattoriModel {
     }
 
     public boolean esistonoFattoriPerCategoria(String categoriaFormattata) {
-        return hashMapFattori.get(categoriaFormattata).isEmpty();
+        return !hashMapFattori.get(categoriaFormattata).isEmpty();
     }
 }
