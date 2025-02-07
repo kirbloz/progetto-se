@@ -21,18 +21,12 @@ public class AccessoController {
     }
 
     public Utente login() {
-        boolean riuscito = true;
-        do {
-            String[] credenziali = view.richiestaCredenziali();
-            try {
-                //NOTA: questo ritorna un Configuratore con firstAccess true se si usano le credenziali di default
-                return utentiModel.verificaCredenziali(credenziali);
-            } catch (Exception e) {
-                riuscito = false;
-                view.stampaErroreCredenziali("Login fallito, credenziali errate.");
-            }
-        } while (!riuscito);
-
+        String[] credenziali = view.richiestaCredenziali();
+        try {
+            return utentiModel.verificaCredenziali(credenziali);
+        } catch (Exception e) {
+            view.stampaErroreCredenziali();
+        }
         return null;
     }
 
@@ -47,17 +41,17 @@ public class AccessoController {
                 view.visualizzaErroreUsernameGiaInUso();
             }
         } while (!riuscito);
-        String comprensorio = view.selezionaNomeDaLista(comprensorioModel.getListaNomiComprensoriGeografici());
+        String comprensorio = view.selezionaNomeComprensorioDaLista(comprensorioModel.getListaNomiComprensoriGeografici());
 
-        boolean mailValid = false;
+        boolean mailValid;
         String email;
         do {
             email = view.inserisciEmail();
             mailValid = isValidEmail(email);
-            if(!mailValid) {
+            if (!mailValid) {
                 view.visualizzaErroreMailNonValida();
             }
-        }while (!mailValid);
+        } while (!mailValid);
 
         return utentiModel.aggungiFruitore(credenziali[0], credenziali[1], email, comprensorio);
 
