@@ -23,16 +23,7 @@ public class FattoriModel {
 
     public FattoriModel(Repository<Map<String, List<FattoreDiConversione>>> repository) {
         this.repository = repository;
-        load();
-    }
-
-    public void save(){
-        repository.save(hashMapFattori);
-    }
-
-    public void load(){
-        Map<String, List<FattoreDiConversione>> data = repository.load();
-        this.hashMapFattori = (data == null ? new HashMap<>() : data);
+        this.hashMapFattori = repository.load();
     }
 
     public void setHashMapFattori( Map<String, List<FattoreDiConversione>> hashMapFattori ){
@@ -40,24 +31,19 @@ public class FattoriModel {
             this.hashMapFattori = hashMapFattori;
     }
 
-
-    ////////////////////////////////////////////////////// CORPO //////////////////////////////////////////////////////
-
-    public void inserisciFattoriDiConversione(String nomeFogliaEsternaFormattata, String nomeFogliaInternaFormattata, double fattoreDiConversioneEsternoInterno, List<FattoreDiConversione> nuoviDaNuovaRadice) {
+    public void calcolaEInserisciFattoriDiConversione(String nomeFogliaEsternaFormattata, String nomeFogliaInternaFormattata, double fattoreDiConversioneEsternoInterno, List<FattoreDiConversione> nuoviDaNuovaRadice) {
         nuoviDaNuovaRadice.addAll(calcolaInversi(nuoviDaNuovaRadice));
 
         FattoreDiConversione primoFattoreEsternoInterno = new FattoreDiConversione(nomeFogliaEsternaFormattata, nomeFogliaInternaFormattata, fattoreDiConversioneEsternoInterno);
         List<FattoreDiConversione> fattoriEsterni = calcoloFattoriEsterni(primoFattoreEsternoInterno, nuoviDaNuovaRadice);
 
-        aggiungiArrayListDiFattori(nuoviDaNuovaRadice);
-        aggiungiArrayListDiFattori(fattoriEsterni);
+        aggiungiListDiFattori(nuoviDaNuovaRadice);
+        aggiungiListDiFattori(fattoriEsterni);
 
-        save();
+        repository.save(hashMapFattori);
     }
 
     public void inserisciSingolaFogliaNellaHashmap(String nomeRadice, List<Categoria> foglie) {
-        // caso hashmap è vuota e non hai i nuovi => è la prima radice ed hai solo una foglia nuova
-        // 1. prepara la chiave e un arraylist vuoto, non puoi calcolare nessun fattore
         hashMapFattori.put(Utilitas.factorNameBuilder(nomeRadice, foglie.getFirst().getNome()), new ArrayList<>());
     }
 
@@ -73,9 +59,6 @@ public class FattoriModel {
         return hashMapFattori.isEmpty();
     }
 
-
-    ////////////////////////////////////////////////// RIFATTORIZZATO //////////////////////////////////////////////////
-
     /**
      * Inserisce un nuovo fattore nell'HashMap, verificando eventuali duplicati.
      * Garantisce il formato di chiave (string root:leaf) e valore (oggetto FdC)
@@ -88,11 +71,11 @@ public class FattoriModel {
         FattoreDiConversione fattore = controllaESostituisciValoriFuoriScala(fattoreDaInserire);
         // computeIfAbsent verifica se la chiave chiaveFattore esiste già: se non esiste, la aggiunge e crea una nuova arraylist come valore.
         // In entrambi i casi, aggiunge il fattore alla lista.
-        this.hashMapFattori.computeIfAbsent(chiaveFattore, k -> new ArrayList<>()).add(fattore);
+        this.hashMapFattori.computeIfAbsent(chiaveFattore, _ -> new ArrayList<>()).add(fattore);
     }
 
     /**
-     * controlla ed eventualmente sostituisce (se fuori scala) il valore del fattoreDaControllare
+     * Controlla ed eventualmente sostituisce (se fuori scala) il valore del fattoreDaControllare
      *
      * @param fattoreDaControllare, fattore da controllare
      */
@@ -110,11 +93,11 @@ public class FattoriModel {
      *
      * @param fattori, list di fattori
      */
-    public void aggiungiArrayListDiFattori(List<FattoreDiConversione> fattori) {
+    public void aggiungiListDiFattori(List<FattoreDiConversione> fattori) {
         for (FattoreDiConversione f : fattori) {
             addFattore(f.getNome_c1(), f);
         }
-        save();
+        repository.save(hashMapFattori);
     }
 
     /**
@@ -142,43 +125,36 @@ public class FattoriModel {
      * Calcola tutti i fattori che hanno una foglia nuova e una preesistente,
      * ovvero appartenente a una gerarchia diversa da quella nuova.
      *
-     * @param primoFattoreEsternoInterno, fattore creato tra una foglia preesistente e una nuova.
+     * @param primoFattoreFogliaEsternaInterna, fattore creato tra una foglia preesistente e una nuova.
      *                                    Permette il calcolo di tutti gli altri
      * @param fattoriInterni,             fattori di conversione tra tutte le foglie della gerarchia appena creata
      * @return fattoriEsterni, lista di fattori appena calcolati
      */
-    private List<FattoreDiConversione> calcoloFattoriEsterni(FattoreDiConversione primoFattoreEsternoInterno, List<FattoreDiConversione> fattoriInterni) {
-        ArrayList<FattoreDiConversione> fattoriCalcolati = new ArrayList<>();
+    private List<FattoreDiConversione> calcoloFattoriEsterni(FattoreDiConversione primoFattoreFogliaEsternaInterna, List<FattoreDiConversione> fattoriInterni) {
+        List<FattoreDiConversione> fattoriCalcolati = new ArrayList<>();
+        List<FattoreDiConversione> nuoviFattoriDaSingolaFogliaEsternaATutteLeInterne = new ArrayList<>();
+        List<FattoreDiConversione> nuoviFattoriDaTutteLeInterneAllaSingolaEsterna = new ArrayList<>();
 
-        //L'insieme di tutti i fattori che hanno come <c1> la foglia esterna scelta e come <c2> tutte le foglie Interne (quelle passate dal nuovo albero)
-        ArrayList<FattoreDiConversione> nuoviSingoloEsternoAInterni = new ArrayList<>();
-        //L'insieme di tutti i fattori che hanno come <c1> tutte le foglie Interne e come <c2> la foglia esterna scelta (Gli inversi)
-        ArrayList<FattoreDiConversione> nuoviInterniASingoloEsterno = new ArrayList<>();
+        nuoviFattoriDaSingolaFogliaEsternaATutteLeInterne.add(primoFattoreFogliaEsternaInterna);
 
-        //Infilo il fattore dato (Old:A New:A x)
-        nuoviSingoloEsternoAInterni.add(primoFattoreEsternoInterno);
-        //Creo e infilo il reciproco del fattore dato(New:A Old:A x)
-        FattoreDiConversione primoFattoreInternoEsterno = generaInverso(primoFattoreEsternoInterno);
-        nuoviInterniASingoloEsterno.add(primoFattoreInternoEsterno);
+        FattoreDiConversione primoFattoreInternoEsterno = generaInverso(primoFattoreFogliaEsternaInterna);
+        nuoviFattoriDaTutteLeInterneAllaSingolaEsterna.add(primoFattoreInternoEsterno);
 
+        calcoloFattoriDaEsternaAInterne(primoFattoreFogliaEsternaInterna, fattoriInterni, nuoviFattoriDaSingolaFogliaEsternaATutteLeInterne, nuoviFattoriDaTutteLeInterneAllaSingolaEsterna);
 
-        ///Calcolo fattori Esterno-Interni (se c'è più di una foglia interna)
-        if (!fattoriInterni.isEmpty()) {
-            for (FattoreDiConversione nuovo : fattoriInterni) {
-                //Se New:A in (Old:A New:A x) == New:A in (New:A New:X y) => genera (Old:A New:X x*y)
-                if (primoFattoreEsternoInterno.getNome_c2().equals(nuovo.getNome_c1())) {
-                    FattoreDiConversione nuovoSingoloEsternoAInterno = new FattoreDiConversione(primoFattoreEsternoInterno.getNome_c1(), nuovo.getNome_c2(), primoFattoreEsternoInterno.getFattore() * nuovo.getFattore());
-                    FattoreDiConversione nuovoInternoASingoloEsterno = generaInverso(nuovoSingoloEsternoAInterno);
+        List<FattoreDiConversione> fattoriInternoATuttiEsterni = new ArrayList<>();
 
-                    nuoviSingoloEsternoAInterni.add(nuovoSingoloEsternoAInterno);
-                    nuoviInterniASingoloEsterno.add(nuovoInternoASingoloEsterno);
-                }
-            }
-        }
+        calcoloDaTutteLeInterneATutteLeEsterneRimanentiConInversi(nuoviFattoriDaTutteLeInterneAllaSingolaEsterna, fattoriInternoATuttiEsterni);
 
-        ArrayList<FattoreDiConversione> fattoriInternoATuttiEsterni = new ArrayList<>();
-        //per ogni nuovo fattore nel formato (Interno:X Esterno:A)
-        for (FattoreDiConversione fattoreInternoASingoloEsterno : nuoviInterniASingoloEsterno) {
+        fattoriCalcolati.addAll(fattoriInternoATuttiEsterni); //Aggiungo l'array di fattori esterni
+        fattoriCalcolati.addAll(nuoviFattoriDaSingolaFogliaEsternaATutteLeInterne); //Aggiungo l'array di diretti
+        fattoriCalcolati.addAll(nuoviFattoriDaTutteLeInterneAllaSingolaEsterna); //Aggiungo l'array di inversi al primo
+
+        return fattoriCalcolati;
+    }
+
+    private void calcoloDaTutteLeInterneATutteLeEsterneRimanentiConInversi(List<FattoreDiConversione> nuoviFattoriDaTutteLeInterneAllaSingolaEsterna, List<FattoreDiConversione> fattoriInternoATuttiEsterni) {
+        for (FattoreDiConversione fattoreInternoASingoloEsterno : nuoviFattoriDaTutteLeInterneAllaSingolaEsterna) {
             //Per ogni Fattore che ha come Key la foglia Esterno:A
             for (FattoreDiConversione fattoreInMemoria : hashMapFattori.get(fattoreInternoASingoloEsterno.getNome_c2())) {
                 //Genero i fattori con tutto il resto del fuori
@@ -188,12 +164,20 @@ public class FattoriModel {
                 fattoriInternoATuttiEsterni.add(fattoreEsternoInterno);
             }
         }
+    }
 
-        fattoriCalcolati.addAll(fattoriInternoATuttiEsterni); //Aggiungo l'array di fattori esterni
-        fattoriCalcolati.addAll(nuoviSingoloEsternoAInterni); //Aggiungo l'array di diretti
-        fattoriCalcolati.addAll(nuoviInterniASingoloEsterno); //Aggiungo l'array di inversi al primo
+    private void calcoloFattoriDaEsternaAInterne(FattoreDiConversione primoFattoreFogliaEsternaInterna, List<FattoreDiConversione> fattoriInterni, List<FattoreDiConversione> nuoviFattoriDaSingolaFogliaEsternaATutteLeInterne, List<FattoreDiConversione> nuoviFattoriDaTutteLeInterneAllaSingolaEsterna) {
+        if (!fattoriInterni.isEmpty()) {
+            for (FattoreDiConversione nuovoFattore : fattoriInterni) {
+                if (primoFattoreFogliaEsternaInterna.getNome_c2().equals(nuovoFattore.getNome_c1())) {
+                    FattoreDiConversione nuovoFogliaSingolaEsternaAInterna = new FattoreDiConversione(primoFattoreFogliaEsternaInterna.getNome_c1(), nuovoFattore.getNome_c2(), primoFattoreFogliaEsternaInterna.getFattore() * nuovoFattore.getFattore());
+                    FattoreDiConversione nuovoFogliaInternaASingolaEsterna = generaInverso(nuovoFogliaSingolaEsternaAInterna);
 
-        return fattoriCalcolati;
+                    nuoviFattoriDaSingolaFogliaEsternaATutteLeInterne.add(nuovoFogliaSingolaEsternaAInterna);
+                    nuoviFattoriDaTutteLeInterneAllaSingolaEsterna.add(nuovoFogliaInternaASingolaEsterna);
+                }
+            }
+        }
     }
 
 
