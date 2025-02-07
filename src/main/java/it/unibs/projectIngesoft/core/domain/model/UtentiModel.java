@@ -35,15 +35,6 @@ public class UtentiModel {
         }
     }
 
-    public static boolean isValidEmail(String email) {
-        String emailRegex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$";
-        Pattern pat = Pattern.compile(emailRegex);
-        if (email == null) {
-            return false;
-        }
-        return pat.matcher(email).matches();
-    }
-
     /**
      * Serve per il login.
      */
