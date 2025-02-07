@@ -1,345 +1,51 @@
 [ {
   "categorieFiglie" : [ {
-    "categorieFiglie" : [ {
-      "valoriDominioFiglie" : [ ],
-      "nome" : "Ripetizioni di Letteratura Italiana",
-      "valoreDominio" : {
-        "nome" : "italiano",
-        "descrizione" : ""
-      },
-      "isRadice" : false,
-      "isFoglia" : true,
-      "nomeMadre" : "Ripetizioni di Materie Umanistiche",
-      "campo" : "materia",
-      "campoFiglie" : ""
-    }, {
-      "valoriDominioFiglie" : [ ],
-      "nome" : "Ripetizioni di Filosofia",
-      "valoreDominio" : {
-        "nome" : "filosofia",
-        "descrizione" : ""
-      },
-      "isRadice" : false,
-      "isFoglia" : true,
-      "nomeMadre" : "Ripetizioni di Materie Umanistiche",
-      "campo" : "materia",
-      "campoFiglie" : ""
-    }, {
-      "valoriDominioFiglie" : [ ],
-      "nome" : "Ripetizioni di Storia",
-      "valoreDominio" : {
-        "nome" : "storia",
-        "descrizione" : "Lezioni di racconti vari"
-      },
-      "isRadice" : false,
-      "isFoglia" : true,
-      "nomeMadre" : "Ripetizioni di Materie Umanistiche",
-      "campo" : "materia",
-      "campoFiglie" : ""
-    }, {
-      "valoriDominioFiglie" : [ ],
-      "nome" : "Ripetizioni di Storia dell'Arte",
-      "valoreDominio" : {
-        "nome" : "storia dell'arte",
-        "descrizione" : ""
-      },
-      "isRadice" : false,
-      "isFoglia" : true,
-      "nomeMadre" : "Ripetizioni di Materie Umanistiche",
-      "campo" : "materia",
-      "campoFiglie" : ""
-    } ],
-    "valoriDominioFiglie" : [ "italiano", "filosofia", "storia", "storia dell'arte" ],
-    "nome" : "Ripetizioni di Materie Umanistiche",
+    "nomeValoreDominio" : "asgasdg",
+    "descrizioneValoreDominio" : "",
+    "valoriDominioFiglie" : [ ],
+    "nome" : "figlia1",
     "valoreDominio" : {
-      "nome" : "umanistiche",
-      "descrizione" : "Materie umanistiche"
+      "nome" : "asgasdg",
+      "descrizione" : ""
     },
     "isRadice" : false,
-    "isFoglia" : false,
-    "nomeMadre" : "Ripetizioni Scolastiche",
+    "isFoglia" : true,
+    "nomeMadre" : "radiceTest",
     "campo" : "tipo",
-    "campoFiglie" : "materia"
+    "campoFiglie" : ""
   }, {
-    "categorieFiglie" : [ {
-      "valoriDominioFiglie" : [ ],
-      "nome" : "Ripetizioni di Matematica",
-      "valoreDominio" : {
-        "nome" : "matematica",
-        "descrizione" : ""
-      },
-      "isRadice" : false,
-      "isFoglia" : true,
-      "nomeMadre" : "Ripetizioni di Materie Scientifiche",
-      "campo" : "materia",
-      "campoFiglie" : ""
-    }, {
-      "valoriDominioFiglie" : [ ],
-      "nome" : "Ripetizioni di Fisica",
-      "valoreDominio" : {
-        "nome" : "fisica",
-        "descrizione" : ""
-      },
-      "isRadice" : false,
-      "isFoglia" : true,
-      "nomeMadre" : "Ripetizioni di Materie Scientifiche",
-      "campo" : "materia",
-      "campoFiglie" : ""
-    }, {
-      "valoriDominioFiglie" : [ ],
-      "nome" : "Ripetizioni di Informatica",
-      "valoreDominio" : {
-        "nome" : "informatica",
-        "descrizione" : ""
-      },
-      "isRadice" : false,
-      "isFoglia" : true,
-      "nomeMadre" : "Ripetizioni di Materie Scientifiche",
-      "campo" : "materia",
-      "campoFiglie" : ""
-    }, {
-      "valoriDominioFiglie" : [ ],
-      "nome" : "Ripetizioni di Chimica",
-      "valoreDominio" : {
-        "nome" : "chimica",
-        "descrizione" : ""
-      },
-      "isRadice" : false,
-      "isFoglia" : true,
-      "nomeMadre" : "Ripetizioni di Materie Scientifiche",
-      "campo" : "materia",
-      "campoFiglie" : ""
-    }, {
-      "valoriDominioFiglie" : [ ],
-      "nome" : "Ripetizioni di Biologia",
-      "valoreDominio" : {
-        "nome" : "biologia",
-        "descrizione" : ""
-      },
-      "isRadice" : false,
-      "isFoglia" : true,
-      "nomeMadre" : "Ripetizioni di Materie Scientifiche",
-      "campo" : "materia",
-      "campoFiglie" : ""
-    }, {
-      "valoriDominioFiglie" : [ ],
-      "nome" : "Ripetizioni di Scienze della Terra",
-      "valoreDominio" : {
-        "nome" : "scienze della terra",
-        "descrizione" : ""
-      },
-      "isRadice" : false,
-      "isFoglia" : true,
-      "nomeMadre" : "Ripetizioni di Materie Scientifiche",
-      "campo" : "materia",
-      "campoFiglie" : ""
-    } ],
-    "valoriDominioFiglie" : [ "matematica", "fisica", "informatica", "chimica", "biologia", "scienze della terra" ],
-    "nome" : "Ripetizioni di Materie Scientifiche",
+    "nomeValoreDominio" : "asdgsdg",
+    "descrizioneValoreDominio" : "",
+    "valoriDominioFiglie" : [ ],
+    "nome" : "figliaMadre",
     "valoreDominio" : {
-      "nome" : "scientifiche",
-      "descrizione" : "Materie Scientifiche"
+      "nome" : "asdgsdg",
+      "descrizione" : ""
     },
     "isRadice" : false,
-    "isFoglia" : false,
-    "nomeMadre" : "Ripetizioni Scolastiche",
+    "isFoglia" : true,
+    "nomeMadre" : "radiceTest",
     "campo" : "tipo",
-    "campoFiglie" : "materia"
+    "campoFiglie" : ""
   }, {
-    "categorieFiglie" : [ {
-      "valoriDominioFiglie" : [ ],
-      "nome" : "Ripetizioni di Inglese",
-      "valoreDominio" : {
-        "nome" : "inglese",
-        "descrizione" : ""
-      },
-      "isRadice" : false,
-      "isFoglia" : true,
-      "nomeMadre" : "Ripetizioni di lingue",
-      "campo" : "materia",
-      "campoFiglie" : ""
-    }, {
-      "valoriDominioFiglie" : [ ],
-      "nome" : "Ripetizioni di Spagnolo",
-      "valoreDominio" : {
-        "nome" : "spagnolo",
-        "descrizione" : ""
-      },
-      "isRadice" : false,
-      "isFoglia" : true,
-      "nomeMadre" : "Ripetizioni di lingue",
-      "campo" : "materia",
-      "campoFiglie" : ""
-    }, {
-      "valoriDominioFiglie" : [ ],
-      "nome" : "Ripetizioni di Francese",
-      "valoreDominio" : {
-        "nome" : "francese",
-        "descrizione" : ""
-      },
-      "isRadice" : false,
-      "isFoglia" : true,
-      "nomeMadre" : "Ripetizioni di lingue",
-      "campo" : "materia",
-      "campoFiglie" : ""
-    }, {
-      "valoriDominioFiglie" : [ ],
-      "nome" : "Ripetizioni di Tedesco",
-      "valoreDominio" : {
-        "nome" : "tedesco",
-        "descrizione" : ""
-      },
-      "isRadice" : false,
-      "isFoglia" : true,
-      "nomeMadre" : "Ripetizioni di lingue",
-      "campo" : "materia",
-      "campoFiglie" : ""
-    }, {
-      "valoriDominioFiglie" : [ ],
-      "nome" : "Ripetizioni di Latino",
-      "valoreDominio" : {
-        "nome" : "latino",
-        "descrizione" : ""
-      },
-      "isRadice" : false,
-      "isFoglia" : true,
-      "nomeMadre" : "Ripetizioni di lingue",
-      "campo" : "materia",
-      "campoFiglie" : ""
-    }, {
-      "valoriDominioFiglie" : [ ],
-      "nome" : "Ripetizioni di Greco",
-      "valoreDominio" : {
-        "nome" : "greco",
-        "descrizione" : ""
-      },
-      "isRadice" : false,
-      "isFoglia" : true,
-      "nomeMadre" : "Ripetizioni di lingue",
-      "campo" : "materia",
-      "campoFiglie" : ""
-    }, {
-      "valoriDominioFiglie" : [ ],
-      "nome" : "Ripetizioni di Arabo",
-      "valoreDominio" : {
-        "nome" : "arabo",
-        "descrizione" : ""
-      },
-      "isRadice" : false,
-      "isFoglia" : true,
-      "nomeMadre" : "Ripetizioni di lingue",
-      "campo" : "materia",
-      "campoFiglie" : ""
-    } ],
-    "valoriDominioFiglie" : [ "inglese", "spagnolo", "francese", "tedesco", "latino", "greco", "arabo" ],
-    "nome" : "Ripetizioni di lingue",
+    "nomeValoreDominio" : "aaa",
+    "descrizioneValoreDominio" : "",
+    "valoriDominioFiglie" : [ ],
+    "nome" : "figlia2",
     "valoreDominio" : {
-      "nome" : "lingue",
+      "nome" : "aaa",
       "descrizione" : ""
     },
     "isRadice" : false,
-    "isFoglia" : false,
-    "nomeMadre" : "Ripetizioni Scolastiche",
+    "isFoglia" : true,
+    "nomeMadre" : "radiceTest",
     "campo" : "tipo",
-    "campoFiglie" : "materia"
+    "campoFiglie" : ""
   } ],
-  "valoriDominioFiglie" : [ "umanistiche", "scientifiche", "lingue" ],
-  "nome" : "Ripetizioni Scolastiche",
-  "valoreDominio" : null,
-  "isRadice" : true,
-  "isFoglia" : false,
-  "nomeMadre" : "",
-  "campo" : "",
-  "campoFiglie" : "tipo"
-}, {
-  "categorieFiglie" : [ {
-    "categorieFiglie" : [ {
-      "valoriDominioFiglie" : [ ],
-      "nome" : "Lezioni di solfeggio",
-      "valoreDominio" : {
-        "nome" : "solfeggio",
-        "descrizione" : ""
-      },
-      "isRadice" : false,
-      "isFoglia" : true,
-      "nomeMadre" : "Lezioni di teoria musicale",
-      "campo" : "materia",
-      "campoFiglie" : ""
-    }, {
-      "valoriDominioFiglie" : [ ],
-      "nome" : "Lezioni di storia della musica",
-      "valoreDominio" : {
-        "nome" : "storia della musica",
-        "descrizione" : ""
-      },
-      "isRadice" : false,
-      "isFoglia" : true,
-      "nomeMadre" : "Lezioni di teoria musicale",
-      "campo" : "materia",
-      "campoFiglie" : ""
-    } ],
-    "valoriDominioFiglie" : [ "solfeggio", "storia della musica" ],
-    "nome" : "Lezioni di teoria musicale",
-    "valoreDominio" : {
-      "nome" : "teoria",
-      "descrizione" : ""
-    },
-    "isRadice" : false,
-    "isFoglia" : false,
-    "nomeMadre" : "Lezioni di musica",
-    "campo" : "tipo",
-    "campoFiglie" : "materia"
-  } ],
-  "valoriDominioFiglie" : [ "teoria" ],
-  "nome" : "Lezioni di musica",
-  "valoreDominio" : null,
-  "isRadice" : true,
-  "isFoglia" : false,
-  "nomeMadre" : "",
-  "campo" : "",
-  "campoFiglie" : "tipo"
-}, {
-  "categorieFiglie" : [ {
-    "categorieFiglie" : [ {
-      "valoriDominioFiglie" : [ ],
-      "nome" : "Lezioni di Scacchi",
-      "valoreDominio" : {
-        "nome" : "scacchi",
-        "descrizione" : ""
-      },
-      "isRadice" : false,
-      "isFoglia" : true,
-      "nomeMadre" : "Giochi di Logica",
-      "campo" : "gioco",
-      "campoFiglie" : ""
-    }, {
-      "valoriDominioFiglie" : [ ],
-      "nome" : "Lezioni di Sudoku",
-      "valoreDominio" : {
-        "nome" : "sudoku",
-        "descrizione" : ""
-      },
-      "isRadice" : false,
-      "isFoglia" : true,
-      "nomeMadre" : "Giochi di Logica",
-      "campo" : "gioco",
-      "campoFiglie" : ""
-    } ],
-    "valoriDominioFiglie" : [ "scacchi", "sudoku" ],
-    "nome" : "Giochi di Logica",
-    "valoreDominio" : {
-      "nome" : "logica",
-      "descrizione" : ""
-    },
-    "isRadice" : false,
-    "isFoglia" : false,
-    "nomeMadre" : "Attivita di svago",
-    "campo" : "tipo",
-    "campoFiglie" : "gioco"
-  } ],
-  "valoriDominioFiglie" : [ "logica" ],
-  "nome" : "Attivita di svago",
-  "valoreDominio" : null,
+  "nomeValoreDominio" : "",
+  "descrizioneValoreDominio" : "",
+  "valoriDominioFiglie" : [ "asgasdg", "asdgsdg", "aaa" ],
+  "nome" : "radiceTest",
   "isRadice" : true,
   "isFoglia" : false,
   "nomeMadre" : "",

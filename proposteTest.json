@@ -1,0 +1,53 @@
+{
+  "Bergamo" : [ {
+    "richiesta" : "radiceTest:figlia2",
+    "offerta" : "radiceTest:figliaMadre",
+    "oreRichiesta" : 1,
+    "oreOfferta" : 1,
+    "stato" : "APERTA",
+    "autore" : "Gabbayyyy",
+    "comprensorioDiAppartenenza" : "Bergamo",
+    "cronologiaStati" : [ "APERTA" ],
+    "daNotificare" : false
+  }, {
+    "richiesta" : "radiceTest:figliaMadre",
+    "offerta" : "radiceTest:figlia1",
+    "oreRichiesta" : 1,
+    "oreOfferta" : 2,
+    "stato" : "APERTA",
+    "autore" : "Gabbayyyy",
+    "comprensorioDiAppartenenza" : "Bergamo",
+    "cronologiaStati" : [ "APERTA" ],
+    "daNotificare" : false
+  }, {
+    "richiesta" : "radiceTest:figlia1",
+    "offerta" : "radiceTest:figlia2",
+    "oreRichiesta" : 2,
+    "oreOfferta" : 2,
+    "stato" : "CHIUSA",
+    "autore" : "Gabbayyyy",
+    "comprensorioDiAppartenenza" : "Bergamo",
+    "cronologiaStati" : [ "APERTA", "CHIUSA" ],
+    "daNotificare" : false
+  }, {
+    "richiesta" : "radiceTest:figliaMadre",
+    "offerta" : "radiceTest:figlia2",
+    "oreRichiesta" : 1,
+    "oreOfferta" : 2,
+    "stato" : "APERTA",
+    "autore" : "Gabbayyyy",
+    "comprensorioDiAppartenenza" : "Bergamo",
+    "cronologiaStati" : [ "APERTA" ],
+    "daNotificare" : false
+  }, {
+    "richiesta" : "radiceTest:figlia2",
+    "offerta" : "radiceTest:figlia1",
+    "oreRichiesta" : 2,
+    "oreOfferta" : 2,
+    "stato" : "CHIUSA",
+    "autore" : "Gabbayyyy",
+    "comprensorioDiAppartenenza" : "Bergamo",
+    "cronologiaStati" : [ "APERTA", "CHIUSA" ],
+    "daNotificare" : false
+  } ]
+}
