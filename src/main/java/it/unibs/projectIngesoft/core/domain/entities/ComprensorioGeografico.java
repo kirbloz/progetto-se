@@ -45,21 +45,6 @@ public class ComprensorioGeografico {
             this.listaComuni.add(comune);
     }*/
 
-    /**
-     * Rappresenta il comprensorio geografico come stringa.
-     *
-     * @return la stringa formattata
-     */
-    @Override
-    public String toString() {
-        StringBuilder comprensorioAsString = new StringBuilder();
-        comprensorioAsString.append(nomeComprensorio).append("\n");
-        int index = 0;
-        for (String comune : listaComuni) {
-            comprensorioAsString.append("[").append(index++).append("] ").append(comune).append("\n");
-        }
-        return comprensorioAsString.toString();
-    }
 
     public void setNomeComprensorio(String nomeComprensorio) {
         assert nomeComprensorio != null
