@@ -17,7 +17,7 @@ import java.util.Map;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-public class ConfiguratoreController extends BaseController<Configuratore>{
+public class ConfiguratoreController extends UtenteController<Configuratore> {
 
     public static final String MSG_INPUT_DESCRIZIONE_VALORE_DOMINIO = ">> Inserisci la descrizione (da 0 a 100 caratteri):\n> ";
     public static final String CONFIRM_DESCRIZIONE_AGGIUNTA = ">> Descrizione aggiunta <<";
@@ -112,7 +112,7 @@ public class ConfiguratoreController extends BaseController<Configuratore>{
         } while (scelta != 0);
     }
 
-    private void cambioCredenziali() {
+    protected void cambioCredenziali() {
         String username;
         do {
             username = view.richiestaUsername();
@@ -180,9 +180,11 @@ public class ConfiguratoreController extends BaseController<Configuratore>{
 
     public void aggiungiRadice() {
         String nomeRadice;
+        boolean valid;
         do {
             nomeRadice = view.visualizzaInserimentoNomeCategoriaRadice(categorieModel);
-        } while (categorieModel.esisteRadice(nomeRadice));
+            valid = !nomeRadice.contains(":");
+        } while (categorieModel.esisteRadice(nomeRadice) || !valid);
         String nomeCampo = view.visualizzaInserimentoCampoCategoria();
         categorieModel.aggiungiCategoriaRadice(nomeRadice, nomeCampo);
     }
