@@ -15,6 +15,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public class ConfiguratoreController extends BaseController<Configuratore>{
 
@@ -285,47 +286,11 @@ public class ConfiguratoreController extends BaseController<Configuratore>{
         view.visualizzaPropostePronteHeader();
 
         Map<Fruitore, List<Proposta>> mapDaNotificare = new HashMap<>();
-        List<String> nomiAutori = new ArrayList<>();
 
-        for(Proposta daNotificare : proposteModel.getFilteredProposte(Proposta::isDaNotificare).toList()){
-            boolean giaPresente = false;
-            for (String n : nomiAutori){
-                if(n.equals(daNotificare.getAutoreUsername())) {
-                    giaPresente = true;
-                    break;
-                }
-            }
-            if(!giaPresente) {
-                nomiAutori.add(daNotificare.getAutoreUsername());
-            }
-        }
 
-        for (String n : nomiAutori){
-            List<Proposta> listaPropostaPerNome = new ArrayList<>();
-            for(Proposta daNotificare : proposteModel.getFilteredProposte(Proposta::isDaNotificare).toList()){
-                if (daNotificare.getAutoreUsername().equals(n)) {
-                    listaPropostaPerNome.add(daNotificare);
-                }
-            }
-            if(utentiModel.getFruitoreDaUsername(n).isPresent())
-                mapDaNotificare.put(utentiModel.getFruitoreDaUsername(n).get(), listaPropostaPerNome);
-        }
-
-        view.visualizzaProposteDaNotificare(mapDaNotificare);
-        proposteModel.save();
-    }
-
-    /*public void visualizzaProposteDaNotificare() {
-        view.visualizzaPropostePronteHeader();
-
-        Map<Fruitore, List<Proposta>> mapDaNotificare = new HashMap<>();
-        List<Proposta> proposteDaNotificare = proposteModel.getFilteredProposte(Proposta::isDaNotificare).toList();
-
-        // Raggruppa le proposte per autore
-        Map<String, List<Proposta>> propostePerAutore = proposteDaNotificare.stream()
+        Map<String, List<Proposta>> propostePerAutore = proposteModel.getFilteredProposte(Proposta::isDaNotificare)
                 .collect(Collectors.groupingBy(Proposta::getAutoreUsername));
 
-        // Popola la mappa da notificare
         for (Map.Entry<String, List<Proposta>> entry : propostePerAutore.entrySet()) {
             String autore = entry.getKey();
             List<Proposta> listaPropostaPerNome = entry.getValue();
@@ -337,6 +302,7 @@ public class ConfiguratoreController extends BaseController<Configuratore>{
 
         view.visualizzaProposteDaNotificare(mapDaNotificare);
         proposteModel.save();
-    }*/
+    }
+
 
 }
