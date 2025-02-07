@@ -92,13 +92,16 @@ public class FruitoreView extends ErmesTerminaleView {
     public void uscitaMenu(String menu) {
         switch (menu) {
             case "esplora":
-                System.out.println(">> USCITA MENU ESPLORA GERARCHIE..");
+                print(">> USCITA MENU ESPLORA GERARCHIE..");
                 break;
             case "programma":
-                System.out.println(">> USCITA PROGRAMA..");
+                print(">> USCITA PROGRAMA..");
                 break;
             case "submenu":
-                System.out.println(">> USCITA SUBMENU..");
+                print(">> USCITA SUBMENU..");
+                break;
+            default:
+                print(">> USCITA MENU "+ menu);
                 break;
         }
     }
