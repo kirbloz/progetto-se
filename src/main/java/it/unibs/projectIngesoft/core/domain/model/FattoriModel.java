@@ -4,7 +4,7 @@ package it.unibs.projectIngesoft.core.domain.model;
 import it.unibs.projectIngesoft.core.domain.entities.Categoria;
 import it.unibs.projectIngesoft.core.domain.entities.FattoreDiConversione;
 import it.unibs.projectIngesoft.libraries.Utilitas;
-import it.unibs.projectIngesoft.persistence.implementations.FattoriDiConversioneRepository;
+import it.unibs.projectIngesoft.persistence.Repository;
 
 import java.util.*;
 
@@ -19,9 +19,9 @@ public class FattoriModel {
 
 
     private Map<String, List<FattoreDiConversione>> hashMapFattori;
-    private final FattoriDiConversioneRepository repository;
+    private final Repository<Map<String, List<FattoreDiConversione>>> repository;
 
-    public FattoriModel(FattoriDiConversioneRepository repository) {
+    public FattoriModel(Repository<Map<String, List<FattoreDiConversione>>> repository) {
         this.repository = repository;
         load();
     }

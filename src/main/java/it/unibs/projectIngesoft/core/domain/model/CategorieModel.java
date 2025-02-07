@@ -3,8 +3,6 @@ package it.unibs.projectIngesoft.core.domain.model;
 
 import it.unibs.projectIngesoft.core.domain.entities.Categoria;
 import it.unibs.projectIngesoft.persistence.Repository;
-import it.unibs.projectIngesoft.persistence.implementations.CategorieRepository;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
@@ -17,7 +15,7 @@ public class CategorieModel {
     /**
      * Costruttore per inizializzare i percorsi dei file e de-serializzare l'albero.
      */
-    public CategorieModel(CategorieRepository repository) {
+    public CategorieModel(Repository<List<Categoria>> repository) {
         this.radici = new ArrayList<>();
         this.repository = repository;
         load();

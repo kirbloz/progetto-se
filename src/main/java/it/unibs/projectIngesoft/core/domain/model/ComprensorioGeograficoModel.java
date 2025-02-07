@@ -1,6 +1,7 @@
 package it.unibs.projectIngesoft.core.domain.model;
 
 import it.unibs.projectIngesoft.core.domain.entities.ComprensorioGeografico;
+import it.unibs.projectIngesoft.persistence.Repository;
 import it.unibs.projectIngesoft.persistence.implementations.CompGeoRepository;
 
 import java.util.ArrayList;
@@ -9,9 +10,9 @@ import java.util.List;
 public class ComprensorioGeograficoModel {
 
     private List<ComprensorioGeografico> listaComprensoriGeografici;
-    private final CompGeoRepository repository;
+    private final Repository<List<ComprensorioGeografico>> repository;
 
-    public ComprensorioGeograficoModel(CompGeoRepository repository) {
+    public ComprensorioGeograficoModel(Repository<List<ComprensorioGeografico>> repository) {
         this.repository = repository;
         this.listaComprensoriGeografici =  repository.load();
         if(this.listaComprensoriGeografici == null) {

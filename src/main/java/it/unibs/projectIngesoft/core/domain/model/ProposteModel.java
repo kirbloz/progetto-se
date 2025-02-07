@@ -4,8 +4,8 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import it.unibs.projectIngesoft.core.domain.entities.Proposta;
 import it.unibs.projectIngesoft.core.domain.entities.StatiProposta;
-import it.unibs.projectIngesoft.persistence.implementations.ProposteRepository;
 import it.unibs.projectIngesoft.core.domain.entities.utenti.Fruitore;
+import it.unibs.projectIngesoft.persistence.Repository;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -20,9 +20,9 @@ public class ProposteModel {
     @JacksonXmlProperty(localName = "Proposta")
     private Map<String, List<Proposta>> hashListaProposte;
 
-    private final ProposteRepository repository;
+    private final Repository<Map<String, List<Proposta>>> repository;
 
-    public ProposteModel(ProposteRepository repository) {
+    public ProposteModel(Repository<Map<String, List<Proposta>>> repository) {
         this.hashListaProposte = new HashMap<>();
 
         this.repository = repository;
@@ -30,10 +30,6 @@ public class ProposteModel {
         if(hashListaProposte == null) {
             hashListaProposte = new HashMap<>();
         }
-    }
-
-    public Map<String, List<Proposta>> getHashListaProposte() {
-        return new HashMap<>(hashListaProposte);
     }
 
     public void addProposta(Proposta proposta) {
