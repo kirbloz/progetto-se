@@ -35,8 +35,12 @@ public class AccessoView {
         return new String[]{username,password};
     }
 
-    public void stampaErroreCredenziali(String msg) {
+    public void print(String msg){
         System.out.println(msg);
+    }
+
+    public void stampaErroreCredenziali() {
+        print(WARNING_LOGIN_FALLITO_CREDENZIALI_ERRATE);
     }
 
     public int visualizzaMenuPrincipale() {
@@ -45,13 +49,13 @@ public class AccessoView {
     }
 
     public void visualizzaErroreUsernameGiaInUso() {
-        System.out.println(WARNING_USERNAME_ESISTE_GIA);
+        print(WARNING_USERNAME_ESISTE_GIA);
     }
 
-    public String selezionaNomeDaLista(List<String> lista){
-        System.out.println(">> Scegli uno tra i seguenti nomi: ");
+    public String selezionaNomeComprensorioDaLista(List<String> lista){
+        print(MSG_INPUT_SELEZIONE_NOME);
         for (String nome : lista) {
-            System.out.println(nome);
+            print(nome);
         }
         String nomeInserito;
         boolean esisteNome = false;
@@ -64,7 +68,7 @@ public class AccessoView {
                 }
             }
             if (!esisteNome) {
-                System.out.println("Errore: Comprensorio inesistente");
+                print(WARNING_NON_ESISTE_COMPRENSORIO);
             }
         } while (!esisteNome);
         return nomeInserito;
@@ -75,7 +79,7 @@ public class AccessoView {
     }
 
     public void visualizzaErroreMailNonValida() {
-        System.out.println(WARNING_INVALID_MAIL);
+        print(WARNING_INVALID_MAIL);
     }
 
 }
