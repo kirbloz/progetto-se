@@ -295,10 +295,14 @@ public class ConfiguratoreView extends ErmesTerminaleView {
     }
 
     public void visualizzaComprensorio(String nome, List<String> comuni) {
-        print(NOME_COMPRENSORIO_FORMATTED.formatted(nome.toUpperCase()));
-        for (String s : comuni) {
-            print(s);
+        StringBuilder comprensorioStringBuilder = new StringBuilder();
+        comprensorioStringBuilder.append(NOME_COMPRENSORIO_FORMATTED.formatted(nome.toUpperCase())).append("\n");
+        int index = 1;
+        for (String comune : comuni) {
+            comprensorioStringBuilder.append("[").append(index++).append("] ").append(comune).append("\n");
         }
+        print(comprensorioStringBuilder.toString());
+
     }
 
     public void stampaErroreComprensoriVuoto() {
