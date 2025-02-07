@@ -60,8 +60,6 @@ public class FattoreDiConversione {
     }
 
     public void setFattore(double fattore) {
-        assert fattore >= 0.5
-                && fattore <= 2 : "Il fattore di conversione deve stare tra 0.5 e 2";
         this.fattore = fattore;
     }
 
