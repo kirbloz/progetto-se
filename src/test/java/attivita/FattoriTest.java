@@ -2,6 +2,7 @@ package attivita;
 
 
 import it.unibs.projectIngesoft.core.domain.entities.Categoria;
+import it.unibs.projectIngesoft.core.domain.entities.FattoreDiConversione;
 import it.unibs.projectIngesoft.core.domain.entities.utenti.Configuratore;
 import it.unibs.projectIngesoft.core.domain.model.CategorieModel;
 import it.unibs.projectIngesoft.core.domain.model.FattoriModel;
@@ -20,6 +21,9 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class FattoriTest {
 
@@ -64,7 +68,21 @@ public class FattoriTest {
 
     @Test
     void calcolaInversiTest(){
+        Repository<Map<String, List<FattoreDiConversione>>> fattoriRepository;
+        fattoriRepository = new FattoriDiConversioneRepository("mock.json",
+                new JsonSerializerFactory().createSerializer());
+        FattoriModel fattoriModel = new FattoriModel(fattoriRepository);
 
+        List<FattoreDiConversione> listFattori = new ArrayList<>();
+        FattoreDiConversione F1 = new FattoreDiConversione("radice:cat1", "radice:cat2", 1.5);
+        listFattori.add(F1);
+        listFattori.addAll(fattoriModel.calcolaInversi(listFattori));
+        fattoriModel.aggiungiArrayListDiFattori(listFattori);
+
+        assertTrue(fattoriModel.esisteCategoria("radice:cat1"));
+        assertTrue(fattoriModel.esisteCategoria("radice:cat2"));
+        assertEquals(1.5, fattoriModel.getFattoriFromFoglia("radice:cat1").getFirst().getFattore());
+        assertNotNull(fattoriModel.getFattoriFromFoglia("radice:cat2"));
     }
 
     @Test
