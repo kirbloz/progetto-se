@@ -85,8 +85,27 @@ public class WhiteBoxTest {
         assertEquals(2, fattoriModel.getFattoriFromFoglia("radice:categoriaDue").size());
     }
 
+    @Test
     void secondoCamminoWhiteBoxTesting_GeneraEMemorizzaNuoviFattori(){
-        assert false;
+        // 1 2 3 4, 5, 7, 8, 13
+        // foglie not empty
+        // fattoriModel empty
+        // nuoviDaNuovaRadice not empty
+        List<Categoria> categorie = new ArrayList<>();
+        categorie.add(new Categoria("radice"));
+        categorie.add(new Categoria("radice2"));
+
+        InputInjector.inject("1.3\n");
+
+        controller.generaEMemorizzaNuoviFattori("radice", categorie);
+
+        assertTrue(fattoriModel.esisteCategoria("radice:radice"));
+        assertTrue(fattoriModel.esisteCategoria("radice:radice2"));
+        assertEquals(1, fattoriModel.getFattoriFromFoglia("radice:radice").size());
+        assertEquals(1, fattoriModel.getFattoriFromFoglia("radice:radice2").size());
+        assertEquals(1.3, fattoriModel.getFattoriFromFoglia("radice:radice").getFirst().getFattore());
+        double inverso = fattoriModel.calcolaInversi(List.of(fattoriModel.getFattoriFromFoglia("radice:radice").getFirst())).getFirst().getFattore();
+        assertEquals(inverso, fattoriModel.getFattoriFromFoglia("radice:radice2").getFirst().getFattore());
     }
 
     void terzoCamminoWhiteBoxTesting_GeneraEMemorizzaNuoviFattori(){
