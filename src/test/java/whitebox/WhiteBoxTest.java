@@ -55,30 +55,17 @@ public class WhiteBoxTest {
     @Test
     void primoCamminoWhiteBoxTesting_GeneraEMemorizzaNuoviFattori() {
         // 1 2 3,4 9,10,11,12 13 15
-        // foglie is not empty
-        // fattorimodel is not empty
-        // else if scartato
-        // if scartato
-
-        //servono 2 foglie gia esistenti con relativi fattori
-        //almeno una foglia nuova
         List<FattoreDiConversione> listaFattoriGiaEsistenti = new ArrayList<>();
         FattoreDiConversione fattore1 = new FattoreDiConversione("radice:categoriaUno", "radice:categoriaDue", 2.0);
         listaFattoriGiaEsistenti.add(fattore1);
         listaFattoriGiaEsistenti.addAll(fattoriModel.calcolaInversi(listaFattoriGiaEsistenti));
 
-        fattoriModel.aggiungiArrayListDiFattori(listaFattoriGiaEsistenti);
+        fattoriModel.aggiungiListDiFattori(listaFattoriGiaEsistenti);
 
         Categoria categoria = new Categoria("radice2");
-
-        //inject input: nomeFogliaEsternaFormattata = radice:categoriaUno
-        //inject input: nomeFogliaInternaFormattata = radice2:radice2
         InputInjector.inject("radice\ncategoriaUno\nradice2\nradice2\n1\n");
         controller.generaEMemorizzaNuoviFattori("radice2", List.of(categoria));
 
-        //ci aspettiamo la nuova chiave radice2:categoriaTre
-        //la nuova chiave avrà 2 fDc perchè in totale ci sono 3 categorie foglia
-        //ci aspettiamo che il fattore sia calcolato correttamente -> altro test
         assertTrue(fattoriModel.esisteCategoria("radice2:radice2"));
         assertEquals(2, fattoriModel.getFattoriFromFoglia("radice2:radice2").size());
         assertEquals(2, fattoriModel.getFattoriFromFoglia("radice:categoriaUno").size());
@@ -88,10 +75,6 @@ public class WhiteBoxTest {
     @Test
     void secondoCamminoWhiteBoxTesting_GeneraEMemorizzaNuoviFattori(){
         // 1 2 3,4 5 6 8 13 15
-
-        // foglie not empty
-        // fattoriModel empty
-        // nuoviDaNuovaRadice not empty
         List<Categoria> categorie = new ArrayList<>();
         categorie.add(new Categoria("radice"));
         categorie.add(new Categoria("radice2"));
@@ -113,13 +96,8 @@ public class WhiteBoxTest {
     void terzoCamminoWhiteBoxTesting_GeneraEMemorizzaNuoviFattori(){
         // 1 2 3,4 5 7 8 13 15
 
-        // foglie non è vuoto
-        //fattoriModel è empty
-        //nuoviDaRadice
         List<Categoria> categorie = new ArrayList<>();
         categorie.add(new Categoria("radice"));
-
-
         controller.generaEMemorizzaNuoviFattori("radice", categorie);
 
         assertTrue(fattoriModel.esisteCategoria("radice:radice"));
@@ -135,7 +113,7 @@ public class WhiteBoxTest {
         listaFattoriGiaEsistenti.add(fattore1);
         listaFattoriGiaEsistenti.add(fattore2);
 
-        fattoriModel.aggiungiArrayListDiFattori(listaFattoriGiaEsistenti);
+        fattoriModel.aggiungiListDiFattori(listaFattoriGiaEsistenti);
 
         controller.generaEMemorizzaNuoviFattori("radice2", new ArrayList<>());
 

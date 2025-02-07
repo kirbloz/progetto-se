@@ -26,7 +26,7 @@ public class CompensoriTest {
 
     @BeforeEach
     void prepareTest() {
-        repositoryComprensori = new CompGeoRepository("comprensoriGeograficiTest.json",
+        repositoryComprensori = new CompGeoRepository("mock.json",
                 new JsonSerializerFactory().createSerializer()
         );
         saveData();

@@ -2,33 +2,52 @@ package utente;
 
 
 import it.unibs.projectIngesoft.core.domain.entities.utenti.Configuratore;
+import it.unibs.projectIngesoft.core.domain.entities.utenti.Utente;
 import it.unibs.projectIngesoft.core.domain.model.UtentiModel;
 import it.unibs.projectIngesoft.libraries.InputInjector;
+import it.unibs.projectIngesoft.persistence.Repository;
+import it.unibs.projectIngesoft.persistence.implementations.AbstractUtentiRepository;
 import it.unibs.projectIngesoft.persistence.implementations.UtentiRepository;
 import it.unibs.projectIngesoft.persistence.serialization.SerializerJSON;
 import it.unibs.projectIngesoft.presentation.controllers.AccessoController;
 import it.unibs.projectIngesoft.presentation.controllers.ConfiguratoreController;
 import it.unibs.projectIngesoft.presentation.view.ConfiguratoreView;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+import java.util.List;
 
 class ConfiguratoreTest {
 
     private UtentiModel utentiModel;
-
     private Configuratore configuratoreTest;
+    private AbstractUtentiRepository repository;
+    private List<Utente> cleanData;
 
     @BeforeEach
     void prepareTest() {
-        UtentiRepository mapper = new UtentiRepository("usersJSONTEST.json",
+        repository= new UtentiRepository("mock.json",
                 "defaultCredentials.json",
                 new SerializerJSON<>(),
                 new SerializerJSON<>());
 
         this.configuratoreTest = new Configuratore("admin", "pwd");
-
-        this.utentiModel = new UtentiModel(mapper);
+        this.utentiModel = new UtentiModel(repository);
+        saveData();
     }
+
+    void saveData(){
+        cleanData = new ArrayList<>();
+        cleanData = repository.load();
+    }
+
+    @AfterEach
+    void tearDown() {
+        repository.save(new ArrayList<>(cleanData));
+    }
+
 
     @Test
     void primoAccessoConfiguratore() {

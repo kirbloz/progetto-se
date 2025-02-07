@@ -5,6 +5,7 @@ import it.unibs.projectIngesoft.core.domain.entities.utenti.Utente;
 import it.unibs.projectIngesoft.core.domain.model.ComprensorioGeograficoModel;
 import it.unibs.projectIngesoft.core.domain.model.UtentiModel;
 import it.unibs.projectIngesoft.libraries.InputInjector;
+import it.unibs.projectIngesoft.persistence.implementations.AbstractUtentiRepository;
 import it.unibs.projectIngesoft.persistence.implementations.CompGeoRepository;
 import it.unibs.projectIngesoft.persistence.implementations.UtentiRepository;
 import it.unibs.projectIngesoft.persistence.serialization.SerializerJSON;
@@ -26,29 +27,29 @@ class FruitoreTest {
     private Fruitore fruitoreTest;
     private UtentiModel utentiModel;
 
-    private UtentiRepository mapper;
+    private AbstractUtentiRepository repository;
     private List<Utente> cleanTestData;
 
 
     @BeforeEach
     void prepareTest() {
-        mapper = new UtentiRepository("usersTest.json",
+        repository = new UtentiRepository("mock.json",
                 "defaultCredentials.json",
                 new SerializerJSON<>(),
                 new SerializerJSON<>()
         );
 
         cleanTestData = new ArrayList<>();
-        cleanTestData = mapper.load();
+        cleanTestData = repository.load();
 
-        this.utentiModel = new UtentiModel(mapper);
+        this.utentiModel = new UtentiModel(repository);
         this.fruitoreTest = new Fruitore("user", "pwd", "valid@email.com", "comprensorio");
     }
 
 
     @AfterEach
     void tearDown() {
-        mapper.save(cleanTestData);
+        repository.save(cleanTestData);
     }
 
     @Test
@@ -84,14 +85,14 @@ class FruitoreTest {
         utentiModel.addUtente(fruitoreTest);
         utentiModel.cambioCredenziali(fruitoreTest, fruitoreTest.getUsername(), "pwd1");
 
-        assert fruitoreTest.getPassword().equals("pwd1");
+        assertEquals("pwd1",fruitoreTest.getPassword());
     }
 
     @Test
     void cambioCredenzialiFruitore_SoloUsername() {
         fruitoreTest.cambioCredenziali("newUser", "pwd");
-        assert fruitoreTest.getUsername().equals("newUser");
-        assert fruitoreTest.getPassword().equals("pwd");
+        assertEquals("newUser", fruitoreTest.getUsername());
+        assertEquals("pwd", fruitoreTest.getPassword());
     }
 
 

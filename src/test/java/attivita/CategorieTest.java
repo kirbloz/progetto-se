@@ -32,13 +32,15 @@ class CategorieTest {
 
     @BeforeEach
     void prepareTest() {
-        categorieRepository = new CategorieRepository("categorieTest.json",
+
+        categorieRepository = new CategorieRepository("mock.json",
                 new JsonSerializerFactory().createSerializer()
         );
+        categorieModel = new CategorieModel(categorieRepository);
         saveData();
     }
 
-    void saveData(){
+    void saveData() {
         cleanData = new ArrayList<>();
         cleanData = categorieRepository.load();
     }
@@ -50,28 +52,23 @@ class CategorieTest {
 
     @Test
     void aggiungiUnaRadice() {
-
-        assert !categorieModel.esisteRadice("nomeTest");
-
+        assertFalse(categorieModel.esisteRadice("nomeTest"));
         ConfiguratoreController controller = new ConfiguratoreController(new ConfiguratoreView(),
                 categorieModel,
                 null,
                 null,
                 null,
                 null,
-                new Configuratore("default", "test"));
+                null);
 
         InputInjector.inject("nomeTest\ncampoTest\n");
         controller.aggiungiRadice();
 
-        assert categorieModel.esisteRadice("nomeTest");
-
-        //controller.addGerarchia così aggiungeremo di più di una singola radice
+        assertTrue(categorieModel.esisteRadice("nomeTest"));
     }
 
     @Test
     void aggiungiGerarchia_RadiceNomeUnivoco_RadiceFoglia_FattoriInseritiCorrettamente() {
-        //todo questa roba controlla fattori.....
         Categoria radiceFoglia = new Categoria("radiceTest", "testing");
         FattoriModel fattoriModel = new FattoriModel(new FattoriDiConversioneRepository("fattoriTest.json", new JsonSerializerFactory().createSerializer()));
         ConfiguratoreController controller = new ConfiguratoreController(new ConfiguratoreView(),
@@ -79,7 +76,7 @@ class CategorieTest {
                 null,
                 null,
                 null,
-                new Configuratore("default", "test"));
+                null);
 
         this.categorieModel.setRadici(new ArrayList<>());
         fattoriModel.setHashMapFattori(new HashMap<>());
@@ -89,35 +86,21 @@ class CategorieTest {
         radiceFoglia.impostaCategorieFoglia();
         fattoriModel.inserisciSingolaFogliaNellaHashmap(radiceFoglia.getNome(), radiceFoglia.getFoglie());
 
-        String data = "radiceTest2\ncampoTest\n";
-        data = data + "1\nfigliaTest\nradice\nradiceTest2\nvaloreFiglia\nN\nS\n";
-        data = data + "1\nfigliaTest2\nfigliaTest\nradiceTest2\nvaloreFiglia2\nS" +
-                "\ndescrizione\nN\ndominioFake\n";
-        data = data + "0\n0.5\nradiceTest\nradiceTest\nradiceTest2\nfigliaTest\n1";
+        String data = "radiceTest2\ncampoTest\n" +
+                "1\nfigliaTest\nradice\nradiceTest2\nvaloreFiglia\nN\nS\n" +
+                "1\nfigliaTest2\nfigliaTest\nradiceTest2\nvaloreFiglia2\nS" +
+                "\ndescrizione\nN\ndominioFake\n" +
+                "0\n0.5\nradiceTest\nradiceTest\nradiceTest2\nfigliaTest\n1";
 
         InputInjector.inject(data);
         controller.aggiungiGerarchia();
 
-        assertTrue(fattoriModel.existsKeyInHashmapFattori("radiceTest2:figliaTest"));
-        assertTrue(fattoriModel.existsKeyInHashmapFattori("radiceTest2:figliaTest2"));
-
-        Optional<FattoreDiConversione> fattore1 = fattoriModel.getFattoriFromFoglia("radiceTest:radiceTest")
-                .stream().filter(f -> f.getNome_c2().equals("radiceTest2:figliaTest")).findAny();
-        Optional<FattoreDiConversione> fattore2 = fattoriModel.getFattoriFromFoglia("radiceTest2:figliaTest")
-                .stream().filter(f -> f.getNome_c2().equals("radiceTest2:figliaTest2")).findAny();
-        Optional<FattoreDiConversione> fattore3 = fattoriModel.getFattoriFromFoglia("radiceTest2:figliaTest2")
-                .stream().filter(f -> f.getNome_c2().equals("radiceTest2:figliaTest")).findAny();
-
-        assertTrue(fattore1.isPresent());
-        assertTrue(fattore2.isPresent());
-        assertTrue(fattore3.isPresent());
-    }
-
-
-    @Test
-    void aggiungiMadreFiglia_TipoValoreDominio() {
-
-        assert !false;
+        assertTrue(categorieModel.esisteRadice("radiceTest2"));
+        assertTrue(categorieModel.esisteRadice("radiceTest"));
+        assertNull(categorieModel.getRadice("figliaTest"));
+        assertNull(categorieModel.getRadice("figliaTest2"));
+        assertTrue(categorieModel.esisteCategoriaNellaGerarchia("figliaTest", "radiceTest2"));
+        assertTrue(categorieModel.esisteCategoriaNellaGerarchia("figliaTest2", "radiceTest2"));
     }
 
     @Test
@@ -128,7 +111,7 @@ class CategorieTest {
                 null,
                 null,
                 null,
-                new Configuratore("default", "test"));
+                null);
 
         InputInjector.inject("nomeTest\ncampoTest\n");
         controller.aggiungiRadice();
@@ -137,15 +120,58 @@ class CategorieTest {
                 categorieModel.getRadici().getLast(),
                 new ValoreDominio("nomeValoreTest"));
 
-        assert categoria.getValoreDominio().getDescrizione().isEmpty();
+        assertTrue(categoria.getValoreDominio().getDescrizione().isEmpty());
         categoria.getValoreDominio().setDescrizione("test");
-        assert categoria.getValoreDominio().getDescrizione().equals("test");
+        assertEquals("test", categoria.getValoreDominio().getDescrizione());
     }
 
+    @Test
+    void esploraGerarchie_PassoSceltaNuovoLivelloTest() {
+
+        Categoria radice = new Categoria("radiceTest", "tipo");
+        Categoria figlia1 = new Categoria("figlia1", "box", radice, new ValoreDominio("test"));
+        Categoria figlia2 = new Categoria("figlia2", radice, new ValoreDominio("black"));
+        Categoria figlia3 = new Categoria("figlia2", radice, new ValoreDominio("black"));
+
+        radice.aggiungiCategoriaFiglia(figlia1);
+        figlia1.aggiungiCategoriaFiglia(figlia2);
+        figlia1.aggiungiCategoriaFiglia(figlia3);
+
+        FruitoreController controller = new FruitoreController(new FruitoreView(),
+                categorieModel,
+                null,
+                null,
+                null,
+                null,
+                null);
+
+        InputInjector.inject("test\n");
+        assertEquals(figlia1, controller.selezionaNuovaMadreLivello(1, radice, radice));
+    }
 
     @Test
-    void esploraGerarchie_PassoSceltaNuovoLivelloTest(){
-        assert false;
+    void esploraGerarchie_PassoSceltaNuovoLivelloTest_TornaIndietro() {
+
+        Categoria radice = new Categoria("radiceTest", "tipo");
+        Categoria figlia1 = new Categoria("figlia1", "box", radice, new ValoreDominio("test"));
+        Categoria figlia2 = new Categoria("figlia2", radice, new ValoreDominio("black"));
+        Categoria figlia3 = new Categoria("figlia2", radice, new ValoreDominio("black"));
+
+        radice.aggiungiCategoriaFiglia(figlia1);
+        figlia1.aggiungiCategoriaFiglia(figlia2);
+        figlia1.aggiungiCategoriaFiglia(figlia3);
+
+        FruitoreController controller = new FruitoreController(new FruitoreView(),
+                categorieModel,
+                null,
+                null,
+                null,
+                null,
+                null);
+
+        InputInjector.inject("test\n");
+        assertEquals(radice, controller.selezionaNuovaMadreLivello(2, radice, radice));
+        assertEquals(radice, controller.selezionaNuovaMadreLivello(2, figlia1, radice));
     }
 
 }

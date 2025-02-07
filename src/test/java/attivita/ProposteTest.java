@@ -16,6 +16,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 public class ProposteTest {
 
     private ProposteModel model;
@@ -26,12 +29,10 @@ public class ProposteTest {
 
     @BeforeEach
     void prepareTest() {
-        proposteRepository = new ProposteRepository("proposteTest.json",
+        proposteRepository = new ProposteRepository("mock.json",
                 new JsonSerializerFactory().createSerializer()
         );
         saveData();
-        // creare i test con configuratore E quelli con utenteAttivo
-        //Fruitore utenteAttivo = new Fruitore("user", "pwd", "valid@email.com", "comprensorio");
 
         this.model = new ProposteModel(proposteRepository);
     }
@@ -52,7 +53,7 @@ public class ProposteTest {
 
         Proposta P = new Proposta("Matematica", "Fisica", 10, 10, utenteAttivo);
         model.addProposta(P);
-        assert model.getListaProposteComprensorio(utenteAttivo.getComprensorioDiAppartenenza()).contains(P);
+        assertTrue(model.getListaProposteComprensorio(utenteAttivo.getComprensorioDiAppartenenza()).contains(P));
     }
 
     @Test
@@ -61,7 +62,7 @@ public class ProposteTest {
 
         Proposta P = new Proposta("Matematica", "Fisica", 10, 10, utenteAttivo);
         P.setRitirata();
-        assert P.getStato().equals(StatiProposta.RITIRATA);
+        assertEquals(StatiProposta.RITIRATA, P.getStato());
     }
 
     @Test
@@ -70,7 +71,7 @@ public class ProposteTest {
 
         Proposta P = new Proposta("Matematica", "Fisica", 10, 10, utenteAttivo);
         P.setChiusa();
-        assert P.getStato().equals(StatiProposta.CHIUSA);
+        assertEquals(StatiProposta.CHIUSA, P.getStato());
     }
 
 
@@ -85,7 +86,8 @@ public class ProposteTest {
 
         model.cercaProposteDaChiudere(P1);
 
-        assert P1.getStato().equals(StatiProposta.CHIUSA) && P2.getStato().equals(StatiProposta.CHIUSA);
+        assertEquals(StatiProposta.CHIUSA, P1.getStato());
+        assertEquals(StatiProposta.CHIUSA, P2.getStato());
     }
 
     @Test
@@ -101,6 +103,8 @@ public class ProposteTest {
 
         model.cercaProposteDaChiudere(P1);
 
-        assert P1.getStato().equals(StatiProposta.CHIUSA) && P2.getStato().equals(StatiProposta.CHIUSA) && P3.getStato().equals(StatiProposta.CHIUSA);
+        assertEquals(StatiProposta.CHIUSA, P1.getStato());
+        assertEquals(StatiProposta.CHIUSA, P2.getStato());
+        assertEquals(StatiProposta.CHIUSA, P3.getStato());
     }
 }
