@@ -2,7 +2,6 @@ package it.unibs.projectIngesoft.presentation.controllers;
 
 import it.unibs.projectIngesoft.core.domain.model.*;
 import it.unibs.projectIngesoft.core.domain.entities.utenti.Utente;
-import it.unibs.projectIngesoft.presentation.view.ErmesTerminaleView;
 
 public abstract class BaseController<T extends Utente> {
 

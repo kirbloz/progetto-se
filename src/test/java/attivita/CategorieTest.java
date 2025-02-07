@@ -2,9 +2,7 @@ package attivita;
 
 
 import it.unibs.projectIngesoft.core.domain.entities.Categoria;
-import it.unibs.projectIngesoft.core.domain.entities.FattoreDiConversione;
 import it.unibs.projectIngesoft.core.domain.entities.ValoreDominio;
-import it.unibs.projectIngesoft.core.domain.entities.utenti.Configuratore;
 import it.unibs.projectIngesoft.core.domain.model.CategorieModel;
 import it.unibs.projectIngesoft.core.domain.model.FattoriModel;
 import it.unibs.projectIngesoft.libraries.InputInjector;
@@ -13,7 +11,9 @@ import it.unibs.projectIngesoft.persistence.implementations.CategorieRepository;
 import it.unibs.projectIngesoft.persistence.implementations.FattoriDiConversioneRepository;
 import it.unibs.projectIngesoft.persistence.serialization.JsonSerializerFactory;
 import it.unibs.projectIngesoft.presentation.controllers.ConfiguratoreController;
+import it.unibs.projectIngesoft.presentation.controllers.FruitoreController;
 import it.unibs.projectIngesoft.presentation.view.ConfiguratoreView;
+import it.unibs.projectIngesoft.presentation.view.FruitoreView;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -21,7 +21,6 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 

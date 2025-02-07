@@ -121,7 +121,7 @@ public class ConfiguratoreController extends BaseController<Configuratore>{
         utentiModel.cambioCredenziali(utenteAttivo, username, password);
     }
 
-    /////////////////////////////// CATEGORIE /////////////////////////////////////////////////
+    /////////////////////////////// FATTORI /////////////////////////////////////////////////
 
     /**
      * Cicla le foglie dalla prima all'ultima per generare tutte le coppie di valori possibili
@@ -148,23 +148,16 @@ public class ConfiguratoreController extends BaseController<Configuratore>{
 
     public void generaEMemorizzaNuoviFattori(String nomeRadice, List<Categoria> foglie) {
         if (foglie.isEmpty()) return;
+        List<FattoreDiConversione> nuoviFattoriTraTutteLeFoglieDellaNuovaRadice = ottieniFattoriDelleNuoveCategorie(nomeRadice, foglie);
 
-        //1. chiedi i fattori nuovi all'utente sulla base delle categorie appena inserite
-        List<FattoreDiConversione> nuoviDaNuovaRadice = ottieniFattoriDelleNuoveCategorie(nomeRadice, foglie);
-        //è vuoto se esiste una sola foglia
-        //se esistono fattori già presenti vanno calcolati i rapporti tra i nuovi (o la singola nuova foglia) e i vecchi
         if (!fattoriModel.isEmpty()) {
-            //2.1. chiedi le 2 foglie (una nuova(interna) e una preesistene(esterna)) per fare il confronto
             String nomeFogliaEsternaFormattata = view.selezioneFogliaDaLista(fattoriModel.getKeysets());
-            // 2. scegliere una categoria delle nuove, da utilizzare per il primo fattore di conversione (se non esistono nuovi fattori la scelta è tra una sola foglia)
             String nomeFogliaInternaFormattata = view.selezioneFogliaDaLista(nomeRadice, foglie);
-            //2.2. chiedi il fattore di conversione EsternoInterno [x in (Old:A, New:A, x)]
-            double fattoreDiConversioneEsternoInterno = view.ottieniFattoreDiConversione(nomeFogliaEsternaFormattata, nomeFogliaInternaFormattata);
-            fattoriModel.inserisciFattoriDiConversione(nomeFogliaEsternaFormattata, nomeFogliaInternaFormattata, fattoreDiConversioneEsternoInterno, nuoviDaNuovaRadice);
-        }else if (!nuoviDaNuovaRadice.isEmpty()) {
-            nuoviDaNuovaRadice.addAll(fattoriModel.calcolaInversi(nuoviDaNuovaRadice));
-            // 1. aggiungi i nuovi fattori (sono gli unici)
-            fattoriModel.aggiungiArrayListDiFattori(nuoviDaNuovaRadice);
+            double fattoreDiConversioneTraEsternaEInterna = view.ottieniFattoreDiConversione(nomeFogliaEsternaFormattata, nomeFogliaInternaFormattata);
+            fattoriModel.calcolaEInserisciFattoriDiConversione(nomeFogliaEsternaFormattata, nomeFogliaInternaFormattata, fattoreDiConversioneTraEsternaEInterna, nuoviFattoriTraTutteLeFoglieDellaNuovaRadice);
+        }else if (!nuoviFattoriTraTutteLeFoglieDellaNuovaRadice.isEmpty()) {
+            nuoviFattoriTraTutteLeFoglieDellaNuovaRadice.addAll(fattoriModel.calcolaInversi(nuoviFattoriTraTutteLeFoglieDellaNuovaRadice));
+            fattoriModel.aggiungiListDiFattori(nuoviFattoriTraTutteLeFoglieDellaNuovaRadice);
         } else {
             fattoriModel.inserisciSingolaFogliaNellaHashmap(nomeRadice, foglie);
         }
@@ -182,6 +175,8 @@ public class ConfiguratoreController extends BaseController<Configuratore>{
         }
         view.visualizzaFattori(fattoriModel.getFattoriFromFoglia(categoriaFormattata));
     }
+
+    /// /////////////////////////////////////////////// CATEGORIA ////////////////////////////////////////////////////
 
     public void aggiungiRadice() {
         String nomeRadice;
@@ -213,28 +208,20 @@ public class ConfiguratoreController extends BaseController<Configuratore>{
 
 
     private void aggiungiCategoria(Categoria radice) {
-        // 1. chiede nome
         String nomeCategoria = view.inserimentoNomeNuovaCategoria(categorieModel, radice);
 
-        // 1.1 chiede madre per nuova radice, verificando che esista
         String nomeCategoriaMadre = view.inserimentoNomeCategoriaMadre(nomeCategoria,
                 categorieModel.getListaNomiCategorieGerarchiaFiltrata(radice, Categoria::isNotFoglia));
         Categoria categoriaMadre = radice.cercaCategoria(nomeCategoriaMadre);
 
-        // 2. chiede valore del dominio ereditato + descrizione
         String nomeValoreDominio = view.inserimentoValoreDominio(nomeCategoria, categoriaMadre);
         ValoreDominio valoreDominio = creaValoreDominio(nomeValoreDominio);
 
-        // 3. chiede se è foglia
         boolean isFoglia = view.getUserChoiceYoN(ASK_CATEGORIA_IS_FOGLIA);
-        // 3.1 se non è foglia, inserisce il dominio che imprime alle figlie
         String nomeCampoFiglie = isFoglia ?
                 "" : view.getUserInput(MSG_INSERIMENTO_DOMINIO_PER_FIGLIE);
 
-        // 4. creazione dell'oggetto Categoria
-        Categoria tempCategoria = creaCategoriaNonRadice(nomeCategoria, categoriaMadre, valoreDominio, nomeCampoFiglie, isFoglia);
-        // 5. aggiunta della categoria figlia alla madre
-        categoriaMadre.aggiungiCategoriaFiglia(tempCategoria);
+        categoriaMadre.aggiungiCategoriaFiglia(creaCategoriaNonRadice(nomeCategoria, categoriaMadre, valoreDominio, nomeCampoFiglie, isFoglia));
     }
 
     public ValoreDominio creaValoreDominio(String domainValueName) {
@@ -260,7 +247,7 @@ public class ConfiguratoreController extends BaseController<Configuratore>{
 
     public void aggiungiComprensorio() {
         String nomeComprensorio = view.inserimentoNomeComprensorio(compGeoModel.getListaNomiComprensoriGeografici().toArray(String[]::new));
-        List<String> comuniDaInserire = view.inserimentoComuni(); //fai in inputdati un inserimento ArraydiStringhe univoche
+        List<String> comuniDaInserire = view.inserimentoComuni();
         compGeoModel.aggiungiComprensorio(nomeComprensorio, comuniDaInserire);
     }
 

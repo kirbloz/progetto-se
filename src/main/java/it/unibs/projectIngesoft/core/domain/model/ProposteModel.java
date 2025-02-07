@@ -1,14 +1,11 @@
 package it.unibs.projectIngesoft.core.domain.model;
 
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import it.unibs.projectIngesoft.core.domain.entities.Proposta;
 import it.unibs.projectIngesoft.core.domain.entities.StatiProposta;
 import it.unibs.projectIngesoft.core.domain.entities.utenti.Fruitore;
 import it.unibs.projectIngesoft.persistence.Repository;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Predicate;

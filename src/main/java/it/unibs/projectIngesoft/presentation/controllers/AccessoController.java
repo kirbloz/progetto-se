@@ -1,13 +1,14 @@
 package it.unibs.projectIngesoft.presentation.controllers;
 
+import it.unibs.projectIngesoft.core.domain.entities.utenti.Utente;
 import it.unibs.projectIngesoft.core.domain.model.ComprensorioGeograficoModel;
 import it.unibs.projectIngesoft.core.domain.model.UtentiModel;
-import it.unibs.projectIngesoft.core.domain.entities.utenti.Utente;
 import it.unibs.projectIngesoft.presentation.view.AccessoView;
 
-import static it.unibs.projectIngesoft.core.domain.model.UtentiModel.isValidEmail;
+import static it.unibs.projectIngesoft.libraries.Utilitas.isValidEmail;
 
 public class AccessoController {
+
 
     private final UtentiModel utentiModel;
     private final ComprensorioGeograficoModel comprensorioModel;
@@ -38,11 +39,11 @@ public class AccessoController {
     private Utente register() {
         boolean riuscito = false;
         String[] credenziali;
-        do{
+        do {
             credenziali = view.richiestaCredenziali();
-            if(!utentiModel.existsUsername(credenziali[0])) {
+            if (!utentiModel.existsUsername(credenziali[0])) {
                 riuscito = true;
-            }else{
+            } else {
                 view.visualizzaErroreUsernameGiaInUso();
             }
         } while (!riuscito);
@@ -64,21 +65,14 @@ public class AccessoController {
 
     public Utente run() {
         Utente utenteAttivo = null;
-
         do {
-            //1. print menu principale
             int scelta = view.visualizzaMenuPrincipale();
-            //2. sceglie tra login e register
             switch (scelta) {
-                case 1 -> utenteAttivo = this.login(); //config & fruitore
-                case 2 -> utenteAttivo = this.register(); //fruitore
+                case 1 -> utenteAttivo = this.login();
+                case 2 -> utenteAttivo = this.register();
             }
         } while (utenteAttivo == null);
-
-        //3. gestisce IO con accessoVIew
         return utenteAttivo;
-
     }
-
 
 }

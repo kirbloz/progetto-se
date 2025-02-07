@@ -15,7 +15,6 @@ import java.util.Map;
 
 public class ConfiguratoreView extends ErmesTerminaleView {
 
-    //public static final String TITLE_MAIN_MENU = "MENU' PRINCIPALE - SCAMBIO ORE";
     public static final String[] vociMainConfiguratore = new String[]{
             "Cambia Credenziali",
             "Menu Comprensorio ",
@@ -65,18 +64,13 @@ public class ConfiguratoreView extends ErmesTerminaleView {
     public static final String WARNING_CATEGORIA_NF_NON_ESISTE = ">> (!!) Per favore indica una categoria non foglia dell'albero gerarchico selezionato.\n";
     public static final String MSG_SELEZIONE_TRA_ESISTENTI = ">> Inserisci uno tra questi:\n> ";
 
-
     private static final String MSG_INPUT_NOME = ">> Inserisci un nome non già in uso:\n> ";
     public static final String NOME_COMPRENSORIO_FORMATTED = " [ %s ]";
 
-
-    /// Copiato da FattoriModel
     public static final String INSERISCI_IL_FATTORE_TRA = ">> Inserisci il fattore tra [%s] e [%s]:\n> ";
 
     public static final String WARNING_CATEGORIA_NON_ESISTE = ">> (!!) La foglia richiesta non esiste o non esistono fattori relativi a questa foglia";
     public static final String WARNING_NO_FATTORI_MEMORIZZATI = ">> (!!) Non ci sono Fattori di Conversione memorizzati";
-
-    // STRINGHE PER PROPOSTE
 
     public static final String HEADER_PROPOSTE_PRONTE = ">> PROPOSTE PRONTE <<";
     public static final String HEADER_PROPOSTE_CATEGORIA = ">> PROPOSTE CON %s <<\n";
@@ -86,7 +80,6 @@ public class ConfiguratoreView extends ErmesTerminaleView {
     public static final String MSG_SCEGLI_NOMI_LISTA = ">> Scegli uno tra i seguenti nomi: ";
     public static final String MSG_SCELTA_CATEGORIA = ">> Scegli la categoria.";
 
-    // STRINGHE PER COMPRENSORI
 
     public int visualizzaMenuPrincipale() {
         Menu menu = new Menu(TITLE_MAIN_MENU,

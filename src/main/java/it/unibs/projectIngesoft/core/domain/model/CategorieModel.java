@@ -16,17 +16,12 @@ public class CategorieModel {
      * Costruttore per inizializzare i percorsi dei file e de-serializzare l'albero.
      */
     public CategorieModel(Repository<List<Categoria>> repository) {
-        this.radici = new ArrayList<>();
         this.repository = repository;
         load();
     }
 
     public void save() {
         repository.save(this.radici);
-    }
-
-    public void load() {
-        this.radici = (new ArrayList<>(repository.load()));
     }
 
     public List<Categoria> getRadici() {

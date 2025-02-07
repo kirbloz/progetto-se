@@ -8,7 +8,6 @@ import java.util.List;
 
 public abstract class AbstractUtentiRepository extends SerializerBasedRepository<List<Utente>> {
 
-
     protected AbstractUtentiRepository(String filePath, Serializer<List<Utente>> serializer) {
         super(filePath, serializer);
     }

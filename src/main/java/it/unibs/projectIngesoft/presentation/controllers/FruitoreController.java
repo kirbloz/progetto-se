@@ -37,7 +37,7 @@ public class FruitoreController extends BaseController <Fruitore> {
 
 
     public void run(){
-        int scelta = 0;
+        int scelta;
 
         do {
             scelta = view.visualizzaMenuPrincipale();
@@ -47,8 +47,6 @@ public class FruitoreController extends BaseController <Fruitore> {
                 case 1 -> cambioCredenziali();
                 case 2 -> runControllerProposte();
                 case 3 -> runControllerCategorie();
-                default -> {
-                } // già gestito dalla classe Menu
             }
 
         } while (scelta != 0);
@@ -80,7 +78,7 @@ public class FruitoreController extends BaseController <Fruitore> {
     }
 
 
-    private void cambioCredenziali() {
+    protected void cambioCredenziali() {
         String username;
         do {
             username = view.richiestaUsername();
@@ -98,11 +96,10 @@ public class FruitoreController extends BaseController <Fruitore> {
         }
         int scelta;
 
-        // 0. seleziono la radice della gerarchia da esplorare
-        List<Categoria> listaRadiciNonFoglia = categorieModel.getRadici()
+        List<Categoria> listaRadiciEsplorabili = categorieModel.getRadici()
                 .stream().filter(c -> !c.isFoglia()).toList();
-        Categoria radice = inserimentoNomeCategoria(listaRadiciNonFoglia);
-        Categoria madreCorrente = radice; // categoria madre del livello che si sta visualizzando al momento
+        Categoria radice = inserimentoNomeCategoria(listaRadiciEsplorabili);
+        Categoria madreCorrente = radice;
 
         do {
             view.visualizzaLivello(madreCorrente.getCampoFiglie(), madreCorrente);
@@ -133,7 +130,6 @@ public class FruitoreController extends BaseController <Fruitore> {
 
 
     public Categoria inserimentoNomeCategoria(List<Categoria> categorie) {
-
         String tempNomeRadice;
         do {
             view.visualizzaListaRadici(categorie);
@@ -196,7 +192,7 @@ public class FruitoreController extends BaseController <Fruitore> {
             return;
         }
         Proposta tempProposta = new Proposta(categoriaRichiesta, categoriaOfferta, oreRichiesta, oreOfferta.get(), utenteAttivo);
-        // 3.1 se confermi ma è duplicata, segnala e non aggiunge
+
         if (proposteModel.controllaPropostaDuplicata(tempProposta, utenteAttivo.getComprensorioDiAppartenenza())) {
             view.visualizzaMessaggioErroreDuplicato();
             return;
@@ -207,7 +203,6 @@ public class FruitoreController extends BaseController <Fruitore> {
     }
 
     public String inserimentoFogliaFormattataFromAvailable(String prompt){
-
         if(fattoriModel.isEmpty()) {
             view.visualizzaErroreNessunaCategoriaFoglia();
         }

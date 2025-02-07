@@ -5,13 +5,15 @@ import it.unibs.projectIngesoft.libraries.Menu;
 import java.util.List;
 
 // classe generica per la view del login a priori
-public class AccessoView /*implements EventListener*/ {
+public class AccessoView {
 
     public static final String MSG_RICHIESTA_USERNAME = "Inserisci il tuo username: ";
     public static final String MSG_RICHIESTA_PASSWORD = "Inserisci la tua password: ";
     public static final String MSG_RICHIESTA_EMAIL = "Inserisci la tua email: ";
     public static final String MSG_RICHIESTA_COMPRENSORIO = " Inserisci il tuo comprensorio di Appartenenza tra quelli sopra: ";
 
+
+    public static final String WARNING_LOGIN_FALLITO_CREDENZIALI_ERRATE = "Login fallito, credenziali errate.";
     public static final String WARNING_USERNAME_ESISTE_GIA = ">> Errore: Username già in uso";
     public static final String WARNING_INVALID_MAIL = ">> Errore: Email non valida";
 
@@ -20,6 +22,8 @@ public class AccessoView /*implements EventListener*/ {
             "Login",
             "Registrazione"
     };
+    public static final String MSG_INPUT_SELEZIONE_NOME = ">> Scegli uno tra i seguenti nomi: ";
+    public static final String WARNING_NON_ESISTE_COMPRENSORIO = "Errore: Comprensorio inesistente";
 
     public AccessoView(/*AccessoController controllerAccesso*/) {
 
@@ -49,7 +53,6 @@ public class AccessoView /*implements EventListener*/ {
         for (String nome : lista) {
             System.out.println(nome);
         }
-        // immissione della foglia e verifica che sia corretto [New:A in (Old:A New:A x)]
         String nomeInserito;
         boolean esisteNome = false;
         do {
@@ -64,7 +67,6 @@ public class AccessoView /*implements EventListener*/ {
                 System.out.println("Errore: Comprensorio inesistente");
             }
         } while (!esisteNome);
-
         return nomeInserito;
     }
 

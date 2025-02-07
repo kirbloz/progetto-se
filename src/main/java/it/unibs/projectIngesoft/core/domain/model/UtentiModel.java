@@ -9,7 +9,6 @@ import it.unibs.projectIngesoft.core.domain.entities.utenti.Utente;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.regex.Pattern;
 
 public class UtentiModel {
 
@@ -20,9 +19,6 @@ public class UtentiModel {
     public UtentiModel(AbstractUtentiRepository repository) {
         this.repository = repository;
         utenti = repository.load();
-        if(utenti == null) {
-            utenti = new ArrayList<>();
-        }
         this.defaultUtente =  repository.loadDefaultUtente();
     }
 

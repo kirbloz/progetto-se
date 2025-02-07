@@ -2,7 +2,6 @@ package it.unibs.projectIngesoft.core.domain.model;
 
 import it.unibs.projectIngesoft.core.domain.entities.ComprensorioGeografico;
 import it.unibs.projectIngesoft.persistence.Repository;
-import it.unibs.projectIngesoft.persistence.implementations.CompGeoRepository;
 
 import java.util.ArrayList;
 import java.util.List;

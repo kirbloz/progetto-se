@@ -13,7 +13,7 @@ public class FattoriDiConversioneRepository extends SerializerBasedRepository<Ma
 
     public FattoriDiConversioneRepository(String filePath,
                                           Serializer<Map<String, List<FattoreDiConversione>>> serializer) {
-       super(filePath, serializer);
+        super(filePath, serializer);
     }
 
     public void save(Map<String, List<FattoreDiConversione>> hashListaFdC) {
