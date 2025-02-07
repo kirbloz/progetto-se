@@ -317,10 +317,8 @@ public class ConfiguratoreView extends ErmesTerminaleView {
 
         for (Fruitore autore : mapDaNotificare.keySet()) {
             for (Proposta proposta : mapDaNotificare.get(autore)) {
-                System.out.println(proposta);
-                String email = autore.getEmail();
-                String comprensorio = autore.getComprensorioDiAppartenenza();
-                print(MSG_FORMATTED_PROPOSTA_PRONTA.formatted(autore.getUsername(), comprensorio, email));
+                print(formattaProposta(proposta));
+                print(MSG_FORMATTED_PROPOSTA_PRONTA.formatted(autore.getUsername(), autore.getComprensorioDiAppartenenza(), autore.getEmail()));
                 proposta.notificata();
             }
         }
