@@ -96,7 +96,16 @@ public class FattoriTest {
 
     @Test
     void aggiungiListDiFattoriTest(){
+        List<FattoreDiConversione> listFattori = new ArrayList<>();
+        FattoreDiConversione F1 = new FattoreDiConversione("radice:cat1", "radice:cat2", 1.5);
+        FattoreDiConversione F2 = new FattoreDiConversione("radice:cat2", "radice:cat3", 0.9);
+        listFattori.add(F1);
+        fattoriModel.aggiungiListDiFattori(listFattori);
 
+        assertTrue(fattoriModel.esisteCategoria("radice:cat1"));
+        assertTrue(fattoriModel.esisteCategoria("radice:cat2"));
+        assertEquals(1, fattoriModel.getFattoriFromFoglia("radice:cat1"));
+        assertEquals(1, fattoriModel.getFattoriFromFoglia("radice:cat2"));
     }
 
     @Test
