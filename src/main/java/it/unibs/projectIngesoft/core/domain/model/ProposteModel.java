@@ -27,7 +27,7 @@ public class ProposteModel {
 
         this.repository = repository;
         hashListaProposte = repository.load();
-        if(hashListaProposte == null) {
+        if (hashListaProposte == null) {
             hashListaProposte = new HashMap<>();
         }
     }
@@ -51,7 +51,7 @@ public class ProposteModel {
         else return new ArrayList<>();
     }
 
-    public void save(){
+    public void save() {
         repository.save(hashListaProposte);
     }
 
@@ -60,8 +60,7 @@ public class ProposteModel {
      *
      * @return true se esiste, false altrimenti
      */
-	public boolean controllaPropostaDuplicata(Proposta proposta) {
-        String comprensorio = UtentiModel.getInformazioniFruitore(proposta.getAutoreUsername()).getComprensorioDiAppartenenza();
+    public boolean controllaPropostaDuplicata(Proposta proposta, String comprensorio) {
         return getListaProposteComprensorio(comprensorio).stream()
                 .filter(p -> p.getStato() == StatiProposta.APERTA)
                 .anyMatch(p -> p.getRichiesta().equals(proposta.getRichiesta())
@@ -137,14 +136,14 @@ public class ProposteModel {
      * @param oreRichiesta,       ore richieste
      * @return Proposta se esiste, null altrimenti
      */
-	public Proposta cercaPropostaCambiabile(String categoriaOfferta, String categoriaRichiesta, int oreRichiesta, Fruitore autore) {
+    public Proposta cercaPropostaCambiabile(String categoriaOfferta, String categoriaRichiesta, int oreRichiesta, Fruitore autore) {
 
         Predicate<Proposta> filtro = p -> p.getOfferta().equals(categoriaOfferta)
                 && p.getOreRichiesta() == oreRichiesta
                 && p.getRichiesta().equals(categoriaRichiesta)
                 && p.getComprensorio().equals(autore.getComprensorioDiAppartenenza())
-				&& p.getAutoreUsername().equals(autore.getUsername())
-				&& p.getStato() != StatiProposta.CHIUSA;
+                && p.getAutoreUsername().equals(autore.getUsername())
+                && p.getStato() != StatiProposta.CHIUSA;
 
         return getFilteredProposte(filtro)
                 .findFirst()
@@ -154,35 +153,35 @@ public class ProposteModel {
     public Stream<Proposta> getFilteredProposte(Predicate<Proposta> filtro) {
         return hashListaProposte.keySet().stream().flatMap(comprensorio -> hashListaProposte.get(comprensorio).stream()).filter(filtro);
     }
-	
-	
-	//////////////////// Nuovi Metodi /////////////////////////////////
+
+
+    /// ///////////////// Nuovi Metodi /////////////////////////////////
 
     // todo questo metodo è replicabile semplicemente chiamando getFilteredProposte e controllando che il risultato
     // non sia empty
     // ho cambiato il nome perchè si cerca per autore, non utente.
     // c'è sempre la certezza che questi metodi siano chiamati con fruitori
-	public boolean esisteAlmenoUnaPropostaPerAutore(Fruitore autore){
+    public boolean esisteAlmenoUnaPropostaPerAutore(Fruitore autore) {
         Predicate<Proposta> filtro = p -> p.getAutoreUsername().equals(/*utenteAttivo*/autore.getUsername())
                 && p.getStato() != StatiProposta.CHIUSA;
         return getFilteredProposte(filtro).findAny().isPresent(); //versione stream equivalente a !isEmpty()
-	}
+    }
 
-	public List<Proposta> getProposteModificabiliPerAutore(Fruitore autore){
+    public List<Proposta> getProposteModificabiliPerAutore(Fruitore autore) {
         Predicate<Proposta> filtro = p -> p.getAutoreUsername().equals(autore.getUsername())
                 && p.getStato() != StatiProposta.CHIUSA;
-		return getFilteredProposte(filtro).toList();
+        return getFilteredProposte(filtro).toList();
 
-	}
-	
-	public void cambiaStato(Proposta daCambiare){
-		if(daCambiare.getStato() == StatiProposta.APERTA) daCambiare.setRitirata();
+    }
+
+    public void cambiaStato(Proposta daCambiare) {
+        if (daCambiare.getStato() == StatiProposta.APERTA) daCambiare.setRitirata();
         else {
             daCambiare.setAperta();
             cercaProposteDaChiudere(daCambiare);
         }
         save();
-	}
+    }
 
     public List<Proposta> getPropostePerAutore(Fruitore autore) {
         Predicate<Proposta> filtro = p -> p.getAutoreUsername().equals(autore.getUsername());
