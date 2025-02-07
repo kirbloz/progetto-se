@@ -45,13 +45,6 @@ public class Proposta {
         aggiornaStoricoStati();
     }
 
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Richiesta:\t[ ").append(richiesta).append(", ").append(oreRichiesta).append(" ore ]\n");
-        sb.append("Offerta:\t[ ").append(offerta).append(", ").append(oreOfferta).append(" ore ]\n");
-        return sb.toString();
-    }
-
     /**
      * La compatibilità vuole che la richiesta della proposta passata sia uguale all'offerta della proposta corrente.
      *
