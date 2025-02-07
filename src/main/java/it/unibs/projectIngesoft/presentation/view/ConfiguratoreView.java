@@ -125,6 +125,9 @@ public class ConfiguratoreView extends ErmesTerminaleView {
             case "submenu":
                 print(">> USCITA SUBMENU..");
                 break;
+            default:
+                print(">> USCITA MENU "+ menu);
+                break;
         }
     }
 
@@ -188,13 +191,15 @@ public class ConfiguratoreView extends ErmesTerminaleView {
         assert radice != null : "radice non può essere null";
 
         String tempNome;
+        boolean valid;
         do {
             visualizzaGerarchia(radice); // stampa la gerarchia
             tempNome = getUserInput(MSG_INSERIMENTO_NUOVA_CATEGORIA);
             if (model.esisteCategoriaNellaGerarchia(tempNome, radice.getNome())) {
-                System.out.print(WARNING_CATEGORIA_ESISTE);
+                print(WARNING_CATEGORIA_ESISTE);
             }
-        } while (model.esisteCategoriaNellaGerarchia(tempNome, radice.getNome()));
+            valid = !tempNome.contains(":");
+        } while (model.esisteCategoriaNellaGerarchia(tempNome, radice.getNome())|| !valid);
         return tempNome;
     }
 
@@ -211,7 +216,7 @@ public class ConfiguratoreView extends ErmesTerminaleView {
         do {
             nomeMadre = getUserInput(String.format(MSG_INSERIMENTO_NOME_CATEGORIA_MADRE, nomeCategoria));
             if (!possibiliMadri.contains(nomeMadre))
-                System.out.println(WARNING_CATEGORIA_NF_NON_ESISTE);
+                print(WARNING_CATEGORIA_NF_NON_ESISTE);
         } while (!possibiliMadri.contains(nomeMadre));
 
         return nomeMadre;
@@ -249,7 +254,7 @@ public class ConfiguratoreView extends ErmesTerminaleView {
     public String selezioneFogliaDaLista(String[] foglie) {
 
         for (String foglia : foglie) {
-            System.out.println(foglia);
+            print(foglia);
         }
         // immissione della foglia e verifica che sia corretto [New:A in (Old:A New:A x)]
         String fogliaSelezionata;
@@ -271,9 +276,9 @@ public class ConfiguratoreView extends ErmesTerminaleView {
     }
 
     public String selezionaNomeDaLista(List<String> lista) {
-        System.out.println(MSG_SCEGLI_NOMI_LISTA);
+        print(MSG_SCEGLI_NOMI_LISTA);
         for (String nome : lista) {
-            System.out.println(nome);
+            print(nome);
         }
         // immissione della foglia e verifica che sia corretto [New:A in (Old:A New:A x)]
         return getUserInputFromAvailable(MSG_SELEZIONE_TRA_ESISTENTI, lista.toArray(String[]::new));
