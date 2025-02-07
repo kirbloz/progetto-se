@@ -40,7 +40,7 @@ public class FruitoreView extends ErmesTerminaleView {
     public static final String HEADER_PROPOSTE_AUTORE = ">> PROPOSTE DI %s <<\n";
 
 
-    public static final String MSG_RICHIESTA_ORE = ">> Inserisci il numero di ORE che vuoi richiedere:\n> ";
+    public static final String MSG_RICHIESTA_ORE = ">> Inserisci il numero di ORE:\n> ";
     public static final String MSG_CONFERMA_PROPOSTA = ">> Dovrai offrire %d ore in cambio. Confermi?%n> ";
 
     public static final String MSG_CONFERMA_CAMBIO_STATO = ">> Vuoi cambiare lo stato della proposta da %s a %s?";
