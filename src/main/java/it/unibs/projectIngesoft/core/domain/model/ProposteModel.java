@@ -16,8 +16,7 @@ import java.util.stream.Stream;
 
 
 public class ProposteModel {
-    @JacksonXmlElementWrapper(localName = "listaProposte")
-    @JacksonXmlProperty(localName = "Proposta")
+
     private Map<String, List<Proposta>> hashListaProposte;
 
     private final Repository<Map<String, List<Proposta>>> repository;
