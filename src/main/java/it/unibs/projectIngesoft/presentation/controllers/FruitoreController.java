@@ -254,7 +254,7 @@ public class FruitoreController extends UtenteController<Fruitore> {
 		boolean conferma = view.visualizzaInserimentoConfermaCambioStatoProposta(daCambiare);
         if(conferma){
 			proposteModel.cambiaStato(daCambiare);
-            view.visualizzaConfermaCambioStatoProposta();
+            view.visualizzaConfermaCambioStatoProposta(daCambiare.getStato().name());
 		}
     }
 

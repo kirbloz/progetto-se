@@ -110,6 +110,7 @@ public class FruitoreView extends ErmesTerminaleView {
         return InputDatiTerminale.leggiInteroPositivo(MSG_RICHIESTA_ORE);
     }
 
+
     public void visualizzaErroreInserimentoCategoria() {
         print("Errore inserimento categoria!");
     }
@@ -141,8 +142,8 @@ public class FruitoreView extends ErmesTerminaleView {
         return getUserChoiceYoN(MSG_CONFERMA_CAMBIO_STATO.formatted(statoAttuale, statoNuovo));
     }
 
-    public void visualizzaConfermaCambioStatoProposta() {
-        print(MSG_STATO_MODIFICATO);
+    public void visualizzaConfermaCambioStatoProposta(String stato) {
+        print(MSG_STATO_MODIFICATO.formatted(stato));
     }
 
     public void visualizzaProposteModificabiliHeader() {
