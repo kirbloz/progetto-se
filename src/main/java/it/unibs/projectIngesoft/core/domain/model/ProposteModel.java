@@ -19,13 +19,8 @@ public class ProposteModel {
     private final Repository<Map<String, List<Proposta>>> repository;
 
     public ProposteModel(Repository<Map<String, List<Proposta>>> repository) {
-        this.hashListaProposte = new HashMap<>();
-
         this.repository = repository;
         hashListaProposte = repository.load();
-        if (hashListaProposte == null) {
-            hashListaProposte = new HashMap<>();
-        }
     }
 
     public void addProposta(Proposta proposta) {
