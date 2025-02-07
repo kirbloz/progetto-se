@@ -17,7 +17,7 @@ public class CategorieModel {
      */
     public CategorieModel(Repository<List<Categoria>> repository) {
         this.repository = repository;
-        load();
+        this.radici = repository.load();
     }
 
     public void save() {
