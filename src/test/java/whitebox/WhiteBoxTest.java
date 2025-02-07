@@ -87,7 +87,8 @@ public class WhiteBoxTest {
 
     @Test
     void secondoCamminoWhiteBoxTesting_GeneraEMemorizzaNuoviFattori(){
-        // 1 2 3 4, 5, 7, 8, 13
+        // 1 2 3,4 5 6 8 13 15
+
         // foglie not empty
         // fattoriModel empty
         // nuoviDaNuovaRadice not empty
@@ -98,22 +99,36 @@ public class WhiteBoxTest {
         InputInjector.inject("1.3\n");
 
         controller.generaEMemorizzaNuoviFattori("radice", categorie);
+        double inverso = fattoriModel.calcolaInversi(List.of(fattoriModel.getFattoriFromFoglia("radice:radice").getFirst())).getFirst().getFattore();
 
         assertTrue(fattoriModel.esisteCategoria("radice:radice"));
         assertTrue(fattoriModel.esisteCategoria("radice:radice2"));
         assertEquals(1, fattoriModel.getFattoriFromFoglia("radice:radice").size());
         assertEquals(1, fattoriModel.getFattoriFromFoglia("radice:radice2").size());
         assertEquals(1.3, fattoriModel.getFattoriFromFoglia("radice:radice").getFirst().getFattore());
-        double inverso = fattoriModel.calcolaInversi(List.of(fattoriModel.getFattoriFromFoglia("radice:radice").getFirst())).getFirst().getFattore();
         assertEquals(inverso, fattoriModel.getFattoriFromFoglia("radice:radice2").getFirst().getFattore());
     }
 
+    @Test
     void terzoCamminoWhiteBoxTesting_GeneraEMemorizzaNuoviFattori(){
-        assert false;
+        // 1 2 3,4 5 7 8 13 15
+
+        // foglie non è vuoto
+        //fattoriModel è empty
+        //nuoviDaRadice
+        List<Categoria> categorie = new ArrayList<>();
+        categorie.add(new Categoria("radice"));
+
+
+        controller.generaEMemorizzaNuoviFattori("radice", categorie);
+
+        assertTrue(fattoriModel.esisteCategoria("radice:radice"));
+        assertEquals(0, fattoriModel.getFattoriFromFoglia("radice:radice").size());
     }
 
     @Test
     void quartoCamminoWhiteBoxTesting_GeneraEMemorizzaNuoviFattori(){
+        // 1 2 14 15
         List<FattoreDiConversione> listaFattoriGiaEsistenti = new ArrayList<>();
         FattoreDiConversione fattore1 = new FattoreDiConversione("radice:categoriaUno", "radice:categoriaDue", 2.0);
         FattoreDiConversione fattore2 = fattoriModel.generaInverso(fattore1);
@@ -122,15 +137,14 @@ public class WhiteBoxTest {
 
         fattoriModel.aggiungiArrayListDiFattori(listaFattoriGiaEsistenti);
 
-        controller.generaEMemorizzaNuoviFattori("radice2", new ArrayList<Categoria>());
+        controller.generaEMemorizzaNuoviFattori("radice2", new ArrayList<>());
 
-
-        assert(fattore1.getNome_c1().equals(fattoriModel.getFattoriFromFoglia("radice:categoriaUno").getFirst().getNome_c1()) &&
-                fattore1.getNome_c2().equals(fattoriModel.getFattoriFromFoglia("radice:categoriaUno").getFirst().getNome_c2()) &&
-                fattore1.getFattore() == fattoriModel.getFattoriFromFoglia("radice:categoriaUno").getFirst().getFattore());
-        assert(fattore2.getNome_c1().equals(fattoriModel.getFattoriFromFoglia("radice:categoriaDue").getFirst().getNome_c1()) &&
-                fattore2.getNome_c2().equals(fattoriModel.getFattoriFromFoglia("radice:categoriaDue").getFirst().getNome_c2()) &&
-                fattore2.getFattore() == fattoriModel.getFattoriFromFoglia("radice:categoriaDue").getFirst().getFattore());
+        assertEquals(fattore1.getNome_c1(), fattoriModel.getFattoriFromFoglia("radice:categoriaUno").getFirst().getNome_c1());
+        assertEquals(fattore1.getNome_c2(), fattoriModel.getFattoriFromFoglia("radice:categoriaUno").getFirst().getNome_c2());
+        assertEquals(fattore1.getFattore(), fattoriModel.getFattoriFromFoglia("radice:categoriaUno").getFirst().getFattore());
+        assertEquals(fattore2.getNome_c1(), fattoriModel.getFattoriFromFoglia("radice:categoriaDue").getFirst().getNome_c1());
+        assertEquals(fattore2.getNome_c2(), fattoriModel.getFattoriFromFoglia("radice:categoriaDue").getFirst().getNome_c2());
+        assertEquals(fattore2.getFattore(), fattoriModel.getFattoriFromFoglia("radice:categoriaDue").getFirst().getFattore());
     }
 
 
