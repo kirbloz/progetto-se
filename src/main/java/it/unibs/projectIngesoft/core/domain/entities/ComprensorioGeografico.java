@@ -33,19 +33,6 @@ public class ComprensorioGeografico {
         this.setListaComuni(listaComuni);
     }
 
-    /** todo martino questo lo leviamo?
-     * Aggiunge un comune alla lista nel Comprensorio.
-     *
-     * @param comune, nome del comune da aggiungere
-     */
-   /* public void addComune(String comune) {
-        assert comune != null
-                && !comune.trim().isEmpty() : "Il nome del comune non deve essere null o vuoto";
-        if (!listaComuni.contains(comune)) // controlla non ci siano duplicati
-            this.listaComuni.add(comune);
-    }*/
-
-
     public void setNomeComprensorio(String nomeComprensorio) {
         assert nomeComprensorio != null
                 && !nomeComprensorio.trim().isEmpty() : "Il nome del comprensorio non deve essere null o vuoto";
