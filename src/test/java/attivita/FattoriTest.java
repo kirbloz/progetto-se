@@ -2,6 +2,7 @@ package attivita;
 
 
 import it.unibs.projectIngesoft.core.domain.entities.Categoria;
+import it.unibs.projectIngesoft.core.domain.entities.FattoreDiConversione;
 import it.unibs.projectIngesoft.core.domain.entities.utenti.Configuratore;
 import it.unibs.projectIngesoft.core.domain.model.CategorieModel;
 import it.unibs.projectIngesoft.core.domain.model.FattoriModel;
@@ -20,6 +21,9 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class FattoriTest {
 
@@ -47,18 +51,27 @@ public class FattoriTest {
         repositoryCategorie.save(cleanData);
     }
 
-    /*
-      fattoriModel.calcolaEInserisciFattoriDiConversione(nomeFogliaEsternaFormattata, nomeFogliaInternaFormattata, fattoreDiConversioneTraEsternaEInterna, nuoviFattoriTraTutteLeFoglieDellaNuovaRadice);
-        }
-            nuoviFattoriTraTutteLeFoglieDellaNuovaRadice.addAll(fattoriModel.calcolaInversi(nuoviFattoriTraTutteLeFoglieDellaNuovaRadice));
-
-            fattoriModel.aggiungiListDiFattori(nuoviFattoriTraTutteLeFoglieDellaNuovaRadice);
-
-            fattoriModel.inserisciSingolaFogliaNellaHashmap(nomeRadice, foglie);
-     */
-
     @Test
     void calcolaEInserisciFattoriDiConversioneTest(){
+        FattoriModel fattoriModel = new FattoriModel(new FattoriDiConversioneRepository("fattoriTest.json", new JsonSerializerFactory().createSerializer()));
+
+
+        fattoriModel.setHashMapFattori(new HashMap<>());
+        fattoriModel.inserisciSingolaFogliaNellaHashmap("fogliaEsterna", List.of(new Categoria("fogliaEsterna")));
+
+        List<FattoreDiConversione> listaFdC = new ArrayList<>();
+        listaFdC.add(new FattoreDiConversione("radice:fogliaInterna", "radice:fogliaInterna1", 2.0));
+
+        fattoriModel.calcolaEInserisciFattoriDiConversione(
+                "fogliaEsterna:fogliaEsterna",
+                "radice:fogliaInterna",
+                1.0,
+                listaFdC
+        );
+
+        assertTrue(fattoriModel.esisteCategoria("radice:fogliaInterna"));
+        assertTrue(fattoriModel.esisteCategoria("radice:fogliaInterna1"));
+        assertEquals(2, fattoriModel.getFattoriFromFoglia("radice:fogliaInterna").size());
 
     }
 
