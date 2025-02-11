@@ -1,34 +1,164 @@
 {
-  "comprensorioDue" : [ {
-    "richiesta" : "offerta2",
-    "offerta" : "richiesta2",
-    "oreRichiesta" : 1,
-    "oreOfferta" : 1,
+  "Bergamo" : [ {
+    "richiesta" : "Ripetizioni Scolastiche:Ripetizioni di Greco",
+    "offerta" : "Ripetizioni Scolastiche:Giochi di Logica",
+    "oreRichiesta" : 10,
+    "oreOfferta" : 9,
     "stato" : "APERTA",
-    "autore" : "fruitoreTre",
-    "comprensorioDiAppartenenza" : "comprensorioDue",
-    "cronologiaStati" : [ "APERTA" ],
+    "autore" : "Gabbayyyy",
+    "comprensorioDiAppartenenza" : "Bergamo",
+    "cronologiaStati" : [ "APERTA", "RITIRATA", "APERTA"],
     "daNotificare" : false
-  } ],
-  "comprensorio" : [ {
-    "richiesta" : "richiesta",
-    "offerta" : "offerta",
-    "oreRichiesta" : 1,
-    "oreOfferta" : 1,
+  }, {
+    "richiesta" : "Ripetizioni Scolastiche:Ripetizioni di Tedesco",
+    "offerta" : "Attività di svago:Lezioni di Scacchi",
+    "oreRichiesta" : 11,
+    "oreOfferta" : 22,
     "stato" : "APERTA",
-    "autore" : "fruitore",
-    "comprensorioDiAppartenenza" : "comprensorio",
+    "autore" : "Gabbayyyy",
+    "comprensorioDiAppartenenza" : "Bergamo",
     "cronologiaStati" : [ "APERTA" ],
     "daNotificare" : false
   }, {
-    "richiesta" : "offerta",
-    "offerta" : "richiesta",
-    "oreRichiesta" : 1,
-    "oreOfferta" : 1,
+    "richiesta" : "Lezioni di musica:Lezioni di solfeggio",
+    "offerta" : "Ripetizioni Scolastiche:Ripetizioni di Informatica",
+    "oreRichiesta" : 15,
+    "oreOfferta" : 21,
+    "stato" : "RITIRATA",
+    "autore" : "Gabbayyyy",
+    "comprensorioDiAppartenenza" : "Bergamo",
+    "cronologiaStati" : [ "APERTA", "RITIRATA" ],
+    "daNotificare" : false
+  }, {
+    "richiesta" : "Ripetizioni Scolastiche:Ripetizioni di Arabo",
+    "offerta" : "Ripetizioni Scolastiche:Ripetizioni di Filosofia",
+    "oreRichiesta" : 8,
+    "oreOfferta" : 9,
     "stato" : "APERTA",
-    "autore" : "fruitoreDue",
-    "comprensorioDiAppartenenza" : "comprensorio",
+    "autore" : "GiorgioVanni",
+    "comprensorioDiAppartenenza" : "Bergamo",
     "cronologiaStati" : [ "APERTA" ],
     "daNotificare" : false
-  } ]
+  }, {
+    "richiesta" : "Lezioni di musica:Lezioni di storia della musica",
+    "offerta" : "Lezioni di musica:Lezioni di solfeggio",
+    "oreRichiesta" : 30,
+    "oreOfferta" : 23,
+    "stato" : "RITIRATA",
+    "autore" : "GiorgioVanni",
+    "comprensorioDiAppartenenza" : "Bergamo",
+    "cronologiaStati" : [ "APERTA", "RITIRATA" ],
+    "daNotificare" : false
+  }, {
+    "richiesta" : "Ripetizioni Scolastiche:Ripetizioni di Letteratura Italiana",
+    "offerta" : "Ripetizioni Scolastiche:Ripetizioni di Tedesco",
+    "oreRichiesta" : 76,
+    "oreOfferta" : 68,
+    "stato" : "APERTA",
+    "autore" : "GiorgioVanni",
+    "comprensorioDiAppartenenza" : "Bergamo",
+    "cronologiaStati" : [ "APERTA" ],
+    "daNotificare" : false
+  }, {
+    "richiesta" : "Ripetizioni Scolastiche:Ripetizioni di Tedesco",
+    "offerta" : "Ripetizioni Scolastiche:Ripetizioni di Spagnolo",
+    "oreRichiesta" : 90,
+    "oreOfferta" : 90,
+    "stato" : "APERTA",
+    "autore" : "Gabbayyyy",
+    "comprensorioDiAppartenenza" : "Bergamo",
+    "cronologiaStati" : [ "APERTA" ],
+    "daNotificare" : false
+  }, {
+    "richiesta" : "Ripetizioni Scolastiche:Ripetizioni di Arabo",
+    "offerta" : "Ripetizioni Scolastiche:Ripetizioni di Biologia",
+    "oreRichiesta" : 5,
+    "oreOfferta" : 6,
+    "stato" : "APERTA",
+    "autore" : "Gabbayyyy",
+    "comprensorioDiAppartenenza" : "Bergamo",
+    "cronologiaStati" : [ "APERTA" ],
+    "daNotificare" : false
+  }, {
+    "richiesta" : "Ripetizioni Scolastiche:Ripetizioni di Arabo",
+    "offerta" : "Attività di svago:Lezioni di Scacchi",
+    "oreRichiesta" : 5,
+    "oreOfferta" : 4,
+    "stato" : "CHIUSA",
+    "autore" : "GiorgioVanni",
+    "comprensorioDiAppartenenza" : "Bergamo",
+    "cronologiaStati" : [ "APERTA", "CHIUSA" ],
+    "daNotificare" : true
+  }, {
+    "richiesta" : "Attività di svago:Lezioni di Scacchi",
+    "offerta" : "Ripetizioni Scolastiche:Ripetizioni di Arabo",
+    "oreRichiesta" : 4,
+    "oreOfferta" : 5,
+    "stato" : "APERTA",
+    "autore" : "Gabbayyyy",
+    "comprensorioDiAppartenenza" : "Bergamo",
+    "cronologiaStati" : [ "APERTA", "CHIUSA" ],
+    "daNotificare" : true
+  } ],
+  "Brescia" : [ {
+    "richiesta" : "Ripetizioni Scolastiche:Ripetizioni di Filosofia",
+    "offerta" : "Ripetizioni Scolastiche:Ripetizioni di Arabo",
+    "oreRichiesta" : 20,
+    "oreOfferta" : 18,
+    "stato" : "APERTA",
+    "autore" : "martinomaff",
+    "comprensorioDiAppartenenza" : "Brescia",
+    "cronologiaStati" : [ "APERTA", "RITIRATA", "APERTA" ],
+    "daNotificare" : false
+  }, {
+    "richiesta" : "Ripetizioni Scolastiche:Ripetizioni di Biologia",
+    "offerta" : "RRipetizioni Scolastiche:Ripetizioni di Scienze della Terra",
+    "oreRichiesta" : 3,
+    "oreOfferta" : 3,
+    "stato" : "APERTA",
+    "autore" : "LucaMaff",
+    "comprensorioDiAppartenenza" : "Brescia",
+    "cronologiaStati" : [ "APERTA" ],
+    "daNotificare" : false
+  }, {
+    "richiesta" : "Ripetizioni Scolastiche:Ripetizioni di Greco",
+    "offerta" : "Lezioni di musica:Lezioni di solfeggio",
+    "oreRichiesta" : 6,
+    "oreOfferta" : 3,
+    "stato" : "APERTA",
+    "autore" : "LucaMaff",
+    "comprensorioDiAppartenenza" : "Brescia",
+    "cronologiaStati" : [ "APERTA" ],
+    "daNotificare" : false
+  }, {
+    "richiesta" : "Attività di svago:Lezioni di Scacchi",
+    "offerta" : "Ripetizioni Scolastiche:Ripetizioni di Arabo",
+    "oreRichiesta" : 4,
+    "oreOfferta" : 5,
+    "stato" : "CHIUSA",
+    "autore" : "martinomaff",
+    "comprensorioDiAppartenenza" : "Brescia",
+    "cronologiaStati" : [ "APERTA", "CHIUSA" ],
+    "daNotificare" : true
+  }, {
+    "richiesta" : "Ripetizioni Scolastiche:Ripetizioni di Arabo",
+    "offerta" : "Attività di svago:Lezioni di Scacchi",
+    "oreRichiesta" : 5,
+    "oreOfferta" : 4,
+    "stato" : "CHIUSA",
+    "autore" : "martinomaff",
+    "comprensorioDiAppartenenza" : "Brescia",
+    "cronologiaStati" : [ "APERTA", "CHIUSA" ],
+    "daNotificare" : true
+  }, {
+    "richiesta" : "Ripetizioni Scolastiche:Ripetizioni di Arabo",
+    "offerta" : "Attività di svago:Lezioni di Scacchi",
+    "oreRichiesta" : 5,
+    "oreOfferta" : 4,
+    "stato" : "APERTA",
+    "autore" : "martinomaff",
+    "comprensorioDiAppartenenza" : "Brescia",
+    "cronologiaStati" : [ "APERTA" ],
+    "daNotificare" : false
+  }]
 }
